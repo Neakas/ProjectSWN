@@ -1,0 +1,31 @@
+﻿<Window x:Class="SWNAdmin.Forms.DataBaseManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SWNAdmin.Forms"
+        xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
+        themes:ThemeManager.Theme="ExpressionDark"
+        mc:Ignorable="d"
+        Title="DataBaseManager" Height="1000" Width="1000" WindowState="Maximized">
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
+    </Window.Background>
+    <Grid>
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="1000">
+            <MenuItem Header="Manage">
+                <MenuItem x:Name="MenuManageAdvantage" Header="Advantage" HorizontalAlignment="Left" Width="161" Click="MenuManageAdvantage_Click" Margin="0,0,-21,0"/>
+                <MenuItem x:Name="MenuManageDisadvantage" Header="Disadvantage" HorizontalAlignment="Left" Width="161" Margin="0,0,-21,0" Click="MenuManageDisadvantage_Click"/>
+                <MenuItem x:Name="MenuManageStat" Header="Stats" HorizontalAlignment="Left" Width="140" Click="MenuManageStat_Click"/>
+                <MenuItem x:Name="MenuManageBoni" Header="Boni" HorizontalAlignment="Left" Width="140" Click="MenuManageBoni_Click"/>
+                <MenuItem x:Name="MenuManageMali" Header="Mali" HorizontalAlignment="Left" Width="140" Click="MenuManageMali_Click"/>
+            </MenuItem>
+        </Menu>
+        <DataGrid x:Name="dgMain" Margin="108,27,10,0" VerticalAlignment="Top" Height="932">
+            <DataGrid.Background>
+                <SolidColorBrush Color="{DynamicResource SWNDarkBackground}"/>
+            </DataGrid.Background>
+        </DataGrid>
+        <ComboBox x:Name="cbDatabaseSelector" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="93" SelectionChanged="cbDatabaseSelector_SelectionChanged"/>
+    </Grid>
+</Window>

@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="SWNAdmin.UserControls.ModifyMoonlet"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SWNAdmin.UserControls"
+             mc:Ignorable="d" 
+             xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
+             themes:ThemeManager.Theme="ExpressionDark"
+             d:DesignHeight="600" d:DesignWidth="600">
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
+        </Grid.Background>
+        <Label x:Name="lblMoonletName" Content="Moonlet Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbMoonletName" HorizontalAlignment="Left" Height="23" Margin="105,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblMoonletID" Content="Moonlet ID:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbMoonletID" HorizontalAlignment="Left" Height="23" Margin="105,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <Label x:Name="lblMoonletRadius" Content="Moonlet Radius:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbMoonletRadius" HorizontalAlignment="Left" Height="23" Margin="105,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblMoonletblackbodyTemp" Content="Blackbody Temp.:" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbMoonletblackbodyTemp" HorizontalAlignment="Left" Height="23" Margin="105,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblMoonletorbitalEccent" Content="Orbital Eccent.:" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbMoonletorbitalEccent" HorizontalAlignment="Left" Height="23" Margin="105,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblMoonletorbitalPeriod" Content="Orbital Period:" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbMoonletorbitalPeriod" HorizontalAlignment="Left" Height="23" Margin="105,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblMoonletorbitalRadius" Content="Orbital Radius:" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbMoonletorbitalRadius" HorizontalAlignment="Left" Height="23" Margin="105,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+        <Button x:Name="btApply" Content="Apply" HorizontalAlignment="Left" Margin="515,572,0,0" VerticalAlignment="Top" Width="75" Click="btApply_Click"/>
+        <TextBox x:Name="tbIsOuter" HorizontalAlignment="Left" Height="23" Margin="60,551,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False" Visibility="Hidden"/>
+    </Grid>
+</UserControl>

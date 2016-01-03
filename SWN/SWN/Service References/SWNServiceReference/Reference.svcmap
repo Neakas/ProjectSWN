@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="2893916e-2531-4ae9-b3ab-1d03529a0c95" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8000/swnservice" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="SWNService.wsdl" MetadataType="Wsdl" ID="7496fe1c-0fd5-4fe1-bdd6-df415d8ef20a" SourceId="1" SourceUrl="http://localhost:8000/SWNService?wsdl=wsdl0" />
+    <MetadataFile FileName="SWNService1.wsdl" MetadataType="Wsdl" ID="271ee1ab-e0d0-4ca8-896f-bec877ba454f" SourceId="1" SourceUrl="http://localhost:8000/SWNService?wsdl" />
+    <MetadataFile FileName="SWNService3.xsd" MetadataType="Schema" ID="d1dfb4e5-1894-44aa-a8e9-30eb60446281" SourceId="1" SourceUrl="http://localhost:8000/SWNService?xsd=xsd3" />
+    <MetadataFile FileName="SWNService.xsd" MetadataType="Schema" ID="be37c70c-60dd-499a-b610-0de08a55844b" SourceId="1" SourceUrl="http://localhost:8000/SWNService?xsd=xsd2" />
+    <MetadataFile FileName="SWNService1.xsd" MetadataType="Schema" ID="bf184921-0467-4687-a63e-bb2284e83289" SourceId="1" SourceUrl="http://localhost:8000/SWNService?xsd=xsd1" />
+    <MetadataFile FileName="SWNService2.xsd" MetadataType="Schema" ID="06df7ad4-f9ce-42be-88d0-c8edc198f880" SourceId="1" SourceUrl="http://localhost:8000/SWNService?xsd=xsd0" />
+    <MetadataFile FileName="SWNService4.xsd" MetadataType="Schema" ID="5c9e5f73-1768-4e03-bc5e-a474a8c7a789" SourceId="1" SourceUrl="http://localhost:8000/SWNService?xsd=xsd4" />
+    <MetadataFile FileName="SWNService.disco" MetadataType="Disco" ID="b6d52bb0-a6a2-4c26-9b76-b2ee35852707" SourceId="1" SourceUrl="http://localhost:8000/SWNService?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

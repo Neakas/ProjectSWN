@@ -1,0 +1,30 @@
+﻿<Window x:Class="SWNAdmin.Forms.ManageMalus"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SWNAdmin.Forms"
+        xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
+        themes:ThemeManager.Theme="ExpressionDark"
+        mc:Ignorable="d"
+        Title="Manage Mali" Height="306.624" Width="412.619">
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource SWNDarkBackground}"/>
+    </Window.Background>
+    <Grid>
+        <Label x:Name="lblMalusName" Content="Malus-Name:" HorizontalAlignment="Left" Margin="14,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbMalusName" HorizontalAlignment="Left" Height="23" Margin="101,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btOk" Content="Ok" HorizontalAlignment="Left" Margin="10,246,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btCancel" Content="Cancel" HorizontalAlignment="Left" Margin="146,246,0,0" VerticalAlignment="Top" Width="75"/>
+        <ListBox x:Name="lbBoni" HorizontalAlignment="Left" Height="256" Margin="226,10,0,0" VerticalAlignment="Top" Width="168" MouseDoubleClick="lbStats_MouseDoubleClick"/>
+        <Button x:Name="btAdd" Content="Add" HorizontalAlignment="Left" Margin="10,221,0,0" VerticalAlignment="Top" Width="50" Click="btAdd_Click"/>
+        <Button x:Name="btDel" Content="Remove" HorizontalAlignment="Left" Margin="65,221,0,0" VerticalAlignment="Top" Width="65" Click="btDel_Click"/>
+        <Label x:Name="lblDiscription" Content="Discription:" HorizontalAlignment="Left" Margin="13,36,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbStats" HorizontalAlignment="Left" Margin="101,141,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblAffectedStat" Content="Affected Stat:" HorizontalAlignment="Left" Margin="15,137,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbValue" HorizontalAlignment="Left" Height="23" Margin="101,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblValue" Content="Value:" HorizontalAlignment="Left" Margin="44,174,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbDiscription" HorizontalAlignment="Left" Height="88" Margin="101,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Window>

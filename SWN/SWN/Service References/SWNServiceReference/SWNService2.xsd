@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="SWNAdmin" elementFormDefault="qualified" targetNamespace="SWNAdmin" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8000/SWNService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SWNAdmin" />
+  <xs:import schemaLocation="http://localhost:8000/SWNService?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:8000/SWNService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" />
+  <xs:element name="Connect">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q1:Client" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConnectResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ConnectResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Disconnect">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q2:Client" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisconnectResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendMessageResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestOnlineUsersList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestOnlineUsersListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="RequestOnlineUsersListResult" nillable="true" type="q3:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UserJoin">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q4:Client" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UserLeft">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q5:Client" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RefreshClients">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="clients" nillable="true" type="q6:ArrayOfClient" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Receive">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="msg" nillable="true" type="q7:Message" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ServiceIsShuttingDown">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendStarSystem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="StarSystem" nillable="true" type="q8:StarSystems" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendImage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="fMsg" nillable="true" type="q9:FileMessage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="fMsg" nillable="true" type="q10:FileMessage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

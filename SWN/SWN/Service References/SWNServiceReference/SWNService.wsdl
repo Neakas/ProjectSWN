@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="SWNAdmin" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="SWNAdmin" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="SWNAdmin/Imports">
+      <xsd:import schemaLocation="http://localhost:8000/SWNService?xsd=xsd0" namespace="SWNAdmin" />
+      <xsd:import schemaLocation="http://localhost:8000/SWNService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8000/SWNService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SWNAdmin" />
+      <xsd:import schemaLocation="http://localhost:8000/SWNService?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:8000/SWNService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="SWNService_Connect_InputMessage">
+    <wsdl:part name="parameters" element="tns:Connect" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_Connect_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConnectResponse" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_Disconnect_InputMessage">
+    <wsdl:part name="parameters" element="tns:Disconnect" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_Disconnect_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DisconnectResponse" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_SendMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessage" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_SendMessage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_RequestOnlineUsersList_InputMessage">
+    <wsdl:part name="parameters" element="tns:RequestOnlineUsersList" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_RequestOnlineUsersList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RequestOnlineUsersListResponse" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_UserJoin_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UserJoin" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_UserLeft_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UserLeft" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_RefreshClients_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RefreshClients" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_Receive_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:Receive" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_ServiceIsShuttingDown_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ServiceIsShuttingDown" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_SendStarSystem_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendStarSystem" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_SendImage_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendImage" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_SendFile_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendFile" />
+  </wsdl:message>
+  <wsdl:portType msc:usingSession="true" name="SWNService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Connect">
+      <wsdl:input wsaw:Action="SWNAdmin/SWNService/Connect" message="tns:SWNService_Connect_InputMessage" />
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/ConnectResponse" message="tns:SWNService_Connect_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Disconnect">
+      <wsdl:input wsaw:Action="SWNAdmin/SWNService/Disconnect" message="tns:SWNService_Disconnect_InputMessage" />
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/DisconnectResponse" message="tns:SWNService_Disconnect_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendMessage">
+      <wsdl:input wsaw:Action="SWNAdmin/SWNService/SendMessage" message="tns:SWNService_SendMessage_InputMessage" />
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/SendMessageResponse" message="tns:SWNService_SendMessage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RequestOnlineUsersList">
+      <wsdl:input wsaw:Action="SWNAdmin/SWNService/RequestOnlineUsersList" message="tns:SWNService_RequestOnlineUsersList_InputMessage" />
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/RequestOnlineUsersListResponse" message="tns:SWNService_RequestOnlineUsersList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UserJoin">
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/UserJoin" message="tns:SWNService_UserJoin_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UserLeft">
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/UserLeft" message="tns:SWNService_UserLeft_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RefreshClients">
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/RefreshClients" message="tns:SWNService_RefreshClients_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Receive">
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/Receive" message="tns:SWNService_Receive_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ServiceIsShuttingDown">
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/ServiceIsShuttingDown" message="tns:SWNService_ServiceIsShuttingDown_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendStarSystem">
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/SendStarSystem" message="tns:SWNService_SendStarSystem_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendImage">
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/SendImage" message="tns:SWNService_SendImage_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendFile">
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/SendFile" message="tns:SWNService_SendFile_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="SWNAdmin.UserControls.ModifyPlanet"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SWNAdmin.UserControls"
+             mc:Ignorable="d" 
+             xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
+             themes:ThemeManager.Theme="ExpressionDark"
+             d:DesignHeight="600" d:DesignWidth="600">
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
+        </Grid.Background>
+        <Label x:Name="lblPlanetName" Content="Planet Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetName" HorizontalAlignment="Left" Height="23" Margin="105,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetID" Content="Planet ID:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetID" HorizontalAlignment="Left" Height="23" Margin="105,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <Label x:Name="lblPlanetAge" Content="Planet Age:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetAge" HorizontalAlignment="Left" Height="23" Margin="105,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetatmCate" Content="Atm Cate:" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetatmCate" HorizontalAlignment="Left" Height="23" Margin="105,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetOrder" Content="Planet Order:" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetOrder" HorizontalAlignment="Left" Height="23" Margin="105,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <Label x:Name="lblPlanetatmMass" Content="Atm. Mass:" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetatmMass" HorizontalAlignment="Left" Height="23" Margin="105,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetatmPres" Content="Atm. Pressure:" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetatmPres" HorizontalAlignment="Left" Height="23" Margin="105,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetatmNote" Content="Atm. Note:" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetatmNote" HorizontalAlignment="Left" Height="23" Margin="105,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetaxialTilt" Content="Axial Tilt:" HorizontalAlignment="Left" Margin="10,250,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetaxialTilt" HorizontalAlignment="Left" Height="23" Margin="105,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetPlanetMass" Content="Planet Mass:" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetPlanetMass" HorizontalAlignment="Left" Height="23" Margin="105,278,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetRVM" Content="Planet RVM:" HorizontalAlignment="Left" Margin="10,310,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetRVM" HorizontalAlignment="Left" Height="23" Margin="105,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetorbitalEccent" Content="Orbital Eccent.:" HorizontalAlignment="Left" Margin="10,340,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetorbitalEccent" HorizontalAlignment="Left" Height="23" Margin="105,338,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetorbitalPeriod" Content="Orbital Period:" HorizontalAlignment="Left" Margin="10,370,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetorbitalPeriod" HorizontalAlignment="Left" Height="23" Margin="105,368,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetorbitalRadius" Content="Orbital Radius:" HorizontalAlignment="Left" Margin="10,400,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetorbitalRadius" HorizontalAlignment="Left" Height="23" Margin="105,398,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetRadius" Content="Planet Radius:" HorizontalAlignment="Left" Margin="10,430,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetRadius" HorizontalAlignment="Left" Height="23" Margin="105,428,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetType" Content="Planet Type:" HorizontalAlignment="Left" Margin="10,460,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetType" HorizontalAlignment="Left" Height="23" Margin="105,458,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetSize" Content="PlanetSize:" HorizontalAlignment="Left" Margin="10,490,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetSite" HorizontalAlignment="Left" Height="23" Margin="105,488,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetbbt" Content="BlackBody Temp.:" HorizontalAlignment="Left" Margin="10,520,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetbbt" HorizontalAlignment="Left" Height="23" Margin="105,518,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetdayfaceMod" Content="Day Face Mod:" HorizontalAlignment="Left" Margin="10,550,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetdayFaceMod" HorizontalAlignment="Left" Height="23" Margin="105,548,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetDensity" Content="Planet Density:" HorizontalAlignment="Left" Margin="250,10,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetDensity" HorizontalAlignment="Left" Height="23" Margin="355,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetDiameter" Content="Planet Diameter:" HorizontalAlignment="Left" Margin="250,40,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetDiameter" HorizontalAlignment="Left" Height="23" Margin="355,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetGravity" Content="Planet Gravity:" HorizontalAlignment="Left" Margin="250,70,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetGravity" HorizontalAlignment="Left" Height="23" Margin="355,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanethydCov" Content="Hydro. Coverage:" HorizontalAlignment="Left" Margin="250,100,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanethydCov" HorizontalAlignment="Left" Height="23" Margin="355,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetisRes" Content="Is Resonant:" HorizontalAlignment="Left" Margin="250,130,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetisRes" HorizontalAlignment="Left" Height="23" Margin="355,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetisTideLock" Content="Tidal Locked:" HorizontalAlignment="Left" Margin="250,160,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetisTideLock" HorizontalAlignment="Left" Height="23" Margin="355,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetNightFaceMod" Content="Day Face Mod:" HorizontalAlignment="Left" Margin="250,190,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetNightFaceMod" HorizontalAlignment="Left" Height="23" Margin="355,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetretrogradeMotion" Content="Retrograde Motion" HorizontalAlignment="Left" Margin="250,220,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetretrogradeMotion" HorizontalAlignment="Left" Height="23" Margin="355,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetrotPeriod" Content="Rotational Period" HorizontalAlignment="Left" Margin="250,250,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetrotPeriod" HorizontalAlignment="Left" Height="23" Margin="355,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetsatType" Content="Sat. Type" HorizontalAlignment="Left" Margin="250,280,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetsatType" HorizontalAlignment="Left" Height="23" Margin="355,278,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetsiderealPeriod" Content="Sidereal Period" HorizontalAlignment="Left" Margin="250,310,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetsiderealPeriod" HorizontalAlignment="Left" Height="23" Margin="355,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetsurfaceTemp" Content="Surface Temp." HorizontalAlignment="Left" Margin="250,340,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetsurfaceTemp" HorizontalAlignment="Left" Height="23" Margin="355,338,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanettecActivity" Content="Tec. Activity" HorizontalAlignment="Left" Margin="250,370,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanettecActivity" HorizontalAlignment="Left" Height="23" Margin="355,368,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanettideForce" Content="Tide Force" HorizontalAlignment="Left" Margin="250,400,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanettideForce" HorizontalAlignment="Left" Height="23" Margin="355,398,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanettideTotal" Content="Tide Total" HorizontalAlignment="Left" Margin="250,430,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanettideTotal" HorizontalAlignment="Left" Height="23" Margin="355,428,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetvolActivity" Content="Vol. Activity" HorizontalAlignment="Left" Margin="250,460,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetvolActivity" HorizontalAlignment="Left" Height="23" Margin="355,458,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblPlanetOrbitalCycle" Content="Orbital Cycle:" HorizontalAlignment="Left" Margin="250,490,0,0" VerticalAlignment="Top" Height="20" Width="90"/>
+        <TextBox x:Name="tbPlanetOrbitalCycle" HorizontalAlignment="Left" Height="23" Margin="355,488,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+
+
+        <Button x:Name="btApply" Content="Apply" HorizontalAlignment="Left" Margin="515,572,0,0" VerticalAlignment="Top" Width="75" Click="btApply_Click"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,54 @@
+﻿<Window x:Class="SWN.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
+        themes:ThemeManager.Theme="ExpressionDark"
+        xmlns:local="clr-namespace:SWN"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="689.676" Width="1043.291" Loaded="Window_Loaded" Closed="Window_Closed" WindowState="Maximized">
+    <Window.Resources>
+        <Color x:Key="SWNBackground">#FF4B4B4B</Color>
+    </Window.Resources>
+    <Window.Background>
+        <SolidColorBrush Color="#FF4B4B4B"/>
+    </Window.Background>
+    <Grid>
+        <Calendar x:Name="MainCalendar" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" DisplayDate="3000-01-01" Focusable="False" IsHitTestVisible="False" SelectionMode="None" IsTabStop="False" FirstDayOfWeek="Monday"/>
+        <TextBox x:Name="tbClock" HorizontalAlignment="Left" Height="23" Margin="10,28,0,0" TextWrapping="Wrap" Text="00:00:00" VerticalAlignment="Top" Width="54" IsEnabled="False"/>
+        <Button x:Name="btOpenMap" Content="Open Mapping" HorizontalAlignment="Left" Margin="93,28,0,0" VerticalAlignment="Top" Width="96" Click="btOpenMap_Click" Height="23"/>
+        <Menu x:Name="menu" Height="23" VerticalAlignment="Top">
+            <MenuItem Header="Datei"/>
+            <MenuItem Header="Character">
+                <MenuItem x:Name="menuOpenCV" Header="Open CharacterViewer" HorizontalAlignment="Left" Width="215" Margin="0,0,-50,0" Click="MenuOpenCV_Click"/>
+            </MenuItem>
+            <MenuItem x:Name="menuTools" Header="Tools" Margin="0" VerticalAlignment="Top">
+                <MenuItem x:Name="submenuOptions" Header="Options" HorizontalAlignment="Left" Width="96" Click="submenuOptions_Click"/>
+            </MenuItem>
+        </Menu>
+        <Button x:Name="cbCodeTest" Content="CodeTest" HorizontalAlignment="Left" Margin="935,41,0,0" VerticalAlignment="Top" Width="75" Click="cbCodeTest_Click"/>
+        <Grid Name="testgrid">
+            <Border  BorderBrush="Black" BorderThickness="2" Margin="10,286,0,0" HorizontalAlignment="Left" Width="405" Height="362" VerticalAlignment="Top" >
+                <ScrollViewer VerticalScrollBarVisibility="Auto"  BorderBrush="Black" BorderThickness="2">
+                    <StackPanel x:Name="sP1" HorizontalAlignment="Left" Width="403" VerticalAlignment="Top" Background="#FFC9C9C9" MinHeight="398" />
+                </ScrollViewer>
+            </Border>
+            <Border Margin="440,33,103,327" BorderBrush="Black" BorderThickness="2">
+                <Image x:Name="imgTest" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+            </Border>
+            <Label x:Name="lblFileTransfer" Content="No Filetransfer" HorizontalAlignment="Left" Margin="357,33,0,0" VerticalAlignment="Top" Foreground="White"/>
+
+        </Grid>
+        <Grid Name="Chat" Height="275" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="497">
+            <TextBox x:Name="tbChatPane" Grid.Row="0" Width="373" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Right" Margin="0,0,10,37" Height="228" VerticalAlignment="Bottom" IsReadOnly="True" >
+                <TextBox.Background>
+                    <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}"/>
+                </TextBox.Background>
+            </TextBox>
+            <TextBox x:Name="tbChatInput" HorizontalAlignment="Right" Width="294" Margin="0,243,89,10" KeyDown="tbChatInput_KeyDown" />
+            <Button x:Name="btsend" Content="Send" Click="btsend_Click" Height="22" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="74" Margin="0,0,10,10"/>
+            <ListBox x:Name="lbUserOnline" HorizontalAlignment="Right" Width="100" Height="255" VerticalAlignment="Bottom" Margin="0,0,387,10"/>
+        </Grid>
+    </Grid>
+</Window>
