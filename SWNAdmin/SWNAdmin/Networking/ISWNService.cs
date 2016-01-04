@@ -17,7 +17,7 @@ namespace SWNAdmin
         void Disconnect(Client client);
 
         [OperationContract]
-        void SendMessage(string Message, string UserName);
+        void SendMessage(Message msg);
 
         [OperationContract]
         List<string> RequestOnlineUsersList();

@@ -139,6 +139,7 @@ namespace SWNAdmin.Forms
                     var query = from c in context.Planets select c;
                     var advlist = query.ToList();
                     dgMain.ItemsSource = advlist;
+                    dgMain.Columns[44].Visibility = Visibility.Collapsed;
                 }
                 if (SelectedItem == "Registration")
                 {

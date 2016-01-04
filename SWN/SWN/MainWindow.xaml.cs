@@ -28,7 +28,6 @@ namespace SWN
 {
     public partial class MainWindow : Window
     {
-        public string UserIsAdmin = "0";
         public string UserName = SettingHandler.GetUserName();
         public static MainWindow CurrentInstance;
         Dictionary<ListBoxItem, Client> OnlineClients = new Dictionary<ListBoxItem, Client>();
@@ -77,7 +76,7 @@ namespace SWN
             HandleProxy();
         }
 
-        private void HandleProxy()
+        public void HandleProxy()
         {
             if (proxy != null)
             {
@@ -183,8 +182,12 @@ namespace SWN
                 }
                 else
                 {
-                    ServerConnection sc = new ServerConnection();
-                    sc.SendMessageToServer(tbChatInput.Text, UserName);
+                    //ServerConnection sc = new ServerConnection();
+                    //sc.SendMessageToServer(tbChatInput.Text, UserName);
+                    SWNServiceReference.Message m = new SWNServiceReference.Message();
+                    m.Content = tbChatInput.Text;
+                    m.Sender = UserName;
+                    proxy.SendMessage(m);
                     tbChatInput.Text = "";
                 }
            }
@@ -259,7 +262,7 @@ namespace SWN
             bool AllGood = false;
             if (proxy != null)
             {
-                if (proxy.State == CommunicationState.Faulted)
+                if (proxy.State == CommunicationState.Faulted || proxy.State == CommunicationState.Closed || proxy.State == CommunicationState.Closing || proxy.InnerDuplexChannel.State == CommunicationState.Faulted)
                 {
                     HandleProxy();
                     return AllGood;

@@ -55,40 +55,42 @@ namespace SWNAdmin
             int LoginSuccessful = -1;
             int Handshake = -1;
 
-            if (client.eMail != null)
-            {
-                RegistrationHandler RH = new RegistrationHandler();
-                RegSuccessful = RH.RegistrationCheck(client.UserName, client.eMail, client.encPassword);
-                Handshake = RegSuccessful;
-            }
-
             if (!clients.ContainsValue(CurrentCallback) && !SearchClientsByName(client.UserName))
             {
                 lock (syncObj)
                 {
-                    LoginHandler LH = new LoginHandler();
-                    LoginSuccessful = LH.LoginCheck(client.UserName, client.encPassword);
-                    Handshake = LoginSuccessful;
-                    if (LoginSuccessful == 1)
+                    if (client.eMail != null)
                     {
-                        MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": The User '" + client.UserName + "' logged in");
-                        MainWindow.CurrentInstance.UpdateUserOnline(client.UserName, false);
-                        foreach (Client key in clients.Keys)
+                        RegistrationHandler RH = new RegistrationHandler();
+                        RegSuccessful = RH.RegistrationCheck(client.UserName, client.eMail, client.encPassword);
+                        Handshake = RegSuccessful;
+                    }
+                    else
+                    {
+                        LoginHandler LH = new LoginHandler();
+                        LoginSuccessful = LH.LoginCheck(client.UserName, client.encPassword);
+                        Handshake = LoginSuccessful;
+                        if (LoginSuccessful == 1 && RegSuccessful == -1)
                         {
-                            ISWNServiceCallback callback = clients[key];
-                            try
+                            MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": The User '" + client.UserName + "' logged in");
+                            MainWindow.CurrentInstance.UpdateUserOnline(client.UserName, false);
+                            foreach (Client key in clients.Keys)
                             {
-                                callback.RefreshClients(clientList);
-                                callback.UserJoin(client);
+                                ISWNServiceCallback callback = clients[key];
+                                try
+                                {
+                                    callback.RefreshClients(clientList);
+                                    callback.UserJoin(client);
+                                }
+                                catch (Exception)
+                                {
+                                    clients.Remove(key);
+                                    return Handshake;
+                                }
                             }
-                            catch (Exception)
-                            {
-                                clients.Remove(key);
-                                return Handshake;
-                            }
+                            clients.Add(client, CurrentCallback);
+                            clientList.Add(client);
                         }
-                        clients.Add(client, CurrentCallback);
-                        clientList.Add(client);
                     }
                     if (RegSuccessful == 1)
                     {
@@ -123,12 +125,8 @@ namespace SWNAdmin
             }
         }
 
-        public void SendMessage(string Message, string UserName)
+        public void SendMessage(Message m)
         {
-            Message m = new Message();
-            m.Sender = UserName;
-            m.Time = DateTime.Now;
-            m.Content = Message;
             lock (syncObj)
             {
                 foreach (ISWNServiceCallback callback in clients.Values)
@@ -136,7 +134,7 @@ namespace SWNAdmin
                     callback.Receive(m);
                 }
             }
-            MainWindow.CurrentInstance.UpdateChatWindow(Message, UserName);
+            MainWindow.CurrentInstance.UpdateChatWindow(m.Content, m.Sender);
         }
 
         public void SendSystem(StarSystems ssystem)

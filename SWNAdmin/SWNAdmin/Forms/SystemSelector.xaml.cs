@@ -111,7 +111,7 @@ namespace SWNAdmin.Forms
                         item6.Header = om.Id.ToString();
                         OuterMoonlet.Items.Add(item6);
                     }
-                        if (planet.name != "")
+                        if (planet.name != "" && planet.name != null)
                         {
                             item3.Header = planet.name;
                         }
@@ -255,6 +255,7 @@ namespace SWNAdmin.Forms
                             if ((Int32)selectedtv.Tag == planet.Id)
                             {
                                 conObject = planet;
+                                mp.tbPlanetName.Text = conObject.name.ToString();
                                 mp.tbPlanetAge.Text = "N/A";
                                 mp.tbPlanetatmCate.Text = conObject.atmCate.ToString();
                                 mp.tbPlanetatmMass.Text = conObject.atmMass.ToString();
@@ -286,7 +287,7 @@ namespace SWNAdmin.Forms
                                 mp.tbPlanetSite.Text = conObject.SatelliteSize.ToString();
                                 mp.tbPlanetsurfaceTemp.Text = conObject.surfaceTemp.ToString();
                                 mp.tbPlanettecActivity.Text = conObject.tecActivity.ToString();
-                                mp.tbPlanettideForce.Text = conObject.tideForce.ToString();
+                                mp.tbPlanettideForce.Text = "0.00";
                                 mp.tbPlanettideTotal.Text = conObject.tideTotal.ToString();
                                 mp.tbPlanetType.Text = conObject.baseType.ToString();
                                 mp.tbPlanetvolActivity.Text = conObject.volActivity.ToString();

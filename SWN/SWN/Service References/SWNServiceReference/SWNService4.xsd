@@ -29,6 +29,7 @@
       <xs:element minOccurs="0" name="OrbitalDetails" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Planets" nillable="true" type="tns:ArrayOfPlanets" />
       <xs:element minOccurs="0" name="StarOrder" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StarString" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="StarSystems" nillable="true" type="tns:StarSystems" />
       <xs:element minOccurs="0" name="StellarEvolutionStage" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SystemID" type="xs:int" />
@@ -102,6 +103,7 @@
       <xs:element minOccurs="0" name="parentDiam" nillable="true" type="xs:double" />
       <xs:element minOccurs="0" name="parentID" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="parentName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="planetString" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="retrogradeMotion" nillable="true" type="xs:boolean" />
       <xs:element minOccurs="0" name="rotationalPeriod" nillable="true" type="xs:double" />
       <xs:element minOccurs="0" name="sattype" nillable="true" type="xs:string" />
@@ -126,6 +128,7 @@
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Planets" nillable="true" type="tns:Planets" />
       <xs:element minOccurs="0" name="blackbodyTemp" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="innerMoonString" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="orbitalEccent" nillable="true" type="xs:double" />
       <xs:element minOccurs="0" name="orbitalPeriod" nillable="true" type="xs:double" />
@@ -147,6 +150,7 @@
   <xs:complexType name="MajorMoons">
     <xs:sequence>
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="MajorMoonString" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ParentDBID" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Planets" nillable="true" type="tns:Planets" />
       <xs:element minOccurs="0" name="RVM" nillable="true" type="xs:double" />
@@ -208,6 +212,7 @@
       <xs:element minOccurs="0" name="orbitalEccent" nillable="true" type="xs:double" />
       <xs:element minOccurs="0" name="orbitalPeriod" nillable="true" type="xs:double" />
       <xs:element minOccurs="0" name="orbitalRadius" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="outerMoonString" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="parentID" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="parentName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="planetRadius" nillable="true" type="xs:double" />

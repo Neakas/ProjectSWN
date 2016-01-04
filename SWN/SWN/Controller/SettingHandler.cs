@@ -20,7 +20,7 @@ namespace SWN
         //Setzt die Aktuelle DateTime
         public static void SetCurrentDateTime(DateTime DateTimeValue, bool isUndo = false)
         {
-            //erstmal rausgenommen
+            //cleanup erstmal rausgenommen
             //if (isUndo == false)
             //{
             //    UndoHandler.AddItemToUndoList(GetCurrentDateTime());
@@ -105,7 +105,7 @@ namespace SWN
             XmlHandler.SetXmlValue(SettingHandler.GrabSettingFile(), "IPPort", "localhost:8001");
         }
 
-        //TODOLOW Delete if not needed
+        //Cleanup Delete if not needed
         //private static bool CheckSettingFile(string Path)
         //{
         //    if (File.Exists(SettingPath()) == false)

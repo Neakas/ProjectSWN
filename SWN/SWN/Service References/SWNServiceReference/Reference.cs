@@ -426,6 +426,9 @@ namespace SWN.SWNServiceReference {
         private string StarOrderField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StarStringField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private SWN.SWNServiceReference.StarSystems StarSystemsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -555,6 +558,19 @@ namespace SWN.SWNServiceReference {
                 if ((object.ReferenceEquals(this.StarOrderField, value) != true)) {
                     this.StarOrderField = value;
                     this.RaisePropertyChanged("StarOrder");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string StarString {
+            get {
+                return this.StarStringField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StarStringField, value) != true)) {
+                    this.StarStringField = value;
+                    this.RaisePropertyChanged("StarString");
                 }
             }
         }
@@ -1003,6 +1019,9 @@ namespace SWN.SWNServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string parentNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string planetStringField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<bool> retrogradeMotionField;
@@ -1539,6 +1558,19 @@ namespace SWN.SWNServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string planetString {
+            get {
+                return this.planetStringField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.planetStringField, value) != true)) {
+                    this.planetStringField = value;
+                    this.RaisePropertyChanged("planetString");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Nullable<bool> retrogradeMotion {
             get {
                 return this.retrogradeMotionField;
@@ -1697,6 +1729,9 @@ namespace SWN.SWNServiceReference {
         private System.Nullable<double> blackbodyTempField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string innerMoonStringField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string nameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1768,6 +1803,19 @@ namespace SWN.SWNServiceReference {
                 if ((this.blackbodyTempField.Equals(value) != true)) {
                     this.blackbodyTempField = value;
                     this.RaisePropertyChanged("blackbodyTemp");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string innerMoonString {
+            get {
+                return this.innerMoonStringField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.innerMoonStringField, value) != true)) {
+                    this.innerMoonStringField = value;
+                    this.RaisePropertyChanged("innerMoonString");
                 }
             }
         }
@@ -1910,6 +1958,9 @@ namespace SWN.SWNServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MajorMoonStringField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> ParentDBIDField;
@@ -2056,6 +2107,19 @@ namespace SWN.SWNServiceReference {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string MajorMoonString {
+            get {
+                return this.MajorMoonStringField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MajorMoonStringField, value) != true)) {
+                    this.MajorMoonStringField = value;
+                    this.RaisePropertyChanged("MajorMoonString");
                 }
             }
         }
@@ -2650,6 +2714,9 @@ namespace SWN.SWNServiceReference {
         private System.Nullable<double> orbitalRadiusField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string outerMoonStringField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> parentIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -2771,6 +2838,19 @@ namespace SWN.SWNServiceReference {
                 if ((this.orbitalRadiusField.Equals(value) != true)) {
                     this.orbitalRadiusField = value;
                     this.RaisePropertyChanged("orbitalRadius");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string outerMoonString {
+            get {
+                return this.outerMoonStringField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.outerMoonStringField, value) != true)) {
+                    this.outerMoonStringField = value;
+                    this.RaisePropertyChanged("outerMoonString");
                 }
             }
         }
@@ -2947,10 +3027,10 @@ namespace SWN.SWNServiceReference {
         System.Threading.Tasks.Task DisconnectAsync(SWN.SWNServiceReference.Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/SendMessage", ReplyAction="SWNAdmin/SWNService/SendMessageResponse")]
-        void SendMessage(string Message, string UserName);
+        void SendMessage(SWN.SWNServiceReference.Message msg);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/SendMessage", ReplyAction="SWNAdmin/SWNService/SendMessageResponse")]
-        System.Threading.Tasks.Task SendMessageAsync(string Message, string UserName);
+        System.Threading.Tasks.Task SendMessageAsync(SWN.SWNServiceReference.Message msg);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestOnlineUsersList", ReplyAction="SWNAdmin/SWNService/RequestOnlineUsersListResponse")]
         System.Collections.Generic.List<string> RequestOnlineUsersList();
@@ -3031,12 +3111,12 @@ namespace SWN.SWNServiceReference {
             return base.Channel.DisconnectAsync(client);
         }
         
-        public void SendMessage(string Message, string UserName) {
-            base.Channel.SendMessage(Message, UserName);
+        public void SendMessage(SWN.SWNServiceReference.Message msg) {
+            base.Channel.SendMessage(msg);
         }
         
-        public System.Threading.Tasks.Task SendMessageAsync(string Message, string UserName) {
-            return base.Channel.SendMessageAsync(Message, UserName);
+        public System.Threading.Tasks.Task SendMessageAsync(SWN.SWNServiceReference.Message msg) {
+            return base.Channel.SendMessageAsync(msg);
         }
         
         public System.Collections.Generic.List<string> RequestOnlineUsersList() {

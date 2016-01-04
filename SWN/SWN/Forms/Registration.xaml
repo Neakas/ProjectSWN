@@ -46,7 +46,7 @@
             <Button Content="Submit" Height="23" HorizontalAlignment="Left" Margin="183,140,0,0" Name="Submit" VerticalAlignment="Top" Width="70" Click="Submit_Click" />
             <Button Content="Reset" Height="23" HorizontalAlignment="Left" Margin="259,140,0,0" Name="button2" VerticalAlignment="Top" Width="70" Click="button2_Click" />
             <Button Content="Cancel" Height="23" HorizontalAlignment="Right" Margin="0,140,60,0" Name="button3" VerticalAlignment="Top" Width="70" Click="button3_Click" />
-            <TextBox x:Name="tbIPPort" HorizontalAlignment="Left" Margin="36,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" Text="localhost:8000"/>
+            <TextBox x:Name="tbIPPort" HorizontalAlignment="Left" Margin="36,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" Text="localhost:8001"/>
         </Grid>
     </Grid>
 </Window>

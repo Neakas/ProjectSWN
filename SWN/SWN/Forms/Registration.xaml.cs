@@ -76,7 +76,7 @@ namespace SWN
                 localclient.encPassword = E.EncryptStringToBytes(passwordBox1.Password);
 
                 ServerConnection SC = new ServerConnection();
-                int RegSuccessful = SC.ClientInit(localclient);
+                int RegSuccessful = SC.ClientReg(localclient);
 
                 if (RegSuccessful == 1)
                 {
@@ -90,6 +90,7 @@ namespace SWN
                 {
                     errormessage.Text = "Der Benutzer existiert bereits";
                 }
+                //TODOLOW: Needs a Close for the Reg Connection
             }
         }
     }

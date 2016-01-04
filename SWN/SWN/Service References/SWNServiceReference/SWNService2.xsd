@@ -32,8 +32,7 @@
   <xs:element name="SendMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="msg" nillable="true" type="q3:Message" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -50,35 +49,35 @@
   <xs:element name="RequestOnlineUsersListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="RequestOnlineUsersListResult" nillable="true" type="q3:ArrayOfstring" />
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="RequestOnlineUsersListResult" nillable="true" type="q4:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UserJoin">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q4:Client" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q5:Client" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UserLeft">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q5:Client" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q6:Client" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RefreshClients">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="clients" nillable="true" type="q6:ArrayOfClient" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="clients" nillable="true" type="q7:ArrayOfClient" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="Receive">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="msg" nillable="true" type="q7:Message" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="msg" nillable="true" type="q8:Message" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -90,21 +89,21 @@
   <xs:element name="SendStarSystem">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="StarSystem" nillable="true" type="q8:StarSystems" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="StarSystem" nillable="true" type="q9:StarSystems" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SendImage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="fMsg" nillable="true" type="q9:FileMessage" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="fMsg" nillable="true" type="q10:FileMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SendFile">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="fMsg" nillable="true" type="q10:FileMessage" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="fMsg" nillable="true" type="q11:FileMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

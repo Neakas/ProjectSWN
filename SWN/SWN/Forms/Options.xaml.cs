@@ -30,6 +30,7 @@ namespace SWN.Forms
 
         private void LoadSettings()
         {
+            //TODOHIGH Make the Load Work. Check which Config it Grabs
             cfgfile = SettingHandler.GrabSettingFile();
             tbFileDirectory.Text = XmlHandler.GrabXMLValue(cfgfile, "DataFilePath");
             tbImgDirectory.Text = XmlHandler.GrabXMLValue(cfgfile, "PicFilePath");

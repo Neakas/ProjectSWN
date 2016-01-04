@@ -38,50 +38,44 @@ namespace SWN
             CurrentConnection = this;
         }
 
-        //TODOHIGH Fix Registration
-        //public int ClientInit(Client client)
-        //{
-        //    try
-        //    {
-        //        SWNClient = new SWNServiceReference.SWNServiceClient(new InstanceContext(this), "netTcpBinding", "net.tcp://" + SettingHandler.GetIPPort() + "/SWNService");
-        //        SWNClient.Open();
-        //        int SuccessfulLogin = SWNClient.ConnectAsync(client);
-        //        return SuccessfulLogin;
-        //    }
-        //    catch (FaultException exception)
-        //    {
-        //        CurrentLoginWindow.errormessage.Text = "Got " + exception.GetType().ToString();
-        //        return -2;
-        //    }
-        //    catch (CommunicationException exception)
-        //    {
-        //        CurrentLoginWindow.errormessage.Text = "Got " + exception.GetType().ToString();
-        //        return -2;
-        //    }
-        //    catch (TimeoutException exception)
-        //    {
-        //        CurrentLoginWindow.errormessage.Text = "Got " + exception.GetType().ToString();
-        //        return -2;
-        //    }
-        //    catch (Exception t)
-        //    {
-        //        MessageBox.Show(t.ToString());
-        //        return -1;
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        This will:
-        //         -be executed if any exception was thrown above in the 'try'(including ThreadAbortException); and
-        //       - ensure that CloseOrAbortServiceChannel() itself will not be interrupted by a ThreadAbortException
-        //         (since it is executing from within a 'finally' block)
+        public int ClientReg(Client C)
+        {
+            try
+            {
+                SWNClient = new SWNServiceReference.SWNServiceClient(new InstanceContext(this), "netTcpBinding", "net.tcp://" + SettingHandler.GetIPPort() + "/SWNService");
+                SWNClient.Open();
+                int SuccessfulLogin = SWNClient.Connect(C);
+                return SuccessfulLogin;
+            }
+            catch (FaultException exception)
+            {
+                CurrentLoginWindow.errormessage.Text = "Got " + exception.GetType().ToString();
+                CloseOrAbortServiceChannel(SWNClient);
 
-        //      CloseOrAbortServiceChannel(SWNClient);
+                return -2;
+            }
+            catch (CommunicationException)
+            {
+                CurrentLoginWindow.errormessage.Text = "Server not Responding";
+                CloseOrAbortServiceChannel(SWNClient);
 
-        //        Unreference the client
-        //       SWNClient = null;
-        //    }
-        //}
+                return -2;
+            }
+            catch (TimeoutException exception)
+            {
+                CurrentLoginWindow.errormessage.Text = "Got " + exception.GetType().ToString();
+                CloseOrAbortServiceChannel(SWNClient);
+
+                return -2;
+            }
+            catch (Exception t)
+            {
+                MessageBox.Show(t.ToString());
+                CloseOrAbortServiceChannel(SWNClient);
+                return -1;
+                throw;
+            }
+        }
 
         public int ClientInit(Client C)
         {
@@ -90,6 +84,7 @@ namespace SWN
                 SWNClient = new SWNServiceReference.SWNServiceClient(new InstanceContext(this), "netTcpBinding", "net.tcp://" + SettingHandler.GetIPPort() + "/swnservice");
                 SWNClient.Open();
                 string eMail = null;
+                C.eMail = eMail;
                 int SuccessfulLogin = SWNClient.Connect(C);
                 SettingHandler.SetUserName(C.UserName);
                 return SuccessfulLogin;
@@ -166,7 +161,11 @@ namespace SWN
         {
             SWNClient = new SWNServiceReference.SWNServiceClient(new InstanceContext(this), "netTcpBinding", "net.tcp://" + SettingHandler.GetIPPort() + "/SWNService");
             SWNClient.Open();
-            SWNClient.SendMessage(Message, Username);
+            Message m = new Message();
+            m.Sender = Username;
+            m.Time = DateTime.Now;
+            m.Content = Message;
+            SWNClient.SendMessage(m);
         }
 
         public List<string> GrabLoggedInUsers()
@@ -315,7 +314,8 @@ namespace SWN
 
         public void ServiceIsShuttingDown()
         {
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(3000);
+            MainWindow.CurrentInstance.CheckConnection();
             SWNClient.Close();
             MessageBox.Show("Server in Shutdown-Mode.Closing...");
             Environment.Exit(0);

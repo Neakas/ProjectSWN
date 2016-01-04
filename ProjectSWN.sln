@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWNAdmin", "SWNAdmin\SWNAdmin\SWNAdmin.csproj", "{F94763F2-429E-46C1-8DDE-A1EB5B86B24C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWN", "SWN\SWN\SWN.csproj", "{AEEAEDD7-A05F-456A-B0E7-75BFE6318EB6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C4D2597A-6BF1-4035-9845-DFE103223595} = {C4D2597A-6BF1-4035-9845-DFE103223595}
+		{F94763F2-429E-46C1-8DDE-A1EB5B86B24C} = {F94763F2-429E-46C1-8DDE-A1EB5B86B24C}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniverseGeneration", "UniverseGeneration\UniverseGeneration.csproj", "{C4D2597A-6BF1-4035-9845-DFE103223595}"
 EndProject

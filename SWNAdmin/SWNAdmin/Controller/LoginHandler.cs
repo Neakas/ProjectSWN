@@ -18,14 +18,21 @@ namespace SWNAdmin
             {
                 var regcontext = new Utility.Db1Entities();
                 var query = from c in regcontext.Registration where c.Username == UserName && c.Password == encPassword select c;
-                var UserID = query.FirstOrDefault().Id;
-               
-                if (UserID > 0)
+                try
                 {
-                    return 1;
+                    var UserID = query.FirstOrDefault().Id;
+
+                    if (UserID > 0)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
                 }
-                else
-                {   
+                catch (Exception)
+                {
                     return 0;
                 }
             }

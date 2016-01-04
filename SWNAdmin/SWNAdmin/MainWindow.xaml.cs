@@ -27,16 +27,15 @@ namespace SWNAdmin
         public static MainWindow CurrentInstance;
         public static Server ServiceServer;
 
-        //TODOLOW Move TimeManagement to Submenu
-
         public MainWindow()
         {
             CurrentInstance = this;
             InitializeComponent();
             TimeHandler.ResetDateTime();
-            UpdateDateTimeDisplay();
+            //UpdateDateTimeDisplay();
             btServerStart.IsEnabled = true;
             btServerStop.IsEnabled = false;
+            //Cleanup Remove this if not needed anymore
            // SqlManager.QueryAdvantage();
         }
 
@@ -172,125 +171,6 @@ namespace SWNAdmin
             });
         }
 
-        public void UpdateDateTimeDisplay()
-        {
-            DateTime DT = SettingHandler.GetCurrentDateTime();
-            MainCalendar.SelectedDate = DT;
-            tbClock.Text = DT.TimeOfDay.ToString();
-            tbDate.Text = DT.ToShortDateString();
-
-            if (SettingHandler.GethasUndo())
-            {
-                btUndo.IsEnabled = true;
-            }
-            else
-            {
-                btUndo.IsEnabled = false;
-            }
-        }
-
-        private void _1MButton_Click(object sender, RoutedEventArgs e)
-        {
-            TimeHandler.IncrementMinute(1);
-            UpdateDateTimeDisplay();
-        }
-
-        private void _5MButton_Click(object sender, RoutedEventArgs e)
-        {
-            TimeHandler.IncrementMinute(5);
-            UpdateDateTimeDisplay();
-        }
-
-        private void TenMButton_Click(object sender, RoutedEventArgs e)
-        {
-            TimeHandler.IncrementMinute(10);
-            UpdateDateTimeDisplay();
-        }
-
-        private void ThirtyMButton_Click(object sender, RoutedEventArgs e)
-        {
-            TimeHandler.IncrementMinute(30);
-            UpdateDateTimeDisplay();
-        }
-
-        private void OneHButton_Click(object sender, RoutedEventArgs e)
-        {
-            TimeHandler.IncrementHour(1);
-            UpdateDateTimeDisplay();
-        }
-
-        private void SixHButton_Click(object sender, RoutedEventArgs e)
-        {
-            TimeHandler.IncrementHour(6);
-            UpdateDateTimeDisplay();
-        }
-
-        private void TwelveHButton_Click(object sender, RoutedEventArgs e)
-        {
-            TimeHandler.IncrementHour(12);
-            UpdateDateTimeDisplay();
-        }
-
-        private void OneDButton_Click(object sender, RoutedEventArgs e)
-        {
-            TimeHandler.IncrementDay(1);
-            UpdateDateTimeDisplay();
-        }
-
-        private void sevenDButton_click(object sender, RoutedEventArgs e)
-        {
-            TimeHandler.IncrementDay(7);
-            UpdateDateTimeDisplay();
-        }
-
-        private void thirthyDButton_Click(object sender, RoutedEventArgs e)
-        {
-            TimeHandler.IncrementDay(30);
-            UpdateDateTimeDisplay();
-        }
-
-        private void tbDate_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                ModifyDate();
-            }
-        }
-
-        private void tbClock_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                ModifyDate();
-            }
-        }
-
-        private void checkBox_Checked(object sender, RoutedEventArgs e)
-        {
-            tbDate.IsEnabled = true;
-            tbClock.IsEnabled = true;
-        }
-
-        private void checkBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            tbDate.IsEnabled = false;
-            tbClock.IsEnabled = false;
-        }
-
-        private void btUndo_Click(object sender, RoutedEventArgs e)
-        {
-            SettingHandler.SetCurrentDateTime(UndoHandler.getUndo(), true);
-            UpdateDateTimeDisplay();
-        }
-
-        public void ModifyDate()
-        {
-            DateTime DT = SettingHandler.GetCurrentDateTime();
-            DateTime.TryParse(String.Concat(tbDate.Text, " ", tbClock.Text), out DT);
-            SettingHandler.SetCurrentDateTime(DT);
-            UpdateDateTimeDisplay();
-        }
-
         public void btGenerate_Click(object sender, RoutedEventArgs e)
         {
             SystemGeneration SG = new SystemGeneration();
@@ -349,17 +229,24 @@ namespace SWNAdmin
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (Server.CurrentServiceHost != null && Server.CurrentServiceHost.State == CommunicationState.Opened)
-            {
-                btServerStop_Click(this, null);
-            }
+            //if (Server.CurrentServiceHost != null && Server.CurrentServiceHost.State == CommunicationState.Opened)
+            //{
+            //    btServerStop_Click(this, null);
+            //}
         }
 
         public void UpdateImageWindow(Uri uri)
         {
+            //Cleanup Check what is needed here!
             Application.Current.Dispatcher.BeginInvoke(new Action(() => this.imgTest.Source = new BitmapImage(uri)));
             //Application.Current.Dispatcher.BeginInvoke(new Action(() => this.lblFileTransfer.Content = "No Filetransfer"));
             //Application.Current.Dispatcher.BeginInvoke(new Action(() => this.lblFileTransfer.Foreground = Brushes.White));
+        }
+
+        private void submenuTimeManager_Click(object sender, RoutedEventArgs e)
+        {
+            TimeManager tm = new TimeManager();
+            tm.Show();
         }
     }
 }
