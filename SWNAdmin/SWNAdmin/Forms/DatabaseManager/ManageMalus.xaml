@@ -7,14 +7,14 @@
         xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
         themes:ThemeManager.Theme="ExpressionDark"
         mc:Ignorable="d"
-        Title="Manage Mali" Height="306.624" Width="412.619">
+        Title="Manage Mali" Height="306.624" Width="412.619" Activated="Window_Activated">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource SWNDarkBackground}"/>
     </Window.Background>
     <Grid>
         <Label x:Name="lblMalusName" Content="Malus-Name:" HorizontalAlignment="Left" Margin="14,10,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbMalusName" HorizontalAlignment="Left" Height="23" Margin="101,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btOk" Content="Ok" HorizontalAlignment="Left" Margin="10,246,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btOk" Content="Ok" HorizontalAlignment="Left" Margin="10,246,0,0" VerticalAlignment="Top" Width="75" Click="btOk_Click"/>
         <Button x:Name="btCancel" Content="Cancel" HorizontalAlignment="Left" Margin="146,246,0,0" VerticalAlignment="Top" Width="75"/>
         <ListBox x:Name="lbBoni" HorizontalAlignment="Left" Height="256" Margin="226,10,0,0" VerticalAlignment="Top" Width="168" MouseDoubleClick="lbStats_MouseDoubleClick"/>
         <Button x:Name="btAdd" Content="Add" HorizontalAlignment="Left" Margin="10,221,0,0" VerticalAlignment="Top" Width="50" Click="btAdd_Click"/>
@@ -24,7 +24,8 @@
         <Label x:Name="lblAffectedStat" Content="Affected Stat:" HorizontalAlignment="Left" Margin="15,137,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbValue" HorizontalAlignment="Left" Height="23" Margin="101,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="lblValue" Content="Value:" HorizontalAlignment="Left" Margin="44,174,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbDiscription" HorizontalAlignment="Left" Height="88" Margin="101,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbDiscription" HorizontalAlignment="Left" Height="88" Margin="101,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" AcceptsTab="True" AcceptsReturn="True" />
 
     </Grid>
 </Window>
+

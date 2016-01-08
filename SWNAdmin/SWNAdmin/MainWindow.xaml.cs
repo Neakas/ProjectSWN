@@ -26,6 +26,7 @@ namespace SWNAdmin
         public bool StopFlag = false;
         public static MainWindow CurrentInstance;
         public static Server ServiceServer;
+        
 
         public MainWindow()
         {
@@ -36,7 +37,9 @@ namespace SWNAdmin
             btServerStart.IsEnabled = true;
             btServerStop.IsEnabled = false;
             //Cleanup Remove this if not needed anymore
-           // SqlManager.QueryAdvantage();
+            // SqlManager.QueryAdvantage();
+            //TODOLOW: Make Users Kickable
+            // SWNAdmin.Utility.XmlSkillImporter.Import();
         }
 
         public void UpdateUserOnline(string User, bool Delete)
@@ -247,6 +250,11 @@ namespace SWNAdmin
         {
             TimeManager tm = new TimeManager();
             tm.Show();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

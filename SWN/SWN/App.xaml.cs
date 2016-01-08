@@ -15,6 +15,9 @@ namespace SWN
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            SettingHandler.InitSettingFile();
+            SettingHandler.GrabSettingFile();
+            SettingHandler.PreloadImages();
             if (SWN.Properties.Settings.Default.LoggedIn == true)
             {
                 StartupUri = new Uri("Forms/Login.xaml", UriKind.Relative);

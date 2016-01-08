@@ -77,6 +77,7 @@ namespace SWNAdmin
             stopFlag.Set();
         }
 
+        //Cleanup Check if Cleanup needed
         //public void CloseOrAbortServiceChannel(ICommunicationObject communicationObject)
         //{
         //    bool isClosed = false;

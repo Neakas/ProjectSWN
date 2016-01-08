@@ -5,12 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.IO;
+using System.Drawing;
 
 namespace SWN
 {
     
     public class SettingHandler
     {
+        public static List<string> ImageList = new List<string>();
+
         public static DateTime GetCurrentDateTime()
         {
             DateTime CurrentDateTime = SWN.Properties.Settings.Default.CurrentDateTime;
@@ -78,8 +81,12 @@ namespace SWN
 
         public static XDocument GrabSettingFile()
         {
-            XDocument xDoc = XDocument.Load(SettingPath());
-            return xDoc;
+            if (File.Exists(SettingPath()))
+            {
+                XDocument xDoc = XDocument.Load(SettingPath());
+                return xDoc;
+            }
+            return null;
         }
 
         public static string SettingPath()
@@ -93,16 +100,20 @@ namespace SWN
 
         public static void InitSettingFile()
         {
-            string picTargetFolderName = "Received Images";
-            string fileTargetFolderName = "Received Files";
-            string TargetPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
-            TargetPath = TargetPath.Remove(0, 6);
-            string picDir = Path.Combine(TargetPath, picTargetFolderName);
-            string fileDir = Path.Combine(TargetPath, fileTargetFolderName);
-            Directory.CreateDirectory(picDir);
-            XmlHandler.SetXmlValue(SettingHandler.GrabSettingFile(), "PicFilePath", picDir);
-            XmlHandler.SetXmlValue(SettingHandler.GrabSettingFile(), "DataFilePath", fileDir);
-            XmlHandler.SetXmlValue(SettingHandler.GrabSettingFile(), "IPPort", "localhost:8001");
+            if (XmlHandler.GrabXMLValue(SettingHandler.GrabSettingFile(), "FirstLoad") == "true")
+            {
+                string picTargetFolderName = "Received Images";
+                string fileTargetFolderName = "Received Files";
+                string TargetPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+                TargetPath = TargetPath.Remove(0, 6);
+                string picDir = Path.Combine(TargetPath, picTargetFolderName);
+                string fileDir = Path.Combine(TargetPath, fileTargetFolderName);
+                Directory.CreateDirectory(picDir);
+                XmlHandler.SetXmlValue(SettingHandler.GrabSettingFile(), "FirstLoad", "false");
+                XmlHandler.SetXmlValue(SettingHandler.GrabSettingFile(), "PicFilePath", picDir);
+                XmlHandler.SetXmlValue(SettingHandler.GrabSettingFile(), "DataFilePath", fileDir);
+                XmlHandler.SetXmlValue(SettingHandler.GrabSettingFile(), "IPPort", "localhost:8001");
+            }
         }
 
         //Cleanup Delete if not needed
@@ -134,6 +145,14 @@ namespace SWN
         {
             string UserName = SWN.Properties.Settings.Default.UserName;
             return UserName;
+        }
+
+        public static void PreloadImages()
+        {
+            foreach (string s in Directory.GetFiles(XmlHandler.GrabXMLValue(SettingHandler.GrabSettingFile(), "PicFilePath"), "*.*").Select(Path.GetFileName))
+            {
+                ImageList.Add(s);
+            }
         }
 
     }

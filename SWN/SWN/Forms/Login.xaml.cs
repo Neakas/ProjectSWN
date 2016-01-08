@@ -35,8 +35,6 @@ namespace SWN
         {
             CurrentLoginWindow = this;
             InitializeComponent();
-            SettingHandler.InitSettingFile();
-            SettingHandler.GrabSettingFile();
             tbIPPort.Text = SettingHandler.GetIPPort();
         }
 

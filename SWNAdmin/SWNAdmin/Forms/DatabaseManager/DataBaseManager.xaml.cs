@@ -203,5 +203,12 @@ namespace SWNAdmin.Forms
         {
             LoadDgMain(cbDatabaseSelector.SelectedItem.ToString());
         }
+
+        private void MenuManageSkills_Click(object sender, RoutedEventArgs e)
+        {
+            ManageSkills MSK = new ManageSkills();
+            MSK.ShowDialog();
+            LoadDgMain(null);
+        }
     }
 }

@@ -31,12 +31,19 @@ namespace SWNAdmin.UserControls
             AdvantageId = LoadedAdvantage.Id;
             lblAdvLabel.Content = LoadedAdvantage.Name;
             tbDiscription.Text = LoadedAdvantage.Discription;
+            tbDiscription.Text += "\n\nLimitation:";
+            tbDiscription.Text += "\n" + LoadedAdvantage.Limitation;
             lblAdvPoints.Content = LoadedAdvantage.PointCost;
         }
 
         private void btdel_Click(object sender, RoutedEventArgs e)
         {
             Forms.ManageAdvantage.AdvWindow.DeleteAdvantage(this);
+        }
+
+        private void btedit_Click(object sender, RoutedEventArgs e)
+        {
+            Forms.ManageAdvantage.AdvWindow.UpdateAdvantage(this);
         }
     }
 }

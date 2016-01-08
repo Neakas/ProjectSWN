@@ -14,6 +14,13 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PointCost" Type="int" />
           <Property Name="Discription" Type="nvarchar(max)" />
+          <Property Name="isPhysical" Type="bit" Nullable="false" />
+          <Property Name="isMental" Type="bit" Nullable="false" />
+          <Property Name="isSocial" Type="bit" Nullable="false" />
+          <Property Name="isExotic" Type="bit" Nullable="false" />
+          <Property Name="isSuperNatural" Type="bit" Nullable="false" />
+          <Property Name="isMundane" Type="bit" Nullable="false" />
+          <Property Name="Limitation" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="CharacterBonus">
           <Key>
@@ -521,6 +528,13 @@
           <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="UsedBonus" Relationship="Self.FK_UsedBonus_Advantage" FromRole="Advantages" ToRole="UsedBonus" />
           <NavigationProperty Name="UsedMalus" Relationship="Self.FK_UsedMalus_Advantage" FromRole="Advantages" ToRole="UsedMalus" />
+          <Property Name="isPhysical" Type="Boolean" Nullable="false" />
+          <Property Name="isMental" Type="Boolean" Nullable="false" />
+          <Property Name="isSocial" Type="Boolean" Nullable="false" />
+          <Property Name="isExotic" Type="Boolean" Nullable="false" />
+          <Property Name="isSuperNatural" Type="Boolean" Nullable="false" />
+          <Property Name="isMundane" Type="Boolean" Nullable="false" />
+          <Property Name="Limitation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CharacterBonus">
           <Key>
@@ -1042,6 +1056,13 @@
           <EntitySetMapping Name="Advantages">
             <EntityTypeMapping TypeName="Db1Model.Advantages">
               <MappingFragment StoreEntitySet="Advantages">
+                <ScalarProperty Name="Limitation" ColumnName="Limitation" />
+                <ScalarProperty Name="isMundane" ColumnName="isMundane" />
+                <ScalarProperty Name="isSuperNatural" ColumnName="isSuperNatural" />
+                <ScalarProperty Name="isExotic" ColumnName="isExotic" />
+                <ScalarProperty Name="isSocial" ColumnName="isSocial" />
+                <ScalarProperty Name="isMental" ColumnName="isMental" />
+                <ScalarProperty Name="isPhysical" ColumnName="isPhysical" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

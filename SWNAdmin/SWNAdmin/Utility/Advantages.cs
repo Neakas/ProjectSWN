@@ -26,7 +26,14 @@ namespace SWNAdmin.Utility
         public string Name { get; set; }
         public Nullable<int> PointCost { get; set; }
         public string Discription { get; set; }
-    
+        public bool isPhysical { get; set; }
+        public bool isMental { get; set; }
+        public bool isSocial { get; set; }
+        public bool isExotic { get; set; }
+        public bool isSuperNatural { get; set; }
+        public bool isMundane { get; set; }
+        public string Limitation { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsedBonus> UsedBonus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

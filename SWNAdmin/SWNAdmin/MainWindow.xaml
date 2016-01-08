@@ -40,7 +40,28 @@
                 </TextBox>
                 <TextBox x:Name="tbChatInput" HorizontalAlignment="Right" Width="294" Margin="0,243,89,10" KeyDown="tbChatInput_KeyDown" />
                 <Button x:Name="btsend" Content="Send" Click="btSend_Click" Height="22" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="74" Margin="0,0,10,10"/>
-                <ListBox x:Name="lbUserOnline" HorizontalAlignment="Right" Width="100" Height="255" VerticalAlignment="Bottom" Margin="0,0,387,10"/>
+                <ListBox x:Name="lbUserOnline" HorizontalAlignment="Right" Width="100" Height="255" VerticalAlignment="Bottom" Margin="0,0,387,10">
+                    <!--<ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>-->
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="ContextMenu">
+                                <Setter.Value>
+                                    <ContextMenu>
+                                    </ContextMenu>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Content" Value="{Binding Path=EventName}"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
             </Grid>
         </Border>
 
@@ -48,7 +69,7 @@
             <Grid Name="ServerConsole" HorizontalAlignment="Left" Width="428" Height="208" VerticalAlignment="Top">
                 <Button x:Name="btServerStart" Content="Start" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top" Width="75" Click="btServerStart_Click"/>
                 <Button x:Name="btServerStop" Content="Stop" HorizontalAlignment="Left" Margin="11,77,0,0" VerticalAlignment="Top" Width="74" Click="btServerStop_Click"/>
-                <TextBox x:Name="tbConsole" Margin="144,10,0,0" TextWrapping="Wrap" Text="" IsEnabled="False" Background="Black" Foreground="Black" HorizontalAlignment="Left" Width="274" Height="188" VerticalAlignment="Top"/>
+                <TextBox x:Name="tbConsole" Margin="144,10,0,0" TextWrapping="Wrap" Text="" IsEnabled="False" Background="Black" Foreground="Black" HorizontalAlignment="Left" Width="274" Height="188" VerticalAlignment="Top" />
                 <Label x:Name="lServerStatus" Content="Shutdown" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Red" Visibility="Visible" Margin="85,34,0,0" Background="{x:Null}"/>
                 <Label x:Name="label" Content="Server" HorizontalAlignment="Left" Margin="11,10,0,0" VerticalAlignment="Top" Width="74" FontSize="16" Height="30"/>
                 <Label x:Name="label1" Content="Server Status:" HorizontalAlignment="Left" Margin="11,34,0,0" VerticalAlignment="Top"/>

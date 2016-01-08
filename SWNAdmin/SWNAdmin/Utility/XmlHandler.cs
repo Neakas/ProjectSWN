@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using System.Xml;
 using System.IO;
 using UniverseGeneration;
+using SWNAdmin.Utility;
 
 namespace SWNAdmin
 {
@@ -51,12 +52,6 @@ namespace SWNAdmin
             return Document;
         }
 
-
-        /// <summary>
-        /// This Functions Accepts a StarSystem Object and writes it to an XMLFile
-        /// </summary>
-        /// <param name="System">The StarSystem to Export</param>
-        /// <param name="Path">The Path to Export to</param>
         public static void ExportSystemToXml(StarSystem System, string Path)
         {
             if (!File.Exists(Path))
@@ -65,6 +60,13 @@ namespace SWNAdmin
             }
             XDocument XDoc = new XDocument(new XElement("StarSystem", new XAttribute("Name", System.sysName)));
             XDoc.Save(Path);
+        }
+
+        public static void XML2SQL(skill_list SkillList)
+        {
+            //            var context = new Utility.Db1Entities();
+            //var query = from c in context.StarSystems select c;
+            //AllSystems = query.ToList();
         }
     }
 }

@@ -121,20 +121,41 @@ namespace SWN
 
         public void SendImage(SWNServiceReference.FileMessage fileMsg)
         {
-            MainWindow.CurrentInstance.UpdateFileReceive();
-            try
+            bool ok = true;
+            foreach (string img in SettingHandler.ImageList)
             {
-                FileStream fileStrm = new FileStream(@"C:\Test\ReceivedImages\" +
-                           fileMsg.FileName, FileMode.Create,
-                           FileAccess.ReadWrite);
-                fileStrm.Write(fileMsg.Data, 0, fileMsg.Data.Length);
-                //MessageBox.Show("Received file, " + fileMsg.FileName);
-                fileStrm.Close();
-                MainWindow.CurrentInstance.UpdateImageWindow(new Uri(@"C:\Test\ReceivedImages\" + fileMsg.FileName));
+                if (img == fileMsg.FileName)
+                {
+                    ok = false;
+                }
             }
-            catch (Exception ex)
+            if (ok)
             {
-                MessageBox.Show(ex.Message.ToString());
+                MainWindow.CurrentInstance.UpdateFileReceive();
+                try
+                {
+                    FileStream fileStrm = new FileStream(XmlHandler.GrabXMLValue(SettingHandler.GrabSettingFile(), "PicFilePath") + @"\" + fileMsg.FileName, FileMode.Create,FileAccess.ReadWrite);
+                    fileStrm.Write(fileMsg.Data, 0, fileMsg.Data.Length);
+                    fileStrm.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+            }
+            MainWindow.CurrentInstance.UpdateImageWindow(new Uri(XmlHandler.GrabXMLValue(SettingHandler.GrabSettingFile(), "PicFilePath") + @"\" + fileMsg.FileName));
+
+            bool picnotinlist = true;
+            foreach (string img in SettingHandler.ImageList)
+            {
+                if (fileMsg.FileName == img)
+                {
+                    picnotinlist = false;
+                }
+            }
+            if (picnotinlist)
+            {
+                SettingHandler.ImageList.Add(fileMsg.FileName);
             }
         }
 
@@ -143,11 +164,10 @@ namespace SWN
             MainWindow.CurrentInstance.UpdateFileReceive();
             try
             {
-                FileStream fileStrm = new FileStream(@"C:\Test\ReceivedFiles\" +
+                FileStream fileStrm = new FileStream(XmlHandler.GrabXMLValue(SettingHandler.GrabSettingFile(), "DataFilePath") +
                            fileMsg.FileName, FileMode.Create,
                            FileAccess.ReadWrite);
                 fileStrm.Write(fileMsg.Data, 0, fileMsg.Data.Length);
-                //MessageBox.Show("Received file, " + fileMsg.FileName);
                 fileStrm.Close();
             }
             catch (Exception ex)

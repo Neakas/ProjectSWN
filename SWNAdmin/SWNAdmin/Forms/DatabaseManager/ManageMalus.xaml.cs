@@ -17,9 +17,9 @@ namespace SWNAdmin.Forms
     /// <summary>
     /// Interaction logic for AddStat.xaml
     /// </summary>
-    public partial class ManageBoni : Window
+    public partial class ManageMalus : Window
     {
-        public ManageBoni()
+        public ManageMalus()
         {
             InitializeComponent();
             FillListbox();
@@ -29,10 +29,10 @@ namespace SWNAdmin.Forms
         private void FillListbox()
         {
             var context = new Utility.Db1Entities();
-            var query = from c in context.CharacterBonus select c;
+            var query = from c in context.CharacterMalus select c;
             var CharacterBoni = query.ToList();
             lbBoni.ItemsSource = CharacterBoni;
-            lbBoni.DisplayMemberPath = "BonusName";
+            lbBoni.DisplayMemberPath = "MalusName";
             lbBoni.SelectedValuePath = "Id";
         }
 
@@ -49,19 +49,19 @@ namespace SWNAdmin.Forms
         private void btAdd_Click(object sender, RoutedEventArgs e)
         {
             var findcontext = new Utility.Db1Entities();
-            var query = from c in findcontext.CharacterBonus where c.BonusName == tbBonusName.Text select c;
+            var query = from c in findcontext.CharacterMalus where c.MalusName == tbMalusName.Text select c;
             var foundCharacterBoni = query.FirstOrDefault();
             if (foundCharacterBoni == null)
             {
-                if (tbBonusName.Text == "")
+                if (tbMalusName.Text == "")
                 {
-                    MessageBox.Show("Please input Bonus Name!");
+                    MessageBox.Show("Please input Malus Name!");
                 }
                 else
                 {
                     if (tbValue.Text == "")
                     {
-                        MessageBox.Show("Please input Bonus Value!");
+                        MessageBox.Show("Please input Malus Value!");
                     }
                     else
                     {
@@ -79,17 +79,17 @@ namespace SWNAdmin.Forms
                             {
                                 using (var context = new Utility.Db1Entities())
                                 {
-                                    Utility.CharacterBonus newCharacterBonus = new Utility.CharacterBonus();
-                                    newCharacterBonus.BonusName = tbBonusName.Text;
-                                    newCharacterBonus.Discription = tbDiscription.Text;
+                                    Utility.CharacterMalus newCharacterMalus = new Utility.CharacterMalus();
+                                    newCharacterMalus.MalusName = tbMalusName.Text;
+                                    newCharacterMalus.Discription = tbDiscription.Text;
                                     //Insert Stat here
-                                    newCharacterBonus.Value = Convert.ToInt32(tbValue.Text);
-                                    context.CharacterBonus.Add(newCharacterBonus);
+                                    newCharacterMalus.Value = Convert.ToInt32(tbValue.Text);
+                                    context.CharacterMalus.Add(newCharacterMalus);
                                     context.SaveChanges();
                                 }
-                                MessageBox.Show("'" + tbBonusName.Text + "' added to the Database");
+                                MessageBox.Show("'" + tbMalusName.Text + "' added to the Database");
                                 FillListbox();
-                                tbBonusName.Text = "";
+                                tbMalusName.Text = "";
                             }
                         }
                     }
@@ -104,25 +104,25 @@ namespace SWNAdmin.Forms
         private void btDel_Click(object sender, RoutedEventArgs e)
         {
             var context = new Utility.Db1Entities();
-            var query = from c in context.CharacterBonus where c.BonusName == tbBonusName.Text select c;
-            var foundbonus = query.FirstOrDefault();
-            if (tbBonusName.Text == "")
+            var query = from c in context.CharacterMalus where c.MalusName == tbMalusName.Text select c;
+            var foundMalus = query.FirstOrDefault();
+            if (tbMalusName.Text == "")
             {
-                MessageBox.Show("Please input Character Bonus!");
+                MessageBox.Show("Please input Character Malus!");
             }
             else
             {
-                if (foundbonus.Id != 0)
+                if (foundMalus.Id != 0)
                 {
-                    context.CharacterBonus.Remove(foundbonus);
+                    context.CharacterMalus.Remove(foundMalus);
                     context.SaveChanges();
                     FillListbox();
-                    MessageBox.Show("'" + tbBonusName.Text + "' deleted from the Database");
-                    tbBonusName.Text = "";
+                    MessageBox.Show("'" + tbMalusName.Text + "' deleted from the Database");
+                    tbMalusName.Text = "";
                 }
                 else
                 {
-                    MessageBox.Show("No CharacterBonus with that Name found in the Database");
+                    MessageBox.Show("No CharacterMalus with that Name found in the Database");
                 }
             }
         }
@@ -131,10 +131,20 @@ namespace SWNAdmin.Forms
         {
             if (lbBoni.SelectedItem != null)
             {
-                Utility.CharacterBonus selectedBonus = new Utility.CharacterBonus();
-                selectedBonus = lbBoni.SelectedItem as Utility.CharacterBonus;
-                tbBonusName.Text = selectedBonus.BonusName;
+                Utility.CharacterMalus selectedMalus = new Utility.CharacterMalus();
+                selectedMalus = lbBoni.SelectedItem as Utility.CharacterMalus;
+                tbMalusName.Text = selectedMalus.MalusName;
             }
+        }
+
+        private void btOk_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+
         }
     }
 }

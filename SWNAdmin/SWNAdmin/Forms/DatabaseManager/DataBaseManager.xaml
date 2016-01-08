@@ -12,13 +12,14 @@
         <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
     </Window.Background>
     <Grid>
-        <Menu x:Name="menu" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="1000">
+        <Menu x:Name="menu" Height="25" VerticalAlignment="Top">
             <MenuItem Header="Manage">
                 <MenuItem x:Name="MenuManageAdvantage" Header="Advantage" HorizontalAlignment="Left" Width="161" Click="MenuManageAdvantage_Click" Margin="0,0,-21,0"/>
                 <MenuItem x:Name="MenuManageDisadvantage" Header="Disadvantage" HorizontalAlignment="Left" Width="161" Margin="0,0,-21,0" Click="MenuManageDisadvantage_Click"/>
                 <MenuItem x:Name="MenuManageStat" Header="Stats" HorizontalAlignment="Left" Width="140" Click="MenuManageStat_Click"/>
                 <MenuItem x:Name="MenuManageBoni" Header="Boni" HorizontalAlignment="Left" Width="140" Click="MenuManageBoni_Click"/>
                 <MenuItem x:Name="MenuManageMali" Header="Mali" HorizontalAlignment="Left" Width="140" Click="MenuManageMali_Click"/>
+                <MenuItem x:Name="MenuManageSkills" Header="Skills" HorizontalAlignment="Left" Width="140" Click="MenuManageSkills_Click" />
             </MenuItem>
         </Menu>
         <DataGrid x:Name="dgMain" Margin="108,27,10,0" VerticalAlignment="Top" Height="932">

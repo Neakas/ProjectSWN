@@ -4,17 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SWNAdmin.UserControls"
-             mc:Ignorable="d" 
+             xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
+             themes:ThemeManager.Theme="ExpressionDark"
+             mc:Ignorable="d" Background="Black" 
             >
     <Border BorderBrush="#FF464646" BorderThickness="4" Width="605" Height="182" CornerRadius="4">
-        <Grid Background="White" Height="176">
+        <Grid Height="176">
+            <Grid.Background>
+                <SolidColorBrush Color="{DynamicResource SWNDarkBackground}"/>
+            </Grid.Background>
             <Label x:Name="label" Content="Advantage:" Margin="10,10,495,0" FontSize="16"  VerticalAlignment="Top"/>
             <Label x:Name="lblAdvLabel" Content="Label" Margin="101,10,308,0" FontSize="16" FontStyle="Italic" Height="35" VerticalAlignment="Top"/>
-            <TextBox x:Name="tbDiscription" Margin="84,49,69,0" TextWrapping="Wrap" Height="91" VerticalAlignment="Top" IsEnabled="False"/>
+            <TextBox x:Name="tbDiscription" Margin="84,49,69,0" TextWrapping="Wrap" Height="91" VerticalAlignment="Top" IsEnabled="true" Foreground="Black" VerticalScrollBarVisibility="Auto" IsReadOnly="True">
+                <TextBox.Background>
+                    <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
+                </TextBox.Background>
+            </TextBox>
             <Label x:Name="label2" Content="Discription:" Margin="10,44,518,0" Height="38" VerticalAlignment="Top" />
             <Label x:Name="label3" Content="Point Cost:" Margin="460,148,69,0" Height="38" VerticalAlignment="Top"/>
             <Label x:Name="lblAdvPoints" Content="Points" Margin="528,148,26,0" Height="38" VerticalAlignment="Top"/>
             <Button x:Name="btdel" Content="Del" HorizontalAlignment="Left" Margin="559,10,0,0" VerticalAlignment="Top" Width="28" Background="#FFF1AAAA" Click="btdel_Click"/>
+            <Button x:Name="btedit" Content="Edit" HorizontalAlignment="Left" Margin="528,10,0,0" VerticalAlignment="Top" Width="28" Background="#FF6E9765" Click="btedit_Click"/>
         </Grid>
     </Border>
 </UserControl>
