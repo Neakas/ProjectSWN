@@ -41,9 +41,9 @@ namespace SWN
         {
             InitializeComponent();
             CurrentInstance = this;
-
             //TODOLOW: Reimplement
             //LoadStackPanelContent();
+            //TODOHIGH: ServerCrash catch still doesnt work
         }
 
         void InnerDuplexChannel_Closed(object sender, EventArgs e)
@@ -279,6 +279,23 @@ namespace SWN
         {
             Forms.Options o = new Forms.Options();
             o.ShowDialog();
+        }
+
+        public void UserGetsKicked()
+        {
+            if (proxy != null)
+            {
+                if (proxy.State == CommunicationState.Opened)
+                {
+                    proxy.Disconnect(this.localclient);
+                    //dont set proxy.Close(); because isTerminating = true on Disconnect()
+                    //and this by default will call HandleProxy() to take care of this.
+                }
+                else
+                {
+                    HandleProxy();
+                }
+            }
         }
     }
 

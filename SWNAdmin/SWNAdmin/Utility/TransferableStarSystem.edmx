@@ -292,6 +292,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StatName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="UDateTime">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SystemTime" Type="datetime" Nullable="false" />
+          <Property Name="CurrentDateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="UsedBonus">
           <Key>
             <PropertyRef Name="Id" />
@@ -466,6 +474,7 @@
           <EntitySet Name="Stars" EntityType="Self.Stars" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StarSystems" EntityType="Self.StarSystems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stats" EntityType="Self.Stats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UDateTime" EntityType="Self.UDateTime" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsedBonus" EntityType="Self.UsedBonus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsedMalus" EntityType="Self.UsedMalus" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_InnerMoonlets_Planets" Association="Self.FK_InnerMoonlets_Planets">
@@ -1046,7 +1055,16 @@
             <End Role="StarSystems" EntitySet="StarSystems" />
             <End Role="Stars" EntitySet="Stars" />
           </AssociationSet>
+          <EntitySet Name="UDateTime" EntityType="Db1Model.UDateTime" />
         </EntityContainer>
+        <EntityType Name="UDateTime">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SystemTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CurrentDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1372,6 +1390,15 @@
                 <ScalarProperty Name="AdvantageId" ColumnName="AdvantageId" />
                 <ScalarProperty Name="DisadvantageId" ColumnName="DisadvantageId" />
                 <ScalarProperty Name="MalusId" ColumnName="MalusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UDateTime">
+            <EntityTypeMapping TypeName="Db1Model.UDateTime">
+              <MappingFragment StoreEntitySet="UDateTime">
+                <ScalarProperty Name="CurrentDateTime" ColumnName="CurrentDateTime" />
+                <ScalarProperty Name="SystemTime" ColumnName="SystemTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

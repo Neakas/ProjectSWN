@@ -11,6 +11,7 @@
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
     </Window.Background>
+    
     <Grid x:Name="grMain">
         <Menu x:Name="menu" Height="24" VerticalAlignment="Top">
             <MenuItem x:Name="menuDatei" Header="Datei"/>
@@ -41,26 +42,6 @@
                 <TextBox x:Name="tbChatInput" HorizontalAlignment="Right" Width="294" Margin="0,243,89,10" KeyDown="tbChatInput_KeyDown" />
                 <Button x:Name="btsend" Content="Send" Click="btSend_Click" Height="22" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="74" Margin="0,0,10,10"/>
                 <ListBox x:Name="lbUserOnline" HorizontalAlignment="Right" Width="100" Height="255" VerticalAlignment="Bottom" Margin="0,0,387,10">
-                    <!--<ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="Background">
-                                <Setter.Value>
-                                    <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ListBox.ItemContainerStyle>-->
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="ContextMenu">
-                                <Setter.Value>
-                                    <ContextMenu>
-                                    </ContextMenu>
-                                </Setter.Value>
-                            </Setter>
-                            <Setter Property="Content" Value="{Binding Path=EventName}"/>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
                 </ListBox>
             </Grid>
         </Border>
@@ -76,6 +57,9 @@
             </Grid>
         </Border>
         <Border Margin="527,29,0,0" BorderBrush="Black" BorderThickness="2" Height="496" VerticalAlignment="Top" HorizontalAlignment="Left" Width="650">
+            <Border.Background>
+                <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
+            </Border.Background>
             <Image x:Name="imgTest" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
         </Border>
 

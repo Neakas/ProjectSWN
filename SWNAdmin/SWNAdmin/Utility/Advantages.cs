@@ -33,7 +33,7 @@ namespace SWNAdmin.Utility
         public bool isSuperNatural { get; set; }
         public bool isMundane { get; set; }
         public string Limitation { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsedBonus> UsedBonus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

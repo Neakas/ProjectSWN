@@ -196,6 +196,7 @@ namespace SWN
             return UserList;
         }
 
+
         //für CharacterTransfer
         //public CharacterController TransferCharacter(string UserName, CharacterController UserCharacter)
         //{
@@ -251,7 +252,7 @@ namespace SWN
                 OnlineClients.Add(c);
             }
         }
-
+        
         public void UserJoin(Client c)
         {
             MainWindow.CurrentInstance.UpdateChatWindow("The User: " + c.UserName + " has Joined!", c.UserName);
@@ -346,6 +347,25 @@ namespace SWN
         public void SendStarSystem(SWNServiceReference.StarSystems System)
         {
             XmlHandler.SerializeSystem(System);
+        }
+
+        public void KickUser()
+        {
+            System.Threading.Thread.Sleep(3000);
+            MainWindow.CurrentInstance.CheckConnection();
+            MainWindow.CurrentInstance.UserGetsKicked();
+            SWNClient.Close();
+            MessageBox.Show("You were kicked from the Server");
+            Environment.Exit(0);
+            Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+            Application.Current.Shutdown();
+        }
+
+        public void SendDateTime(DateTime Increment)
+        {
+            DateTime CurrentDateTime = SettingHandler.GetCurrentDateTime();
+            
+
         }
 
 

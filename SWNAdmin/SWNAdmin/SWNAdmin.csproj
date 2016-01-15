@@ -178,6 +178,9 @@
     <Compile Include="Utility\Characters.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utility\UDateTime.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="Utility\XmlFile.cs" />
     <Compile Include="Utility\Disadvantages.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
@@ -191,7 +194,6 @@
     <Compile Include="Controller\RegistrationHandler.cs" />
     <Compile Include="Controller\SettingHandler.cs" />
     <Compile Include="Controller\TimeHandler.cs" />
-    <Compile Include="Controller\UndoHandler.cs" />
     <Compile Include="Utility\InnerMoonlets.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>

@@ -3065,6 +3065,12 @@ namespace SWN.SWNServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="SWNAdmin/SWNService/SendFile")]
         void SendFile(SWN.SWNServiceReference.FileMessage fMsg);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="SWNAdmin/SWNService/KickUser")]
+        void KickUser();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="SWNAdmin/SWNService/SendDateTime")]
+        void SendDateTime(System.DateTime Increment);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

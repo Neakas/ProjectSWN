@@ -101,6 +101,18 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="KickUser">
+      <soap12:operation soapAction="SWNAdmin/SWNService/KickUser" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDateTime">
+      <soap12:operation soapAction="SWNAdmin/SWNService/SendDateTime" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="SWNService">
     <wsdl:port name="MexEndpoint" binding="tns:MexEndpoint">

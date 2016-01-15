@@ -57,6 +57,12 @@
   <wsdl:message name="SWNService_SendFile_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:SendFile" />
   </wsdl:message>
+  <wsdl:message name="SWNService_KickUser_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:KickUser" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_SendDateTime_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendDateTime" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="SWNService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Connect">
       <wsdl:input wsaw:Action="SWNAdmin/SWNService/Connect" message="tns:SWNService_Connect_InputMessage" />
@@ -97,6 +103,12 @@
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendFile">
       <wsdl:output wsaw:Action="SWNAdmin/SWNService/SendFile" message="tns:SWNService_SendFile_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="KickUser">
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/KickUser" message="tns:SWNService_KickUser_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendDateTime">
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/SendDateTime" message="tns:SWNService_SendDateTime_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

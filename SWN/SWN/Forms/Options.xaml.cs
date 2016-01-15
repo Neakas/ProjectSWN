@@ -37,7 +37,7 @@ namespace SWN.Forms
 
         private void btSave_Click(object sender, RoutedEventArgs e)
         {
-            //TODOLOW Needs Sanity Checks for Corret Directory
+            //TODOLOW Needs Sanity Checks for Correct Directory
             XmlHandler.SetXmlValue(cfgfile, "DataFilePath", tbFileDirectory.Text);
             XmlHandler.SetXmlValue(cfgfile, "PicFilePath", tbImgDirectory.Text);
             System.Windows.MessageBox.Show("Saved to Config-File");

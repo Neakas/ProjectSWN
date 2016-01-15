@@ -11,52 +11,6 @@ namespace SWNAdmin
 
     public class SettingHandler
     {
-        //Holt sich den Aktuellen Tag aus den GlobalSettings
-        public static DateTime GetCurrentDateTime()
-        {
-            DateTime CurrentDateTime = SWNAdmin.Properties.Settings.Default.CurrentDateTime;
-            return CurrentDateTime;
-        }
-
-        //Setzt die Aktuelle DateTime
-        public static void SetCurrentDateTime(DateTime DateTimeValue, bool isUndo = false)
-        {
-            if (isUndo == false)
-            {
-                UndoHandler.AddItemToUndoList(GetCurrentDateTime());
-            }
-            SWNAdmin.Properties.Settings.Default.CurrentDateTime = DateTimeValue;
-            SWNAdmin.Properties.Settings.Default.Save();
-        }
-
-        //Gibt das Standart StartDatum zurück
-        public static bool GetisStartDate()
-        {
-            bool isStartDate = SWNAdmin.Properties.Settings.Default.isStartDate;
-            return isStartDate;
-        }
-
-        //Setzt das GlobalSetting für isStartDate
-        public static void SetisStartDate(bool Boolean)
-        {
-            SWNAdmin.Properties.Settings.Default.isStartDate = Boolean;
-            SWNAdmin.Properties.Settings.Default.Save();
-        }
-
-        //Gibt den Bool hasUndo aus den GlobalSettings zurück.Wichtig für die Undo Funktion
-        public static bool GethasUndo()
-        {
-            bool hasUndo = SWNAdmin.Properties.Settings.Default.hasUndo;
-            return hasUndo;
-        }
-
-        //Setzt das Global Setting auf hasUndo.Dadurch weiß das Programm das ein Undo möglich ist.
-        public static void SethasUndo(bool Boolean)
-        {
-            SWNAdmin.Properties.Settings.Default.hasUndo = Boolean;
-            SWNAdmin.Properties.Settings.Default.Save();
-        }
-
         public static bool GetIsLoggedIn()
         {
             bool isLoggedIN = SWNAdmin.Properties.Settings.Default.LoggedIn;
@@ -127,7 +81,5 @@ namespace SWNAdmin
             SWNAdmin.Properties.Settings.Default.SettingInit = Boolean;
             SWNAdmin.Properties.Settings.Default.Save();
         }
-
-
     }
 }

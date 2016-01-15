@@ -43,5 +43,6 @@ namespace SWNAdmin.Utility
         public virtual DbSet<Stats> Stats { get; set; }
         public virtual DbSet<UsedBonus> UsedBonus { get; set; }
         public virtual DbSet<UsedMalus> UsedMalus { get; set; }
+        public virtual DbSet<UDateTime> UDateTime { get; set; }
     }
 }

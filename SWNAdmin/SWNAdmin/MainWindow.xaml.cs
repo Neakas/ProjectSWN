@@ -26,19 +26,14 @@ namespace SWNAdmin
         public bool StopFlag = false;
         public static MainWindow CurrentInstance;
         public static Server ServiceServer;
-        
+       
 
         public MainWindow()
         {
             CurrentInstance = this;
             InitializeComponent();
-            TimeHandler.ResetDateTime();
-            //UpdateDateTimeDisplay();
             btServerStart.IsEnabled = true;
             btServerStop.IsEnabled = false;
-            //Cleanup Remove this if not needed anymore
-            // SqlManager.QueryAdvantage();
-            //TODOLOW: Make Users Kickable
             // SWNAdmin.Utility.XmlSkillImporter.Import();
         }
 
@@ -48,7 +43,16 @@ namespace SWNAdmin
             {
                 Application.Current.Dispatcher.BeginInvoke((Action)delegate ()
                 {
-                    lbUserOnline.Items.Add(User);
+                    ListBoxItem UserItem = new ListBoxItem();
+                    ContextMenu cm = new ContextMenu();
+                    MenuItem mi = new MenuItem();
+                    mi.Click += new RoutedEventHandler(MenuItemClick);                    
+                    mi.Header = "Kick";
+                    mi.Background = Brushes.Black;
+                    cm.Items.Add(mi);
+                    UserItem.ContextMenu = cm;
+                    UserItem.Content = User;
+                    lbUserOnline.Items.Add(UserItem);
                 });
             }
             if (Delete)
@@ -59,6 +63,16 @@ namespace SWNAdmin
                 });
             }
         }
+
+        //Test
+        public void MenuItemClick(object sender, RoutedEventArgs e)
+        {
+            ListBoxItem selectedItem = lbUserOnline.SelectedItem  as ListBoxItem;
+            Client kickclient = new Client();
+            kickclient.UserName = selectedItem.Content.ToString();
+            SWNService.CurrentService.KickSelectedUser(kickclient);
+        }
+
 
         public void UpdateServerStatus(bool Online)
         {
@@ -250,11 +264,6 @@ namespace SWNAdmin
         {
             TimeManager tm = new TimeManager();
             tm.Show();
-        }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

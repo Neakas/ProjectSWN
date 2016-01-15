@@ -22,23 +22,15 @@ namespace SWNAdmin.Forms
         public TimeManager()
         {
             InitializeComponent();
+            UpdateDateTimeDisplay();
         }
 
         public void UpdateDateTimeDisplay()
         {
-            DateTime DT = SettingHandler.GetCurrentDateTime();
+            DateTime DT = TimeHandler.GetCurrentDateTime();
             MainCalendar.SelectedDate = DT;
             tbClock.Text = DT.TimeOfDay.ToString();
             tbDate.Text = DT.ToShortDateString();
-
-            if (SettingHandler.GethasUndo())
-            {
-                btUndo.IsEnabled = true;
-            }
-            else
-            {
-                btUndo.IsEnabled = false;
-            }
         }
 
         private void _1MButton_Click(object sender, RoutedEventArgs e)
@@ -131,15 +123,16 @@ namespace SWNAdmin.Forms
 
         private void btUndo_Click(object sender, RoutedEventArgs e)
         {
-            SettingHandler.SetCurrentDateTime(UndoHandler.getUndo(), true);
-            UpdateDateTimeDisplay();
+            //TODOLOW DT Undo reimplement
+            //TimeHandler.SetCurrentDateTime(UndoHandler.getUndo(), true);
+            //UpdateDateTimeDisplay();
         }
 
         public void ModifyDate()
         {
-            DateTime DT = SettingHandler.GetCurrentDateTime();
+            DateTime DT = TimeHandler.GetCurrentDateTime();
             DateTime.TryParse(String.Concat(tbDate.Text, " ", tbClock.Text), out DT);
-            SettingHandler.SetCurrentDateTime(DT);
+            TimeHandler.SetCurrentDateTime(DT);
             UpdateDateTimeDisplay();
         }
 

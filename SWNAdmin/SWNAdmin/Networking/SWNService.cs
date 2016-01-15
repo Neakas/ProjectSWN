@@ -274,8 +274,26 @@ namespace SWNAdmin
                     callback.ServiceIsShuttingDown();
                 }
             }
-            MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + " Server - Informing Clients");
-            MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + " Server - Waiting for Signoffs");
+            MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": Server - Informing Clients");
+            MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": Server - Waiting for Signoffs");
+        }
+
+        public void KickSelectedUser(Client c)
+        {
+            lock (syncObj)
+            {
+                foreach (Client client in clients.Keys)
+                {
+                    if (client.UserName == c.UserName)
+                    {
+                        ISWNServiceCallback toKickUser;
+                        clients.TryGetValue(client, out toKickUser);
+                        toKickUser.KickUser();
+                    }
+                }
+            }
+            MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": User: " + c.UserName + " kicked from the Server");
+            MainWindow.CurrentInstance.UpdateUserOnline(c.UserName, true);
         }
 
         public List<string> RequestOnlineUsersList()

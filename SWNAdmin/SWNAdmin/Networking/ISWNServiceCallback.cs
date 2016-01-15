@@ -34,5 +34,11 @@ namespace SWNAdmin
 
         [OperationContract(IsOneWay = true)]
         Task SendFile(FileMessage fMsg);
+
+        [OperationContract(IsOneWay = true)]
+        void KickUser();
+
+        [OperationContract(IsOneWay = true)]
+        void SendDateTime(DateTime Increment);
     }
 }
