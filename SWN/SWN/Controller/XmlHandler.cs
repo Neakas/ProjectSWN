@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -55,13 +56,17 @@ namespace SWN
           
         // Create a new XmlSerializer instance with the type of the test class
         XmlSerializer SerializerObj = new XmlSerializer(typeof(SWNServiceReference.StarSystems));
-
+            try
+            {
                 // Create a new file stream to write the serialized object to a file
                 TextWriter WriteFileStream = new StreamWriter(@"C:\Test\test.xml");
                 SerializerObj.Serialize(WriteFileStream, StarSystem);
- 
-        // Cleanup
-        WriteFileStream.Close();
+                WriteFileStream.Close();
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+            }
         }
     }
 }

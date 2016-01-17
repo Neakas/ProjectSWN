@@ -255,7 +255,15 @@ namespace SWNAdmin.Forms
                             if ((Int32)selectedtv.Tag == planet.Id)
                             {
                                 conObject = planet;
-                                mp.tbPlanetName.Text = conObject.name.ToString();
+                                if (conObject.name != null)
+                                {
+                                    mp.tbPlanetName.Text = conObject.name.ToString();
+                                }
+                                else
+                                {
+                                    mp.tbPlanetName.Text = conObject.sattype;
+                                }
+                                
                                 mp.tbPlanetAge.Text = "N/A";
                                 mp.tbPlanetatmCate.Text = conObject.atmCate.ToString();
                                 mp.tbPlanetatmMass.Text = conObject.atmMass.ToString();

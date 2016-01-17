@@ -11,8 +11,8 @@
 namespace SWN.SWNServiceReference {
     using System.Runtime.Serialization;
     using System;
-    
-    
+    using System.Xml.Serialization;
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Client", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin")]
@@ -429,6 +429,7 @@ namespace SWN.SWNServiceReference {
         private string StarStringField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [XmlIgnore]
         private SWN.SWNServiceReference.StarSystems StarSystemsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -576,6 +577,7 @@ namespace SWN.SWNServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        [XmlIgnore]
         public SWN.SWNServiceReference.StarSystems StarSystems {
             get {
                 return this.StarSystemsField;
@@ -914,7 +916,7 @@ namespace SWN.SWNServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<SWN.SWNServiceReference.MajorMoons> MajorMoons1Field;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<SWN.SWNServiceReference.OuterMoonlets> OuterMoonlets1Field;
         
@@ -929,8 +931,9 @@ namespace SWN.SWNServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StarIDField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [XmlIgnore]
         private SWN.SWNServiceReference.Stars StarsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1166,8 +1169,9 @@ namespace SWN.SWNServiceReference {
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
+        [XmlIgnore]
         public SWN.SWNServiceReference.Stars Stars {
             get {
                 return this.StarsField;
@@ -1723,6 +1727,7 @@ namespace SWN.SWNServiceReference {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [XmlIgnore]
         private SWN.SWNServiceReference.Planets PlanetsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1782,6 +1787,7 @@ namespace SWN.SWNServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        [XmlIgnore]
         public SWN.SWNServiceReference.Planets Planets {
             get {
                 return this.PlanetsField;
@@ -1966,6 +1972,7 @@ namespace SWN.SWNServiceReference {
         private System.Nullable<int> ParentDBIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [XmlIgnore]
         private SWN.SWNServiceReference.Planets PlanetsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -2138,6 +2145,7 @@ namespace SWN.SWNServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        [XmlIgnore]
         public SWN.SWNServiceReference.Planets Planets {
             get {
                 return this.PlanetsField;
@@ -2696,6 +2704,7 @@ namespace SWN.SWNServiceReference {
         private int ParentDBIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [XmlIgnore]
         private SWN.SWNServiceReference.Planets PlanetsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -2765,6 +2774,7 @@ namespace SWN.SWNServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        [XmlIgnore]
         public SWN.SWNServiceReference.Planets Planets {
             get {
                 return this.PlanetsField;
