@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b1f7340b848145aa8f951951f6176c5e" Name="Diagram1" ZoomLevel="63">
+      <Diagram DiagramId="b1f7340b848145aa8f951951f6176c5e" Name="Diagram1" ZoomLevel="61">
         <EntityTypeShape EntityType="Db1Model.Advantages" Width="1.5" PointX="9.75" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Db1Model.CharacterBonus" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Db1Model.CharacterMalus" Width="1.5" PointX="12.75" PointY="9.25" IsExpanded="true" />
@@ -19,7 +19,6 @@
         <EntityTypeShape EntityType="Db1Model.SatelliteBaseTypes" Width="1.5" PointX="9.75" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Db1Model.Stars" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Db1Model.StarSystems" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db1Model.Stats" Width="1.5" PointX="11.75" PointY="12.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Db1Model.UsedBonus" Width="1.5" PointX="12" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Db1Model.UsedMalus" Width="1.5" PointX="15" PointY="4.25" IsExpanded="true" />
         <AssociationConnector Association="Db1Model.FK_UsedBonus_Advantage" ManuallyRouted="false" />
@@ -34,6 +33,10 @@
         <AssociationConnector Association="Db1Model.FK_Planets_Stars" ManuallyRouted="false" />
         <AssociationConnector Association="Db1Model.FK_Stars_SystemID" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Db1Model.UDateTime" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Db1Model.Attribute" Width="1.5" PointX="14.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Db1Model.SkilLDefaults" Width="1.5" PointX="10.375" PointY="14.75" />
+        <EntityTypeShape EntityType="Db1Model.SkillPrereq" Width="1.5" PointX="14.375" PointY="12.75" />
+        <EntityTypeShape EntityType="Db1Model.Skills" Width="1.5" PointX="15.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

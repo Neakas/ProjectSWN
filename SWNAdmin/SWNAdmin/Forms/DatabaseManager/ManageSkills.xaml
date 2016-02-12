@@ -4,10 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SWNAdmin.Forms"
+        xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
+        themes:ThemeManager.Theme="ExpressionDark"
         mc:Ignorable="d"
         Title="ManageSkills" Height="847" Width="1109">
-    <Grid>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="796" Width="1091"/>
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource SWNDarkBackground}"/>
+    </Window.Background>
 
+    <Grid>
+        <Label x:Name="label" Content="Skill Name:&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

@@ -40,9 +40,12 @@ namespace SWNAdmin.Utility
         public virtual DbSet<SatelliteBaseTypes> SatelliteBaseTypes { get; set; }
         public virtual DbSet<Stars> Stars { get; set; }
         public virtual DbSet<StarSystems> StarSystems { get; set; }
-        public virtual DbSet<Stats> Stats { get; set; }
         public virtual DbSet<UsedBonus> UsedBonus { get; set; }
         public virtual DbSet<UsedMalus> UsedMalus { get; set; }
         public virtual DbSet<UDateTime> UDateTime { get; set; }
+        public virtual DbSet<Attribute> Attribute { get; set; }
+        public virtual DbSet<SkilLDefaults> SkilLDefaults { get; set; }
+        public virtual DbSet<SkillPrereq> SkillPrereq { get; set; }
+        public virtual DbSet<Skills> Skills { get; set; }
     }
 }

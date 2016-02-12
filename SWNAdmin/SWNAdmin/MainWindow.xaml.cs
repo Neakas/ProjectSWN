@@ -17,6 +17,7 @@ using System.ServiceModel;
 using UniverseGeneration;
 using SWNAdmin.Forms;
 using System.Windows.Threading;
+using AMXGetFoto;
 
 namespace SWNAdmin
 {

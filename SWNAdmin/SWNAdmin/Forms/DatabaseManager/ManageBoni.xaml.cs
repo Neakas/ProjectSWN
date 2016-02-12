@@ -39,7 +39,7 @@ namespace SWNAdmin.Forms
         private void FillCombobox()
         {
             var context = new Utility.Db1Entities();
-            var query = from c in context.Stats select c;
+            var query = from c in context.Attribute select c;
             var Stats = query.ToList();
             cbStats.ItemsSource = Stats;
             cbStats.DisplayMemberPath = "StatName";

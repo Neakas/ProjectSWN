@@ -28,7 +28,7 @@ namespace SWNAdmin.Forms
         private void FillListbox()
         {
             var context = new Utility.Db1Entities();
-            var query = from c in context.Stats select c;
+            var query = from c in context.Attribute select c;
             var stats = query.ToList();
             lbStats.ItemsSource = stats;
             lbStats.DisplayMemberPath = "StatName";
@@ -38,7 +38,7 @@ namespace SWNAdmin.Forms
         private void btAdd_Click(object sender, RoutedEventArgs e)
         {
             var findcontext = new Utility.Db1Entities();
-            var query = from c in findcontext.Stats where c.StatName == tbStat.Text select c;
+            var query = from c in findcontext.Attribute where c.Name == tbStat.Text select c;
             var foundstat = query.FirstOrDefault();
             if (foundstat == null)
             {
@@ -50,9 +50,9 @@ namespace SWNAdmin.Forms
                 {
                     using (var context = new Utility.Db1Entities())
                     {
-                        Utility.Stats newStat = new Utility.Stats();
-                        newStat.StatName = tbStat.Text;
-                        context.Stats.Add(newStat);
+                        Utility.Attribute newStat = new Utility.Attribute();
+                        newStat.Name = tbStat.Text;
+                        context.Attribute.Add(newStat);
                         context.SaveChanges();
                     }
                     MessageBox.Show("'" + tbStat.Text + "' added to the Database");
@@ -69,7 +69,7 @@ namespace SWNAdmin.Forms
         private void btDel_Click(object sender, RoutedEventArgs e)
         {
             var context = new Utility.Db1Entities();
-            var query = from c in context.Stats where c.StatName == tbStat.Text select c;
+            var query = from c in context.Attribute where c.Name == tbStat.Text select c;
             var foundstat = query.FirstOrDefault();
             if (tbStat.Text == "")
             {
@@ -79,7 +79,7 @@ namespace SWNAdmin.Forms
             {
                 if (foundstat.Id != 0)
                 {
-                    context.Stats.Remove(foundstat);
+                    context.Attribute.Remove(foundstat);
                     context.SaveChanges();
                     FillListbox();
                     MessageBox.Show("'" + tbStat.Text + "' deleted from the Database");
@@ -96,9 +96,9 @@ namespace SWNAdmin.Forms
         {
             if (lbStats.SelectedItem != null)
             {
-                Utility.Stats selectedStat = new Utility.Stats();
-                selectedStat = lbStats.SelectedItem as Utility.Stats;
-                tbStat.Text = selectedStat.StatName;
+                Utility.Attribute selectedStat = new Utility.Attribute();
+                selectedStat = lbStats.SelectedItem as Utility.Attribute;
+                tbStat.Text = selectedStat.Name;
             }
         }
     }

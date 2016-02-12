@@ -25,13 +25,6 @@ namespace SWNAdmin.Forms
         {
             InitializeComponent();
             SkillList = skill_list.Load();
-            LoadDatagridContent();
-        }
-
-        public void LoadDatagridContent()
-        {
-            //dataGrid.ItemsSource = SkillList.Items;
-
         }
     }
 }

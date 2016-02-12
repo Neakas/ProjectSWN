@@ -166,7 +166,7 @@ namespace SWNAdmin.Forms
                 if (SelectedItem == "Stats")
                 {
                     var context = new Utility.Db1Entities();
-                    var query = from c in context.Stats select c;
+                    var query = from c in context.Attribute select c;
                     var advlist = query.ToList();
                     dgMain.ItemsSource = advlist;
                 }

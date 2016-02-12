@@ -20,6 +20,7 @@ using System.Runtime.Serialization;
 using SWN.SWNServiceReference;
 using System.Threading;
 using System.Windows.Threading;
+using System.ComponentModel;
 
 namespace SWN
 
@@ -39,10 +40,11 @@ namespace SWN
         }
 
         private void btLogin_Click(object sender, RoutedEventArgs e)
-        {
+        { 
             proxy = null;
             errormessage.Text = "";
             ProcessUITasks();
+
             this.localclient = new Client();
 
             SettingHandler.SetIPPort(tbIPPort.Text);
