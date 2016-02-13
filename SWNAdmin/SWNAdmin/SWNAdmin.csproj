@@ -57,9 +57,6 @@
     <ApplicationIcon>SWNADMIN.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AMXGetFoto">
-      <HintPath>..\..\..\..\Visual Studio 2015\Projects\AMXGetFoto\AMXGetFoto\bin\Debug\AMXGetFoto.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -198,7 +195,6 @@
     <Compile Include="Utility\UDateTime.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
-    <Compile Include="Utility\XmlFile.cs" />
     <Compile Include="Utility\Disadvantages.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>

@@ -62,11 +62,5 @@ namespace SWNAdmin
             XDoc.Save(Path);
         }
 
-        public static void XML2SQL(skill_list SkillList)
-        {
-            //            var context = new Utility.Db1Entities();
-            //var query = from c in context.StarSystems select c;
-            //AllSystems = query.ToList();
-        }
     }
 }

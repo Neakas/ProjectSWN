@@ -265,7 +265,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SkillName" Type="nvarchar" MaxLength="50" />
           <Property Name="DifficultyLevel" Type="nvarchar" MaxLength="50" />
           <Property Name="notes" Type="nvarchar" MaxLength="50" />
@@ -276,6 +276,7 @@
           <Property Name="ControllingAttribute" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Modifiers" Type="nvarchar(max)" />
+          <Property Name="Defaults" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Stars">
           <Key>
@@ -1136,6 +1137,7 @@
           <Property Name="ControllingAttribute" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Modifiers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Defaults" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1496,6 +1498,7 @@
           <EntitySetMapping Name="Skills">
             <EntityTypeMapping TypeName="Db1Model.Skills">
               <MappingFragment StoreEntitySet="Skills">
+                <ScalarProperty Name="Defaults" ColumnName="Defaults" />
                 <ScalarProperty Name="Modifiers" ColumnName="Modifiers" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ControllingAttribute" ColumnName="ControllingAttribute" />

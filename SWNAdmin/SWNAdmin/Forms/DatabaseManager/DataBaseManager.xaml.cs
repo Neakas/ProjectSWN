@@ -184,6 +184,13 @@ namespace SWNAdmin.Forms
                     var advlist = query.ToList();
                     dgMain.ItemsSource = advlist;
                 }
+                if (SelectedItem == "Skills")
+                {
+                    var context = new Utility.Db1Entities();
+                    var query = from c in context.Skills select c;
+                    var advlist = query.ToList();
+                    dgMain.ItemsSource = advlist;
+                }
 
 
 
@@ -195,7 +202,7 @@ namespace SWNAdmin.Forms
         private void LoadDatabaseSelector()
         {
             List<string> ItemList = new List<string>();
-            ItemList.AddRange(new string[] { "Advantages", "Disadvantages", "CharacterBonus", "CharacterMalus","Characters","InnerMoonlets","MajorMoons","OuterMoonlets","Planets","Registration","Stars","StarSystems","Stats","UsedBonus","UsedMalus"});
+            ItemList.AddRange(new string[] { "Advantages", "Disadvantages", "CharacterBonus", "CharacterMalus","Characters","InnerMoonlets","MajorMoons","OuterMoonlets","Planets","Registration","Stars","StarSystems","Stats","UsedBonus","UsedMalus","Skills"});
             cbDatabaseSelector.ItemsSource = ItemList;
         }
 

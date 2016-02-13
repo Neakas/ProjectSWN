@@ -7,12 +7,41 @@
         xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
         themes:ThemeManager.Theme="ExpressionDark"
         mc:Ignorable="d"
-        Title="ManageSkills" Height="847" Width="1109">
+        Title="ManageSkills" Height="459" Width="506">
     <Window.Background>
-        <SolidColorBrush Color="{DynamicResource SWNDarkBackground}"/>
+        <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
     </Window.Background>
 
     <Grid>
-        <Label x:Name="label" Content="Skill Name:&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label" Content="Id" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbExistingSkill" HorizontalAlignment="Left" Margin="80,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbExistingSkill_SelectionChanged" />
+        <Label x:Name="label1" Content="Existing Skill:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbId" HorizontalAlignment="Left" Height="23" Margin="80,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Focusable="False" IsReadOnlyCaretVisible="True" IsReadOnly="True"/>
+        <Label x:Name="label_Copy" Content="Skill Name:" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbSkillName" HorizontalAlignment="Left" Height="23" Margin="80,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label_Copy1" Content="DiffL:" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbDifficultyLevel" HorizontalAlignment="Left" Height="23" Margin="80,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label_Copy2" Content="Notes:" HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbNotes" HorizontalAlignment="Left" Height="23" Margin="80,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label_Copy3" Content="Points:" HorizontalAlignment="Left" Margin="10,149,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbPoints" HorizontalAlignment="Left" Height="23" Margin="80,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label_Copy4" Content="Reference:" HorizontalAlignment="Left" Margin="10,177,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbReference" HorizontalAlignment="Left" Height="23" Margin="80,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label_Copy5" Content="Spezial.:" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbSpecialization" HorizontalAlignment="Left" Height="23" Margin="80,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label_Copy6" Content="Tech Level:" HorizontalAlignment="Left" Margin="10,233,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbTechLevel" HorizontalAlignment="Left" Height="23" Margin="80,233,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label_Copy7" Content="Controlling&#xD;&#xA;Attribute:" HorizontalAlignment="Left" Margin="10,261,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbControllingAttribute" HorizontalAlignment="Left" Height="23" Margin="80,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label_Copy8" Content="Modifiers:" HorizontalAlignment="Left" Margin="10,293,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbModifiers" HorizontalAlignment="Left" Height="23" Margin="80,289,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbDiscription" HorizontalAlignment="Left" Height="275" Margin="205,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="276" AcceptsReturn="True" AcceptsTab="True"/>
+        <Label x:Name="label_Copy9" Content="Discription:" HorizontalAlignment="Left" Margin="205,19,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btUpdate" Content="Update" Margin="0,0,10,10" Click="btUpdate_Click" IsEnabled="False" HorizontalAlignment="Right" Width="75" Height="18" VerticalAlignment="Bottom" Visibility="Hidden"/>
+        <Button x:Name="btAdd" Content="Add" Margin="0,0,10,10" Click="btAdd_Click" Height="18" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>
+        <Button x:Name="btDelete" Content="Delete" HorizontalAlignment="Left" Margin="10,0,0,10" Width="75" Click="btDelete_Click" IsEnabled="False" Height="18" VerticalAlignment="Bottom"/>
+        <Button x:Name="btClear" Content="Clear" HorizontalAlignment="Left" Margin="406,10,0,0" VerticalAlignment="Top" Width="75" Click="btClear_Click"/>
+        <TextBox x:Name="tbDefault" HorizontalAlignment="Left" Height="65" Margin="80,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="401" AcceptsReturn="True" AcceptsTab="True"/>
+        <Label x:Name="label_Copy10" Content="Defaults:" HorizontalAlignment="Left" Margin="10,317,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

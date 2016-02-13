@@ -20,11 +20,140 @@ namespace SWNAdmin.Forms
     /// </summary>
     public partial class ManageSkills : Window
     {
-        private skill_list SkillList;
+        public List<Skills> LoadedSkills;
+        public Skills SelectedSkill;
+        private string TestString;
+
+        public string teststring
+        {
+            get { return TestString; }
+            set { TestString = value; }
+        }
+
         public ManageSkills()
         {
             InitializeComponent();
-            SkillList = skill_list.Load();
+            InitForm();
+        }
+        public void InitForm()
+        {
+            var Context = new Utility.Db1Entities();
+            var query = from c in Context.Skills select c;
+            LoadedSkills = query.ToList();
+            cbExistingSkill.ItemsSource = LoadedSkills.OrderBy(Skills => Skills.SkillName);
+            cbExistingSkill.DisplayMemberPath = "SkillName";
+        }
+
+        private void cbExistingSkill_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbExistingSkill.SelectedItem != null)
+            {
+                btAdd.Visibility = Visibility.Hidden;
+                btAdd.IsEnabled = false;
+                btUpdate.Visibility = Visibility.Visible;
+                btUpdate.IsEnabled = true;
+                SelectedSkill = cbExistingSkill.SelectedItem as Skills;
+                tbId.Text = SelectedSkill.Id.ToString();
+                tbSkillName.Text = SelectedSkill.SkillName?.ToString();
+                tbDifficultyLevel.Text = SelectedSkill.DifficultyLevel?.ToString();
+                tbNotes.Text = SelectedSkill.notes?.ToString();
+                tbPoints.Text = SelectedSkill.points?.ToString();
+                tbReference.Text = SelectedSkill.reference?.ToString();
+                tbSpecialization.Text = SelectedSkill.specialization?.ToString();
+                tbTechLevel.Text = SelectedSkill.tech_level?.ToString();
+                tbControllingAttribute.Text = SelectedSkill.ControllingAttribute?.ToString();
+                tbDiscription.Text = SelectedSkill.Description?.ToString();
+                tbModifiers.Text = SelectedSkill.Modifiers?.ToString();
+                tbDefault.Text = SelectedSkill.Defaults?.ToString();
+            }
+        }
+
+        private void btUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            var Context = new Utility.Db1Entities();
+            int id = Int32.Parse(tbId.Text);
+            var queryskill = from c in Context.Skills where c.Id == id select c;
+            
+            using (Context)
+            {
+                Skills UpdateSkill = queryskill.FirstOrDefault();
+                UpdateSkill.SkillName = tbSkillName.Text;
+                UpdateSkill.DifficultyLevel = tbDifficultyLevel.Text;
+                UpdateSkill.notes = tbNotes.Text;
+                UpdateSkill.points = Int32.Parse(tbPoints.Text);
+                UpdateSkill.reference = tbReference.Text;
+                UpdateSkill.specialization = tbSpecialization.Text;
+                UpdateSkill.tech_level = tbTechLevel.Text;
+                UpdateSkill.ControllingAttribute = tbControllingAttribute.Text;
+                UpdateSkill.Description = tbDiscription.Text;
+                UpdateSkill.Modifiers = tbModifiers.Text;
+                UpdateSkill.Defaults = tbDefault.Text;
+                Context.Entry(UpdateSkill).State = System.Data.Entity.EntityState.Modified;
+                Context.SaveChanges();
+            }
+            InitForm();
+        }
+
+        private void btDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var Context = new Utility.Db1Entities();
+            int id = Int32.Parse(tbId.Text);
+            var queryskill = from c in Context.Skills where c.Id == id select c;
+
+            using (Context)
+            {
+                Skills DeleteSkill = queryskill.FirstOrDefault();
+                Context.Entry(DeleteSkill).State = System.Data.Entity.EntityState.Deleted;
+                Context.SaveChanges();
+            }
+            InitForm();
+        }
+
+        private void btClear_Click(object sender, RoutedEventArgs e)
+        {
+            cbExistingSkill.SelectedItem = null;
+            btAdd.Visibility = Visibility.Visible;
+            btAdd.IsEnabled = true;
+            btUpdate.Visibility = Visibility.Hidden;
+            btUpdate.IsEnabled = false;
+            SelectedSkill = null;
+            tbId.Text = "";
+            tbSkillName.Text = "";
+            tbDifficultyLevel.Text = "";
+            tbNotes.Text = "";
+            tbPoints.Text = "";
+            tbReference.Text = "";
+            tbSpecialization.Text = "";
+            tbTechLevel.Text = "";
+            tbControllingAttribute.Text = "";
+            tbDiscription.Text = "";
+            tbModifiers.Text = "";
+            tbDefault.Text = "";
+        }
+
+        private void btAdd_Click(object sender, RoutedEventArgs e)
+        {
+            int result;
+            Int32.TryParse(tbPoints.Text, out result);
+            using (var Context = new Db1Entities())
+            {
+                Skills AddSkill = new Skills();
+                AddSkill.SkillName = tbSkillName.Text;
+                AddSkill.DifficultyLevel = tbDifficultyLevel.Text;
+                AddSkill.notes = tbNotes.Text;
+                AddSkill.points = result;
+                AddSkill.reference = tbReference.Text;
+                AddSkill.specialization = tbSpecialization.Text;
+                AddSkill.tech_level = tbTechLevel.Text;
+                AddSkill.ControllingAttribute = tbControllingAttribute.Text;
+                AddSkill.Description = tbDiscription.Text;
+                AddSkill.Modifiers = tbModifiers.Text;
+                AddSkill.Defaults = tbDefault.Text;
+                Context.Skills.Add(AddSkill);
+                Context.SaveChanges();
+            }
+            InitForm();
+            btClear_Click(this, null);
         }
     }
 }
