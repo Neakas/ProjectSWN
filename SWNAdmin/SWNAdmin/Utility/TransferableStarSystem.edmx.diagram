@@ -34,9 +34,8 @@
         <AssociationConnector Association="Db1Model.FK_Stars_SystemID" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Db1Model.UDateTime" Width="1.5" PointX="12.375" PointY="0.75" />
         <EntityTypeShape EntityType="Db1Model.Attribute" Width="1.5" PointX="14.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Db1Model.SkilLDefaults" Width="1.5" PointX="10.375" PointY="14.75" />
-        <EntityTypeShape EntityType="Db1Model.SkillPrereq" Width="1.5" PointX="14.375" PointY="12.75" />
         <EntityTypeShape EntityType="Db1Model.Skills" Width="1.5" PointX="15.375" PointY="7.75" />
+        <EntityTypeShape EntityType="Db1Model.SkillSpecialization" Width="1.5" PointX="12.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

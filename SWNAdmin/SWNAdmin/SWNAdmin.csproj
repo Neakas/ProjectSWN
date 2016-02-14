@@ -183,13 +183,10 @@
     <Compile Include="Utility\Characters.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
-    <Compile Include="Utility\SkilLDefaults.cs">
-      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Utility\SkillPrereq.cs">
-      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
-    </Compile>
     <Compile Include="Utility\Skills.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\SkillSpecialization.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\UDateTime.cs">

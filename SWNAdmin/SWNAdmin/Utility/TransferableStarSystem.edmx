@@ -244,23 +244,6 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="SkilLDefaults">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="SkillId" Type="int" />
-          <Property Name="DefaultBase" Type="nvarchar" MaxLength="50" />
-          <Property Name="DefaultValue" Type="int" />
-        </EntityType>
-        <EntityType Name="SkillPrereq">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="SkillMinimum" Type="int" />
-        </EntityType>
         <EntityType Name="Skills">
           <Key>
             <PropertyRef Name="Id" />
@@ -271,12 +254,26 @@
           <Property Name="notes" Type="nvarchar" MaxLength="50" />
           <Property Name="points" Type="int" />
           <Property Name="reference" Type="nvarchar" MaxLength="50" />
-          <Property Name="specialization" Type="nvarchar" MaxLength="50" />
+          <Property Name="specialization" Type="nvarchar(max)" />
           <Property Name="tech_level" Type="nvarchar" MaxLength="50" />
           <Property Name="ControllingAttribute" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Modifiers" Type="nvarchar(max)" />
           <Property Name="Defaults" Type="nvarchar(max)" />
+          <Property Name="Prerequisites" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SkillSpecialization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="SkillId" Type="int" />
+          <Property Name="Default" Type="nvarchar(max)" />
+          <Property Name="Discription" Type="nvarchar(max)" />
+          <Property Name="Prerequisites" Type="nvarchar(max)" />
+          <Property Name="Modifiers" Type="nvarchar(max)" />
+          <Property Name="IsOptional" Type="bit" />
         </EntityType>
         <EntityType Name="Stars">
           <Key>
@@ -506,9 +503,8 @@
           <EntitySet Name="PName" EntityType="Self.PName" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Registration" EntityType="Self.Registration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SatelliteBaseTypes" EntityType="Self.SatelliteBaseTypes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SkilLDefaults" EntityType="Self.SkilLDefaults" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SkillPrereq" EntityType="Self.SkillPrereq" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Skills" EntityType="Self.Skills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SkillSpecialization" EntityType="Self.SkillSpecialization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stars" EntityType="Self.Stars" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StarSystems" EntityType="Self.StarSystems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UDateTime" EntityType="Self.UDateTime" Schema="dbo" store:Type="Tables" />
@@ -1086,9 +1082,8 @@
           </AssociationSet>
           <EntitySet Name="UDateTime" EntityType="Db1Model.UDateTime" />
           <EntitySet Name="Attribute" EntityType="Db1Model.Attribute" />
-          <EntitySet Name="SkilLDefaults" EntityType="Db1Model.SkilLDefaults" />
-          <EntitySet Name="SkillPrereq" EntityType="Db1Model.SkillPrereq" />
           <EntitySet Name="Skills" EntityType="Db1Model.Skills" />
+          <EntitySet Name="SkillSpecialization" EntityType="Db1Model.SkillSpecialization" />
         </EntityContainer>
         <EntityType Name="UDateTime">
           <Key>
@@ -1105,23 +1100,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="SkilLDefaults">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="SkillId" Type="Int32" />
-          <Property Name="DefaultBase" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DefaultValue" Type="Int32" />
-        </EntityType>
-        <EntityType Name="SkillPrereq">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SkillMinimum" Type="Int32" />
-        </EntityType>
         <EntityType Name="Skills">
           <Key>
             <PropertyRef Name="Id" />
@@ -1132,12 +1110,26 @@
           <Property Name="notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="points" Type="Int32" />
           <Property Name="reference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="specialization" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="specialization" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="tech_level" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ControllingAttribute" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Modifiers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Defaults" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Prerequisites" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SkillSpecialization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SkillId" Type="Int32" />
+          <Property Name="Default" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Prerequisites" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Modifiers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsOptional" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1476,28 +1468,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SkilLDefaults">
-            <EntityTypeMapping TypeName="Db1Model.SkilLDefaults">
-              <MappingFragment StoreEntitySet="SkilLDefaults">
-                <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
-                <ScalarProperty Name="DefaultBase" ColumnName="DefaultBase" />
-                <ScalarProperty Name="SkillId" ColumnName="SkillId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SkillPrereq">
-            <EntityTypeMapping TypeName="Db1Model.SkillPrereq">
-              <MappingFragment StoreEntitySet="SkillPrereq">
-                <ScalarProperty Name="SkillMinimum" ColumnName="SkillMinimum" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Skills">
             <EntityTypeMapping TypeName="Db1Model.Skills">
               <MappingFragment StoreEntitySet="Skills">
+                <ScalarProperty Name="Prerequisites" ColumnName="Prerequisites" />
                 <ScalarProperty Name="Defaults" ColumnName="Defaults" />
                 <ScalarProperty Name="Modifiers" ColumnName="Modifiers" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1509,6 +1483,20 @@
                 <ScalarProperty Name="notes" ColumnName="notes" />
                 <ScalarProperty Name="DifficultyLevel" ColumnName="DifficultyLevel" />
                 <ScalarProperty Name="SkillName" ColumnName="SkillName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SkillSpecialization">
+            <EntityTypeMapping TypeName="Db1Model.SkillSpecialization">
+              <MappingFragment StoreEntitySet="SkillSpecialization">
+                <ScalarProperty Name="IsOptional" ColumnName="IsOptional" />
+                <ScalarProperty Name="Modifiers" ColumnName="Modifiers" />
+                <ScalarProperty Name="Prerequisites" ColumnName="Prerequisites" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Default" ColumnName="Default" />
+                <ScalarProperty Name="SkillId" ColumnName="SkillId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

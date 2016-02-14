@@ -12,11 +12,15 @@ namespace SWNAdmin.Utility
     using System;
     using System.Collections.Generic;
     
-    public partial class SkilLDefaults
+    public partial class SkillSpecialization
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public Nullable<int> SkillId { get; set; }
-        public string DefaultBase { get; set; }
-        public Nullable<int> DefaultValue { get; set; }
+        public string Default { get; set; }
+        public string Discription { get; set; }
+        public string Prerequisites { get; set; }
+        public string Modifiers { get; set; }
+        public Nullable<bool> IsOptional { get; set; }
     }
 }

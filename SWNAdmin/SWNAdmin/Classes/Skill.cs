@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace SWNAdmin.Classes
 {
-    class Skill
+    class Skill : Utility.Skills
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public Attribute ControllingAttribute { get; set; }
+        
     }
 }

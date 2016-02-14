@@ -26,5 +26,6 @@ namespace SWNAdmin.Utility
         public string Description { get; set; }
         public string Modifiers { get; set; }
         public string Defaults { get; set; }
+        public string Prerequisites { get; set; }
     }
 }

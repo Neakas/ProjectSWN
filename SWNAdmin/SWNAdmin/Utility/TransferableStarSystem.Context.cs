@@ -44,8 +44,7 @@ namespace SWNAdmin.Utility
         public virtual DbSet<UsedMalus> UsedMalus { get; set; }
         public virtual DbSet<UDateTime> UDateTime { get; set; }
         public virtual DbSet<Attribute> Attribute { get; set; }
-        public virtual DbSet<SkilLDefaults> SkilLDefaults { get; set; }
-        public virtual DbSet<SkillPrereq> SkillPrereq { get; set; }
         public virtual DbSet<Skills> Skills { get; set; }
+        public virtual DbSet<SkillSpecialization> SkillSpecialization { get; set; }
     }
 }
