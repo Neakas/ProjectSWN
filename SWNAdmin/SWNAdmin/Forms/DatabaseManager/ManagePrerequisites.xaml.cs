@@ -20,6 +20,8 @@ namespace SWNAdmin.Forms
     /// </summary>
     public partial class ManagePrerequisites : Window
     {
+        public List<Skills> FoundSkills;
+       
         public ManagePrerequisites()
         {
             InitializeComponent();
@@ -31,12 +33,32 @@ namespace SWNAdmin.Forms
         {
             //Load Skills
             var Context = new Utility.Db1Entities();
-            var query = from c in Context.Skills.Include("SkillSPecialization") select c;
-            List<Skills> FoundSkills = query.ToList();
+            var query = from c in Context.Skills.Include("SkillSpecialization") select c;
+            FoundSkills = query.ToList();
             foreach (Skills Skillitem in FoundSkills)
             {
-                tvItemList.Items.Add(Skillitem);
+
+                SkillTreeViewItem tvi = new SkillTreeViewItem();
+                if (Skillitem.SkillSpecialization.Count > 0)
+                {
+                    foreach (SkillSpecialization skillspec in Skillitem.SkillSpecialization)
+                    {
+                        SkillTreeViewItem tvi2 = new SkillTreeViewItem();
+                        tvi2.Header = skillspec.Name;
+                        tvi2.StoredObject = skillspec; 
+                        tvi.Items.Add(tvi2);
+                    }
+                }
+                tvi.Header = Skillitem.SkillName;
+                tvi.StoredObject = Skillitem;
+                tvObjects.Items.Add(tvi);
+                tvObjects.DisplayMemberPath = "SkillName";
             }
+        }
+
+        public class SkillTreeViewItem : TreeViewItem
+        {
+            public object StoredObject = new object();
         }
     }
 }

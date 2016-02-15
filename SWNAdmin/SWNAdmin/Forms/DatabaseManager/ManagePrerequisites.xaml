@@ -1,17 +1,33 @@
-﻿<Window x:Class="SWNAdmin.Forms.ManagePrerequisites"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
-        themes:ThemeManager.Theme="ExpressionDark"
         xmlns:local="clr-namespace:SWNAdmin.Forms"
+        xmlns:Utility="clr-namespace:SWNAdmin.Utility" x:Class="SWNAdmin.Forms.ManagePrerequisites"
+        themes:ThemeManager.Theme="ExpressionDark"
         mc:Ignorable="d"
         Title="ManagePrerequisites" Height="456" Width="592">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
     </Window.Background>
     <Grid>
-        <TreeView x:Name="tvItemList" HorizontalAlignment="Left" Height="405" Margin="10,10,0,0" VerticalAlignment="Top" Width="100"/>
+        <TreeView x:Name="tvObjects" HorizontalAlignment="Left" Height="406" Margin="10,10,0,0" VerticalAlignment="Top" Width="162"/>
+
+        <!--<TreeView x:Name="tvItemList" HorizontalAlignment="Left" Height="405" Margin="10,10,0,0" VerticalAlignment="Top" Width="157">
+            -->
+        <!--<TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding SkillSpecialization}">
+                    <TextBlock Text="{Binding SkillName}" />
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <HierarchicalDataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </HierarchicalDataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>-->
+        <!--
+        </TreeView>-->
     </Grid>
 </Window>
