@@ -13,7 +13,10 @@
         <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
     </Window.Background>
     <Grid>
-        <TreeView x:Name="tvObjects" HorizontalAlignment="Left" Height="406" Margin="10,10,0,0" VerticalAlignment="Top" Width="162"/>
+        <TreeView x:Name="tvObjects" HorizontalAlignment="Left" Height="406" Margin="10,10,0,0" VerticalAlignment="Top" Width="162" SelectedItemChanged="tvObjects_SelectedItemChanged"/>
+        <TreeView x:Name="tvTargets" HorizontalAlignment="Left" Height="406" Margin="412,10,0,0" VerticalAlignment="Top" Width="162" SelectedItemChanged="tvTargets_SelectedItemChanged"/>
+        <TextBox x:Name="tbObject" HorizontalAlignment="Left" Height="23" Margin="172,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbTarget" HorizontalAlignment="Left" Height="23" Margin="287,393,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
         <!--<TreeView x:Name="tvItemList" HorizontalAlignment="Left" Height="405" Margin="10,10,0,0" VerticalAlignment="Top" Width="157">
             -->
