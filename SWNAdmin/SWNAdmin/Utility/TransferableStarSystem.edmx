@@ -237,6 +237,16 @@
           <Property Name="isUnlocked" Type="bit" Nullable="false" />
           <Property Name="isAdmin" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Requirements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="TargetRequirementID" Type="int" />
+          <Property Name="SourceItemID" Type="int" />
+          <Property Name="Condition" Type="nchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="SatelliteBaseTypes">
           <Key>
             <PropertyRef Name="Id" />
@@ -397,6 +407,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SkillSpecialization_Skills">
+          <End Role="Skills" Type="Self.Skills" Multiplicity="0..1" />
+          <End Role="SkillSpecialization" Type="Self.SkillSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SkillSpecialization">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Stars_SystemID">
           <End Role="StarSystems" Type="Self.StarSystems" Multiplicity="1" />
           <End Role="Stars" Type="Self.Stars" Multiplicity="*" />
@@ -502,6 +524,7 @@
           <EntitySet Name="Planets" EntityType="Self.Planets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PName" EntityType="Self.PName" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Registration" EntityType="Self.Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Requirements" EntityType="Self.Requirements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SatelliteBaseTypes" EntityType="Self.SatelliteBaseTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Skills" EntityType="Self.Skills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SkillSpecialization" EntityType="Self.SkillSpecialization" Schema="dbo" store:Type="Tables" />
@@ -525,6 +548,10 @@
           <AssociationSet Name="FK_Planets_Stars" Association="Self.FK_Planets_Stars">
             <End Role="Stars" EntitySet="Stars" />
             <End Role="Planets" EntitySet="Planets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SkillSpecialization_Skills" Association="Self.FK_SkillSpecialization_Skills">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="SkillSpecialization" EntitySet="SkillSpecialization" />
           </AssociationSet>
           <AssociationSet Name="FK_Stars_SystemID" Association="Self.FK_Stars_SystemID">
             <End Role="StarSystems" EntitySet="StarSystems" />
@@ -1084,6 +1111,11 @@
           <EntitySet Name="Attribute" EntityType="Db1Model.Attribute" />
           <EntitySet Name="Skills" EntityType="Db1Model.Skills" />
           <EntitySet Name="SkillSpecialization" EntityType="Db1Model.SkillSpecialization" />
+          <EntitySet Name="Requirements" EntityType="Db1Model.Requirements" />
+          <AssociationSet Name="FK_SkillSpecialization_Skills" Association="Db1Model.FK_SkillSpecialization_Skills">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="SkillSpecialization" EntitySet="SkillSpecialization" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="UDateTime">
           <Key>
@@ -1117,6 +1149,7 @@
           <Property Name="Modifiers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Defaults" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Prerequisites" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SkillSpecialization" Relationship="Db1Model.FK_SkillSpecialization_Skills" FromRole="Skills" ToRole="SkillSpecialization" />
         </EntityType>
         <EntityType Name="SkillSpecialization">
           <Key>
@@ -1130,7 +1163,30 @@
           <Property Name="Prerequisites" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Modifiers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsOptional" Type="Boolean" />
+          <NavigationProperty Name="Skills" Relationship="Db1Model.FK_SkillSpecialization_Skills" FromRole="SkillSpecialization" ToRole="Skills" />
         </EntityType>
+        <EntityType Name="Requirements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TargetRequirementID" Type="Int32" />
+          <Property Name="SourceItemID" Type="Int32" />
+          <Property Name="Condition" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_SkillSpecialization_Skills">
+          <End Type="Db1Model.Skills" Role="Skills" Multiplicity="0..1" />
+          <End Type="Db1Model.SkillSpecialization" Role="SkillSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SkillSpecialization">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1497,6 +1553,17 @@
                 <ScalarProperty Name="Default" ColumnName="Default" />
                 <ScalarProperty Name="SkillId" ColumnName="SkillId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requirements">
+            <EntityTypeMapping TypeName="Db1Model.Requirements">
+              <MappingFragment StoreEntitySet="Requirements">
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+                <ScalarProperty Name="SourceItemID" ColumnName="SourceItemID" />
+                <ScalarProperty Name="TargetRequirementID" ColumnName="TargetRequirementID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

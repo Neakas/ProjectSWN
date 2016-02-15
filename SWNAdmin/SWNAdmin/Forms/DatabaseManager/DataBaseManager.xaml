@@ -20,6 +20,7 @@
                 <MenuItem x:Name="MenuManageBoni" Header="Boni" HorizontalAlignment="Left" Width="140" Click="MenuManageBoni_Click"/>
                 <MenuItem x:Name="MenuManageMali" Header="Mali" HorizontalAlignment="Left" Width="140" Click="MenuManageMali_Click"/>
                 <MenuItem x:Name="MenuManageSkills" Header="Skills" HorizontalAlignment="Left" Width="140" Click="MenuManageSkills_Click" />
+                <MenuItem x:Name="MenuManagePrerequisites" Header="Prerequisites" HorizontalAlignment="Left" Width="140" Click="MenuManagePrerequisites_Click"/>
             </MenuItem>
         </Menu>
         <DataGrid x:Name="dgMain" Margin="108,27,10,0" VerticalAlignment="Top" Height="932">

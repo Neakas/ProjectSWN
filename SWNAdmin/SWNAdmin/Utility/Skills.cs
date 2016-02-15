@@ -14,6 +14,12 @@ namespace SWNAdmin.Utility
     
     public partial class Skills
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Skills()
+        {
+            this.SkillSpecialization = new HashSet<SkillSpecialization>();
+        }
+    
         public int Id { get; set; }
         public string SkillName { get; set; }
         public string DifficultyLevel { get; set; }
@@ -27,5 +33,8 @@ namespace SWNAdmin.Utility
         public string Modifiers { get; set; }
         public string Defaults { get; set; }
         public string Prerequisites { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SkillSpecialization> SkillSpecialization { get; set; }
     }
 }

@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace SWNAdmin.Classes
 {
-    class Skill : Utility.Skills
+    class SkillPrerequisites : Utility.Skills
     {
-        
+        public static void CheckPrereqString(Utility.Skills skill)
+        {
+            
+        }
     }
 }

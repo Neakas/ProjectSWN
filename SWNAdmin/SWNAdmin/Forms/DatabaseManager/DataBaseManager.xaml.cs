@@ -214,8 +214,14 @@ namespace SWNAdmin.Forms
         private void MenuManageSkills_Click(object sender, RoutedEventArgs e)
         {
             ManageSkills MSK = new ManageSkills();
-        MSK.ShowDialog();
+            MSK.ShowDialog();
             LoadDgMain(null);
+        }
+
+        private void MenuManagePrerequisites_Click(object sender, RoutedEventArgs e)
+        {
+            ManagePrerequisites MPR = new ManagePrerequisites();
+            MPR.ShowDialog();
         }
     }
 }

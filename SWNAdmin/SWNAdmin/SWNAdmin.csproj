@@ -116,6 +116,9 @@
     <Compile Include="Forms\DatabaseManager\ManageMalus.xaml.cs">
       <DependentUpon>ManageMalus.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DatabaseManager\ManagePrerequisites.xaml.cs">
+      <DependentUpon>ManagePrerequisites.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DatabaseManager\ManageSkills.xaml.cs">
       <DependentUpon>ManageSkills.xaml</DependentUpon>
     </Compile>
@@ -181,6 +184,9 @@
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\Characters.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\Requirements.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\Skills.cs">
@@ -269,6 +275,10 @@
     <Page Include="Forms\DatabaseManager\ManageMalus.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\DatabaseManager\ManagePrerequisites.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\DatabaseManager\ManageSkills.xaml">
       <SubType>Designer</SubType>

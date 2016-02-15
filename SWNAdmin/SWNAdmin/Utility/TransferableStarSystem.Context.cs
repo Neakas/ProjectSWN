@@ -46,5 +46,6 @@ namespace SWNAdmin.Utility
         public virtual DbSet<Attribute> Attribute { get; set; }
         public virtual DbSet<Skills> Skills { get; set; }
         public virtual DbSet<SkillSpecialization> SkillSpecialization { get; set; }
+        public virtual DbSet<Requirements> Requirements { get; set; }
     }
 }

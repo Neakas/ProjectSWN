@@ -66,7 +66,7 @@ namespace SWNAdmin.Forms
                 tbDiscription.Text = SelectedSkill.Description?.ToString();
                 //tbModifiers.Text = SelectedSkill.Modifiers?.ToString();
                 tbDefault.Text = SelectedSkill.Defaults?.ToString();
-                //tbPrerequisite.Text = SelectedSkill.Prerequisites?.ToString();
+                tbPrerequisite.Text = SelectedSkill.Prerequisites?.ToString();
 
                 PreparePage1();
                 PreparePage2();
@@ -108,7 +108,7 @@ namespace SWNAdmin.Forms
                 UpdateSkill.Description = tbDiscription.Text;
                 //UpdateSkill.Modifiers = tbModifiers.Text;
                 UpdateSkill.Defaults = tbDefault.Text;
-                //UpdateSkill.Prerequisites = tbPrerequisite.Text;
+                UpdateSkill.Prerequisites = tbPrerequisite.Text;
                 Context.Entry(UpdateSkill).State = System.Data.Entity.EntityState.Modified;
                 Context.SaveChanges();
             }
@@ -153,7 +153,7 @@ namespace SWNAdmin.Forms
             tbDiscription.Text = "";
             //tbModifiers.Text = "";
             tbDefault.Text = "";
-            //tbPrerequisite.Text = "";
+            tbPrerequisite.Text = "";
         }
 
         private void btAdd_Click(object sender, RoutedEventArgs e)
@@ -174,7 +174,7 @@ namespace SWNAdmin.Forms
                 AddSkill.Description = tbDiscription.Text;
                 //AddSkill.Modifiers = tbModifiers.Text;
                 AddSkill.Defaults = tbDefault.Text;
-                //AddSkill.Prerequisites = tbPrerequisite.Text;
+                AddSkill.Prerequisites = tbPrerequisite.Text;
                 Context.Skills.Add(AddSkill);
                 Context.SaveChanges();
             }
