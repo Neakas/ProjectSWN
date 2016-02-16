@@ -171,6 +171,9 @@
     <Compile Include="UserControls\ModifyStarSystem.xaml.cs">
       <DependentUpon>ModifyStarSystem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\TextBoxWithObject.xaml.cs">
+      <DependentUpon>TextBoxWithObject.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utility\Advantages.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
@@ -353,6 +356,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\ModifyStarSystem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\TextBoxWithObject.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
