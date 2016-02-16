@@ -15,9 +15,10 @@ namespace SWNAdmin.Utility
     public partial class Requirements
     {
         public int Id { get; set; }
-        public string Type { get; set; }
         public Nullable<int> TargetRequirementID { get; set; }
         public Nullable<int> SourceItemID { get; set; }
         public string Condition { get; set; }
+        public string SourceType { get; set; }
+        public string TargetType { get; set; }
     }
 }

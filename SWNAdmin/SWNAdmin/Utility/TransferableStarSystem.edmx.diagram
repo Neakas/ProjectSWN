@@ -36,7 +36,7 @@
         <EntityTypeShape EntityType="Db1Model.Attribute" Width="1.5" PointX="14.375" PointY="0.75" />
         <EntityTypeShape EntityType="Db1Model.Skills" Width="1.5" PointX="15.375" PointY="7.75" />
         <EntityTypeShape EntityType="Db1Model.SkillSpecialization" Width="1.5" PointX="17.875" PointY="8.75" />
-        <EntityTypeShape EntityType="Db1Model.Requirements" Width="1.5" PointX="14.375" PointY="12.75" />
+        <EntityTypeShape EntityType="Db1Model.Requirements" Width="1.5" PointX="13.75" PointY="12.125" />
         <AssociationConnector Association="Db1Model.FK_SkillSpecialization_Skills" />
       </Diagram>
     </edmx:Diagrams>

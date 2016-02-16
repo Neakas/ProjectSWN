@@ -22,6 +22,10 @@ namespace SWNAdmin.Forms
     {
         public List<Skills> FoundSkills;
         public List<SWNAdmin.Utility.Attribute> FoundAttributes;
+        int SourceItemID;
+        int TargetItemID;
+        string SourceType;
+        string TargetType;
 
         public ManagePrerequisites()
         {
@@ -51,14 +55,21 @@ namespace SWNAdmin.Forms
                         tvi2.Header = skillspec.Name;
                         tvi2.StoredObject = skillspec;
                         tvi2.Foreground = Brushes.White;
+                        if (skillspec.RequirementSet == true)
+                        {
+                            tvi2.Foreground = Brushes.Green;
+                        }
                         tvi.Items.Add(tvi2);
                     }
                 }
                 tvi.Header = Skillitem.SkillName;
                 tvi.StoredObject = Skillitem;
-                tvi.Foreground = Brushes.White;    
+                tvi.Foreground = Brushes.White;
+                if (Skillitem.RequirementSet == true)
+                {
+                    tvi.Foreground = Brushes.Green;
+                }
                 SkillMain.Items.Add(tvi);
-                //treeview.DisplayMemberPath = "SkillName";
             }
             treeview.Items.Add(SkillMain);
 
@@ -75,25 +86,37 @@ namespace SWNAdmin.Forms
                 tvi.Header = AttItem.Name;
                 tvi.StoredObject = AttItem;
                 tvi.Foreground = Brushes.White;
+                if (AttItem.RequirementSet == true)
+                {
+                    tvi.Foreground = Brushes.Green;
+                }
                 AttributeMain.Items.Add(tvi);
             }
             treeview.Items.Add(AttributeMain);
-            //treeview.DisplayMemberPath = "SkillName";
         }
 
         private void tvObjects_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if ((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(Skills))
             {
-                tbObject.Text = (((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject) as Skills).SkillName;
+                Skills s = (((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject) as Skills);
+                tbObject.Text = s.SkillName;
+                SourceItemID = s.Id;
+                SourceType = "Skills";
             }
             if ((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(SkillSpecialization))
             {
-                tbObject.Text = (((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject) as SkillSpecialization).Name;
+                SkillSpecialization ss = (((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject) as SkillSpecialization);
+                tbObject.Text = ss.Name;
+                SourceItemID = ss.Id;
+                SourceType = "SkillSpecialization";
             }
             if ((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(SWNAdmin.Utility.Attribute))
             {
-                tbObject.Text = (((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject) as SWNAdmin.Utility.Attribute).Name;
+                SWNAdmin.Utility.Attribute a = (((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject) as SWNAdmin.Utility.Attribute);
+                tbObject.Text = a.Name;
+                SourceItemID = a.Id;
+                SourceType = "Attribute";
             }
         }
 
@@ -101,15 +124,24 @@ namespace SWNAdmin.Forms
         {
             if ((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(Skills))
             {
-                tbTarget.Text = (((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject) as Skills).SkillName;
+                Skills s = (((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject) as Skills);
+                tbTarget.Text = s.SkillName;
+                TargetItemID = s.Id;
+                TargetType = "Skills";
             }
             if ((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(SkillSpecialization))
             {
-                tbTarget.Text = (((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject) as SkillSpecialization).Name;
+                SkillSpecialization ss = (((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject) as SkillSpecialization);
+                tbTarget.Text = ss.Name;
+                TargetItemID = ss.Id;
+                TargetType = "SkillSpecialization";
             }
             if ((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(SWNAdmin.Utility.Attribute))
             {
-                tbTarget.Text = (((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject) as SWNAdmin.Utility.Attribute).Name;
+                SWNAdmin.Utility.Attribute a = (((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject) as SWNAdmin.Utility.Attribute);
+                tbTarget.Text = a.Name;
+                TargetItemID = a.Id;
+                TargetType = "Attribute";
             }
         }
 
@@ -184,8 +216,26 @@ namespace SWNAdmin.Forms
             using (var context = new Utility.Db1Entities())
             {
                 Requirements req = new Requirements();
-
+                req.SourceItemID = SourceItemID;
+                req.TargetRequirementID = TargetItemID;
+                req.TargetType = TargetType;
+                req.SourceType = SourceType;
+                req.Condition = cbConditions.SelectedValue.ToString();
+                context.Requirements.Add(req);
+                context.SaveChanges();
             }
+            (tvObjects.SelectedItem as TreeViewItem).IsSelected = false;
+            (tvTargets.SelectedItem as TreeViewItem).IsSelected = false;
+            tbConditionValue.Text = "";
+            tbObject.Text = "";
+            tbTarget.Text = "";
+
+
+
+            LoadTreeViewContent(tvObjects);
+            LoadTreeViewContent(tvTargets);
+
+
         }
 
         private void btDel_Click(object sender, RoutedEventArgs e)

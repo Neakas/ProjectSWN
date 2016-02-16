@@ -22,6 +22,7 @@ namespace SWNAdmin.Utility
         public string Prerequisites { get; set; }
         public string Modifiers { get; set; }
         public Nullable<bool> IsOptional { get; set; }
+        public Nullable<bool> RequirementSet { get; set; }
     
         public virtual Skills Skills { get; set; }
     }

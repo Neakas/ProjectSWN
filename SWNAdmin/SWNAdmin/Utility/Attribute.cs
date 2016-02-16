@@ -16,5 +16,6 @@ namespace SWNAdmin.Utility
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public Nullable<bool> RequirementSet { get; set; }
     }
 }

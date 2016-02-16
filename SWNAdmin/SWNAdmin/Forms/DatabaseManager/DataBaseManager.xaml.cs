@@ -191,13 +191,8 @@ namespace SWNAdmin.Forms
                     var advlist = query.ToList();
                     dgMain.ItemsSource = advlist;
                 }
-
-
-
             }
         }
-
-
 
         private void LoadDatabaseSelector()
         {

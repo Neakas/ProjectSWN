@@ -17,7 +17,7 @@
     <Grid>
         <TreeView x:Name="tvObjects" HorizontalAlignment="Left" Height="406" Margin="10,10,0,0" VerticalAlignment="Top" Width="162" SelectedItemChanged="tvObjects_SelectedItemChanged"/>
         <TreeView x:Name="tvTargets" HorizontalAlignment="Left" Height="406" Margin="268,10,0,0" VerticalAlignment="Top" Width="162" SelectedItemChanged="tvTargets_SelectedItemChanged"/>
-        <TextBox x:Name="tbObject" HorizontalAlignment="Left" Height="23" Margin="10,421,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" Focusable="False" IsReadOnly="True" TextChanged="tbObject_TextChanged"/>
+        <TextBox x:Name="tbObject" HorizontalAlignment="Left" Height="23" Margin="10,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" Focusable="False" IsReadOnly="True" TextChanged="tbObject_TextChanged"/>
         <TextBox x:Name="tbTarget" themes:ThemeManager.Theme="ExpressionLight" HorizontalAlignment="Left" Height="24" Margin="268,421,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" Focusable="False" IsReadOnly="True" TextChanged="tbTarget_TextChanged"/>
         <Label x:Name="label" Content="Requires -&gt;" HorizontalAlignment="Left" Margin="177,421,0,0" VerticalAlignment="Top" Height="24" Width="75" FontSize="14.667"/>
         <ComboBox x:Name="cbConditions" HorizontalAlignment="Left" Margin="452,421,0,0" VerticalAlignment="Top" Width="88" Height="24" IsEnabled="False" SelectionChanged="cbConditions_SelectionChanged"/>
@@ -26,8 +26,6 @@
         <Button x:Name="btAdd" Content="Add" HorizontalAlignment="Left" Margin="609,421,0,0" VerticalAlignment="Top" Width="34" Height="23" IsEnabled="False" Click="btAdd_Click"/>
         <Button x:Name="btDel" Content="Del" HorizontalAlignment="Left" Margin="648,421,0,0" VerticalAlignment="Top" Width="34" Height="23" IsEnabled="False"/>
         <Button x:Name="btUpdate" Content="Upd" HorizontalAlignment="Left" Margin="609,421,0,0" VerticalAlignment="Top" Width="34" Height="23" Visibility="Hidden" IsEnabled="False"/>
-        
-
 
 
         <!--<TreeView x:Name="tvItemList" HorizontalAlignment="Left" Height="405" Margin="10,10,0,0" VerticalAlignment="Top" Width="157">

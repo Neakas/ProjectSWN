@@ -33,6 +33,7 @@ namespace SWNAdmin.Utility
         public string Modifiers { get; set; }
         public string Defaults { get; set; }
         public string Prerequisites { get; set; }
+        public Nullable<bool> RequirementSet { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SkillSpecialization> SkillSpecialization { get; set; }

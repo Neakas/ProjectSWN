@@ -28,6 +28,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RequirementSet" Type="bit" />
         </EntityType>
         <EntityType Name="CharacterBonus">
           <Key>
@@ -241,11 +242,12 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SourceType" Type="nvarchar" MaxLength="50" />
           <Property Name="TargetRequirementID" Type="int" />
           <Property Name="SourceItemID" Type="int" />
           <Property Name="Condition" Type="nchar" MaxLength="10" />
+          <Property Name="TargetType" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="SatelliteBaseTypes">
           <Key>
@@ -271,6 +273,7 @@
           <Property Name="Modifiers" Type="nvarchar(max)" />
           <Property Name="Defaults" Type="nvarchar(max)" />
           <Property Name="Prerequisites" Type="nvarchar(max)" />
+          <Property Name="RequirementSet" Type="bit" />
         </EntityType>
         <EntityType Name="SkillSpecialization">
           <Key>
@@ -284,6 +287,7 @@
           <Property Name="Prerequisites" Type="nvarchar(max)" />
           <Property Name="Modifiers" Type="nvarchar(max)" />
           <Property Name="IsOptional" Type="bit" />
+          <Property Name="RequirementSet" Type="bit" />
         </EntityType>
         <EntityType Name="Stars">
           <Key>
@@ -1131,6 +1135,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RequirementSet" Type="Boolean" />
         </EntityType>
         <EntityType Name="Skills">
           <Key>
@@ -1150,6 +1155,7 @@
           <Property Name="Defaults" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Prerequisites" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SkillSpecialization" Relationship="Db1Model.FK_SkillSpecialization_Skills" FromRole="Skills" ToRole="SkillSpecialization" />
+          <Property Name="RequirementSet" Type="Boolean" />
         </EntityType>
         <EntityType Name="SkillSpecialization">
           <Key>
@@ -1164,16 +1170,18 @@
           <Property Name="Modifiers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsOptional" Type="Boolean" />
           <NavigationProperty Name="Skills" Relationship="Db1Model.FK_SkillSpecialization_Skills" FromRole="SkillSpecialization" ToRole="Skills" />
+          <Property Name="RequirementSet" Type="Boolean" />
         </EntityType>
         <EntityType Name="Requirements">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TargetRequirementID" Type="Int32" />
           <Property Name="SourceItemID" Type="Int32" />
           <Property Name="Condition" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SourceType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TargetType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_SkillSpecialization_Skills">
           <End Type="Db1Model.Skills" Role="Skills" Multiplicity="0..1" />
@@ -1519,6 +1527,7 @@
           <EntitySetMapping Name="Attribute">
             <EntityTypeMapping TypeName="Db1Model.Attribute">
               <MappingFragment StoreEntitySet="Attribute">
+                <ScalarProperty Name="RequirementSet" ColumnName="RequirementSet" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -1527,6 +1536,7 @@
           <EntitySetMapping Name="Skills">
             <EntityTypeMapping TypeName="Db1Model.Skills">
               <MappingFragment StoreEntitySet="Skills">
+                <ScalarProperty Name="RequirementSet" ColumnName="RequirementSet" />
                 <ScalarProperty Name="Prerequisites" ColumnName="Prerequisites" />
                 <ScalarProperty Name="Defaults" ColumnName="Defaults" />
                 <ScalarProperty Name="Modifiers" ColumnName="Modifiers" />
@@ -1546,6 +1556,7 @@
           <EntitySetMapping Name="SkillSpecialization">
             <EntityTypeMapping TypeName="Db1Model.SkillSpecialization">
               <MappingFragment StoreEntitySet="SkillSpecialization">
+                <ScalarProperty Name="RequirementSet" ColumnName="RequirementSet" />
                 <ScalarProperty Name="IsOptional" ColumnName="IsOptional" />
                 <ScalarProperty Name="Modifiers" ColumnName="Modifiers" />
                 <ScalarProperty Name="Prerequisites" ColumnName="Prerequisites" />
@@ -1560,10 +1571,11 @@
           <EntitySetMapping Name="Requirements">
             <EntityTypeMapping TypeName="Db1Model.Requirements">
               <MappingFragment StoreEntitySet="Requirements">
+                <ScalarProperty Name="TargetType" ColumnName="TargetType" />
+                <ScalarProperty Name="SourceType" ColumnName="SourceType" />
                 <ScalarProperty Name="Condition" ColumnName="Condition" />
                 <ScalarProperty Name="SourceItemID" ColumnName="SourceItemID" />
                 <ScalarProperty Name="TargetRequirementID" ColumnName="TargetRequirementID" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
