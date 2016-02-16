@@ -19,6 +19,7 @@ namespace SWNAdmin.Utility
             : base("name=Db1Entities")
         {
             this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
