@@ -20,5 +20,8 @@ namespace SWNAdmin.Utility
         public string Condition { get; set; }
         public string SourceType { get; set; }
         public string TargetType { get; set; }
+        public string SourceName { get; set; }
+        public string TargetName { get; set; }
+        public string ConditionValue { get; set; }
     }
 }

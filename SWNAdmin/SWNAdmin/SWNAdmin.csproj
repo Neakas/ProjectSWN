@@ -113,11 +113,17 @@
     <Compile Include="Forms\DatabaseManager\ManageBoni.xaml.cs">
       <DependentUpon>ManageBoni.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DatabaseManager\ManageGroups.xaml.cs">
+      <DependentUpon>ManageGroups.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DatabaseManager\ManageMalus.xaml.cs">
       <DependentUpon>ManageMalus.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\DatabaseManager\ManagePrerequisites.xaml.cs">
       <DependentUpon>ManagePrerequisites.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DatabaseManager\ManageModifiers.xaml.cs">
+      <DependentUpon>ManageModifiers.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\DatabaseManager\ManageSkills.xaml.cs">
       <DependentUpon>ManageSkills.xaml</DependentUpon>
@@ -186,6 +192,9 @@
     <Compile Include="Utility\Characters.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utility\Modifier.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="Utility\Requirements.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
@@ -193,6 +202,12 @@
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\SkillSpecialization.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\StatGroup.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\StatSubGroup.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\UDateTime.cs">
@@ -272,6 +287,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Forms\DatabaseManager\ManageGroups.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\DatabaseManager\ManageMalus.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -279,6 +298,10 @@
     <Page Include="Forms\DatabaseManager\ManagePrerequisites.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\DatabaseManager\ManageModifiers.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Forms\DatabaseManager\ManageSkills.xaml">
       <SubType>Designer</SubType>

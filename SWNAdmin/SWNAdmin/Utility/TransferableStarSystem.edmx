@@ -153,6 +153,16 @@
           <Property Name="volActivity" Type="float" />
           <Property Name="MajorMoonString" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="Modifier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Group" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubGroup" Type="nchar" MaxLength="10" />
+          <Property Name="Modifying Property" Type="nvarchar" MaxLength="50" />
+          <Property Name="Modifying Value" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="OuterMoonlets">
           <Key>
             <PropertyRef Name="Id" />
@@ -248,6 +258,9 @@
           <Property Name="SourceItemID" Type="int" />
           <Property Name="Condition" Type="nchar" MaxLength="10" />
           <Property Name="TargetType" Type="nvarchar" MaxLength="50" />
+          <Property Name="SourceName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TargetName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ConditionValue" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="SatelliteBaseTypes">
           <Key>
@@ -336,6 +349,21 @@
           <Property Name="subCompanionStar3index" Type="int" />
           <Property Name="sysAge" Type="float" Nullable="false" />
           <Property Name="sysStars" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StatGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StatSubGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UDateTime">
           <Key>
@@ -435,6 +463,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_StatSubGroup_StatGroup">
+          <End Role="StatGroup" Type="Self.StatGroup" Multiplicity="1" />
+          <End Role="StatSubGroup" Type="Self.StatSubGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StatSubGroup">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UsedBonus_Advantage">
           <End Role="Advantages" Type="Self.Advantages" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -524,6 +564,7 @@
           <EntitySet Name="Disadvantages" EntityType="Self.Disadvantages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InnerMoonlets" EntityType="Self.InnerMoonlets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MajorMoons" EntityType="Self.MajorMoons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modifier" EntityType="Self.Modifier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OuterMoonlets" EntityType="Self.OuterMoonlets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Planets" EntityType="Self.Planets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PName" EntityType="Self.PName" Schema="dbo" store:Type="Tables" />
@@ -534,6 +575,8 @@
           <EntitySet Name="SkillSpecialization" EntityType="Self.SkillSpecialization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stars" EntityType="Self.Stars" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StarSystems" EntityType="Self.StarSystems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatGroup" EntityType="Self.StatGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatSubGroup" EntityType="Self.StatSubGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UDateTime" EntityType="Self.UDateTime" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsedBonus" EntityType="Self.UsedBonus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsedMalus" EntityType="Self.UsedMalus" Schema="dbo" store:Type="Tables" />
@@ -560,6 +603,10 @@
           <AssociationSet Name="FK_Stars_SystemID" Association="Self.FK_Stars_SystemID">
             <End Role="StarSystems" EntitySet="StarSystems" />
             <End Role="Stars" EntitySet="Stars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatSubGroup_StatGroup" Association="Self.FK_StatSubGroup_StatGroup">
+            <End Role="StatGroup" EntitySet="StatGroup" />
+            <End Role="StatSubGroup" EntitySet="StatSubGroup" />
           </AssociationSet>
           <AssociationSet Name="FK_UsedBonus_Advantage" Association="Self.FK_UsedBonus_Advantage">
             <End Role="Advantages" EntitySet="Advantages" />
@@ -1120,6 +1167,13 @@
             <End Role="Skills" EntitySet="Skills" />
             <End Role="SkillSpecialization" EntitySet="SkillSpecialization" />
           </AssociationSet>
+          <EntitySet Name="Modifier" EntityType="Db1Model.Modifier" />
+          <EntitySet Name="StatGroup" EntityType="Db1Model.StatGroup" />
+          <EntitySet Name="StatSubGroup" EntityType="Db1Model.StatSubGroup" />
+          <AssociationSet Name="FK_StatSubGroup_StatGroup1" Association="Db1Model.FK_StatSubGroup_StatGroup1">
+            <End Role="StatGroup" EntitySet="StatGroup" />
+            <End Role="StatSubGroup" EntitySet="StatSubGroup" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="UDateTime">
           <Key>
@@ -1182,6 +1236,9 @@
           <Property Name="Condition" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="SourceType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TargetType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SourceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TargetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ConditionValue" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <Association Name="FK_SkillSpecialization_Skills">
           <End Type="Db1Model.Skills" Role="Skills" Multiplicity="0..1" />
@@ -1192,6 +1249,45 @@
             </Principal>
             <Dependent Role="SkillSpecialization">
               <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Modifier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Group" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubGroup" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Modifying_Property" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Modifying_Value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="StatGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="StatSubGroup" Relationship="Db1Model.FK_StatSubGroup_StatGroup1" FromRole="StatGroup" ToRole="StatSubGroup" />
+        </EntityType>
+        <EntityType Name="StatSubGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="StatGroup" Relationship="Db1Model.FK_StatSubGroup_StatGroup1" FromRole="StatSubGroup" ToRole="StatGroup" />
+        </EntityType>
+        <Association Name="FK_StatSubGroup_StatGroup1">
+          <End Type="Db1Model.StatGroup" Role="StatGroup" Multiplicity="1" />
+          <End Type="Db1Model.StatSubGroup" Role="StatSubGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StatSubGroup">
+              <PropertyRef Name="GroupId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1571,11 +1667,42 @@
           <EntitySetMapping Name="Requirements">
             <EntityTypeMapping TypeName="Db1Model.Requirements">
               <MappingFragment StoreEntitySet="Requirements">
+                <ScalarProperty Name="ConditionValue" ColumnName="ConditionValue" />
+                <ScalarProperty Name="TargetName" ColumnName="TargetName" />
+                <ScalarProperty Name="SourceName" ColumnName="SourceName" />
                 <ScalarProperty Name="TargetType" ColumnName="TargetType" />
                 <ScalarProperty Name="SourceType" ColumnName="SourceType" />
                 <ScalarProperty Name="Condition" ColumnName="Condition" />
                 <ScalarProperty Name="SourceItemID" ColumnName="SourceItemID" />
                 <ScalarProperty Name="TargetRequirementID" ColumnName="TargetRequirementID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modifier">
+            <EntityTypeMapping TypeName="Db1Model.Modifier">
+              <MappingFragment StoreEntitySet="Modifier">
+                <ScalarProperty Name="Modifying_Value" ColumnName="Modifying Value" />
+                <ScalarProperty Name="Modifying_Property" ColumnName="Modifying Property" />
+                <ScalarProperty Name="SubGroup" ColumnName="SubGroup" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatGroup">
+            <EntityTypeMapping TypeName="Db1Model.StatGroup">
+              <MappingFragment StoreEntitySet="StatGroup">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatSubGroup">
+            <EntityTypeMapping TypeName="Db1Model.StatSubGroup">
+              <MappingFragment StoreEntitySet="StatSubGroup">
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

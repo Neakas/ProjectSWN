@@ -22,6 +22,8 @@ namespace SWNAdmin.Forms
     {
         public List<Skills> FoundSkills;
         public List<SWNAdmin.Utility.Attribute> FoundAttributes;
+        public List<Requirements> FoundPrereqs;
+        Dictionary<String, Requirements> dictPrereq;
         int SourceItemID;
         int TargetItemID;
         string SourceType;
@@ -30,9 +32,10 @@ namespace SWNAdmin.Forms
         public ManagePrerequisites()
         {
             InitializeComponent();
-            List<string> Conditions = new List<string> { "<", "<=", "==",">",">=","Needs" };
+            List<string> Conditions = new List<string> { "<", "<=", "==",">",">=","Needs","Or" };
             LoadTreeViewContent(tvObjects);
             LoadTreeViewContent(tvTargets);
+            LoadSetPrereqList();
             cbConditions.ItemsSource = Conditions;
         }
 
@@ -104,6 +107,7 @@ namespace SWNAdmin.Forms
                 SourceItemID = s.Id;
                 SourceType = "Skills";
             }
+
             if ((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(SkillSpecialization))
             {
                 SkillSpecialization ss = (((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject) as SkillSpecialization);
@@ -111,6 +115,7 @@ namespace SWNAdmin.Forms
                 SourceItemID = ss.Id;
                 SourceType = "SkillSpecialization";
             }
+
             if ((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(SWNAdmin.Utility.Attribute))
             {
                 SWNAdmin.Utility.Attribute a = (((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject) as SWNAdmin.Utility.Attribute);
@@ -129,6 +134,7 @@ namespace SWNAdmin.Forms
                 TargetItemID = s.Id;
                 TargetType = "Skills";
             }
+
             if ((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(SkillSpecialization))
             {
                 SkillSpecialization ss = (((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject) as SkillSpecialization);
@@ -136,6 +142,7 @@ namespace SWNAdmin.Forms
                 TargetItemID = ss.Id;
                 TargetType = "SkillSpecialization";
             }
+
             if ((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(SWNAdmin.Utility.Attribute))
             {
                 SWNAdmin.Utility.Attribute a = (((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject) as SWNAdmin.Utility.Attribute);
@@ -181,15 +188,15 @@ namespace SWNAdmin.Forms
             {
                 if (tbObject.Text != "" && tbObject.Text != null)
                 {
-                    if (cbConditions.SelectedValue.ToString() != "Needs")
+                    if (cbConditions.SelectedValue.ToString() != "Needs" && cbConditions.SelectedValue.ToString() != "Or")
                     {
                         tbConditionValue.IsEnabled = true;
                         btAdd.IsEnabled = true;
                     }
-                    if (cbConditions.SelectedValue.ToString() == "Needs")
+                    if (cbConditions.SelectedValue.ToString() == "Needs" || cbConditions.SelectedValue.ToString() == "Or")
                     {
-                        btAdd.IsEnabled = true;
-                        tbConditionValue.IsEnabled = false;
+                            btAdd.IsEnabled = true;
+                            tbConditionValue.IsEnabled = false;
                     }
                     else
                     {
@@ -221,6 +228,9 @@ namespace SWNAdmin.Forms
                 req.TargetType = TargetType;
                 req.SourceType = SourceType;
                 req.Condition = cbConditions.SelectedValue.ToString();
+                req.SourceName = tbObject.Text;
+                req.TargetName = tbTarget.Text;
+                req.ConditionValue = tbConditionValue.Text;
                 context.Requirements.Add(req);
                 context.SaveChanges();
             }
@@ -229,18 +239,62 @@ namespace SWNAdmin.Forms
             tbConditionValue.Text = "";
             tbObject.Text = "";
             tbTarget.Text = "";
-
-
-
-            LoadTreeViewContent(tvObjects);
-            LoadTreeViewContent(tvTargets);
-
-
+            LoadSetPrereqList();
         }
 
         private void btDel_Click(object sender, RoutedEventArgs e)
         {
+            string item = lbSetPrerequisites.SelectedItem.ToString();
+            Requirements reqitem;
+            dictPrereq.TryGetValue(item, out reqitem);
 
+            if (reqitem != null)
+            {
+                var DelContext = new Utility.Db1Entities();
+                var DelQuery = from c in DelContext.Requirements where c.Id == reqitem.Id select c;
+
+                using (var cnt = new Utility.Db1Entities())
+                {
+                    Requirements Deletereq = DelQuery.FirstOrDefault();
+                    cnt.Entry(Deletereq).State = System.Data.Entity.EntityState.Deleted;
+                    cnt.SaveChanges();
+                }
+            }
+            LoadSetPrereqList();
+        }
+
+        private void LoadSetPrereqList()
+        {
+            var RequirementContext = new Utility.Db1Entities();
+            var prereqquery = from c in RequirementContext.Requirements select c;
+            FoundPrereqs = prereqquery.ToList();
+
+            List<String> prereqList = new List<string>();
+            dictPrereq = new Dictionary<string, Requirements>();
+
+            foreach (Requirements item in FoundPrereqs)
+            {
+                string prereqString = "(" + item.SourceType + ":" + item.SourceName + ")-(" + item.TargetType + ":" + item.TargetName + ":" + item.Condition.Replace(" ", "") + item.ConditionValue.Replace(" ","") + ")";
+                prereqList.Add(prereqString);
+                dictPrereq.Add(prereqString, item);
+            }
+            lbSetPrerequisites.ItemsSource = prereqList;
+        }
+
+        private void lbSetPrerequisites_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lbSetPrerequisites.SelectedItem != null)
+            {
+                btDel.IsEnabled = true;
+                btAdd.IsEnabled = false;
+                btAdd.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                btDel.IsEnabled = false;
+                btAdd.IsEnabled = true;
+                btAdd.Visibility = Visibility.Visible;
+            }
         }
     }
 
@@ -248,5 +302,6 @@ namespace SWNAdmin.Forms
     {
         public object StoredObject = new object();
     }
+
 
 }

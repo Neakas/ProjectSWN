@@ -19,7 +19,6 @@ namespace SWNAdmin.Utility
             : base("name=Db1Entities")
         {
             this.Configuration.LazyLoadingEnabled = false;
-            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -48,5 +47,8 @@ namespace SWNAdmin.Utility
         public virtual DbSet<Skills> Skills { get; set; }
         public virtual DbSet<SkillSpecialization> SkillSpecialization { get; set; }
         public virtual DbSet<Requirements> Requirements { get; set; }
+        public virtual DbSet<Modifier> Modifier { get; set; }
+        public virtual DbSet<StatGroup> StatGroup { get; set; }
+        public virtual DbSet<StatSubGroup> StatSubGroup { get; set; }
     }
 }

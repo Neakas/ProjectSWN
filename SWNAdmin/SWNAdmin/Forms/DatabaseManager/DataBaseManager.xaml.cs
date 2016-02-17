@@ -218,5 +218,11 @@ namespace SWNAdmin.Forms
             ManagePrerequisites MPR = new ManagePrerequisites();
             MPR.ShowDialog();
         }
+
+        private void MenuManageGroups_Click(object sender, RoutedEventArgs e)
+        {
+            ManageGroups mg = new ManageGroups();
+            mg.ShowDialog();
+        }
     }
 }

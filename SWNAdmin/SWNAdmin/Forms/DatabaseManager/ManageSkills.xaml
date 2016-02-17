@@ -67,16 +67,10 @@
 
             </Grid>
         </TabItem>
-        <TabItem x:Name="tabItemRequierements" Header="Manage Prerequisites" IsEnabled="False">
-            <Grid>
-                <Label x:Name="label_Copy61" Content="Skill Name:" HorizontalAlignment="Left" Margin="6,10,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="tbSkillNameP2" HorizontalAlignment="Left" Height="23" Margin="78,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Focusable="False" IsReadOnlyCaretVisible="True" IsReadOnly="True"/>
-            </Grid>
-        </TabItem>
-        <TabItem x:Name="tabItemModifiers" Header="Manage Modifiers" IsEnabled="False">
+        <TabItem x:Name="tabItemModifiers" Header="Empty" IsEnabled="False">
             <Grid>
                 <Label x:Name="label_Copy71" Content="Skill Name:" HorizontalAlignment="Left" Margin="6,10,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="tbSkillNameP3" HorizontalAlignment="Left" Height="23" Margin="78,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Focusable="False" IsReadOnlyCaretVisible="True" IsReadOnly="True"/>
+                <TextBox x:Name="tbSkillNameP" HorizontalAlignment="Left" Height="23" Margin="78,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Focusable="False" IsReadOnlyCaretVisible="True" IsReadOnly="True"/>
             </Grid>
         </TabItem>
     </TabControl>

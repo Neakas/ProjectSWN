@@ -70,7 +70,6 @@ namespace SWNAdmin.Forms
 
                 PreparePage1();
                 PreparePage2();
-                PreparePage3();
             }
             else
             {
@@ -78,14 +77,9 @@ namespace SWNAdmin.Forms
             }
         }
 
-        
         private void PreparePage2()
         {
-            tbSkillNameP2.Text = tbSkillName.Text = SelectedSkill.SkillName?.ToString();
-        }
-        private void PreparePage3()
-        {
-            tbSkillNameP3.Text = tbSkillName.Text = SelectedSkill.SkillName?.ToString();
+            //tbSkillName2.Text = tbSkillName.Text = SelectedSkill.SkillName?.ToString();
         }
 
         private void btUpdate_Click(object sender, RoutedEventArgs e)
@@ -141,8 +135,6 @@ namespace SWNAdmin.Forms
             tbId.Text = "";
             tbSkillName.Text = "";
             tbSkillNameP1.Text = "";
-            tbSkillNameP2.Text = "";
-            tbSkillNameP3.Text = "";
             tbDifficultyLevel.Text = "";
             tbNotes.Text = "";
             tbPoints.Text = "";
@@ -188,13 +180,11 @@ namespace SWNAdmin.Forms
             {
                 tabItemSpecializations.IsEnabled = true;
                 tabItemModifiers.IsEnabled = true;
-                tabItemRequierements.IsEnabled = true;
             }
             else
             {
                 tabItemSpecializations.IsEnabled = false;
                 tabItemModifiers.IsEnabled = false;
-                tabItemRequierements.IsEnabled = false;
             }
         }
 
