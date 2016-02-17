@@ -7,39 +7,39 @@
         xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
         themes:ThemeManager.Theme="ExpressionDark"
         mc:Ignorable="d"
-        Title="ManageModifiers" Height="421.795" Width="543.144">
+        Title="ManageModifiers" Height="340.573" Width="543.144">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
     </Window.Background>
     <TabControl x:Name="tabControl">
         <TabItem x:Name="tabItemModifier" Header="Manage Modifier">
             <Grid Margin="0,4,0,-4">
-                <Label x:Name="label" Content="Id" HorizontalAlignment="Left" Margin="8,37,0,0" VerticalAlignment="Top"/>
-                <ComboBox x:Name="cbExistingModifier" HorizontalAlignment="Left" Margin="104,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbExistingModifier_SelectionChanged" />
-                <Label x:Name="label1" Content="Existing Modifier:" HorizontalAlignment="Left" Margin="8,12,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="tbId" HorizontalAlignment="Left" Height="23" Margin="104,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Focusable="False" IsReadOnlyCaretVisible="True" IsReadOnly="True" />
-                <Label x:Name="label_Copy" Content="Modifier Name:" HorizontalAlignment="Left" Margin="8,65,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="tbModifierName" HorizontalAlignment="Left" Height="23" Margin="104,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                <Label x:Name="label_Copy2" Content="Notes:" HorizontalAlignment="Left" Margin="8,93,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="tbNotes" HorizontalAlignment="Left" Height="23" Margin="104,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                <Label x:Name="label_Copy3" Content="Points:" HorizontalAlignment="Left" Margin="8,121,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="tbPoints" HorizontalAlignment="Left" Height="23" Margin="104,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                <Label x:Name="label_Copy4" Content="Reference:" HorizontalAlignment="Left" Margin="8,149,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="tbReference" HorizontalAlignment="Left" Height="23" Margin="104,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                <Label x:Name="label_Copy7" Content="C. Attribute:" HorizontalAlignment="Left" Margin="8,177,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="tbControllingAttribute" HorizontalAlignment="Left" Height="23" Margin="104,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                <TextBox x:Name="tbDiscription" HorizontalAlignment="Left" Height="219" Margin="229,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="276" AcceptsReturn="True" AcceptsTab="True"/>
                 <Label x:Name="label_Copy9" Content="Discription:" HorizontalAlignment="Left" Margin="229,16,0,0" VerticalAlignment="Top"/>
-                <Button x:Name="btUpdate" Content="Update" Margin="0,0,30,20" Click="btUpdate_Click" IsEnabled="False" HorizontalAlignment="Right" Width="75" Height="18" VerticalAlignment="Bottom" Visibility="Hidden"/>
-                <Button x:Name="btAdd" Content="Add" Margin="0,0,30,20" Click="btAdd_Click" Height="18" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>
-                <Button x:Name="btDelete" Content="Delete" HorizontalAlignment="Left" Margin="10,0,0,20" Width="75" Click="btDelete_Click" IsEnabled="False" Height="18" VerticalAlignment="Bottom"/>
+                <Label x:Name="label_Copy10" Content="" HorizontalAlignment="Left" Margin="44,261,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_Copy1" Content="Sub-Group:" HorizontalAlignment="Left" Margin="8,231,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_Copy6" Content="Group:" HorizontalAlignment="Left" Margin="8,204,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label" Content="Id" HorizontalAlignment="Left" Margin="8,37,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_Copy" Content="Modifier Name:" HorizontalAlignment="Left" Margin="8,65,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label1" Content="Existing Modifier:" HorizontalAlignment="Left" Margin="8,12,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_Copy2" Content="Notes:" HorizontalAlignment="Left" Margin="8,93,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_Copy3" Content="Property" HorizontalAlignment="Left" Margin="8,121,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_Copy4" Content="Value" HorizontalAlignment="Left" Margin="8,149,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label_Copy5" Content="Operator" HorizontalAlignment="Left" Margin="8,177,0,0" VerticalAlignment="Top"/>
+                <ComboBox x:Name="cbExistingModifier" HorizontalAlignment="Left" Margin="104,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbExistingModifier_SelectionChanged" />
+                <TextBox x:Name="tbId" HorizontalAlignment="Left" Height="23" Margin="104,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Focusable="False" IsReadOnlyCaretVisible="True" IsReadOnly="True" />
+                <TextBox x:Name="tbModifierName" HorizontalAlignment="Left" Height="23" Margin="104,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="tbNotes" HorizontalAlignment="Left" Height="23" Margin="104,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="tbModProp" HorizontalAlignment="Left" Height="23" Margin="104,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="tbModVal" HorizontalAlignment="Left" Height="23" Margin="104,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <ComboBox x:Name="cbModOp" HorizontalAlignment="Left" Margin="104,177,0,0" VerticalAlignment="Top" Width="120"/>
+                <ComboBox x:Name="cbGroup" HorizontalAlignment="Left" Margin="104,204,0,0" VerticalAlignment="Top" Width="120"/>
+                <ComboBox x:Name="cbSubGroup" HorizontalAlignment="Left" Margin="104,231,0,0" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="tbDiscription" HorizontalAlignment="Left" Height="216" Margin="229,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="276" AcceptsReturn="True" AcceptsTab="True"/>
+                <Button x:Name="btOpenGroups" Content="..." HorizontalAlignment="Left" Margin="81,206,0,0" VerticalAlignment="Top" Width="18" Height="16" Click="btOpenGroups_Click"/>
+                <Button x:Name="btUpdate" Content="Update" Margin="0,0,10,10" Click="btUpdate_Click" IsEnabled="False" HorizontalAlignment="Right" Width="75" Height="18" VerticalAlignment="Bottom" Visibility="Hidden"/>
+                <Button x:Name="btAdd" Content="Add" Margin="0,0,10,10" Click="btAdd_Click" Height="18" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>
+                <Button x:Name="btDelete" Content="Delete" HorizontalAlignment="Left" Margin="8,0,0,10" Width="75" Click="btDelete_Click" IsEnabled="False" Height="18" VerticalAlignment="Bottom"/>
                 <Button x:Name="btClear" Content="Clear" HorizontalAlignment="Left" Margin="430,15,0,0" VerticalAlignment="Top" Width="75" Click="btClear_Click"/>
-                <TextBox x:Name="tbDefault" HorizontalAlignment="Left" Height="65" Margin="104,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="401" AcceptsReturn="True" AcceptsTab="True"/>
-                <Label x:Name="label_Copy10" Content="Defaults:" HorizontalAlignment="Left" Margin="10,261,0,0" VerticalAlignment="Top"/>
-                <ComboBox x:Name="cbGroup" HorizontalAlignment="Left" Margin="104,205,0,0" VerticalAlignment="Top" Width="120"/>
-                <ComboBox x:Name="cbSubGroup" HorizontalAlignment="Left" Margin="104,232,0,0" VerticalAlignment="Top" Width="120"/>
-                <Label x:Name="label_Copy1" Content="Sub-Group:" HorizontalAlignment="Left" Margin="8,232,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="label_Copy6" Content="Group:" HorizontalAlignment="Left" Margin="7,205,0,0" VerticalAlignment="Top"/>
             </Grid>
         </TabItem>
     </TabControl>

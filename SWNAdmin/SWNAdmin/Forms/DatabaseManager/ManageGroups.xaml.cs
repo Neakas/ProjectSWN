@@ -107,6 +107,7 @@ namespace SWNAdmin.Forms
                 btUpd.IsEnabled = false;
                 tiSubGroups.IsEnabled = false;
             }
+            LoadSubListBoxContent();
         }
 
         //SubGroups
@@ -151,7 +152,7 @@ namespace SWNAdmin.Forms
         {
             var Context = new Db1Entities();
             StatGroup Group = (lbGroups.SelectedItem as StatGroup);
-            var Query = from c in Context.StatSubGroup where Group.Id == c.Id select c;
+            var Query = from c in Context.StatSubGroup where Group.Id == c.GroupId select c;
             StatSubGroup DelSubGroup = Query.FirstOrDefault();
 
             using (Context)
@@ -182,11 +183,19 @@ namespace SWNAdmin.Forms
 
         private void LoadSubListBoxContent()
         {
-            var Context = new Db1Entities();
-            var query = from c in Context.StatSubGroup select c;
-            List<StatSubGroup> SubGroupList = query.ToList();
-            lbSubGroups.ItemsSource = SubGroupList;
-            lbSubGroups.DisplayMemberPath = "Name";
+            try
+            {
+                var Context = new Db1Entities();
+                StatGroup LoadedSG = (lbGroups.SelectedItem as StatGroup);
+                var query = from c in Context.StatSubGroup where c.GroupId == LoadedSG.Id select c;
+                List<StatSubGroup> SubGroupList = query.ToList();
+                lbSubGroups.ItemsSource = SubGroupList;
+                lbSubGroups.DisplayMemberPath = "Name";
+            }
+            catch (Exception)
+            { 
+            }
+            
         }
     }
 }

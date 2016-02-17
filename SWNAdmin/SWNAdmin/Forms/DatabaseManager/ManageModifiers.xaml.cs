@@ -21,6 +21,7 @@ namespace SWNAdmin.Forms
     public partial class ManageModifiers : Window
     {
         public List<Modifier> LoadedModifier;
+        public List<string> Operator = new List<string> { "+", "-", "=" };
         public Modifier SelectedModifier;
         private string TestString;
 
@@ -34,14 +35,23 @@ namespace SWNAdmin.Forms
         {
             InitializeComponent();
             InitForm();
+            cbModOp.ItemsSource = Operator;
+            LoadComboBoxes();
         }
         public void InitForm()
         {
             var Context = new Utility.Db1Entities();
-            var query = from c in Context.Modifier select c;
-            LoadedModifier = query.ToList();
-            cbExistingModifier.ItemsSource = LoadedModifier.OrderBy(Modifier => Modifier.Id);
-            cbExistingModifier.DisplayMemberPath = "ModifierName";
+            cbExistingModifier.ItemsSource = (from c in Context.Modifier select c).ToList().OrderBy(Modifier => Modifier.Id);
+            cbExistingModifier.DisplayMemberPath = "Name";
+        }
+
+        public void LoadComboBoxes()
+        {
+            var context = new Db1Entities();
+            cbGroup.ItemsSource = (from c in context.StatGroup select c).ToList();
+            cbGroup.DisplayMemberPath = "Name";
+            cbSubGroup.ItemsSource = (from c in context.StatSubGroup select c).ToList();
+            cbSubGroup.DisplayMemberPath = "Name";
         }
 
         private void cbExistingModifier_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -55,31 +65,19 @@ namespace SWNAdmin.Forms
                 btDelete.IsEnabled = true;
                 SelectedModifier = cbExistingModifier.SelectedItem as Modifier;
                 tbId.Text = SelectedModifier.Id.ToString();
-                //tbModifierName.Text = SelectedModifier.ModifierName?.ToString();
-                //tbDifficultyLevel.Text = SelectedModifier.DifficultyLevel?.ToString();
-                //tbNotes.Text = SelectedModifier.notes?.ToString();
-                //tbPoints.Text = SelectedModifier.points?.ToString();
-                //tbReference.Text = SelectedModifier.reference?.ToString();
-                //tbSpecialization.Text = SelectedModifier.specialization?.ToString();
-                //tbTechLevel.Text = SelectedModifier.tech_level?.ToString();
-                //tbControllingAttribute.Text = SelectedModifier.ControllingAttribute?.ToString();
-                //tbDiscription.Text = SelectedModifier.Description?.ToString();
-                //tbModifiers.Text = SelectedModifier.Modifiers?.ToString();
-                //tbDefault.Text = SelectedModifier.Defaults?.ToString();
-                //tbPrerequisite.Text = SelectedModifier.Prerequisites?.ToString();
-
-                PreparePage1();
-                PreparePage2();
+                tbModifierName.Text = SelectedModifier.Name?.ToString();
+                tbNotes.Text = SelectedModifier.Notes?.ToString();
+                tbDiscription.Text = SelectedModifier.Description?.ToString();
+                tbModProp.Text = SelectedModifier.Modifying_Property;
+                tbModVal.Text = SelectedModifier.Modifying_Value;
+                cbModOp.Text = SelectedModifier.Operator;
+                cbGroup.Text = SelectedModifier.Group;
+                cbSubGroup.Text = SelectedModifier.SubGroup.Replace(" ","");
             }
             else
             {
                 btDelete.IsEnabled = false;
             }
-        }
-
-        private void PreparePage2()
-        {
-            //tbModifierName2.Text = tbModifierName.Text = SelectedModifier.ModifierName?.ToString();
         }
 
         private void btUpdate_Click(object sender, RoutedEventArgs e)
@@ -91,22 +89,19 @@ namespace SWNAdmin.Forms
             using (Context)
             {
                 Modifier UpdateModifier = queryModifier.FirstOrDefault();
-                //UpdateModifier.ModifierName = tbModifierName.Text;
-                //UpdateModifier.DifficultyLevel = tbDifficultyLevel.Text;
-                //UpdateModifier.notes = tbNotes.Text;
-                //UpdateModifier.points = Int32.Parse(tbPoints.Text);
-                //UpdateModifier.reference = tbReference.Text;
-                ////UpdateModifier.specialization = tbSpecialization.Text;
-                //UpdateModifier.tech_level = tbTechLevel.Text;
-                //UpdateModifier.ControllingAttribute = tbControllingAttribute.Text;
-                //UpdateModifier.Description = tbDiscription.Text;
-                ////UpdateModifier.Modifiers = tbModifiers.Text;
-                //UpdateModifier.Defaults = tbDefault.Text;
-                //UpdateModifier.Prerequisites = tbPrerequisite.Text;
+                UpdateModifier.Name = tbModifierName.Text;
+                UpdateModifier.Notes = tbNotes.Text;
+                UpdateModifier.Description = tbDiscription.Text;
+                UpdateModifier.Modifying_Property = tbModProp.Text;
+                UpdateModifier.Modifying_Value = tbModVal.Text;
+                UpdateModifier.Operator = cbModOp.Text.ToString();
+                UpdateModifier.Group = cbGroup.Text.ToString();
+                UpdateModifier.SubGroup = cbSubGroup.Text.ToString();
                 Context.Entry(UpdateModifier).State = System.Data.Entity.EntityState.Modified;
                 Context.SaveChanges();
             }
             InitForm();
+            btClear_Click(this, null);
         }
 
         private void btDelete_Click(object sender, RoutedEventArgs e)
@@ -122,6 +117,7 @@ namespace SWNAdmin.Forms
                 Context.SaveChanges();
             }
             InitForm();
+            btClear_Click(this, null);
         }
 
         private void btClear_Click(object sender, RoutedEventArgs e)
@@ -135,159 +131,39 @@ namespace SWNAdmin.Forms
             tbId.Text = "";
             tbModifierName.Text = "";           
             tbNotes.Text = "";
-            tbPoints.Text = "";
-            tbReference.Text = "";
-            //tbSpecialization.Text = "";
-            tbControllingAttribute.Text = "";
             tbDiscription.Text = "";
-            //tbModifiers.Text = "";
-            tbDefault.Text = "";
+            tbModProp.Text = "";
+            tbModVal.Text = "";
+            cbModOp.SelectedItem = null;
+            cbGroup.SelectedItem = null;
+            cbSubGroup.SelectedItem = null;            
         }
 
         private void btAdd_Click(object sender, RoutedEventArgs e)
         {
-            int result;
-            Int32.TryParse(tbPoints.Text, out result);
             using (var Context = new Db1Entities())
             {
                 Modifier AddModifier = new Modifier();
-                //AddModifier.ModifierName = tbModifierName.Text;
-                //AddModifier.DifficultyLevel = tbDifficultyLevel.Text;
-                //AddModifier.notes = tbNotes.Text;
-                //AddModifier.points = result;
-                //AddModifier.reference = tbReference.Text;
-                ////AddModifier.specialization = tbSpecialization.Text;
-                //AddModifier.tech_level = tbTechLevel.Text;
-                //AddModifier.ControllingAttribute = tbControllingAttribute.Text;
-                //AddModifier.Description = tbDiscription.Text;
-                ////AddModifier.Modifiers = tbModifiers.Text;
-                //AddModifier.Defaults = tbDefault.Text;
-                //AddModifier.Prerequisites = tbPrerequisite.Text;
+                AddModifier.Name = tbModifierName.Text;
+                AddModifier.Notes = tbNotes.Text;
+                AddModifier.Description = tbDiscription.Text;
+                AddModifier.Modifying_Property = tbModProp.Text;
+                AddModifier.Modifying_Value = tbModVal.Text;
+                AddModifier.Operator = cbModOp.Text.ToString();
+                AddModifier.Group = cbGroup.Text.ToString();
+                AddModifier.SubGroup = cbSubGroup.Text.ToString();
                 Context.Modifier.Add(AddModifier);
                 Context.SaveChanges();
             }
             InitForm();
             btClear_Click(this, null);
         }
-
-        //Specialization TAB
-        private void PreparePage1()
+        private void btOpenGroups_Click(object sender, RoutedEventArgs e)
         {
-            //tbModifierNameP1.Text = tbModifierName.Text = SelectedModifier.ModifierName?.ToString();
-            //int id = Int32.Parse(tbId.Text);
-            //var Context = new Utility.Db1Entities();
-            //var query = from c in Context.Modifierpecialization where c.ModifierId == id select c;
-            //List<Modifierpecialization> FoundSpecializations = query.ToList();
-            //if (FoundSpecializations.Count > 0)
-            //{
-            //    tabItemSpecializations.Foreground = Brushes.Green;
-            //}
-            //else
-            //{
-            //    tabItemSpecializations.Foreground = Brushes.White;
-            //}
-            //lbSpecializations.ItemsSource = FoundSpecializations;
-            //lbSpecializations.DisplayMemberPath = "Name";
+            ManageGroups mg = new ManageGroups();
+            mg.ShowDialog();
+            LoadComboBoxes();
         }
-
-        //private void btAddSpec_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (tbSpecName.Text != "")
-        //    {
-        //        using (var Context = new Db1Entities())
-        //        {
-        //            Modifierpecialization ss = new Modifierpecialization();
-        //            ss.Name = tbSpecName.Text;
-        //            ss.Prerequisites = tbSpecPrereq.Text;
-        //            ss.ModifierId = Int32.Parse(tbId.Text);
-        //            ss.Default = tbSpecDefault.Text;
-        //            ss.Discription = tbSpecDiscription.Text;
-        //            ss.Modifiers = tbSpecModifiers.Text;
-        //            ss.IsOptional = cbSpecIsOptional.IsChecked;
-        //            Context.Modifierpecialization.Add(ss);
-        //            Context.SaveChanges();
-        //        }
-        //        CleanControls();
-        //    }
-        //    PreparePage1();
-        //}
-
-        //private void btDerlSpec_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (lbSpecializations.SelectedItem != null)
-        //    {
-        //        var Context = new Utility.Db1Entities();
-        //        var queryspec = from c in Context.Modifierpecialization where c.Id == ((Modifierpecialization)lbSpecializations.SelectedItem).Id select c;
-
-        //        using (Context)
-        //        {
-        //            Modifierpecialization DeleteSpec = queryspec.FirstOrDefault();
-        //            Context.Entry(DeleteSpec).State = System.Data.Entity.EntityState.Deleted;
-        //            Context.SaveChanges();
-        //        }
-        //        CleanControls();
-        //    }
-        //    PreparePage1();
-        //}
-
-        //private void lbSpecializations_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    if (lbSpecializations.SelectedItem != null)
-        //    {
-        //        btAddSpec.IsEnabled = false;
-        //        btAddSpec.Visibility = Visibility.Hidden;
-        //        btDerlSpec.IsEnabled = true;
-        //        btUpdateSpec.Visibility = Visibility.Visible;
-        //        btUpdateSpec.IsEnabled = true;
-        //        Modifierpecialization LoadedSpec = lbSpecializations.SelectedItem as Modifierpecialization;
-        //        tbSpecName.Text = LoadedSpec.Name;
-        //        tbSpecDefault.Text = LoadedSpec.Default;
-        //        tbSpecDiscription.Text = LoadedSpec.Discription;
-        //        tbSpecPrereq.Text = LoadedSpec.Prerequisites;
-        //        tbSpecModifiers.Text = LoadedSpec.Modifiers;
-        //        cbSpecIsOptional.IsChecked = LoadedSpec.IsOptional;
-        //    }
-        //    else
-        //    {
-        //        btAddSpec.IsEnabled = true;
-        //        btAddSpec.Visibility = Visibility.Visible;
-        //        btDerlSpec.IsEnabled = false;
-        //        btUpdateSpec.Visibility = Visibility.Hidden;
-        //        btUpdateSpec.IsEnabled = false;
-        //        CleanControls();
-        //    }
-        //}
-
-        //private void CleanControls()
-        //{
-        //    tbSpecName.Text = "";
-        //    tbSpecDefault.Text = "";
-        //    tbSpecDiscription.Text = "";
-        //    tbSpecPrereq.Text = "";
-        //    tbSpecModifiers.Text = "";
-        //    cbSpecIsOptional.IsChecked = false;
-        //}
-
-        //private void btUpdateSpec_Click(object sender, RoutedEventArgs e)
-        //{
-        //    var Context = new Utility.Db1Entities();
-        //    var queryspec = from c in Context.Modifierpecialization where c.Id == ((Modifierpecialization)lbSpecializations.SelectedItem).Id select c;
-
-        //    using (Context)
-        //    {
-        //        Modifierpecialization UpdateSpec = queryspec.FirstOrDefault();
-        //        UpdateSpec.Discription = tbSpecDiscription.Text;
-        //        UpdateSpec.Name = tbSpecName.Text;
-        //        UpdateSpec.Prerequisites = tbSpecPrereq.Text;
-        //        UpdateSpec.Default = tbSpecDefault.Text;
-        //        UpdateSpec.Modifiers = tbSpecModifiers.Text;
-        //        UpdateSpec.IsOptional = cbSpecIsOptional.IsChecked;
-        //        Context.Entry(UpdateSpec).State = System.Data.Entity.EntityState.Modified;
-        //        Context.SaveChanges();
-        //    }
-        //    lbSpecializations.SelectedItem = null;
-        //    PreparePage1();
-        //}
     }
 }
 

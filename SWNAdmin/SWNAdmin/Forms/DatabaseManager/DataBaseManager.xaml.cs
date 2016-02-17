@@ -224,5 +224,11 @@ namespace SWNAdmin.Forms
             ManageGroups mg = new ManageGroups();
             mg.ShowDialog();
         }
+
+        private void MenuManageModifiers_Click(object sender, RoutedEventArgs e)
+        {
+            ManageModifiers mmods = new ManageModifiers();
+            mmods.ShowDialog();
+        }
     }
 }
