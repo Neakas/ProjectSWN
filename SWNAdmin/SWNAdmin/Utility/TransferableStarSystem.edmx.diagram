@@ -4,10 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b1f7340b848145aa8f951951f6176c5e" Name="Diagram1" ZoomLevel="61">
+      <Diagram DiagramId="b1f7340b848145aa8f951951f6176c5e" Name="Diagram1" ZoomLevel="80">
         <EntityTypeShape EntityType="Db1Model.Advantages" Width="1.5" PointX="9.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db1Model.CharacterBonus" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db1Model.CharacterMalus" Width="1.5" PointX="12.75" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Db1Model.Characters" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Db1Model.Disadvantages" Width="1.5" PointX="9.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Db1Model.InnerMoonlets" Width="1.5" PointX="7.5" PointY="3.25" IsExpanded="true" />
@@ -19,14 +17,6 @@
         <EntityTypeShape EntityType="Db1Model.SatelliteBaseTypes" Width="1.5" PointX="9.75" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Db1Model.Stars" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Db1Model.StarSystems" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db1Model.UsedBonus" Width="1.5" PointX="12" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db1Model.UsedMalus" Width="1.5" PointX="15" PointY="4.25" IsExpanded="true" />
-        <AssociationConnector Association="Db1Model.FK_UsedBonus_Advantage" ManuallyRouted="false" />
-        <AssociationConnector Association="Db1Model.FK_UsedMalus_Advantage" ManuallyRouted="false" />
-        <AssociationConnector Association="Db1Model.FK_UsedBonus_CharacterBonus" ManuallyRouted="false" />
-        <AssociationConnector Association="Db1Model.FK_UsedMalus_UsedMalus" ManuallyRouted="false" />
-        <AssociationConnector Association="Db1Model.FK_UsedBonus_Disadvantage" ManuallyRouted="false" />
-        <AssociationConnector Association="Db1Model.FK_UsedMalus_Disadvantage" ManuallyRouted="false" />
         <AssociationConnector Association="Db1Model.FK_InnerMoonlets_Planets" ManuallyRouted="false" />
         <AssociationConnector Association="Db1Model.FK_MajorMoons_Planets" ManuallyRouted="false" />
         <AssociationConnector Association="Db1Model.FK_OuterMoonlets_Planets" ManuallyRouted="false" />
@@ -42,6 +32,7 @@
         <EntityTypeShape EntityType="Db1Model.StatGroup" Width="1.5" PointX="12.375" PointY="15.75" />
         <EntityTypeShape EntityType="Db1Model.StatSubGroup" Width="1.5" PointX="20" PointY="7.75" />
         <AssociationConnector Association="Db1Model.FK_StatSubGroup_StatGroup1" />
+        <EntityTypeShape EntityType="Db1Model.UsedModifier" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -18,10 +18,8 @@ namespace SWNAdmin.Utility
         public string Group { get; set; }
         public string SubGroup { get; set; }
         public string Modifying_Property { get; set; }
-        public string Modifying_Value { get; set; }
         public string Name { get; set; }
         public string Notes { get; set; }
         public string Description { get; set; }
-        public string Operator { get; set; }
     }
 }

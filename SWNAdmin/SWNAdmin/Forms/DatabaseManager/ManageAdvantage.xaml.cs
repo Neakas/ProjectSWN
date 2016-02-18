@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SWNAdmin.Utility;
 
 namespace SWNAdmin.Forms
 {
@@ -21,116 +22,22 @@ namespace SWNAdmin.Forms
     public partial class ManageAdvantage : Window
     {
         public static ManageAdvantage AdvWindow;
+        public List<string> Operator = new List<string> { "+", "-", "=" };
+        public Dictionary<Modifier, UsedModifier> DictMod = new Dictionary<Modifier, UsedModifier>();
+        public int UpdateID;
         public ManageAdvantage()
         {
             AdvWindow = this;
             InitializeComponent();
+            cbModOp.ItemsSource = Operator;
             LoadStackPanelContent();
-            FillCBBonus();
-            FillCBMalus();
-        }
-
-        public void FillCBBonus()
-        {
-            var context = new Utility.Db1Entities();
-            var query = from c in context.CharacterBonus select c;
-            var CharacterBoni = query.ToList();
-            context.Dispose();
-            cbBoni.ItemsSource = CharacterBoni;
-            cbBoni.DisplayMemberPath = "BonusName";
-            cbBoni.SelectedValuePath = "Id";
-        }
-
-        public void FillCBMalus()
-        {
-            var context = new Utility.Db1Entities();
-            var query = from c in context.CharacterMalus select c;
-            var CharacterMali = query.ToList();
-            context.Dispose();
-            cbMali.ItemsSource = CharacterMali;
-            cbMali.DisplayMemberPath = "MalusName";
-            cbMali.SelectedValuePath = "Id";
-        }
-
-
-        private void btBonusAdd_Click(object sender, RoutedEventArgs e)
-        {
-            if (cbBoni.SelectedItem == null)
-            {
-                MessageBox.Show("Please select a Bonus");
-            }
-            else
-            {
-                lbBonuses.Items.Add(cbBoni.SelectedItem);
-                lbBonuses.DisplayMemberPath = "BonusName";
-                lbBonuses.SelectedValuePath = "Id";
-            }
-        }
-
-        private void btBonusDel_Click(object sender, RoutedEventArgs e)
-        {
-            if (cbBoni.SelectedItem == null)
-            {
-                MessageBox.Show("Please select a Bonus");
-            }
-            else
-            {
-                foreach (Utility.CharacterBonus CBonus in lbBonuses.Items)
-                {
-                    if (CBonus.BonusName == cbBoni.Text)
-                    {
-                        lbBonuses.Items.Remove(CBonus);
-                        return;
-                    }
-                    else
-                    {
-                        MessageBox.Show("No Bonus with that Name could be found");
-                    }
-                }
-            }
-        }
-
-        private void btMaliAdd_Click(object sender, RoutedEventArgs e)
-        {
-            if (cbMali.SelectedItem == null)
-            {
-                MessageBox.Show("Please select a Malus");
-            }
-            else
-            {
-                lbMali.Items.Add(cbMali.SelectedItem);
-                lbMali.DisplayMemberPath = "MalusName";
-                lbMali.SelectedValuePath = "Id";
-            }
-        }
-
-        private void btMaliDel_Click(object sender, RoutedEventArgs e)
-        {
-            if (cbMali.SelectedItem == null)
-            {
-                MessageBox.Show("Please select a Malus");
-            }
-            else
-            {
-                foreach (Utility.CharacterMalus CMalus in lbMali.Items)
-                {
-                    if (CMalus.MalusName == cbMali.Text)
-                    {
-                        lbMali.Items.Remove(CMalus);
-                    }
-                    else
-                    {
-                        MessageBox.Show("No Malus with that Name could be found");
-                    }
-                }
-            }
+            LoadModifierComboBox();
         }
 
         private void btAddAdvantage_Click(object sender, RoutedEventArgs e)
         {
             var findcontext = new Utility.Db1Entities();
-            var query = from c in findcontext.Advantages where c.Name == tbName.Text select c;
-            var foundstat = query.FirstOrDefault();
+            var foundstat = (from c in findcontext.Advantages where c.Name == tbName.Text select c).FirstOrDefault();
             findcontext.Dispose();
             if (foundstat == null)
             {
@@ -142,40 +49,28 @@ namespace SWNAdmin.Forms
                 {
                     using (var newcontext = new Utility.Db1Entities())
                     {
-                        try
+                        Advantages adv = new Advantages();
+                        adv.isEnabled = (bool)cbisEnabled.IsChecked;
+                        adv.isPhysical = (bool)cbisPhysical.IsChecked;
+                        adv.isSocial = (bool)cbisSocial.IsChecked;
+                        adv.isSuperNatural = (bool)cbisSuperNatural.IsChecked;
+                        adv.isExotic = (bool)cbisExotic.IsChecked;
+                        adv.isMundane = (bool)cbisMundane.IsChecked;
+                        adv.isMental = (bool)cbisMental.IsChecked;
+                        adv.Limitation = tbLimitation.Text;
+                        adv.Discription = tbDiscription.Text;
+                        adv.PointCost = Int32.Parse(tbPointCost.Text);
+                        adv.Name = tbName.Text;
+                        newcontext.Advantages.Add(adv);
+                        newcontext.SaveChanges();
+                        foreach (Modifier item in lbModifier.Items)
                         {
-                            Utility.Advantages newAdvantage = new Utility.Advantages();
-                            newAdvantage.Name = tbName.Text;
-                            newAdvantage.Discription = tbDiscription.Text;
-                            newAdvantage.isEnabled = cbisEnabled.IsEnabled;
-                            newAdvantage.PointCost = Convert.ToInt32(tbPointCost.Text);
-                            newAdvantage.isPhysical = (Boolean)cbisPhysical.IsChecked;
-                            newAdvantage.isMental = (Boolean)cbisMental.IsChecked;
-                            newAdvantage.isSocial = (Boolean)cbisSocial.IsChecked;
-                            newAdvantage.isExotic = (Boolean)cbisExotic.IsChecked;
-                            newAdvantage.isSuperNatural = (Boolean)cbisSuberNatural.IsChecked;
-                            newAdvantage.isMundane = (Boolean)cbisMundane.IsChecked;
-                            newAdvantage.Limitation = tbLimitation.Text;
-                            foreach (Utility.CharacterBonus charbonus in lbBonuses.Items)
-                            {
-                                Utility.UsedBonus newUsedBonus = new Utility.UsedBonus();
-                                newUsedBonus.BonusId = charbonus.Id;
-                                newAdvantage.UsedBonus.Add(newUsedBonus);
-                            }
-                            foreach (Utility.CharacterMalus charmalus in lbMali.Items)
-                            {
-                                Utility.UsedMalus newUsedMalus = new Utility.UsedMalus();
-                                newUsedMalus.MalusId = charmalus.Id;
-                                newAdvantage.UsedMalus.Add(newUsedMalus);
-                            }
-                            newcontext.Advantages.Add(newAdvantage);
+                            UsedModifier usedmod;
+                            DictMod.TryGetValue(item, out usedmod);
+                            usedmod.ForeignId = (from c in newcontext.Advantages where c.Name == adv.Name select c).FirstOrDefault().Id;                            
+                            newcontext.UsedModifier.Add(usedmod);
                             newcontext.SaveChanges();
                         }
-                        catch (DbEntityValidationException t)
-                        {
-                            MessageBox.Show(t.ToString());
-                        }
-                        
                     }
                     MessageBox.Show("'" + tbName.Text + "' added to the Database");
                     tbName.Text = "";
@@ -186,6 +81,7 @@ namespace SWNAdmin.Forms
                 MessageBox.Show("That Advantage allready exists in the Database!");
             }
             LoadStackPanelContent();
+            ClearControls();
         }
 
         public void LoadStackPanelContent()
@@ -193,7 +89,7 @@ namespace SWNAdmin.Forms
             sP1.Children.Clear();
             var context = new Utility.Db1Entities();
             var query = from c in context.Advantages select c;
-            var advlist = query.ToList();
+            var advlist = query.ToList().OrderBy(Advantages => Advantages.Name);
 
             foreach (Utility.Advantages adv in advlist)
             {
@@ -211,31 +107,37 @@ namespace SWNAdmin.Forms
 
         public void DeleteAdvantage(UserControls.AdvantageControl advControl)
         {
+            
             using (var context = new Utility.Db1Entities())
             {
                 var itemToRemove = context.Advantages.SingleOrDefault(x => x.Id == advControl.AdvantageId); //returns a single item.
+                List<UsedModifier> moddelist = (from c in context.UsedModifier where c.ForeignId == itemToRemove.Id select c).ToList();
 
                 if (itemToRemove != null)
                 {
-                    context.Advantages.Remove(itemToRemove);
+                    context.Entry(itemToRemove).State = System.Data.Entity.EntityState.Deleted;
+                    foreach (UsedModifier item in moddelist)
+                    {
+                        context.Entry(item).State = System.Data.Entity.EntityState.Deleted;
+                    }
                     context.SaveChanges();
                 }
             }
-
             MessageBox.Show("Deleted!");
             LoadStackPanelContent();
+            ClearControls();
         }
 
         public void UpdateAdvantage(UserControls.AdvantageControl advControl)
         {
+            //Reads out of the Database to Edit
+            lbModifier.Items.Clear();
             btAddAdvantage.IsEnabled = false;
             btEditAdvantage.IsEnabled = true;
-            lbMali.Items.Clear();
-            lbBonuses.Items.Clear();
             using (var context = new Utility.Db1Entities())
             {
                 var LoadItem = context.Advantages.SingleOrDefault(x => x.Id == advControl.AdvantageId); //returns a single item.
-
+                UpdateID = LoadItem.Id;
                 if (LoadItem != null)
                 {
                     tbName.Text = LoadItem.Name;
@@ -246,82 +148,174 @@ namespace SWNAdmin.Forms
                     cbisMental.IsChecked = (Boolean)LoadItem.isMental;
                     cbisSocial.IsChecked = (Boolean)LoadItem.isSocial;
                     cbisExotic.IsChecked = (Boolean)LoadItem.isExotic;
-                    cbisSuberNatural.IsChecked = (Boolean)LoadItem.isSuperNatural;
+                    cbisSuperNatural.IsChecked = (Boolean)LoadItem.isSuperNatural;
                     cbisMundane.IsChecked = (Boolean)LoadItem.isMundane;
                     tbLimitation.Text = LoadItem.Limitation;
                 }
-            }
-            var bonuscontext = new Utility.Db1Entities();
-            var bonusquery = from c in bonuscontext.UsedBonus select c;
-            var bonuslist = bonusquery.ToList();
-            foreach (Utility.UsedBonus bonus in bonuslist)
-            {
-                var charbonus = from c in bonuscontext.CharacterBonus where c.Id == bonus.BonusId select c;
-                var Charbonusitem = charbonus.FirstOrDefault();
-                lbBonuses.Items.Add(Charbonusitem);
-                lbBonuses.DisplayMemberPath = "BonusName";
-                lbBonuses.SelectedValuePath = "Id";
-            }
-            var malusquery = from c in bonuscontext.UsedMalus select c;
-            var maluslist = malusquery.ToList();
-            foreach (Utility.UsedMalus malus in maluslist)
-            {
-                var charmalus = from c in bonuscontext.CharacterMalus where c.Id == malus.MalusId select c;
-                var Charmalusitem = charmalus.FirstOrDefault();
-                lbMali.Items.Add(Charmalusitem);
-                lbMali.DisplayMemberPath = "MalusName";
-                lbMali.SelectedValuePath = "Id";
-            }
-
-            using (var context = new Utility.Db1Entities())
-            {
-                var itemToRemove = context.Advantages.SingleOrDefault(x => x.Id == advControl.AdvantageId); //returns a single item.
-
-                if (itemToRemove != null)
+                List<UsedModifier> UsedModifers = (from c in context.UsedModifier where c.ForeignId == LoadItem.Id select c).ToList();
+                foreach (UsedModifier umod in UsedModifers)
                 {
-                    context.Advantages.Remove(itemToRemove);
-                    context.SaveChanges();
+                    Modifier mod = (from c in context.Modifier where c.Id == umod.ModifierId select c).FirstOrDefault();
+                    lbModifier.Items.Add(mod);
+                    lbModifier.DisplayMemberPath = "Name";
+                    DictMod.Add(mod,umod);
                 }
+                CheckRequirement();
             }
-        }
-
-        private void btOpenBonus_Click(object sender, RoutedEventArgs e)
-        {
-            ManageBoni MB = new ManageBoni();
-            MB.ShowDialog();
-            FillCBBonus();
-        }
-
-        private void btOpenMalus_Click(object sender, RoutedEventArgs e)
-        {
-            ManageMalus MM = new ManageMalus();
-            MM.ShowDialog();
-            FillCBMalus();
         }
 
         private void btEditAdvantage_Click(object sender, RoutedEventArgs e)
         {
-            btAddAdvantage_Click(this, null);
+            //Writes the Update back to the Database
+            var Context = new Db1Entities();
+            Advantages editAdv = (from c in Context.Advantages where c.Name == tbName.Text select c).FirstOrDefault();
+            using (Context)
+            {
+                editAdv.Discription = tbDiscription.Text;
+                editAdv.isEnabled = (bool)cbisEnabled.IsChecked;
+                editAdv.isExotic = (bool)cbisExotic.IsChecked;
+                editAdv.isMental = (bool)cbisMental.IsChecked;
+                editAdv.isMundane = (bool)cbisMundane.IsChecked;
+                editAdv.isPhysical = (bool)cbisPhysical.IsChecked;
+                editAdv.isSocial = (bool)cbisSocial.IsChecked;
+                editAdv.isSuperNatural = (bool)cbisSuperNatural.IsChecked;
+                editAdv.Limitation = tbLimitation.Text;
+                editAdv.Name = tbName.Text;
+                editAdv.PointCost = Int32.Parse(tbPointCost.Text);
+                Context.Entry(editAdv).State = System.Data.Entity.EntityState.Modified;
+                Context.SaveChanges();
+            }
+            btAddAdvantage.IsEnabled = true;
+            btEditAdvantage.IsEnabled = false;
+            LoadStackPanelContent();
+            ClearControls();
         }
 
-        private void lbMali_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void btOpenModifers_Click(object sender, RoutedEventArgs e)
         {
-            if (lbMali.SelectedItem != null)
+            ManageModifiers mm = new ManageModifiers();
+            mm.ShowDialog();
+            LoadModifierComboBox();
+        }
+
+        private void cbModifier_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbModifier.SelectedItem != null)
             {
-                Utility.CharacterMalus selectedMalus = new Utility.CharacterMalus();
-                selectedMalus = lbMali.SelectedItem as Utility.CharacterMalus;
-                cbMali.Text = selectedMalus.MalusName;
+                cbModifier.ToolTip = (cbModifier.SelectedItem as Modifier).Description;
+                cbModOp.IsEnabled = true;
+                tbModVal.IsEnabled = true;
+            }
+            else
+            {
+                cbModOp.IsEnabled = false;
+                tbModVal.IsEnabled = false;
             }
         }
 
-        private void lbBonuses_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void CheckRequirement()
         {
-            if (lbBonuses.SelectedItem != null)
+            var context = new Db1Entities();
+            Advantages Advantagequery = (from c in context.Advantages where c.Name == tbName.Text select c).FirstOrDefault();
+            Requirements reqquery = (from c in context.Requirements where c.SourceItemID == Advantagequery.Id select c).FirstOrDefault();
+            if (reqquery != null)
             {
-                Utility.CharacterBonus selectedBonus = new Utility.CharacterBonus();
-                selectedBonus = lbBonuses.SelectedItem as Utility.CharacterBonus;
-                cbBoni.Text = selectedBonus.BonusName;
+                if (reqquery.SourceItemID == UpdateID)
+                {
+                    rbRegSet.IsChecked = true;
+                }
+                else
+                {
+                    rbRegSet.IsChecked = false;
+                }
             }
+        }
+
+        private void btModifierAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbModOp.SelectedItem == null)
+            {
+                MessageBox.Show("Bitte einen Operator auswählen!");
+            }
+            else
+            {
+                if (tbModVal.Text == "")
+                {
+                    MessageBox.Show("Bitte einen Value eingeben");
+                }
+                else
+                {
+                    Modifier AddItem = (cbModifier.SelectedItem as Modifier);
+                    UsedModifier UsedMod = new UsedModifier();
+                    UsedMod.Operator = cbModOp.Text;
+                    UsedMod.Value = Int32.Parse(tbModVal.Text);
+                    UsedMod.ModifierId = AddItem.Id;
+                    lbModifier.Items.Add(AddItem);
+                    lbModifier.DisplayMemberPath = "Name";
+                    DictMod.Add(AddItem, UsedMod);
+                    cbModOp.SelectedValue = null;
+                    tbModVal.Text = "";
+                }
+            }   
+        }
+
+        private void btModifierDel_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbModifier.SelectedItem != null)
+            {
+                lbModifier.Items.Remove(lbModifier.SelectedItem);
+                DictMod.Remove((lbModifier.SelectedItem) as Modifier);
+            }
+        }
+
+        private void LoadModifierComboBox()
+        {
+            var context = new Db1Entities();
+            cbModifier.ItemsSource = (from c in context.Modifier select c).ToList().OrderBy(Modifier => Modifier.Name);
+            cbModifier.DisplayMemberPath = "Name";
+        }
+
+        private void lbModifier_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lbModifier.SelectedItem != null)
+            {
+                btModifierAdd.IsEnabled = false;
+                btModifierDel.IsEnabled = true;
+                cbModifier.SelectedItem = null;
+                UsedModifier usedmod;
+                DictMod.TryGetValue((lbModifier.SelectedItem as Modifier), out usedmod);
+                cbModOp.IsEnabled = true;
+                tbModVal.IsEnabled = true;
+                cbModOp.Text = usedmod.Operator;
+                tbModVal.Text = usedmod.Value.ToString();
+            }
+            else
+            {
+                cbModOp.IsEnabled = false;
+                tbModVal.IsEnabled = false;
+                btModifierAdd.IsEnabled = true;
+                btModifierDel.IsEnabled = false;
+            }   
+        }
+
+        private void ClearControls()
+        {
+            tbDiscription.Text = "";
+            tbLimitation.Text = "";
+            tbName.Text = "";
+            tbPointCost.Text = "";
+            cbisEnabled.IsChecked = false;
+            cbisExotic.IsChecked = false;
+            cbisMental.IsChecked = false;
+            cbisMundane.IsChecked = false;
+            cbisPhysical.IsChecked = false;
+            cbisSocial.IsChecked = false;
+            cbisSuperNatural.IsChecked = false;
+            cbModifier.SelectedItem = null;
+            lbModifier.Items.Clear();
+            cbModifier.SelectedItem = null;
+            tbModVal.Text = "";
+            rbRegSet.IsChecked = false;
         }
     }
 }

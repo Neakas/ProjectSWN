@@ -14,22 +14,10 @@ namespace SWNAdmin.Utility
     
     public partial class Disadvantages
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Disadvantages()
-        {
-            this.UsedBonus = new HashSet<UsedBonus>();
-            this.UsedMalus = new HashSet<UsedMalus>();
-        }
-    
         public int Id { get; set; }
         public bool isEnabled { get; set; }
         public string Name { get; set; }
         public Nullable<int> PointCost { get; set; }
         public string Discription { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UsedBonus> UsedBonus { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UsedMalus> UsedMalus { get; set; }
     }
 }

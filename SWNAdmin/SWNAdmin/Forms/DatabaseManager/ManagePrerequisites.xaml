@@ -25,21 +25,5 @@
         <ListBox x:Name="lbSetPrerequisites" HorizontalAlignment="Left" Height="406" Margin="452,10,0,0" VerticalAlignment="Top" Width="279" SelectionChanged="lbSetPrerequisites_SelectionChanged"/>
         <Button x:Name="btAdd" Content="Add" HorizontalAlignment="Left" Margin="658,421,0,0" VerticalAlignment="Top" Width="34" Height="23" IsEnabled="False" Click="btAdd_Click"/>
         <Button x:Name="btDel" Content="Del" HorizontalAlignment="Left" Margin="697,421,0,0" VerticalAlignment="Top" Width="34" Height="23" IsEnabled="False" Click="btDel_Click"/>
-
-
-        <!--<TreeView x:Name="tvItemList" HorizontalAlignment="Left" Height="405" Margin="10,10,0,0" VerticalAlignment="Top" Width="157">
-            -->
-        <!--<TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding SkillSpecialization}">
-                    <TextBlock Text="{Binding SkillName}" />
-                    <HierarchicalDataTemplate.ItemTemplate>
-                        <HierarchicalDataTemplate>
-                            <TextBlock Text="{Binding Name}" />
-                        </HierarchicalDataTemplate>
-                    </HierarchicalDataTemplate.ItemTemplate>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>-->
-        <!--
-        </TreeView>-->
     </Grid>
 </Window>

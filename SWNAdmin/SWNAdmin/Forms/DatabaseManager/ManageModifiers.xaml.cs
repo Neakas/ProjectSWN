@@ -21,7 +21,7 @@ namespace SWNAdmin.Forms
     public partial class ManageModifiers : Window
     {
         public List<Modifier> LoadedModifier;
-        public List<string> Operator = new List<string> { "+", "-", "=" };
+        
         public Modifier SelectedModifier;
         private string TestString;
 
@@ -35,22 +35,27 @@ namespace SWNAdmin.Forms
         {
             InitializeComponent();
             InitForm();
-            cbModOp.ItemsSource = Operator;
-            LoadComboBoxes();
+            LoadComboBoxGroups();
         }
         public void InitForm()
         {
             var Context = new Utility.Db1Entities();
-            cbExistingModifier.ItemsSource = (from c in Context.Modifier select c).ToList().OrderBy(Modifier => Modifier.Id);
+            cbExistingModifier.ItemsSource = (from c in Context.Modifier select c).ToList().OrderBy(Modifier => Modifier.Name);
             cbExistingModifier.DisplayMemberPath = "Name";
         }
 
-        public void LoadComboBoxes()
+        public void LoadComboBoxGroups()
         {
             var context = new Db1Entities();
-            cbGroup.ItemsSource = (from c in context.StatGroup select c).ToList();
+            cbGroup.ItemsSource = (from c in context.StatGroup select c).ToList().OrderBy(StatGroup => StatGroup.Name);
             cbGroup.DisplayMemberPath = "Name";
-            cbSubGroup.ItemsSource = (from c in context.StatSubGroup select c).ToList();
+        }
+
+        public void LoadComboBoxSubGroups()
+        {
+            var context = new Db1Entities();
+            StatGroup sg = (cbGroup.SelectedItem as StatGroup);
+            cbSubGroup.ItemsSource = (from c in context.StatSubGroup where c.GroupId == sg.Id select c).ToList().OrderBy(StatSubGroup => StatSubGroup.Name);
             cbSubGroup.DisplayMemberPath = "Name";
         }
 
@@ -69,8 +74,6 @@ namespace SWNAdmin.Forms
                 tbNotes.Text = SelectedModifier.Notes?.ToString();
                 tbDiscription.Text = SelectedModifier.Description?.ToString();
                 tbModProp.Text = SelectedModifier.Modifying_Property;
-                tbModVal.Text = SelectedModifier.Modifying_Value;
-                cbModOp.Text = SelectedModifier.Operator;
                 cbGroup.Text = SelectedModifier.Group;
                 cbSubGroup.Text = SelectedModifier.SubGroup.Replace(" ","");
             }
@@ -93,8 +96,6 @@ namespace SWNAdmin.Forms
                 UpdateModifier.Notes = tbNotes.Text;
                 UpdateModifier.Description = tbDiscription.Text;
                 UpdateModifier.Modifying_Property = tbModProp.Text;
-                UpdateModifier.Modifying_Value = tbModVal.Text;
-                UpdateModifier.Operator = cbModOp.Text.ToString();
                 UpdateModifier.Group = cbGroup.Text.ToString();
                 UpdateModifier.SubGroup = cbSubGroup.Text.ToString();
                 Context.Entry(UpdateModifier).State = System.Data.Entity.EntityState.Modified;
@@ -133,8 +134,6 @@ namespace SWNAdmin.Forms
             tbNotes.Text = "";
             tbDiscription.Text = "";
             tbModProp.Text = "";
-            tbModVal.Text = "";
-            cbModOp.SelectedItem = null;
             cbGroup.SelectedItem = null;
             cbSubGroup.SelectedItem = null;            
         }
@@ -148,8 +147,6 @@ namespace SWNAdmin.Forms
                 AddModifier.Notes = tbNotes.Text;
                 AddModifier.Description = tbDiscription.Text;
                 AddModifier.Modifying_Property = tbModProp.Text;
-                AddModifier.Modifying_Value = tbModVal.Text;
-                AddModifier.Operator = cbModOp.Text.ToString();
                 AddModifier.Group = cbGroup.Text.ToString();
                 AddModifier.SubGroup = cbSubGroup.Text.ToString();
                 Context.Modifier.Add(AddModifier);
@@ -162,7 +159,20 @@ namespace SWNAdmin.Forms
         {
             ManageGroups mg = new ManageGroups();
             mg.ShowDialog();
-            LoadComboBoxes();
+            LoadComboBoxGroups();
+        }
+
+        private void cbGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbGroup.SelectedItem != null)
+            {
+                cbSubGroup.IsEnabled = true;
+                LoadComboBoxSubGroups();
+            }
+            else
+            {
+                cbSubGroup.IsEnabled = false;
+            }
         }
     }
 }

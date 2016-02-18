@@ -104,20 +104,11 @@
     <Compile Include="Classes\User.cs" />
     <Compile Include="Controller\CharacterController.cs" />
     <Compile Include="Controller\RaceController.cs" />
-    <Compile Include="Forms\DatabaseManager\ManageDisadvantage.xaml.cs">
-      <DependentUpon>ManageDisadvantage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Forms\DatabaseManager\ManageAdvantage.xaml.cs">
       <DependentUpon>ManageAdvantage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DatabaseManager\ManageBoni.xaml.cs">
-      <DependentUpon>ManageBoni.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Forms\DatabaseManager\ManageGroups.xaml.cs">
       <DependentUpon>ManageGroups.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\DatabaseManager\ManageMalus.xaml.cs">
-      <DependentUpon>ManageMalus.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\DatabaseManager\ManagePrerequisites.xaml.cs">
       <DependentUpon>ManagePrerequisites.xaml</DependentUpon>
@@ -181,12 +172,6 @@
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\Attribute.cs">
-      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Utility\CharacterBonus.cs">
-      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Utility\CharacterMalus.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\Characters.cs">
@@ -268,32 +253,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TransferableStarSystem.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Utility\UsedBonus.cs">
-      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Utility\UsedMalus.cs">
+    <Compile Include="Utility\UsedModifier.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\XmlHandler.cs" />
-    <Page Include="Forms\DatabaseManager\ManageDisadvantage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Forms\DatabaseManager\ManageAdvantage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Forms\DatabaseManager\ManageBoni.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Forms\DatabaseManager\ManageGroups.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Forms\DatabaseManager\ManageMalus.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Forms\DatabaseManager\ManagePrerequisites.xaml">
       <SubType>Designer</SubType>

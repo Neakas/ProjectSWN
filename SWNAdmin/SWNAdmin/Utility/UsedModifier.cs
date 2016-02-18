@@ -12,15 +12,13 @@ namespace SWNAdmin.Utility
     using System;
     using System.Collections.Generic;
     
-    public partial class UsedMalus
+    public partial class UsedModifier
     {
         public int Id { get; set; }
-        public Nullable<int> AdvantageId { get; set; }
-        public Nullable<int> DisadvantageId { get; set; }
-        public Nullable<int> MalusId { get; set; }
-    
-        public virtual Advantages Advantages { get; set; }
-        public virtual CharacterMalus CharacterMalus { get; set; }
-        public virtual Disadvantages Disadvantages { get; set; }
+        public Nullable<int> ModifierId { get; set; }
+        public Nullable<int> ForeignId { get; set; }
+        public string Modi { get; set; }
+        public Nullable<int> Value { get; set; }
+        public string Operator { get; set; }
     }
 }

@@ -36,7 +36,6 @@ namespace SWNAdmin.UserControls
 
         private void btdel_Click(object sender, RoutedEventArgs e)
         {
-            Forms.ManageDisadvantage.AdvWindow.DeleteDisadvantage(this);
         }
     }
 }

@@ -23,6 +23,7 @@ namespace SWNAdmin.Forms
         public List<Skills> FoundSkills;
         public List<SWNAdmin.Utility.Attribute> FoundAttributes;
         public List<Requirements> FoundPrereqs;
+        public List<Advantages> FoundAdvantages;
         Dictionary<String, Requirements> dictPrereq;
         int SourceItemID;
         int TargetItemID;
@@ -43,8 +44,7 @@ namespace SWNAdmin.Forms
         {
             //Load Skills and SkillSpecialitations
             var SkillContext = new Utility.Db1Entities();
-            var skillquery = from c in SkillContext.Skills.Include("SkillSpecialization") select c;
-            FoundSkills = skillquery.ToList();
+            FoundSkills = (from c in SkillContext.Skills.Include("SkillSpecialization") select c).ToList();
             TreeViewItem SkillMain = new TreeViewItem();
             SkillMain.Header = "Skills";
             foreach (Skills Skillitem in FoundSkills)
@@ -80,10 +80,9 @@ namespace SWNAdmin.Forms
             TreeViewItem AttributeMain = new TreeViewItem();
             AttributeMain.Header = "Attributes";
 
-            var AttributeContext = new Utility.Db1Entities();
-            var attquery = from c in AttributeContext.Attribute select c;
-            FoundAttributes = attquery.ToList();
-            foreach (SWNAdmin.Utility.Attribute AttItem in FoundAttributes)
+            var AttributeContext = new Db1Entities();
+            FoundAttributes = (from c in AttributeContext.Attribute select c).ToList();
+            foreach (Utility.Attribute AttItem in FoundAttributes)
             {
                 SkillTreeViewItem tvi = new SkillTreeViewItem();
                 tvi.Header = AttItem.Name;
@@ -96,6 +95,26 @@ namespace SWNAdmin.Forms
                 AttributeMain.Items.Add(tvi);
             }
             treeview.Items.Add(AttributeMain);
+
+            //Load Advantages
+            TreeViewItem AdvantagesMain = new TreeViewItem();
+            AdvantagesMain.Header = "Advantages";
+
+            var AdvantageContext = new Db1Entities();
+            FoundAdvantages = (from c in AdvantageContext.Advantages select c).ToList();
+            foreach (Advantages AdvItem in FoundAdvantages)
+            {
+                SkillTreeViewItem tvi = new SkillTreeViewItem();
+                tvi.Header = AdvItem.Name;
+                tvi.StoredObject = AdvItem;
+                tvi.Foreground = Brushes.White;
+                if (AdvItem.RequirementSet == true)
+                {
+                    tvi.Foreground = Brushes.Green;
+                }
+                AdvantagesMain.Items.Add(tvi);
+            }
+            treeview.Items.Add(AdvantagesMain);
         }
 
         private void tvObjects_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -123,6 +142,14 @@ namespace SWNAdmin.Forms
                 SourceItemID = a.Id;
                 SourceType = "Attribute";
             }
+
+            if ((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(SWNAdmin.Utility.Advantages))
+            {
+                Advantages a = (((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject) as SWNAdmin.Utility.Advantages);
+                tbObject.Text = a.Name;
+                SourceItemID = a.Id;
+                SourceType = "Advantage";
+            }
         }
 
         private void tvTargets_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -149,6 +176,14 @@ namespace SWNAdmin.Forms
                 tbTarget.Text = a.Name;
                 TargetItemID = a.Id;
                 TargetType = "Attribute";
+            }
+
+            if ((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(Advantages))
+            {
+                Advantages a = (((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject) as Advantages);
+                tbTarget.Text = a.Name;
+                TargetItemID = a.Id;
+                TargetType = "Advantage";
             }
         }
 

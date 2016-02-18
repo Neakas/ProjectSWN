@@ -14,13 +14,6 @@ namespace SWNAdmin.Utility
     
     public partial class Advantages
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Advantages()
-        {
-            this.UsedBonus = new HashSet<UsedBonus>();
-            this.UsedMalus = new HashSet<UsedMalus>();
-        }
-    
         public int Id { get; set; }
         public bool isEnabled { get; set; }
         public string Name { get; set; }
@@ -33,10 +26,6 @@ namespace SWNAdmin.Utility
         public bool isSuperNatural { get; set; }
         public bool isMundane { get; set; }
         public string Limitation { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UsedBonus> UsedBonus { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UsedMalus> UsedMalus { get; set; }
+        public Nullable<bool> RequirementSet { get; set; }
     }
 }

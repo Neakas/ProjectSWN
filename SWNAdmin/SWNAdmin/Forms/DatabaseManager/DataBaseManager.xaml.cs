@@ -45,24 +45,8 @@ namespace SWNAdmin.Forms
             LoadDgMain(null);
         }
 
-        private void MenuManageBoni_Click(object sender, RoutedEventArgs e)
-        {
-            ManageBoni MB = new ManageBoni();
-            MB.ShowDialog();
-            LoadDgMain(null);
-        }
-
-        private void MenuManageMali_Click(object sender, RoutedEventArgs e)
-        {
-            ManageMalus MM = new ManageMalus();
-            MM.ShowDialog();
-            LoadDgMain(null);
-        }
-
         private void MenuManageDisadvantage_Click(object sender, RoutedEventArgs e)
         {
-            ManageDisadvantage MD = new ManageDisadvantage();
-            MD.ShowDialog();
             LoadDgMain(null);
         }
 
@@ -88,20 +72,6 @@ namespace SWNAdmin.Forms
                 {
                     var context = new Utility.Db1Entities();
                     var query = from c in context.Disadvantages select c;
-                    var advlist = query.ToList();
-                    dgMain.ItemsSource = advlist;
-                }
-                if (SelectedItem == "CharacterBonus")
-                {
-                    var context = new Utility.Db1Entities();
-                    var query = from c in context.CharacterBonus select c;
-                    var advlist = query.ToList();
-                    dgMain.ItemsSource = advlist;
-                }
-                if (SelectedItem == "CharacterMalus")
-                {
-                    var context = new Utility.Db1Entities();
-                    var query = from c in context.CharacterMalus select c;
                     var advlist = query.ToList();
                     dgMain.ItemsSource = advlist;
                 }
@@ -167,20 +137,6 @@ namespace SWNAdmin.Forms
                 {
                     var context = new Utility.Db1Entities();
                     var query = from c in context.Attribute select c;
-                    var advlist = query.ToList();
-                    dgMain.ItemsSource = advlist;
-                }
-                if (SelectedItem == "UsedBonus")
-                {
-                    var context = new Utility.Db1Entities();
-                    var query = from c in context.UsedBonus select c;
-                    var advlist = query.ToList();
-                    dgMain.ItemsSource = advlist;
-                }
-                if (SelectedItem == "UsedMalus")
-                {
-                    var context = new Utility.Db1Entities();
-                    var query = from c in context.UsedMalus select c;
                     var advlist = query.ToList();
                     dgMain.ItemsSource = advlist;
                 }

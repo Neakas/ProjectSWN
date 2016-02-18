@@ -7,11 +7,12 @@
         xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
         themes:ThemeManager.Theme="ExpressionDark"
         mc:Ignorable="d"
-        Title="AddAdvantage" Height="803.91" Width="698.03">
+        Title="AddAdvantage" Height="803.91" Width="665.53">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
     </Window.Background>
     <Grid>
+        <Button x:Name="btOpenModifers" Content="..." HorizontalAlignment="Left" Margin="515,43,0,0" VerticalAlignment="Top" Width="18" Height="16" Click="btOpenModifers_Click"/>
         <TextBox x:Name="tbDiscription" HorizontalAlignment="Left" Margin="115,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="131" Width="263" Background="#FFDAD9D9" Foreground="Black" AcceptsTab="True" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
         <TextBox x:Name="tbLimitation" HorizontalAlignment="Left" Margin="115,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="131" Width="263" Background="#FFDAD9D9" Foreground="Black" AcceptsTab="True" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
         <CheckBox x:Name="cbisEnabled" Content="isEnabled" HorizontalAlignment="Left" Margin="263,13,0,0" VerticalAlignment="Top" IsChecked="True"/>
@@ -19,22 +20,17 @@
         <CheckBox x:Name="cbisMental" Content="Mental" HorizontalAlignment="Left" Margin="40,73,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="cbisSocial" Content="Social" HorizontalAlignment="Left" Margin="40,89,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="cbisExotic" Content="Exotic" HorizontalAlignment="Left" Margin="40,105,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="cbisSuberNatural" Content="S-Natural" HorizontalAlignment="Left" Margin="40,121,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbisSuperNatural" Content="S-Natural" HorizontalAlignment="Left" Margin="40,121,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="cbisMundane" Content="Mundane" HorizontalAlignment="Left" Margin="40,137,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbName" HorizontalAlignment="Left" Height="23" Margin="115,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="label" Content="Advantage Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label1" Content="Discription:" HorizontalAlignment="Left" Margin="43,41,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label2" Content="Limitation:" HorizontalAlignment="Left" Margin="47,177,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="lbBonuses" HorizontalAlignment="Left" Height="100" Margin="579,13,0,0" VerticalAlignment="Top" Width="100" MouseDoubleClick="lbBonuses_MouseDoubleClick"/>
-        <ListBox x:Name="lbMali" HorizontalAlignment="Left" Height="100" Margin="579,169,0,0" VerticalAlignment="Top" Width="100" MouseDoubleClick="lbMali_MouseDoubleClick"/>
-        <ComboBox x:Name="cbBoni" HorizontalAlignment="Left" Margin="454,36,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="label3" Content="Add a Bonus" HorizontalAlignment="Left" Margin="454,10,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btBonusAdd" Content="Add" HorizontalAlignment="Left" Margin="496,63,0,0" VerticalAlignment="Top" Width="35" Click="btBonusAdd_Click"/>
-        <Button x:Name="btBonusDel" Content="Del" HorizontalAlignment="Left" Margin="539,63,0,0" VerticalAlignment="Top" Width="35" Click="btBonusDel_Click"/>
-        <Label x:Name="label2_Copy" Content="Add a Malus" HorizontalAlignment="Left" Margin="454,169,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbMali" HorizontalAlignment="Left" Margin="454,195,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btMaliAdd" Content="Add" HorizontalAlignment="Left" Margin="495,222,0,0" VerticalAlignment="Top" Width="35" Click="btMaliAdd_Click"/>
-        <Button x:Name="btMaliDel" Content="Del" HorizontalAlignment="Left" Margin="535,222,0,0" VerticalAlignment="Top" Width="35" Click="btMaliDel_Click"/>
+        <ListBox x:Name="lbModifier" HorizontalAlignment="Left" Height="180" Margin="390,157,0,0" VerticalAlignment="Top" Width="184" SelectionChanged="lbModifier_SelectionChanged"/>
+        <ComboBox x:Name="cbModifier" HorizontalAlignment="Left" Margin="390,41,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbModifier_SelectionChanged"/>
+        <Label x:Name="label3" Content="Manage Modifier" HorizontalAlignment="Left" Margin="390,10,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btModifierAdd" Content="Add" HorizontalAlignment="Left" Margin="390,68,0,0" VerticalAlignment="Top" Width="35" Click="btModifierAdd_Click"/>
+        <Button x:Name="btModifierDel" Content="Del" HorizontalAlignment="Left" Margin="434,68,0,0" VerticalAlignment="Top" Width="35" Click="btModifierDel_Click" IsEnabled="False"/>
         <Button x:Name="btAddAdvantage" Content="Add" HorizontalAlignment="Left" Margin="118,313,0,0" VerticalAlignment="Top" Width="54" Click="btAddAdvantage_Click"/>
         <Button x:Name="btEditAdvantage" Content="Edit" HorizontalAlignment="Left" Margin="181,313,0,0" VerticalAlignment="Top" Width="54" Click="btEditAdvantage_Click" IsEnabled="False"/>
         <TextBox x:Name="tbPointCost" HorizontalAlignment="Left" Height="24" Margin="310,313,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="68"/>
@@ -45,7 +41,11 @@
                 <StackPanel x:Name="sP1" HorizontalAlignment="Left" Width="455" VerticalAlignment="Top" Background="#FFC9C9C9" MinHeight="398" />
             </ScrollViewer>
         </Border>
-        <Button x:Name="btOpenBonus" Content="..." HorizontalAlignment="Left" Margin="526,10,0,0" VerticalAlignment="Top" Width="18" Height="16" Click="btOpenBonus_Click"/>
-        <Button x:Name="btOpenMalus" Content="..." HorizontalAlignment="Left" Margin="526,169,0,0" VerticalAlignment="Top" Width="18" Height="16" Click="btOpenMalus_Click"/>
+        <TextBox x:Name="tbModVal" HorizontalAlignment="Left" Height="23" Margin="454,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <ComboBox x:Name="cbModOp" HorizontalAlignment="Left" Margin="454,126,0,0" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <Label x:Name="label_Copy4" Content="Value" HorizontalAlignment="Left" Margin="393,98,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy5" Content="Operator" HorizontalAlignment="Left" Margin="393,126,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbRegSet" Content="RegSet" HorizontalAlignment="Left" Margin="10,314,0,0" VerticalAlignment="Top" Focusable="False" IsEnabled="False"/>
+
     </Grid>
 </Window>

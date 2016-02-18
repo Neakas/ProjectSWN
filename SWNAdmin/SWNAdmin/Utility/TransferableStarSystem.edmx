@@ -21,6 +21,7 @@
           <Property Name="isSuperNatural" Type="bit" Nullable="false" />
           <Property Name="isMundane" Type="bit" Nullable="false" />
           <Property Name="Limitation" Type="nvarchar(max)" />
+          <Property Name="RequirementSet" Type="bit" />
         </EntityType>
         <EntityType Name="Attribute">
           <Key>
@@ -29,26 +30,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RequirementSet" Type="bit" />
-        </EntityType>
-        <EntityType Name="CharacterBonus">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Discription" Type="nvarchar(max)" />
-          <Property Name="Value" Type="int" />
-          <Property Name="ModifiedStat" Type="nvarchar" MaxLength="50" />
-          <Property Name="BonusName" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CharacterMalus">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Discription" Type="nvarchar(max)" />
-          <Property Name="Value" Type="int" />
-          <Property Name="ModifiedStat" Type="nvarchar" MaxLength="50" />
-          <Property Name="MalusName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Characters">
           <Key>
@@ -161,11 +142,9 @@
           <Property Name="Group" Type="nvarchar" MaxLength="50" />
           <Property Name="SubGroup" Type="nchar" MaxLength="10" />
           <Property Name="Modifying Property" Type="nvarchar" MaxLength="50" />
-          <Property Name="Modifying Value" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Notes" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="Operator" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="OuterMoonlets">
           <Key>
@@ -377,23 +356,16 @@
           <Property Name="SystemTime" Type="datetime" Nullable="false" />
           <Property Name="CurrentDateTime" Type="datetime" />
         </EntityType>
-        <EntityType Name="UsedBonus">
+        <EntityType Name="UsedModifier">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AdvantageId" Type="int" />
-          <Property Name="DisadvantageId" Type="int" />
-          <Property Name="BonusId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UsedMalus">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AdvantageId" Type="int" />
-          <Property Name="DisadvantageId" Type="int" />
-          <Property Name="MalusId" Type="int" />
+          <Property Name="ModifierId" Type="int" />
+          <Property Name="ForeignId" Type="int" />
+          <Property Name="Modi" Type="nchar" MaxLength="10" />
+          <Property Name="Value" Type="int" />
+          <Property Name="Operator" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_InnerMoonlets_Planets">
           <End Role="Planets" Type="Self.Planets" Multiplicity="1" />
@@ -479,91 +451,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UsedBonus_Advantage">
-          <End Role="Advantages" Type="Self.Advantages" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UsedBonus" Type="Self.UsedBonus" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Advantages">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UsedBonus">
-              <PropertyRef Name="AdvantageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UsedBonus_CharacterBonus">
-          <End Role="CharacterBonus" Type="Self.CharacterBonus" Multiplicity="1" />
-          <End Role="UsedBonus" Type="Self.UsedBonus" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CharacterBonus">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UsedBonus">
-              <PropertyRef Name="BonusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UsedBonus_Disadvantage">
-          <End Role="Disadvantages" Type="Self.Disadvantages" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UsedBonus" Type="Self.UsedBonus" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Disadvantages">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UsedBonus">
-              <PropertyRef Name="DisadvantageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UsedMalus_Advantage">
-          <End Role="Advantages" Type="Self.Advantages" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UsedMalus" Type="Self.UsedMalus" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Advantages">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UsedMalus">
-              <PropertyRef Name="AdvantageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UsedMalus_Disadvantage">
-          <End Role="Disadvantages" Type="Self.Disadvantages" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UsedMalus" Type="Self.UsedMalus" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Disadvantages">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UsedMalus">
-              <PropertyRef Name="DisadvantageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UsedMalus_UsedMalus">
-          <End Role="CharacterMalus" Type="Self.CharacterMalus" Multiplicity="0..1" />
-          <End Role="UsedMalus" Type="Self.UsedMalus" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CharacterMalus">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UsedMalus">
-              <PropertyRef Name="MalusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Db1ModelStoreContainer">
           <EntitySet Name="Advantages" EntityType="Self.Advantages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attribute" EntityType="Self.Attribute" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CharacterBonus" EntityType="Self.CharacterBonus" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CharacterMalus" EntityType="Self.CharacterMalus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Characters" EntityType="Self.Characters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disadvantages" EntityType="Self.Disadvantages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InnerMoonlets" EntityType="Self.InnerMoonlets" Schema="dbo" store:Type="Tables" />
@@ -582,8 +472,7 @@
           <EntitySet Name="StatGroup" EntityType="Self.StatGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StatSubGroup" EntityType="Self.StatSubGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UDateTime" EntityType="Self.UDateTime" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UsedBonus" EntityType="Self.UsedBonus" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UsedMalus" EntityType="Self.UsedMalus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsedModifier" EntityType="Self.UsedModifier" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_InnerMoonlets_Planets" Association="Self.FK_InnerMoonlets_Planets">
             <End Role="Planets" EntitySet="Planets" />
             <End Role="InnerMoonlets" EntitySet="InnerMoonlets" />
@@ -612,30 +501,6 @@
             <End Role="StatGroup" EntitySet="StatGroup" />
             <End Role="StatSubGroup" EntitySet="StatSubGroup" />
           </AssociationSet>
-          <AssociationSet Name="FK_UsedBonus_Advantage" Association="Self.FK_UsedBonus_Advantage">
-            <End Role="Advantages" EntitySet="Advantages" />
-            <End Role="UsedBonus" EntitySet="UsedBonus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsedBonus_CharacterBonus" Association="Self.FK_UsedBonus_CharacterBonus">
-            <End Role="CharacterBonus" EntitySet="CharacterBonus" />
-            <End Role="UsedBonus" EntitySet="UsedBonus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsedBonus_Disadvantage" Association="Self.FK_UsedBonus_Disadvantage">
-            <End Role="Disadvantages" EntitySet="Disadvantages" />
-            <End Role="UsedBonus" EntitySet="UsedBonus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsedMalus_Advantage" Association="Self.FK_UsedMalus_Advantage">
-            <End Role="Advantages" EntitySet="Advantages" />
-            <End Role="UsedMalus" EntitySet="UsedMalus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsedMalus_Disadvantage" Association="Self.FK_UsedMalus_Disadvantage">
-            <End Role="Disadvantages" EntitySet="Disadvantages" />
-            <End Role="UsedMalus" EntitySet="UsedMalus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsedMalus_UsedMalus" Association="Self.FK_UsedMalus_UsedMalus">
-            <End Role="CharacterMalus" EntitySet="CharacterMalus" />
-            <End Role="UsedMalus" EntitySet="UsedMalus" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -650,8 +515,6 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PointCost" Type="Int32" />
           <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UsedBonus" Relationship="Self.FK_UsedBonus_Advantage" FromRole="Advantages" ToRole="UsedBonus" />
-          <NavigationProperty Name="UsedMalus" Relationship="Self.FK_UsedMalus_Advantage" FromRole="Advantages" ToRole="UsedMalus" />
           <Property Name="isPhysical" Type="Boolean" Nullable="false" />
           <Property Name="isMental" Type="Boolean" Nullable="false" />
           <Property Name="isSocial" Type="Boolean" Nullable="false" />
@@ -659,28 +522,7 @@
           <Property Name="isSuperNatural" Type="Boolean" Nullable="false" />
           <Property Name="isMundane" Type="Boolean" Nullable="false" />
           <Property Name="Limitation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="CharacterBonus">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Value" Type="Int32" />
-          <Property Name="ModifiedStat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BonusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="UsedBonus" Relationship="Self.FK_UsedBonus_CharacterBonus" FromRole="CharacterBonus" ToRole="UsedBonus" />
-        </EntityType>
-        <EntityType Name="CharacterMalus">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Value" Type="Int32" />
-          <Property Name="ModifiedStat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MalusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UsedMalus" Relationship="Self.FK_UsedMalus_UsedMalus" FromRole="CharacterMalus" ToRole="UsedMalus" />
+          <Property Name="RequirementSet" Type="Boolean" />
         </EntityType>
         <EntityType Name="Characters">
           <Key>
@@ -719,8 +561,6 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PointCost" Type="Int32" />
           <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UsedBonus" Relationship="Self.FK_UsedBonus_Disadvantage" FromRole="Disadvantages" ToRole="UsedBonus" />
-          <NavigationProperty Name="UsedMalus" Relationship="Self.FK_UsedMalus_Disadvantage" FromRole="Disadvantages" ToRole="UsedMalus" />
         </EntityType>
         <EntityType Name="InnerMoonlets">
           <Key>
@@ -937,110 +777,6 @@
           <Property Name="sysStars" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Stars" Relationship="Self.FK_Stars_SystemID" FromRole="StarSystems" ToRole="Stars" />
         </EntityType>
-        <EntityType Name="UsedBonus">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AdvantageId" Type="Int32" />
-          <Property Name="DisadvantageId" Type="Int32" />
-          <Property Name="BonusId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Advantages" Relationship="Self.FK_UsedBonus_Advantage" FromRole="UsedBonus" ToRole="Advantages" />
-          <NavigationProperty Name="CharacterBonus" Relationship="Self.FK_UsedBonus_CharacterBonus" FromRole="UsedBonus" ToRole="CharacterBonus" />
-          <NavigationProperty Name="Disadvantages" Relationship="Self.FK_UsedBonus_Disadvantage" FromRole="UsedBonus" ToRole="Disadvantages" />
-        </EntityType>
-        <EntityType Name="UsedMalus">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AdvantageId" Type="Int32" />
-          <Property Name="DisadvantageId" Type="Int32" />
-          <Property Name="MalusId" Type="Int32" />
-          <NavigationProperty Name="Advantages" Relationship="Self.FK_UsedMalus_Advantage" FromRole="UsedMalus" ToRole="Advantages" />
-          <NavigationProperty Name="CharacterMalus" Relationship="Self.FK_UsedMalus_UsedMalus" FromRole="UsedMalus" ToRole="CharacterMalus" />
-          <NavigationProperty Name="Disadvantages" Relationship="Self.FK_UsedMalus_Disadvantage" FromRole="UsedMalus" ToRole="Disadvantages" />
-        </EntityType>
-        <Association Name="FK_UsedBonus_Advantage">
-          <End Role="Advantages" Type="Self.Advantages" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UsedBonus" Type="Self.UsedBonus" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Advantages">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UsedBonus">
-              <PropertyRef Name="AdvantageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UsedMalus_Advantage">
-          <End Role="Advantages" Type="Self.Advantages" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UsedMalus" Type="Self.UsedMalus" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Advantages">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UsedMalus">
-              <PropertyRef Name="AdvantageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UsedBonus_CharacterBonus">
-          <End Role="CharacterBonus" Type="Self.CharacterBonus" Multiplicity="1" />
-          <End Role="UsedBonus" Type="Self.UsedBonus" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CharacterBonus">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UsedBonus">
-              <PropertyRef Name="BonusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UsedMalus_UsedMalus">
-          <End Role="CharacterMalus" Type="Self.CharacterMalus" Multiplicity="0..1" />
-          <End Role="UsedMalus" Type="Self.UsedMalus" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CharacterMalus">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UsedMalus">
-              <PropertyRef Name="MalusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UsedBonus_Disadvantage">
-          <End Role="Disadvantages" Type="Self.Disadvantages" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UsedBonus" Type="Self.UsedBonus" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Disadvantages">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UsedBonus">
-              <PropertyRef Name="DisadvantageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UsedMalus_Disadvantage">
-          <End Role="Disadvantages" Type="Self.Disadvantages" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UsedMalus" Type="Self.UsedMalus" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Disadvantages">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UsedMalus">
-              <PropertyRef Name="DisadvantageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_InnerMoonlets_Planets">
           <End Role="Planets" Type="Self.Planets" Multiplicity="1" />
           <End Role="InnerMoonlets" Type="Self.InnerMoonlets" Multiplicity="*" />
@@ -1103,8 +839,6 @@
         </Association>
         <EntityContainer Name="Db1Entities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="Advantages" EntityType="Self.Advantages" />
-          <EntitySet Name="CharacterBonus" EntityType="Self.CharacterBonus" />
-          <EntitySet Name="CharacterMalus" EntityType="Self.CharacterMalus" />
           <EntitySet Name="Characters" EntityType="Self.Characters" />
           <EntitySet Name="Disadvantages" EntityType="Self.Disadvantages" />
           <EntitySet Name="InnerMoonlets" EntityType="Self.InnerMoonlets" />
@@ -1116,32 +850,6 @@
           <EntitySet Name="SatelliteBaseTypes" EntityType="Self.SatelliteBaseTypes" />
           <EntitySet Name="Stars" EntityType="Self.Stars" />
           <EntitySet Name="StarSystems" EntityType="Self.StarSystems" />
-          <EntitySet Name="UsedBonus" EntityType="Self.UsedBonus" />
-          <EntitySet Name="UsedMalus" EntityType="Self.UsedMalus" />
-          <AssociationSet Name="FK_UsedBonus_Advantage" Association="Self.FK_UsedBonus_Advantage">
-            <End Role="Advantages" EntitySet="Advantages" />
-            <End Role="UsedBonus" EntitySet="UsedBonus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsedMalus_Advantage" Association="Self.FK_UsedMalus_Advantage">
-            <End Role="Advantages" EntitySet="Advantages" />
-            <End Role="UsedMalus" EntitySet="UsedMalus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsedBonus_CharacterBonus" Association="Self.FK_UsedBonus_CharacterBonus">
-            <End Role="CharacterBonus" EntitySet="CharacterBonus" />
-            <End Role="UsedBonus" EntitySet="UsedBonus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsedMalus_UsedMalus" Association="Self.FK_UsedMalus_UsedMalus">
-            <End Role="CharacterMalus" EntitySet="CharacterMalus" />
-            <End Role="UsedMalus" EntitySet="UsedMalus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsedBonus_Disadvantage" Association="Self.FK_UsedBonus_Disadvantage">
-            <End Role="Disadvantages" EntitySet="Disadvantages" />
-            <End Role="UsedBonus" EntitySet="UsedBonus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsedMalus_Disadvantage" Association="Self.FK_UsedMalus_Disadvantage">
-            <End Role="Disadvantages" EntitySet="Disadvantages" />
-            <End Role="UsedMalus" EntitySet="UsedMalus" />
-          </AssociationSet>
           <AssociationSet Name="FK_InnerMoonlets_Planets" Association="Self.FK_InnerMoonlets_Planets">
             <End Role="Planets" EntitySet="Planets" />
             <End Role="InnerMoonlets" EntitySet="InnerMoonlets" />
@@ -1178,6 +886,7 @@
             <End Role="StatGroup" EntitySet="StatGroup" />
             <End Role="StatSubGroup" EntitySet="StatSubGroup" />
           </AssociationSet>
+          <EntitySet Name="UsedModifier" EntityType="Db1Model.UsedModifier" />
         </EntityContainer>
         <EntityType Name="UDateTime">
           <Key>
@@ -1264,11 +973,9 @@
           <Property Name="Group" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SubGroup" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Modifying_Property" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Modifying_Value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Operator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="StatGroup">
           <Key>
@@ -1299,6 +1006,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UsedModifier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModifierId" Type="Int32" />
+          <Property Name="ForeignId" Type="Int32" />
+          <Property Name="Modi" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Value" Type="Int32" />
+          <Property Name="Operator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1308,6 +1026,7 @@
           <EntitySetMapping Name="Advantages">
             <EntityTypeMapping TypeName="Db1Model.Advantages">
               <MappingFragment StoreEntitySet="Advantages">
+                <ScalarProperty Name="RequirementSet" ColumnName="RequirementSet" />
                 <ScalarProperty Name="Limitation" ColumnName="Limitation" />
                 <ScalarProperty Name="isMundane" ColumnName="isMundane" />
                 <ScalarProperty Name="isSuperNatural" ColumnName="isSuperNatural" />
@@ -1320,28 +1039,6 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="PointCost" ColumnName="PointCost" />
                 <ScalarProperty Name="Discription" ColumnName="Discription" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CharacterBonus">
-            <EntityTypeMapping TypeName="Db1Model.CharacterBonus">
-              <MappingFragment StoreEntitySet="CharacterBonus">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Discription" ColumnName="Discription" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="ModifiedStat" ColumnName="ModifiedStat" />
-                <ScalarProperty Name="BonusName" ColumnName="BonusName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CharacterMalus">
-            <EntityTypeMapping TypeName="Db1Model.CharacterMalus">
-              <MappingFragment StoreEntitySet="CharacterMalus">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Discription" ColumnName="Discription" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="ModifiedStat" ColumnName="ModifiedStat" />
-                <ScalarProperty Name="MalusName" ColumnName="MalusName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1599,26 +1296,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UsedBonus">
-            <EntityTypeMapping TypeName="Db1Model.UsedBonus">
-              <MappingFragment StoreEntitySet="UsedBonus">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="AdvantageId" ColumnName="AdvantageId" />
-                <ScalarProperty Name="DisadvantageId" ColumnName="DisadvantageId" />
-                <ScalarProperty Name="BonusId" ColumnName="BonusId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UsedMalus">
-            <EntityTypeMapping TypeName="Db1Model.UsedMalus">
-              <MappingFragment StoreEntitySet="UsedMalus">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="AdvantageId" ColumnName="AdvantageId" />
-                <ScalarProperty Name="DisadvantageId" ColumnName="DisadvantageId" />
-                <ScalarProperty Name="MalusId" ColumnName="MalusId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UDateTime">
             <EntityTypeMapping TypeName="Db1Model.UDateTime">
               <MappingFragment StoreEntitySet="UDateTime">
@@ -1690,11 +1367,9 @@
           <EntitySetMapping Name="Modifier">
             <EntityTypeMapping TypeName="Db1Model.Modifier">
               <MappingFragment StoreEntitySet="Modifier">
-                <ScalarProperty Name="Operator" ColumnName="Operator" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Modifying_Value" ColumnName="Modifying Value" />
                 <ScalarProperty Name="Modifying_Property" ColumnName="Modifying Property" />
                 <ScalarProperty Name="SubGroup" ColumnName="SubGroup" />
                 <ScalarProperty Name="Group" ColumnName="Group" />
@@ -1715,6 +1390,18 @@
               <MappingFragment StoreEntitySet="StatSubGroup">
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsedModifier">
+            <EntityTypeMapping TypeName="Db1Model.UsedModifier">
+              <MappingFragment StoreEntitySet="UsedModifier">
+                <ScalarProperty Name="Operator" ColumnName="Operator" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Modi" ColumnName="Modi" />
+                <ScalarProperty Name="ForeignId" ColumnName="ForeignId" />
+                <ScalarProperty Name="ModifierId" ColumnName="ModifierId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

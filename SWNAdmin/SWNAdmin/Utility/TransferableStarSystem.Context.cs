@@ -27,8 +27,6 @@ namespace SWNAdmin.Utility
         }
     
         public virtual DbSet<Advantages> Advantages { get; set; }
-        public virtual DbSet<CharacterBonus> CharacterBonus { get; set; }
-        public virtual DbSet<CharacterMalus> CharacterMalus { get; set; }
         public virtual DbSet<Characters> Characters { get; set; }
         public virtual DbSet<Disadvantages> Disadvantages { get; set; }
         public virtual DbSet<InnerMoonlets> InnerMoonlets { get; set; }
@@ -40,8 +38,6 @@ namespace SWNAdmin.Utility
         public virtual DbSet<SatelliteBaseTypes> SatelliteBaseTypes { get; set; }
         public virtual DbSet<Stars> Stars { get; set; }
         public virtual DbSet<StarSystems> StarSystems { get; set; }
-        public virtual DbSet<UsedBonus> UsedBonus { get; set; }
-        public virtual DbSet<UsedMalus> UsedMalus { get; set; }
         public virtual DbSet<UDateTime> UDateTime { get; set; }
         public virtual DbSet<Attribute> Attribute { get; set; }
         public virtual DbSet<Skills> Skills { get; set; }
@@ -50,5 +46,6 @@ namespace SWNAdmin.Utility
         public virtual DbSet<Modifier> Modifier { get; set; }
         public virtual DbSet<StatGroup> StatGroup { get; set; }
         public virtual DbSet<StatSubGroup> StatSubGroup { get; set; }
+        public virtual DbSet<UsedModifier> UsedModifier { get; set; }
     }
 }
