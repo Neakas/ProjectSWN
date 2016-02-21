@@ -35,6 +35,7 @@ namespace SWN
         public SWNServiceClient proxy = null;
         public Client receiver = null;
         public Client localclient = null;
+        public Character myCharacter;
 
 
         public MainWindow()
@@ -296,6 +297,13 @@ namespace SWN
                     HandleProxy();
                 }
             }
+        }
+
+        private void menuCreateNewCharacter_Click(object sender, RoutedEventArgs e)
+        {
+            myCharacter = ServerConnection.SWNClient.GetBlankCharacter(localclient);
+            CreateNewCharacter cnc = new CreateNewCharacter(myCharacter);
+            cnc.ShowDialog();
         }
     }
 

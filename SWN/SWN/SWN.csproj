@@ -76,12 +76,39 @@
       <HintPath>..\..\packages\wpfthemes.0.0.1\lib\WPF.Themes.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.2.6\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=2.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.2.6\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=2.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.2.6\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=2.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.2.6\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=2.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.2.6\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.2.6\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Forms\CreateNewCharacter.xaml.cs">
+      <DependentUpon>CreateNewCharacter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
@@ -93,17 +120,7 @@
     <Compile Include="UserControls\AdvantageControl.xaml.cs">
       <DependentUpon>AdvantageControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controller\Advantages.cs" />
-    <Compile Include="Controller\CharacterBonus.cs" />
-    <Compile Include="Controller\CharacterController.cs" />
-    <Compile Include="Controller\CharacterMalus.cs" />
-    <Compile Include="Controller\Disadvantages.cs" />
     <Compile Include="Controller\RaceController.cs" />
-    <Compile Include="Controller\UsedBonus.cs" />
-    <Compile Include="Controller\UsedMalus.cs" />
-    <Compile Include="Forms\NewCharacter.xaml.cs">
-      <DependentUpon>NewCharacter.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Forms\CharacterViewer.xaml.cs">
       <DependentUpon>CharacterViewer.xaml</DependentUpon>
     </Compile>
@@ -133,6 +150,10 @@
     <Compile Include="UserControls\StatLabel.xaml.cs">
       <DependentUpon>StatLabel.xaml</DependentUpon>
     </Compile>
+    <Page Include="Forms\CreateNewCharacter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\Options.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,10 +161,6 @@
     <Page Include="UserControls\AdvantageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Forms\NewCharacter.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Forms\CharacterViewer.xaml">
       <SubType>Designer</SubType>
@@ -218,6 +235,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\SWNServiceReference\SWN.SWNServiceReference.Character.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SWNServiceReference\SWNService.wsdl" />
     <None Include="Service References\SWNServiceReference\SWNService.xsd">
       <SubType>Designer</SubType>

@@ -33,6 +33,12 @@
   <wsdl:message name="SWNService_RequestOnlineUsersList_OutputMessage">
     <wsdl:part name="parameters" element="tns:RequestOnlineUsersListResponse" />
   </wsdl:message>
+  <wsdl:message name="SWNService_GetBlankCharacter_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBlankCharacter" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_GetBlankCharacter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBlankCharacterResponse" />
+  </wsdl:message>
   <wsdl:message name="SWNService_UserJoin_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:UserJoin" />
   </wsdl:message>
@@ -79,6 +85,10 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RequestOnlineUsersList">
       <wsdl:input wsaw:Action="SWNAdmin/SWNService/RequestOnlineUsersList" message="tns:SWNService_RequestOnlineUsersList_InputMessage" />
       <wsdl:output wsaw:Action="SWNAdmin/SWNService/RequestOnlineUsersListResponse" message="tns:SWNService_RequestOnlineUsersList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetBlankCharacter">
+      <wsdl:input wsaw:Action="SWNAdmin/SWNService/GetBlankCharacter" message="tns:SWNService_GetBlankCharacter_InputMessage" />
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/GetBlankCharacterResponse" message="tns:SWNService_GetBlankCharacter_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UserJoin">
       <wsdl:output wsaw:Action="SWNAdmin/SWNService/UserJoin" message="tns:SWNService_UserJoin_OutputCallbackMessage" />

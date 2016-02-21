@@ -59,8 +59,11 @@ namespace SWNAdmin.Forms
                         adv.isMental = (bool)cbisMental.IsChecked;
                         adv.Limitation = tbLimitation.Text;
                         adv.Discription = tbDiscription.Text;
-                        adv.PointCost = Int32.Parse(tbPointCost.Text);
+                        adv.PointCost = Convert.ToInt32(tbPointCost.Text);
+                        adv.hasLevels = (bool)cbhasLevels.IsChecked;
                         adv.Name = tbName.Text;
+                        adv.isCreationLocked = (bool)cbisCreationLocked.IsChecked;
+                        adv.Reference = tbReference.Text;
                         newcontext.Advantages.Add(adv);
                         newcontext.SaveChanges();
                         foreach (Modifier item in lbModifier.Items)
@@ -144,12 +147,15 @@ namespace SWNAdmin.Forms
                     tbDiscription.Text = LoadItem.Discription;
                     cbisEnabled.IsChecked = LoadItem.isEnabled;
                     tbPointCost.Text = LoadItem.PointCost.ToString();
-                    cbisPhysical.IsChecked = (Boolean)LoadItem.isPhysical;
-                    cbisMental.IsChecked = (Boolean)LoadItem.isMental;
-                    cbisSocial.IsChecked = (Boolean)LoadItem.isSocial;
-                    cbisExotic.IsChecked = (Boolean)LoadItem.isExotic;
-                    cbisSuperNatural.IsChecked = (Boolean)LoadItem.isSuperNatural;
-                    cbisMundane.IsChecked = (Boolean)LoadItem.isMundane;
+                    cbisPhysical.IsChecked = (bool)LoadItem.isPhysical;
+                    cbisMental.IsChecked = (bool)LoadItem.isMental;
+                    cbisSocial.IsChecked = (bool)LoadItem.isSocial;
+                    cbisExotic.IsChecked = (bool)LoadItem.isExotic;
+                    cbisSuperNatural.IsChecked = (bool)LoadItem.isSuperNatural;
+                    cbisMundane.IsChecked = (bool)LoadItem.isMundane;
+                    cbhasLevels.IsChecked = (bool)LoadItem.hasLevels;
+                    cbisCreationLocked.IsChecked = (bool)LoadItem.isCreationLocked;
+                    tbReference.Text = LoadItem.Reference;
                     tbLimitation.Text = LoadItem.Limitation;
                 }
                 List<UsedModifier> UsedModifers = (from c in context.UsedModifier where c.ForeignId == LoadItem.Id select c).ToList();
@@ -181,9 +187,13 @@ namespace SWNAdmin.Forms
                 editAdv.isSuperNatural = (bool)cbisSuperNatural.IsChecked;
                 editAdv.Limitation = tbLimitation.Text;
                 editAdv.Name = tbName.Text;
+                editAdv.hasLevels = (bool)cbhasLevels.IsChecked;
                 editAdv.PointCost = Int32.Parse(tbPointCost.Text);
+                editAdv.isCreationLocked = (bool)cbisCreationLocked.IsChecked;
+                editAdv.Reference = tbReference.Text;
                 Context.Entry(editAdv).State = System.Data.Entity.EntityState.Modified;
                 Context.SaveChanges();
+                
             }
             btAddAdvantage.IsEnabled = true;
             btEditAdvantage.IsEnabled = false;
@@ -268,6 +278,29 @@ namespace SWNAdmin.Forms
             }
         }
 
+        private void btModifierUpd_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbModifier.SelectedItem != null)
+            {
+                using (var context = new Db1Entities())
+                {
+                    DictMod[(lbModifier.SelectedItem) as Modifier].Value = Int32.Parse(tbModVal.Text);
+                    DictMod[(lbModifier.SelectedItem) as Modifier].Operator = cbModOp.Text;
+                    UsedModifier foundmod;
+                    DictMod.TryGetValue((lbModifier.SelectedItem) as Modifier, out foundmod);
+                    UsedModifier usedmod = (from c in context.UsedModifier where c.Id == foundmod.Id select c).FirstOrDefault();
+                    usedmod.Operator = foundmod.Operator;
+                    usedmod.Value = foundmod.Value;
+                    context.Entry(usedmod).State = System.Data.Entity.EntityState.Modified;
+                    context.SaveChanges();
+                }
+                lbModifier.SelectedItem = null;
+                cbModOp.Text = "";
+                tbModVal.Text = "";
+            }
+            
+        }
+
         private void LoadModifierComboBox()
         {
             var context = new Db1Entities();
@@ -280,8 +313,17 @@ namespace SWNAdmin.Forms
             if (lbModifier.SelectedItem != null)
             {
                 btModifierAdd.IsEnabled = false;
+                btModifierAdd.Visibility = Visibility.Hidden;
+                btModifierUpd.Visibility = Visibility.Visible;
+                btModifierUpd.IsEnabled = true;
                 btModifierDel.IsEnabled = true;
-                cbModifier.SelectedItem = null;
+                foreach (Modifier item in cbModifier.Items)
+                {
+                    if (item.Name == (lbModifier.SelectedItem as Modifier).Name)
+                    {
+                        cbModifier.SelectedItem = item;
+                    }
+                }
                 UsedModifier usedmod;
                 DictMod.TryGetValue((lbModifier.SelectedItem as Modifier), out usedmod);
                 cbModOp.IsEnabled = true;
@@ -295,6 +337,9 @@ namespace SWNAdmin.Forms
                 tbModVal.IsEnabled = false;
                 btModifierAdd.IsEnabled = true;
                 btModifierDel.IsEnabled = false;
+                btModifierAdd.Visibility = Visibility.Visible;
+                btModifierUpd.Visibility = Visibility.Hidden;
+                btModifierUpd.IsEnabled = false;
             }   
         }
 
@@ -303,8 +348,8 @@ namespace SWNAdmin.Forms
             tbDiscription.Text = "";
             tbLimitation.Text = "";
             tbName.Text = "";
-            tbPointCost.Text = "";
-            cbisEnabled.IsChecked = false;
+            tbPointCost.Text = "0";
+            cbisEnabled.IsChecked = true;
             cbisExotic.IsChecked = false;
             cbisMental.IsChecked = false;
             cbisMundane.IsChecked = false;
@@ -316,6 +361,12 @@ namespace SWNAdmin.Forms
             cbModifier.SelectedItem = null;
             tbModVal.Text = "";
             rbRegSet.IsChecked = false;
+            cbhasLevels.IsChecked = false;
+            cbisCreationLocked.IsChecked = false;
+            tbReference.Text = "";
+            DictMod.Clear();
         }
+
+
     }
 }

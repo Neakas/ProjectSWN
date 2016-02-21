@@ -53,6 +53,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetBlankCharacter">
+      <soap12:operation soapAction="SWNAdmin/SWNService/GetBlankCharacter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="UserJoin">
       <soap12:operation soapAction="SWNAdmin/SWNService/UserJoin" style="document" />
       <wsdl:output>

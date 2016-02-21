@@ -22,6 +22,9 @@
           <Property Name="isMundane" Type="bit" Nullable="false" />
           <Property Name="Limitation" Type="nvarchar(max)" />
           <Property Name="RequirementSet" Type="bit" />
+          <Property Name="hasLevels" Type="bit" />
+          <Property Name="isCreationLocked" Type="bit" />
+          <Property Name="Reference" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Attribute">
           <Key>
@@ -31,7 +34,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RequirementSet" Type="bit" />
         </EntityType>
-        <EntityType Name="Characters">
+        <EntityType Name="Character">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -54,10 +57,11 @@
           <Property Name="WillPower" Type="int" />
           <Property Name="Perception" Type="int" />
           <Property Name="BasicLift" Type="int" />
-          <Property Name="BasicSpeed" Type="int" />
+          <Property Name="BasicSpeed" Type="float" />
           <Property Name="BasicMove" Type="int" />
           <Property Name="PersonalTechnologyLevel" Type="int" />
           <Property Name="ParryValue" Type="int" />
+          <Property Name="FatiguePoints" Type="int" />
         </EntityType>
         <EntityType Name="Disadvantages">
           <Key>
@@ -140,7 +144,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Group" Type="nvarchar" MaxLength="50" />
-          <Property Name="SubGroup" Type="nchar" MaxLength="10" />
+          <Property Name="SubGroup" Type="nvarchar" MaxLength="50" />
           <Property Name="Modifying Property" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Notes" Type="nvarchar" MaxLength="50" />
@@ -454,7 +458,7 @@
         <EntityContainer Name="Db1ModelStoreContainer">
           <EntitySet Name="Advantages" EntityType="Self.Advantages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attribute" EntityType="Self.Attribute" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Characters" EntityType="Self.Characters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Character" EntityType="Self.Character" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disadvantages" EntityType="Self.Disadvantages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InnerMoonlets" EntityType="Self.InnerMoonlets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MajorMoons" EntityType="Self.MajorMoons" Schema="dbo" store:Type="Tables" />
@@ -523,34 +527,9 @@
           <Property Name="isMundane" Type="Boolean" Nullable="false" />
           <Property Name="Limitation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="RequirementSet" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="Characters">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PlayerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PlayerId" Type="Int32" Nullable="false" />
-          <Property Name="PointTotal" Type="Int32" />
-          <Property Name="Height" Type="Double" />
-          <Property Name="Weight" Type="Double" />
-          <Property Name="SizeModifier" Type="Int32" />
-          <Property Name="Age" Type="Int32" />
-          <Property Name="UnspendPoints" Type="Int32" />
-          <Property Name="Appearance" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Strenght" Type="Int32" />
-          <Property Name="Dexterity" Type="Int32" />
-          <Property Name="Intelligence" Type="Int32" />
-          <Property Name="Health" Type="Int32" />
-          <Property Name="HitPoints" Type="Int32" />
-          <Property Name="WillPower" Type="Int32" />
-          <Property Name="Perception" Type="Int32" />
-          <Property Name="BasicLift" Type="Int32" />
-          <Property Name="BasicSpeed" Type="Int32" />
-          <Property Name="BasicMove" Type="Int32" />
-          <Property Name="PersonalTechnologyLevel" Type="Int32" />
-          <Property Name="ParryValue" Type="Int32" />
+          <Property Name="hasLevels" Type="Boolean" />
+          <Property Name="isCreationLocked" Type="Boolean" />
+          <Property Name="Reference" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Disadvantages">
           <Key>
@@ -839,7 +818,6 @@
         </Association>
         <EntityContainer Name="Db1Entities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="Advantages" EntityType="Self.Advantages" />
-          <EntitySet Name="Characters" EntityType="Self.Characters" />
           <EntitySet Name="Disadvantages" EntityType="Self.Disadvantages" />
           <EntitySet Name="InnerMoonlets" EntityType="Self.InnerMoonlets" />
           <EntitySet Name="MajorMoons" EntityType="Self.MajorMoons" />
@@ -887,6 +865,7 @@
             <End Role="StatSubGroup" EntitySet="StatSubGroup" />
           </AssociationSet>
           <EntitySet Name="UsedModifier" EntityType="Db1Model.UsedModifier" />
+          <EntitySet Name="Character" EntityType="Db1Model.Character" />
         </EntityContainer>
         <EntityType Name="UDateTime">
           <Key>
@@ -971,7 +950,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Group" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SubGroup" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SubGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Modifying_Property" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1017,6 +996,35 @@
           <Property Name="Value" Type="Int32" />
           <Property Name="Operator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Character">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PlayerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PlayerId" Type="Int32" Nullable="false" />
+          <Property Name="PointTotal" Type="Int32" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="Weight" Type="Double" />
+          <Property Name="SizeModifier" Type="Int32" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="UnspendPoints" Type="Int32" />
+          <Property Name="Appearance" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Strenght" Type="Int32" />
+          <Property Name="Dexterity" Type="Int32" />
+          <Property Name="Intelligence" Type="Int32" />
+          <Property Name="Health" Type="Int32" />
+          <Property Name="HitPoints" Type="Int32" />
+          <Property Name="WillPower" Type="Int32" />
+          <Property Name="Perception" Type="Int32" />
+          <Property Name="BasicLift" Type="Int32" />
+          <Property Name="BasicSpeed" Type="Double" />
+          <Property Name="BasicMove" Type="Int32" />
+          <Property Name="PersonalTechnologyLevel" Type="Int32" />
+          <Property Name="ParryValue" Type="Int32" />
+          <Property Name="FatiguePoints" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1026,6 +1034,9 @@
           <EntitySetMapping Name="Advantages">
             <EntityTypeMapping TypeName="Db1Model.Advantages">
               <MappingFragment StoreEntitySet="Advantages">
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="isCreationLocked" ColumnName="isCreationLocked" />
+                <ScalarProperty Name="hasLevels" ColumnName="hasLevels" />
                 <ScalarProperty Name="RequirementSet" ColumnName="RequirementSet" />
                 <ScalarProperty Name="Limitation" ColumnName="Limitation" />
                 <ScalarProperty Name="isMundane" ColumnName="isMundane" />
@@ -1039,35 +1050,6 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="PointCost" ColumnName="PointCost" />
                 <ScalarProperty Name="Discription" ColumnName="Discription" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Characters">
-            <EntityTypeMapping TypeName="Db1Model.Characters">
-              <MappingFragment StoreEntitySet="Characters">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
-                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
-                <ScalarProperty Name="PointTotal" ColumnName="PointTotal" />
-                <ScalarProperty Name="Height" ColumnName="Height" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="SizeModifier" ColumnName="SizeModifier" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="UnspendPoints" ColumnName="UnspendPoints" />
-                <ScalarProperty Name="Appearance" ColumnName="Appearance" />
-                <ScalarProperty Name="Strenght" ColumnName="Strenght" />
-                <ScalarProperty Name="Dexterity" ColumnName="Dexterity" />
-                <ScalarProperty Name="Intelligence" ColumnName="Intelligence" />
-                <ScalarProperty Name="Health" ColumnName="Health" />
-                <ScalarProperty Name="HitPoints" ColumnName="HitPoints" />
-                <ScalarProperty Name="WillPower" ColumnName="WillPower" />
-                <ScalarProperty Name="Perception" ColumnName="Perception" />
-                <ScalarProperty Name="BasicLift" ColumnName="BasicLift" />
-                <ScalarProperty Name="BasicSpeed" ColumnName="BasicSpeed" />
-                <ScalarProperty Name="BasicMove" ColumnName="BasicMove" />
-                <ScalarProperty Name="PersonalTechnologyLevel" ColumnName="PersonalTechnologyLevel" />
-                <ScalarProperty Name="ParryValue" ColumnName="ParryValue" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1402,6 +1384,36 @@
                 <ScalarProperty Name="Modi" ColumnName="Modi" />
                 <ScalarProperty Name="ForeignId" ColumnName="ForeignId" />
                 <ScalarProperty Name="ModifierId" ColumnName="ModifierId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Character">
+            <EntityTypeMapping TypeName="Db1Model.Character">
+              <MappingFragment StoreEntitySet="Character">
+                <ScalarProperty Name="FatiguePoints" ColumnName="FatiguePoints" />
+                <ScalarProperty Name="ParryValue" ColumnName="ParryValue" />
+                <ScalarProperty Name="PersonalTechnologyLevel" ColumnName="PersonalTechnologyLevel" />
+                <ScalarProperty Name="BasicMove" ColumnName="BasicMove" />
+                <ScalarProperty Name="BasicSpeed" ColumnName="BasicSpeed" />
+                <ScalarProperty Name="BasicLift" ColumnName="BasicLift" />
+                <ScalarProperty Name="Perception" ColumnName="Perception" />
+                <ScalarProperty Name="WillPower" ColumnName="WillPower" />
+                <ScalarProperty Name="HitPoints" ColumnName="HitPoints" />
+                <ScalarProperty Name="Health" ColumnName="Health" />
+                <ScalarProperty Name="Intelligence" ColumnName="Intelligence" />
+                <ScalarProperty Name="Dexterity" ColumnName="Dexterity" />
+                <ScalarProperty Name="Strenght" ColumnName="Strenght" />
+                <ScalarProperty Name="Appearance" ColumnName="Appearance" />
+                <ScalarProperty Name="UnspendPoints" ColumnName="UnspendPoints" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="SizeModifier" ColumnName="SizeModifier" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="PointTotal" ColumnName="PointTotal" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

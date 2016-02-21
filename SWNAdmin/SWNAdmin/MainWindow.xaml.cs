@@ -26,6 +26,7 @@ namespace SWNAdmin
         public bool StopFlag = false;
         public static MainWindow CurrentInstance;
         public static Server ServiceServer;
+        //TODOLOW User gets not Signed of of the Online-User Listbox, when disconnecting
        
 
         public MainWindow()
@@ -35,6 +36,7 @@ namespace SWNAdmin
             btServerStart.IsEnabled = true;
             btServerStop.IsEnabled = false;
             // SWNAdmin.Utility.XmlSkillImporter.Import();
+            
         }
 
         public void UpdateUserOnline(string User, bool Delete)

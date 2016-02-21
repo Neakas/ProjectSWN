@@ -174,6 +174,17 @@ namespace SWNAdmin.Forms
                 cbSubGroup.IsEnabled = false;
             }
         }
+
+        private void btCopy_Click(object sender, RoutedEventArgs e)
+        {
+            tbId.Text = "";
+            cbExistingModifier.SelectedItem = null;
+            btAdd.Visibility = Visibility.Visible;
+            btAdd.IsEnabled = true;
+            btUpdate.Visibility = Visibility.Hidden;
+            btUpdate.IsEnabled = false;
+            SelectedModifier = null;
+        }
     }
 }
 

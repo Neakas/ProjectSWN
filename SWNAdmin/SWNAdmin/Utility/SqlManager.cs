@@ -231,43 +231,6 @@ namespace SWNAdmin
             }
         }
 
-        public static bool InsertCharacter(CharacterController NewChar, string UserName)
-        {
-            var regcontext = new Utility.Db1Entities();
-            var query = from c in regcontext.Registration where c.Username == UserName select c;
-            var UserID = query.FirstOrDefault().Id;
-
-            using (var context = new Utility.Db1Entities())
-            {
-                Utility.Characters NewCharacter = new Utility.Characters();
-                NewCharacter.Name = NewChar.Name;
-                NewCharacter.PlayerName = UserName;
-                NewCharacter.PlayerId = UserID;
-                NewCharacter.Height = NewChar.Height;
-                NewCharacter.Weight = NewChar.Weight;
-                NewCharacter.SizeModifier = NewChar.SizeModifier;
-                NewCharacter.Age = NewChar.Age;
-                NewCharacter.UnspendPoints = NewChar.UnspendPoints;
-                NewCharacter.Strenght = NewChar.Strenght;
-                NewCharacter.Dexterity = NewChar.Dexterity;
-                NewCharacter.Intelligence = NewChar.Intelligence;
-                NewCharacter.Health = NewChar.Health;
-                NewCharacter.HitPoints = NewChar.HitPoints;
-                NewCharacter.WillPower = NewChar.WillPower;
-                NewCharacter.Perception = NewChar.Perception;
-                NewCharacter.BasicLift = NewChar.BasicLift;
-                NewCharacter.BasicSpeed = NewChar.BasicSpeed;
-                NewCharacter.BasicMove = NewChar.BasicMove;
-                NewCharacter.PersonalTechnologyLevel = NewChar.PersonalTechnologyLevel;
-                NewCharacter.ParryValue = NewChar.ParryValue;
-                context.Characters.Add(NewCharacter);
-                context.SaveChanges();
-                return true;
-                
-            }
-           
-        }
-
         public static List<Utility.StarSystems> LoadAllSystems()
         {
             List<Utility.StarSystems> AllSystems = new List<Utility.StarSystems>();

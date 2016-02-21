@@ -21,6 +21,7 @@
         <Menu x:Name="menu" Height="23" VerticalAlignment="Top">
             <MenuItem Header="Datei"/>
             <MenuItem Header="Character">
+                <MenuItem x:Name="menuCreateNewCharacter" Header="Create New" HorizontalAlignment="Left" Width="215" Margin="0,0,-50,0" Click="menuCreateNewCharacter_Click"/>
                 <MenuItem x:Name="menuOpenCV" Header="Open CharacterViewer" HorizontalAlignment="Left" Width="215" Margin="0,0,-50,0" Click="MenuOpenCV_Click"/>
             </MenuItem>
             <MenuItem x:Name="menuTools" Header="Tools" Margin="0" VerticalAlignment="Top">

@@ -11,8 +11,8 @@
 namespace SWN.SWNServiceReference {
     using System.Runtime.Serialization;
     using System;
-    using System.Xml.Serialization;
-
+    
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Client", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin")]
@@ -169,6 +169,419 @@ namespace SWN.SWNServiceReference {
                 if ((this.TimeField.Equals(value) != true)) {
                     this.TimeField = value;
                     this.RaisePropertyChanged("Time");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Character", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
+    [System.SerializableAttribute()]
+    public partial class Character : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> AgeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AppearanceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> BasicLiftField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> BasicMoveField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<double> BasicSpeedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> DexterityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> FatiguePointsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> HealthField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<double> HeightField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> HitPointsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> IntelligenceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> ParryValueField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> PerceptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> PersonalTechnologyLevelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PlayerIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PlayerNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> PointTotalField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> SizeModifierField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> StrenghtField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> UnspendPointsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<double> WeightField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> WillPowerField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Age {
+            get {
+                return this.AgeField;
+            }
+            set {
+                if ((this.AgeField.Equals(value) != true)) {
+                    this.AgeField = value;
+                    this.RaisePropertyChanged("Age");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Appearance {
+            get {
+                return this.AppearanceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AppearanceField, value) != true)) {
+                    this.AppearanceField = value;
+                    this.RaisePropertyChanged("Appearance");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> BasicLift {
+            get {
+                return this.BasicLiftField;
+            }
+            set {
+                if ((this.BasicLiftField.Equals(value) != true)) {
+                    this.BasicLiftField = value;
+                    this.RaisePropertyChanged("BasicLift");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> BasicMove {
+            get {
+                return this.BasicMoveField;
+            }
+            set {
+                if ((this.BasicMoveField.Equals(value) != true)) {
+                    this.BasicMoveField = value;
+                    this.RaisePropertyChanged("BasicMove");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<double> BasicSpeed {
+            get {
+                return this.BasicSpeedField;
+            }
+            set {
+                if ((this.BasicSpeedField.Equals(value) != true)) {
+                    this.BasicSpeedField = value;
+                    this.RaisePropertyChanged("BasicSpeed");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Dexterity {
+            get {
+                return this.DexterityField;
+            }
+            set {
+                if ((this.DexterityField.Equals(value) != true)) {
+                    this.DexterityField = value;
+                    this.RaisePropertyChanged("Dexterity");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> FatiguePoints {
+            get {
+                return this.FatiguePointsField;
+            }
+            set {
+                if ((this.FatiguePointsField.Equals(value) != true)) {
+                    this.FatiguePointsField = value;
+                    this.RaisePropertyChanged("FatiguePoints");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Health {
+            get {
+                return this.HealthField;
+            }
+            set {
+                if ((this.HealthField.Equals(value) != true)) {
+                    this.HealthField = value;
+                    this.RaisePropertyChanged("Health");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<double> Height {
+            get {
+                return this.HeightField;
+            }
+            set {
+                if ((this.HeightField.Equals(value) != true)) {
+                    this.HeightField = value;
+                    this.RaisePropertyChanged("Height");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> HitPoints {
+            get {
+                return this.HitPointsField;
+            }
+            set {
+                if ((this.HitPointsField.Equals(value) != true)) {
+                    this.HitPointsField = value;
+                    this.RaisePropertyChanged("HitPoints");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Intelligence {
+            get {
+                return this.IntelligenceField;
+            }
+            set {
+                if ((this.IntelligenceField.Equals(value) != true)) {
+                    this.IntelligenceField = value;
+                    this.RaisePropertyChanged("Intelligence");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> ParryValue {
+            get {
+                return this.ParryValueField;
+            }
+            set {
+                if ((this.ParryValueField.Equals(value) != true)) {
+                    this.ParryValueField = value;
+                    this.RaisePropertyChanged("ParryValue");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Perception {
+            get {
+                return this.PerceptionField;
+            }
+            set {
+                if ((this.PerceptionField.Equals(value) != true)) {
+                    this.PerceptionField = value;
+                    this.RaisePropertyChanged("Perception");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> PersonalTechnologyLevel {
+            get {
+                return this.PersonalTechnologyLevelField;
+            }
+            set {
+                if ((this.PersonalTechnologyLevelField.Equals(value) != true)) {
+                    this.PersonalTechnologyLevelField = value;
+                    this.RaisePropertyChanged("PersonalTechnologyLevel");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PlayerId {
+            get {
+                return this.PlayerIdField;
+            }
+            set {
+                if ((this.PlayerIdField.Equals(value) != true)) {
+                    this.PlayerIdField = value;
+                    this.RaisePropertyChanged("PlayerId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PlayerName {
+            get {
+                return this.PlayerNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PlayerNameField, value) != true)) {
+                    this.PlayerNameField = value;
+                    this.RaisePropertyChanged("PlayerName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> PointTotal {
+            get {
+                return this.PointTotalField;
+            }
+            set {
+                if ((this.PointTotalField.Equals(value) != true)) {
+                    this.PointTotalField = value;
+                    this.RaisePropertyChanged("PointTotal");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> SizeModifier {
+            get {
+                return this.SizeModifierField;
+            }
+            set {
+                if ((this.SizeModifierField.Equals(value) != true)) {
+                    this.SizeModifierField = value;
+                    this.RaisePropertyChanged("SizeModifier");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Strenght {
+            get {
+                return this.StrenghtField;
+            }
+            set {
+                if ((this.StrenghtField.Equals(value) != true)) {
+                    this.StrenghtField = value;
+                    this.RaisePropertyChanged("Strenght");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> UnspendPoints {
+            get {
+                return this.UnspendPointsField;
+            }
+            set {
+                if ((this.UnspendPointsField.Equals(value) != true)) {
+                    this.UnspendPointsField = value;
+                    this.RaisePropertyChanged("UnspendPoints");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<double> Weight {
+            get {
+                return this.WeightField;
+            }
+            set {
+                if ((this.WeightField.Equals(value) != true)) {
+                    this.WeightField = value;
+                    this.RaisePropertyChanged("Weight");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> WillPower {
+            get {
+                return this.WillPowerField;
+            }
+            set {
+                if ((this.WillPowerField.Equals(value) != true)) {
+                    this.WillPowerField = value;
+                    this.RaisePropertyChanged("WillPower");
                 }
             }
         }
@@ -429,7 +842,6 @@ namespace SWN.SWNServiceReference {
         private string StarStringField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        [XmlIgnore]
         private SWN.SWNServiceReference.StarSystems StarSystemsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -577,7 +989,6 @@ namespace SWN.SWNServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [XmlIgnore]
         public SWN.SWNServiceReference.StarSystems StarSystems {
             get {
                 return this.StarSystemsField;
@@ -916,7 +1327,7 @@ namespace SWN.SWNServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<SWN.SWNServiceReference.MajorMoons> MajorMoons1Field;
-
+        
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<SWN.SWNServiceReference.OuterMoonlets> OuterMoonlets1Field;
         
@@ -931,9 +1342,8 @@ namespace SWN.SWNServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StarIDField;
-
+        
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        [XmlIgnore]
         private SWN.SWNServiceReference.Stars StarsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1169,9 +1579,8 @@ namespace SWN.SWNServiceReference {
                 }
             }
         }
-
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [XmlIgnore]
         public SWN.SWNServiceReference.Stars Stars {
             get {
                 return this.StarsField;
@@ -1727,7 +2136,6 @@ namespace SWN.SWNServiceReference {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        [XmlIgnore]
         private SWN.SWNServiceReference.Planets PlanetsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1787,7 +2195,6 @@ namespace SWN.SWNServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [XmlIgnore]
         public SWN.SWNServiceReference.Planets Planets {
             get {
                 return this.PlanetsField;
@@ -1972,7 +2379,6 @@ namespace SWN.SWNServiceReference {
         private System.Nullable<int> ParentDBIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        [XmlIgnore]
         private SWN.SWNServiceReference.Planets PlanetsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -2145,7 +2551,6 @@ namespace SWN.SWNServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [XmlIgnore]
         public SWN.SWNServiceReference.Planets Planets {
             get {
                 return this.PlanetsField;
@@ -2704,7 +3109,6 @@ namespace SWN.SWNServiceReference {
         private int ParentDBIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        [XmlIgnore]
         private SWN.SWNServiceReference.Planets PlanetsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -2774,7 +3178,6 @@ namespace SWN.SWNServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        [XmlIgnore]
         public SWN.SWNServiceReference.Planets Planets {
             get {
                 return this.PlanetsField;
@@ -3047,6 +3450,12 @@ namespace SWN.SWNServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestOnlineUsersList", ReplyAction="SWNAdmin/SWNService/RequestOnlineUsersListResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<string>> RequestOnlineUsersListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/GetBlankCharacter", ReplyAction="SWNAdmin/SWNService/GetBlankCharacterResponse")]
+        SWN.SWNServiceReference.Character GetBlankCharacter(SWN.SWNServiceReference.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/GetBlankCharacter", ReplyAction="SWNAdmin/SWNService/GetBlankCharacterResponse")]
+        System.Threading.Tasks.Task<SWN.SWNServiceReference.Character> GetBlankCharacterAsync(SWN.SWNServiceReference.Client client);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -3141,6 +3550,14 @@ namespace SWN.SWNServiceReference {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<string>> RequestOnlineUsersListAsync() {
             return base.Channel.RequestOnlineUsersListAsync();
+        }
+        
+        public SWN.SWNServiceReference.Character GetBlankCharacter(SWN.SWNServiceReference.Client client) {
+            return base.Channel.GetBlankCharacter(client);
+        }
+        
+        public System.Threading.Tasks.Task<SWN.SWNServiceReference.Character> GetBlankCharacterAsync(SWN.SWNServiceReference.Client client) {
+            return base.Channel.GetBlankCharacterAsync(client);
         }
     }
 }

@@ -4,35 +4,35 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b1f7340b848145aa8f951951f6176c5e" Name="Diagram1" ZoomLevel="80">
-        <EntityTypeShape EntityType="Db1Model.Advantages" Width="1.5" PointX="9.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db1Model.Characters" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db1Model.Disadvantages" Width="1.5" PointX="9.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db1Model.InnerMoonlets" Width="1.5" PointX="7.5" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db1Model.MajorMoons" Width="1.5" PointX="7.5" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db1Model.OuterMoonlets" Width="1.5" PointX="7.5" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db1Model.Planets" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db1Model.PName" Width="1.5" PointX="2.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db1Model.Registration" Width="1.5" PointX="4.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db1Model.SatelliteBaseTypes" Width="1.5" PointX="9.75" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db1Model.Stars" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Db1Model.StarSystems" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+      <Diagram DiagramId="b1f7340b848145aa8f951951f6176c5e" Name="Diagram1" ZoomLevel="67">
+        <EntityTypeShape EntityType="Db1Model.Advantages" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db1Model.Disadvantages" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db1Model.InnerMoonlets" Width="1.5" PointX="7.5" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db1Model.MajorMoons" Width="1.5" PointX="7.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db1Model.OuterMoonlets" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db1Model.Planets" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db1Model.PName" Width="1.5" PointX="9.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db1Model.Registration" Width="1.5" PointX="11.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db1Model.SatelliteBaseTypes" Width="1.5" PointX="11.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db1Model.Stars" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Db1Model.StarSystems" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
         <AssociationConnector Association="Db1Model.FK_InnerMoonlets_Planets" ManuallyRouted="false" />
         <AssociationConnector Association="Db1Model.FK_MajorMoons_Planets" ManuallyRouted="false" />
         <AssociationConnector Association="Db1Model.FK_OuterMoonlets_Planets" ManuallyRouted="false" />
         <AssociationConnector Association="Db1Model.FK_Planets_Stars" ManuallyRouted="false" />
         <AssociationConnector Association="Db1Model.FK_Stars_SystemID" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Db1Model.UDateTime" Width="1.5" PointX="12.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Db1Model.Attribute" Width="1.5" PointX="14.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Db1Model.Skills" Width="1.5" PointX="15.375" PointY="7.75" />
-        <EntityTypeShape EntityType="Db1Model.SkillSpecialization" Width="1.5" PointX="17.875" PointY="8.75" />
-        <EntityTypeShape EntityType="Db1Model.Requirements" Width="1.5" PointX="13.75" PointY="12.125" />
+        <EntityTypeShape EntityType="Db1Model.UDateTime" Width="1.5" PointX="11.75" PointY="11.75" />
+        <EntityTypeShape EntityType="Db1Model.Attribute" Width="1.5" PointX="13.75" PointY="5.75" />
+        <EntityTypeShape EntityType="Db1Model.Skills" Width="1.5" PointX="9.75" PointY="1" />
+        <EntityTypeShape EntityType="Db1Model.SkillSpecialization" Width="1.5" PointX="12" PointY="1.5" />
+        <EntityTypeShape EntityType="Db1Model.Requirements" Width="1.5" PointX="13.75" PointY="8.75" />
         <AssociationConnector Association="Db1Model.FK_SkillSpecialization_Skills" />
-        <EntityTypeShape EntityType="Db1Model.Modifier" Width="1.5" PointX="10.375" PointY="13.75" />
-        <EntityTypeShape EntityType="Db1Model.StatGroup" Width="1.5" PointX="12.375" PointY="15.75" />
-        <EntityTypeShape EntityType="Db1Model.StatSubGroup" Width="1.5" PointX="20" PointY="7.75" />
+        <EntityTypeShape EntityType="Db1Model.Modifier" Width="1.5" PointX="13.75" PointY="12.75" />
+        <EntityTypeShape EntityType="Db1Model.StatGroup" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="Db1Model.StatSubGroup" Width="1.5" PointX="3" PointY="0.875" />
         <AssociationConnector Association="Db1Model.FK_StatSubGroup_StatGroup1" />
-        <EntityTypeShape EntityType="Db1Model.UsedModifier" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Db1Model.UsedModifier" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Db1Model.Character" Width="1.5" PointX="9.75" PointY="14.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -37,6 +37,7 @@
                 <Button x:Name="btAdd" Content="Add" Margin="0,0,10,10" Click="btAdd_Click" Height="18" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>
                 <Button x:Name="btDelete" Content="Delete" HorizontalAlignment="Left" Margin="8,0,0,10" Width="75" Click="btDelete_Click" IsEnabled="False" Height="18" VerticalAlignment="Bottom"/>
                 <Button x:Name="btClear" Content="Clear" HorizontalAlignment="Left" Margin="430,15,0,0" VerticalAlignment="Top" Width="75" Click="btClear_Click"/>
+                <Button x:Name="btCopy" Content="Copy" HorizontalAlignment="Left" Margin="385,15,0,0" VerticalAlignment="Top" Width="40" Click="btCopy_Click"/>
             </Grid>
         </TabItem>
     </TabControl>

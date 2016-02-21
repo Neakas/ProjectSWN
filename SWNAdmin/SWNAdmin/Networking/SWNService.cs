@@ -125,6 +125,11 @@ namespace SWNAdmin
             }
         }
 
+        public Character GetBlankCharacter(Client client)
+        {
+            return Controller.CharacterController.GetBlankCharacter(client);
+        }
+
         public void SendMessage(Message m)
         {
             lock (syncObj)

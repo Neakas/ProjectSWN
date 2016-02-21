@@ -26,13 +26,13 @@ namespace SWN
             InitializeComponent();
         }
 
-        public void InitControl(SWNAdmin.Utility.Advantages LoadedAdvantage)
-        {
-            AdvantageId = LoadedAdvantage.Id;
-            lblAdvLabel.Content = LoadedAdvantage.Name;
-            tbDiscription.Text = LoadedAdvantage.Discription;
-            lblAdvPoints.Content = LoadedAdvantage.PointCost;
-        }
+        //public void InitControl(SWNAdmin.Utility.Advantages LoadedAdvantage)
+        //{
+        //    AdvantageId = LoadedAdvantage.Id;
+        //    lblAdvLabel.Content = LoadedAdvantage.Name;
+        //    tbDiscription.Text = LoadedAdvantage.Discription;
+        //    lblAdvPoints.Content = LoadedAdvantage.PointCost;
+        //}
 
     }
 }

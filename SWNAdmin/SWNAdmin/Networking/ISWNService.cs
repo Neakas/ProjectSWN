@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using SWNAdmin.Utility;
 
 namespace SWNAdmin
 {
@@ -21,5 +22,8 @@ namespace SWNAdmin
 
         [OperationContract]
         List<string> RequestOnlineUsersList();
+
+        [OperationContract]
+        Character GetBlankCharacter(Client client);
     }
 }

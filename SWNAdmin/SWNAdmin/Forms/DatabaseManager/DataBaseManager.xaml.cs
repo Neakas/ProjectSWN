@@ -78,7 +78,7 @@ namespace SWNAdmin.Forms
                 if (SelectedItem == "Characters")
                 {
                     var context = new Utility.Db1Entities();
-                    var query = from c in context.Characters select c;
+                    var query = from c in context.Character select c;
                     var advlist = query.ToList();
                     dgMain.ItemsSource = advlist;
                 }

@@ -27,5 +27,8 @@ namespace SWNAdmin.Utility
         public bool isMundane { get; set; }
         public string Limitation { get; set; }
         public Nullable<bool> RequirementSet { get; set; }
+        public Nullable<bool> hasLevels { get; set; }
+        public Nullable<bool> isCreationLocked { get; set; }
+        public string Reference { get; set; }
     }
 }
