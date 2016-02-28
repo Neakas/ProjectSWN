@@ -112,7 +112,7 @@ namespace SWN
                 XmlHandler.SetXmlValue(SettingHandler.GrabSettingFile(), "FirstLoad", "false");
                 XmlHandler.SetXmlValue(SettingHandler.GrabSettingFile(), "PicFilePath", picDir);
                 XmlHandler.SetXmlValue(SettingHandler.GrabSettingFile(), "DataFilePath", fileDir);
-                XmlHandler.SetXmlValue(SettingHandler.GrabSettingFile(), "IPPort", "localhost:8001");
+                XmlHandler.SetXmlValue(SettingHandler.GrabSettingFile(), "IPPort", GetIPPort());
             }
         }
 

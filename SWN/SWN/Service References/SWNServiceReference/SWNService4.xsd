@@ -29,6 +29,97 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Character" nillable="true" type="tns:Character" />
+  <xs:complexType name="ArrayOfAdvantages">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Advantages" nillable="true" type="tns:Advantages" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAdvantages" nillable="true" type="tns:ArrayOfAdvantages" />
+  <xs:complexType name="Advantages">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Discription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Limitation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PointCost" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Reference" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RequirementSet" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="hasLevels" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="isCreationLocked" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="isEnabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="isExotic" type="xs:boolean" />
+      <xs:element minOccurs="0" name="isMental" type="xs:boolean" />
+      <xs:element minOccurs="0" name="isMundane" type="xs:boolean" />
+      <xs:element minOccurs="0" name="isPhysical" type="xs:boolean" />
+      <xs:element minOccurs="0" name="isSocial" type="xs:boolean" />
+      <xs:element minOccurs="0" name="isSuperNatural" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Advantages" nillable="true" type="tns:Advantages" />
+  <xs:complexType name="ArrayOfDisadvantages">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Disadvantages" nillable="true" type="tns:Disadvantages" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDisadvantages" nillable="true" type="tns:ArrayOfDisadvantages" />
+  <xs:complexType name="Disadvantages">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Discription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PointCost" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="isEnabled" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Disadvantages" nillable="true" type="tns:Disadvantages" />
+  <xs:complexType name="ArrayOfSkills">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Skills" nillable="true" type="tns:Skills" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSkills" nillable="true" type="tns:ArrayOfSkills" />
+  <xs:complexType name="Skills">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ControllingAttribute" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Defaults" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DifficultyLevel" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Modifiers" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Prerequisites" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RequirementSet" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SkillName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SkillSpecialization" nillable="true" type="tns:ArrayOfSkillSpecialization" />
+      <xs:element minOccurs="0" name="isEnabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="notes" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="points" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="reference" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="specialization" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="tech_level" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Skills" nillable="true" type="tns:Skills" />
+  <xs:complexType name="ArrayOfSkillSpecialization">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SkillSpecialization" nillable="true" type="tns:SkillSpecialization" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSkillSpecialization" nillable="true" type="tns:ArrayOfSkillSpecialization" />
+  <xs:complexType name="SkillSpecialization">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Default" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Discription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IsOptional" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Modifiers" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Prerequisites" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RequirementSet" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SkillId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Skills" nillable="true" type="tns:Skills" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SkillSpecialization" nillable="true" type="tns:SkillSpecialization" />
   <xs:complexType name="StarSystems">
     <xs:sequence>
       <xs:element minOccurs="0" name="Id" type="xs:int" />

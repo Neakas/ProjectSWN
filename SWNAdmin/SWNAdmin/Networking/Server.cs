@@ -76,51 +76,5 @@ namespace SWNAdmin
             }
             stopFlag.Set();
         }
-
-        //Cleanup Check if Cleanup needed
-        //public void CloseOrAbortServiceChannel(ICommunicationObject communicationObject)
-        //{
-        //    bool isClosed = false;
-
-        //    if (communicationObject == null || communicationObject.State == CommunicationState.Closed)
-        //    {
-        //        return;
-        //    }
-
-        //    try
-        //    {
-        //        if (communicationObject.State != CommunicationState.Faulted)
-        //        {
-        //            communicationObject.Close();
-        //            isClosed = true;
-        //        }
-        //    }
-        //    catch (CommunicationException)
-        //    {
-        //        // Catch this expected exception so it is not propagated further.
-        //        // Perhaps write this exception out to log file for gathering statistics...
-        //    }
-        //    catch (TimeoutException)
-        //    {
-        //        // Catch this expected exception so it is not propagated further.
-        //        // Perhaps write this exception out to log file for gathering statistics...
-        //    }
-        //    catch (Exception)
-        //    {
-        //        // An unexpected exception that we don't know how to handle.
-        //        // Perhaps write this exception out to log file for support purposes...
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        // If State was Faulted or any exception occurred while doing the Close(), then do an Abort()
-        //        if (!isClosed)
-        //        {
-        //            AbortServiceChannel(communicationObject);
-        //        }
-        //    }
-        //}
-
-        //private static void AbortServiceChannel(ICommunicationObject communicationObject)
     }
 }

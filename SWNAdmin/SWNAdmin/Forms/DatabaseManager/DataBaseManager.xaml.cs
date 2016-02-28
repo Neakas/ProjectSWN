@@ -186,5 +186,11 @@ namespace SWNAdmin.Forms
             ManageModifiers mmods = new ManageModifiers();
             mmods.ShowDialog();
         }
+
+        private void MenuManageAlienRace_Click(object sender, RoutedEventArgs e)
+        {
+            ManageAlienRaces mar = new ManageAlienRaces();
+            mar.ShowDialog();
+        }
     }
 }

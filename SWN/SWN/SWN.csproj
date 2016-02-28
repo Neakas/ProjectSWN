@@ -235,7 +235,16 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\SWNServiceReference\SWN.SWNServiceReference.Advantages.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SWNServiceReference\SWN.SWNServiceReference.Character.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SWNServiceReference\SWN.SWNServiceReference.Disadvantages.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SWNServiceReference\SWN.SWNServiceReference.Skills.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SWNServiceReference\SWNService.wsdl" />

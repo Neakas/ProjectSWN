@@ -155,6 +155,9 @@
     <Compile Include="Forms\DatabaseManager\DataBaseManager.xaml.cs">
       <DependentUpon>DataBaseManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ManageAlienRaces.xaml.cs">
+      <DependentUpon>ManageAlienRaces.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SystemGeneration.xaml.cs">
       <DependentUpon>SystemGeneration.xaml</DependentUpon>
     </Compile>
@@ -314,6 +317,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\DatabaseManager\DataBaseManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\ManageAlienRaces.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -26,7 +26,6 @@ namespace SWNAdmin
         public bool StopFlag = false;
         public static MainWindow CurrentInstance;
         public static Server ServiceServer;
-        //TODOLOW User gets not Signed of of the Online-User Listbox, when disconnecting
        
 
         public MainWindow()
@@ -61,7 +60,15 @@ namespace SWNAdmin
             {
                 Application.Current.Dispatcher.BeginInvoke((Action)delegate ()
                 {
-                    lbUserOnline.Items.Remove(User);
+                    ListBoxItem delitem = new ListBoxItem();
+                    foreach (ListBoxItem item in lbUserOnline.Items)
+                    {
+                        if (item.Content.ToString() == User)
+                        {
+                            delitem = item;
+                        }
+                    }
+                    lbUserOnline.Items.Remove(delitem);
                 });
             }
         }

@@ -40,7 +40,7 @@ namespace SWN
         }
 
         private void btLogin_Click(object sender, RoutedEventArgs e)
-        { 
+        {
             proxy = null;
             errormessage.Text = "";
             ProcessUITasks();

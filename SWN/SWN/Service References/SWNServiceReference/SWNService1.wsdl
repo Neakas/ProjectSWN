@@ -62,6 +62,33 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RequestAdvantages">
+      <soap12:operation soapAction="SWNAdmin/SWNService/RequestAdvantages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestDisadvantages">
+      <soap12:operation soapAction="SWNAdmin/SWNService/RequestDisadvantages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestSkills">
+      <soap12:operation soapAction="SWNAdmin/SWNService/RequestSkills" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="UserJoin">
       <soap12:operation soapAction="SWNAdmin/SWNService/UserJoin" style="document" />
       <wsdl:output>
@@ -125,9 +152,9 @@
   </wsdl:binding>
   <wsdl:service name="SWNService">
     <wsdl:port name="MexEndpoint" binding="tns:MexEndpoint">
-      <soap12:address location="net.tcp://localhost:8001/SWNService" />
+      <soap12:address location="net.tcp://localhost:25565/SWNService" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8001/SWNService</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:25565/SWNService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

@@ -598,6 +598,874 @@ namespace SWN.SWNServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Advantages", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
+    [System.SerializableAttribute()]
+    public partial class Advantages : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DiscriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LimitationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> PointCostField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReferenceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<bool> RequirementSetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<bool> hasLevelsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<bool> isCreationLockedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isEnabledField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isExoticField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isMentalField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isMundaneField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isPhysicalField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isSocialField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isSuperNaturalField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Discription {
+            get {
+                return this.DiscriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DiscriptionField, value) != true)) {
+                    this.DiscriptionField = value;
+                    this.RaisePropertyChanged("Discription");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Limitation {
+            get {
+                return this.LimitationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LimitationField, value) != true)) {
+                    this.LimitationField = value;
+                    this.RaisePropertyChanged("Limitation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> PointCost {
+            get {
+                return this.PointCostField;
+            }
+            set {
+                if ((this.PointCostField.Equals(value) != true)) {
+                    this.PointCostField = value;
+                    this.RaisePropertyChanged("PointCost");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Reference {
+            get {
+                return this.ReferenceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReferenceField, value) != true)) {
+                    this.ReferenceField = value;
+                    this.RaisePropertyChanged("Reference");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<bool> RequirementSet {
+            get {
+                return this.RequirementSetField;
+            }
+            set {
+                if ((this.RequirementSetField.Equals(value) != true)) {
+                    this.RequirementSetField = value;
+                    this.RaisePropertyChanged("RequirementSet");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<bool> hasLevels {
+            get {
+                return this.hasLevelsField;
+            }
+            set {
+                if ((this.hasLevelsField.Equals(value) != true)) {
+                    this.hasLevelsField = value;
+                    this.RaisePropertyChanged("hasLevels");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<bool> isCreationLocked {
+            get {
+                return this.isCreationLockedField;
+            }
+            set {
+                if ((this.isCreationLockedField.Equals(value) != true)) {
+                    this.isCreationLockedField = value;
+                    this.RaisePropertyChanged("isCreationLocked");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isEnabled {
+            get {
+                return this.isEnabledField;
+            }
+            set {
+                if ((this.isEnabledField.Equals(value) != true)) {
+                    this.isEnabledField = value;
+                    this.RaisePropertyChanged("isEnabled");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isExotic {
+            get {
+                return this.isExoticField;
+            }
+            set {
+                if ((this.isExoticField.Equals(value) != true)) {
+                    this.isExoticField = value;
+                    this.RaisePropertyChanged("isExotic");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isMental {
+            get {
+                return this.isMentalField;
+            }
+            set {
+                if ((this.isMentalField.Equals(value) != true)) {
+                    this.isMentalField = value;
+                    this.RaisePropertyChanged("isMental");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isMundane {
+            get {
+                return this.isMundaneField;
+            }
+            set {
+                if ((this.isMundaneField.Equals(value) != true)) {
+                    this.isMundaneField = value;
+                    this.RaisePropertyChanged("isMundane");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isPhysical {
+            get {
+                return this.isPhysicalField;
+            }
+            set {
+                if ((this.isPhysicalField.Equals(value) != true)) {
+                    this.isPhysicalField = value;
+                    this.RaisePropertyChanged("isPhysical");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isSocial {
+            get {
+                return this.isSocialField;
+            }
+            set {
+                if ((this.isSocialField.Equals(value) != true)) {
+                    this.isSocialField = value;
+                    this.RaisePropertyChanged("isSocial");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isSuperNatural {
+            get {
+                return this.isSuperNaturalField;
+            }
+            set {
+                if ((this.isSuperNaturalField.Equals(value) != true)) {
+                    this.isSuperNaturalField = value;
+                    this.RaisePropertyChanged("isSuperNatural");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Disadvantages", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
+    [System.SerializableAttribute()]
+    public partial class Disadvantages : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DiscriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> PointCostField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isEnabledField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Discription {
+            get {
+                return this.DiscriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DiscriptionField, value) != true)) {
+                    this.DiscriptionField = value;
+                    this.RaisePropertyChanged("Discription");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> PointCost {
+            get {
+                return this.PointCostField;
+            }
+            set {
+                if ((this.PointCostField.Equals(value) != true)) {
+                    this.PointCostField = value;
+                    this.RaisePropertyChanged("PointCost");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isEnabled {
+            get {
+                return this.isEnabledField;
+            }
+            set {
+                if ((this.isEnabledField.Equals(value) != true)) {
+                    this.isEnabledField = value;
+                    this.RaisePropertyChanged("isEnabled");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Skills", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
+    [System.SerializableAttribute()]
+    public partial class Skills : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ControllingAttributeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DefaultsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DifficultyLevelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ModifiersField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PrerequisitesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<bool> RequirementSetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SkillNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<SWN.SWNServiceReference.SkillSpecialization> SkillSpecializationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isEnabledField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string notesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> pointsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string referenceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string specializationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string tech_levelField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ControllingAttribute {
+            get {
+                return this.ControllingAttributeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ControllingAttributeField, value) != true)) {
+                    this.ControllingAttributeField = value;
+                    this.RaisePropertyChanged("ControllingAttribute");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Defaults {
+            get {
+                return this.DefaultsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DefaultsField, value) != true)) {
+                    this.DefaultsField = value;
+                    this.RaisePropertyChanged("Defaults");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DifficultyLevel {
+            get {
+                return this.DifficultyLevelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DifficultyLevelField, value) != true)) {
+                    this.DifficultyLevelField = value;
+                    this.RaisePropertyChanged("DifficultyLevel");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Modifiers {
+            get {
+                return this.ModifiersField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ModifiersField, value) != true)) {
+                    this.ModifiersField = value;
+                    this.RaisePropertyChanged("Modifiers");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Prerequisites {
+            get {
+                return this.PrerequisitesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PrerequisitesField, value) != true)) {
+                    this.PrerequisitesField = value;
+                    this.RaisePropertyChanged("Prerequisites");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<bool> RequirementSet {
+            get {
+                return this.RequirementSetField;
+            }
+            set {
+                if ((this.RequirementSetField.Equals(value) != true)) {
+                    this.RequirementSetField = value;
+                    this.RaisePropertyChanged("RequirementSet");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SkillName {
+            get {
+                return this.SkillNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SkillNameField, value) != true)) {
+                    this.SkillNameField = value;
+                    this.RaisePropertyChanged("SkillName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<SWN.SWNServiceReference.SkillSpecialization> SkillSpecialization {
+            get {
+                return this.SkillSpecializationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SkillSpecializationField, value) != true)) {
+                    this.SkillSpecializationField = value;
+                    this.RaisePropertyChanged("SkillSpecialization");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isEnabled {
+            get {
+                return this.isEnabledField;
+            }
+            set {
+                if ((this.isEnabledField.Equals(value) != true)) {
+                    this.isEnabledField = value;
+                    this.RaisePropertyChanged("isEnabled");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string notes {
+            get {
+                return this.notesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.notesField, value) != true)) {
+                    this.notesField = value;
+                    this.RaisePropertyChanged("notes");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> points {
+            get {
+                return this.pointsField;
+            }
+            set {
+                if ((this.pointsField.Equals(value) != true)) {
+                    this.pointsField = value;
+                    this.RaisePropertyChanged("points");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string reference {
+            get {
+                return this.referenceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.referenceField, value) != true)) {
+                    this.referenceField = value;
+                    this.RaisePropertyChanged("reference");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string specialization {
+            get {
+                return this.specializationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.specializationField, value) != true)) {
+                    this.specializationField = value;
+                    this.RaisePropertyChanged("specialization");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string tech_level {
+            get {
+                return this.tech_levelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.tech_levelField, value) != true)) {
+                    this.tech_levelField = value;
+                    this.RaisePropertyChanged("tech_level");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SkillSpecialization", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
+    [System.SerializableAttribute()]
+    public partial class SkillSpecialization : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DefaultField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DiscriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<bool> IsOptionalField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ModifiersField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PrerequisitesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<bool> RequirementSetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> SkillIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SWN.SWNServiceReference.Skills SkillsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Default {
+            get {
+                return this.DefaultField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DefaultField, value) != true)) {
+                    this.DefaultField = value;
+                    this.RaisePropertyChanged("Default");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Discription {
+            get {
+                return this.DiscriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DiscriptionField, value) != true)) {
+                    this.DiscriptionField = value;
+                    this.RaisePropertyChanged("Discription");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<bool> IsOptional {
+            get {
+                return this.IsOptionalField;
+            }
+            set {
+                if ((this.IsOptionalField.Equals(value) != true)) {
+                    this.IsOptionalField = value;
+                    this.RaisePropertyChanged("IsOptional");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Modifiers {
+            get {
+                return this.ModifiersField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ModifiersField, value) != true)) {
+                    this.ModifiersField = value;
+                    this.RaisePropertyChanged("Modifiers");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Prerequisites {
+            get {
+                return this.PrerequisitesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PrerequisitesField, value) != true)) {
+                    this.PrerequisitesField = value;
+                    this.RaisePropertyChanged("Prerequisites");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<bool> RequirementSet {
+            get {
+                return this.RequirementSetField;
+            }
+            set {
+                if ((this.RequirementSetField.Equals(value) != true)) {
+                    this.RequirementSetField = value;
+                    this.RaisePropertyChanged("RequirementSet");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> SkillId {
+            get {
+                return this.SkillIdField;
+            }
+            set {
+                if ((this.SkillIdField.Equals(value) != true)) {
+                    this.SkillIdField = value;
+                    this.RaisePropertyChanged("SkillId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SWN.SWNServiceReference.Skills Skills {
+            get {
+                return this.SkillsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SkillsField, value) != true)) {
+                    this.SkillsField = value;
+                    this.RaisePropertyChanged("Skills");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="StarSystems", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
     [System.SerializableAttribute()]
     public partial class StarSystems : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -3456,6 +4324,24 @@ namespace SWN.SWNServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/GetBlankCharacter", ReplyAction="SWNAdmin/SWNService/GetBlankCharacterResponse")]
         System.Threading.Tasks.Task<SWN.SWNServiceReference.Character> GetBlankCharacterAsync(SWN.SWNServiceReference.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestAdvantages", ReplyAction="SWNAdmin/SWNService/RequestAdvantagesResponse")]
+        System.Collections.Generic.List<SWN.SWNServiceReference.Advantages> RequestAdvantages(SWN.SWNServiceReference.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestAdvantages", ReplyAction="SWNAdmin/SWNService/RequestAdvantagesResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Advantages>> RequestAdvantagesAsync(SWN.SWNServiceReference.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestDisadvantages", ReplyAction="SWNAdmin/SWNService/RequestDisadvantagesResponse")]
+        System.Collections.Generic.List<SWN.SWNServiceReference.Disadvantages> RequestDisadvantages(SWN.SWNServiceReference.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestDisadvantages", ReplyAction="SWNAdmin/SWNService/RequestDisadvantagesResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Disadvantages>> RequestDisadvantagesAsync(SWN.SWNServiceReference.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestSkills", ReplyAction="SWNAdmin/SWNService/RequestSkillsResponse")]
+        System.Collections.Generic.List<SWN.SWNServiceReference.Skills> RequestSkills(SWN.SWNServiceReference.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestSkills", ReplyAction="SWNAdmin/SWNService/RequestSkillsResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Skills>> RequestSkillsAsync(SWN.SWNServiceReference.Client client);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -3558,6 +4444,30 @@ namespace SWN.SWNServiceReference {
         
         public System.Threading.Tasks.Task<SWN.SWNServiceReference.Character> GetBlankCharacterAsync(SWN.SWNServiceReference.Client client) {
             return base.Channel.GetBlankCharacterAsync(client);
+        }
+        
+        public System.Collections.Generic.List<SWN.SWNServiceReference.Advantages> RequestAdvantages(SWN.SWNServiceReference.Client client) {
+            return base.Channel.RequestAdvantages(client);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Advantages>> RequestAdvantagesAsync(SWN.SWNServiceReference.Client client) {
+            return base.Channel.RequestAdvantagesAsync(client);
+        }
+        
+        public System.Collections.Generic.List<SWN.SWNServiceReference.Disadvantages> RequestDisadvantages(SWN.SWNServiceReference.Client client) {
+            return base.Channel.RequestDisadvantages(client);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Disadvantages>> RequestDisadvantagesAsync(SWN.SWNServiceReference.Client client) {
+            return base.Channel.RequestDisadvantagesAsync(client);
+        }
+        
+        public System.Collections.Generic.List<SWN.SWNServiceReference.Skills> RequestSkills(SWN.SWNServiceReference.Client client) {
+            return base.Channel.RequestSkills(client);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Skills>> RequestSkillsAsync(SWN.SWNServiceReference.Client client) {
+            return base.Channel.RequestSkillsAsync(client);
         }
     }
 }

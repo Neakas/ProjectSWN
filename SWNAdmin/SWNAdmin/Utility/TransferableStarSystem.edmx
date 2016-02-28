@@ -274,6 +274,7 @@
           <Property Name="Defaults" Type="nvarchar(max)" />
           <Property Name="Prerequisites" Type="nvarchar(max)" />
           <Property Name="RequirementSet" Type="bit" />
+          <Property Name="isEnabled" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SkillSpecialization">
           <Key>
@@ -902,6 +903,7 @@
           <Property Name="Prerequisites" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SkillSpecialization" Relationship="Db1Model.FK_SkillSpecialization_Skills" FromRole="Skills" ToRole="SkillSpecialization" />
           <Property Name="RequirementSet" Type="Boolean" />
+          <Property Name="isEnabled" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="SkillSpecialization">
           <Key>
@@ -1299,6 +1301,7 @@
           <EntitySetMapping Name="Skills">
             <EntityTypeMapping TypeName="Db1Model.Skills">
               <MappingFragment StoreEntitySet="Skills">
+                <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
                 <ScalarProperty Name="RequirementSet" ColumnName="RequirementSet" />
                 <ScalarProperty Name="Prerequisites" ColumnName="Prerequisites" />
                 <ScalarProperty Name="Defaults" ColumnName="Defaults" />

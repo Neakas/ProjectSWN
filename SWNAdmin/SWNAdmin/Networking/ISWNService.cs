@@ -25,5 +25,14 @@ namespace SWNAdmin
 
         [OperationContract]
         Character GetBlankCharacter(Client client);
+
+        [OperationContract]
+        List<Advantages> RequestAdvantages(Client client);
+
+        [OperationContract]
+        List<Disadvantages> RequestDisadvantages(Client client);
+
+        [OperationContract]
+        List<Skills> RequestSkills(Client client);
     }
 }

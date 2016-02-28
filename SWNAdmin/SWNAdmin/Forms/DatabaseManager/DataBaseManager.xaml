@@ -21,6 +21,7 @@
                 <MenuItem x:Name="MenuManagePrerequisites" Header="Prerequisites" HorizontalAlignment="Left" Width="140" Click="MenuManagePrerequisites_Click"/>
                 <MenuItem x:Name="MenuManageGroups" Header="Groups" HorizontalAlignment="Left" Width="140" Click="MenuManageGroups_Click" />
                 <MenuItem x:Name="MenuManageModifiers" Header="Modifiers" HorizontalAlignment="Left" Width="140" Click="MenuManageModifiers_Click" />
+                <MenuItem x:Name="MenuManageAlienRace" Header="Alien Races" HorizontalAlignment="Left" Width="140" Click="MenuManageAlienRace_Click" />
             </MenuItem>
         </Menu>
         <DataGrid x:Name="dgMain" Margin="108,27,10,0" VerticalAlignment="Top" Height="932">

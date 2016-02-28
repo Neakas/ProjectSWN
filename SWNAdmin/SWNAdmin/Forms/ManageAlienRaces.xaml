@@ -1,0 +1,20 @@
+﻿<Window x:Class="SWNAdmin.Forms.ManageAlienRaces"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SWNAdmin.Forms"
+        xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
+        themes:ThemeManager.Theme="ExpressionDark"
+        mc:Ignorable="d"
+        Title="ManageAlienRaces" Height="300" Width="300">
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource SWNDarkBackground}"/>
+    </Window.Background>
+    <Grid>
+        <TextBox x:Name="tbChemicalBasis" HorizontalAlignment="Left" Height="23" Margin="91,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbLandWater" HorizontalAlignment="Left" Height="23" Margin="91,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbHabitat" HorizontalAlignment="Left" Height="23" Margin="91,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btgenTest" Content="GenTest" HorizontalAlignment="Left" Margin="10,17,0,0" VerticalAlignment="Top" Width="54" Click="btgenTest_Click"/>
+    </Grid>
+</Window>

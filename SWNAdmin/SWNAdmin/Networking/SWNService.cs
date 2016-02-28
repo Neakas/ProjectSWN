@@ -130,6 +130,30 @@ namespace SWNAdmin
             return Controller.CharacterController.GetBlankCharacter(client);
         }
 
+        public List<Advantages> RequestAdvantages(Client client)
+        {
+            List<Advantages> Advlist = new List<Advantages>();
+            var context = new Db1Entities();
+            Advlist = (from c in context.Advantages where c.isEnabled == true select c).ToList();
+            return Advlist;
+        }
+
+        public List<Disadvantages> RequestDisadvantages(Client client)
+        {
+            List<Disadvantages> disAdvlist = new List<Disadvantages>();
+            var context = new Db1Entities();
+            disAdvlist = (from c in context.Disadvantages where c.isEnabled == true select c).ToList();
+            return disAdvlist;
+        }
+
+        public List<Skills> RequestSkills(Client client)
+        {
+            List<Skills> SkillList = new List<Skills>();
+            var context = new Db1Entities();
+            SkillList = (from c in context.Skills where c.isEnabled == true select c).ToList();
+            return SkillList;
+        }
+
         public void SendMessage(Message m)
         {
             lock (syncObj)
