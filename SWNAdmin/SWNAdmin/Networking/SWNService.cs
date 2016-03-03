@@ -146,6 +146,14 @@ namespace SWNAdmin
             return disAdvlist;
         }
 
+        public List<Requirements> RequestRequirements(Client client)
+        {
+            List<Requirements> reqlist = new List<Requirements>();
+            var context = new Db1Entities();
+            reqlist = (from c in context.Requirements select c).ToList();
+            return reqlist;
+        }
+
         public List<Skills> RequestSkills(Client client)
         {
             List<Skills> SkillList = new List<Skills>();
@@ -329,6 +337,28 @@ namespace SWNAdmin
         {
             return MainWindow.CurrentInstance.GetUsersOnline();
         }
+        
+        public bool SaveCharacter(Client client, Character c)
+        {
+            bool success = false;
+
+            using (var Context = new Db1Entities())
+            {
+                Context.Character.Add(c);
+                Context.SaveChanges();
+                success = true;
+            }
+            return success;
+        }
+
+        public List<Character> RequestSavedCharacters(Client c)
+        {
+            using (var Context = new Db1Entities())
+            { 
+                return (from q in Context.Character where q.PlayerName == c.UserName select q).ToList();
+            }
+        }
     }
+
     #endregion
 }

@@ -33,6 +33,15 @@ namespace SWNAdmin
         List<Disadvantages> RequestDisadvantages(Client client);
 
         [OperationContract]
+        List<Requirements> RequestRequirements(Client client);
+
+        [OperationContract]
         List<Skills> RequestSkills(Client client);
+
+        [OperationContract]
+        List<Character> RequestSavedCharacters(Client client);
+
+        [OperationContract]
+        bool SaveCharacter(Client client, Character c);
     }
 }
