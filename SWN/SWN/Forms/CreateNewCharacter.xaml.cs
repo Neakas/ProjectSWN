@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,11 @@ namespace SWN
         private double ModSpeed;
         private int BaseMove;
         private int ModMove;
+        private Dictionary<SWNServiceReference.Advantages, int> AdvantageLevels = new Dictionary<SWNServiceReference.Advantages, int>();
+
+        private List<SWNServiceReference.Advantages> AdvList = new List<SWNServiceReference.Advantages>();
+        private List<SWNServiceReference.Requirements> reqList = new List<SWNServiceReference.Requirements>();
+        private SWNServiceReference.Character character;
 
         public int points
         {
@@ -50,6 +56,7 @@ namespace SWN
 
         public CreateNewCharacter(SWNServiceReference.Character c)
         {
+            character = c;
             InitializeComponent();
             this.DataContext = c;
             Points = (int)c.PointTotal;
@@ -67,7 +74,7 @@ namespace SWN
             UpdateBaseFatiguePoints(Health);
             BaseSpeed = (double)c.BasicSpeed;
             UpdateBaseSpeed(Health, Dexterity);
-            BaseMove= (int)c.BasicMove;
+            BaseMove = (int)c.BasicMove;
             UpdateMovePoints(BaseSpeed);
             SetupToolTips();
             SetupTabControls();
@@ -209,8 +216,14 @@ namespace SWN
 
         private void SetupTabControls()
         {
-           lbAdvantages.ItemsSource = ServerConnection.SWNClient.RequestAdvantages(MainWindow.CurrentInstance.localclient);
-           lbAdvantages.DisplayMemberPath = "Name";
+            AdvList = ServerConnection.SWNClient.RequestAdvantages(MainWindow.CurrentInstance.localclient).OrderBy(x => x.Name).ToList();
+            reqList = ServerConnection.SWNClient.RequestRequirements((MainWindow.CurrentInstance.localclient));
+            //lbAdvantages.ItemsSource = AdvList;
+            foreach (SWNServiceReference.Advantages item in AdvList)
+            {
+                lbAdvantages.Items.Add(item);
+            }
+            lbAdvantages.DisplayMemberPath = "Name";
         }
         private void OnPointsChange()
         {
@@ -239,9 +252,18 @@ namespace SWN
         private void BuyStrenght()
         {
             //+-10 Points/Level
-            points = points - 10;
-            Strength += 1;
-            BaseHitpoints += 1;
+            if (CanBuy(10))
+            {
+                points = points - 10;
+                Strength += 1;
+                BaseHitpoints += 1;
+            }
+            else
+            {
+                iudStrenght.ValueChanged -= iudStrenght_ValueChanged;
+                iudStrenght.Value -= 1;
+                iudStrenght.ValueChanged += iudStrenght_ValueChanged;
+            }
         }
 
         private void SellStrenght()
@@ -273,8 +295,17 @@ namespace SWN
         private void BuyDexterity()
         {
             //+-20 Points/Level
-            points = points - 20;
-            Dexterity += 1;
+            if (CanBuy(20))
+            {
+                points = points - 20;
+                Dexterity += 1;
+            }
+            else
+            {
+                iudDexterity.ValueChanged -= iudDexterity_ValueChanged;
+                iudDexterity.Value -= 1;
+                iudDexterity.ValueChanged += iudDexterity_ValueChanged;
+            }
         }
 
         private void SellDexterity()
@@ -305,10 +336,19 @@ namespace SWN
         private void BuyIntelligence()
         {
             //+-20 Points/Level
-            points = points - 20;
-            Intelligence += 1;
-            BaseWill += 1;
-            BasePerception += 1;
+            if (CanBuy(20))
+            {
+                points = points - 20;
+                Intelligence += 1;
+                BaseWill += 1;
+                BasePerception += 1;
+            }
+            else
+            {
+                iudIntelligence.ValueChanged -= iudIntelligence_ValueChanged;
+                iudIntelligence.Value -= 1;
+                iudIntelligence.ValueChanged += iudIntelligence_ValueChanged;
+            }
         }
 
         private void SellIntelligence()
@@ -343,9 +383,18 @@ namespace SWN
         private void BuyHealth()
         {
             //+-10 Points/Level
-            points = points - 10;
-            Health += 1;
-            BaseFatiguePoints += 1;
+            if (CanBuy(10))
+            {
+                points = points - 10;
+                Health += 1;
+                BaseFatiguePoints += 1;
+            }
+            else
+            {
+                iudHealth.ValueChanged -= iudHealth_ValueChanged;
+                iudHealth.Value -= 1;
+                iudHealth.ValueChanged += iudHealth_ValueChanged;
+            }
         }
 
         private void SellHealth()
@@ -360,7 +409,7 @@ namespace SWN
 
         private void UpdateBasicLift(int newStrenght)
         {
-            tbBasicLift.Text = Math.Floor((Double)(((newStrenght * newStrenght) / 5)/ 2)).ToString();
+            tbBasicLift.Text = Math.Floor((Double)(((newStrenght * newStrenght) / 5) / 2)).ToString();
         }
 
 
@@ -375,7 +424,7 @@ namespace SWN
         }
 
         private void ResetModHitpoints()
-        { 
+        {
             int h = ModHitpoints;
             if (ModHitpoints > 0)
             {
@@ -431,8 +480,17 @@ namespace SWN
         private void BuyBonusHitpoints()
         {
             //+-2 Points per +- 1 Hp
-            points = points - 2;
-            ModHitpoints += 1;
+            if (CanBuy(2))
+            {
+                points = points - 2;
+                ModHitpoints += 1;
+            }
+            else
+            {
+                iudHitPoints.ValueChanged -= iudHitPoints_ValueChanged;
+                iudHitPoints.Value -= 1;
+                iudHitPoints.ValueChanged += iudHitPoints_ValueChanged;
+            }
         }
 
         private void SellBonusHitpoints()
@@ -505,8 +563,17 @@ namespace SWN
         private void BuyBonusWill()
         {
             //+-5 Points per +- 1 Will
-            points = points - 5;
-            ModWill += 1;
+            if (CanBuy(5))
+            {
+                points = points - 5;
+                ModWill += 1;
+            }
+            else
+            {
+                iudWillPower.ValueChanged -= iudWillPower_ValueChanged;
+                iudWillPower.Value -= 1;
+                iudWillPower.ValueChanged += iudWillPower_ValueChanged;
+            }
         }
 
         private void SellBonusWill()
@@ -579,8 +646,17 @@ namespace SWN
         private void BuyBonusPerception()
         {
             //+-5 Points per +- 1 Will
-            points = points - 5;
-            ModPerception += 1;
+            if (CanBuy(5))
+            {
+                points = points - 5;
+                ModPerception += 1;
+            }
+            else
+            {
+                iudPerception.ValueChanged -= iudPerception_ValueChanged;
+                iudPerception.Value -= 1;
+                iudPerception.ValueChanged += iudPerception_ValueChanged;
+            }
         }
 
         private void SellBonusPerception()
@@ -657,8 +733,17 @@ namespace SWN
         private void BuyBonusFatiguePoints()
         {
             //+-3 Points per +- 1 Hp
-            points = points - 3;
-            ModFatiguePoints += 1;
+            if (CanBuy(3))
+            {
+                points = points - 3;
+                ModFatiguePoints += 1;
+            }
+            else
+            {
+                iudFatiguePoints.ValueChanged -= iudFatiguePoints_ValueChanged;
+                iudFatiguePoints.Value -= 1;
+                iudFatiguePoints.ValueChanged += iudFatiguePoints_ValueChanged;
+            }
         }
 
         private void SellBonusFatiguePoints()
@@ -670,7 +755,7 @@ namespace SWN
 
         //Base Speed
 
-        private void UpdateBaseSpeed(int newHealth,int newDex)
+        private void UpdateBaseSpeed(int newHealth, int newDex)
         {
             BaseSpeed = ((newHealth + newDex) / 4.00);
             iudBasicSpeed.ValueChanged -= iudBasicSpeed_ValueChanged;
@@ -708,7 +793,7 @@ namespace SWN
                     if (((double)e.NewValue) - BaseSpeed > 2.00)
                     {
                         System.Windows.MessageBox.Show("Can not raise Speed by more then 2.00 Points from the Main Stat");
-                        UpdateBaseSpeed(Health,Dexterity);
+                        UpdateBaseSpeed(Health, Dexterity);
                     }
                     else
                     {
@@ -734,8 +819,17 @@ namespace SWN
         private void BuyBonusSpeed()
         {
             //+-5 Points per +- 0.25 Hp
-            points = points - 5;
-            ModSpeed += 0.25;
+            if (CanBuy(5))
+            {
+                points = points - 5;
+                ModSpeed += 0.25;
+            }
+            else
+            {
+                iudBasicSpeed.ValueChanged -= iudBasicSpeed_ValueChanged;
+                iudBasicSpeed.Value -= 1;
+                iudBasicSpeed.ValueChanged += iudBasicSpeed_ValueChanged;
+            }
         }
 
         private void SellBonusSpeed()
@@ -809,8 +903,17 @@ namespace SWN
         private void BuyBonusMove()
         {
             //+-5 Points per +- 1 Yard
-            points = points - 5;
-            ModMove += 1;
+            if (CanBuy(5))
+            {
+                points = points - 5;
+                ModMove += 1;
+            }
+            else
+            {
+                iudBasicMove.ValueChanged -= iudBasicMove_ValueChanged;
+                iudBasicMove.Value -= 1;
+                iudBasicMove.ValueChanged += iudBasicMove_ValueChanged;
+            }
         }
 
         private void SellBonusMove()
@@ -825,14 +928,68 @@ namespace SWN
             if (lbAdvantages.SelectedItem != null)
             {
                 PopulateAdvantageSideBar((SWNServiceReference.Advantages)lbAdvantages.SelectedItem);
+                if (tbAdvReq.Text == "")
+                {
+                    btBuyAdv.IsEnabled = true;
+                }
+                else
+                {
+                    btBuyAdv.IsEnabled = false;
+                    foreach (SWNServiceReference.Advantages item in lbBoughtAdvantages.Items)
+                    {
+                        if (item.Name == tbAdvReq.Text)
+                        {
+                            btBuyAdv.IsEnabled = true;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                btBuyAdv.IsEnabled = false;
             }
         }
 
         private void PopulateAdvantageSideBar(SWNServiceReference.Advantages item)
         {
             tbAdvType.Text = GetAdvType(item);
+            tbAdvReq.Text = GetRequirements(item);
+            tbAdvName.Text = item.Name;
             txtbAdvDiscription.Text = item.Discription;
             tbAdvPointCost.Text = item.PointCost.ToString();
+            if ((bool)item.hasLevels)
+            {
+                lbladvLevel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                lbladvLevel.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private string GetRequirements(SWNServiceReference.Advantages advitem)
+        {
+            foreach (SWNServiceReference.Requirements item in reqList)
+            {
+                if (item.SourceType == "Advantage")
+                {
+                    if (item.SourceItemID == advitem.Id)
+                    {
+                        return item.TargetName;
+                    }
+                }
+            }
+            return "";
+            //Requirements reqquery = (from c in context.Requirements where c.SourceItemID == Advantagequery.Id select c).FirstOrDefault();
+        }
+
+        private void ClearAdvantageSideBar()
+        {
+            tbAdvName.Text = "";
+            tbAdvReq.Text = "";
+            tbAdvType.Text = "";
+            txtbAdvDiscription.Text = "";
+            tbAdvPointCost.Text = "";
         }
 
         //private void PopulateDisadvantageSideBar(SWNServiceReference.Disadvantages item)
@@ -908,6 +1065,157 @@ namespace SWN
         private void lbDisadvantages_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void btBuyAdv_Click(object sender, RoutedEventArgs e)
+        {
+            BuyAdvantage();
+            ClearAdvantageSideBar();
+        }
+
+        private void btSellAdv_Click(object sender, RoutedEventArgs e)
+        {
+            SellAdvantage();
+
+            List<SWNServiceReference.Advantages> sortlist = new List<SWNServiceReference.Advantages>();
+            foreach (SWNServiceReference.Advantages item in lbAdvantages.Items)
+            {
+                sortlist.Add(item);
+            }
+            var newList = sortlist.OrderBy(x => x.Name).ToList();
+            lbAdvantages.Items.Clear();
+            foreach (SWNServiceReference.Advantages item in newList)
+            {
+                lbAdvantages.Items.Add(item);
+            }
+            ClearAdvantageSideBar();
+            tbboughtAdvLevels.Text = "";
+        }
+
+        private void BuyAdvantage()
+        {
+            SWNServiceReference.Advantages adv = lbAdvantages.SelectedItem as SWNServiceReference.Advantages;
+            if (CanBuy((int)adv.PointCost))
+            {
+                points -= (int)adv.PointCost;
+                if ((bool)adv.hasLevels)
+                {
+                    if (AdvantageLevels.ContainsKey(adv))
+                    {
+                        int value = AdvantageLevels[adv];
+                        AdvantageLevels[adv] = value + 1;
+                    }
+                    else
+                    {
+                        AdvantageLevels.Add(adv, 1);
+                        lbBoughtAdvantages.Items.Add(adv);
+                        lbBoughtAdvantages.DisplayMemberPath = "Name";
+                    }
+                }
+                else
+                {
+                    lbBoughtAdvantages.Items.Add(adv);
+                    lbBoughtAdvantages.DisplayMemberPath = "Name";
+                    lbAdvantages.Items.Remove(lbAdvantages.SelectedItem);
+                }
+                lbBoughtAdvantages.SelectedItem = null;
+            }
+        }
+
+        private void SellAdvantage()
+        {
+            SWNServiceReference.Advantages adv = lbBoughtAdvantages.SelectedItem as SWNServiceReference.Advantages;
+            points += (int)adv.PointCost;
+            if ((bool)adv.hasLevels)
+            {
+                if (AdvantageLevels.ContainsKey(adv))
+                {
+                    if (AdvantageLevels[adv] > 1)
+                    {
+                        AdvantageLevels[adv] -= 1;
+                    }
+                    else
+                    {
+                        AdvantageLevels.Remove(adv);
+                        lbBoughtAdvantages.Items.Remove(adv);
+                    }
+                }
+            }
+            else
+            {
+                lbAdvantages.Items.Add(adv);
+                lbAdvantages.Items.IsLiveSorting = true;
+                lbAdvantages.DisplayMemberPath = "Name";
+                lbBoughtAdvantages.Items.Remove(lbBoughtAdvantages.SelectedItem);
+            }
+            lbBoughtAdvantages.SelectedItem = null;
+            tbboughtAdvLevels.Text = "";
+        }
+
+        private bool CanBuy(int Cost)
+        {
+            bool canbuy = false;
+            if ((Points - Cost) >= 0)
+            {
+                canbuy = true;
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("That is to expensive!");
+            }
+            return canbuy;
+        }
+
+        private void lbBoughtAdvantages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lbBoughtAdvantages.SelectedItem != null)
+            {
+                PopulateAdvantageSideBar((SWNServiceReference.Advantages)lbBoughtAdvantages.SelectedItem);
+                btSellAdv.IsEnabled = true;
+                if ((bool)((SWNServiceReference.Advantages)lbBoughtAdvantages.SelectedItem).hasLevels)
+                {
+                    tbboughtAdvLevels.Text = AdvantageLevels[((SWNServiceReference.Advantages)lbBoughtAdvantages.SelectedItem)].ToString();
+                }
+                else
+                {
+                    tbboughtAdvLevels.Text = "";
+                }
+            }
+            else
+            {
+                btSellAdv.IsEnabled = false;
+            }
+        }
+
+        private void lbBoughtAdvantages_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (lbBoughtAdvantages.SelectedItem != null)
+            {
+                lbBoughtAdvantages.SelectedItem = lbBoughtAdvantages.SelectedItem;
+            }
+        }
+
+        private void btSaveCharacter_Click(object sender, RoutedEventArgs e)
+        {
+            character.Age = Int32.Parse(tbAge.Text);
+            character.BasicLift = Int32.Parse(tbBasicLift.Text);
+            character.BasicMove = iudBasicMove.Value;
+            character.BasicSpeed = iudBasicSpeed.Value;
+            character.Dexterity = iudDexterity.Value;
+            character.FatiguePoints = iudFatiguePoints.Value;
+            character.Health = iudHealth.Value;
+            character.Height = Double.Parse(tbHeight.Text);
+            character.HitPoints = iudHitPoints.Value;
+            character.Intelligence = iudIntelligence.Value;
+            character.Name = tbName.Text;
+            character.Perception = iudPerception.Value;
+            character.PlayerName = MainWindow.CurrentInstance.localclient.UserName;
+            character.PointTotal = Int32.Parse(tbPoints.Text);
+            character.Strenght = iudStrenght.Value;
+            character.Weight = Int32.Parse(tbWeight.Text);
+            character.WillPower = iudWillPower.Value;
+            ServerConnection.SWNClient.SaveCharacter(MainWindow.CurrentInstance.localclient, character);
+            System.Windows.MessageBox.Show("Saved!");
         }
     }
 }

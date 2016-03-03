@@ -27,8 +27,9 @@ namespace SWNAdmin.Forms
         {
             DataBaseManagerWindow = this;
             InitializeComponent();
-            LoadDgMain(null);
+            //LoadDgMain(null);
             LoadDatabaseSelector();
+            //LoadDgMain("Advantages");
         }
 
         private void MenuManageAdvantage_Click(object sender, RoutedEventArgs e)
@@ -58,6 +59,7 @@ namespace SWNAdmin.Forms
                 var query = from c in context.Advantages select c;
                 var advlist = query.ToList();
                 dgMain.ItemsSource = advlist;
+                //
             }
             else
             {
@@ -67,6 +69,7 @@ namespace SWNAdmin.Forms
                     var query = from c in context.Advantages select c;
                     var advlist = query.ToList();
                     dgMain.ItemsSource = advlist;
+                    dgMain.Columns[4].Visibility = Visibility.Collapsed;
                 }
                 if (SelectedItem == "Disadvantages")
                 {

@@ -32,7 +32,6 @@ namespace SWNAdmin
         private void StartService()
         {
             SWNServiceHost = new ServiceHost(typeof(SWNService));
-            CurrentServiceHost = SWNServiceHost;
             try
             {
                 SWNServiceHost.Open();
@@ -49,6 +48,7 @@ namespace SWNAdmin
                     MainWindow.CurrentInstance.UpdateServerStatus(true);
                 }
             }
+            CurrentServiceHost = SWNServiceHost;
             stopFlag.WaitOne();
             ServerThread.Join();
         }

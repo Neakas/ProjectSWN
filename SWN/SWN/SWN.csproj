@@ -109,6 +109,9 @@
     <Compile Include="Forms\CreateNewCharacter.xaml.cs">
       <DependentUpon>CreateNewCharacter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\LoadCharacter.xaml.cs">
+      <DependentUpon>LoadCharacter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
@@ -151,6 +154,10 @@
       <DependentUpon>StatLabel.xaml</DependentUpon>
     </Compile>
     <Page Include="Forms\CreateNewCharacter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\LoadCharacter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -242,6 +249,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SWNServiceReference\SWN.SWNServiceReference.Disadvantages.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SWNServiceReference\SWN.SWNServiceReference.Requirements.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SWNServiceReference\SWN.SWNServiceReference.Skills.datasource">

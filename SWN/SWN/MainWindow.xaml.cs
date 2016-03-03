@@ -305,6 +305,12 @@ namespace SWN
             CreateNewCharacter cnc = new CreateNewCharacter(myCharacter);
             cnc.ShowDialog();
         }
+
+        private void menuLoadCharacter_Click(object sender, RoutedEventArgs e)
+        {
+            LoadCharacter lc = new LoadCharacter();
+            lc.ShowDialog();
+        }
     }
 
 }

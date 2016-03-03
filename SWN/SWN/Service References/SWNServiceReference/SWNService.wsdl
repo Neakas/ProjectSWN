@@ -51,11 +51,29 @@
   <wsdl:message name="SWNService_RequestDisadvantages_OutputMessage">
     <wsdl:part name="parameters" element="tns:RequestDisadvantagesResponse" />
   </wsdl:message>
+  <wsdl:message name="SWNService_RequestRequirements_InputMessage">
+    <wsdl:part name="parameters" element="tns:RequestRequirements" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_RequestRequirements_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RequestRequirementsResponse" />
+  </wsdl:message>
   <wsdl:message name="SWNService_RequestSkills_InputMessage">
     <wsdl:part name="parameters" element="tns:RequestSkills" />
   </wsdl:message>
   <wsdl:message name="SWNService_RequestSkills_OutputMessage">
     <wsdl:part name="parameters" element="tns:RequestSkillsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_RequestSavedCharacters_InputMessage">
+    <wsdl:part name="parameters" element="tns:RequestSavedCharacters" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_RequestSavedCharacters_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RequestSavedCharactersResponse" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_SaveCharacter_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveCharacter" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_SaveCharacter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveCharacterResponse" />
   </wsdl:message>
   <wsdl:message name="SWNService_UserJoin_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:UserJoin" />
@@ -116,9 +134,21 @@
       <wsdl:input wsaw:Action="SWNAdmin/SWNService/RequestDisadvantages" message="tns:SWNService_RequestDisadvantages_InputMessage" />
       <wsdl:output wsaw:Action="SWNAdmin/SWNService/RequestDisadvantagesResponse" message="tns:SWNService_RequestDisadvantages_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RequestRequirements">
+      <wsdl:input wsaw:Action="SWNAdmin/SWNService/RequestRequirements" message="tns:SWNService_RequestRequirements_InputMessage" />
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/RequestRequirementsResponse" message="tns:SWNService_RequestRequirements_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RequestSkills">
       <wsdl:input wsaw:Action="SWNAdmin/SWNService/RequestSkills" message="tns:SWNService_RequestSkills_InputMessage" />
       <wsdl:output wsaw:Action="SWNAdmin/SWNService/RequestSkillsResponse" message="tns:SWNService_RequestSkills_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RequestSavedCharacters">
+      <wsdl:input wsaw:Action="SWNAdmin/SWNService/RequestSavedCharacters" message="tns:SWNService_RequestSavedCharacters_InputMessage" />
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/RequestSavedCharactersResponse" message="tns:SWNService_RequestSavedCharacters_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SaveCharacter">
+      <wsdl:input wsaw:Action="SWNAdmin/SWNService/SaveCharacter" message="tns:SWNService_SaveCharacter_InputMessage" />
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/SaveCharacterResponse" message="tns:SWNService_SaveCharacter_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UserJoin">
       <wsdl:output wsaw:Action="SWNAdmin/SWNService/UserJoin" message="tns:SWNService_UserJoin_OutputCallbackMessage" />

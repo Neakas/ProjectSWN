@@ -80,8 +80,35 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RequestRequirements">
+      <soap12:operation soapAction="SWNAdmin/SWNService/RequestRequirements" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="RequestSkills">
       <soap12:operation soapAction="SWNAdmin/SWNService/RequestSkills" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestSavedCharacters">
+      <soap12:operation soapAction="SWNAdmin/SWNService/RequestSavedCharacters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveCharacter">
+      <soap12:operation soapAction="SWNAdmin/SWNService/SaveCharacter" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

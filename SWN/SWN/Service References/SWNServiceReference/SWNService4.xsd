@@ -72,6 +72,26 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Disadvantages" nillable="true" type="tns:Disadvantages" />
+  <xs:complexType name="ArrayOfRequirements">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Requirements" nillable="true" type="tns:Requirements" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRequirements" nillable="true" type="tns:ArrayOfRequirements" />
+  <xs:complexType name="Requirements">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Condition" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ConditionValue" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="SourceItemID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SourceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TargetName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TargetRequirementID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TargetType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Requirements" nillable="true" type="tns:Requirements" />
   <xs:complexType name="ArrayOfSkills">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Skills" nillable="true" type="tns:Skills" />
@@ -120,6 +140,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SkillSpecialization" nillable="true" type="tns:SkillSpecialization" />
+  <xs:complexType name="ArrayOfCharacter">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Character" nillable="true" type="tns:Character" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCharacter" nillable="true" type="tns:ArrayOfCharacter" />
   <xs:complexType name="StarSystems">
     <xs:sequence>
       <xs:element minOccurs="0" name="Id" type="xs:int" />

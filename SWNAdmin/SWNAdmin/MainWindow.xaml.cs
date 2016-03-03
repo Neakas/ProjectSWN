@@ -91,6 +91,7 @@ namespace SWNAdmin
                 {
                     lServerStatus.Content = "Running";
                     UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + " Server - Running");
+                    UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + " Server - Listening on Port: " + Server.CurrentServiceHost.Description.Endpoints[0].ListenUri.Port.ToString());
                     lServerStatus.Foreground = Brushes.Green;
                 });
             }
@@ -185,6 +186,7 @@ namespace SWNAdmin
             Application.Current.Dispatcher.BeginInvoke((Action)delegate ()
             {
                 this.tbConsole.Text += Msg + "\r\n";
+                this.tbConsole.ScrollToEnd();
             });
             return true;
         }

@@ -992,6 +992,179 @@ namespace SWN.SWNServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Requirements", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
+    [System.SerializableAttribute()]
+    public partial class Requirements : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ConditionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ConditionValueField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> SourceItemIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SourceNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SourceTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TargetNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> TargetRequirementIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TargetTypeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Condition {
+            get {
+                return this.ConditionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ConditionField, value) != true)) {
+                    this.ConditionField = value;
+                    this.RaisePropertyChanged("Condition");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ConditionValue {
+            get {
+                return this.ConditionValueField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ConditionValueField, value) != true)) {
+                    this.ConditionValueField = value;
+                    this.RaisePropertyChanged("ConditionValue");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> SourceItemID {
+            get {
+                return this.SourceItemIDField;
+            }
+            set {
+                if ((this.SourceItemIDField.Equals(value) != true)) {
+                    this.SourceItemIDField = value;
+                    this.RaisePropertyChanged("SourceItemID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SourceName {
+            get {
+                return this.SourceNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SourceNameField, value) != true)) {
+                    this.SourceNameField = value;
+                    this.RaisePropertyChanged("SourceName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SourceType {
+            get {
+                return this.SourceTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SourceTypeField, value) != true)) {
+                    this.SourceTypeField = value;
+                    this.RaisePropertyChanged("SourceType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TargetName {
+            get {
+                return this.TargetNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TargetNameField, value) != true)) {
+                    this.TargetNameField = value;
+                    this.RaisePropertyChanged("TargetName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> TargetRequirementID {
+            get {
+                return this.TargetRequirementIDField;
+            }
+            set {
+                if ((this.TargetRequirementIDField.Equals(value) != true)) {
+                    this.TargetRequirementIDField = value;
+                    this.RaisePropertyChanged("TargetRequirementID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TargetType {
+            get {
+                return this.TargetTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TargetTypeField, value) != true)) {
+                    this.TargetTypeField = value;
+                    this.RaisePropertyChanged("TargetType");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Skills", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
     [System.SerializableAttribute()]
     public partial class Skills : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -4337,11 +4510,29 @@ namespace SWN.SWNServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestDisadvantages", ReplyAction="SWNAdmin/SWNService/RequestDisadvantagesResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Disadvantages>> RequestDisadvantagesAsync(SWN.SWNServiceReference.Client client);
         
+        [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestRequirements", ReplyAction="SWNAdmin/SWNService/RequestRequirementsResponse")]
+        System.Collections.Generic.List<SWN.SWNServiceReference.Requirements> RequestRequirements(SWN.SWNServiceReference.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestRequirements", ReplyAction="SWNAdmin/SWNService/RequestRequirementsResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Requirements>> RequestRequirementsAsync(SWN.SWNServiceReference.Client client);
+        
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestSkills", ReplyAction="SWNAdmin/SWNService/RequestSkillsResponse")]
         System.Collections.Generic.List<SWN.SWNServiceReference.Skills> RequestSkills(SWN.SWNServiceReference.Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestSkills", ReplyAction="SWNAdmin/SWNService/RequestSkillsResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Skills>> RequestSkillsAsync(SWN.SWNServiceReference.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestSavedCharacters", ReplyAction="SWNAdmin/SWNService/RequestSavedCharactersResponse")]
+        System.Collections.Generic.List<SWN.SWNServiceReference.Character> RequestSavedCharacters(SWN.SWNServiceReference.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestSavedCharacters", ReplyAction="SWNAdmin/SWNService/RequestSavedCharactersResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Character>> RequestSavedCharactersAsync(SWN.SWNServiceReference.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/SaveCharacter", ReplyAction="SWNAdmin/SWNService/SaveCharacterResponse")]
+        bool SaveCharacter(SWN.SWNServiceReference.Client client, SWN.SWNServiceReference.Character c);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/SaveCharacter", ReplyAction="SWNAdmin/SWNService/SaveCharacterResponse")]
+        System.Threading.Tasks.Task<bool> SaveCharacterAsync(SWN.SWNServiceReference.Client client, SWN.SWNServiceReference.Character c);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -4462,12 +4653,36 @@ namespace SWN.SWNServiceReference {
             return base.Channel.RequestDisadvantagesAsync(client);
         }
         
+        public System.Collections.Generic.List<SWN.SWNServiceReference.Requirements> RequestRequirements(SWN.SWNServiceReference.Client client) {
+            return base.Channel.RequestRequirements(client);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Requirements>> RequestRequirementsAsync(SWN.SWNServiceReference.Client client) {
+            return base.Channel.RequestRequirementsAsync(client);
+        }
+        
         public System.Collections.Generic.List<SWN.SWNServiceReference.Skills> RequestSkills(SWN.SWNServiceReference.Client client) {
             return base.Channel.RequestSkills(client);
         }
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Skills>> RequestSkillsAsync(SWN.SWNServiceReference.Client client) {
             return base.Channel.RequestSkillsAsync(client);
+        }
+        
+        public System.Collections.Generic.List<SWN.SWNServiceReference.Character> RequestSavedCharacters(SWN.SWNServiceReference.Client client) {
+            return base.Channel.RequestSavedCharacters(client);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Character>> RequestSavedCharactersAsync(SWN.SWNServiceReference.Client client) {
+            return base.Channel.RequestSavedCharactersAsync(client);
+        }
+        
+        public bool SaveCharacter(SWN.SWNServiceReference.Client client, SWN.SWNServiceReference.Character c) {
+            return base.Channel.SaveCharacter(client, c);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SaveCharacterAsync(SWN.SWNServiceReference.Client client, SWN.SWNServiceReference.Character c) {
+            return base.Channel.SaveCharacterAsync(client, c);
         }
     }
 }
