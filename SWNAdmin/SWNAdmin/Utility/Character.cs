@@ -38,5 +38,6 @@ namespace SWNAdmin.Utility
         public Nullable<int> PersonalTechnologyLevel { get; set; }
         public Nullable<int> ParryValue { get; set; }
         public Nullable<int> FatiguePoints { get; set; }
+        public string Advantages { get; set; }
     }
 }

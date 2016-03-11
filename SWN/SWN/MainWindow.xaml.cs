@@ -51,7 +51,7 @@ namespace SWN
         {
             if (!this.Dispatcher.CheckAccess())
             {
-                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal,new FaultedInvoker(HandleProxy));
+                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new FaultedInvoker(HandleProxy));
                 return;
             }
             HandleProxy();
@@ -61,7 +61,7 @@ namespace SWN
         {
             if (!this.Dispatcher.CheckAccess())
             {
-                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal,new FaultedInvoker(HandleProxy));
+                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new FaultedInvoker(HandleProxy));
                 return;
             }
             HandleProxy();
@@ -71,7 +71,7 @@ namespace SWN
         {
             if (!this.Dispatcher.CheckAccess())
             {
-                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal,new FaultedInvoker(HandleProxy));
+                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new FaultedInvoker(HandleProxy));
                 return;
             }
             HandleProxy();
@@ -191,7 +191,7 @@ namespace SWN
                     proxy.SendMessage(m);
                     tbChatInput.Text = "";
                 }
-           }
+            }
         }
 
         public void UpdateChatWindow(string message, string username)
@@ -312,5 +312,4 @@ namespace SWN
             lc.ShowDialog();
         }
     }
-
 }

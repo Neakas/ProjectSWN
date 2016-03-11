@@ -47,5 +47,6 @@ namespace SWNAdmin.Utility
         public virtual DbSet<StatSubGroup> StatSubGroup { get; set; }
         public virtual DbSet<UsedModifier> UsedModifier { get; set; }
         public virtual DbSet<Character> Character { get; set; }
+        public virtual DbSet<Aliens> Aliens { get; set; }
     }
 }

@@ -9,6 +9,7 @@ using System.Windows;
 using System.IO;
 using System.Windows.Forms;
 using SWNAdmin;
+using System.ServiceModel.Channels;
 
 namespace SWNAdmin
 {
@@ -72,6 +73,7 @@ namespace SWNAdmin
                         Handshake = LoginSuccessful;
                         if (LoginSuccessful == 1 && RegSuccessful == -1)
                         {
+                            MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": New Connection Attempt from: " + getClientIpAddress(client));
                             MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": The User '" + client.UserName + "' logged in");
                             MainWindow.CurrentInstance.UpdateUserOnline(client.UserName, false);
                             foreach (Client key in clients.Keys)
@@ -123,6 +125,17 @@ namespace SWNAdmin
                     return;
                 }
             }
+        }
+
+        private string getClientIpAddress(Client c)
+        {
+            
+            string ip = "";
+            OperationContext context = OperationContext.Current;
+            MessageProperties prop = context.IncomingMessageProperties;
+            RemoteEndpointMessageProperty endpoint = prop[RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
+            ip = endpoint.Address;
+            return ip;
         }
 
         public Character GetBlankCharacter(Client client)

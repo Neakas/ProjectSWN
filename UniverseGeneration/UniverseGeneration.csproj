@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OtherGeneration\Alien.cs" />
+    <Compile Include="OtherGeneration\AlienSociety.cs" />
+    <Compile Include="OtherGeneration\Culture.cs" />
+    <Compile Include="OtherGeneration\Society.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Range Objects\cleanZone.cs" />
     <Compile Include="Range Objects\forbiddenZone.cs" />
@@ -72,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

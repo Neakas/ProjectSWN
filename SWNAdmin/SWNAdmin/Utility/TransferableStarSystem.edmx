@@ -26,6 +26,59 @@
           <Property Name="isCreationLocked" Type="bit" />
           <Property Name="Reference" Type="nchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="Aliens">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="HomePlanet" Type="nvarchar" MaxLength="50" />
+          <Property Name="chemicalBasis" Type="nvarchar" MaxLength="50" />
+          <Property Name="LandOrWater" Type="nvarchar" MaxLength="50" />
+          <Property Name="LandHabitat" Type="nvarchar" MaxLength="50" />
+          <Property Name="WaterHabitat" Type="nvarchar" MaxLength="50" />
+          <Property Name="TrophicDiet" Type="nvarchar" MaxLength="50" />
+          <Property Name="PrimaryLocomotion" Type="nvarchar" MaxLength="50" />
+          <Property Name="SecondaryLocomotion" Type="nvarchar" MaxLength="50" />
+          <Property Name="hasSecondaryLocomotuib" Type="bit" />
+          <Property Name="Gravity" Type="float" />
+          <Property Name="SizeClass" Type="nvarchar" MaxLength="50" />
+          <Property Name="Size" Type="float" />
+          <Property Name="Symmetry" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sides" Type="int" />
+          <Property Name="LimbSegments" Type="int" />
+          <Property Name="Tail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Manipulators" Type="int" />
+          <Property Name="Skeleton" Type="nvarchar" MaxLength="50" />
+          <Property Name="SkinClass" Type="nvarchar" MaxLength="50" />
+          <Property Name="Skin" Type="nvarchar" MaxLength="50" />
+          <Property Name="Breathing" Type="nvarchar" MaxLength="50" />
+          <Property Name="Temperatur" Type="nvarchar" MaxLength="50" />
+          <Property Name="Growth" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gestation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Strategy" Type="nvarchar" MaxLength="50" />
+          <Property Name="OffspringCount" Type="int" />
+          <Property Name="PrimarySense" Type="nvarchar" MaxLength="50" />
+          <Property Name="Vision" Type="nvarchar" MaxLength="50" />
+          <Property Name="Hearing" Type="nvarchar" MaxLength="50" />
+          <Property Name="Touch" Type="nvarchar" MaxLength="50" />
+          <Property Name="TasteSmell" Type="nvarchar" MaxLength="50" />
+          <Property Name="Intelligence" Type="nvarchar" MaxLength="50" />
+          <Property Name="IntelligenceValue" Type="int" />
+          <Property Name="MatingBehaviour" Type="nvarchar" MaxLength="50" />
+          <Property Name="SocialOrganization" Type="nvarchar" MaxLength="50" />
+          <Property Name="SocialGroupSize" Type="int" />
+          <Property Name="Concentration" Type="nvarchar" MaxLength="50" />
+          <Property Name="Curiosity" Type="nvarchar" MaxLength="50" />
+          <Property Name="Egoism" Type="nvarchar" MaxLength="50" />
+          <Property Name="Empathy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gegariousness" Type="nvarchar" MaxLength="50" />
+          <Property Name="Imagination" Type="nvarchar" MaxLength="50" />
+          <Property Name="Chauvinism" Type="nvarchar" MaxLength="50" />
+          <Property Name="Suspicion" Type="nvarchar" MaxLength="50" />
+          <Property Name="Playfulness" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Attribute">
           <Key>
             <PropertyRef Name="Id" />
@@ -62,6 +115,7 @@
           <Property Name="PersonalTechnologyLevel" Type="int" />
           <Property Name="ParryValue" Type="int" />
           <Property Name="FatiguePoints" Type="int" />
+          <Property Name="Advantages" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Disadvantages">
           <Key>
@@ -458,6 +512,7 @@
         </Association>
         <EntityContainer Name="Db1ModelStoreContainer">
           <EntitySet Name="Advantages" EntityType="Self.Advantages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Aliens" EntityType="Self.Aliens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Attribute" EntityType="Self.Attribute" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Character" EntityType="Self.Character" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disadvantages" EntityType="Self.Disadvantages" Schema="dbo" store:Type="Tables" />
@@ -867,6 +922,7 @@
           </AssociationSet>
           <EntitySet Name="UsedModifier" EntityType="Db1Model.UsedModifier" />
           <EntitySet Name="Character" EntityType="Db1Model.Character" />
+          <EntitySet Name="Aliens" EntityType="Db1Model.Aliens" />
         </EntityContainer>
         <EntityType Name="UDateTime">
           <Key>
@@ -1026,6 +1082,60 @@
           <Property Name="PersonalTechnologyLevel" Type="Int32" />
           <Property Name="ParryValue" Type="Int32" />
           <Property Name="FatiguePoints" Type="Int32" />
+          <Property Name="Advantages" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Aliens">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HomePlanet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="chemicalBasis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LandOrWater" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LandHabitat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WaterHabitat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TrophicDiet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PrimaryLocomotion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SecondaryLocomotion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hasSecondaryLocomotuib" Type="Boolean" />
+          <Property Name="Gravity" Type="Double" />
+          <Property Name="SizeClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="Double" />
+          <Property Name="Symmetry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sides" Type="Int32" />
+          <Property Name="LimbSegments" Type="Int32" />
+          <Property Name="Tail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Manipulators" Type="Int32" />
+          <Property Name="Skeleton" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SkinClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Skin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Breathing" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Temperatur" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Growth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gestation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Strategy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OffspringCount" Type="Int32" />
+          <Property Name="PrimarySense" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Vision" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Hearing" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Touch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TasteSmell" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Intelligence" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IntelligenceValue" Type="Int32" />
+          <Property Name="MatingBehaviour" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SocialOrganization" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SocialGroupSize" Type="Int32" />
+          <Property Name="Concentration" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Curiosity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Egoism" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Empathy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gegariousness" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Imagination" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Chauvinism" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Suspicion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Playfulness" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1394,6 +1504,7 @@
           <EntitySetMapping Name="Character">
             <EntityTypeMapping TypeName="Db1Model.Character">
               <MappingFragment StoreEntitySet="Character">
+                <ScalarProperty Name="Advantages" ColumnName="Advantages" />
                 <ScalarProperty Name="FatiguePoints" ColumnName="FatiguePoints" />
                 <ScalarProperty Name="ParryValue" ColumnName="ParryValue" />
                 <ScalarProperty Name="PersonalTechnologyLevel" ColumnName="PersonalTechnologyLevel" />
@@ -1416,6 +1527,60 @@
                 <ScalarProperty Name="PointTotal" ColumnName="PointTotal" />
                 <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
                 <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Aliens">
+            <EntityTypeMapping TypeName="Db1Model.Aliens">
+              <MappingFragment StoreEntitySet="Aliens">
+                <ScalarProperty Name="Playfulness" ColumnName="Playfulness" />
+                <ScalarProperty Name="Suspicion" ColumnName="Suspicion" />
+                <ScalarProperty Name="Chauvinism" ColumnName="Chauvinism" />
+                <ScalarProperty Name="Imagination" ColumnName="Imagination" />
+                <ScalarProperty Name="Gegariousness" ColumnName="Gegariousness" />
+                <ScalarProperty Name="Empathy" ColumnName="Empathy" />
+                <ScalarProperty Name="Egoism" ColumnName="Egoism" />
+                <ScalarProperty Name="Curiosity" ColumnName="Curiosity" />
+                <ScalarProperty Name="Concentration" ColumnName="Concentration" />
+                <ScalarProperty Name="SocialGroupSize" ColumnName="SocialGroupSize" />
+                <ScalarProperty Name="SocialOrganization" ColumnName="SocialOrganization" />
+                <ScalarProperty Name="MatingBehaviour" ColumnName="MatingBehaviour" />
+                <ScalarProperty Name="IntelligenceValue" ColumnName="IntelligenceValue" />
+                <ScalarProperty Name="Intelligence" ColumnName="Intelligence" />
+                <ScalarProperty Name="TasteSmell" ColumnName="TasteSmell" />
+                <ScalarProperty Name="Touch" ColumnName="Touch" />
+                <ScalarProperty Name="Hearing" ColumnName="Hearing" />
+                <ScalarProperty Name="Vision" ColumnName="Vision" />
+                <ScalarProperty Name="PrimarySense" ColumnName="PrimarySense" />
+                <ScalarProperty Name="OffspringCount" ColumnName="OffspringCount" />
+                <ScalarProperty Name="Strategy" ColumnName="Strategy" />
+                <ScalarProperty Name="Gestation" ColumnName="Gestation" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Growth" ColumnName="Growth" />
+                <ScalarProperty Name="Temperatur" ColumnName="Temperatur" />
+                <ScalarProperty Name="Breathing" ColumnName="Breathing" />
+                <ScalarProperty Name="Skin" ColumnName="Skin" />
+                <ScalarProperty Name="SkinClass" ColumnName="SkinClass" />
+                <ScalarProperty Name="Skeleton" ColumnName="Skeleton" />
+                <ScalarProperty Name="Manipulators" ColumnName="Manipulators" />
+                <ScalarProperty Name="Tail" ColumnName="Tail" />
+                <ScalarProperty Name="LimbSegments" ColumnName="LimbSegments" />
+                <ScalarProperty Name="Sides" ColumnName="Sides" />
+                <ScalarProperty Name="Symmetry" ColumnName="Symmetry" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="SizeClass" ColumnName="SizeClass" />
+                <ScalarProperty Name="Gravity" ColumnName="Gravity" />
+                <ScalarProperty Name="hasSecondaryLocomotuib" ColumnName="hasSecondaryLocomotuib" />
+                <ScalarProperty Name="SecondaryLocomotion" ColumnName="SecondaryLocomotion" />
+                <ScalarProperty Name="PrimaryLocomotion" ColumnName="PrimaryLocomotion" />
+                <ScalarProperty Name="TrophicDiet" ColumnName="TrophicDiet" />
+                <ScalarProperty Name="WaterHabitat" ColumnName="WaterHabitat" />
+                <ScalarProperty Name="LandHabitat" ColumnName="LandHabitat" />
+                <ScalarProperty Name="LandOrWater" ColumnName="LandOrWater" />
+                <ScalarProperty Name="chemicalBasis" ColumnName="chemicalBasis" />
+                <ScalarProperty Name="HomePlanet" ColumnName="HomePlanet" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

@@ -155,7 +155,7 @@
     <Compile Include="Forms\DatabaseManager\DataBaseManager.xaml.cs">
       <DependentUpon>DataBaseManager.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ManageAlienRaces.xaml.cs">
+    <Compile Include="Forms\DatabaseManager\ManageAlienRaces.xaml.cs">
       <DependentUpon>ManageAlienRaces.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\SystemGeneration.xaml.cs">
@@ -196,6 +196,9 @@
       <DependentUpon>ModifyStarSystem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utility\Advantages.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\Aliens.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\Attribute.cs">
@@ -320,7 +323,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Forms\ManageAlienRaces.xaml">
+    <Page Include="Forms\DatabaseManager\ManageAlienRaces.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
