@@ -62,5 +62,6 @@ namespace SWNAdmin.Utility
         public string Chauvinism { get; set; }
         public string Suspicion { get; set; }
         public string Playfulness { get; set; }
+        public byte[] Image { get; set; }
     }
 }

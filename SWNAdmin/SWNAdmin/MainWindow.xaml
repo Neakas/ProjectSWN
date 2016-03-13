@@ -25,6 +25,8 @@
             <MenuItem x:Name="menuUniverse" Header="Universe" VerticalAlignment="Top" Foreground="White">
                 <MenuItem x:Name="submenuTimeManager" Header="Time Manager" HorizontalAlignment="Left" Width="185" Click="submenuTimeManager_Click"/>
                 <MenuItem x:Name="subMenuSystemGeneration" Header="System Generation" HorizontalAlignment="Left" Width="143" Click="subMenuSystemGeneration_Click" Margin="0,0,-1,0"/>
+                <MenuItem x:Name="subMenuFactionManager" Header="Faction Manager" HorizontalAlignment="Left" Width="143" Click="subMenuFactionManager_Click" Margin="0,0,-1,0"/>
+                
             </MenuItem>
             <MenuItem x:Name="menuNetwork" Header="Network" VerticalAlignment="Top" Foreground="White">
                 <MenuItem x:Name="submenuTransferImage" Header="Transfer Image" HorizontalAlignment="Left" Width="125" Margin="0,0,-4,0" Click="submenuTransferImage_Click" IsEnabled="False"/>

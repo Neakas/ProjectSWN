@@ -276,5 +276,11 @@ namespace SWNAdmin
             TimeManager tm = new TimeManager();
             tm.Show();
         }
+
+        private void subMenuFactionManager_Click(object sender, RoutedEventArgs e)
+        {
+            FactionManager fm = new FactionManager();
+            fm.Show();
+        }
     }
 }

@@ -158,6 +158,12 @@
     <Compile Include="Forms\DatabaseManager\ManageAlienRaces.xaml.cs">
       <DependentUpon>ManageAlienRaces.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FactionManager\CreateFaction.xaml.cs">
+      <DependentUpon>CreateFaction.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FactionManager\FactionManager.xaml.cs">
+      <DependentUpon>FactionManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SystemGeneration.xaml.cs">
       <DependentUpon>SystemGeneration.xaml</DependentUpon>
     </Compile>
@@ -205,6 +211,15 @@
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\Character.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\FactionGoals.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\Factions.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\FactionTags.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\Modifier.cs">
@@ -324,6 +339,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\DatabaseManager\ManageAlienRaces.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\FactionManager\CreateFaction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\FactionManager\FactionManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

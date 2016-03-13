@@ -10,6 +10,7 @@ using System.IO;
 using System.Windows.Forms;
 using SWNAdmin;
 using System.ServiceModel.Channels;
+using System.Windows.Media.Imaging;
 
 namespace SWNAdmin
 {
@@ -198,46 +199,83 @@ namespace SWNAdmin
             }
         }
 
-        public void SendImage()
+        public void SendImage(byte[] ImageByteArray = null)
         {
                 Stream strm = null;
+            if (ImageByteArray == null)
+            {
                 try
-                {
-                    OpenFileDialog fileDialog = new OpenFileDialog();
-                    fileDialog.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif| All files(*.*)|*.*";
-                    fileDialog.Multiselect = false;
-
-                    System.Windows.Forms.DialogResult Result = fileDialog.ShowDialog();
-
-                    if (Result == System.Windows.Forms.DialogResult.OK)
                     {
-                        MainWindow.CurrentInstance.UpdateImageWindow(new Uri(fileDialog.FileName,UriKind.Absolute));
-                        strm = fileDialog.OpenFile();
+                        OpenFileDialog fileDialog = new OpenFileDialog();
+                        fileDialog.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif| All files(*.*)|*.*";
+                        fileDialog.Multiselect = false;
 
-                        if (strm != null)
+                        System.Windows.Forms.DialogResult Result = fileDialog.ShowDialog();
+
+                        if (Result == System.Windows.Forms.DialogResult.OK)
                         {
-                            byte[] buffer = new byte[(int)strm.Length];
+                            MainWindow.CurrentInstance.UpdateImageWindow(new Uri(fileDialog.FileName,UriKind.Absolute));
+                            strm = fileDialog.OpenFile();
 
-                            int i = strm.Read(buffer, 0, buffer.Length);
-
-                            if (i > 0)
+                            if (strm != null)
                             {
-                                FileMessage fMsg = new FileMessage();
-                                fMsg.FileName = fileDialog.SafeFileName;
-                                fMsg.Sender = "Dummy";
-                                fMsg.Data = buffer;
+                                byte[] buffer = new byte[(int)strm.Length];
 
-                                foreach (ISWNServiceCallback callback in clients.Values)
+                                int i = strm.Read(buffer, 0, buffer.Length);
+
+                                if (i > 0)
                                 {
-                                    callback.SendImage(fMsg);
+                                    FileMessage fMsg = new FileMessage();
+                                    fMsg.FileName = fileDialog.SafeFileName;
+                                    fMsg.Sender = "Dummy";
+                                    fMsg.Data = buffer;
+
+                                    foreach (ISWNServiceCallback callback in clients.Values)
+                                    {
+                                        callback.SendImage(fMsg);
+                                    }
                                 }
                             }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                    System.Windows.MessageBox.Show(ex.ToString());
+                    }
+                    finally
+                    {
+                        if (strm != null)
+                        {
+                            strm.Close();
+                        }
+                    }
+            }
+            else
+            {
+                try
+                {
+                  
+                    byte[] buffer = ImageByteArray;
+
+                    //int i = strm.Read(buffer, 0, buffer.Length);
+
+                    //if (i > 0)
+                    //{
+                        FileMessage fMsg = new FileMessage();
+                            UniverseGeneration.Dice dice = new UniverseGeneration.Dice();
+                        fMsg.FileName = "Image" + dice.rng(200000);
+                        fMsg.Sender = "Dummy";
+                        fMsg.Data = buffer;
+
+                        foreach (ISWNServiceCallback callback in clients.Values)
+                        {
+                            callback.SendImage(fMsg);
+                        }
+                    //}
                 }
                 catch (Exception ex)
                 {
-                System.Windows.MessageBox.Show(ex.ToString());
+                    System.Windows.MessageBox.Show(ex.ToString());
                 }
                 finally
                 {
@@ -246,6 +284,7 @@ namespace SWNAdmin
                         strm.Close();
                     }
                 }
+            }
         }
 
         public void SendFile()

@@ -193,7 +193,6 @@ namespace SWNAdmin.Forms
                 editAdv.Reference = tbReference.Text;
                 Context.Entry(editAdv).State = System.Data.Entity.EntityState.Modified;
                 Context.SaveChanges();
-                
             }
             btAddAdvantage.IsEnabled = true;
             btEditAdvantage.IsEnabled = false;

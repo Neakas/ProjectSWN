@@ -48,5 +48,8 @@ namespace SWNAdmin.Utility
         public virtual DbSet<UsedModifier> UsedModifier { get; set; }
         public virtual DbSet<Character> Character { get; set; }
         public virtual DbSet<Aliens> Aliens { get; set; }
+        public virtual DbSet<FactionGoals> FactionGoals { get; set; }
+        public virtual DbSet<Factions> Factions { get; set; }
+        public virtual DbSet<FactionTags> FactionTags { get; set; }
     }
 }

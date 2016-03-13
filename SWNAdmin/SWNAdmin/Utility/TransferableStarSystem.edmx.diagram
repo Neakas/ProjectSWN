@@ -34,6 +34,9 @@
         <EntityTypeShape EntityType="Db1Model.UsedModifier" Width="1.5" PointX="14.75" PointY="0.75" />
         <EntityTypeShape EntityType="Db1Model.Character" Width="1.5" PointX="9.75" PointY="14.75" />
         <EntityTypeShape EntityType="Db1Model.Aliens" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="Db1Model.FactionGoals" Width="1.5" PointX="16.375" PointY="3.75" />
+        <EntityTypeShape EntityType="Db1Model.Factions" Width="1.5" PointX="3.375" PointY="16.75" />
+        <EntityTypeShape EntityType="Db1Model.FactionTags" Width="1.5" PointX="16.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

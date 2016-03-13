@@ -23,6 +23,8 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using WPF.Themes;
 using System.Windows.Threading;
+using System.Diagnostics;
+using System.Threading;
 
 namespace SWN
 {
@@ -311,5 +313,62 @@ namespace SWN
             LoadCharacter lc = new LoadCharacter();
             lc.ShowDialog();
         }
+
+        private void submenuSectorViewer_Click(object sender, RoutedEventArgs e)
+        {
+            if (PrepareSystem())
+            {
+                try
+                {
+                    Process p1 = Process.Start(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\AstroSynthesis3\RunAsDate.exe");
+                    Thread.Sleep(500);
+                    System.Windows.Forms.SendKeys.SendWait("{ENTER}");
+                    Thread.Sleep(1000);
+                    System.Windows.Forms.SendKeys.SendWait("{ENTER}");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Could not Start System Viewer Process");
+                }
+            }
+        }
+
+        private bool PrepareSystem()
+        {
+            try
+            {
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Nbos\AstroSynthesis3\");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Could not Create Activation Folder");
+                return false;
+            }
+            try
+            {
+                string sitePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Nbos\AstroSynthesis3\site.dat";
+                File.WriteAllText(sitePath, "x8bPz9HPyYPLzcvNx9HKzcvOycbPyc3Kg8jMzMnRycmDy83LzMnRyMrHysfIxsfJzoPLx83J0czLg8vNy8vN0crNy87Jxs/Jzco");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Could not Create Activation File");
+                return false;
+            }
+
+            try
+            {
+                Microsoft.Win32.RegistryKey key;
+                key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("Software", false).OpenSubKey("NBOS Software", false).OpenSubKey("AstroSynthesis", false).OpenSubKey("3.0", true);
+                key.SetValue("site-key", "zcjHy9HKzIPLzcvNx9HKzcvOycbPyc3Kg8nKyM7RyciDy83LzMnRyMrHysfIxsfJzoPKy8fI0c/Ng8vNy8vN0crNy87Jxs/Jzco");
+                key.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Could not Set Registry Key");
+                return false;
+            }
+            return true;
+        }
+
     }
 }

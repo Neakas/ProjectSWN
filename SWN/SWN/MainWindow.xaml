@@ -27,7 +27,8 @@
                 <MenuItem x:Name="menuOpenCV" Header="Open CharacterViewer" HorizontalAlignment="Left" Width="215" Margin="0,0,-50,0" Click="MenuOpenCV_Click"/>
             </MenuItem>
             <MenuItem x:Name="menuTools" Header="Tools" Margin="0" VerticalAlignment="Top">
-                <MenuItem x:Name="submenuOptions" Header="Options" HorizontalAlignment="Left" Width="96" Click="submenuOptions_Click"/>
+                <MenuItem x:Name="submenuOptions" Header="Options" HorizontalAlignment="Left" Width="150" Click="submenuOptions_Click"/>
+                <MenuItem x:Name="submenuSectorViewer" Header="Sector Viewer" HorizontalAlignment="Left" Width="150" Click="submenuSectorViewer_Click"/>
             </MenuItem>
         </Menu>
         <Button x:Name="cbCodeTest" Content="CodeTest" HorizontalAlignment="Left" Margin="935,41,0,0" VerticalAlignment="Top" Width="75" Click="cbCodeTest_Click"/>

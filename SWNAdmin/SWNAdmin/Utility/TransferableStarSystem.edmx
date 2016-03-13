@@ -78,6 +78,7 @@
           <Property Name="Chauvinism" Type="nvarchar" MaxLength="50" />
           <Property Name="Suspicion" Type="nvarchar" MaxLength="50" />
           <Property Name="Playfulness" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Attribute">
           <Key>
@@ -126,6 +127,43 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PointCost" Type="int" />
           <Property Name="Discription" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="FactionGoals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FactionId" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Discription" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Factions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="HomePlanet" Type="nvarchar" MaxLength="50" />
+          <Property Name="Race" Type="nvarchar" MaxLength="50" />
+          <Property Name="Force" Type="int" />
+          <Property Name="Cunning" Type="int" />
+          <Property Name="Wealth" Type="int" />
+          <Property Name="CurrentHp" Type="int" />
+          <Property Name="MaxHp" Type="int" />
+          <Property Name="Income" Type="int" />
+          <Property Name="CurrectFacCreds" Type="int" />
+          <Property Name="Exp" Type="int" />
+          <Property Name="RelationShip" Type="int" />
+        </EntityType>
+        <EntityType Name="FactionTags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FactionId" Type="int" Nullable="false" />
+          <Property Name="TagName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Discription" Type="nvarchar(max)" />
+          <Property Name="Effect" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="InnerMoonlets">
           <Key>
@@ -516,6 +554,9 @@
           <EntitySet Name="Attribute" EntityType="Self.Attribute" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Character" EntityType="Self.Character" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disadvantages" EntityType="Self.Disadvantages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FactionGoals" EntityType="Self.FactionGoals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Factions" EntityType="Self.Factions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FactionTags" EntityType="Self.FactionTags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InnerMoonlets" EntityType="Self.InnerMoonlets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MajorMoons" EntityType="Self.MajorMoons" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Modifier" EntityType="Self.Modifier" Schema="dbo" store:Type="Tables" />
@@ -923,6 +964,9 @@
           <EntitySet Name="UsedModifier" EntityType="Db1Model.UsedModifier" />
           <EntitySet Name="Character" EntityType="Db1Model.Character" />
           <EntitySet Name="Aliens" EntityType="Db1Model.Aliens" />
+          <EntitySet Name="FactionGoals" EntityType="Db1Model.FactionGoals" />
+          <EntitySet Name="Factions" EntityType="Db1Model.Factions" />
+          <EntitySet Name="FactionTags" EntityType="Db1Model.FactionTags" />
         </EntityContainer>
         <EntityType Name="UDateTime">
           <Key>
@@ -1136,6 +1180,44 @@
           <Property Name="Chauvinism" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Suspicion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Playfulness" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="FactionGoals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FactionId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Discription" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Factions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HomePlanet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Race" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Force" Type="Int32" />
+          <Property Name="Cunning" Type="Int32" />
+          <Property Name="Wealth" Type="Int32" />
+          <Property Name="CurrentHp" Type="Int32" />
+          <Property Name="MaxHp" Type="Int32" />
+          <Property Name="Income" Type="Int32" />
+          <Property Name="CurrectFacCreds" Type="Int32" />
+          <Property Name="Exp" Type="Int32" />
+          <Property Name="RelationShip" Type="Int32" />
+        </EntityType>
+        <EntityType Name="FactionTags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FactionId" Type="Int32" Nullable="false" />
+          <Property Name="TagName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Effect" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1535,6 +1617,7 @@
           <EntitySetMapping Name="Aliens">
             <EntityTypeMapping TypeName="Db1Model.Aliens">
               <MappingFragment StoreEntitySet="Aliens">
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Playfulness" ColumnName="Playfulness" />
                 <ScalarProperty Name="Suspicion" ColumnName="Suspicion" />
                 <ScalarProperty Name="Chauvinism" ColumnName="Chauvinism" />
@@ -1582,6 +1665,46 @@
                 <ScalarProperty Name="chemicalBasis" ColumnName="chemicalBasis" />
                 <ScalarProperty Name="HomePlanet" ColumnName="HomePlanet" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FactionGoals">
+            <EntityTypeMapping TypeName="Db1Model.FactionGoals">
+              <MappingFragment StoreEntitySet="FactionGoals">
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FactionId" ColumnName="FactionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Factions">
+            <EntityTypeMapping TypeName="Db1Model.Factions">
+              <MappingFragment StoreEntitySet="Factions">
+                <ScalarProperty Name="RelationShip" ColumnName="RelationShip" />
+                <ScalarProperty Name="Exp" ColumnName="Exp" />
+                <ScalarProperty Name="CurrectFacCreds" ColumnName="CurrectFacCreds" />
+                <ScalarProperty Name="Income" ColumnName="Income" />
+                <ScalarProperty Name="MaxHp" ColumnName="MaxHp" />
+                <ScalarProperty Name="CurrentHp" ColumnName="CurrentHp" />
+                <ScalarProperty Name="Wealth" ColumnName="Wealth" />
+                <ScalarProperty Name="Cunning" ColumnName="Cunning" />
+                <ScalarProperty Name="Force" ColumnName="Force" />
+                <ScalarProperty Name="Race" ColumnName="Race" />
+                <ScalarProperty Name="HomePlanet" ColumnName="HomePlanet" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FactionTags">
+            <EntityTypeMapping TypeName="Db1Model.FactionTags">
+              <MappingFragment StoreEntitySet="FactionTags">
+                <ScalarProperty Name="Effect" ColumnName="Effect" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+                <ScalarProperty Name="FactionId" ColumnName="FactionId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
