@@ -25,6 +25,7 @@ namespace SWN
         public Registration()
         {
             InitializeComponent();
+            tbIPPort.Text = SettingHandler.GetIPPort();
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)

@@ -130,7 +130,6 @@ namespace SWNAdmin
 
         private string getClientIpAddress(Client c)
         {
-            
             string ip = "";
             OperationContext context = OperationContext.Current;
             MessageProperties prop = context.IncomingMessageProperties;

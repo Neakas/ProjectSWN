@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SWN"
         xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         themes:ThemeManager.Theme="ExpressionDark"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="Login" Height="542" Width="853">
     <Window.Background>

@@ -14,10 +14,9 @@ namespace SWNAdmin
 {
     public class Server
     {
-        SafeHandle handle = new SafeFileHandle(IntPtr.Zero, true);
-        public AutoResetEvent stopFlag = new AutoResetEvent(false);
+        public AutoResetEvent threadStopFlag = new AutoResetEvent(false);
         Thread ServerThread;
-        ServiceHost SWNServiceHost;
+        //ServiceHost SWNServiceHost;
         public static ServiceHost CurrentServiceHost;
 
         public Server()
@@ -31,10 +30,10 @@ namespace SWNAdmin
 
         private void StartService()
         {
-            SWNServiceHost = new ServiceHost(typeof(SWNService));
+            CurrentServiceHost = new ServiceHost(typeof(SWNService));
             try
             {
-                SWNServiceHost.Open();
+                CurrentServiceHost.Open();
             }
             catch (Exception e)
             {
@@ -43,24 +42,23 @@ namespace SWNAdmin
             }
             finally
             {
-                if (SWNServiceHost.State == CommunicationState.Opened)
+                if (CurrentServiceHost.State == CommunicationState.Opened)
                 {
                     MainWindow.CurrentInstance.UpdateServerStatus(true);
                 }
             }
-            CurrentServiceHost = SWNServiceHost;
-            stopFlag.WaitOne();
+            threadStopFlag.WaitOne();
             ServerThread.Join();
         }
 
         public void StopService()
         {
-            if (SWNServiceHost != null)
+            if (CurrentServiceHost != null)
             {
                 try
                 {
                     Thread.Sleep(1000);
-                    SWNServiceHost.Close();
+                    CurrentServiceHost.Close();
                 }
                 catch (Exception e)
                 {
@@ -68,13 +66,13 @@ namespace SWNAdmin
                 }
                 finally
                 {
-                    if (SWNServiceHost.State == CommunicationState.Closed)
+                    if (CurrentServiceHost.State == CommunicationState.Closed)
                     {
                         MainWindow.CurrentInstance.UpdateServerStatus(false);
                     }
                 }
             }
-            stopFlag.Set();
+            threadStopFlag.Set();
         }
     }
 }
