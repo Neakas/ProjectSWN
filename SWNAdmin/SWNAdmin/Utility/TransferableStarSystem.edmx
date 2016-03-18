@@ -128,6 +128,52 @@
           <Property Name="PointCost" Type="int" />
           <Property Name="Discription" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="encycloFactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EncyclopediaId" Type="int" />
+          <Property Name="FactionName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FactionDataId" Type="int" />
+          <Property Name="FactionDiscription" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Encyclopedia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="encycloPerson">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EncyclopediaID" Type="int" />
+          <Property Name="PersonName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PersonDiscription" Type="nvarchar(max)" />
+          <Property Name="PersonFactionId" Type="int" />
+          <Property Name="PersonFactionRank" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="encycloPlanets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EncyclopediaId" Type="int" />
+          <Property Name="PlanetName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PlanetDiscription" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="encycloRace">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EncyclopediaId" Type="int" />
+          <Property Name="RaceName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RaceDiscription" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="FactionGoals">
           <Key>
             <PropertyRef Name="Id" />
@@ -554,6 +600,11 @@
           <EntitySet Name="Attribute" EntityType="Self.Attribute" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Character" EntityType="Self.Character" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disadvantages" EntityType="Self.Disadvantages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="encycloFactions" EntityType="Self.encycloFactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Encyclopedia" EntityType="Self.Encyclopedia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="encycloPerson" EntityType="Self.encycloPerson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="encycloPlanets" EntityType="Self.encycloPlanets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="encycloRace" EntityType="Self.encycloRace" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FactionGoals" EntityType="Self.FactionGoals" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Factions" EntityType="Self.Factions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FactionTags" EntityType="Self.FactionTags" Schema="dbo" store:Type="Tables" />
@@ -967,6 +1018,11 @@
           <EntitySet Name="FactionGoals" EntityType="Db1Model.FactionGoals" />
           <EntitySet Name="Factions" EntityType="Db1Model.Factions" />
           <EntitySet Name="FactionTags" EntityType="Db1Model.FactionTags" />
+          <EntitySet Name="encycloFactions" EntityType="Db1Model.encycloFactions" />
+          <EntitySet Name="Encyclopedia" EntityType="Db1Model.Encyclopedia" />
+          <EntitySet Name="encycloPerson" EntityType="Db1Model.encycloPerson" />
+          <EntitySet Name="encycloPlanets" EntityType="Db1Model.encycloPlanets" />
+          <EntitySet Name="encycloRace" EntityType="Db1Model.encycloRace" />
         </EntityContainer>
         <EntityType Name="UDateTime">
           <Key>
@@ -1218,6 +1274,52 @@
           <Property Name="TagName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Effect" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="encycloFactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EncyclopediaId" Type="Int32" />
+          <Property Name="FactionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FactionDataId" Type="Int32" />
+          <Property Name="FactionDiscription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Encyclopedia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="encycloPerson">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EncyclopediaID" Type="Int32" />
+          <Property Name="PersonName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PersonDiscription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PersonFactionId" Type="Int32" />
+          <Property Name="PersonFactionRank" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="encycloPlanets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EncyclopediaId" Type="Int32" />
+          <Property Name="PlanetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PlanetDiscription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="encycloRace">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EncyclopediaId" Type="Int32" />
+          <Property Name="RaceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RaceDiscription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1705,6 +1807,57 @@
                 <ScalarProperty Name="Discription" ColumnName="Discription" />
                 <ScalarProperty Name="TagName" ColumnName="TagName" />
                 <ScalarProperty Name="FactionId" ColumnName="FactionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="encycloFactions">
+            <EntityTypeMapping TypeName="Db1Model.encycloFactions">
+              <MappingFragment StoreEntitySet="encycloFactions">
+                <ScalarProperty Name="FactionDiscription" ColumnName="FactionDiscription" />
+                <ScalarProperty Name="FactionDataId" ColumnName="FactionDataId" />
+                <ScalarProperty Name="FactionName" ColumnName="FactionName" />
+                <ScalarProperty Name="EncyclopediaId" ColumnName="EncyclopediaId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Encyclopedia">
+            <EntityTypeMapping TypeName="Db1Model.Encyclopedia">
+              <MappingFragment StoreEntitySet="Encyclopedia">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="encycloPerson">
+            <EntityTypeMapping TypeName="Db1Model.encycloPerson">
+              <MappingFragment StoreEntitySet="encycloPerson">
+                <ScalarProperty Name="PersonFactionRank" ColumnName="PersonFactionRank" />
+                <ScalarProperty Name="PersonFactionId" ColumnName="PersonFactionId" />
+                <ScalarProperty Name="PersonDiscription" ColumnName="PersonDiscription" />
+                <ScalarProperty Name="PersonName" ColumnName="PersonName" />
+                <ScalarProperty Name="EncyclopediaID" ColumnName="EncyclopediaID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="encycloPlanets">
+            <EntityTypeMapping TypeName="Db1Model.encycloPlanets">
+              <MappingFragment StoreEntitySet="encycloPlanets">
+                <ScalarProperty Name="PlanetDiscription" ColumnName="PlanetDiscription" />
+                <ScalarProperty Name="PlanetName" ColumnName="PlanetName" />
+                <ScalarProperty Name="EncyclopediaId" ColumnName="EncyclopediaId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="encycloRace">
+            <EntityTypeMapping TypeName="Db1Model.encycloRace">
+              <MappingFragment StoreEntitySet="encycloRace">
+                <ScalarProperty Name="RaceDiscription" ColumnName="RaceDiscription" />
+                <ScalarProperty Name="RaceName" ColumnName="RaceName" />
+                <ScalarProperty Name="EncyclopediaId" ColumnName="EncyclopediaId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

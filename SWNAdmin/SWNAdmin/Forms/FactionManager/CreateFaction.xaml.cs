@@ -113,7 +113,6 @@ namespace SWNAdmin
                 LoadBox.ItemsSource = (from c in Context.Factions select c).ToList();
                 LoadBox.DisplayMemberPath = "Name";
                 LoadBox.MouseDoubleClick += LoadboxSelectionChanged;
-
             }
             LoadWindow.ShowDialog();
         }

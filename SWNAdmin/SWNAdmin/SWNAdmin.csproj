@@ -158,6 +158,16 @@
     <Compile Include="Forms\DatabaseManager\ManageAlienRaces.xaml.cs">
       <DependentUpon>ManageAlienRaces.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\EncyclopediaManager\Interaction\Command.cs" />
+    <Compile Include="Forms\EncyclopediaManager\Interaction\EventCommand.cs" />
+    <Compile Include="Forms\EncyclopediaManager\MainEncyclopedia.xaml.cs">
+      <DependentUpon>MainEncyclopedia.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EncyclopediaManager\ValueConverters\BooleanToVisiblityConverter.cs" />
+    <Compile Include="Forms\EncyclopediaManager\ValueConverters\TreeNodeToImageConverter.cs" />
+    <Compile Include="Forms\EncyclopediaManager\ViewModels\Notifier.cs" />
+    <Compile Include="Forms\EncyclopediaManager\ViewModels\SettingsViewModel.cs" />
+    <Compile Include="Forms\EncyclopediaManager\ViewModels\TreeNodeViewModel.cs" />
     <Compile Include="Forms\FactionManager\CreateFaction.xaml.cs">
       <DependentUpon>CreateFaction.xaml</DependentUpon>
     </Compile>
@@ -213,6 +223,21 @@
     <Compile Include="Utility\Character.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utility\encycloFactions.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\Encyclopedia.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\encycloPerson.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\encycloPlanets.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\encycloRace.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="Utility\FactionGoals.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
@@ -222,6 +247,7 @@
     <Compile Include="Utility\FactionTags.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utility\Helper.cs" />
     <Compile Include="Utility\Modifier.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
@@ -342,6 +368,34 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\EncyclopediaManager\MainEncyclopedia.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\EncyclopediaManager\Resources\DataTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\EncyclopediaManager\Resources\DataTemplates\SettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\EncyclopediaManager\Resources\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\EncyclopediaManager\Resources\Styles\SearchBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\EncyclopediaManager\Resources\Styles\TreeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\EncyclopediaManager\Resources\ValueConverters.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Forms\FactionManager\CreateFaction.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -447,6 +501,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Forms\EncyclopediaManager\Resources\Images\Application.ico" />
+    <Resource Include="Forms\EncyclopediaManager\Resources\Images\Archive.png" />
+    <Resource Include="Forms\EncyclopediaManager\Resources\Images\Executable.png" />
+    <Resource Include="Forms\EncyclopediaManager\Resources\Images\Folder.png" />
+    <Resource Include="Forms\EncyclopediaManager\Resources\Images\Picture.png" />
+    <Resource Include="Forms\EncyclopediaManager\Resources\Images\Properties.png" />
+    <Resource Include="Forms\EncyclopediaManager\Resources\Images\Search.png" />
+    <Resource Include="Forms\EncyclopediaManager\Resources\Images\Text.png" />
     <Content Include="Utility\TransferableStarSystem.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>TransferableStarSystem.edmx</DependentUpon>
@@ -483,6 +545,9 @@
       <Project>{c4d2597a-6bf1-4035-9845-dfe103223595}</Project>
       <Name>UniverseGeneration</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Recources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -51,5 +51,10 @@ namespace SWNAdmin.Utility
         public virtual DbSet<FactionGoals> FactionGoals { get; set; }
         public virtual DbSet<Factions> Factions { get; set; }
         public virtual DbSet<FactionTags> FactionTags { get; set; }
+        public virtual DbSet<encycloFactions> encycloFactions { get; set; }
+        public virtual DbSet<Encyclopedia> Encyclopedia { get; set; }
+        public virtual DbSet<encycloPerson> encycloPerson { get; set; }
+        public virtual DbSet<encycloPlanets> encycloPlanets { get; set; }
+        public virtual DbSet<encycloRace> encycloRace { get; set; }
     }
 }

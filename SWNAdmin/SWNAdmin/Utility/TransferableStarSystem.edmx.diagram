@@ -37,6 +37,11 @@
         <EntityTypeShape EntityType="Db1Model.FactionGoals" Width="1.5" PointX="16.375" PointY="3.75" />
         <EntityTypeShape EntityType="Db1Model.Factions" Width="1.5" PointX="3.375" PointY="16.75" />
         <EntityTypeShape EntityType="Db1Model.FactionTags" Width="1.5" PointX="16.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Db1Model.encycloFactions" Width="1.5" PointX="16.375" PointY="9.75" />
+        <EntityTypeShape EntityType="Db1Model.Encyclopedia" Width="1.5" PointX="16.375" PointY="12.75" />
+        <EntityTypeShape EntityType="Db1Model.encycloPerson" Width="1.5" PointX="12.375" PointY="16.75" />
+        <EntityTypeShape EntityType="Db1Model.encycloPlanets" Width="1.5" PointX="14.375" PointY="16.75" />
+        <EntityTypeShape EntityType="Db1Model.encycloRace" Width="1.5" PointX="16.375" PointY="15.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

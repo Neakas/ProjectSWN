@@ -11,7 +11,7 @@
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
     </Window.Background>
-    
+
     <Grid x:Name="grMain">
         <Menu x:Name="menu" Height="24" VerticalAlignment="Top">
             <MenuItem x:Name="menuDatei" Header="Datei"/>
@@ -26,7 +26,7 @@
                 <MenuItem x:Name="submenuTimeManager" Header="Time Manager" HorizontalAlignment="Left" Width="185" Click="submenuTimeManager_Click"/>
                 <MenuItem x:Name="subMenuSystemGeneration" Header="System Generation" HorizontalAlignment="Left" Width="143" Click="subMenuSystemGeneration_Click" Margin="0,0,-1,0"/>
                 <MenuItem x:Name="subMenuFactionManager" Header="Faction Manager" HorizontalAlignment="Left" Width="143" Click="subMenuFactionManager_Click" Margin="0,0,-1,0"/>
-                
+                <MenuItem x:Name="subMenuEncyclopediaManger" Header="Encyclopedia Manager" HorizontalAlignment="Left" Width="186" Click="subMenuEncyclopediaManger_Click" Margin="0,0,-1,0"/>
             </MenuItem>
             <MenuItem x:Name="menuNetwork" Header="Network" VerticalAlignment="Top" Foreground="White">
                 <MenuItem x:Name="submenuTransferImage" Header="Transfer Image" HorizontalAlignment="Left" Width="125" Margin="0,0,-4,0" Click="submenuTransferImage_Click" IsEnabled="False"/>
@@ -52,7 +52,7 @@
             <Grid Name="ServerConsole" HorizontalAlignment="Left" Width="428" Height="208" VerticalAlignment="Top">
                 <Button x:Name="btServerStart" Content="Start" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top" Width="75" Click="btServerStart_Click"/>
                 <Button x:Name="btServerStop" Content="Stop" HorizontalAlignment="Left" Margin="11,77,0,0" VerticalAlignment="Top" Width="74" Click="btServerStop_Click"/>
-                <TextBox x:Name="tbConsole" Margin="144,10,0,0" TextWrapping="Wrap" Text="" IsEnabled="False" Background="Black" Foreground="Black" HorizontalAlignment="Left" Width="274" Height="188" VerticalAlignment="Top" />
+                <TextBox x:Name="tbConsole" Margin="144,10,0,0" TextWrapping="Wrap" Text="" IsEnabled="False" Background="Black" Foreground="Black" HorizontalAlignment="Left" Width="274" Height="188" VerticalAlignment="Top"/>
                 <Label x:Name="lServerStatus" Content="Shutdown" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Red" Visibility="Visible" Margin="85,34,0,0" Background="{x:Null}"/>
                 <Label x:Name="label" Content="Server" HorizontalAlignment="Left" Margin="11,10,0,0" VerticalAlignment="Top" Width="74" FontSize="16" Height="30"/>
                 <Label x:Name="label1" Content="Server Status:" HorizontalAlignment="Left" Margin="11,34,0,0" VerticalAlignment="Top"/>
@@ -65,5 +65,7 @@
             <Image x:Name="imgTest" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
         </Border>
 
+
     </Grid>
+
 </Window>

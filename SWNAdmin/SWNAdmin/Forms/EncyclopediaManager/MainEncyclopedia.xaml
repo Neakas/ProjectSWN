@@ -1,0 +1,29 @@
+﻿<Window x:Class="SWNAdmin.UI.MainEncyclopedia"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        themes:ThemeManager.Theme="ExpressionDark"
+        mc:Ignorable="d"
+        Title="MainEncyclopedia" Height="548" Width="872">
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
+    </Window.Background>
+    <Grid>
+        <Menu x:Name="menu" Height="25" VerticalAlignment="Top">
+            <MenuItem x:Name="menuFile" Header="File" Height="25" Margin="0" VerticalAlignment="Top">
+                <MenuItem x:Name="subMenuNewEncy" Header="New Encyclopedia" HorizontalAlignment="Left" Width="98" Click="subMenuNewEncy_Click"/>
+            </MenuItem>
+        </Menu>
+        <xctk:RichTextBox x:Name="rtbContent" Margin="222,30,10,33" >
+            <xctk:RichTextBoxFormatBarManager.FormatBar>
+                <xctk:RichTextBoxFormatBar></xctk:RichTextBoxFormatBar>
+            </xctk:RichTextBoxFormatBarManager.FormatBar>
+        </xctk:RichTextBox>
+        <ContentPresenter Content="{Binding}" Margin="0,25,647,10"/>
+        <Button x:Name="btSave" Content="Save" HorizontalAlignment="Left" Margin="779,489,0,0" VerticalAlignment="Top" Width="75" Click="btSave_Click" IsEnabled="False"/>
+
+    </Grid>
+</Window>

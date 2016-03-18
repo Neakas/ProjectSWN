@@ -17,6 +17,7 @@ using System.ServiceModel;
 using UniverseGeneration;
 using SWNAdmin.Forms;
 using System.Windows.Threading;
+using System.Windows.Media.Animation;
 
 namespace SWNAdmin
 {
@@ -26,7 +27,8 @@ namespace SWNAdmin
         public bool StopFlag = false;
         public static MainWindow CurrentInstance;
         public static Server ServiceServer;
-       
+        private Storyboard myStoryboard;
+
 
         public MainWindow()
         {
@@ -92,7 +94,20 @@ namespace SWNAdmin
                     lServerStatus.Content = "Running";
                     UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + " Server - Running");
                     UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + " Server - Listening on Port: " + Server.CurrentServiceHost.Description.Endpoints[0].ListenUri.Port.ToString());
-                    lServerStatus.Foreground = Brushes.Green;
+                    lServerStatus.Foreground = Brushes.LimeGreen;
+
+                    DoubleAnimation myDoubleAnimation = new DoubleAnimation();
+                    this.RegisterName(lServerStatus.Name, lServerStatus);
+                    myDoubleAnimation.From = 1.0;
+                    myDoubleAnimation.To = 0.0;
+                    myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
+                    myDoubleAnimation.AutoReverse = true;
+                    myDoubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
+                    myStoryboard = new Storyboard();
+                    myStoryboard.Children.Add(myDoubleAnimation);
+                    Storyboard.SetTargetName(myDoubleAnimation, lServerStatus.Name);
+                    Storyboard.SetTargetProperty(myDoubleAnimation, new PropertyPath(Rectangle.OpacityProperty));
+                    myStoryboard.Begin(this);
                 });
             }
             else
@@ -105,9 +120,17 @@ namespace SWNAdmin
                     SwitchServerState();
                     lbUserOnline.Items.Clear();
                     tbChatPane.Clear();
+                    RepeatBehavior rb = new RepeatBehavior(0);
+                    myStoryboard.RepeatBehavior = rb;
+                    myStoryboard.Begin(this);
                 });
             }
            
+        }
+
+        private void ServerLoaded(object sender, RoutedEventArgs e)
+        {
+            myStoryboard.Begin(this);
         }
 
         public List<string> GetUsersOnline()
@@ -281,6 +304,12 @@ namespace SWNAdmin
         {
             FactionManager fm = new FactionManager();
             fm.Show();
+        }
+
+        private void subMenuEncyclopediaManger_Click(object sender, RoutedEventArgs e)
+        {
+            UI.MainEncyclopedia enc = new UI.MainEncyclopedia();
+            enc.Show();
         }
     }
 }

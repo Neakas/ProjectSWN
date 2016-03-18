@@ -21,6 +21,7 @@ namespace SWN
     /// </summary>
     public partial class CreateNewCharacter : Window
     {
+        //ToDo: Finish Me: MewCharacter
         private int Points;
         private int Strength;
         private int Dexterity;
