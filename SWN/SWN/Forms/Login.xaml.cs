@@ -31,12 +31,16 @@ namespace SWN
         public SWNServiceClient proxy = null;
         public Client receiver = null;
         public Client localclient = null;
+        
+
 
         public Login()
         {
             CurrentLoginWindow = this;
             InitializeComponent();
             tbIPPort.Text = SettingHandler.GetIPPort();
+            //TODO: Background Worker for Login
+           
         }
 
         private void btLogin_Click(object sender, RoutedEventArgs e)
@@ -129,6 +133,21 @@ namespace SWN
         public void NotifyUserJoined(string UserName)
         {
 
+        }
+
+        private void btSound_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.musicplaying)
+            {
+                App.mplayer.Pause();
+                App.musicplaying = false;
+            }
+            else
+            {
+                App.mplayer.Play();
+                App.musicplaying = true;
+            }
+            
         }
     }
 }

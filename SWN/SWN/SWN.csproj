@@ -233,9 +233,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="Config.cfg">
+    <Content Include="Config.cfg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -340,6 +340,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\RegistrationBackground.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\lautsprecher-audio-schnittstelle-symbol_318-69591.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Popskyy - Popskyy MEGA PACK 1 - 26 Dragon%27s Fire.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -37,7 +37,6 @@ namespace SWNAdmin
             btServerStart.IsEnabled = true;
             btServerStop.IsEnabled = false;
             // SWNAdmin.Utility.XmlSkillImporter.Import();
-            
         }
 
         public void UpdateUserOnline(string User, bool Delete)

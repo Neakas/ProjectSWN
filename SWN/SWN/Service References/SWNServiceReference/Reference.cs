@@ -193,6 +193,9 @@ namespace SWN.SWNServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AdvantagesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> AgeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -271,6 +274,19 @@ namespace SWN.SWNServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Advantages {
+            get {
+                return this.AdvantagesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AdvantagesField, value) != true)) {
+                    this.AdvantagesField = value;
+                    this.RaisePropertyChanged("Advantages");
+                }
             }
         }
         

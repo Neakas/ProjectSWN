@@ -84,6 +84,7 @@ namespace SWN
                 string eMail = null;
                 C.eMail = eMail;
                 int SuccessfulLogin = SWNClient.Connect(C);
+                
                 SettingHandler.SetUserName(C.UserName);
                 return SuccessfulLogin;
             }

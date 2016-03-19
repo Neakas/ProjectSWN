@@ -44,6 +44,7 @@ namespace SWN
         {
             InitializeComponent();
             CurrentInstance = this;
+            App.mplayer.Stop();
             //TODOLOW: Reimplement
             //LoadStackPanelContent();
             //TODOHIGH: ServerCrash catch still doesnt work

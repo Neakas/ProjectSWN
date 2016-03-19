@@ -33,13 +33,17 @@ namespace SWN.Forms
             cfgfile = SettingHandler.GrabSettingFile();
             tbFileDirectory.Text = XmlHandler.GrabXMLValue(cfgfile, "DataFilePath");
             tbImgDirectory.Text = XmlHandler.GrabXMLValue(cfgfile, "PicFilePath");
+            cbStartMusic.IsChecked = !bool.Parse(XmlHandler.GrabXMLValue(cfgfile, "TurnOffMusic"));
         }
 
         private void btSave_Click(object sender, RoutedEventArgs e)
         {
             //TODOLOW Needs Sanity Checks for Correct Directory
+            bool value = (bool)cbStartMusic.IsChecked;
+            value = !value;
             XmlHandler.SetXmlValue(cfgfile, "DataFilePath", tbFileDirectory.Text);
             XmlHandler.SetXmlValue(cfgfile, "PicFilePath", tbImgDirectory.Text);
+            XmlHandler.SetXmlValue(cfgfile, "TurnOffMusic", value.ToString());
             System.Windows.MessageBox.Show("Saved to Config-File");
         }
 

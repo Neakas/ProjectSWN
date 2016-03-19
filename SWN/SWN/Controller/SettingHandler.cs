@@ -78,6 +78,17 @@ namespace SWN
         {
             XmlHandler.SetXmlValue(GrabSettingFile(), "IPPort", IPPort);
         }
+        public static bool GetTurnOffMusic()
+        {
+            bool Value = bool.Parse(XmlHandler.GrabXMLValue(GrabSettingFile(), "TurnOffMusic"));
+            return Value;
+        }
+
+        public static void TurnOffMusic(bool Value)
+        {
+            Value = !Value;
+            XmlHandler.SetXmlValue(GrabSettingFile(), "TurnOffMusic", Value.ToString());
+        }
 
         public static XDocument GrabSettingFile()
         {
