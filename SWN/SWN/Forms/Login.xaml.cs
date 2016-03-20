@@ -21,79 +21,86 @@ using SWN.SWNServiceReference;
 using System.Threading;
 using System.Windows.Threading;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace SWN
 
 {
     public partial class Login : Window
     {
-        public static Login CurrentLoginWindow;
-        public SWNServiceClient proxy = null;
-        public Client receiver = null;
-        public Client localclient = null;
-        
+        private static Login currentinstance;
 
+        public static Login CurrentInstance
+        {
+            get { return currentinstance; }
+            set { currentinstance = value; }
+        }
 
         public Login()
         {
-            CurrentLoginWindow = this;
             InitializeComponent();
+            CurrentInstance = this;
             tbIPPort.Text = SettingHandler.GetIPPort();
-            //TODO: Background Worker for Login
-           
         }
 
-        private void btLogin_Click(object sender, RoutedEventArgs e)
+        private Client userclient;
+
+        public Client UserClient
         {
-            proxy = null;
-            errormessage.Text = "";
-            ProcessUITasks();
+            get { return userclient; }
+            set { userclient = value; }
+        }
 
-            this.localclient = new Client();
+        private async void btLogin_Click(object sender, RoutedEventArgs e)
+        {
+            ServerConnection SC;
+            if (ServerConnection.CurrentInstance == null)
+            {
+                SC = new ServerConnection();
+            }
+            else
+            {
+                SC = ServerConnection.CurrentInstance;
+            }
 
+            UserClient = new Client();
             SettingHandler.SetIPPort(tbIPPort.Text);
 
             if (textBoxUsername.Text.Length == 0)
             {
                 errormessage.Text = "Please enter a Username.";
                 textBoxUsername.Focus();
+                return;
+            }
+            errormessage.Text = "";
+            biBusy.IsBusy = true;
+            //Force UI Redraw
+            Dispatcher.Invoke(new Action(() => { }), DispatcherPriority.ContextIdle);
+
+            UserClient.UserName = textBoxUsername.Text;
+            Encryption E = new Encryption(passwordBox1.Password);
+            UserClient.encPassword = E.EncryptStringToBytes(passwordBox1.Password);
+            bool SuccessfullLogin = await SC.tryLogin(UserClient);
+            if (SuccessfullLogin)
+            {
+                MainWindow MW = new MainWindow();
+
+                MW.LocalCient = UserClient;
+                SettingHandler.SetIsLoggedIn(true);
+                MW.Show();
+                Close();
             }
             else
             {
-                    this.localclient.UserName = textBoxUsername.Text;
-                    string password = passwordBox1.Password;
-                    Encryption E = new Encryption(passwordBox1.Password);
-                    this.localclient.encPassword = E.EncryptStringToBytes(passwordBox1.Password);
-                    ServerConnection SC = new ServerConnection();
-                    int SuccessfullLogin = SC.ClientInit(localclient);
-                    if (SuccessfullLogin == 1)
-                    {
-                        MainWindow MW = new MainWindow();
-                        MW.localclient = localclient;
-                        MW.receiver = receiver;
-                        MW.proxy = ServerConnection.SWNClient;
-                        MW.UserName = this.localclient.UserName;
-                        SettingHandler.SetIsLoggedIn(true);
-                        MW.Show();
-                        List<String> UserList = SC.GrabLoggedInUsers();
-                        MW.lbUserOnline.ItemsSource = UserList;
-                    Close();
-                    }
-                    else if (SuccessfullLogin == 0)
-                    {
-                        errormessage.Text = "Please enter an existing Username and Password";
-                    }
-                    else if (SuccessfullLogin == -1 || SuccessfullLogin == -2)
-                    {
-                        return;
-                    }
+                biBusy.IsBusy = false;
             }
         }
 
         public static void ProcessUITasks()
         {
             DispatcherFrame frame = new DispatcherFrame();
-            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(delegate (object parameter) {
+            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(delegate (object parameter)
+            {
                 frame.Continue = false;
                 return null;
             }), null);
@@ -109,7 +116,7 @@ namespace SWN
 
         private void textBoxUsername_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 btLogin_Click(this, null);
             }
@@ -130,11 +137,6 @@ namespace SWN
             Close();
         }
 
-        public void NotifyUserJoined(string UserName)
-        {
-
-        }
-
         private void btSound_Click(object sender, RoutedEventArgs e)
         {
             if (App.musicplaying)
@@ -147,7 +149,6 @@ namespace SWN
                 App.mplayer.Play();
                 App.musicplaying = true;
             }
-            
         }
     }
 }

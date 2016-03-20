@@ -30,13 +30,21 @@ namespace SWN
 {
     public partial class MainWindow : Window
     {
-        public string UserName = SettingHandler.GetUserName();
-        public static MainWindow CurrentInstance;
-        Dictionary<ListBoxItem, Client> OnlineClients = new Dictionary<ListBoxItem, Client>();
         private delegate void FaultedInvoker();
-        public SWNServiceClient proxy = null;
-        public Client receiver = null;
-        public Client localclient = null;
+        private Client localclient;
+
+        public Client LocalCient
+        {
+            get { return localclient; }
+            set { localclient = value; }
+        }
+
+        private static MainWindow currentinstance;
+        public static MainWindow CurrentInstance
+        {
+            get { return currentinstance; }
+            set { currentinstance = value; }
+        }
         public Character myCharacter;
 
 
@@ -44,75 +52,41 @@ namespace SWN
         {
             InitializeComponent();
             CurrentInstance = this;
+            lbUserOnline.ItemsSource = ServerConnection.CurrentInstance.GrabLoggedInUsers();
             App.mplayer.Stop();
-            //TODOLOW: Reimplement
-            //LoadStackPanelContent();
-            //TODOHIGH: ServerCrash catch still doesnt work
         }
 
         void InnerDuplexChannel_Closed(object sender, EventArgs e)
         {
             if (!this.Dispatcher.CheckAccess())
             {
-                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new FaultedInvoker(HandleProxy));
+                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new FaultedInvoker(ServerConnection.CurrentInstance.HandleProxy));
                 return;
             }
-            HandleProxy();
+            ServerConnection.CurrentInstance.HandleProxy();
         }
 
         void InnerDuplexChannel_Opened(object sender, EventArgs e)
         {
             if (!this.Dispatcher.CheckAccess())
             {
-                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new FaultedInvoker(HandleProxy));
+                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new FaultedInvoker(ServerConnection.CurrentInstance.HandleProxy));
                 return;
             }
-            HandleProxy();
+            ServerConnection.CurrentInstance.HandleProxy();
         }
 
         void InnerDuplexChannel_Faulted(object sender, EventArgs e)
         {
             if (!this.Dispatcher.CheckAccess())
             {
-                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new FaultedInvoker(HandleProxy));
+                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new FaultedInvoker(ServerConnection.CurrentInstance.HandleProxy));
                 return;
             }
-            HandleProxy();
+            ServerConnection.CurrentInstance.HandleProxy();
         }
 
-        public void HandleProxy()
-        {
-            if (proxy != null)
-            {
-                switch (this.proxy.State)
-                {
-                    case CommunicationState.Closed:
-                        proxy = null;
-                        lbUserOnline.Items.Clear();
-                        MessageBox.Show("Connection to Server Closed");
-                        break;
-                    case CommunicationState.Closing:
-                        break;
-                    case CommunicationState.Created:
-                        break;
-                    case CommunicationState.Faulted:
-                        proxy.Abort();
-                        proxy = null;
-                        lbUserOnline.ItemsSource = null;
-                        lbUserOnline.Items.Clear();
-                        MessageBox.Show("Connection to Server Lost");
-                        this.Close();
-                        break;
-                    case CommunicationState.Opened:
-                        MessageBox.Show("Connected");
-                        break;
-                    case CommunicationState.Opening:
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
+       
 
         public void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -132,9 +106,9 @@ namespace SWN
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            ServerConnection.SWNClient.Disconnect(localclient);
+            ServerConnection.LocalServiceClient.Disconnect(localclient);
             System.Threading.Thread.Sleep(500);
-            ServerConnection.CurrentConnection.CloseOrAbortServiceChannel(ServerConnection.SWNClient);
+            ServerConnection.CurrentInstance.CloseOrAbortServiceChannel(ServerConnection.LocalServiceClient);
             Application.Current.Shutdown();
         }
 
@@ -144,41 +118,9 @@ namespace SWN
             CV.ShowDialog();
         }
 
-        public void LoadStackPanelContent()
-        {
-            //TODOLOW: Reimplement
-
-            //sP1.Children.Clear();
-            ////var context = new Utility.Db1Entities();
-            ////var query = from c in context.Advantages select c;
-            //ServerConnection sc = new ServerConnection();
-            //var advlist = sc.GrabAdvantageListFromServer();
-
-            //foreach (SWNAdmin.Utility.Advantages adv in advlist)
-            //{
-            //    Expander ex = new Expander();
-            //    AdvantageControl AC = new AdvantageControl();
-            //    AC.InitControl(adv);
-            //    Viewbox vb1 = new Viewbox();
-            //    sP1.Children.Add(ex);
-            //    ex.Content = vb1;
-            //    ex.Header = adv.Name;
-            //    vb1.Child = AC;
-            //    vb1.Height = AC.Height;
-            //}
-        }
-
-        private void cbCodeTest_Click(object sender, RoutedEventArgs e)
-        {
-            //TestButton
-
-            //ServerConnection sc = new ServerConnection();
-            //sc.GrabAdvantageListFromServer();
-        }
-
         private void btsend_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckConnection())
+            if (ServerConnection.CurrentInstance.CheckConnection())
             {
                 if (tbChatInput.Text == null || tbChatInput.Text == "")
                 {
@@ -190,21 +132,21 @@ namespace SWN
                     //sc.SendMessageToServer(tbChatInput.Text, UserName);
                     SWNServiceReference.Message m = new SWNServiceReference.Message();
                     m.Content = tbChatInput.Text;
-                    m.Sender = UserName;
-                    proxy.SendMessage(m);
+                    m.Sender = localclient.UserName;
+                    ServerConnection.LocalServiceClient.SendMessage(m);
                     tbChatInput.Text = "";
                 }
             }
         }
 
-        public void UpdateChatWindow(string message, string username)
+        public void UpdateChatWindow(string message)
         {
             Application.Current.Dispatcher.BeginInvoke((Action)delegate ()
             {
                 tbChatPane.Focus();
                 tbChatPane.CaretIndex = tbChatPane.Text.Length;
                 tbChatPane.ScrollToEnd();
-                this.tbChatPane.Text += username + ": " + message + "\r\n";
+                this.tbChatPane.Text += message + "\r\n";
                 tbChatInput.Focus();
             });
         }
@@ -233,9 +175,15 @@ namespace SWN
             Application.Current.Dispatcher.BeginInvoke(new Action(() => this.lblFileTransfer.Foreground = Brushes.White));
         }
 
+        public void UpdateUserOnline(List<string> Userlist)
+        {
+            Application.Current.Dispatcher.BeginInvoke(new Action(() => this.lbUserOnline.ItemsSource = null));
+            Application.Current.Dispatcher.BeginInvoke(new Action(() => this.lbUserOnline.ItemsSource = Userlist));
+        }
+
         private void tbChatInput_KeyDown(object sender, KeyEventArgs e)
         {
-            if (CheckConnection())
+            if (ServerConnection.CurrentInstance.CheckConnection())
             {
                 if (e.Key == Key.Enter)
                 {
@@ -246,38 +194,22 @@ namespace SWN
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            if (proxy != null)
+            if (ServerConnection.LocalServiceClient != null)
             {
-                if (proxy.State == CommunicationState.Opened)
+                if (ServerConnection.LocalServiceClient.State == CommunicationState.Opened)
                 {
-                    proxy.Disconnect(this.localclient);
+                    ServerConnection.LocalServiceClient.Disconnect(this.localclient);
                     //dont set proxy.Close(); because isTerminating = true on Disconnect()
                     //and this by default will call HandleProxy() to take care of this.
                 }
                 else
                 {
-                    HandleProxy();
+                    ServerConnection.CurrentInstance.HandleProxy();
                 }
             }
         }
 
-        public bool CheckConnection()
-        {
-            bool AllGood = false;
-            if (proxy != null)
-            {
-                if (proxy.State == CommunicationState.Faulted || proxy.State == CommunicationState.Closed || proxy.State == CommunicationState.Closing || proxy.InnerDuplexChannel.State == CommunicationState.Faulted)
-                {
-                    HandleProxy();
-                    return AllGood;
-                }
-                else
-                {
-                    AllGood = true;
-                }
-            }
-            return AllGood;
-        }
+        
 
         private void submenuOptions_Click(object sender, RoutedEventArgs e)
         {
@@ -287,24 +219,24 @@ namespace SWN
 
         public void UserGetsKicked()
         {
-            if (proxy != null)
+            if (ServerConnection.LocalServiceClient != null)
             {
-                if (proxy.State == CommunicationState.Opened)
+                if (ServerConnection.LocalServiceClient.State == CommunicationState.Opened)
                 {
-                    proxy.Disconnect(this.localclient);
+                    ServerConnection.LocalServiceClient.Disconnect(this.localclient);
                     //dont set proxy.Close(); because isTerminating = true on Disconnect()
                     //and this by default will call HandleProxy() to take care of this.
                 }
                 else
                 {
-                    HandleProxy();
+                    ServerConnection.CurrentInstance.HandleProxy();
                 }
             }
         }
 
         private void menuCreateNewCharacter_Click(object sender, RoutedEventArgs e)
         {
-            myCharacter = ServerConnection.SWNClient.GetBlankCharacter(localclient);
+            myCharacter = ServerConnection.LocalServiceClient.GetBlankCharacter(localclient);
             CreateNewCharacter cnc = new CreateNewCharacter(myCharacter);
             cnc.ShowDialog();
         }

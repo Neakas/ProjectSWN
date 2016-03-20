@@ -12,12 +12,14 @@
     <Window.Background>
         <ImageBrush ImageSource="pack://siteoforigin:,,,/Assets/LoginBackground.jpg"/>
     </Window.Background>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <TextBlock HorizontalAlignment="Left" Margin="24,0,0,172" Name="LoginHeading" Text="Login:" FontSize="17" FontStretch="ExtraCondensed" Foreground="White" Height="23" VerticalAlignment="Bottom"/>
-        <TextBlock Margin="0,0,10,0" Name="textBlockHeading" FontSize="12" FontStyle="Italic" Padding="5" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="123">
+    <xctk:BusyIndicator x:Name="biBusy" BusyContent="Connecting..." IsHitTestVisible="True" DisplayAfter="0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock HorizontalAlignment="Left" Margin="24,0,0,172" Name="LoginHeading" Text="Login:" FontSize="17" FontStretch="ExtraCondensed" Foreground="White" Height="23" VerticalAlignment="Bottom"/>
+            <TextBlock Margin="0,0,10,0" Name="textBlockHeading" FontSize="12" FontStyle="Italic" Padding="5" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="123">
 
             Note: Bitte einloggen! <LineBreak /><!--line break-->
            <!--textblock as a Hyperlink.-->
@@ -26,18 +28,20 @@
             </TextBlock>
             <!--end textblock as a hyperlink-->
         </TextBlock>
-        <TextBlock Margin="24,0,0,144" Name="textBlock1" Text="Username" Foreground="White" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="67" />
-        <TextBlock Margin="24,0,0,98" Name="textBlock2" Text="Password" Foreground="White" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="67" />
-        <TextBox Margin="24,0,0,121" x:Name="textBoxUsername" KeyDown="textBoxUsername_KeyDown" Background="#FF333333" HorizontalAlignment="Left" Width="238" Height="23" VerticalAlignment="Bottom" />
-        <PasswordBox Margin="24,0,0,74" Name="passwordBox1" KeyDown="passwordBox1_KeyDown" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="238" />
-        <Button Content="Login" HorizontalAlignment="Left" Margin="24,0,0,40" x:Name="btLogin" Width="104" Click="btLogin_Click" Height="23" VerticalAlignment="Bottom" />
-        <TextBlock Height="23" HorizontalAlignment="Left" x:Name ="errormessage" VerticalAlignment="Top" Width="399" Margin="51,254,0,0"  OpacityMask="Crimson" Foreground="#FFE5572C"  />
-        <TextBox x:Name="tbIPPort" HorizontalAlignment="Left" Margin="133,0,0,39" TextWrapping="Wrap" Text="Neakas.GoIP.de:25565" Width="129" Height="23" VerticalAlignment="Bottom"/>
-        <Button x:Name="btOverride" Content="Override" Margin="0,32,31,0" Click="btOverride_Click" Height="22" VerticalAlignment="Top" HorizontalAlignment="Right" Width="76"/>
-        <Button x:Name="btSound" Content="Button" Margin="274,0,0,10" Foreground="{x:Null}" BorderBrush="Black" IsHitTestVisible="True" RenderTransformOrigin="0.294,0.438" Click="btSound_Click" HorizontalAlignment="Left" Width="34" Height="32" VerticalAlignment="Bottom">
-            <Button.Background>
-                <ImageBrush ImageSource="/SWN;component/Assets/lautsprecher-audio-schnittstelle-symbol_318-69591.png"/>
-            </Button.Background>
-        </Button>
-    </Grid>
+            <TextBlock Margin="24,0,0,144" Name="textBlock1" Text="Username" Foreground="White" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="67" />
+            <TextBlock Margin="24,0,0,98" Name="textBlock2" Text="Password" Foreground="White" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="67" />
+            <TextBox Margin="24,0,0,121" x:Name="textBoxUsername" KeyDown="textBoxUsername_KeyDown" Background="#FF333333" HorizontalAlignment="Left" Width="238" Height="23" VerticalAlignment="Bottom" />
+            <PasswordBox Margin="24,0,0,74" Name="passwordBox1" KeyDown="passwordBox1_KeyDown" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="238" />
+            <Button Content="Login" HorizontalAlignment="Left" Margin="24,0,0,40" x:Name="btLogin" Width="104" Click="btLogin_Click" Height="23" VerticalAlignment="Bottom" />
+            <TextBlock HorizontalAlignment="Left" x:Name ="errormessage" Width="399" Margin="24,0,0,200"  OpacityMask="Crimson" Foreground="#FFE5572C" Height="23" VerticalAlignment="Bottom"  />
+            <TextBox x:Name="tbIPPort" HorizontalAlignment="Left" Margin="133,0,0,39" TextWrapping="Wrap" Text="Neakas.GoIP.de:25565" Width="129" Height="23" VerticalAlignment="Bottom"/>
+            <Button x:Name="btOverride" Content="Override" Margin="0,32,31,0" Click="btOverride_Click" Height="22" VerticalAlignment="Top" HorizontalAlignment="Right" Width="76"/>
+            <Button x:Name="btSound" Content="Button" Margin="274,0,0,10" Foreground="{x:Null}" BorderBrush="Black" IsHitTestVisible="True" RenderTransformOrigin="0.294,0.438" Click="btSound_Click" HorizontalAlignment="Left" Width="34" Height="32" VerticalAlignment="Bottom">
+                <Button.Background>
+                    <ImageBrush ImageSource="/SWN;component/Assets/lautsprecher-audio-schnittstelle-symbol_318-69591.png"/>
+                </Button.Background>
+            </Button>
+
+        </Grid>
+    </xctk:BusyIndicator>
 </Window>

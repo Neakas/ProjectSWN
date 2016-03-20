@@ -13,14 +13,28 @@
   <xs:element name="ConnectResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="ConnectResult" type="xs:int" />
+        <xs:element minOccurs="0" name="ConnectResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Register">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q2:Client" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RegisterResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RegisterResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="Disconnect">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q2:Client" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q3:Client" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -32,7 +46,7 @@
   <xs:element name="SendMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="msg" nillable="true" type="q3:Message" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="msg" nillable="true" type="q4:Message" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -49,99 +63,99 @@
   <xs:element name="RequestOnlineUsersListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="RequestOnlineUsersListResult" nillable="true" type="q4:ArrayOfstring" />
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="RequestOnlineUsersListResult" nillable="true" type="q5:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetBlankCharacter">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q5:Client" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q6:Client" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetBlankCharacterResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="GetBlankCharacterResult" nillable="true" type="q6:Character" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="GetBlankCharacterResult" nillable="true" type="q7:Character" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RequestAdvantages">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q7:Client" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q8:Client" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RequestAdvantagesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="RequestAdvantagesResult" nillable="true" type="q8:ArrayOfAdvantages" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="RequestAdvantagesResult" nillable="true" type="q9:ArrayOfAdvantages" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RequestDisadvantages">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q9:Client" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q10:Client" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RequestDisadvantagesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="RequestDisadvantagesResult" nillable="true" type="q10:ArrayOfDisadvantages" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="RequestDisadvantagesResult" nillable="true" type="q11:ArrayOfDisadvantages" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RequestRequirements">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q11:Client" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q12:Client" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RequestRequirementsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="RequestRequirementsResult" nillable="true" type="q12:ArrayOfRequirements" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="RequestRequirementsResult" nillable="true" type="q13:ArrayOfRequirements" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RequestSkills">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q13:Client" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q14:Client" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RequestSkillsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="RequestSkillsResult" nillable="true" type="q14:ArrayOfSkills" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="RequestSkillsResult" nillable="true" type="q15:ArrayOfSkills" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RequestSavedCharacters">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q15:Client" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q16:Client" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RequestSavedCharactersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="RequestSavedCharactersResult" nillable="true" type="q16:ArrayOfCharacter" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="RequestSavedCharactersResult" nillable="true" type="q17:ArrayOfCharacter" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveCharacter">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q17:Client" />
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="c" nillable="true" type="q18:Character" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q18:Client" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="c" nillable="true" type="q19:Character" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -155,28 +169,28 @@
   <xs:element name="UserJoin">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q19:Client" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q20:Client" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UserLeft">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q20:Client" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="client" nillable="true" type="q21:Client" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RefreshClients">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="clients" nillable="true" type="q21:ArrayOfClient" />
+        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="clients" nillable="true" type="q22:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="Receive">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="msg" nillable="true" type="q22:Message" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="msg" nillable="true" type="q23:Message" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -188,21 +202,21 @@
   <xs:element name="SendStarSystem">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="StarSystem" nillable="true" type="q23:StarSystems" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility" minOccurs="0" name="StarSystem" nillable="true" type="q24:StarSystems" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SendImage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="fMsg" nillable="true" type="q24:FileMessage" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="fMsg" nillable="true" type="q25:FileMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SendFile">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="fMsg" nillable="true" type="q25:FileMessage" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/SWNAdmin" minOccurs="0" name="fMsg" nillable="true" type="q26:FileMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

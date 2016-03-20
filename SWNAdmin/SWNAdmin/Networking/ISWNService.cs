@@ -12,7 +12,10 @@ namespace SWNAdmin
     interface ISWNService
     {
         [OperationContract(IsInitiating = true)]
-        int Connect(Client client);
+        bool Connect(Client client);
+
+        [OperationContract(IsInitiating = true)]
+        bool Register(Client client);
 
         [OperationContract]
         void Disconnect(Client client);

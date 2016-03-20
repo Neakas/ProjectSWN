@@ -132,12 +132,6 @@ namespace SWNAdmin
             myStoryboard.Begin(this);
         }
 
-        public List<string> GetUsersOnline()
-        {
-            List<string> OnlineUsers = this.lbUserOnline.Items.OfType<string>().ToList();
-            return OnlineUsers;
-        }
-
         public void UpdateChatWindow(string Message, String UserName)
         {
             Application.Current.Dispatcher.BeginInvoke((Action)delegate ()

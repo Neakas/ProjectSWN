@@ -31,7 +31,6 @@
                 <MenuItem x:Name="submenuSectorViewer" Header="Sector Viewer" HorizontalAlignment="Left" Width="150" Click="submenuSectorViewer_Click"/>
             </MenuItem>
         </Menu>
-        <Button x:Name="cbCodeTest" Content="CodeTest" HorizontalAlignment="Left" Margin="935,41,0,0" VerticalAlignment="Top" Width="75" Click="cbCodeTest_Click"/>
         <Grid Name="testgrid">
             <Border  BorderBrush="Black" BorderThickness="2" Margin="10,286,0,0" HorizontalAlignment="Left" Width="405" Height="362" VerticalAlignment="Top" >
                 <ScrollViewer VerticalScrollBarVisibility="Auto"  BorderBrush="Black" BorderThickness="2">

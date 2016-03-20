@@ -17,8 +17,7 @@ namespace SWNAdmin
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.Single, UseSynchronizationContext = false)]
     public class SWNService : ISWNService
     {
-        Dictionary<Client, ISWNServiceCallback> clients = new Dictionary<Client, ISWNServiceCallback>();
-        List<Client> clientList = new List<Client>();
+        Dictionary<Client, ISWNServiceCallback> clientsDict = new Dictionary<Client, ISWNServiceCallback>();
         public static SWNService CurrentService;
         public static int LoggedInUsers = 0;
 
@@ -39,7 +38,7 @@ namespace SWNAdmin
 
         private bool SearchClientsByName(string username)
         {
-            foreach (Client c in clients.Keys)
+            foreach (Client c in clientsDict.Keys)
             {
                 if (c.UserName == username)
                 {
@@ -51,75 +50,75 @@ namespace SWNAdmin
 
         #region ISWNService Members
 
-        public int Connect(Client client)
+        public bool Connect(Client client)
         {
-            int RegSuccessful = -1;
-            int LoginSuccessful = -1;
-            int Handshake = -1;
-
-            if (!clients.ContainsValue(CurrentCallback) && !SearchClientsByName(client.UserName))
+            if (!clientsDict.ContainsValue(CurrentCallback) && !SearchClientsByName(client.UserName))
             {
                 lock (syncObj)
                 {
-                    if (client.eMail != null)
+                    LoginHandler LH = new LoginHandler();
+                    if (LH.LoginCheck(client))
                     {
-                        RegistrationHandler RH = new RegistrationHandler();
-                        RegSuccessful = RH.RegistrationCheck(client.UserName, client.eMail, client.encPassword);
-                        Handshake = RegSuccessful;
+                        MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": New Connection Attempt from: " + getClientIpAddress(client));
+                        MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": The User '" + client.UserName + "' logged in");
+                        MainWindow.CurrentInstance.UpdateUserOnline(client.UserName, false);
+                        clientsDict.Add(client, CurrentCallback);
+                        foreach (Client key in clientsDict.Keys)
+                        {
+                            ISWNServiceCallback callback = clientsDict[key];
+                            try
+                            {
+                                callback.RefreshClients((from c in clientsDict.Keys select c.UserName).ToList());
+                                callback.UserJoin(client);
+                            }
+                            catch (Exception)
+                            {
+                                clientsDict.Remove(key);
+                            }
+                        }
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool Register(Client client)
+        {
+            if (!clientsDict.ContainsValue(CurrentCallback) && !SearchClientsByName(client.UserName))
+            {
+                lock (syncObj)
+                {
+                    RegistrationHandler RH = new RegistrationHandler();
+                    if (RH.RegistrationCheck(client))
+                    {
+                        MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": The User '" + client.UserName + "' registered with the Server");
+                        return true;
                     }
                     else
                     {
-                        LoginHandler LH = new LoginHandler();
-                        LoginSuccessful = LH.LoginCheck(client.UserName, client.encPassword);
-                        Handshake = LoginSuccessful;
-                        if (LoginSuccessful == 1 && RegSuccessful == -1)
-                        {
-                            MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": New Connection Attempt from: " + getClientIpAddress(client));
-                            MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": The User '" + client.UserName + "' logged in");
-                            MainWindow.CurrentInstance.UpdateUserOnline(client.UserName, false);
-                            foreach (Client key in clients.Keys)
-                            {
-                                ISWNServiceCallback callback = clients[key];
-                                try
-                                {
-                                    callback.RefreshClients(clientList);
-                                    callback.UserJoin(client);
-                                }
-                                catch (Exception)
-                                {
-                                    clients.Remove(key);
-                                    return Handshake;
-                                }
-                            }
-                            clients.Add(client, CurrentCallback);
-                            clientList.Add(client);
-                        }
-                    }
-                    if (RegSuccessful == 1)
-                    {
-                        MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": The User '" + client.UserName + "' registered with the Server");
+                        return false;
                     }
                 }
-                return Handshake;
             }
-            return Handshake;
+            return false;
         }
+
 
         public void Disconnect(Client client)
         {
-            foreach (Client c in clients.Keys)
+            foreach (Client c in clientsDict.Keys)
             {
                 if (client.UserName == c.UserName)
                 {
                     lock (syncObj)
                     {
-                        this.clients.Remove(c);
-                        this.clientList.Remove(c);
+                        this.clientsDict.Remove(c);
                         MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": The User '" + client.UserName + "' logged out");
                         MainWindow.CurrentInstance.UpdateUserOnline(client.UserName, true);
-                        foreach (ISWNServiceCallback callback in clients.Values)
+                        foreach (ISWNServiceCallback callback in clientsDict.Values)
                         {
-                            callback.RefreshClients(this.clientList);
+                            callback.RefreshClients((from ce in clientsDict.Keys select ce.UserName).ToList());
                             callback.UserLeft(client);
                         }
                     }
@@ -179,7 +178,7 @@ namespace SWNAdmin
         {
             lock (syncObj)
             {
-                foreach (ISWNServiceCallback callback in clients.Values)
+                foreach (ISWNServiceCallback callback in clientsDict.Values)
                 {
                     callback.Receive(m);
                 }
@@ -191,7 +190,7 @@ namespace SWNAdmin
         {
             lock (syncObj)
             {
-                foreach (ISWNServiceCallback callback in clients.Values)
+                foreach (ISWNServiceCallback callback in clientsDict.Values)
                 {
                     callback.SendStarSystem(ssystem);
                 }
@@ -229,7 +228,7 @@ namespace SWNAdmin
                                     fMsg.Sender = "Dummy";
                                     fMsg.Data = buffer;
 
-                                    foreach (ISWNServiceCallback callback in clients.Values)
+                                    foreach (ISWNServiceCallback callback in clientsDict.Values)
                                     {
                                         callback.SendImage(fMsg);
                                     }
@@ -266,7 +265,7 @@ namespace SWNAdmin
                         fMsg.Sender = "Dummy";
                         fMsg.Data = buffer;
 
-                        foreach (ISWNServiceCallback callback in clients.Values)
+                        foreach (ISWNServiceCallback callback in clientsDict.Values)
                         {
                             callback.SendImage(fMsg);
                         }
@@ -310,7 +309,7 @@ namespace SWNAdmin
                             fMsg.FileName = fileDialog.SafeFileName;
                             fMsg.Sender = "Dummy";
                             fMsg.Data = buffer;
-                            foreach (ISWNServiceCallback callback in clients.Values)
+                            foreach (ISWNServiceCallback callback in clientsDict.Values)
                             {
                                 callback.SendFile(fMsg);
                             }
@@ -342,7 +341,7 @@ namespace SWNAdmin
             m.Time = DateTime.Now;
             m.Content = Message;
             MainWindow.CurrentInstance.UpdateChatWindow(Message, UserName);
-            foreach (ISWNServiceCallback callback in clients.Values)
+            foreach (ISWNServiceCallback callback in clientsDict.Values)
             {
                 callback.Receive(m);
             }
@@ -357,7 +356,7 @@ namespace SWNAdmin
         {
             lock (syncObj)
             {
-                foreach (ISWNServiceCallback callback in clients.Values)
+                foreach (ISWNServiceCallback callback in clientsDict.Values)
                 {
                     callback.ServiceIsShuttingDown();
                 }
@@ -370,12 +369,12 @@ namespace SWNAdmin
         {
             lock (syncObj)
             {
-                foreach (Client client in clients.Keys)
+                foreach (Client client in clientsDict.Keys)
                 {
                     if (client.UserName == c.UserName)
                     {
                         ISWNServiceCallback toKickUser;
-                        clients.TryGetValue(client, out toKickUser);
+                        clientsDict.TryGetValue(client, out toKickUser);
                         toKickUser.KickUser();
                     }
                 }
@@ -386,7 +385,7 @@ namespace SWNAdmin
 
         public List<string> RequestOnlineUsersList()
         {
-            return MainWindow.CurrentInstance.GetUsersOnline();
+            return (from c in clientsDict.Keys select c.UserName).ToList();
         }
         
         public bool SaveCharacter(Client client, Character c)

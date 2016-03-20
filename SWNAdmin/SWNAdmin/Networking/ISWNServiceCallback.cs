@@ -17,7 +17,7 @@ namespace SWNAdmin
         void UserLeft(Client client);
 
         [OperationContract(IsOneWay = true)]
-        void RefreshClients(List<Client> clients);
+        void RefreshClients(List<string> clients);
 
         [OperationContract(IsOneWay = true)]
         void Receive(Message msg);

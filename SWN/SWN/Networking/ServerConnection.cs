@@ -20,103 +20,169 @@ using System.Runtime.Serialization;
 using System.Threading;
 using System.IO;
 using SWN.SWNServiceReference;
+using System.Threading.Tasks;
 
 namespace SWN
 {
     [CallbackBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, UseSynchronizationContext = false)]
     public class ServerConnection : SWNServiceReference.SWNServiceCallback
     {
-        public static ServerConnection CurrentConnection;
-        public static SWNServiceReference.SWNServiceClient SWNClient;
-        Login CurrentLoginWindow = Login.CurrentLoginWindow;
-        List<Client> OnlineClients = new List<Client>();
+        private static SWNServiceClient localserviceclient;
+        private static ServerConnection currentinstance;
+
+        List<Client> OnlineClients;
+
+        public static SWNServiceClient LocalServiceClient
+        {
+            get { return localserviceclient; }
+            set { localserviceclient = value; }
+        }
+
+        public static ServerConnection CurrentInstance
+        {
+            get { return currentinstance; }
+            set { currentinstance = value; }
+        }
 
         public ServerConnection()
         {
-            CurrentConnection = this;
+            if (currentinstance == null)
+            {
+                currentinstance = this;
+            }
         }
 
-        public int ClientReg(Client C)
+        public async Task<bool> tryLogin(Client C)
         {
+            Login.CurrentInstance.errormessage.Text = "";
             try
             {
-                SWNClient = new SWNServiceReference.SWNServiceClient(new InstanceContext(this), "netTcpBinding", "net.tcp://" + SettingHandler.GetIPPort() + "/SWNService");
-                SWNClient.Open();
-                int SuccessfulLogin = SWNClient.Connect(C);
+                if (LocalServiceClient == null)
+                {
+                    LocalServiceClient = new SWNServiceClient(new InstanceContext(this), "netTcpBinding", "net.tcp://" + SettingHandler.GetIPPort() + "/swnservice");
+                }
+                if (LocalServiceClient.State != CommunicationState.Opened)
+                {
+                    LocalServiceClient.Open();
+                }
+                bool SuccessfulLogin = await LocalServiceClient.ConnectAsync(C);
                 return SuccessfulLogin;
             }
             catch (FaultException exception)
             {
-                CurrentLoginWindow.errormessage.Text = "Got " + exception.GetType().ToString();
-                CloseOrAbortServiceChannel(SWNClient);
+                Login.CurrentInstance.errormessage.Text = "Got " + exception.GetType().ToString();
+                CloseOrAbortServiceChannel(LocalServiceClient);
 
-                return -2;
+                return false;
             }
             catch (CommunicationException)
             {
-                CurrentLoginWindow.errormessage.Text = "Server not Responding";
-                CloseOrAbortServiceChannel(SWNClient);
+                Login.CurrentInstance.errormessage.Text = "Server not Responding";
+                CloseOrAbortServiceChannel(LocalServiceClient);
 
-                return -2;
+                return false;
             }
             catch (TimeoutException exception)
             {
-                CurrentLoginWindow.errormessage.Text = "Got " + exception.GetType().ToString();
-                CloseOrAbortServiceChannel(SWNClient);
+                Login.CurrentInstance.errormessage.Text = "Got " + exception.GetType().ToString();
+                CloseOrAbortServiceChannel(LocalServiceClient);
 
-                return -2;
+                return false;
             }
             catch (Exception t)
             {
                 MessageBox.Show(t.ToString());
-                CloseOrAbortServiceChannel(SWNClient);
-                return -1;
+                CloseOrAbortServiceChannel(LocalServiceClient);
+                return false;
                 throw;
             }
         }
 
-        public int ClientInit(Client C)
+
+        public async Task<bool> tryReg(Client C)
         {
             try
             {
-                SWNClient = new SWNServiceReference.SWNServiceClient(new InstanceContext(this), "netTcpBinding", "net.tcp://" + SettingHandler.GetIPPort() + "/swnservice");
-                SWNClient.Open();
-                string eMail = null;
-                C.eMail = eMail;
-                int SuccessfulLogin = SWNClient.Connect(C);
-                
-                SettingHandler.SetUserName(C.UserName);
-                return SuccessfulLogin;
+                if (LocalServiceClient == null)
+                {
+                    LocalServiceClient = new SWNServiceReference.SWNServiceClient(new InstanceContext(this), "netTcpBinding", "net.tcp://" + SettingHandler.GetIPPort() + "/swnservice");
+                }
+                if (LocalServiceClient.State != CommunicationState.Opened)
+                {
+                    LocalServiceClient.Open();
+                }
+                bool Successfulreg = await LocalServiceClient.RegisterAsync(C);
+                return Successfulreg;
             }
             catch (FaultException exception)
             {
-                CurrentLoginWindow.errormessage.Text = "Got " + exception.GetType().ToString();
-                CloseOrAbortServiceChannel(SWNClient);
-
-                return -2;
+                Login.CurrentInstance.errormessage.Text = "Got " + exception.GetType().ToString();
+                CloseOrAbortServiceChannel(LocalServiceClient);
+                return false;
             }
             catch (CommunicationException)
             {
-                CurrentLoginWindow.errormessage.Text = "Server not Responding";
-                CloseOrAbortServiceChannel(SWNClient);
-
-                return -2;
+                Login.CurrentInstance.errormessage.Text = "Server not Responding";
+                CloseOrAbortServiceChannel(LocalServiceClient);
+                return false;
             }
             catch (TimeoutException exception)
             {
-                CurrentLoginWindow.errormessage.Text = "Got " + exception.GetType().ToString();
-                CloseOrAbortServiceChannel(SWNClient);
-
-                return -2;
+                Login.CurrentInstance.errormessage.Text = "Got " + exception.GetType().ToString();
+                CloseOrAbortServiceChannel(LocalServiceClient);
+                return false;
             }
             catch (Exception t)
             {
                 MessageBox.Show(t.ToString());
-                CloseOrAbortServiceChannel(SWNClient);
-                return -1;
+                CloseOrAbortServiceChannel(LocalServiceClient);
+                return false;
                 throw;
             }
         }
+
+        //public int ClientInit(Client C)
+        //{
+        //    try
+        //    {
+        //        SWNClient = new SWNServiceReference.SWNServiceClient(new InstanceContext(this), "netTcpBinding", "net.tcp://" + SettingHandler.GetIPPort() + "/swnservice");
+        //        SWNClient.Open();
+        //        string eMail = null;
+        //        C.eMail = eMail;
+        //        int SuccessfulLogin = SWNClient.Connect(C);
+
+        //        SettingHandler.SetUserName(C.UserName);
+        //        return SuccessfulLogin;
+        //    }
+        //    catch (FaultException exception)
+        //    {
+        //        CurrentLoginWindow.errormessage.Text = "Got " + exception.GetType().ToString();
+        //        CloseOrAbortServiceChannel(SWNClient);
+
+        //        return -2;
+        //    }
+        //    catch (CommunicationException)
+        //    {
+        //        CurrentLoginWindow.errormessage.Text = "Server not Responding";
+        //        CloseOrAbortServiceChannel(SWNClient);
+
+        //        return -2;
+        //    }
+        //    catch (TimeoutException exception)
+        //    {
+        //        CurrentLoginWindow.errormessage.Text = "Got " + exception.GetType().ToString();
+        //        CloseOrAbortServiceChannel(SWNClient);
+
+        //        return -2;
+        //    }
+        //    catch (Exception t)
+        //    {
+        //        MessageBox.Show(t.ToString());
+        //        CloseOrAbortServiceChannel(SWNClient);
+        //        return -1;
+        //        throw;
+        //    }
+        //}
 
         public void SendImage(SWNServiceReference.FileMessage fileMsg)
         {
@@ -133,7 +199,7 @@ namespace SWN
                 MainWindow.CurrentInstance.UpdateFileReceive();
                 try
                 {
-                    FileStream fileStrm = new FileStream(XmlHandler.GrabXMLValue(SettingHandler.GrabSettingFile(), "PicFilePath") + @"\" + fileMsg.FileName, FileMode.Create,FileAccess.ReadWrite);
+                    FileStream fileStrm = new FileStream(XmlHandler.GrabXMLValue(SettingHandler.GrabSettingFile(), "PicFilePath") + @"\" + fileMsg.FileName, FileMode.Create, FileAccess.ReadWrite);
                     fileStrm.Write(fileMsg.Data, 0, fileMsg.Data.Length);
                     fileStrm.Close();
                 }
@@ -142,6 +208,7 @@ namespace SWN
                     MessageBox.Show(ex.Message.ToString());
                 }
             }
+
             MainWindow.CurrentInstance.UpdateImageWindow(new Uri(XmlHandler.GrabXMLValue(SettingHandler.GrabSettingFile(), "PicFilePath") + @"\" + fileMsg.FileName));
 
             bool picnotinlist = true;
@@ -178,23 +245,19 @@ namespace SWN
 
         public void SendMessageToServer(string Message, string Username)
         {
-            SWNClient = new SWNServiceReference.SWNServiceClient(new InstanceContext(this), "netTcpBinding", "net.tcp://" + SettingHandler.GetIPPort() + "/SWNService");
-            SWNClient.Open();
             Message m = new Message();
             m.Sender = Username;
             m.Time = DateTime.Now;
             m.Content = Message;
-            SWNClient.SendMessage(m);
+            LocalServiceClient.SendMessage(m);
         }
 
         public List<string> GrabLoggedInUsers()
         {
-            SWNClient = new SWNServiceReference.SWNServiceClient(new InstanceContext(this), "netTcpBinding", "net.tcp://" + SettingHandler.GetIPPort() + "/SWNService");
-            SWNClient.Open();
-            List<string> UserList = SWNClient.RequestOnlineUsersList();
-            return UserList;
+            return LocalServiceClient.RequestOnlineUsersList();
         }
 
+        /// ////////////////////////////////////////////////
 
         //für CharacterTransfer
         //public CharacterController TransferCharacter(string UserName, CharacterController UserCharacter)
@@ -239,32 +302,32 @@ namespace SWN
         //    (ServiceInterface as ICommunicationObject).Close();
         //}
 
-        #region Server Callbacks
+        //#region Server Callbacks
 
-        public void RefreshClients(List<Client> clients)
+        public void RefreshClients(List<string> clients)
         {
-            MainWindow.CurrentInstance.lbUserOnline.Items.Clear();
-            OnlineClients.Clear();
-            foreach (Client c in clients)
+            if (MainWindow.CurrentInstance != null)
             {
-                MainWindow.CurrentInstance.lbUserOnline.Items.Add(c.UserName);
-                OnlineClients.Add(c);
+                MainWindow.CurrentInstance.UpdateUserOnline(clients);
             }
         }
-        
+
         public void UserJoin(Client c)
         {
-            MainWindow.CurrentInstance.UpdateChatWindow("The User: " + c.UserName + " has Joined!", c.UserName);
+            if (MainWindow.CurrentInstance != null)
+            {
+                MainWindow.CurrentInstance.UpdateChatWindow("Server: " + c.UserName + " has Joined!");
+            }
         }
 
         public void UserLeft(Client c)
         {
-            MainWindow.CurrentInstance.UpdateChatWindow("The User: " + c.UserName + " has Left!", c.UserName);
+            MainWindow.CurrentInstance.UpdateChatWindow("Server: " + c.UserName + " has Left!");
         }
 
         public void Receive(Message m)
         {
-            MainWindow.CurrentInstance.UpdateChatWindow(m.Content, m.Sender);
+            MainWindow.CurrentInstance.UpdateChatWindow(m.Sender + ": " + m.Content);
         }
 
         public void CloseOrAbortServiceChannel(ICommunicationObject communicationObject)
@@ -315,28 +378,69 @@ namespace SWN
             try
             {
                 communicationObject.Abort();
+                LocalServiceClient = null;
             }
             catch (Exception)
             {
-                // An unexpected exception that we don't know how to handle.
-                // If we are in this situation:
-                // - we should NOT retry the Abort() because it has already failed and there is nothing to suggest it could be successful next time
-                // - the abort may have partially succeeded
-                // - the actual service call may have been successful
-                //
-                // The only thing we can do is hope that the channel's resources have been released.
-                // Do not rethrow this exception because the actual service operation call might have succeeded
-                // and an exception closing the channel should not stop the client doing whatever it does next.
-                //
-                // Perhaps write this exception out to log file for gathering statistics and support purposes...
+            }
+        }
+        public bool CheckConnection()
+        {
+            bool AllGood = false;
+            if (LocalServiceClient != null)
+            {
+                if (LocalServiceClient.State == CommunicationState.Faulted || LocalServiceClient.State == CommunicationState.Closed || LocalServiceClient.State == CommunicationState.Closing || LocalServiceClient.InnerDuplexChannel.State == CommunicationState.Faulted)
+                {
+                    HandleProxy();
+                    return AllGood;
+                }
+                else
+                {
+                    AllGood = true;
+                }
+            }
+            return AllGood;
+        }
+
+        public void HandleProxy()
+        {
+            if (LocalServiceClient != null)
+            {
+                switch (LocalServiceClient.State)
+                {
+                    case CommunicationState.Closed:
+                        LocalServiceClient = null;
+                        MainWindow.CurrentInstance.lbUserOnline.Items.Clear();
+                        MessageBox.Show("Connection to Server Closed");
+                        break;
+                    case CommunicationState.Closing:
+                        break;
+                    case CommunicationState.Created:
+                        break;
+                    case CommunicationState.Faulted:
+                        LocalServiceClient.Abort();
+                        LocalServiceClient = null;
+                        MainWindow.CurrentInstance.lbUserOnline.ItemsSource = null;
+                        MainWindow.CurrentInstance.lbUserOnline.Items.Clear();
+                        MessageBox.Show("Connection to Server Lost");
+                        MainWindow.CurrentInstance.Close();
+                        break;
+                    case CommunicationState.Opened:
+                        MessageBox.Show("Connected");
+                        break;
+                    case CommunicationState.Opening:
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
         public void ServiceIsShuttingDown()
         {
             System.Threading.Thread.Sleep(3000);
-            MainWindow.CurrentInstance.CheckConnection();
-            SWNClient.Close();
+            CheckConnection();
+            LocalServiceClient.Close();
             MessageBox.Show("Server in Shutdown-Mode.Closing...");
             Environment.Exit(0);
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
@@ -351,9 +455,9 @@ namespace SWN
         public void KickUser()
         {
             System.Threading.Thread.Sleep(3000);
-            MainWindow.CurrentInstance.CheckConnection();
+            CheckConnection();
             MainWindow.CurrentInstance.UserGetsKicked();
-            SWNClient.Close();
+            LocalServiceClient.Close();
             MessageBox.Show("You were kicked from the Server");
             Environment.Exit(0);
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
@@ -363,11 +467,6 @@ namespace SWN
         public void SendDateTime(DateTime Increment)
         {
             DateTime CurrentDateTime = SettingHandler.GetCurrentDateTime();
-            
-
         }
-
-
-        #endregion
     }
 }

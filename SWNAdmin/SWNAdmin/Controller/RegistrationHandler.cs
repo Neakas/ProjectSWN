@@ -12,39 +12,26 @@ namespace SWNAdmin
 {
     public class RegistrationHandler
     {
-        public int RegistrationCheck(string UserName, string eMail, string encPassword)
+        public bool RegistrationCheck(Client c)
         {
-            bool IsAdmin = false;
-            bool vUserExists = UserExists(UserName);
-            if (CheckIsFirstUser())
-            {
-                IsAdmin = true;
-            }
+            bool vUserExists = UserExists(c.UserName);
 
             if (vUserExists == false)
             {
                 using (var context = new Utility.Db1Entities())
                 {
                     Utility.Registration newReg = new Utility.Registration();
-                    newReg.Username = UserName;
-                    newReg.EMail = eMail;
-                    newReg.Password = encPassword;
-                    newReg.isAdmin = IsAdmin;
+                    newReg.Username = c.UserName;
+                    newReg.EMail = c.eMail;
+                    newReg.Password = c.encPassword;
                     context.Registration.Add(newReg);
                     context.SaveChanges();
                 }
-                if (IsAdmin == true)
-                    return 4;
-                else
-                    return 1;
-            }
-            else if (vUserExists == true)
-            {
-                return 2;
+                return true;
             }
             else
             {
-                return 0;
+                return false;
             }
         }
 
@@ -64,23 +51,6 @@ namespace SWNAdmin
                 UserExists = true;
             }
             return UserExists;
-        }
-        
-        //Überprüft ob der Benutzer der erste Benutzer ist, der sich an der Datenbank anmelden. Wenn das der Fall ist wird ihm automatisch Admin-Rechte gegeben
-        private bool CheckIsFirstUser()
-        {
-            var context = new Utility.Db1Entities();
-            var query = from c in context.Registration select c;
-            var Count = query.Count();
-           
-            if (Count > 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
         }
     }
 }

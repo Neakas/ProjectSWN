@@ -53,10 +53,11 @@ namespace SWN
             Close();
         }
 
-        private void Submit_Click(object sender, RoutedEventArgs e)
+        private async void Submit_Click(object sender, RoutedEventArgs e)
         {
-            this.localclient = new Client();
+            localclient = new Client();
             SettingHandler.SetIPPort(tbIPPort.Text);
+            ServerConnection SC;
             if (textBoxEmail.Text.Length == 0)
             {
                 errormessage.Text = "Bitte Email-Addresse eingeben";
@@ -70,26 +71,26 @@ namespace SWN
             }
             else
             {
+                if (ServerConnection.CurrentInstance == null)
+                {
+                    SC = new ServerConnection();
+                }
+                else
+                {
+                    SC = ServerConnection.CurrentInstance;
+                }
                 localclient.UserName = textBoxUserName.Text;
                 localclient.eMail = textBoxEmail.Text;
                 string password = passwordBox1.Password;
                 Encryption E = new Encryption(passwordBox1.Password);
                 localclient.encPassword = E.EncryptStringToBytes(passwordBox1.Password);
 
-                ServerConnection SC = new ServerConnection();
-                int RegSuccessful = SC.ClientReg(localclient);
+                
+                bool RegSuccessful = await SC.tryReg(localclient);
 
-                if (RegSuccessful == 1)
+                if (RegSuccessful)
                 {
                     errormessage.Text = "Erfolgreich Registriert";
-                }
-                else if (RegSuccessful == 4)
-                {
-                    errormessage.Text = "Erfolgreich Registriert und als Admin angelegt";
-                }
-                else if (RegSuccessful == 2)
-                {
-                    errormessage.Text = "Der Benutzer existiert bereits";
                 }
                 //TODOLOW: Needs a Close for the Reg Connection
             }

@@ -4485,10 +4485,16 @@ namespace SWN.SWNServiceReference {
     public interface SWNService {
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/Connect", ReplyAction="SWNAdmin/SWNService/ConnectResponse")]
-        int Connect(SWN.SWNServiceReference.Client client);
+        bool Connect(SWN.SWNServiceReference.Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/Connect", ReplyAction="SWNAdmin/SWNService/ConnectResponse")]
-        System.Threading.Tasks.Task<int> ConnectAsync(SWN.SWNServiceReference.Client client);
+        System.Threading.Tasks.Task<bool> ConnectAsync(SWN.SWNServiceReference.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/Register", ReplyAction="SWNAdmin/SWNService/RegisterResponse")]
+        bool Register(SWN.SWNServiceReference.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/Register", ReplyAction="SWNAdmin/SWNService/RegisterResponse")]
+        System.Threading.Tasks.Task<bool> RegisterAsync(SWN.SWNServiceReference.Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/Disconnect", ReplyAction="SWNAdmin/SWNService/DisconnectResponse")]
         void Disconnect(SWN.SWNServiceReference.Client client);
@@ -4561,7 +4567,7 @@ namespace SWN.SWNServiceReference {
         void UserLeft(SWN.SWNServiceReference.Client client);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="SWNAdmin/SWNService/RefreshClients")]
-        void RefreshClients(System.Collections.Generic.List<SWN.SWNServiceReference.Client> clients);
+        void RefreshClients(System.Collections.Generic.List<string> clients);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="SWNAdmin/SWNService/Receive")]
         void Receive(SWN.SWNServiceReference.Message msg);
@@ -4613,12 +4619,20 @@ namespace SWN.SWNServiceReference {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public int Connect(SWN.SWNServiceReference.Client client) {
+        public bool Connect(SWN.SWNServiceReference.Client client) {
             return base.Channel.Connect(client);
         }
         
-        public System.Threading.Tasks.Task<int> ConnectAsync(SWN.SWNServiceReference.Client client) {
+        public System.Threading.Tasks.Task<bool> ConnectAsync(SWN.SWNServiceReference.Client client) {
             return base.Channel.ConnectAsync(client);
+        }
+        
+        public bool Register(SWN.SWNServiceReference.Client client) {
+            return base.Channel.Register(client);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RegisterAsync(SWN.SWNServiceReference.Client client) {
+            return base.Channel.RegisterAsync(client);
         }
         
         public void Disconnect(SWN.SWNServiceReference.Client client) {

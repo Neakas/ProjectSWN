@@ -41,7 +41,7 @@ namespace SWN
 
         private void QueryChars()
         {
-            lbCharacters.ItemsSource = ServerConnection.SWNClient.RequestSavedCharacters(MainWindow.CurrentInstance.localclient);
+            lbCharacters.ItemsSource = ServerConnection.LocalServiceClient.RequestSavedCharacters(MainWindow.CurrentInstance.LocalCient);
             lbCharacters.DisplayMemberPath = "Name";
         }
     }

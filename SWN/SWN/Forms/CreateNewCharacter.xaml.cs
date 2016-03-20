@@ -217,8 +217,8 @@ namespace SWN
 
         private void SetupTabControls()
         {
-            AdvList = ServerConnection.SWNClient.RequestAdvantages(MainWindow.CurrentInstance.localclient).OrderBy(x => x.Name).ToList();
-            reqList = ServerConnection.SWNClient.RequestRequirements((MainWindow.CurrentInstance.localclient));
+            AdvList = ServerConnection.LocalServiceClient.RequestAdvantages(MainWindow.CurrentInstance.LocalCient).OrderBy(x => x.Name).ToList();
+            reqList = ServerConnection.LocalServiceClient.RequestRequirements((MainWindow.CurrentInstance.LocalCient));
             //lbAdvantages.ItemsSource = AdvList;
             foreach (SWNServiceReference.Advantages item in AdvList)
             {
@@ -1210,12 +1210,12 @@ namespace SWN
             character.Intelligence = iudIntelligence.Value;
             character.Name = tbName.Text;
             character.Perception = iudPerception.Value;
-            character.PlayerName = MainWindow.CurrentInstance.localclient.UserName;
+            character.PlayerName = MainWindow.CurrentInstance.LocalCient.UserName;
             character.PointTotal = Int32.Parse(tbPoints.Text);
             character.Strenght = iudStrenght.Value;
             character.Weight = Int32.Parse(tbWeight.Text);
             character.WillPower = iudWillPower.Value;
-            ServerConnection.SWNClient.SaveCharacter(MainWindow.CurrentInstance.localclient, character);
+            ServerConnection.LocalServiceClient.SaveCharacter(MainWindow.CurrentInstance.LocalCient, character);
             System.Windows.MessageBox.Show("Saved!");
         }
     }

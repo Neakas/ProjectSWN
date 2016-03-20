@@ -15,6 +15,12 @@
   <wsdl:message name="SWNService_Connect_OutputMessage">
     <wsdl:part name="parameters" element="tns:ConnectResponse" />
   </wsdl:message>
+  <wsdl:message name="SWNService_Register_InputMessage">
+    <wsdl:part name="parameters" element="tns:Register" />
+  </wsdl:message>
+  <wsdl:message name="SWNService_Register_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterResponse" />
+  </wsdl:message>
   <wsdl:message name="SWNService_Disconnect_InputMessage">
     <wsdl:part name="parameters" element="tns:Disconnect" />
   </wsdl:message>
@@ -109,6 +115,10 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Connect">
       <wsdl:input wsaw:Action="SWNAdmin/SWNService/Connect" message="tns:SWNService_Connect_InputMessage" />
       <wsdl:output wsaw:Action="SWNAdmin/SWNService/ConnectResponse" message="tns:SWNService_Connect_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Register">
+      <wsdl:input wsaw:Action="SWNAdmin/SWNService/Register" message="tns:SWNService_Register_InputMessage" />
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/RegisterResponse" message="tns:SWNService_Register_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Disconnect">
       <wsdl:input wsaw:Action="SWNAdmin/SWNService/Disconnect" message="tns:SWNService_Disconnect_InputMessage" />

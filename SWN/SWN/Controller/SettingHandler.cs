@@ -146,18 +146,6 @@ namespace SWN
         //}
 
 
-        public static void SetUserName(string UserName)
-        {
-            SWN.Properties.Settings.Default.UserName = UserName;
-            SWN.Properties.Settings.Default.Save();
-        }
-
-        public static string GetUserName()
-        {
-            string UserName = SWN.Properties.Settings.Default.UserName;
-            return UserName;
-        }
-
         public static void PreloadImages()
         {
             foreach (string s in Directory.GetFiles(XmlHandler.GrabXMLValue(SettingHandler.GrabSettingFile(), "PicFilePath"), "*.*").Select(Path.GetFileName))
