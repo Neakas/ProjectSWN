@@ -16,9 +16,6 @@ using Xceed.Wpf.Toolkit;
 
 namespace SWN
 {
-    /// <summary>
-    /// Interaction logic for Create_New_Character.xaml
-    /// </summary>
     public partial class CreateNewCharacter : Window
     {
         //ToDo: Finish Me: MewCharacter
@@ -39,7 +36,7 @@ namespace SWN
         private double ModSpeed;
         private int BaseMove;
         private int ModMove;
-        private Dictionary<SWNServiceReference.Advantages, int> AdvantageLevels = new Dictionary<SWNServiceReference.Advantages, int>();
+        public Dictionary<SWNServiceReference.Advantages, int> BoughtAdvantageDict = new Dictionary<SWNServiceReference.Advantages, int>();
 
         private List<SWNServiceReference.Advantages> AdvList = new List<SWNServiceReference.Advantages>();
         private List<SWNServiceReference.Requirements> reqList = new List<SWNServiceReference.Requirements>();
@@ -79,6 +76,26 @@ namespace SWN
             UpdateMovePoints(BaseSpeed);
             SetupToolTips();
             SetupTabControls();
+            ReloadDataGrid();
+        }
+
+        private void ReloadDataGrid()
+        {
+            dgBoughtAdvantages.ItemsSource = BoughtAdvantageDict.ToDictionary(t => t.Key.Name, t => t.Value);
+            if (dgBoughtAdvantages.Items.Count > 0)
+            {
+                dgBoughtAdvantages.Columns[0].Header = "Bought Advantage";
+                dgBoughtAdvantages.Columns[1].Header = "Bought Level";
+                Color clr = new Color();
+                clr.A = 255;
+                clr.R = 51;
+                clr.G = 51;
+                clr.B = 51;
+                Brush bgbrush = new SolidColorBrush(clr);
+                dgBoughtAdvantages.RowBackground = bgbrush;
+                dgBoughtAdvantages.Foreground = Brushes.White;
+                dgBoughtAdvantages.Columns[0].Width = 420;
+            }
         }
 
         private void SetupToolTips()
@@ -220,6 +237,8 @@ namespace SWN
             AdvList = ServerConnection.LocalServiceClient.RequestAdvantages(MainWindow.CurrentInstance.LocalCient).OrderBy(x => x.Name).ToList();
             reqList = ServerConnection.LocalServiceClient.RequestRequirements((MainWindow.CurrentInstance.LocalCient));
             //lbAdvantages.ItemsSource = AdvList;
+            lbAdvantages.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Content",ListSortDirection.Ascending));
+            lbAdvantages.Items.IsLiveSorting = true;
             foreach (SWNServiceReference.Advantages item in AdvList)
             {
                 lbAdvantages.Items.Add(item);
@@ -229,6 +248,7 @@ namespace SWN
         private void OnPointsChange()
         {
             tbPoints.Text = Points.ToString();
+            tbLinkedPoints.Text = tbPoints.Text;
         }
 
         //Strenght
@@ -924,33 +944,6 @@ namespace SWN
             ModMove -= 1;
         }
 
-        private void lbAdvantages_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (lbAdvantages.SelectedItem != null)
-            {
-                PopulateAdvantageSideBar((SWNServiceReference.Advantages)lbAdvantages.SelectedItem);
-                if (tbAdvReq.Text == "")
-                {
-                    btBuyAdv.IsEnabled = true;
-                }
-                else
-                {
-                    btBuyAdv.IsEnabled = false;
-                    foreach (SWNServiceReference.Advantages item in lbBoughtAdvantages.Items)
-                    {
-                        if (item.Name == tbAdvReq.Text)
-                        {
-                            btBuyAdv.IsEnabled = true;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                btBuyAdv.IsEnabled = false;
-            }
-        }
-
         private void PopulateAdvantageSideBar(SWNServiceReference.Advantages item)
         {
             tbAdvType.Text = GetAdvType(item);
@@ -981,7 +974,6 @@ namespace SWN
                 }
             }
             return "";
-            //Requirements reqquery = (from c in context.Requirements where c.SourceItemID == Advantagequery.Id select c).FirstOrDefault();
         }
 
         private void ClearAdvantageSideBar()
@@ -992,13 +984,6 @@ namespace SWN
             txtbAdvDiscription.Text = "";
             tbAdvPointCost.Text = "";
         }
-
-        //private void PopulateDisadvantageSideBar(SWNServiceReference.Disadvantages item)
-        //{
-        //    tbAdvType.Text = GetDisAdvType(item);
-        //    txtbAdvDiscription.Text = item.Discription;
-        //    tbAdvPointCost.Text = item.PointCost.ToString();
-        //}
 
         private string GetAdvType(SWNServiceReference.Advantages item)
         {
@@ -1031,127 +1016,7 @@ namespace SWN
             Type = string.Join(",", Typelist);
             return Type;
         }
-        //private string GetDisAdvType(SWNServiceReference.Disadvantages item)
-        //{
-        //    List<string> Typelist = new List<string>();
-        //    string Type = "";
-        //    if (item.isPhysical == true)
-        //    {
-        //        Typelist.Add("Physical");
-        //    }
-        //    if (item.isMental == true)
-        //    {
-        //        Typelist.Add("Mental");
-        //    }
-        //    if (item.isMundane == true)
-        //    {
-        //        Typelist.Add("Mundane");
-        //    }
-        //    if (item.isExotic == true)
-        //    {
-        //        Typelist.Add("Exotic");
-        //    }
-        //    if (item.isSocial == true)
-        //    {
-        //        Typelist.Add("Social");
-        //    }
-        //    if (item.isSuperNatural == true)
-        //    {
-        //        Typelist.Add("Super-Natural");
-        //    }
-        //    Type = string.Join(",", Typelist);
-        //    return Type;
-        //}
 
-        private void lbDisadvantages_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void btBuyAdv_Click(object sender, RoutedEventArgs e)
-        {
-            BuyAdvantage();
-            ClearAdvantageSideBar();
-        }
-
-        private void btSellAdv_Click(object sender, RoutedEventArgs e)
-        {
-            SellAdvantage();
-
-            List<SWNServiceReference.Advantages> sortlist = new List<SWNServiceReference.Advantages>();
-            foreach (SWNServiceReference.Advantages item in lbAdvantages.Items)
-            {
-                sortlist.Add(item);
-            }
-            var newList = sortlist.OrderBy(x => x.Name).ToList();
-            lbAdvantages.Items.Clear();
-            foreach (SWNServiceReference.Advantages item in newList)
-            {
-                lbAdvantages.Items.Add(item);
-            }
-            ClearAdvantageSideBar();
-            tbboughtAdvLevels.Text = "";
-        }
-
-        private void BuyAdvantage()
-        {
-            SWNServiceReference.Advantages adv = lbAdvantages.SelectedItem as SWNServiceReference.Advantages;
-            if (CanBuy((int)adv.PointCost))
-            {
-                points -= (int)adv.PointCost;
-                if ((bool)adv.hasLevels)
-                {
-                    if (AdvantageLevels.ContainsKey(adv))
-                    {
-                        int value = AdvantageLevels[adv];
-                        AdvantageLevels[adv] = value + 1;
-                    }
-                    else
-                    {
-                        AdvantageLevels.Add(adv, 1);
-                        lbBoughtAdvantages.Items.Add(adv);
-                        lbBoughtAdvantages.DisplayMemberPath = "Name";
-                    }
-                }
-                else
-                {
-                    lbBoughtAdvantages.Items.Add(adv);
-                    lbBoughtAdvantages.DisplayMemberPath = "Name";
-                    lbAdvantages.Items.Remove(lbAdvantages.SelectedItem);
-                }
-                lbBoughtAdvantages.SelectedItem = null;
-            }
-        }
-
-        private void SellAdvantage()
-        {
-            SWNServiceReference.Advantages adv = lbBoughtAdvantages.SelectedItem as SWNServiceReference.Advantages;
-            points += (int)adv.PointCost;
-            if ((bool)adv.hasLevels)
-            {
-                if (AdvantageLevels.ContainsKey(adv))
-                {
-                    if (AdvantageLevels[adv] > 1)
-                    {
-                        AdvantageLevels[adv] -= 1;
-                    }
-                    else
-                    {
-                        AdvantageLevels.Remove(adv);
-                        lbBoughtAdvantages.Items.Remove(adv);
-                    }
-                }
-            }
-            else
-            {
-                lbAdvantages.Items.Add(adv);
-                lbAdvantages.Items.IsLiveSorting = true;
-                lbAdvantages.DisplayMemberPath = "Name";
-                lbBoughtAdvantages.Items.Remove(lbBoughtAdvantages.SelectedItem);
-            }
-            lbBoughtAdvantages.SelectedItem = null;
-            tbboughtAdvLevels.Text = "";
-        }
 
         private bool CanBuy(int Cost)
         {
@@ -1165,35 +1030,6 @@ namespace SWN
                 System.Windows.MessageBox.Show("That is to expensive!");
             }
             return canbuy;
-        }
-
-        private void lbBoughtAdvantages_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (lbBoughtAdvantages.SelectedItem != null)
-            {
-                PopulateAdvantageSideBar((SWNServiceReference.Advantages)lbBoughtAdvantages.SelectedItem);
-                btSellAdv.IsEnabled = true;
-                if ((bool)((SWNServiceReference.Advantages)lbBoughtAdvantages.SelectedItem).hasLevels)
-                {
-                    tbboughtAdvLevels.Text = AdvantageLevels[((SWNServiceReference.Advantages)lbBoughtAdvantages.SelectedItem)].ToString();
-                }
-                else
-                {
-                    tbboughtAdvLevels.Text = "";
-                }
-            }
-            else
-            {
-                btSellAdv.IsEnabled = false;
-            }
-        }
-
-        private void lbBoughtAdvantages_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (lbBoughtAdvantages.SelectedItem != null)
-            {
-                lbBoughtAdvantages.SelectedItem = lbBoughtAdvantages.SelectedItem;
-            }
         }
 
         private void btSaveCharacter_Click(object sender, RoutedEventArgs e)
@@ -1217,6 +1053,113 @@ namespace SWN
             character.WillPower = iudWillPower.Value;
             ServerConnection.LocalServiceClient.SaveCharacter(MainWindow.CurrentInstance.LocalCient, character);
             System.Windows.MessageBox.Show("Saved!");
+        }
+
+        public void btBuyAdv_Click(object sender, RoutedEventArgs e)
+        {
+            if (CanBuy((int)(lbAdvantages.SelectedItem as SWNServiceReference.Advantages).PointCost))
+            {
+                //BoughtAdvantageDict.Add((lbAdvantages.SelectedItem as SWNServiceReference.Advantages), 1);
+                BuyAdvantage();
+                ReloadDataGrid();
+                //ClearAdvantageSideBar();
+            }
+        }
+
+        private void BuyAdvantage()
+        {
+            SWNServiceReference.Advantages adv = lbAdvantages.SelectedItem as SWNServiceReference.Advantages;
+            if (CanBuy((int)adv.PointCost))
+            {
+                points -= (int)adv.PointCost;
+                if (BoughtAdvantageDict.ContainsKey(adv))
+                {
+                    int value = BoughtAdvantageDict[adv];
+                    BoughtAdvantageDict[adv] = value + 1;
+                }
+                else
+                {
+                    BoughtAdvantageDict.Add(adv, 1);
+                }
+                if ((bool)!adv.hasLevels)
+                {
+                    lbAdvantages.Items.Remove(lbAdvantages.SelectedItem);
+                }
+            }
+        }
+
+        private void SellAdvantage()
+        {
+            SWNServiceReference.Advantages adv = (from c in BoughtAdvantageDict where c.Key.Name == ((KeyValuePair<string, int>)dgBoughtAdvantages.SelectedItem).Key select c.Key).FirstOrDefault();
+            points += (int)adv.PointCost;
+            
+            if (BoughtAdvantageDict.ContainsKey(adv))
+            {
+                if (BoughtAdvantageDict[adv] > 1)
+                {
+                    BoughtAdvantageDict[adv] -= 1;
+                    ReloadDataGrid();
+                }
+                else
+                {
+                    BoughtAdvantageDict.Remove(adv);
+                    ReloadDataGrid();
+                    if ((bool)!adv.hasLevels)
+                    {
+                        lbAdvantages.Items.Add(adv);
+                        lbAdvantages.DisplayMemberPath = "Name";
+                        lbAdvantages.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Name", ListSortDirection.Ascending));
+                    }
+                }
+            }
+            ClearAdvantageSideBar();
+        }
+
+        private void lbAdvantages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dgBoughtAdvantages.SelectedItem = null;
+            ClearAdvantageSideBar();
+            if (lbAdvantages.SelectedItem != null)
+            {
+                PopulateAdvantageSideBar((SWNServiceReference.Advantages)lbAdvantages.SelectedItem);
+                if (tbAdvReq.Text == "")
+                {
+                    btBuyAdv.IsEnabled = true;
+                }
+                else
+                {
+                    btBuyAdv.IsEnabled = false;
+                    foreach (SWNServiceReference.Advantages item in BoughtAdvantageDict.Keys)
+                    {
+                        if (item.Name == tbAdvReq.Text)
+                        {
+                            btBuyAdv.IsEnabled = true;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                btBuyAdv.IsEnabled = false;
+            }
+        }
+
+        private void dgBoughtAdvantages_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (dgBoughtAdvantages.SelectedItem != null)
+            {
+                SellAdvantage();
+            }
+        }
+
+        private void dgBoughtAdvantages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            lbAdvantages.SelectedItem = null;
+            if (dgBoughtAdvantages.SelectedItem != null)
+            {
+                ClearAdvantageSideBar();
+                PopulateAdvantageSideBar((from c in BoughtAdvantageDict where c.Key.Name == ((KeyValuePair<string, int>)dgBoughtAdvantages.SelectedItem).Key select c.Key).FirstOrDefault());
+            }
         }
     }
 }

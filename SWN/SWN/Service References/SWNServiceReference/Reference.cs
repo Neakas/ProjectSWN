@@ -4572,6 +4572,9 @@ namespace SWN.SWNServiceReference {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="SWNAdmin/SWNService/Receive")]
         void Receive(SWN.SWNServiceReference.Message msg);
         
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="SWNAdmin/SWNService/SendErrorCode")]
+        void SendErrorCode(string ErrorMessage);
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="SWNAdmin/SWNService/ServiceIsShuttingDown")]
         void ServiceIsShuttingDown();
         

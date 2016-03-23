@@ -30,8 +30,6 @@ namespace SWN
         private static SWNServiceClient localserviceclient;
         private static ServerConnection currentinstance;
 
-        List<Client> OnlineClients;
-
         public static SWNServiceClient LocalServiceClient
         {
             get { return localserviceclient; }
@@ -141,48 +139,14 @@ namespace SWN
             }
         }
 
-        //public int ClientInit(Client C)
-        //{
-        //    try
-        //    {
-        //        SWNClient = new SWNServiceReference.SWNServiceClient(new InstanceContext(this), "netTcpBinding", "net.tcp://" + SettingHandler.GetIPPort() + "/swnservice");
-        //        SWNClient.Open();
-        //        string eMail = null;
-        //        C.eMail = eMail;
-        //        int SuccessfulLogin = SWNClient.Connect(C);
+        public void SendErrorCode(string ErrorCode)
+        {
+            Application.Current.Dispatcher.BeginInvoke((Action)delegate ()
+            {
+                Login.CurrentInstance.errormessage.Text = ErrorCode;
+            });
+        }
 
-        //        SettingHandler.SetUserName(C.UserName);
-        //        return SuccessfulLogin;
-        //    }
-        //    catch (FaultException exception)
-        //    {
-        //        CurrentLoginWindow.errormessage.Text = "Got " + exception.GetType().ToString();
-        //        CloseOrAbortServiceChannel(SWNClient);
-
-        //        return -2;
-        //    }
-        //    catch (CommunicationException)
-        //    {
-        //        CurrentLoginWindow.errormessage.Text = "Server not Responding";
-        //        CloseOrAbortServiceChannel(SWNClient);
-
-        //        return -2;
-        //    }
-        //    catch (TimeoutException exception)
-        //    {
-        //        CurrentLoginWindow.errormessage.Text = "Got " + exception.GetType().ToString();
-        //        CloseOrAbortServiceChannel(SWNClient);
-
-        //        return -2;
-        //    }
-        //    catch (Exception t)
-        //    {
-        //        MessageBox.Show(t.ToString());
-        //        CloseOrAbortServiceChannel(SWNClient);
-        //        return -1;
-        //        throw;
-        //    }
-        //}
 
         public void SendImage(SWNServiceReference.FileMessage fileMsg)
         {
@@ -254,55 +218,11 @@ namespace SWN
 
         public List<string> GrabLoggedInUsers()
         {
+            
             return LocalServiceClient.RequestOnlineUsersList();
         }
 
-        /// ////////////////////////////////////////////////
-
-        //für CharacterTransfer
-        //public CharacterController TransferCharacter(string UserName, CharacterController UserCharacter)
-        //{
-        //    scf = new ChannelFactory<IService>(new NetTcpBinding(), "net.tcp://" + SettingHandler.GetIPPort());
-        //    ServiceInterface = scf.CreateChannel();
-        //    CharacterController returnedChar = ServiceInterface.StoreUserCharacter(UserName, UserCharacter);
-        //    (ServiceInterface as ICommunicationObject).Close();
-        //    return returnedChar;
-        //}
-
-        //public List<SWNAdmin.Utility.Advantages> GrabAdvantageListFromServer()
-        //{
-        //    scf = new ChannelFactory<IService>(new NetTcpBinding(), "net.tcp://" + SettingHandler.GetIPPort());
-        //    ServiceInterface = scf.CreateChannel();
-        //    var AdvantageList = ServiceInterface.ClientCallAdvantages();
-        //    (ServiceInterface as ICommunicationObject).Close();
-        //    return AdvantageList;
-        //}
-
-        //public void GrabDisadvantageListFromServer()
-        //{
-        //    scf = new ChannelFactory<IService>(new NetTcpBinding(), "net.tcp://" + SettingHandler.GetIPPort());
-        //    ServiceInterface = scf.CreateChannel();
-        //    var DisadvantageList = ServiceInterface.ClientCallDisadvantages();
-        //    (ServiceInterface as ICommunicationObject).Close();
-        //}
-
-        //public void GrabCharacterBonusListFromServer()
-        //{
-        //    scf = new ChannelFactory<IService>(new NetTcpBinding(), "net.tcp://" + SettingHandler.GetIPPort());
-        //    ServiceInterface = scf.CreateChannel();
-        //    var CharacterBonusList = ServiceInterface.ClientCallCharacterBonus();
-        //    (ServiceInterface as ICommunicationObject).Close();
-        //}
-
-        //public void GrabCharacterMalusListFromServer()
-        //{
-        //    scf = new ChannelFactory<IService>(new NetTcpBinding(), "net.tcp://" + SettingHandler.GetIPPort());
-        //    ServiceInterface = scf.CreateChannel();
-        //    var CharacterMalusList = ServiceInterface.ClientCallCharacterMalus();
-        //    (ServiceInterface as ICommunicationObject).Close();
-        //}
-
-        //#region Server Callbacks
+        #region Server Callbacks
 
         public void RefreshClients(List<string> clients)
         {
@@ -468,5 +388,6 @@ namespace SWN
         {
             DateTime CurrentDateTime = SettingHandler.GetCurrentDateTime();
         }
+        #endregion
     }
 }

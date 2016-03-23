@@ -93,6 +93,9 @@
   <wsdl:message name="SWNService_Receive_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:Receive" />
   </wsdl:message>
+  <wsdl:message name="SWNService_SendErrorCode_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendErrorCode" />
+  </wsdl:message>
   <wsdl:message name="SWNService_ServiceIsShuttingDown_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ServiceIsShuttingDown" />
   </wsdl:message>
@@ -171,6 +174,9 @@
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Receive">
       <wsdl:output wsaw:Action="SWNAdmin/SWNService/Receive" message="tns:SWNService_Receive_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendErrorCode">
+      <wsdl:output wsaw:Action="SWNAdmin/SWNService/SendErrorCode" message="tns:SWNService_SendErrorCode_OutputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ServiceIsShuttingDown">
       <wsdl:output wsaw:Action="SWNAdmin/SWNService/ServiceIsShuttingDown" message="tns:SWNService_ServiceIsShuttingDown_OutputCallbackMessage" />

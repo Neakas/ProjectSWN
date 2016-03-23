@@ -283,8 +283,6 @@ namespace SWNAdmin
         {
             //Cleanup Check what is needed here!
             Application.Current.Dispatcher.BeginInvoke(new Action(() => this.imgTest.Source = new BitmapImage(uri)));
-            //Application.Current.Dispatcher.BeginInvoke(new Action(() => this.lblFileTransfer.Content = "No Filetransfer"));
-            //Application.Current.Dispatcher.BeginInvoke(new Action(() => this.lblFileTransfer.Foreground = Brushes.White));
         }
 
         private void submenuTimeManager_Click(object sender, RoutedEventArgs e)

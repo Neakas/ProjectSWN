@@ -23,6 +23,9 @@ namespace SWNAdmin
         void Receive(Message msg);
 
         [OperationContract(IsOneWay = true)]
+        void SendErrorCode(string ErrorMessage);
+
+        [OperationContract(IsOneWay = true)]
         void ServiceIsShuttingDown();
 
         [OperationContract(IsOneWay = true)]

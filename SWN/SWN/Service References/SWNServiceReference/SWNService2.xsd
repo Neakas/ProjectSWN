@@ -194,6 +194,13 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SendErrorCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ServiceIsShuttingDown">
     <xs:complexType>
       <xs:sequence />

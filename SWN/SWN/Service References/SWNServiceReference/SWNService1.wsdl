@@ -149,6 +149,12 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SendErrorCode">
+      <soap12:operation soapAction="SWNAdmin/SWNService/SendErrorCode" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ServiceIsShuttingDown">
       <soap12:operation soapAction="SWNAdmin/SWNService/ServiceIsShuttingDown" style="document" />
       <wsdl:output>

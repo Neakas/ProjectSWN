@@ -74,13 +74,33 @@ namespace SWNAdmin
                             catch (Exception)
                             {
                                 clientsDict.Remove(key);
+                                CurrentCallback.SendErrorCode("Server send Abort-Request!");
                             }
                         }
                         return true;
                     }
+                    else
+                    {
+                        CurrentCallback.SendErrorCode("The User: " + client.UserName + " does not exist!");
+                    }
                 }
             }
+            else
+            {
+                CurrentCallback.SendErrorCode("The User: " + client.UserName + " is already Logged-In! Wait a few Seconds for Cleanup...");
+                InvalidateUser(client);
+            }
             return false;
+        }
+
+        private void InvalidateUser(Client client)
+        {
+            LoginHandler LH = new LoginHandler();
+            if (LH.LoginCheck(client))
+            {
+                //client is Ok. client wanted Access, but is allready Online. Can only be a Crash related Stuck Client + Callback
+                Disconnect(client);
+            }
         }
 
         public bool Register(Client client)
@@ -113,13 +133,13 @@ namespace SWNAdmin
                 {
                     lock (syncObj)
                     {
-                        this.clientsDict.Remove(c);
+                        clientsDict.Remove(c);
                         MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": The User '" + client.UserName + "' logged out");
                         MainWindow.CurrentInstance.UpdateUserOnline(client.UserName, true);
                         foreach (ISWNServiceCallback callback in clientsDict.Values)
                         {
                             callback.RefreshClients((from ce in clientsDict.Keys select ce.UserName).ToList());
-                            callback.UserLeft(client);
+                            callback.UserLeft(client);                            
                         }
                     }
                     return;
@@ -134,6 +154,10 @@ namespace SWNAdmin
             MessageProperties prop = context.IncomingMessageProperties;
             RemoteEndpointMessageProperty endpoint = prop[RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
             ip = endpoint.Address;
+            if (ip == "::1")
+            {
+                return "localhost";
+            }
             return ip;
         }
 
