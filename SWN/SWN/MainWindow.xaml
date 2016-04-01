@@ -1,29 +1,29 @@
-﻿<Window x:Class="SWN.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
-        themes:ThemeManager.Theme="ExpressionDark"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:local="clr-namespace:SWN"
+        xmlns:UserControls="clr-namespace:SWN.UserControls" x:Class="SWN.MainWindow"
+        themes:ThemeManager.Theme="ExpressionDark"
         mc:Ignorable="d"
-        Title="MainWindow" Height="689.676" Width="1043.291" Loaded="Window_Loaded" Closed="Window_Closed" WindowState="Maximized">
+        Title="MainWindow" Height="695.676" Width="1463.291" Loaded="Window_Loaded" Closed="Window_Closed" WindowState="Maximized" Background="#FF4B4B4B">
     <Window.Resources>
         <Color x:Key="SWNBackground">#FF4B4B4B</Color>
     </Window.Resources>
-    <Window.Background>
-        <SolidColorBrush Color="#FF4B4B4B"/>
-    </Window.Background>
     <Grid>
         <Calendar x:Name="MainCalendar" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" DisplayDate="3000-01-01" Focusable="False" IsHitTestVisible="False" SelectionMode="None" IsTabStop="False" FirstDayOfWeek="Monday"/>
         <TextBox x:Name="tbClock" HorizontalAlignment="Left" Height="23" Margin="10,28,0,0" TextWrapping="Wrap" Text="00:00:00" VerticalAlignment="Top" Width="54" IsEnabled="False"/>
-        <Button x:Name="btOpenMap" Content="Open Mapping" HorizontalAlignment="Left" Margin="93,28,0,0" VerticalAlignment="Top" Width="96" Click="btOpenMap_Click" Height="23"/>
+        <Button x:Name="btOpenMap" Content="Open Mapping" HorizontalAlignment="Left" Margin="93,28,0,0" VerticalAlignment="Top" Width="96" Click="btOpenMap_Click" Height="23">
+        </Button>
         <Menu x:Name="menu" Height="23" VerticalAlignment="Top">
             <MenuItem Header="Datei"/>
             <MenuItem Header="Character">
                 <MenuItem x:Name="menuCreateNewCharacter" Header="Create New" HorizontalAlignment="Left" Width="215" Margin="0,0,-50,0" Click="menuCreateNewCharacter_Click"/>
                 <MenuItem x:Name="menuLoadCharacter" Header="Load" HorizontalAlignment="Left" Width="215" Margin="0,0,-50,0" Click="menuLoadCharacter_Click"/>
-                
                 <MenuItem x:Name="menuOpenCV" Header="Open CharacterViewer" HorizontalAlignment="Left" Width="215" Margin="0,0,-50,0" Click="MenuOpenCV_Click"/>
             </MenuItem>
             <MenuItem x:Name="menuTools" Header="Tools" Margin="0" VerticalAlignment="Top">
@@ -31,19 +31,21 @@
                 <MenuItem x:Name="submenuSectorViewer" Header="Sector Viewer" HorizontalAlignment="Left" Width="150" Click="submenuSectorViewer_Click"/>
             </MenuItem>
         </Menu>
-        <Grid Name="testgrid">
+        <Grid x:Name="testgrid">
             <Border  BorderBrush="Black" BorderThickness="2" Margin="10,286,0,0" HorizontalAlignment="Left" Width="405" Height="362" VerticalAlignment="Top" >
                 <ScrollViewer VerticalScrollBarVisibility="Auto"  BorderBrush="Black" BorderThickness="2">
-                    <StackPanel x:Name="sP1" HorizontalAlignment="Left" Width="403" VerticalAlignment="Top" Background="#FFC9C9C9" MinHeight="398" />
+                    <StackPanel x:Name="sP1" HorizontalAlignment="Left" Width="403" VerticalAlignment="Top" Background="#FFC9C9C9" MinHeight="398">
+                    </StackPanel>
                 </ScrollViewer>
             </Border>
             <Border Margin="440,33,103,327" BorderBrush="Black" BorderThickness="2">
-                <Image x:Name="imgTest" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+                <Image x:Name="imgTest" HorizontalAlignment="Left"  VerticalAlignment="Top">
+                </Image>
             </Border>
             <Label x:Name="lblFileTransfer" Content="No Filetransfer" HorizontalAlignment="Left" Margin="357,33,0,0" VerticalAlignment="Top" Foreground="White"/>
-
+            <StackPanel x:Name="spNotificationPanel" Height="366" Margin="0,28,-1,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="99"/>
         </Grid>
-        <Grid Name="Chat" Height="275" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="497">
+        <Grid x:Name="Chat" Height="275" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="497" Margin="0,0,99,10">
             <TextBox x:Name="tbChatPane" Grid.Row="0" Width="373" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Right" Margin="0,0,10,37" Height="228" VerticalAlignment="Bottom" IsReadOnly="True" >
                 <TextBox.Background>
                     <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}"/>

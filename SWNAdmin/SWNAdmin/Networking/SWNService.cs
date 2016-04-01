@@ -229,7 +229,7 @@ namespace SWNAdmin
                 try
                     {
                         OpenFileDialog fileDialog = new OpenFileDialog();
-                        fileDialog.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif| All files(*.*)|*.*";
+                        fileDialog.Filter = "All Files (*.*)|*.*|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif| JPEG files(*.jpeg)|*.jpeg";
                         fileDialog.Multiselect = false;
 
                         System.Windows.Forms.DialogResult Result = fileDialog.ShowDialog();

@@ -25,6 +25,8 @@ using WPF.Themes;
 using System.Windows.Threading;
 using System.Diagnostics;
 using System.Threading;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 
 namespace SWN
 {
@@ -32,6 +34,8 @@ namespace SWN
     {
         private delegate void FaultedInvoker();
         private Client localclient;
+        private Storyboard myStoryboard;
+        private Dictionary<UserControls.Notification, string> NotificationDict = new Dictionary<UserControls.Notification, string>();
 
         public Client LocalCient
         {
@@ -173,6 +177,41 @@ namespace SWN
             Application.Current.Dispatcher.BeginInvoke(new Action(() => this.imgTest.Source = new BitmapImage(uri)));
             Application.Current.Dispatcher.BeginInvoke(new Action(() => this.lblFileTransfer.Content = "No Filetransfer"));
             Application.Current.Dispatcher.BeginInvoke(new Action(() => this.lblFileTransfer.Foreground = Brushes.White));
+        }
+
+        public void CreateNotification(object notificationobject)
+        {
+            Application.Current.Dispatcher.BeginInvoke((Action)delegate ()
+            {
+                UserControls.Notification Notification = new UserControls.Notification(notificationobject);
+                Notification.NotificationText = "Received New Image";
+                NotificationDict.Add(Notification,"Notification" + (NotificationDict.Count+1));
+                ReloadNotificationPanel();
+            });
+        }
+
+        private void ReloadNotificationPanel()
+        {
+            //spNotificationPanel.Children.Clear();
+            foreach (UserControls.Notification notificationitem in NotificationDict.Keys)
+            {
+                if (!spNotificationPanel.Children.Contains(notificationitem))
+                {
+                    spNotificationPanel.Children.Add(notificationitem);
+                    // Animation Code für Notifications
+                    //DoubleAnimation myAnimation = new DoubleAnimation();
+                    ThicknessAnimation myAnimation = new ThicknessAnimation();
+                    this.RegisterName(NotificationDict[notificationitem], notificationitem);
+                    myAnimation.From = new Thickness(66, 0, 0, 0);
+                    myAnimation.To = new Thickness(0, 0, 0, 0);
+                    myAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
+                    myStoryboard = new Storyboard();
+                    myStoryboard.Children.Add(myAnimation);
+                    Storyboard.SetTargetName(myAnimation, NotificationDict[notificationitem]);
+                    Storyboard.SetTargetProperty(myAnimation, new PropertyPath(Border.MarginProperty));
+                    myStoryboard.Begin(this);
+                }
+            }
         }
 
         public void UpdateUserOnline(List<string> Userlist)

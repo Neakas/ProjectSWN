@@ -173,7 +173,7 @@ namespace SWN
                 }
             }
 
-            MainWindow.CurrentInstance.UpdateImageWindow(new Uri(XmlHandler.GrabXMLValue(SettingHandler.GrabSettingFile(), "PicFilePath") + @"\" + fileMsg.FileName));
+            MainWindow.CurrentInstance.CreateNotification(new Uri(XmlHandler.GrabXMLValue(SettingHandler.GrabSettingFile(), "PicFilePath") + @"\" + fileMsg.FileName));
 
             bool picnotinlist = true;
             foreach (string img in SettingHandler.ImageList)

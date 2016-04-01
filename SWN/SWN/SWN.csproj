@@ -147,6 +147,9 @@
     <Compile Include="UserControls\LanguageControl.xaml.cs">
       <DependentUpon>LanguageControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Notification.xaml.cs">
+      <DependentUpon>Notification.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SecondaryStatsLabel.xaml.cs">
       <DependentUpon>SecondaryStatsLabel.xaml</DependentUpon>
     </Compile>
@@ -201,7 +204,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\Dictionary1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\LanguageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Notification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
