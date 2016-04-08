@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using SWNAdmin.Forms;
+using SWNAdmin.Utility;
 
 namespace SWNAdmin.UserControls
 {
     /// <summary>
-    /// Interaction logic for ModifyStarSystem.xaml
+    ///     Interaction logic for ModifyStarSystem.xaml
     /// </summary>
     public partial class ModifyMajorMoon : UserControl
     {
@@ -27,56 +19,53 @@ namespace SWNAdmin.UserControls
 
         private void btApply_Click(object sender, RoutedEventArgs e)
         {
-            Utility.MajorMoons updateplanet;
-            using (var ctx = new Utility.Db1Entities())
+            MajorMoons updateplanet;
+            using (var ctx = new Db1Entities())
             {
-                updateplanet = ctx.MajorMoons.Where(s => s.Id.ToString() == tbMoonID.Text).FirstOrDefault<Utility.MajorMoons>();
+                updateplanet = ctx.MajorMoons.Where(s => s.Id.ToString() == tbMoonID.Text).FirstOrDefault();
             }
             if (updateplanet != null)
             {
-
-                    updateplanet.name = tbMoonName.Text;
-                updateplanet.atmCate = Int32.Parse(tbMoonatmCate.Text);
-                updateplanet.atmMass = Double.Parse(tbMoonatmMass.Text);
-                updateplanet.axialTilt = Double.Parse(tbMoonaxialTilt.Text);
-                updateplanet.mass = Double.Parse(tbMoonMoonMass.Text);
-                updateplanet.RVM = Double.Parse(tbMoonRVM.Text);
-                updateplanet.orbitalPeriod = Double.Parse(tbMoonorbitalPeriod.Text);
-                updateplanet.orbitalRadius = Double.Parse(tbMoonorbitalRadius.Text);
-                updateplanet.orbitalEccent = Double.Parse(tbMoonorbitalEccent.Text);
-                updateplanet.moonRadius = Double.Parse(tbMoonRadius.Text);
-                updateplanet.baseType = Int32.Parse(tbMoonType.Text);
-                updateplanet.SatelliteSize = Int32.Parse(tbMoonSite.Text);
-                updateplanet.blackbodyTemp = Double.Parse(tbMoonbbt.Text);
-                updateplanet.dayFaceMod = Int32.Parse(tbMoondayFaceMod.Text);
-                updateplanet.density = Double.Parse(tbMoonDensity.Text);
-                updateplanet.diameter = Double.Parse(tbMoonDiameter.Text);
-                updateplanet.gravity = Double.Parse(tbMoonGravity.Text);
+                updateplanet.name = tbMoonName.Text;
+                updateplanet.atmCate = int.Parse(tbMoonatmCate.Text);
+                updateplanet.atmMass = double.Parse(tbMoonatmMass.Text);
+                updateplanet.axialTilt = double.Parse(tbMoonaxialTilt.Text);
+                updateplanet.mass = double.Parse(tbMoonMoonMass.Text);
+                updateplanet.RVM = double.Parse(tbMoonRVM.Text);
+                updateplanet.orbitalPeriod = double.Parse(tbMoonorbitalPeriod.Text);
+                updateplanet.orbitalRadius = double.Parse(tbMoonorbitalRadius.Text);
+                updateplanet.orbitalEccent = double.Parse(tbMoonorbitalEccent.Text);
+                updateplanet.moonRadius = double.Parse(tbMoonRadius.Text);
+                updateplanet.baseType = int.Parse(tbMoonType.Text);
+                updateplanet.SatelliteSize = int.Parse(tbMoonSite.Text);
+                updateplanet.blackbodyTemp = double.Parse(tbMoonbbt.Text);
+                updateplanet.dayFaceMod = int.Parse(tbMoondayFaceMod.Text);
+                updateplanet.density = double.Parse(tbMoonDensity.Text);
+                updateplanet.diameter = double.Parse(tbMoonDiameter.Text);
+                updateplanet.gravity = double.Parse(tbMoonGravity.Text);
                 updateplanet.hydCoverage = tbMoonhydCov.Text;
-                updateplanet.isResonant = Boolean.Parse(tbMoonisRes.Text);
-                updateplanet.isTideLocked = Boolean.Parse(tbMoonisTideLock.Text);
-                updateplanet.retrogradeMotion = Boolean.Parse(tbMoonretrogradeMotion.Text);
-                updateplanet.rotationalPeriod = Double.Parse(tbMoonrotPeriod.Text);
-                updateplanet.SatelliteSize = Int32.Parse(tbMoonSite.Text);
-                updateplanet.siderealPeriod = Double.Parse(tbMoonsiderealPeriod.Text);
-                updateplanet.surfaceTemp = Double.Parse(tbMoonsurfaceTemp.Text);
-                updateplanet.tecActivity = Double.Parse(tbMoontecActivity.Text);
-                updateplanet.tideForce = Int32.Parse(tbMoontideForce.Text);
-                updateplanet.tideTotal = Int32.Parse(tbMoontideTotal.Text);
-                updateplanet.volActivity = Double.Parse(tbMoonvolActivity.Text);
-                updateplanet.orbitalCycle = Double.Parse(tbMoonOrbitalCycle.Text);
-
-
+                updateplanet.isResonant = bool.Parse(tbMoonisRes.Text);
+                updateplanet.isTideLocked = bool.Parse(tbMoonisTideLock.Text);
+                updateplanet.retrogradeMotion = bool.Parse(tbMoonretrogradeMotion.Text);
+                updateplanet.rotationalPeriod = double.Parse(tbMoonrotPeriod.Text);
+                updateplanet.SatelliteSize = int.Parse(tbMoonSite.Text);
+                updateplanet.siderealPeriod = double.Parse(tbMoonsiderealPeriod.Text);
+                updateplanet.surfaceTemp = double.Parse(tbMoonsurfaceTemp.Text);
+                updateplanet.tecActivity = double.Parse(tbMoontecActivity.Text);
+                updateplanet.tideForce = int.Parse(tbMoontideForce.Text);
+                updateplanet.tideTotal = int.Parse(tbMoontideTotal.Text);
+                updateplanet.volActivity = double.Parse(tbMoonvolActivity.Text);
+                updateplanet.orbitalCycle = double.Parse(tbMoonOrbitalCycle.Text);
             }
-            using (var dbCtx = new Utility.Db1Entities())
+            using (var dbCtx = new Db1Entities())
             {
                 //3. Mark entity as modified
-                dbCtx.Entry(updateplanet).State = System.Data.Entity.EntityState.Modified;
+                dbCtx.Entry(updateplanet).State = EntityState.Modified;
 
                 //4. call SaveChanges
                 dbCtx.SaveChanges();
             }
-            Forms.SystemSelector.CurrentInstance.LoadSystemsFromSql();
+            SystemSelector.CurrentInstance.LoadSystemsFromSql();
         }
     }
 }

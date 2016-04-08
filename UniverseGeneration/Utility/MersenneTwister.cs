@@ -75,7 +75,7 @@
 
 using System;
 
-namespace NPack
+namespace UniverseGeneration.Utility
 {
     /// <summary>
     /// Generates pseudo-random numbers using the Mersenne Twister algorithm.

@@ -1,35 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using SWNAdmin.Utility;
+using System.Linq;
 
-namespace SWNAdmin.Forms
+namespace SWNAdmin.Forms.DatabaseManager
 {
-    /// <summary>
-    /// Interaction logic for ManageModifier.xaml
-    /// </summary>
-    public partial class ManageModifiers : Window
+    public partial class ManageModifiers
     {
-        public List<Modifier> LoadedModifier;
-        
-        public Modifier SelectedModifier;
-        private string TestString;
 
-        public string teststring
-        {
-            get { return TestString; }
-            set { TestString = value; }
-        }
+        private Modifier _selectedModifier;
 
         public ManageModifiers()
         {
@@ -37,69 +17,77 @@ namespace SWNAdmin.Forms
             InitForm();
             LoadComboBoxGroups();
         }
-        public void InitForm()
-        {
-            var Context = new Utility.Db1Entities();
-            cbExistingModifier.ItemsSource = (from c in Context.Modifier select c).ToList().OrderBy(Modifier => Modifier.Name);
-            cbExistingModifier.DisplayMemberPath = "Name";
-        }
 
-        public void LoadComboBoxGroups()
+        private void InitForm()
         {
             var context = new Db1Entities();
-            cbGroup.ItemsSource = (from c in context.StatGroup select c).ToList().OrderBy(StatGroup => StatGroup.Name);
-            cbGroup.DisplayMemberPath = "Name";
+            CbExistingModifier.ItemsSource =
+                (from c in context.Modifier select c).ToList().OrderBy(modifier => modifier.Name);
+            CbExistingModifier.DisplayMemberPath = "Name";
         }
 
-        public void LoadComboBoxSubGroups()
+        private void LoadComboBoxGroups()
         {
             var context = new Db1Entities();
-            StatGroup sg = (cbGroup.SelectedItem as StatGroup);
-            cbSubGroup.ItemsSource = (from c in context.StatSubGroup where c.GroupId == sg.Id select c).ToList().OrderBy(StatSubGroup => StatSubGroup.Name);
-            cbSubGroup.DisplayMemberPath = "Name";
+            CbGroup.ItemsSource = (from c in context.StatGroup select c).ToList().OrderBy(statGroup => statGroup.Name);
+            CbGroup.DisplayMemberPath = "Name";
+        }
+
+        private void LoadComboBoxSubGroups()
+        {
+            var context = new Db1Entities();
+            var sg = CbGroup.SelectedItem as StatGroup;
+            CbSubGroup.ItemsSource =
+                (from c in context.StatSubGroup where c.GroupId == sg.Id select c).ToList()
+                    .OrderBy(statSubGroup => statSubGroup.Name);
+            CbSubGroup.DisplayMemberPath = "Name";
         }
 
         private void cbExistingModifier_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbExistingModifier.SelectedItem != null)
+            if (CbExistingModifier.SelectedItem != null)
             {
-                btAdd.Visibility = Visibility.Hidden;
-                btAdd.IsEnabled = false;
-                btUpdate.Visibility = Visibility.Visible;
-                btUpdate.IsEnabled = true;
-                btDelete.IsEnabled = true;
-                SelectedModifier = cbExistingModifier.SelectedItem as Modifier;
-                tbId.Text = SelectedModifier.Id.ToString();
-                tbModifierName.Text = SelectedModifier.Name?.ToString();
-                tbNotes.Text = SelectedModifier.Notes?.ToString();
-                tbDiscription.Text = SelectedModifier.Description?.ToString();
-                tbModProp.Text = SelectedModifier.Modifying_Property;
-                cbGroup.Text = SelectedModifier.Group;
-                cbSubGroup.Text = SelectedModifier.SubGroup.Replace(" ","");
+                BtAdd.Visibility = Visibility.Hidden;
+                BtAdd.IsEnabled = false;
+                BtUpdate.Visibility = Visibility.Visible;
+                BtUpdate.IsEnabled = true;
+                BtDelete.IsEnabled = true;
+                _selectedModifier = CbExistingModifier.SelectedItem as Modifier;
+                if (_selectedModifier == null) return;
+                TbId.Text = _selectedModifier.Id.ToString();
+                TbModifierName.Text = _selectedModifier.Name;
+                TbNotes.Text = _selectedModifier.Notes;
+                TbDiscription.Text = _selectedModifier.Description;
+                TbModProp.Text = _selectedModifier.Modifying_Property;
+                CbGroup.Text = _selectedModifier.Group;
+                CbSubGroup.Text = _selectedModifier.SubGroup.Replace(" ", "");
             }
             else
             {
-                btDelete.IsEnabled = false;
+                BtDelete.IsEnabled = false;
             }
         }
 
         private void btUpdate_Click(object sender, RoutedEventArgs e)
         {
-            var Context = new Utility.Db1Entities();
-            int id = Int32.Parse(tbId.Text);
-            var queryModifier = from c in Context.Modifier where c.Id == id select c;
-            
-            using (Context)
+            var context = new Db1Entities();
+            var id = int.Parse(TbId.Text);
+            var queryModifier = from c in context.Modifier where c.Id == id select c;
+
+            using (context)
             {
-                Modifier UpdateModifier = queryModifier.FirstOrDefault();
-                UpdateModifier.Name = tbModifierName.Text;
-                UpdateModifier.Notes = tbNotes.Text;
-                UpdateModifier.Description = tbDiscription.Text;
-                UpdateModifier.Modifying_Property = tbModProp.Text;
-                UpdateModifier.Group = cbGroup.Text.ToString();
-                UpdateModifier.SubGroup = cbSubGroup.Text.ToString();
-                Context.Entry(UpdateModifier).State = System.Data.Entity.EntityState.Modified;
-                Context.SaveChanges();
+                var updateModifier = queryModifier.FirstOrDefault();
+                if (updateModifier != null)
+                {
+                    updateModifier.Name = TbModifierName.Text;
+                    updateModifier.Notes = TbNotes.Text;
+                    updateModifier.Description = TbDiscription.Text;
+                    updateModifier.Modifying_Property = TbModProp.Text;
+                    updateModifier.Group = CbGroup.Text;
+                    updateModifier.SubGroup = CbSubGroup.Text;
+                    context.Entry(updateModifier).State = EntityState.Modified;
+                }
+                context.SaveChanges();
             }
             InitForm();
             btClear_Click(this, null);
@@ -107,15 +95,15 @@ namespace SWNAdmin.Forms
 
         private void btDelete_Click(object sender, RoutedEventArgs e)
         {
-            var Context = new Utility.Db1Entities();
-            int id = Int32.Parse(tbId.Text);
-            var queryModifier = from c in Context.Modifier where c.Id == id select c;
+            var context = new Db1Entities();
+            var id = int.Parse(TbId.Text);
+            var queryModifier = from c in context.Modifier where c.Id == id select c;
 
-            using (Context)
+            using (context)
             {
-                Modifier DeleteModifier = queryModifier.FirstOrDefault();
-                Context.Entry(DeleteModifier).State = System.Data.Entity.EntityState.Deleted;
-                Context.SaveChanges();
+                var deleteModifier = queryModifier.FirstOrDefault();
+                context.Entry(deleteModifier).State = EntityState.Deleted;
+                context.SaveChanges();
             }
             InitForm();
             btClear_Click(this, null);
@@ -123,68 +111,70 @@ namespace SWNAdmin.Forms
 
         private void btClear_Click(object sender, RoutedEventArgs e)
         {
-            cbExistingModifier.SelectedItem = null;
-            btAdd.Visibility = Visibility.Visible;
-            btAdd.IsEnabled = true;
-            btUpdate.Visibility = Visibility.Hidden;
-            btUpdate.IsEnabled = false;
-            SelectedModifier = null;
-            tbId.Text = "";
-            tbModifierName.Text = "";           
-            tbNotes.Text = "";
-            tbDiscription.Text = "";
-            tbModProp.Text = "";
-            cbGroup.SelectedItem = null;
-            cbSubGroup.SelectedItem = null;            
+            CbExistingModifier.SelectedItem = null;
+            BtAdd.Visibility = Visibility.Visible;
+            BtAdd.IsEnabled = true;
+            BtUpdate.Visibility = Visibility.Hidden;
+            BtUpdate.IsEnabled = false;
+            _selectedModifier = null;
+            TbId.Text = "";
+            TbModifierName.Text = "";
+            TbNotes.Text = "";
+            TbDiscription.Text = "";
+            TbModProp.Text = "";
+            CbGroup.SelectedItem = null;
+            CbSubGroup.SelectedItem = null;
         }
 
         private void btAdd_Click(object sender, RoutedEventArgs e)
         {
-            using (var Context = new Db1Entities())
+            using (var context = new Db1Entities())
             {
-                Modifier AddModifier = new Modifier();
-                AddModifier.Name = tbModifierName.Text;
-                AddModifier.Notes = tbNotes.Text;
-                AddModifier.Description = tbDiscription.Text;
-                AddModifier.Modifying_Property = tbModProp.Text;
-                AddModifier.Group = cbGroup.Text.ToString();
-                AddModifier.SubGroup = cbSubGroup.Text.ToString();
-                Context.Modifier.Add(AddModifier);
-                Context.SaveChanges();
+                var addModifier = new Modifier
+                {
+                    Name = TbModifierName.Text,
+                    Notes = TbNotes.Text,
+                    Description = TbDiscription.Text,
+                    Modifying_Property = TbModProp.Text,
+                    Group = CbGroup.Text,
+                    SubGroup = CbSubGroup.Text
+                };
+                context.Modifier.Add(addModifier);
+                context.SaveChanges();
             }
             InitForm();
             btClear_Click(this, null);
         }
+
         private void btOpenGroups_Click(object sender, RoutedEventArgs e)
         {
-            ManageGroups mg = new ManageGroups();
+            var mg = new ManageGroups();
             mg.ShowDialog();
             LoadComboBoxGroups();
         }
 
         private void cbGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbGroup.SelectedItem != null)
+            if (CbGroup.SelectedItem != null)
             {
-                cbSubGroup.IsEnabled = true;
+                CbSubGroup.IsEnabled = true;
                 LoadComboBoxSubGroups();
             }
             else
             {
-                cbSubGroup.IsEnabled = false;
+                CbSubGroup.IsEnabled = false;
             }
         }
 
         private void btCopy_Click(object sender, RoutedEventArgs e)
         {
-            tbId.Text = "";
-            cbExistingModifier.SelectedItem = null;
-            btAdd.Visibility = Visibility.Visible;
-            btAdd.IsEnabled = true;
-            btUpdate.Visibility = Visibility.Hidden;
-            btUpdate.IsEnabled = false;
-            SelectedModifier = null;
+            TbId.Text = "";
+            CbExistingModifier.SelectedItem = null;
+            BtAdd.Visibility = Visibility.Visible;
+            BtAdd.IsEnabled = true;
+            BtUpdate.Visibility = Visibility.Hidden;
+            BtUpdate.IsEnabled = false;
+            _selectedModifier = null;
         }
     }
 }
-

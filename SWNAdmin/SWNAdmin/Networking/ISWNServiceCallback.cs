@@ -1,12 +1,11 @@
-﻿using SWNAdmin;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
 using System.Threading.Tasks;
+using SWNAdmin.Classes;
+using SWNAdmin.Utility;
 
-namespace SWNAdmin
+namespace SWNAdmin.Networking
 {
     public interface ISWNServiceCallback
     {
@@ -30,7 +29,7 @@ namespace SWNAdmin
 
         [OperationContract(IsOneWay = true)]
         [ReferencePreservingDataContractFormat]
-        void SendStarSystem(SWNAdmin.Utility.StarSystems StarSystem);
+        void SendStarSystem(StarSystems StarSystem);
 
         [OperationContract(IsOneWay = true)]
         Task SendImage(FileMessage fMsg);

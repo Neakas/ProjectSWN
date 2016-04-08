@@ -3,14 +3,13 @@
                     xmlns:local="clr-namespace:SWN.UserControls">
 
     <Style x:Key="BorderStyle1" TargetType="{x:Type Border}">
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="CornerRadius" Value="3"/>
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="3" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" Value="#FF123BBA"/>
+                <Setter Property="BorderBrush" Value="#FF123BBA" />
             </Trigger>
         </Style.Triggers>
     </Style>
-    
-</ResourceDictionary>
 
+</ResourceDictionary>

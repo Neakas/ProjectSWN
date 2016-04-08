@@ -1,71 +1,57 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using SWN.Service_References.SWNServiceReference;
 
-namespace SWN
+namespace SWN.Controller
 {
-    class XmlHandler
+    internal class XmlHandler
     {
-        public static XElement CreateNode(string ElementName)
+        public static XElement CreateNode(string elementName)
         {
-            XElement xEle = new XElement(ElementName);
+            var xEle = new XElement(elementName);
             return xEle;
         }
 
-        public static XElement CreateNode(string ElementName, string Content)
+        public static XElement CreateNode(string elementName, string content)
         {
-            XElement xEle = new XElement(ElementName,Content);
+            var xEle = new XElement(elementName, content);
             return xEle;
         }
 
-        public static string GrabXMLValue(XDocument Document, string Element)
+        public static string GrabXmlValue(XDocument document, string element)
         {
-            string Value = "";
-            foreach (XElement xEle in Document.Element("configuration").Elements())
-            {
-                if (xEle.Name == Element)
-                {
-                    Value = xEle.Value;
-                    return Value;
-                }
-            }
-            return Value;
+            var xElement = document.Element("configuration");
+            var firstOrDefault = (xElement?.Elements())?.FirstOrDefault(x => x.Name == element);
+            var value = firstOrDefault?.Value;
+            return value;
+        }
+        
+        public static XDocument SetXmlValue(XDocument document, string element, string value)
+        {
+            var xElement = document.Element("configuration");
+            var xEle = xElement?.Elements().FirstOrDefault(x => x.Name == element);
+            if (xEle != null) xEle.Value = value;
+            document.Save(SettingHandler.SettingPath());
+            return document;
         }
 
-        public static XDocument SetXmlValue(XDocument Document, string Element, string Value)
+        public static void SerializeSystem(StarSystems starSystem)
         {
-            foreach (XElement xEle in Document.Element("configuration").Elements())
-            {
-                if (xEle.Name == Element)
-                {
-                    xEle.Value = Value;
-                    Document.Save(SettingHandler.SettingPath());
-                }
-            }
-            return Document;
-        }
-
-        public static void SerializeSystem(SWNServiceReference.StarSystems StarSystem)
-        {
-          
-        // Create a new XmlSerializer instance with the type of the test class
-        XmlSerializer SerializerObj = new XmlSerializer(typeof(SWNServiceReference.StarSystems));
+            // Create a new XmlSerializer instance with the type of the test class
+            var serializerObj = new XmlSerializer(typeof (StarSystems));
             try
             {
                 // Create a new file stream to write the serialized object to a file
-                TextWriter WriteFileStream = new StreamWriter(@"C:\Test\test.xml");
-                SerializerObj.Serialize(WriteFileStream, StarSystem);
-                WriteFileStream.Close();
+                TextWriter writeFileStream = new StreamWriter(@"C:\Test\test.xml");
+                serializerObj.Serialize(writeFileStream, starSystem);
+                writeFileStream.Close();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                e.ToString();
+                // ignored
             }
         }
     }

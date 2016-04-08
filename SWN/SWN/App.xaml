@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Application x:Class="SWN.App"  xmlns:local="clr-namespace:SWN" Startup="Application_Startup" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+<Application x:Class="SWN.App" xmlns:local="clr-namespace:SWN" Startup="Application_Startup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Application.Resources>
         <Color p4:Key="SWNBackgroundDark" xmlns:p4="http://schemas.microsoft.com/winfx/2006/xaml">#FF333333</Color>
         <Color p4:Key="SWNBackgroundColorLight" xmlns:p4="http://schemas.microsoft.com/winfx/2006/xaml">#FF2E2E2E</Color>

@@ -1,37 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
+using SWNAdmin.Classes;
+using SWNAdmin.Utility;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using amexus.Encryption;
-using System.Data.SqlClient;
-using System.Data;
-using System.ServiceModel;
-using System.IO;
 
-namespace SWNAdmin
+namespace SWNAdmin.Controller
 {
     public class LoginHandler
     {
-        public bool LoginCheck(Client cl)
+        public static bool LoginCheck(Client cl)
         {
-            using (var regcontext = new Utility.Db1Entities())
+            using (var regcontext = new Db1Entities())
             {
-                var query = from c in regcontext.Registration where c.Username == cl.UserName && c.Password == cl.encPassword select c;
+                var query = from c in regcontext.Registration
+                    where c.Username == cl.UserName && c.Password == cl.EncPassword
+                    select c;
                 try
                 {
-                    var UserID = query.FirstOrDefault().Id;
+                    var firstOrDefault = query.FirstOrDefault();
+                    var userId = firstOrDefault?.Id;
 
-                    if (UserID > 0)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    return userId > 0;
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                    // ignored
+                }
             }
             return false;
         }

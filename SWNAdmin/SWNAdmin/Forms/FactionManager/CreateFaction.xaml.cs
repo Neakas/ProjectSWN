@@ -1,29 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using SWNAdmin.Utility;
+using System.Linq;
 
-namespace SWNAdmin
+namespace SWNAdmin.Forms.FactionManager
 {
     /// <summary>
-    /// Interaction logic for CreateFaction.xaml
+    ///     Interaction logic for CreateFaction.xaml
     /// </summary>
-    public partial class CreateFaction : Window
+    public partial class CreateFaction
     {
-        int LoadedId = 0;
-        Window LoadWindow;
-        ListBox LoadBox;
-        Factions LoadedFaction;
+        private ListBox _loadBox;
+        private Factions _loadedFaction;
+        private const int LoadedId = 0;
+        private Window _loadWindow;
 
         public CreateFaction()
         {
@@ -33,127 +24,132 @@ namespace SWNAdmin
 
         private void FillRaceComboBox()
         {
-            using (var Context = new Utility.Db1Entities())
+            using (var context = new Db1Entities())
             {
-                cbRace.ItemsSource = (from c in Context.Aliens select c).ToList();
-                cbRace.DisplayMemberPath = "Name";
-                cbRace.SelectedValuePath = "Id";
+                CbRace.ItemsSource = (from c in context.Aliens select c).ToList();
+                CbRace.DisplayMemberPath = "Name";
+                CbRace.SelectedValuePath = "Id";
             }
         }
 
         private void btClear_Click(object sender, RoutedEventArgs e)
         {
-            tbName.Text = "";
-            cbRace.SelectedItem = null;
-            cbRace.SelectedValue = null;
-            tbHomeplanet.Text = "";
-            iudCunning.Value = null;
-            iudForce.Value = null;
-            iudWealth.Value = null;
-            iudIncome.Value = null;
-            iudMaxHp.Value = null;
+            TbName.Text = "";
+            CbRace.SelectedItem = null;
+            CbRace.SelectedValue = null;
+            TbHomeplanet.Text = "";
+            IudCunning.Value = null;
+            IudForce.Value = null;
+            IudWealth.Value = null;
+            IudIncome.Value = null;
+            IudMaxHp.Value = null;
 
-            btCreate.IsEnabled = true;
-            btCreate.Visibility = Visibility.Visible;
-            btUpdate.IsEnabled = false;
-            btUpdate.Visibility = Visibility.Hidden;
-            btDelete.IsEnabled = false;
-            btDelete.Visibility = Visibility.Hidden;
+            BtCreate.IsEnabled = true;
+            BtCreate.Visibility = Visibility.Visible;
+            BtUpdate.IsEnabled = false;
+            BtUpdate.Visibility = Visibility.Hidden;
+            BtDelete.IsEnabled = false;
+            BtDelete.Visibility = Visibility.Hidden;
         }
 
         private void btCreate_Click(object sender, RoutedEventArgs e)
         {
-            using (var Context = new Db1Entities())
+            using (var context = new Db1Entities())
             {
-                Factions faction = new Factions();
-                faction.Name = tbName.Text;
-                faction.HomePlanet = tbHomeplanet.Text;
-                faction.Race = cbRace.SelectedValue.ToString();
-                faction.Cunning = iudCunning.Value;
-                faction.Force = iudForce.Value;
-                faction.Wealth = iudWealth.Value;
-                faction.Income = iudIncome.Value;
-                faction.MaxHp = iudMaxHp.Value;
-                Context.Factions.Add(faction);
-                Context.SaveChanges();
+                var faction = new Factions
+                {
+                    Name = TbName.Text,
+                    HomePlanet = TbHomeplanet.Text,
+                    Race = CbRace.SelectedValue.ToString(),
+                    Cunning = IudCunning.Value,
+                    Force = IudForce.Value,
+                    Wealth = IudWealth.Value,
+                    Income = IudIncome.Value,
+                    MaxHp = IudMaxHp.Value
+                };
+                context.Factions.Add(faction);
+                context.SaveChanges();
             }
-            MessageBox.Show("The Faction '" + tbName.Text + "' has been saved to the Database");
+            MessageBox.Show("The Faction '" + TbName.Text + "' has been saved to the Database");
             btClear_Click(this, null);
         }
 
         private void btUpdate_Click(object sender, RoutedEventArgs e)
         {
-            using (var Context = new Db1Entities())
+            using (var context = new Db1Entities())
             {
-                Factions UpdateFaction = (from c in Context.Factions where c.Id == LoadedId select c).FirstOrDefault();
-                UpdateFaction.Name = tbName.Text;
-                UpdateFaction.HomePlanet = tbName.Text;
-                UpdateFaction.Race = cbRace.SelectedValue.ToString();
-                UpdateFaction.Cunning = iudCunning.Value;
-                UpdateFaction.Force = iudForce.Value;
-                UpdateFaction.Wealth = iudWealth.Value;
-                UpdateFaction.Income = iudIncome.Value;
-                UpdateFaction.MaxHp = iudMaxHp.Value;
-                Context.Entry(UpdateFaction).State = System.Data.Entity.EntityState.Modified;
-                Context.SaveChanges();
+                var updateFaction = (from c in context.Factions where c.Id == LoadedId select c).FirstOrDefault();
+                if (updateFaction != null)
+                {
+                    updateFaction.Name = TbName.Text;
+                    updateFaction.HomePlanet = TbName.Text;
+                    updateFaction.Race = CbRace.SelectedValue.ToString();
+                    updateFaction.Cunning = IudCunning.Value;
+                    updateFaction.Force = IudForce.Value;
+                    updateFaction.Wealth = IudWealth.Value;
+                    updateFaction.Income = IudIncome.Value;
+                    updateFaction.MaxHp = IudMaxHp.Value;
+                    context.Entry(updateFaction).State = EntityState.Modified;
+                }
+                context.SaveChanges();
             }
-            MessageBox.Show("The Faction '" + tbName.Text + "' has been Updated");
+            MessageBox.Show("The Faction '" + TbName.Text + "' has been Updated");
             btClear_Click(this, null);
         }
 
         private void btLoad_Click(object sender, RoutedEventArgs e)
         {
-            LoadWindow = new Window();
-            LoadWindow.Width = 200;
-            LoadWindow.Height = 200;
-            LoadBox = new ListBox();
-            LoadWindow.Content = LoadBox;
-            using (var Context = new Utility.Db1Entities())
+            _loadWindow = new Window
             {
-                LoadBox.ItemsSource = (from c in Context.Factions select c).ToList();
-                LoadBox.DisplayMemberPath = "Name";
-                LoadBox.MouseDoubleClick += LoadboxSelectionChanged;
+                Width = 200,
+                Height = 200
+            };
+            _loadBox = new ListBox();
+            _loadWindow.Content = _loadBox;
+            using (var context = new Db1Entities())
+            {
+                _loadBox.ItemsSource = (from c in context.Factions select c).ToList();
+                _loadBox.DisplayMemberPath = "Name";
+                _loadBox.MouseDoubleClick += LoadboxSelectionChanged;
             }
-            LoadWindow.ShowDialog();
+            _loadWindow.ShowDialog();
         }
 
         private void LoadboxSelectionChanged(object sender, RoutedEventArgs e)
         {
-            if (LoadBox.SelectedItem != null)
-            {
-                LoadedFaction = (Utility.Factions)LoadBox.SelectedItem;
-                LoadWindow.Close();
-                LoadFaction();
-            }
+            if (_loadBox.SelectedItem == null) return;
+            _loadedFaction = (Factions) _loadBox.SelectedItem;
+            _loadWindow.Close();
+            LoadFaction();
         }
 
         private void LoadFaction()
         {
-            tbName.Text = LoadedFaction.Name;
-            tbHomeplanet.Text = LoadedFaction.HomePlanet;
-            cbRace.SelectedValue = LoadedFaction.Race;
-            iudCunning.Value = LoadedFaction.Cunning;
-            iudForce.Value = LoadedFaction.Force;
-            iudIncome.Value = LoadedFaction.Income;
-            iudWealth.Value = LoadedFaction.Wealth;
-            iudMaxHp.Value = LoadedFaction.MaxHp;
-            btCreate.IsEnabled = false;
-            btCreate.Visibility = Visibility.Hidden;
-            btUpdate.IsEnabled = true;
-            btUpdate.Visibility = Visibility.Visible;
-            btDelete.IsEnabled = true;
-            btDelete.Visibility = Visibility.Visible;
+            TbName.Text = _loadedFaction.Name;
+            TbHomeplanet.Text = _loadedFaction.HomePlanet;
+            CbRace.SelectedValue = _loadedFaction.Race;
+            IudCunning.Value = _loadedFaction.Cunning;
+            IudForce.Value = _loadedFaction.Force;
+            IudIncome.Value = _loadedFaction.Income;
+            IudWealth.Value = _loadedFaction.Wealth;
+            IudMaxHp.Value = _loadedFaction.MaxHp;
+            BtCreate.IsEnabled = false;
+            BtCreate.Visibility = Visibility.Hidden;
+            BtUpdate.IsEnabled = true;
+            BtUpdate.Visibility = Visibility.Visible;
+            BtDelete.IsEnabled = true;
+            BtDelete.Visibility = Visibility.Visible;
         }
 
         private void btDelete_Click(object sender, RoutedEventArgs e)
         {
-            using (var Context = new Db1Entities())
+            using (var context = new Db1Entities())
             {
-                Factions delFaction = (from c in Context.Factions where c.Id == LoadedId select c).FirstOrDefault();
-                Context.Entry(delFaction).State = System.Data.Entity.EntityState.Deleted;
-                Context.SaveChanges();
+                var delFaction = (from c in context.Factions where c.Id == LoadedId select c).FirstOrDefault();
+                context.Entry(delFaction).State = EntityState.Deleted;
+                context.SaveChanges();
             }
-            MessageBox.Show("The Faction '" + tbName.Text + "' has been deleted from the Database");
+            MessageBox.Show("The Faction '" + TbName.Text + "' has been deleted from the Database");
             btClear_Click(this, null);
         }
     }

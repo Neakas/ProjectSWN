@@ -1,69 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using SWNAdmin.Forms;
+using SWNAdmin.Utility;
 
 namespace SWNAdmin.UserControls
 {
     /// <summary>
-    /// Interaction logic for ModifyStarSystem.xaml
+    ///     Interaction logic for ModifyStarSystem.xaml
     /// </summary>
     public partial class ModifyMoonlet : UserControl
     {
-        public static bool IsOuter { get; set; }
-
         public ModifyMoonlet()
         {
             InitializeComponent();
         }
 
+        public static bool IsOuter { get; set; }
+
         private void btApply_Click(object sender, RoutedEventArgs e)
         {
-
             if (tbIsOuter.Text == "true")
             {
-                Utility.OuterMoonlets updatemoonlet;
-                using (var ctx = new Utility.Db1Entities())
+                OuterMoonlets updatemoonlet;
+                using (var ctx = new Db1Entities())
                 {
-                    updatemoonlet = ctx.OuterMoonlets.Where(s => s.Id.ToString() == tbMoonletID.Text).FirstOrDefault<Utility.OuterMoonlets>();
+                    updatemoonlet = ctx.OuterMoonlets.Where(s => s.Id.ToString() == tbMoonletID.Text).FirstOrDefault();
                 }
                 if (updatemoonlet != null)
                 {
-
-                        updatemoonlet.name = tbMoonletName.Text;
-                    updatemoonlet.planetRadius = Double.Parse(tbMoonletRadius.Text);
-                    updatemoonlet.blackbodyTemp = Double.Parse(tbMoonletblackbodyTemp.Text);
-                    updatemoonlet.planetRadius = Double.Parse(tbMoonletRadius.Text);
-                    updatemoonlet.orbitalEccent = Double.Parse(tbMoonletorbitalEccent.Text);
-                    updatemoonlet.orbitalPeriod = Double.Parse(tbMoonletorbitalPeriod.Text);
-                    updatemoonlet.orbitalRadius = Double.Parse(tbMoonletorbitalRadius.Text);
+                    updatemoonlet.name = tbMoonletName.Text;
+                    updatemoonlet.planetRadius = double.Parse(tbMoonletRadius.Text);
+                    updatemoonlet.blackbodyTemp = double.Parse(tbMoonletblackbodyTemp.Text);
+                    updatemoonlet.planetRadius = double.Parse(tbMoonletRadius.Text);
+                    updatemoonlet.orbitalEccent = double.Parse(tbMoonletorbitalEccent.Text);
+                    updatemoonlet.orbitalPeriod = double.Parse(tbMoonletorbitalPeriod.Text);
+                    updatemoonlet.orbitalRadius = double.Parse(tbMoonletorbitalRadius.Text);
                 }
-                using (var dbCtx = new Utility.Db1Entities())
+                using (var dbCtx = new Db1Entities())
                 {
                     //3. Mark entity as modified
-                    dbCtx.Entry(updatemoonlet).State = System.Data.Entity.EntityState.Modified;
+                    dbCtx.Entry(updatemoonlet).State = EntityState.Modified;
 
                     //4. call SaveChanges
                     dbCtx.SaveChanges();
                 }
-                Forms.SystemSelector.CurrentInstance.LoadSystemsFromSql();
+                SystemSelector.CurrentInstance.LoadSystemsFromSql();
             }
             else
             {
-                Utility.InnerMoonlets updatemoonlet;
-                using (var ctx = new Utility.Db1Entities())
+                InnerMoonlets updatemoonlet;
+                using (var ctx = new Db1Entities())
                 {
-                    updatemoonlet = ctx.InnerMoonlets.Where(s => s.Id.ToString() == tbMoonletID.Text).FirstOrDefault<Utility.InnerMoonlets>();
+                    updatemoonlet = ctx.InnerMoonlets.Where(s => s.Id.ToString() == tbMoonletID.Text).FirstOrDefault();
                 }
                 if (updatemoonlet != null)
                 {
@@ -71,22 +61,22 @@ namespace SWNAdmin.UserControls
                     {
                         updatemoonlet.name = tbMoonletName.Text;
                     }
-                    updatemoonlet.planetRadius = Double.Parse(tbMoonletRadius.Text);
-                    updatemoonlet.blackbodyTemp = Double.Parse(tbMoonletblackbodyTemp.Text);
-                    updatemoonlet.planetRadius = Double.Parse(tbMoonletRadius.Text);
-                    updatemoonlet.orbitalEccent = Double.Parse(tbMoonletorbitalEccent.Text);
-                    updatemoonlet.orbitalPeriod = Double.Parse(tbMoonletorbitalPeriod.Text);
-                    updatemoonlet.orbitalRadius = Double.Parse(tbMoonletorbitalRadius.Text);
+                    updatemoonlet.planetRadius = double.Parse(tbMoonletRadius.Text);
+                    updatemoonlet.blackbodyTemp = double.Parse(tbMoonletblackbodyTemp.Text);
+                    updatemoonlet.planetRadius = double.Parse(tbMoonletRadius.Text);
+                    updatemoonlet.orbitalEccent = double.Parse(tbMoonletorbitalEccent.Text);
+                    updatemoonlet.orbitalPeriod = double.Parse(tbMoonletorbitalPeriod.Text);
+                    updatemoonlet.orbitalRadius = double.Parse(tbMoonletorbitalRadius.Text);
                 }
-                using (var dbCtx = new Utility.Db1Entities())
+                using (var dbCtx = new Db1Entities())
                 {
                     //3. Mark entity as modified
-                    dbCtx.Entry(updatemoonlet).State = System.Data.Entity.EntityState.Modified;
+                    dbCtx.Entry(updatemoonlet).State = EntityState.Modified;
 
                     //4. call SaveChanges
                     dbCtx.SaveChanges();
                 }
-                Forms.SystemSelector.CurrentInstance.LoadSystemsFromSql();
+                SystemSelector.CurrentInstance.LoadSystemsFromSql();
             }
         }
     }

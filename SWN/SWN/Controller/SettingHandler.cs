@@ -1,158 +1,124 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 using System.IO;
-using System.Drawing;
+using System.Linq;
+using System.Reflection;
+using System.Xml.Linq;
+using SWN.Properties;
 
-namespace SWN
+namespace SWN.Controller
 {
-    
     public class SettingHandler
     {
         public static List<string> ImageList = new List<string>();
 
         public static DateTime GetCurrentDateTime()
         {
-            DateTime CurrentDateTime = SWN.Properties.Settings.Default.CurrentDateTime;
-            return CurrentDateTime;
+            return Settings.Default.CurrentDateTime;
         }
 
         //Setzt die Aktuelle DateTime
-        public static void SetCurrentDateTime(DateTime DateTimeValue, bool isUndo = false)
+        public static void SetCurrentDateTime(DateTime dateTimeValue, bool isUndo = false)
         {
-            //cleanup erstmal rausgenommen
-            //if (isUndo == false)
-            //{
-            //    UndoHandler.AddItemToUndoList(GetCurrentDateTime());
-            //}
-                SWN.Properties.Settings.Default.CurrentDateTime = DateTimeValue;
-                SWN.Properties.Settings.Default.Save();
+            Settings.Default.CurrentDateTime = dateTimeValue;
+            Settings.Default.Save();
         }
 
         public static bool GetisStartDate()
         {
-            bool isStartDate = SWN.Properties.Settings.Default.isStartDate;
+            var isStartDate = Settings.Default.isStartDate;
             return isStartDate;
         }
 
-        public static void SetisStartDate(bool Boolean)
+        public static void SetisStartDate(bool boolean)
         {
-            SWN.Properties.Settings.Default.isStartDate = Boolean;
-            SWN.Properties.Settings.Default.Save();
-        }
-        
-        public static bool GethasUndo()
-        {
-            bool hasUndo = SWN.Properties.Settings.Default.hasUndo;
-            return hasUndo;
+            Settings.Default.isStartDate = boolean;
+            Settings.Default.Save();
         }
 
-        public static void SethasUndo(bool Boolean)
+        public static bool GethasUndo()
         {
-            SWN.Properties.Settings.Default.hasUndo = Boolean;
-            SWN.Properties.Settings.Default.Save();
+            return Settings.Default.hasUndo;
+        }
+
+        public static void SethasUndo(bool boolean)
+        {
+            Settings.Default.hasUndo = boolean;
+            Settings.Default.Save();
         }
 
         public static bool GetIsLoggedIn()
         {
-            bool isLoggedIN = SWN.Properties.Settings.Default.LoggedIn;
-            return isLoggedIN;
+            return Settings.Default.LoggedIn;
         }
 
-        public static void SetIsLoggedIn(bool Boolean)
+        public static void SetIsLoggedIn(bool boolean)
         {
-            SWN.Properties.Settings.Default.LoggedIn = Boolean;
-            SWN.Properties.Settings.Default.Save();
+            Settings.Default.LoggedIn = boolean;
+            Settings.Default.Save();
         }
 
-        public static string GetIPPort()
+        public static string GetIpPort()
         {
-            string IPPort = XmlHandler.GrabXMLValue(GrabSettingFile(), "IPPort");
-            return IPPort;
+            return XmlHandler.GrabXmlValue(GrabSettingFile(), "ipPort");
         }
 
-        public static void SetIPPort(string IPPort)
+        public static void SetIpPort(string ipPort)
         {
-            XmlHandler.SetXmlValue(GrabSettingFile(), "IPPort", IPPort);
+            XmlHandler.SetXmlValue(GrabSettingFile(), "ipPort", ipPort);
         }
+
         public static bool GetTurnOffMusic()
         {
-            bool Value = bool.Parse(XmlHandler.GrabXMLValue(GrabSettingFile(), "TurnOffMusic"));
-            return Value;
+            return bool.Parse(XmlHandler.GrabXmlValue(GrabSettingFile(), "TurnOffMusic"));
         }
 
-        public static void TurnOffMusic(bool Value)
+        public static void TurnOffMusic(bool value)
         {
-            Value = !Value;
-            XmlHandler.SetXmlValue(GrabSettingFile(), "TurnOffMusic", Value.ToString());
+            value = !value;
+            XmlHandler.SetXmlValue(GrabSettingFile(), "TurnOffMusic", value.ToString());
         }
 
         public static XDocument GrabSettingFile()
         {
-            if (File.Exists(SettingPath()))
-            {
-                XDocument xDoc = XDocument.Load(SettingPath());
-                return xDoc;
-            }
-            return null;
+            if (!File.Exists(SettingPath())) return null;
+            var xDoc = XDocument.Load(SettingPath());
+            return xDoc;
         }
 
         public static string SettingPath()
         {
-            string TargetPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
-            TargetPath = TargetPath.Remove(0, 6);
-            string SettingFileName = "Config.cfg";
-            string sPath = Path.Combine(TargetPath, SettingFileName);
+            var targetPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
+            if (targetPath == null) return null;
+            targetPath = targetPath.Remove(0, 6);
+            const string settingFileName = "Config.cfg";
+            var sPath = Path.Combine(targetPath, settingFileName);
             return sPath;
         }
 
         public static void InitSettingFile()
         {
-            if (XmlHandler.GrabXMLValue(SettingHandler.GrabSettingFile(), "FirstLoad") == "true")
+            if (XmlHandler.GrabXmlValue(GrabSettingFile(), "FirstLoad") != "true") return;
+            var targetPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
+            if (targetPath != null)
             {
-                string picTargetFolderName = "Received Images";
-                string fileTargetFolderName = "Received Files";
-                string TargetPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
-                TargetPath = TargetPath.Remove(0, 6);
-                string picDir = Path.Combine(TargetPath, picTargetFolderName);
-                string fileDir = Path.Combine(TargetPath, fileTargetFolderName);
+                targetPath = targetPath.Remove(0, 6);
+                var picDir = Path.Combine(targetPath, "Received Images");
+                var fileDir = Path.Combine(targetPath, "Received Files");
                 Directory.CreateDirectory(picDir);
-                XmlHandler.SetXmlValue(SettingHandler.GrabSettingFile(), "FirstLoad", "false");
-                XmlHandler.SetXmlValue(SettingHandler.GrabSettingFile(), "PicFilePath", picDir);
-                XmlHandler.SetXmlValue(SettingHandler.GrabSettingFile(), "DataFilePath", fileDir);
-                XmlHandler.SetXmlValue(SettingHandler.GrabSettingFile(), "IPPort", GetIPPort());
+                XmlHandler.SetXmlValue(GrabSettingFile(), "FirstLoad", "false");
+                XmlHandler.SetXmlValue(GrabSettingFile(), "PicFilePath", picDir);
+                XmlHandler.SetXmlValue(GrabSettingFile(), "DataFilePath", fileDir);
             }
+            XmlHandler.SetXmlValue(GrabSettingFile(), "ipPort", GetIpPort());
         }
-
-        //Cleanup Delete if not needed
-        //private static bool CheckSettingFile(string Path)
-        //{
-        //    if (File.Exists(SettingPath()) == false)
-        //    {
-        //        SetSettingInit(false);
-        //        File.Create(SettingPath()).Close();
-        //    }
-        //    if (GetSettingInit() == false)
-        //    {
-        //        XDocument doc = new XDocument(new XElement("body", new XElement("Db1ConnectionString"), new XElement("IPPort")));
-        //        doc = XmlHandler.SetXmlValue(doc, "IPPort", "localhost:8000");
-        //        doc.Save(SettingPath());
-        //        SetSettingInit(true);
-        //    }
-        //    return true;
-        //}
-
 
         public static void PreloadImages()
         {
-            foreach (string s in Directory.GetFiles(XmlHandler.GrabXMLValue(SettingHandler.GrabSettingFile(), "PicFilePath"), "*.*").Select(Path.GetFileName))
+            foreach (var s in Directory.GetFiles(XmlHandler.GrabXmlValue(GrabSettingFile(), "PicFilePath"), "*.*").Select(Path.GetFileName))
             {
                 ImageList.Add(s);
             }
         }
-
     }
 }

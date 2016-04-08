@@ -1,23 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using SWNAdmin.Utility;
+using System.Linq;
 
-namespace SWNAdmin.Forms
+namespace SWNAdmin.Forms.DatabaseManager
 {
     /// <summary>
-    /// Interaction logic for AddStat.xaml
+    ///     Interaction logic for AddStat.xaml
     /// </summary>
-    public partial class ManageStat : Window
+    public partial class ManageStat
     {
         public ManageStat()
         {
@@ -27,37 +18,36 @@ namespace SWNAdmin.Forms
 
         private void FillListbox()
         {
-            var context = new Utility.Db1Entities();
+            var context = new Db1Entities();
             var query = from c in context.Attribute select c;
             var stats = query.ToList();
-            lbStats.ItemsSource = stats;
-            lbStats.DisplayMemberPath = "StatName";
-            lbStats.SelectedValuePath = "Id";
+            LbStats.ItemsSource = stats;
+            LbStats.DisplayMemberPath = "StatName";
+            LbStats.SelectedValuePath = "Id";
         }
 
         private void btAdd_Click(object sender, RoutedEventArgs e)
         {
-            var findcontext = new Utility.Db1Entities();
-            var query = from c in findcontext.Attribute where c.Name == tbStat.Text select c;
+            var findcontext = new Db1Entities();
+            var query = from c in findcontext.Attribute where c.Name == TbStat.Text select c;
             var foundstat = query.FirstOrDefault();
             if (foundstat == null)
             {
-                if (tbStat.Text == "")
+                if (TbStat.Text == "")
                 {
                     MessageBox.Show("Please input Stat!");
                 }
                 else
                 {
-                    using (var context = new Utility.Db1Entities())
+                    using (var context = new Db1Entities())
                     {
-                        Utility.Attribute newStat = new Utility.Attribute();
-                        newStat.Name = tbStat.Text;
+                        var newStat = new Attribute {Name = TbStat.Text};
                         context.Attribute.Add(newStat);
                         context.SaveChanges();
                     }
-                    MessageBox.Show("'" + tbStat.Text + "' added to the Database");
+                    MessageBox.Show("'" + TbStat.Text + "' added to the Database");
                     FillListbox();
-                    tbStat.Text = "";
+                    TbStat.Text = "";
                 }
             }
             else
@@ -68,22 +58,22 @@ namespace SWNAdmin.Forms
 
         private void btDel_Click(object sender, RoutedEventArgs e)
         {
-            var context = new Utility.Db1Entities();
-            var query = from c in context.Attribute where c.Name == tbStat.Text select c;
+            var context = new Db1Entities();
+            var query = from c in context.Attribute where c.Name == TbStat.Text select c;
             var foundstat = query.FirstOrDefault();
-            if (tbStat.Text == "")
+            if (TbStat.Text == "")
             {
                 MessageBox.Show("Please input Stat!");
             }
             else
             {
-                if (foundstat.Id != 0)
+                if (foundstat != null && foundstat.Id != 0)
                 {
                     context.Attribute.Remove(foundstat);
                     context.SaveChanges();
                     FillListbox();
-                    MessageBox.Show("'" + tbStat.Text + "' deleted from the Database");
-                    tbStat.Text = "";
+                    MessageBox.Show("'" + TbStat.Text + "' deleted from the Database");
+                    TbStat.Text = "";
                 }
                 else
                 {
@@ -94,12 +84,8 @@ namespace SWNAdmin.Forms
 
         private void lbStats_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (lbStats.SelectedItem != null)
-            {
-                Utility.Attribute selectedStat = new Utility.Attribute();
-                selectedStat = lbStats.SelectedItem as Utility.Attribute;
-                tbStat.Text = selectedStat.Name;
-            }
+            var selectedStat = LbStats.SelectedItem as Attribute;
+            if (selectedStat != null) TbStat.Text = selectedStat.Name;
         }
     }
 }

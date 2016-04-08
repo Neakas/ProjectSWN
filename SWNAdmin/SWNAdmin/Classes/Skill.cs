@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SWNAdmin.Utility;
 
 namespace SWNAdmin.Classes
 {
-    class SkillPrerequisites : Utility.Skills
+    internal class SkillPrerequisites : Skills
     {
-        public static void CheckPrereqString(Utility.Skills skill)
+        public static void CheckPrereqString(Skills skill)
         {
-            
         }
     }
 }

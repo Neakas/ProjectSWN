@@ -223,6 +223,9 @@
     <Compile Include="Utility\Character.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utility\Disadvantages.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="Utility\encycloFactions.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
@@ -248,30 +251,6 @@
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\Helper.cs" />
-    <Compile Include="Utility\Modifier.cs">
-      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Utility\Requirements.cs">
-      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Utility\Skills.cs">
-      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Utility\SkillSpecialization.cs">
-      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Utility\StatGroup.cs">
-      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Utility\StatSubGroup.cs">
-      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Utility\UDateTime.cs">
-      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Utility\Disadvantages.cs">
-      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
-    </Compile>
     <Compile Include="Utility\Encrypter.cs" />
     <Compile Include="Controller\HexagonGrid.cs" />
     <Compile Include="Controller\LoginHandler.cs" />
@@ -287,6 +266,9 @@
     <Compile Include="Utility\MajorMoons.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utility\Modifier.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="Utility\OuterMoonlets.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
@@ -299,7 +281,16 @@
     <Compile Include="Utility\Registration.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utility\Requirements.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
     <Compile Include="Utility\SatelliteBaseTypes.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\Skills.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\SkillSpecialization.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\SqlManager.cs" />
@@ -307,6 +298,12 @@
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\StarSystems.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\StatGroup.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\StatSubGroup.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\TransferableStarSystem.Context.cs">
@@ -323,6 +320,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TransferableStarSystem.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\UDateTime.cs">
+      <DependentUpon>TransferableStarSystem.tt</DependentUpon>
     </Compile>
     <Compile Include="Utility\UsedModifier.cs">
       <DependentUpon>TransferableStarSystem.tt</DependentUpon>

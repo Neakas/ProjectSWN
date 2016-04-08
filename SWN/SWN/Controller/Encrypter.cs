@@ -1,22 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Security.Cryptography;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 
-namespace amexus.Encryption
+namespace SWN.Controller
 {
     public class Encryption
     {
-        byte[] Key, IV;
+        private readonly byte[] _iv;
+        private readonly byte[] _key;
 
         public Encryption(string key)
         {
-            byte[] bytes = new byte[16];
+            var bytes = new byte[16];
             Encoding.ASCII.GetBytes(key, 0, Math.Min(key.Length, 16), bytes, 0);
-            Key = bytes;
-            IV = Convert.FromBase64String("2sFIzEmmg1Q=");
+            _key = bytes;
+            _iv = Convert.FromBase64String("2sFIzEmmg1Q=");
         }
 
         public string EncryptStringToBytes(string plainText)
@@ -28,22 +27,21 @@ namespace amexus.Encryption
             byte[] encrypted;
             // Create an TripleDESCryptoServiceProvider object
             // with the specified key and IV.
-            using (TripleDESCryptoServiceProvider tdsAlg = new TripleDESCryptoServiceProvider())
+            using (var tdsAlg = new TripleDESCryptoServiceProvider())
             {
-                tdsAlg.Key = Key;
-                tdsAlg.IV = IV;
+                tdsAlg.Key = _key;
+                tdsAlg.IV = _iv;
 
                 // Create a decrytor to perform the stream transform.
-                ICryptoTransform encryptor = tdsAlg.CreateEncryptor(tdsAlg.Key, tdsAlg.IV);
+                var encryptor = tdsAlg.CreateEncryptor(tdsAlg.Key, tdsAlg.IV);
 
                 // Create the streams used for encryption.
-                using (MemoryStream msEncrypt = new MemoryStream())
+                using (var msEncrypt = new MemoryStream())
                 {
-                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                    using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                     {
-                        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                        using (var swEncrypt = new StreamWriter(csEncrypt))
                         {
-
                             //Write all data to the stream.
                             swEncrypt.Write(plainText);
                         }
@@ -68,22 +66,22 @@ namespace amexus.Encryption
 
             // Create an TripleDESCryptoServiceProvider object
             // with the specified key and IV.
-            using (TripleDESCryptoServiceProvider tdsAlg = new TripleDESCryptoServiceProvider())
+            using (var tdsAlg = new TripleDESCryptoServiceProvider())
             {
-                tdsAlg.Key = Key;
-                tdsAlg.IV = IV;
+                tdsAlg.Key = _key;
+                tdsAlg.IV = _iv;
 
                 // Create a decrytor to perform the stream transform.
-                ICryptoTransform decryptor = tdsAlg.CreateDecryptor(tdsAlg.Key, tdsAlg.IV);
+                var decryptor = tdsAlg.CreateDecryptor(tdsAlg.Key, tdsAlg.IV);
 
                 // Create the streams used for decryption.
                 try
                 {
-                    using (MemoryStream msDecrypt = new MemoryStream(Convert.FromBase64String(cipherText)))
+                    using (var msDecrypt = new MemoryStream(Convert.FromBase64String(cipherText)))
                     {
-                        using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                        using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                         {
-                            using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                            using (var srDecrypt = new StreamReader(csDecrypt))
                             {
                                 // Read the decrypted bytes from the decrypting stream
                                 // and place them in a string.

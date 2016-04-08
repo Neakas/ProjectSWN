@@ -1,8 +1,8 @@
 ﻿<UserControl x:Name="SecondaryStatsLabel1" x:Class="SWN.UserControls.SecondaryStatsLabel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SWN.UserControls"
              xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
              themes:ThemeManager.Theme="ExpressionDark"
@@ -10,15 +10,18 @@
     <Grid>
         <Rectangle Stroke="Black">
             <Rectangle.Fill>
-                <SolidColorBrush Color="{DynamicResource SWNBackgroundColorLight}"/>
+                <SolidColorBrush Color="{DynamicResource SWNBackgroundColorLight}" />
             </Rectangle.Fill>
         </Rectangle>
-        <Label x:Name="lblLift" Content="Basic Lift:" Width="70" Height="20" Margin="10,10,220,10"/>
-        <Label x:Name="lblLiftStat" Content="{Binding Path=Lift, ElementName=SecondaryStatsLabel1}" Height="20" Width="20" Margin="65,10,220,10"/>
-        <Label x:Name="lblSpeed" Content="Basic Speed:" Height="20" Width="70" Margin="105,10,125,10"/>
-        <Label x:Name="lblSpeedStat" Content="{Binding Path=Speed, ElementName=SecondaryStatsLabel1}" Height="20" Width="20" Margin="175,10,115,10"/>
-        <Label x:Name="lblMove" Content="Basic Move:" Height="20" Width="70" Margin="212,10,18,10"/>
-        <Label x:Name="lblMoveStat" Content="{Binding Path=Move, ElementName=SecondaryStatsLabel1}" Height="20" Width="20" Margin="280,10,10,10"/>
+        <Label x:Name="lblLift" Content="Basic Lift:" Width="70" Height="20" Margin="10,10,220,10" />
+        <Label x:Name="lblLiftStat" Content="{Binding Path=Lift, ElementName=SecondaryStatsLabel1}" Height="20"
+               Width="20" Margin="65,10,220,10" />
+        <Label x:Name="lblSpeed" Content="Basic Speed:" Height="20" Width="70" Margin="105,10,125,10" />
+        <Label x:Name="lblSpeedStat" Content="{Binding Path=Speed, ElementName=SecondaryStatsLabel1}" Height="20"
+               Width="20" Margin="175,10,115,10" />
+        <Label x:Name="lblMove" Content="Basic Move:" Height="20" Width="70" Margin="212,10,18,10" />
+        <Label x:Name="lblMoveStat" Content="{Binding Path=Move, ElementName=SecondaryStatsLabel1}" Height="20"
+               Width="20" Margin="280,10,10,10" />
         <!--<Label x:Name="lblText" Content="{Binding Path=Text, ElementName=StatLabel1}" Margin="3,3,3,3" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Label x:Name="lblValue" Content="{Binding Path=Value, ElementName=StatLabel1}" Margin="3,3,3,3" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"/>-->
 

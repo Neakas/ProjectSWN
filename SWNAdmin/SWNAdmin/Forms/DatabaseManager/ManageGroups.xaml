@@ -1,39 +1,57 @@
-﻿<Window x:Class="SWNAdmin.Forms.ManageGroups"
+﻿<Window x:Class="SWNAdmin.Forms.DatabaseManager.ManageGroups"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SWNAdmin.Forms"
         xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
         themes:ThemeManager.Theme="ExpressionDark"
-        
+
         mc:Ignorable="d"
         Title="ManageGroups" Height="243.514" Width="342.05">
     <Window.Background>
-        <SolidColorBrush Color="{DynamicResource SWNDarkBackground}"/>
+        <SolidColorBrush Color="{DynamicResource SWNDarkBackground}" />
     </Window.Background>
     <Grid>
         <TabControl>
-            <TabItem x:Name="tiGroups" Header="Manage Groups">
+            <TabItem Header="Manage Groups">
                 <Grid>
-                    <ListBox x:Name="lbGroups" Margin="10,10,0,0" HorizontalAlignment="Left" Width="171" Height="148" VerticalAlignment="Top" SelectionChanged="lbGroups_SelectionChanged"></ListBox>
-                    <Button x:Name="btAdd" Content="Add" HorizontalAlignment="Left" Margin="10,163,0,0" VerticalAlignment="Top" Width="44" Click="btAdd_Click"/>
-                    <Button x:Name="btDel" Content="Del" HorizontalAlignment="Left" Margin="137,163,0,0" VerticalAlignment="Top" Width="44" Click="btDel_Click" Background="{x:Null}" IsEnabled="False"/>
-                    <Button x:Name="btUpd" Content="Upd" HorizontalAlignment="Left" Margin="10,163,0,0" VerticalAlignment="Top" Width="44" Visibility="Hidden" IsEnabled="False" Click="btUpd_Click"/>
-                    <TextBox x:Name="tbGroupName" HorizontalAlignment="Left" Height="23" Margin="186,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138"/>
-                    <Label x:Name="label" Content="Group Name:" HorizontalAlignment="Left" Margin="186,10,0,0" VerticalAlignment="Top"/>
+                    <ListBox x:Name="LbGroups" Margin="10,10,0,0" HorizontalAlignment="Left" Width="171" Height="148"
+                             VerticalAlignment="Top" SelectionChanged="lbGroups_SelectionChanged" />
+                    <Button x:Name="BtAdd" Content="Add" HorizontalAlignment="Left" Margin="10,163,0,0"
+                            VerticalAlignment="Top" Width="44" Click="btAdd_Click" />
+                    <Button x:Name="BtDel" Content="Del" HorizontalAlignment="Left" Margin="137,163,0,0"
+                            VerticalAlignment="Top" Width="44" Click="btDel_Click" Background="{x:Null}"
+                            IsEnabled="False" />
+                    <Button x:Name="BtUpd" Content="Upd" HorizontalAlignment="Left" Margin="10,163,0,0"
+                            VerticalAlignment="Top" Width="44" Visibility="Hidden" IsEnabled="False"
+                            Click="btUpd_Click" />
+                    <TextBox x:Name="TbGroupName" HorizontalAlignment="Left" Height="23" Margin="186,31,0,0"
+                             TextWrapping="Wrap" VerticalAlignment="Top" Width="138" />
+                    <Label Content="Group Name:" HorizontalAlignment="Left" Margin="186,10,0,0"
+                           VerticalAlignment="Top" />
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tiSubGroups" Header="Manage SubGroups" IsEnabled="False">
+            <TabItem x:Name="TiSubGroups" Header="Manage SubGroups" IsEnabled="False">
                 <Grid>
-                    <ListBox x:Name="lbSubGroups" Margin="10,10,0,0" HorizontalAlignment="Left" Width="171" Height="148" VerticalAlignment="Top" SelectionChanged="lbGroups1_SelectionChanged" />
-                    <Button x:Name="btAdd1" Content="Add" HorizontalAlignment="Left" Margin="10,163,0,0" VerticalAlignment="Top" Width="44" Click="btAdd1_Click" />
-                    <Button x:Name="btDel1" Content="Del" HorizontalAlignment="Left" Margin="137,163,0,0" VerticalAlignment="Top" Width="44" Background="{x:Null}" IsEnabled="False" Click="btDel1_Click"/>
-                    <Button x:Name="btUpd1" Content="Upd" HorizontalAlignment="Left" Margin="10,163,0,0" VerticalAlignment="Top" Width="44" Visibility="Hidden" IsEnabled="False" Click="btUpd1_Click" />
-                    <TextBox x:Name="tbGroupName1" HorizontalAlignment="Left" Height="23" Margin="186,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" IsReadOnly="True" Focusable="False"/>
-                    <Label x:Name="label1" Content="Selected Group Name:" HorizontalAlignment="Left" Margin="186,10,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label2" Content="Sub-Group Name:" Width="100" Margin="186,108,0,0" Height="15" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                    <TextBox x:Name="tbSubGroupName" HorizontalAlignment="Left" Height="23" Margin="186,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138"/>
+                    <ListBox x:Name="LbSubGroups" Margin="10,10,0,0" HorizontalAlignment="Left" Width="171"
+                             Height="148" VerticalAlignment="Top" SelectionChanged="lbGroups1_SelectionChanged" />
+                    <Button x:Name="BtAdd1" Content="Add" HorizontalAlignment="Left" Margin="10,163,0,0"
+                            VerticalAlignment="Top" Width="44" Click="btAdd1_Click" />
+                    <Button x:Name="BtDel1" Content="Del" HorizontalAlignment="Left" Margin="137,163,0,0"
+                            VerticalAlignment="Top" Width="44" Background="{x:Null}" IsEnabled="False"
+                            Click="btDel1_Click" />
+                    <Button x:Name="BtUpd1" Content="Upd" HorizontalAlignment="Left" Margin="10,163,0,0"
+                            VerticalAlignment="Top" Width="44" Visibility="Hidden" IsEnabled="False"
+                            Click="btUpd1_Click" />
+                    <TextBox x:Name="TbGroupName1" HorizontalAlignment="Left" Height="23" Margin="186,31,0,0"
+                             TextWrapping="Wrap" VerticalAlignment="Top" Width="138" IsReadOnly="True"
+                             Focusable="False" />
+                    <Label Content="Selected Group Name:" HorizontalAlignment="Left"
+                           Margin="186,10,0,0" VerticalAlignment="Top" />
+                    <Label Content="Sub-Group Name:" Width="100" Margin="186,108,0,0" Height="15"
+                           VerticalAlignment="Top" HorizontalAlignment="Left" />
+                    <TextBox x:Name="TbSubGroupName" HorizontalAlignment="Left" Height="23" Margin="186,135,0,0"
+                             TextWrapping="Wrap" VerticalAlignment="Top" Width="138" />
                 </Grid>
             </TabItem>
 

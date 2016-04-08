@@ -1,8 +1,8 @@
 ﻿<UserControl x:Class="SWN.UserControls.CharacterSheet"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SWN.UserControls"
              xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
              themes:ThemeManager.Theme="ExpressionDark"
@@ -10,20 +10,31 @@
     <Border BorderThickness="2">
         <Grid x:Name="MainGrid" Background="Black">
             <Grid x:Name="baseStatsGrid" Margin="0,0,301,308">
-                <local:StatLabel x:Name="lblStr" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Text="Strenght:" Value="0" Width="100" Height="40"/>
-                <local:StatLabel x:Name="lblDex" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Text="Dexterity:" Value="0" Width="100" Height="40"/>
-                <local:StatLabel x:Name="lblInt" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Text="Intelligence:" Value="0" Width="100" Height="40"/>
-                <local:StatLabel x:Name="lblHth" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top" Text="Health:" Value="0" Width="100" Height="40"/>
+                <local:StatLabel x:Name="lblStr" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"
+                                 Text="Strenght:" Value="0" Width="100" Height="40" />
+                <local:StatLabel x:Name="lblDex" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top"
+                                 Text="Dexterity:" Value="0" Width="100" Height="40" />
+                <local:StatLabel x:Name="lblInt" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"
+                                 Text="Intelligence:" Value="0" Width="100" Height="40" />
+                <local:StatLabel x:Name="lblHth" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top"
+                                 Text="Health:" Value="0" Width="100" Height="40" />
 
-                <local:StatLabel x:Name="lblHP" HorizontalAlignment="Left" Margin="136,10,0,0" VerticalAlignment="Top" Text="Hitpoints:" Value="0" Width="90" Height="40"/>
-                <local:StatLabel x:Name="lblWill" HorizontalAlignment="Left" Margin="136,55,0,0" VerticalAlignment="Top" Text="Will:" Value="0" Width="90" Height="40"/>
-                <local:StatLabel x:Name="lblPer" HorizontalAlignment="Left" Margin="136,100,0,0" VerticalAlignment="Top" Text="Perception:" Value="0" Width="90" Height="40"/>
-                <local:StatLabel x:Name="lblFP" HorizontalAlignment="Left" Margin="136,145,0,0" VerticalAlignment="Top" Text="Fatique:" Value="0" Width="90" Height="40"/>
-                <local:SecondaryStatsLabel HorizontalAlignment="Left" Margin="10,192,0,0" VerticalAlignment="Top" Width="299" Lift="1" Speed="1" Move="1" Height="40"/>
+                <local:StatLabel x:Name="lblHP" HorizontalAlignment="Left" Margin="136,10,0,0" VerticalAlignment="Top"
+                                 Text="Hitpoints:" Value="0" Width="90" Height="40" />
+                <local:StatLabel x:Name="lblWill" HorizontalAlignment="Left" Margin="136,55,0,0"
+                                 VerticalAlignment="Top" Text="Will:" Value="0" Width="90" Height="40" />
+                <local:StatLabel x:Name="lblPer" HorizontalAlignment="Left" Margin="136,100,0,0"
+                                 VerticalAlignment="Top" Text="Perception:" Value="0" Width="90" Height="40" />
+                <local:StatLabel x:Name="lblFP" HorizontalAlignment="Left" Margin="136,145,0,0" VerticalAlignment="Top"
+                                 Text="Fatique:" Value="0" Width="90" Height="40" />
+                <local:SecondaryStatsLabel HorizontalAlignment="Left" Margin="10,192,0,0" VerticalAlignment="Top"
+                                           Width="299" Lift="1" Speed="1" Move="1" Height="40" />
             </Grid>
             <Grid x:Name="LanguageGrid" Margin="314,7,5,301">
-                <StackPanel x:Name="sPLanguages" HorizontalAlignment="Left" Height="222" Margin="0,2,-15,0" VerticalAlignment="Top" Width="306">
-                    <local:LanguageControl Width="Auto" SpokenLanguage="Test" Spoken="1" Written=" 2" Height="49" Margin="0,0,10,0"/>
+                <StackPanel x:Name="sPLanguages" HorizontalAlignment="Left" Height="222" Margin="0,2,-15,0"
+                            VerticalAlignment="Top" Width="306">
+                    <local:LanguageControl Width="Auto" SpokenLanguage="Test" Spoken="1" Written=" 2" Height="49"
+                                           Margin="0,0,10,0" />
                 </StackPanel>
             </Grid>
         </Grid>

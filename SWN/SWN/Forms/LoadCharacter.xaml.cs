@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using SWN.Networking;
+using SWN.Service_References.SWNServiceReference;
 
-namespace SWN
+namespace SWN.Forms
 {
     /// <summary>
-    /// Interaction logic for LoadCharacter.xaml
+    ///     Interaction logic for LoadCharacter.xaml
     /// </summary>
     public partial class LoadCharacter : Window
     {
@@ -29,9 +19,9 @@ namespace SWN
         {
             if (lbCharacters.SelectedItem != null)
             {
-                CreateNewCharacter cnc = new CreateNewCharacter(lbCharacters.SelectedItem as SWNServiceReference.Character);
+                var cnc = new CreateNewCharacter(lbCharacters.SelectedItem as Character);
                 cnc.Show();
-                this.Close();
+                Close();
             }
             else
             {
@@ -41,7 +31,8 @@ namespace SWN
 
         private void QueryChars()
         {
-            lbCharacters.ItemsSource = ServerConnection.LocalServiceClient.RequestSavedCharacters(MainWindow.CurrentInstance.LocalCient);
+            lbCharacters.ItemsSource =
+                ServerConnection.LocalServiceClient.RequestSavedCharacters(MainWindow.CurrentInstance.LocalCient);
             lbCharacters.DisplayMemberPath = "Name";
         }
     }

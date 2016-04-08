@@ -1,4 +1,4 @@
-﻿<Window x:Class="SWNAdmin.SystemGeneration"
+﻿<Window x:Class="SWNAdmin.Forms.SystemGeneration"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,26 +9,40 @@
         mc:Ignorable="d"
         Title="SystemGeneration" Height="626.789" Width="718.182">
     <Window.Background>
-        <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
+        <SolidColorBrush Color="{DynamicResource SWNLightBackground}" />
     </Window.Background>
     <Grid>
         <Grid.ColumnDefinitions>
 
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnGenStars" Content="Generate Stars" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="87" FontSize="10.667" Click="btnGenStars_Click"/>
-        <Button x:Name="btnGenPlanets" Content="Generate Planets" HorizontalAlignment="Left" Margin="102,10,0,0" VerticalAlignment="Top" Width="85" FontSize="10.667" Click="btnGenPlanets_Click"/>
-        <Button x:Name="btGenFull" Content="Generate Amount" HorizontalAlignment="Left" Margin="192,10,0,0" VerticalAlignment="Top" Width="91" FontSize="10.667" Click="btnGenFull_Click"/>
-        <Button x:Name="btnReset" Content="Reset&#xD;&#xA;" HorizontalAlignment="Left" Margin="350,10,0,0" VerticalAlignment="Top" Width="75" FontSize="10.667" Height="18" Grid.ColumnSpan="2" Click="btnReset_Click"/>
-        <DataGrid x:Name="dgvStars" Margin="10,60,10,0" VerticalAlignment="Top" Height="236" Background="#FF818181" ItemsSource="{Binding}" />
+        <Button x:Name="btnGenStars" Content="Generate Stars" HorizontalAlignment="Left" Margin="10,10,0,0"
+                VerticalAlignment="Top" Width="87" FontSize="10.667" Click="btnGenStars_Click" />
+        <Button x:Name="btnGenPlanets" Content="Generate Planets" HorizontalAlignment="Left" Margin="102,10,0,0"
+                VerticalAlignment="Top" Width="85" FontSize="10.667" Click="btnGenPlanets_Click" />
+        <Button x:Name="btGenFull" Content="Generate amount" HorizontalAlignment="Left" Margin="192,10,0,0"
+                VerticalAlignment="Top" Width="91" FontSize="10.667" Click="btnGenFull_Click" />
+        <Button x:Name="btnReset" Content="Reset&#xD;&#xA;" HorizontalAlignment="Left" Margin="350,10,0,0"
+                VerticalAlignment="Top" Width="75" FontSize="10.667" Height="18" Grid.ColumnSpan="2"
+                Click="btnReset_Click" />
+        <DataGrid x:Name="dgvStars" Margin="10,60,10,0" VerticalAlignment="Top" Height="236" Background="#FF818181"
+                  ItemsSource="{Binding}" />
         <DataGrid x:Name="dgvPlanets" Margin="10,350,10,10" Background="#FF818181" ItemsSource="{Binding}" />
-        <Label x:Name="label" Content="System Name:" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" FontSize="10.667" Height="27" Width="87"/>
-        <CheckBox x:Name="chkEmptyDisplay" Content="Display Empty Orbitals" Grid.Column="1" HorizontalAlignment="Left" Margin="179,330,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy" Content="SystemAge:" HorizontalAlignment="Left" Margin="350,33,0,0" VerticalAlignment="Top" FontSize="10.667" Height="27" Width="87" Grid.ColumnSpan="2"/>
-        <Label x:Name="lblSysName" Content="" HorizontalAlignment="Left" Margin="85,34,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.184,-0.269"/>
-        <Label x:Name="lblSysAge" Content="" HorizontalAlignment="Left" Margin="415,33,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
-        <Label x:Name="label_Copy1" Content="Number of Planets:" HorizontalAlignment="Left" Margin="10,318,0,0" VerticalAlignment="Top" FontSize="10.667" Height="27" Width="102"/>
-        <Label x:Name="lblNumberPlanets" Content="" HorizontalAlignment="Left" Margin="112,319,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.4,0.5"/>
-        <TextBox x:Name="tbAmount" HorizontalAlignment="Left" Height="16" Margin="288,10,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="40"/>
+        <Label x:Name="label" Content="System Name:" HorizontalAlignment="Left" Margin="10,33,0,0"
+               VerticalAlignment="Top" FontSize="10.667" Height="27" Width="87" />
+        <CheckBox x:Name="chkEmptyDisplay" Content="Display Empty Orbitals" Grid.Column="1" HorizontalAlignment="Left"
+                  Margin="179,330,0,0" VerticalAlignment="Top" />
+        <Label x:Name="label_Copy" Content="SystemAge:" HorizontalAlignment="Left" Margin="350,33,0,0"
+               VerticalAlignment="Top" FontSize="10.667" Height="27" Width="87" Grid.ColumnSpan="2" />
+        <Label x:Name="lblSysName" Content="" HorizontalAlignment="Left" Margin="85,34,0,0" VerticalAlignment="Top"
+               RenderTransformOrigin="1.184,-0.269" />
+        <Label x:Name="lblSysAge" Content="" HorizontalAlignment="Left" Margin="415,33,0,0" VerticalAlignment="Top"
+               RenderTransformOrigin="0.5,0.5" />
+        <Label x:Name="label_Copy1" Content="Number of Planets:" HorizontalAlignment="Left" Margin="10,318,0,0"
+               VerticalAlignment="Top" FontSize="10.667" Height="27" Width="102" />
+        <Label x:Name="lblNumberPlanets" Content="" HorizontalAlignment="Left" Margin="112,319,0,0"
+               VerticalAlignment="Top" RenderTransformOrigin="0.4,0.5" />
+        <TextBox x:Name="tbAmount" HorizontalAlignment="Left" Height="16" Margin="288,10,0,0" TextWrapping="Wrap"
+                 Text="1" VerticalAlignment="Top" Width="40" />
 
     </Grid>
 </Window>

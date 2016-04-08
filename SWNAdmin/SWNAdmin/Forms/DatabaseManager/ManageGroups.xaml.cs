@@ -1,24 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Entity;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using SWNAdmin.Utility;
+using System.Linq;
 
-namespace SWNAdmin.Forms
+namespace SWNAdmin.Forms.DatabaseManager
 {
     /// <summary>
-    /// Interaction logic for ManageGroups.xaml
+    ///     Interaction logic for ManageGroups.xaml
     /// </summary>
-    public partial class ManageGroups : Window
+    public partial class ManageGroups
     {
         public ManageGroups()
         {
@@ -29,83 +21,89 @@ namespace SWNAdmin.Forms
 
         private void btAdd_Click(object sender, RoutedEventArgs e)
         {
-            using (var Context = new Db1Entities())
+            using (var context = new Db1Entities())
             {
-                StatGroup sg = new StatGroup();
-                sg.Name = tbGroupName.Text;
-                Context.StatGroup.Add(sg);
-                Context.SaveChanges();
+                var sg = new StatGroup {Name = TbGroupName.Text};
+                context.StatGroup.Add(sg);
+                context.SaveChanges();
             }
             LoadListBoxContent();
-            tbGroupName.Text = "";
-            tbGroupName1.Text = "";
+            TbGroupName.Text = "";
+            TbGroupName1.Text = "";
         }
 
         private void btDel_Click(object sender, RoutedEventArgs e)
         {
-            var Context = new Db1Entities();
-            StatGroup DelGroup = (lbGroups.SelectedItem as StatGroup);
-            var Query = from c in Context.StatGroup where DelGroup.Id == c.Id select c;
-            DelGroup = Query.FirstOrDefault();
+            var context = new Db1Entities();
+            var delGroup = LbGroups.SelectedItem as StatGroup;
+            var @group = delGroup;
+            var query = from c in context.StatGroup where @group.Id == c.Id select c;
+            delGroup = query.FirstOrDefault();
 
-            using (Context)
+            using (context)
             {
-                StatGroup sg = DelGroup;
-                Context.Entry(sg).State = System.Data.Entity.EntityState.Deleted;
-                Context.SaveChanges();
+                var sg = delGroup;
+                context.Entry(sg).State = EntityState.Deleted;
+                context.SaveChanges();
             }
             LoadListBoxContent();
         }
 
         private void btUpd_Click(object sender, RoutedEventArgs e)
         {
-            var Context = new Db1Entities();
-            StatGroup UpdateGroup = (lbGroups.SelectedItem as StatGroup);
-            var Query = from c in Context.StatGroup where UpdateGroup.Id == c.Id select c;
-            UpdateGroup = Query.FirstOrDefault();
+            var context = new Db1Entities();
+            var updateGroup = LbGroups.SelectedItem as StatGroup;
+            var @group = updateGroup;
+            var query = from c in context.StatGroup where @group.Id == c.Id select c;
+            updateGroup = query.FirstOrDefault();
 
-            using (Context)
+            using (context)
             {
-                StatGroup sg = UpdateGroup;
-                sg.Name = tbGroupName.Text;
-                Context.Entry(sg).State = System.Data.Entity.EntityState.Modified;
-                Context.SaveChanges();
+                var sg = updateGroup;
+                if (sg != null)
+                {
+                    sg.Name = TbGroupName.Text;
+                    context.Entry(sg).State = EntityState.Modified;
+                }
+                context.SaveChanges();
             }
             LoadListBoxContent();
         }
 
         private void LoadListBoxContent()
         {
-            var Context = new Db1Entities();
-            var query = from c in Context.StatGroup select c;
-            List<StatGroup> GroupList = query.ToList();
-            lbGroups.ItemsSource = GroupList;
-            lbGroups.DisplayMemberPath = "Name";
+            var context = new Db1Entities();
+            var query = from c in context.StatGroup select c;
+            var groupList = query.ToList();
+            LbGroups.ItemsSource = groupList;
+            LbGroups.DisplayMemberPath = "Name";
         }
 
         private void lbGroups_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lbGroups.SelectedItem != null)
+            if (LbGroups.SelectedItem != null)
             {
-                tbGroupName.Text = (lbGroups.SelectedItem as StatGroup).Name;
-                tbGroupName1.Text = tbGroupName.Text;
-                btAdd.Visibility = Visibility.Hidden;
-                btUpd.Visibility = Visibility.Visible;
-                btAdd.IsEnabled = false;
-                btDel.IsEnabled = true;
-                btUpd.IsEnabled = true;
-                tiSubGroups.IsEnabled = true;
+                var statGroup = LbGroups.SelectedItem as StatGroup;
+                if (statGroup != null)
+                    TbGroupName.Text = statGroup.Name;
+                TbGroupName1.Text = TbGroupName.Text;
+                BtAdd.Visibility = Visibility.Hidden;
+                BtUpd.Visibility = Visibility.Visible;
+                BtAdd.IsEnabled = false;
+                BtDel.IsEnabled = true;
+                BtUpd.IsEnabled = true;
+                TiSubGroups.IsEnabled = true;
             }
             else
             {
-                tbGroupName.Text = "";
-                tbGroupName1.Text = "";
-                btAdd.Visibility = Visibility.Visible;
-                btUpd.Visibility = Visibility.Hidden;
-                btAdd.IsEnabled = true;
-                btDel.IsEnabled = false;
-                btUpd.IsEnabled = false;
-                tiSubGroups.IsEnabled = false;
+                TbGroupName.Text = "";
+                TbGroupName1.Text = "";
+                BtAdd.Visibility = Visibility.Visible;
+                BtUpd.Visibility = Visibility.Hidden;
+                BtAdd.IsEnabled = true;
+                BtDel.IsEnabled = false;
+                BtUpd.IsEnabled = false;
+                TiSubGroups.IsEnabled = false;
             }
             LoadSubListBoxContent();
         }
@@ -114,69 +112,81 @@ namespace SWNAdmin.Forms
 
         private void lbGroups1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lbSubGroups.SelectedItem != null)
+            if (LbSubGroups.SelectedItem != null)
             {
-                tbSubGroupName.Text = (lbSubGroups.SelectedItem as StatSubGroup).Name;
-                btAdd1.Visibility = Visibility.Hidden;
-                btUpd1.Visibility = Visibility.Visible;
-                btAdd1.IsEnabled = false;
-                btDel1.IsEnabled = true;
-                btUpd1.IsEnabled = true;
+                var statSubGroup = LbSubGroups.SelectedItem as StatSubGroup;
+                if (statSubGroup != null)
+                    TbSubGroupName.Text = statSubGroup.Name;
+                BtAdd1.Visibility = Visibility.Hidden;
+                BtUpd1.Visibility = Visibility.Visible;
+                BtAdd1.IsEnabled = false;
+                BtDel1.IsEnabled = true;
+                BtUpd1.IsEnabled = true;
             }
             else
             {
-                tbSubGroupName.Text = "";                
-                btAdd1.Visibility = Visibility.Visible;
-                btUpd1.Visibility = Visibility.Hidden;
-                btAdd1.IsEnabled = true;
-                btDel1.IsEnabled = false;
-                btUpd1.IsEnabled = false;
+                TbSubGroupName.Text = "";
+                BtAdd1.Visibility = Visibility.Visible;
+                BtUpd1.Visibility = Visibility.Hidden;
+                BtAdd1.IsEnabled = true;
+                BtDel1.IsEnabled = false;
+                BtUpd1.IsEnabled = false;
             }
         }
 
         private void btAdd1_Click(object sender, RoutedEventArgs e)
         {
-            using (var Context = new Db1Entities())
+            using (var context = new Db1Entities())
             {
-                StatSubGroup ssg = new StatSubGroup();
-                ssg.Name = tbSubGroupName.Text;
-                ssg.GroupId = (lbGroups.SelectedItem as StatGroup).Id;
-                Context.StatSubGroup.Add(ssg);
-                Context.SaveChanges();
+                var statGroup = LbGroups.SelectedItem as StatGroup;
+                if (statGroup != null)
+                {
+                    var ssg = new StatSubGroup
+                    {
+                        Name = TbSubGroupName.Text,
+                        GroupId = statGroup.Id
+                    };
+                    context.StatSubGroup.Add(ssg);
+                }
+                context.SaveChanges();
             }
             LoadSubListBoxContent();
-            tbSubGroupName.Text = "";
+            TbSubGroupName.Text = "";
         }
 
         private void btDel1_Click(object sender, RoutedEventArgs e)
         {
-            var Context = new Db1Entities();
-            StatGroup Group = (lbGroups.SelectedItem as StatGroup);
-            var Query = from c in Context.StatSubGroup where Group.Id == c.GroupId select c;
-            StatSubGroup DelSubGroup = Query.FirstOrDefault();
+            var context = new Db1Entities();
+            var groups = LbGroups.SelectedItem as StatGroup;
+            var query = from c in context.StatSubGroup where groups.Id == c.GroupId select c;
+            var delSubGroup = query.FirstOrDefault();
 
-            using (Context)
+            using (context)
             {
-                StatSubGroup ssg = DelSubGroup;
-                Context.Entry(ssg).State = System.Data.Entity.EntityState.Deleted;
-                Context.SaveChanges();
+                var ssg = delSubGroup;
+                context.Entry(ssg).State = EntityState.Deleted;
+                context.SaveChanges();
             }
             LoadSubListBoxContent();
         }
 
         private void btUpd1_Click(object sender, RoutedEventArgs e)
         {
-            var Context = new Db1Entities();
-            StatSubGroup UpdateSubGroup = (lbSubGroups.SelectedItem as StatSubGroup);
-            var Query = from c in Context.StatSubGroup where UpdateSubGroup.Id == c.Id select c;
-            UpdateSubGroup = Query.FirstOrDefault();
+            var context = new Db1Entities();
+            var updateSubGroup = LbSubGroups.SelectedItem as StatSubGroup;
+            var @group = updateSubGroup;
+            var query = from c in context.StatSubGroup where @group.Id == c.Id select c;
+            updateSubGroup = query.FirstOrDefault();
 
-            using (Context)
+            using (context)
             {
-                StatSubGroup ssg = UpdateSubGroup;
-                ssg.Name = tbSubGroupName.Text;
-                Context.Entry(ssg).State = System.Data.Entity.EntityState.Modified;
-                Context.SaveChanges();
+                var ssg = updateSubGroup;
+                if (ssg != null)
+                {
+                    ssg.Name = TbSubGroupName.Text;
+                    context.Entry(ssg).State = EntityState.Modified;
+                }
+                context.SaveChanges();
             }
             LoadListBoxContent();
         }
@@ -185,17 +195,17 @@ namespace SWNAdmin.Forms
         {
             try
             {
-                var Context = new Db1Entities();
-                StatGroup LoadedSG = (lbGroups.SelectedItem as StatGroup);
-                var query = from c in Context.StatSubGroup where c.GroupId == LoadedSG.Id select c;
-                List<StatSubGroup> SubGroupList = query.ToList();
-                lbSubGroups.ItemsSource = SubGroupList;
-                lbSubGroups.DisplayMemberPath = "Name";
+                var context = new Db1Entities();
+                var loadedSg = LbGroups.SelectedItem as StatGroup;
+                var query = from c in context.StatSubGroup where c.GroupId == loadedSg.Id select c;
+                var subGroupList = query.ToList();
+                LbSubGroups.ItemsSource = subGroupList;
+                LbSubGroups.DisplayMemberPath = "Name";
             }
             catch (Exception)
-            { 
+            {
+                // ignored
             }
-            
         }
     }
 }

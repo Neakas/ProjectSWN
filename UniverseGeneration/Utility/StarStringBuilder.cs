@@ -1,4 +1,4 @@
-﻿namespace UniverseGeneration
+﻿namespace UniverseGeneration.Utility
 {
     class StarStringBuilder
     {

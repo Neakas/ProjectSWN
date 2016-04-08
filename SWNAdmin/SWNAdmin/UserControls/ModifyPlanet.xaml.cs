@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using SWNAdmin.Forms;
+using SWNAdmin.Utility;
 
 namespace SWNAdmin.UserControls
 {
     /// <summary>
-    /// Interaction logic for ModifyStarSystem.xaml
+    ///     Interaction logic for ModifyStarSystem.xaml
     /// </summary>
     public partial class ModifyPlanet : UserControl
     {
@@ -27,54 +19,54 @@ namespace SWNAdmin.UserControls
 
         private void btApply_Click(object sender, RoutedEventArgs e)
         {
-            Utility.Planets updateplanet;
-            using (var ctx = new Utility.Db1Entities())
+            Planets updateplanet;
+            using (var ctx = new Db1Entities())
             {
-                updateplanet = ctx.Planets.Where(s => s.Id.ToString() == tbPlanetID.Text).FirstOrDefault<Utility.Planets>();
+                updateplanet = ctx.Planets.Where(s => s.Id.ToString() == tbPlanetID.Text).FirstOrDefault();
             }
             if (updateplanet != null)
             {
                 updateplanet.name = tbPlanetName.Text;
-                updateplanet.atmCate = Int32.Parse(tbPlanetatmCate.Text);
-                updateplanet.atmMass = Double.Parse(tbPlanetatmMass.Text);
+                updateplanet.atmCate = int.Parse(tbPlanetatmCate.Text);
+                updateplanet.atmMass = double.Parse(tbPlanetatmMass.Text);
                 updateplanet.atmPres = tbPlanetatmPres.Text;
                 updateplanet.atmnote = tbPlanetatmNote.Text;
-                updateplanet.axialTilt = Double.Parse(tbPlanetaxialTilt.Text);
-                updateplanet.mass = Double.Parse(tbPlanetPlanetMass.Text);
+                updateplanet.axialTilt = double.Parse(tbPlanetaxialTilt.Text);
+                updateplanet.mass = double.Parse(tbPlanetPlanetMass.Text);
                 updateplanet.RVM = tbPlanetRVM.Text;
-                updateplanet.orbitalPeriod = Double.Parse(tbPlanetorbitalPeriod.Text);
-                updateplanet.orbitalRadius = Double.Parse(tbPlanetorbitalRadius.Text);
-                updateplanet.orbitalEccent = Double.Parse(tbPlanetorbitalEccent.Text);
-                updateplanet.moonRadius = Double.Parse(tbPlanetRadius.Text);
-                updateplanet.baseType = Int32.Parse(tbPlanetType.Text);
-                updateplanet.SatelliteSize = Int32.Parse(tbPlanetSite.Text);
-                updateplanet.blackbodyTemp = Double.Parse(tbPlanetbbt.Text);
-                updateplanet.dayFaceMod = Int32.Parse(tbPlanetdayFaceMod.Text);
-                updateplanet.density = Double.Parse(tbPlanetDensity.Text);
-                updateplanet.diameter = Double.Parse(tbPlanetDiameter.Text);
-                updateplanet.gravity = Double.Parse(tbPlanetGravity.Text);
+                updateplanet.orbitalPeriod = double.Parse(tbPlanetorbitalPeriod.Text);
+                updateplanet.orbitalRadius = double.Parse(tbPlanetorbitalRadius.Text);
+                updateplanet.orbitalEccent = double.Parse(tbPlanetorbitalEccent.Text);
+                updateplanet.moonRadius = double.Parse(tbPlanetRadius.Text);
+                updateplanet.baseType = int.Parse(tbPlanetType.Text);
+                updateplanet.SatelliteSize = int.Parse(tbPlanetSite.Text);
+                updateplanet.blackbodyTemp = double.Parse(tbPlanetbbt.Text);
+                updateplanet.dayFaceMod = int.Parse(tbPlanetdayFaceMod.Text);
+                updateplanet.density = double.Parse(tbPlanetDensity.Text);
+                updateplanet.diameter = double.Parse(tbPlanetDiameter.Text);
+                updateplanet.gravity = double.Parse(tbPlanetGravity.Text);
                 updateplanet.hydCoverage = tbPlanethydCov.Text;
-                updateplanet.isResonant = Boolean.Parse(tbPlanetisRes.Text);
-                updateplanet.isTideLocked = Boolean.Parse(tbPlanetisTideLock.Text);
-                updateplanet.retrogradeMotion = Boolean.Parse(tbPlanetretrogradeMotion.Text);
-                updateplanet.rotationalPeriod = Double.Parse(tbPlanetrotPeriod.Text);
-                updateplanet.SatelliteSize = Int32.Parse(tbPlanetSite.Text);
-                updateplanet.siderealPeriod = Double.Parse(tbPlanetsiderealPeriod.Text);
-                updateplanet.surfaceTemp = Double.Parse(tbPlanetsurfaceTemp.Text);
-                updateplanet.tecActivity = Double.Parse(tbPlanettecActivity.Text);
-                updateplanet.tideForce = Double.Parse(tbPlanettideForce.Text);
-                updateplanet.volActivity = Double.Parse(tbPlanetvolActivity.Text);
-                updateplanet.orbitalCycle = Double.Parse(tbPlanetOrbitalCycle.Text);
+                updateplanet.isResonant = bool.Parse(tbPlanetisRes.Text);
+                updateplanet.isTideLocked = bool.Parse(tbPlanetisTideLock.Text);
+                updateplanet.retrogradeMotion = bool.Parse(tbPlanetretrogradeMotion.Text);
+                updateplanet.rotationalPeriod = double.Parse(tbPlanetrotPeriod.Text);
+                updateplanet.SatelliteSize = int.Parse(tbPlanetSite.Text);
+                updateplanet.siderealPeriod = double.Parse(tbPlanetsiderealPeriod.Text);
+                updateplanet.surfaceTemp = double.Parse(tbPlanetsurfaceTemp.Text);
+                updateplanet.tecActivity = double.Parse(tbPlanettecActivity.Text);
+                updateplanet.tideForce = double.Parse(tbPlanettideForce.Text);
+                updateplanet.volActivity = double.Parse(tbPlanetvolActivity.Text);
+                updateplanet.orbitalCycle = double.Parse(tbPlanetOrbitalCycle.Text);
             }
-            using (var dbCtx = new Utility.Db1Entities())
+            using (var dbCtx = new Db1Entities())
             {
                 //3. Mark entity as modified
-                dbCtx.Entry(updateplanet).State = System.Data.Entity.EntityState.Modified;
+                dbCtx.Entry(updateplanet).State = EntityState.Modified;
 
                 //4. call SaveChanges
                 dbCtx.SaveChanges();
             }
-            Forms.SystemSelector.CurrentInstance.LoadSystemsFromSql();
+            SystemSelector.CurrentInstance.LoadSystemsFromSql();
         }
     }
 }

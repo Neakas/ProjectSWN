@@ -1,23 +1,15 @@
-﻿using Microsoft.Win32.SafeHandles;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
+﻿using System;
 using System.ServiceModel;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media;
 
-namespace SWNAdmin
+namespace SWNAdmin.Networking
 {
     public class Server
     {
-        public AutoResetEvent threadStopFlag = new AutoResetEvent(false);
-        Thread ServerThread;
         //ServiceHost SWNServiceHost;
         public static ServiceHost CurrentServiceHost;
+        private readonly Thread ServerThread;
+        public AutoResetEvent threadStopFlag = new AutoResetEvent(false);
 
         public Server()
         {
@@ -30,14 +22,14 @@ namespace SWNAdmin
 
         private void StartService()
         {
-            CurrentServiceHost = new ServiceHost(typeof(SWNService));
+            CurrentServiceHost = new ServiceHost(typeof (SWNService));
             try
             {
                 CurrentServiceHost.Open();
             }
             catch (Exception e)
             {
-                MainWindow.CurrentInstance.UpdateConsole(e.Message.ToString());
+                MainWindow.CurrentInstance.UpdateConsole(e.Message);
                 MainWindow.CurrentInstance.SwitchServerState();
             }
             finally
@@ -62,7 +54,7 @@ namespace SWNAdmin
                 }
                 catch (Exception e)
                 {
-                    MainWindow.CurrentInstance.UpdateConsole(e.Message.ToString());
+                    MainWindow.CurrentInstance.UpdateConsole(e.Message);
                 }
                 finally
                 {

@@ -1,48 +1,38 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace SWNAdmin.UI.Interaction {
-    public class Command : ICommand {
-        public event EventHandler CanExecuteChanged;
+namespace SWNAdmin.Forms.EncyclopediaManager.Interaction
+{
+    public class Command : ICommand
+    {
+        private readonly Action<object> _execute;
 
-        private bool canExecute;
-        private readonly Action<object> execute;
+        private bool _canExecute;
 
-        public Command(bool canExecute, Action<object> execute) {
-            this.canExecute = canExecute;
-            this.execute = execute;
+        private Command(bool canExecute, Action<object> execute)
+        {
+            _canExecute = canExecute;
+            _execute = execute;
         }
 
         public Command(Action<object> execute)
-            : this(true, execute) {
+            : this(true, execute)
+        {
         }
 
-        private void OnCanExecuteChanged() {
-            var handler = CanExecuteChanged;
-            if (CanExecuteChanged != null)
-                CanExecuteChanged(this, EventArgs.Empty);
+        public event EventHandler CanExecuteChanged;
+
+        public bool CanExecute(object parameter)
+        {
+            return _canExecute;
         }
 
-        public bool CanExecuteCommand {
-            get { return canExecute; }
-            set {
-                if (value == canExecute)
-                    return;
-
-                canExecute = value;
-                OnCanExecuteChanged();
-            }
-        }
-
-        public bool CanExecute(object parameter) {
-            return canExecute;
-        }
-
-        public void Execute(object parameter) {
+        public void Execute(object parameter)
+        {
             if (!CanExecute(parameter))
                 throw new InvalidOperationException("Invalid command execution requested");
 
-            execute(parameter);
+            _execute(parameter);
         }
     }
 }

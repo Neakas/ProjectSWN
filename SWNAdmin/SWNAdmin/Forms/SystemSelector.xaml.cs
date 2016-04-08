@@ -1,32 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using UniverseGeneration;
-
+using SWNAdmin.Networking;
+using SWNAdmin.UserControls;
+using SWNAdmin.Utility;
 
 namespace SWNAdmin.Forms
 {
     /// <summary>
-    /// Interaction logic for SystemSelector.xaml
+    ///     Interaction logic for SystemSelector.xaml
     /// </summary>
-    ///
     public partial class SystemSelector : Window
     {
         public static SystemSelector CurrentInstance;
-        List<Utility.StarSystems> SystemList = new List<Utility.StarSystems>();
-        Utility.StarSystems LoadedSystem;
+        private StarSystems LoadedSystem;
+        private List<StarSystems> SystemList = new List<StarSystems>();
 
         public SystemSelector()
         {
@@ -48,7 +38,7 @@ namespace SWNAdmin.Forms
         {
             LoadedSystem = null;
             tVSystem.Items.Clear();
-            Utility.StarSystems selectedSystem = cbSelectSystem.SelectedItem as Utility.StarSystems;
+            var selectedSystem = cbSelectSystem.SelectedItem as StarSystems;
             LoadCompleteSystem(selectedSystem);
             SetupTreeView();
             //TODOLOW Fix the Display of Empty Orbitals
@@ -62,55 +52,55 @@ namespace SWNAdmin.Forms
         private void SetupTreeView()
         {
             if (LoadedSystem != null)
-            { 
-            TreeViewItem item = new TreeViewItem();
-            item.ToolTip = "System Item";
-            item.Header = LoadedSystem.sysName;
-            item.Tag = LoadedSystem.Id;
-            foreach (Utility.Stars star in LoadedSystem.Stars)
             {
-                TreeViewItem item2 = new TreeViewItem();
-                item2.Header = star.StarOrder;
-                item2.ToolTip = "Star Item";
-                item2.Tag = star.Id;
-                foreach (Utility.Planets planet in star.Planets)
+                var item = new TreeViewItem();
+                item.ToolTip = "System Item";
+                item.Header = LoadedSystem.sysName;
+                item.Tag = LoadedSystem.Id;
+                foreach (var star in LoadedSystem.Stars)
                 {
-                    TreeViewItem item3 = new TreeViewItem();
-                    item3.ToolTip = "Planet Item";
-                    item3.Tag = planet.Id;
-                    TreeViewItem MajorMoon = new TreeViewItem();
-                    TreeViewItem InnerMoonlet = new TreeViewItem();
-                    TreeViewItem OuterMoonlet = new TreeViewItem();
-                    MajorMoon.Header = "Major Moons";
-                    InnerMoonlet.Header = "Inner Moonlets";
-                    OuterMoonlet.Header = "Outer Moonlet";
-
-                    foreach (Utility.MajorMoons mm in planet.MajorMoons1)
+                    var item2 = new TreeViewItem();
+                    item2.Header = star.StarOrder;
+                    item2.ToolTip = "Star Item";
+                    item2.Tag = star.Id;
+                    foreach (var planet in star.Planets)
                     {
-                        TreeViewItem item4 = new TreeViewItem();
-                        item4.Tag = mm.Id;
-                        item4.ToolTip = "MajorMoon Item";
-                        item4.Header = mm.name;
-                        MajorMoon.Items.Add(item4);
-                    }
+                        var item3 = new TreeViewItem();
+                        item3.ToolTip = "Planet Item";
+                        item3.Tag = planet.Id;
+                        var MajorMoon = new TreeViewItem();
+                        var InnerMoonlet = new TreeViewItem();
+                        var OuterMoonlet = new TreeViewItem();
+                        MajorMoon.Header = "Major Moons";
+                        InnerMoonlet.Header = "Inner Moonlets";
+                        OuterMoonlet.Header = "Outer Moonlet";
 
-                    foreach (Utility.InnerMoonlets im in planet.InnerMoonlets1)
-                    {
-                        TreeViewItem item5 = new TreeViewItem();
-                        item5.ToolTip = "InnerMoonlet Item";
-                        item5.Tag = im.Id;
-                        item5.Header = im.Id.ToString();
-                        InnerMoonlet.Items.Add(item5);
-                    }
+                        foreach (var mm in planet.MajorMoons1)
+                        {
+                            var item4 = new TreeViewItem();
+                            item4.Tag = mm.Id;
+                            item4.ToolTip = "MajorMoon Item";
+                            item4.Header = mm.name;
+                            MajorMoon.Items.Add(item4);
+                        }
 
-                    foreach (Utility.OuterMoonlets om in planet.OuterMoonlets1)
-                    {
-                        TreeViewItem item6 = new TreeViewItem();
-                        item6.Tag = om.Id;
-                        item6.ToolTip = "OuterMoonlet Item";
-                        item6.Header = om.Id.ToString();
-                        OuterMoonlet.Items.Add(item6);
-                    }
+                        foreach (var im in planet.InnerMoonlets1)
+                        {
+                            var item5 = new TreeViewItem();
+                            item5.ToolTip = "InnerMoonlet Item";
+                            item5.Tag = im.Id;
+                            item5.Header = im.Id.ToString();
+                            InnerMoonlet.Items.Add(item5);
+                        }
+
+                        foreach (var om in planet.OuterMoonlets1)
+                        {
+                            var item6 = new TreeViewItem();
+                            item6.Tag = om.Id;
+                            item6.ToolTip = "OuterMoonlet Item";
+                            item6.Header = om.Id.ToString();
+                            OuterMoonlet.Items.Add(item6);
+                        }
                         if (planet.name != "" && planet.name != null)
                         {
                             item3.Header = planet.name;
@@ -119,110 +109,111 @@ namespace SWNAdmin.Forms
                         {
                             item3.Header = planet.sattype;
                         }
-                    if (planet.MajorMoons1.Count > 0)
-                    {
-                        item3.Items.Add(MajorMoon);
+                        if (planet.MajorMoons1.Count > 0)
+                        {
+                            item3.Items.Add(MajorMoon);
+                        }
+                        if (planet.InnerMoonlets1.Count > 0)
+                        {
+                            item3.Items.Add(InnerMoonlet);
+                        }
+                        if (planet.OuterMoonlets1.Count > 0)
+                        {
+                            item3.Items.Add(OuterMoonlet);
+                        }
+                        item2.Items.Add(item3);
                     }
-                    if (planet.InnerMoonlets1.Count > 0)
-                    {
-                        item3.Items.Add(InnerMoonlet);
-                    }
-                    if (planet.OuterMoonlets1.Count > 0)
-                    {
-                        item3.Items.Add(OuterMoonlet);
-                    }
-                    item2.Items.Add(item3);
+                    item.Items.Add(item2);
                 }
-                item.Items.Add(item2);
-            }
-            //item.ItemsSource = LoadedSystem.Stars;
+                //item.ItemsSource = LoadedSystem.Stars;
 
-            tVSystem.Items.Add(item);
+                tVSystem.Items.Add(item);
             }
         }
 
-        private void LoadCompleteSystem(Utility.StarSystems System)
+        private void LoadCompleteSystem(StarSystems System)
         {
             if (cbSelectSystem.SelectedItem == null)
             {
-                return;
             }
             else
             {
-                var context = new Utility.Db1Entities();
+                var context = new Db1Entities();
                 context.Configuration.ProxyCreationEnabled = false;
-                var query = (from p in context.StarSystems.Include("Stars").Include("Stars").Include("Stars.Planets").Include("Stars.Planets.InnerMoonlets1").Include("Stars.Planets.OuterMoonlets1").Include("Stars.Planets.MajorMoons1")
-                             where p.Id == (int)cbSelectSystem.SelectedValue
-                             select p).FirstOrDefault();
+                var query =
+                    (from p in
+                        context.StarSystems.Include("Stars")
+                            .Include("Stars")
+                            .Include("Stars.Planets")
+                            .Include("Stars.Planets.InnerMoonlets1")
+                            .Include("Stars.Planets.OuterMoonlets1")
+                            .Include("Stars.Planets.MajorMoons1")
+                        where p.Id == (int) cbSelectSystem.SelectedValue
+                        select p).FirstOrDefault();
                 LoadedSystem = query;
             }
 
 
-         
-            
             //CalcLocalDay(selectedSystem);
         }
 
 
         private void btSendSystem_Click(object sender, RoutedEventArgs e)
         {
-            SWNService.CurrentService.SendSystem(LoadedSystem as Utility.StarSystems);
+            SWNService.CurrentService.SendSystem(LoadedSystem);
         }
 
-        private void CalcLocalDay(Utility.StarSystems System)
+        private void CalcLocalDay(StarSystems System)
         {
-            foreach (Utility.Stars Star in System.Stars)
+            foreach (var Star in System.Stars)
             {
-                foreach (Utility.Planets Planet in Star.Planets)
+                foreach (var Planet in Star.Planets)
                 {
-                    Double SiderealPeriod = Convert.ToDouble(Planet.siderealPeriod);
-                    Double RotationalPeriod = Convert.ToDouble(Planet.rotationalPeriod);
-                    Double ApparentLength = 0.00;
+                    var SiderealPeriod = Convert.ToDouble(Planet.siderealPeriod);
+                    var RotationalPeriod = Convert.ToDouble(Planet.rotationalPeriod);
+                    var ApparentLength = 0.00;
                     if (SiderealPeriod != RotationalPeriod)
                     {
-                        ApparentLength = (SiderealPeriod * RotationalPeriod) / (SiderealPeriod - RotationalPeriod);
+                        ApparentLength = SiderealPeriod*RotationalPeriod/(SiderealPeriod - RotationalPeriod);
                     }
                     else
                     {
                         ApparentLength = 0.00;
                     }
-                    
                 }
             }
-
-            
         }
 
         private void tVSystem_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {//Update UI
+        {
+//Update UI
             ControlCanvas.Children.Clear();
-            
-            TreeViewItem selectedtv = (TreeViewItem)tVSystem.SelectedItem;
+
+            var selectedtv = (TreeViewItem) tVSystem.SelectedItem;
             if (tVSystem.SelectedItem != null)
             {
-                if ((string)selectedtv.ToolTip == "System Item")
+                if ((string) selectedtv.ToolTip == "System Item")
                 {
-                    UserControls.ModifyStarSystem mss = new UserControls.ModifyStarSystem();                   
-                    Utility.StarSystems conObject = LoadedSystem;
+                    var mss = new ModifyStarSystem();
+                    var conObject = LoadedSystem;
                     mss.tbSysAge.Text = conObject.sysAge.ToString();
                     mss.tbSyshab.Text = conObject.habitableZones.ToString();
                     mss.tbSysID.Text = conObject.Id.ToString();
-                    mss.tbSysName.Text = conObject.sysName.ToString();
+                    mss.tbSysName.Text = conObject.sysName;
                     mss.tbSysStars.Text = conObject.sysStars.ToString();
                     ControlCanvas.Children.Add(mss);
-
                 }
-                if ((string)selectedtv.ToolTip == "Star Item")
+                if ((string) selectedtv.ToolTip == "Star Item")
                 {
-                    UserControls.ModifyStar ms = new UserControls.ModifyStar();
-                    Utility.Stars conObject = null;
-                    foreach (Utility.Stars star in LoadedSystem.Stars)
+                    var ms = new ModifyStar();
+                    Stars conObject = null;
+                    foreach (var star in LoadedSystem.Stars)
                     {
-                        if ((Int32)selectedtv.Tag == star.Id)
+                        if ((int) selectedtv.Tag == star.Id)
                         {
                             conObject = star;
                             ms.tbStarAge.Text = conObject.starAge.ToString();
-                            ms.tbStarColor.Text = conObject.starColor.ToString();
+                            ms.tbStarColor.Text = conObject.starColor;
                             ms.tbStarDistFromPrim.Text = conObject.distFromPrimary.ToString();
                             ms.tbStareffTemp.Text = conObject.effTemp.ToString();
                             ms.tbStarID.Text = conObject.Id.ToString();
@@ -230,52 +221,52 @@ namespace SWNAdmin.Forms
                             ms.tbStarinitMass.Text = conObject.initMass.ToString();
                             ms.tbStarisFlare.Text = conObject.isFlareStar.ToString();
                             ms.tbStarLum.Text = conObject.currLumin.ToString();
-                            ms.tbStarName.Text = conObject.name.ToString();
+                            ms.tbStarName.Text = conObject.name;
                             ms.tbStarorbitalEccent.Text = conObject.orbitalEccent.ToString();
                             ms.tbStarorbitalPeriod.Text = conObject.orbitalPeriod.ToString();
                             ms.tbStarorbitalRadius.Text = conObject.orbitalRadius.ToString();
-                            ms.tbStarOrder.Text = conObject.StarOrder.ToString();
+                            ms.tbStarOrder.Text = conObject.StarOrder;
                             ms.tbStarPlanets.Text = conObject.sysPlanets.ToString();
                             ms.tbStarRadius.Text = conObject.radius.ToString();
-                            ms.tbStarSpecType.Text = conObject.specType.ToString();
+                            ms.tbStarSpecType.Text = conObject.specType;
                             tbText.Text = conObject.StarString;
                         }
                     }
                     ControlCanvas.Children.Add(ms);
                 }
-                if ((string)selectedtv.ToolTip == "Planet Item")
+                if ((string) selectedtv.ToolTip == "Planet Item")
                 {
-                    UserControls.ModifyPlanet mp = new UserControls.ModifyPlanet();
-                    
-                    Utility.Planets conObject = null;
-                    foreach (Utility.Stars star in LoadedSystem.Stars)
+                    var mp = new ModifyPlanet();
+
+                    Planets conObject = null;
+                    foreach (var star in LoadedSystem.Stars)
                     {
-                        foreach (Utility.Planets planet in star.Planets)
+                        foreach (var planet in star.Planets)
                         {
-                            if ((Int32)selectedtv.Tag == planet.Id)
+                            if ((int) selectedtv.Tag == planet.Id)
                             {
                                 conObject = planet;
                                 if (conObject.name != null)
                                 {
-                                    mp.tbPlanetName.Text = conObject.name.ToString();
+                                    mp.tbPlanetName.Text = conObject.name;
                                 }
                                 else
                                 {
                                     mp.tbPlanetName.Text = conObject.sattype;
                                 }
-                                
+
                                 mp.tbPlanetAge.Text = "N/A";
                                 mp.tbPlanetatmCate.Text = conObject.atmCate.ToString();
                                 mp.tbPlanetatmMass.Text = conObject.atmMass.ToString();
-                                mp.tbPlanetatmNote.Text = conObject.atmnote.ToString();
-                                mp.tbPlanetatmPres.Text = conObject.atmPres.ToString();
+                                mp.tbPlanetatmNote.Text = conObject.atmnote;
+                                mp.tbPlanetatmPres.Text = conObject.atmPres;
                                 mp.tbPlanetaxialTilt.Text = conObject.axialTilt.ToString();
                                 mp.tbPlanetbbt.Text = conObject.blackbodyTemp.ToString();
                                 mp.tbPlanetdayFaceMod.Text = conObject.dayFaceMod.ToString();
                                 mp.tbPlanetDensity.Text = conObject.density.ToString();
                                 mp.tbPlanetDiameter.Text = conObject.diameter.ToString();
                                 mp.tbPlanetGravity.Text = conObject.gravity.ToString();
-                                mp.tbPlanethydCov.Text = conObject.hydCoverage.ToString();
+                                mp.tbPlanethydCov.Text = conObject.hydCoverage;
                                 mp.tbPlanetID.Text = conObject.Id.ToString();
                                 mp.tbPlanetisRes.Text = conObject.isResonant.ToString();
                                 mp.tbPlanetisTideLock.Text = conObject.isTideLocked.ToString();
@@ -289,8 +280,8 @@ namespace SWNAdmin.Forms
                                 mp.tbPlanetRadius.Text = conObject.moonRadius.ToString();
                                 mp.tbPlanetretrogradeMotion.Text = conObject.retrogradeMotion.ToString();
                                 mp.tbPlanetrotPeriod.Text = conObject.rotationalPeriod.ToString();
-                                mp.tbPlanetRVM.Text = conObject.RVM.ToString();
-                                mp.tbPlanetsatType.Text = conObject.sattype.ToString();
+                                mp.tbPlanetRVM.Text = conObject.RVM;
+                                mp.tbPlanetsatType.Text = conObject.sattype;
                                 mp.tbPlanetsiderealPeriod.Text = conObject.siderealPeriod.ToString();
                                 mp.tbPlanetSite.Text = conObject.SatelliteSize.ToString();
                                 mp.tbPlanetsurfaceTemp.Text = conObject.surfaceTemp.ToString();
@@ -302,22 +293,21 @@ namespace SWNAdmin.Forms
                                 tbText.Text = conObject.planetString;
                             }
                         }
-                        
                     }
                     ControlCanvas.Children.Add(mp);
                 }
-                if ((string)selectedtv.ToolTip == "MajorMoon Item")
+                if ((string) selectedtv.ToolTip == "MajorMoon Item")
                 {
-                    UserControls.ModifyMajorMoon mmm = new UserControls.ModifyMajorMoon();
-                   
-                    Utility.MajorMoons conObject = null;
-                    foreach (Utility.Stars star in LoadedSystem.Stars)
+                    var mmm = new ModifyMajorMoon();
+
+                    MajorMoons conObject = null;
+                    foreach (var star in LoadedSystem.Stars)
                     {
-                        foreach (Utility.Planets planet in star.Planets)
+                        foreach (var planet in star.Planets)
                         {
-                            foreach (Utility.MajorMoons majormoon in planet.MajorMoons1)
+                            foreach (var majormoon in planet.MajorMoons1)
                             {
-                                if ((Int32)selectedtv.Tag == majormoon.Id)
+                                if ((int) selectedtv.Tag == majormoon.Id)
                                 {
                                     conObject = majormoon;
                                     mmm.tbMoonAge.Text = "N/A";
@@ -331,12 +321,12 @@ namespace SWNAdmin.Forms
                                     mmm.tbMoonDensity.Text = conObject.density.ToString();
                                     mmm.tbMoonDiameter.Text = conObject.diameter.ToString();
                                     mmm.tbMoonGravity.Text = conObject.gravity.ToString();
-                                    mmm.tbMoonhydCov.Text = conObject.hydCoverage.ToString();
+                                    mmm.tbMoonhydCov.Text = conObject.hydCoverage;
                                     mmm.tbMoonID.Text = conObject.Id.ToString();
                                     mmm.tbMoonisRes.Text = conObject.isResonant.ToString();
                                     mmm.tbMoonisTideLock.Text = conObject.isTideLocked.ToString();
                                     mmm.tbMoonMoonMass.Text = conObject.mass.ToString();
-                                    mmm.tbMoonName.Text = conObject.name.ToString();
+                                    mmm.tbMoonName.Text = conObject.name;
                                     mmm.tbMoonNightFaceMod.Text = conObject.nightFaceMod.ToString();
                                     mmm.tbMoonOrbitalCycle.Text = conObject.orbitalCycle.ToString();
                                     mmm.tbMoonorbitalEccent.Text = conObject.orbitalEccent.ToString();
@@ -359,27 +349,27 @@ namespace SWNAdmin.Forms
                                     tbText.Text = conObject.MajorMoonString;
                                 }
                             }
-                            
                         }
                     }
                     ControlCanvas.Children.Add(mmm);
                 }
-                if ((string)selectedtv.ToolTip == "OuterMoonlet Item" || (string)selectedtv.ToolTip == "InnerMoonlet Item")
+                if ((string) selectedtv.ToolTip == "OuterMoonlet Item" ||
+                    (string) selectedtv.ToolTip == "InnerMoonlet Item")
                 {
-                    UserControls.ModifyMoonlet modm = new UserControls.ModifyMoonlet();
-                    
-                    Utility.OuterMoonlets conObjectOuter = null;
-                    Utility.InnerMoonlets conObjectInner = null;
-                    if ((string)selectedtv.ToolTip == "OuterMoonlet Item")
+                    var modm = new ModifyMoonlet();
+
+                    OuterMoonlets conObjectOuter = null;
+                    InnerMoonlets conObjectInner = null;
+                    if ((string) selectedtv.ToolTip == "OuterMoonlet Item")
                     {
                         modm.tbIsOuter.Text = "true";
-                        foreach (Utility.Stars star in LoadedSystem.Stars)
+                        foreach (var star in LoadedSystem.Stars)
                         {
-                            foreach (Utility.Planets planet in star.Planets)
+                            foreach (var planet in star.Planets)
                             {
-                                foreach (Utility.OuterMoonlets outermoonlet in planet.OuterMoonlets1)
+                                foreach (var outermoonlet in planet.OuterMoonlets1)
                                 {
-                                    if ((Int32)selectedtv.Tag == outermoonlet.Id)
+                                    if ((int) selectedtv.Tag == outermoonlet.Id)
                                     {
                                         conObjectOuter = outermoonlet;
                                         modm.tbMoonletblackbodyTemp.Text = conObjectOuter.blackbodyTemp.ToString();
@@ -395,16 +385,16 @@ namespace SWNAdmin.Forms
                             }
                         }
                     }
-                    if ((string)selectedtv.ToolTip == "InnerMoonlet Item")
+                    if ((string) selectedtv.ToolTip == "InnerMoonlet Item")
                     {
                         modm.tbIsOuter.Text = "false";
-                        foreach (Utility.Stars star in LoadedSystem.Stars)
+                        foreach (var star in LoadedSystem.Stars)
                         {
-                            foreach (Utility.Planets planet in star.Planets)
+                            foreach (var planet in star.Planets)
                             {
-                                foreach (Utility.InnerMoonlets innermoonlet in planet.InnerMoonlets1)
+                                foreach (var innermoonlet in planet.InnerMoonlets1)
                                 {
-                                    if ((Int32)selectedtv.Tag == innermoonlet.Id)
+                                    if ((int) selectedtv.Tag == innermoonlet.Id)
                                     {
                                         conObjectInner = innermoonlet;
                                         modm.tbMoonletblackbodyTemp.Text = conObjectInner.blackbodyTemp.ToString();
@@ -418,13 +408,11 @@ namespace SWNAdmin.Forms
                                     }
                                 }
                             }
-
                         }
                     }
                     ControlCanvas.Children.Add(modm);
                 }
             }
-
         }
     }
 }

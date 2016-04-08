@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UniverseGeneration
+﻿namespace UniverseGeneration.Utility
 {
     /// <summary>
     /// This class is an container for the generator status. Accessed by both thing setting it (Front-end) and the generator using them.
@@ -126,37 +120,37 @@ namespace UniverseGeneration
         /// <summary>
         /// This gives more conventional gas giant chances
         /// </summary>
-        public static bool moreConGasGiantChances = false;
+        public static bool? MoreConGasGiantChances = false;
       
         /// <summary>
         /// This option forces only garden no ocean worlds.
         /// </summary>
-        public static bool noOceanOnlyGarden = false;
+        public static bool? noOceanOnlyGarden = false;
 
         /// <summary>
         /// More chances of a large garden world.
         /// </summary>
-        public static bool moreLargeGarden = false;
+        public static bool? moreLargeGarden = false;
 
         /// <summary>
         /// More accurate timing of an oxygen catastrophe 
         /// </summary>
-        public static bool moreAccurateO2Catastrophe = false;
+        public static bool? moreAccurateO2Catastrophe = false;
 
         /// <summary>
         /// Prefer High RVM values
         /// </summary>
-        public static bool highRVMVal = false; 
+        public static bool? highRVMVal = false; 
 
         /// <summary>
         /// No Marginal Atmosphere conditions
         /// </summary>
-        public static bool noMarginalAtm = false; 
+        public static bool? noMarginalAtm = false; 
 
         /// <summary>
         /// Forces stable activity (volcanic, activity) to Moderate.
         /// </summary>
-        public static bool stableActivity = false; 
+        public static bool? stableActivity = false; 
 
         /// <summary>
         /// This sets the atmospheric pressure via override (For Garden Worlds only)
@@ -173,7 +167,7 @@ namespace UniverseGeneration
         /// <summary>
         /// This overrides GURPS's default limit of +8 Habitablility
         /// </summary>
-        public static bool overrideHabitability = false;
+        public static bool? overrideHabitability = false;
 
         /// <summary>
         /// This overrides generated axial tilt.
@@ -184,22 +178,22 @@ namespace UniverseGeneration
         /// <summary>
         /// Reroll the axial tilt over 45 degrees.
         /// </summary>
-        public static bool rerollAxialTiltOver45 = false;
+        public static bool? rerollAxialTiltOver45 = false;
 
         /// <summary>
         /// This option ignores lunar tides on garden worlds for purposes of determining tidal force.
         /// </summary>
-        public static bool ignoreLunarTidesOnGardenWorlds = false; 
+        public static bool? ignoreLunarTidesOnGardenWorlds = false; 
 
         /// <summary>
         /// This option forces to display all tidal data no matter what on the output.
         /// </summary>
-        public static bool alwaysDisplayTidalData = false;
+        public static bool? alwaysDisplayTidalData = false;
 
         /// <summary>
         /// This option expands the asteroid belt size/RVM. 
         /// </summary>
-        public static bool expandAsteroidBelt = false;
+        public static bool? expandAsteroidBelt = false;
 
         /// <summary>
         /// This option sets the moon orbit flag during generation

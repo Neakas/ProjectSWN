@@ -1,8 +1,8 @@
 ﻿<UserControl x:Name="NotificationControl" x:Class="SWN.UserControls.Notification"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SWN.UserControls"
              mc:Ignorable="d" Height="73.743" Width="203.631">
 
@@ -13,17 +13,16 @@
                     <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}"/>
                 </TextBlock.Background>
             </TextBlock>-->
-            <TextBlock x:Name="tbMain" Text="{Binding Path=NotificationText, ElementName=NotificationControl}" TextWrapping="Wrap" HorizontalAlignment="Left" Width="199" Margin="0,0,-5,0">
+            <TextBlock x:Name="tbMain" Text="{Binding Path=NotificationText, ElementName=NotificationControl}"
+                       TextWrapping="Wrap" HorizontalAlignment="Left" Width="199" Margin="0,0,-5,0">
                 <TextBlock.Background>
-                    <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}"/>
+                    <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
                 </TextBlock.Background>
             </TextBlock>
             <Border.BorderBrush>
-                <SolidColorBrush Color="#000000" Opacity="1"/>
+                <SolidColorBrush Color="#000000" Opacity="1" />
             </Border.BorderBrush>
         </Border>
     </Grid>
 
 </UserControl>
-    
-    

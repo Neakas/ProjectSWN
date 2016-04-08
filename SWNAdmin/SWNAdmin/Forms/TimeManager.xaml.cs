@@ -1,21 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using SWNAdmin.Controller;
 
 namespace SWNAdmin.Forms
 {
     /// <summary>
-    /// Interaction logic for TimeManager.xaml
+    ///     Interaction logic for TimeManager.xaml
     /// </summary>
     public partial class TimeManager : Window
     {
@@ -27,7 +18,7 @@ namespace SWNAdmin.Forms
 
         public void UpdateDateTimeDisplay()
         {
-            DateTime DT = TimeHandler.GetCurrentDateTime();
+            var DT = TimeHandler.GetCurrentDateTime();
             MainCalendar.SelectedDate = DT;
             tbClock.Text = DT.TimeOfDay.ToString();
             tbDate.Text = DT.ToShortDateString();
@@ -130,11 +121,10 @@ namespace SWNAdmin.Forms
 
         public void ModifyDate()
         {
-            DateTime DT = TimeHandler.GetCurrentDateTime();
-            DateTime.TryParse(String.Concat(tbDate.Text, " ", tbClock.Text), out DT);
+            var DT = TimeHandler.GetCurrentDateTime();
+            DateTime.TryParse(string.Concat(tbDate.Text, " ", tbClock.Text), out DT);
             TimeHandler.SetCurrentDateTime(DT);
             UpdateDateTimeDisplay();
         }
-
     }
 }

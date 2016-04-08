@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SWNAdmin.UserControls
+﻿namespace SWNAdmin.UserControls
 {
-    class CharacterMalus
+    internal class CharacterMalus
     {
         public int ID { get; set; }
         public string MalusName { get; set; }

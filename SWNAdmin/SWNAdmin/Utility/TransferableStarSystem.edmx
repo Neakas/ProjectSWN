@@ -14,12 +14,12 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PointCost" Type="int" />
           <Property Name="Discription" Type="nvarchar(max)" />
-          <Property Name="isPhysical" Type="bit" Nullable="false" />
-          <Property Name="isMental" Type="bit" Nullable="false" />
-          <Property Name="isSocial" Type="bit" Nullable="false" />
-          <Property Name="isExotic" Type="bit" Nullable="false" />
-          <Property Name="isSuperNatural" Type="bit" Nullable="false" />
-          <Property Name="isMundane" Type="bit" Nullable="false" />
+          <Property Name="isPhysical" Type="bit" />
+          <Property Name="isMental" Type="bit" />
+          <Property Name="isSocial" Type="bit" />
+          <Property Name="isExotic" Type="bit" />
+          <Property Name="isSuperNatural" Type="bit" />
+          <Property Name="isMundane" Type="bit" />
           <Property Name="Limitation" Type="nvarchar(max)" />
           <Property Name="RequirementSet" Type="bit" />
           <Property Name="hasLevels" Type="bit" />
@@ -667,12 +667,12 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PointCost" Type="Int32" />
           <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="isPhysical" Type="Boolean" Nullable="false" />
-          <Property Name="isMental" Type="Boolean" Nullable="false" />
-          <Property Name="isSocial" Type="Boolean" Nullable="false" />
-          <Property Name="isExotic" Type="Boolean" Nullable="false" />
-          <Property Name="isSuperNatural" Type="Boolean" Nullable="false" />
-          <Property Name="isMundane" Type="Boolean" Nullable="false" />
+          <Property Name="isPhysical" Type="Boolean" />
+          <Property Name="isMental" Type="Boolean" />
+          <Property Name="isSocial" Type="Boolean" />
+          <Property Name="isExotic" Type="Boolean" />
+          <Property Name="isSuperNatural" Type="Boolean" />
+          <Property Name="isMundane" Type="Boolean" />
           <Property Name="Limitation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="RequirementSet" Type="Boolean" />
           <Property Name="hasLevels" Type="Boolean" />

@@ -1,8 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Forms/EncyclopediaManager/Resources/DataTemplates/SettingsView.xaml"/>
+        <ResourceDictionary
+            Source="pack://application:,,,/Forms/EncyclopediaManager/Resources/DataTemplates/SettingsView.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
+
 </ResourceDictionary>

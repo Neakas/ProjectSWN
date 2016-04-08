@@ -1,55 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Data;
-using System.Data.SqlClient;
-using System.Text.RegularExpressions;
-using amexus.Encryption;
-using System.ServiceModel;
-using System.Runtime.Serialization;
-using SWN.SWNServiceReference;
-using System.Threading;
 using System.Windows.Threading;
-using System.ComponentModel;
-using System.Threading.Tasks;
+using SWN.Controller;
+using SWN.Networking;
+using SWN.Service_References.SWNServiceReference;
 
-namespace SWN
+namespace SWN.Forms
 
 {
     public partial class Login : Window
     {
-        private static Login currentinstance;
-
-        public static Login CurrentInstance
-        {
-            get { return currentinstance; }
-            set { currentinstance = value; }
-        }
-
         public Login()
         {
             InitializeComponent();
             CurrentInstance = this;
-            tbIPPort.Text = SettingHandler.GetIPPort();
+            tbIPPort.Text = SettingHandler.GetIpPort();
         }
 
-        private Client userclient;
+        public static Login CurrentInstance { get; set; }
 
-        public Client UserClient
-        {
-            get { return userclient; }
-            set { userclient = value; }
-        }
+        public Client UserClient { get; set; }
 
         private async void btLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -64,7 +34,7 @@ namespace SWN
             }
 
             UserClient = new Client();
-            SettingHandler.SetIPPort(tbIPPort.Text);
+            SettingHandler.SetIpPort(tbIPPort.Text);
 
             if (textBoxUsername.Text.Length == 0)
             {
@@ -75,15 +45,15 @@ namespace SWN
             errormessage.Text = "";
             biBusy.IsBusy = true;
             //Force UI Redraw
-            Dispatcher.Invoke(new Action(() => { }), DispatcherPriority.ContextIdle);
+            Dispatcher.Invoke(() => { }, DispatcherPriority.ContextIdle);
 
             UserClient.UserName = textBoxUsername.Text;
-            Encryption E = new Encryption(passwordBox1.Password);
+            var E = new Encryption(passwordBox1.Password);
             UserClient.encPassword = E.EncryptStringToBytes(passwordBox1.Password);
-            bool SuccessfullLogin = await SC.tryLogin(UserClient);
+            var SuccessfullLogin = await SC.tryLogin(UserClient);
             if (SuccessfullLogin)
             {
-                MainWindow MW = new MainWindow();
+                var MW = new MainWindow();
 
                 MW.LocalCient = UserClient;
                 SettingHandler.SetIsLoggedIn(true);
@@ -98,18 +68,19 @@ namespace SWN
 
         public static void ProcessUITasks()
         {
-            DispatcherFrame frame = new DispatcherFrame();
-            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(delegate (object parameter)
-            {
-                frame.Continue = false;
-                return null;
-            }), null);
+            var frame = new DispatcherFrame();
+            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background,
+                new DispatcherOperationCallback(delegate
+                {
+                    frame.Continue = false;
+                    return null;
+                }), null);
             Dispatcher.PushFrame(frame);
         }
 
         private void buttonRegister_Click(object sender, RoutedEventArgs e)
         {
-            Registration registration = new Registration();
+            var registration = new Registration();
             registration.Show();
             Close();
         }
@@ -132,7 +103,7 @@ namespace SWN
 
         private void btOverride_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow MW = new MainWindow();
+            var MW = new MainWindow();
             MW.Show();
             Close();
         }

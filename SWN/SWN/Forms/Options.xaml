@@ -9,18 +9,25 @@
         mc:Ignorable="d"
         Title="Options" Height="366.667" Width="586.666">
     <Window.Background>
-        <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}"/>
+        <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
     </Window.Background>
     <Grid>
-        <Label x:Name="lblRcvFiles" Content="Received-Files Directory" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblRcvImages" Content="Received-Images Directory" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbFileDirectory" Height="23" Margin="167,7,66,0" Text="" VerticalAlignment="Top" IsReadOnly="True"/>
-        <TextBox x:Name="tbImgDirectory" Height="23" Margin="167,35,66,0" Text="" VerticalAlignment="Top" IsReadOnly="True"/>
-        <Button x:Name="btSave" Content="Save" Margin="0,0,10,10" Click="btSave_Click" Height="18" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>
-        <Button x:Name="btFileBrowse" Content="Browse" HorizontalAlignment="Left" Margin="518,10,0,0" VerticalAlignment="Top" Width="52" Height="17" Click="btFileBrowse_Click"/>
-        <Button x:Name="btImageBrowse" Content="Browse" HorizontalAlignment="Left" Margin="518,37,0,0" VerticalAlignment="Top" Width="52" Height="17" Click="btImageBrowse_Click"/>
-        <CheckBox x:Name="cbStartMusic" Content="Enable Startup-Music?" HorizontalAlignment="Left" Height="23" Margin="23,79,0,0" VerticalAlignment="Top" Width="165" IsChecked="True"/>
-
+        <Label x:Name="lblRcvFiles" Content="Received-Files Directory" HorizontalAlignment="Left" Margin="10,10,0,0"
+               VerticalAlignment="Top" />
+        <Label x:Name="lblRcvImages" Content="Received-Images Directory" HorizontalAlignment="Left" Margin="10,35,0,0"
+               VerticalAlignment="Top" />
+        <TextBox x:Name="tbFileDirectory" Height="23" Margin="167,7,66,0" Text="" VerticalAlignment="Top"
+                 IsReadOnly="True" />
+        <TextBox x:Name="tbImgDirectory" Height="23" Margin="167,35,66,0" Text="" VerticalAlignment="Top"
+                 IsReadOnly="True" />
+        <Button x:Name="btSave" Content="Save" Margin="0,0,10,10" Click="btSave_Click" Height="18"
+                VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" />
+        <Button x:Name="btFileBrowse" Content="Browse" HorizontalAlignment="Left" Margin="518,10,0,0"
+                VerticalAlignment="Top" Width="52" Height="17" Click="btFileBrowse_Click" />
+        <Button x:Name="btImageBrowse" Content="Browse" HorizontalAlignment="Left" Margin="518,37,0,0"
+                VerticalAlignment="Top" Width="52" Height="17" Click="btImageBrowse_Click" />
+        <CheckBox x:Name="cbStartMusic" Content="Enable Startup-Music?" HorizontalAlignment="Left" Height="23"
+                  Margin="23,79,0,0" VerticalAlignment="Top" Width="165" IsChecked="True" />
 
 
     </Grid>

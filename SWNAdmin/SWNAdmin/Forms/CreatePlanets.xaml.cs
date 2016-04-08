@@ -1,272 +1,236 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using UniverseGeneration;
+using UniverseGeneration.Range_Objects;
+using UniverseGeneration.Stellar_Bodies;
+using UniverseGeneration.Utility;
 
-namespace SWNAdmin
+namespace SWNAdmin.Forms
 {
     /// <summary>
-    /// Interaction logic for CreatePlanets.xaml
+    ///     Interaction logic for CreatePlanets.xaml
     /// </summary>
-    public partial class CreatePlanets : Window
+    public partial class CreatePlanets
     {
-
         /// <summary>
-        /// A passed StarSystem object (the one currently being used)
-        /// </summary>
-        public StarSystem ourSystem { get; set; }
-
-        /// <summary>
-        /// A passed Dice object
-        /// </summary>
-        public Dice velvetBag { get; set; }
-
-        /// <summary>
-        /// Parent object, used to pass to the main thing when we're done successfully.
-        /// </summary>
-        private SystemGeneration parent { get; set; }
-
-
-        /// <summary>
-        /// The constructor object for this form
+        ///     The constructor object for this form
         /// </summary>
         public CreatePlanets(StarSystem o, Dice d, SystemGeneration p)
         {
-            this.parent = p;
-            this.velvetBag = d;
-            this.ourSystem = o;
+            OParent = p;
+            VelvetBag = d;
+            OurSystem = o;
 
             InitializeComponent();
         }
 
-        private void overridePressure_CheckedChanged(object sender, EventArgs e)
-        {
-            if (overridePressure.IsChecked == true)
-            {
-                lblAtm.Visibility = Visibility.Visible;
-                numAtmPressure.Visibility = Visibility.Visible;
-            }
-
-            if (overridePressure.IsChecked == false)
-            {
-                lblAtm.Visibility = Visibility.Hidden;
-                numAtmPressure.Visibility = Visibility.Hidden;
-            }
-        }
-
         /// <summary>
-        /// This hides or unhides the moon selector based on the check of it's check mark.
+        ///     A passed StarSystem object (the one currently being used)
         /// </summary>
-        /// <param name="sender">Sender object</param>
-        /// <param name="e">EventArgs object</param>
-        private void overrideMoons_CheckedChanged(object sender, EventArgs e)
-        {
-            if (overrideMoons.IsChecked == true)
-            {
-                lblMoons.Visibility = Visibility.Visible;
-                numMoons.Visibility = Visibility.Visible;
-            }
-
-            if (overrideMoons.IsChecked == false)
-            {
-                lblMoons.Visibility = Visibility.Hidden;
-                numMoons.Visibility = Visibility.Hidden;
-            }
-        }
+        private StarSystem OurSystem { get; }
 
         /// <summary>
-        /// Sends the completed status and begins generating the planets
+        ///     A passed Dice object
+        /// </summary>
+        private Dice VelvetBag { get; }
+
+        /// <summary>
+        ///     OParent object, used to pass to the main thing when we're done successfully.
+        /// </summary>
+        private SystemGeneration OParent { get; }
+
+        /// <summary>
+        ///     Sends the completed status and begins generating the planets
         /// </summary>
         /// <param name="sender">Sender object</param>
         /// <param name="e">EventArgs object</param>
         private void btnGenPlanets_Click(object sender, EventArgs e)
         {
             //save options
-            OptionCont.moreConGasGiantChances = (bool)chkConGasGiant.IsChecked;
-            OptionCont.noOceanOnlyGarden = (bool)onlyGarden.IsChecked;
-            OptionCont.moreAccurateO2Catastrophe = (bool)chkMoreAccurateO2Catastrophe.IsChecked;
-            OptionCont.stableActivity = (bool)frcStableActivity.IsChecked;
-            OptionCont.noMarginalAtm = (bool)noMarginAtm.IsChecked;
-            OptionCont.highRVMVal = (bool)highRVM.IsChecked;
-            OptionCont.overrideHabitability = (bool)chkHigherHabitability.IsChecked;
-            OptionCont.ignoreLunarTidesOnGardenWorlds = (bool)ignoreTides.IsChecked;
-            OptionCont.rerollAxialTiltOver45 = (bool)chkKeepAxialTiltUnder45.IsChecked;
-            OptionCont.alwaysDisplayTidalData = (bool)chkDisplayTidalData.IsChecked;
-            OptionCont.expandAsteroidBelt = (bool)chkExpandAsteroidBelt.IsChecked;
+            OptionCont.MoreConGasGiantChances = ChkConGasGiant.IsChecked != null && (bool) ChkConGasGiant.IsChecked;
+            OptionCont.noOceanOnlyGarden = OnlyGarden.IsChecked != null && (bool) OnlyGarden.IsChecked;
+            OptionCont.moreAccurateO2Catastrophe = ChkMoreAccurateO2Catastrophe.IsChecked != null && (bool) ChkMoreAccurateO2Catastrophe.IsChecked;
+            OptionCont.stableActivity = FrcStableActivity.IsChecked != null && (bool) FrcStableActivity.IsChecked;
+            OptionCont.noMarginalAtm = NoMarginAtm.IsChecked != null && (bool) NoMarginAtm.IsChecked;
+            OptionCont.highRVMVal = HighRvm.IsChecked != null && (bool) HighRvm.IsChecked;
+            OptionCont.overrideHabitability = ChkHigherHabitability.IsChecked != null && (bool) ChkHigherHabitability.IsChecked;
+            OptionCont.ignoreLunarTidesOnGardenWorlds = IgnoreTides.IsChecked != null && (bool) IgnoreTides.IsChecked;
+            OptionCont.rerollAxialTiltOver45 = ChkKeepAxialTiltUnder45.IsChecked != null && (bool) ChkKeepAxialTiltUnder45.IsChecked;
+            OptionCont.alwaysDisplayTidalData = ChkDisplayTidalData.IsChecked != null && (bool) ChkDisplayTidalData.IsChecked;
+            OptionCont.expandAsteroidBelt = ChkExpandAsteroidBelt.IsChecked != null && (bool) ChkExpandAsteroidBelt.IsChecked;
 
-            if (overrideMoons.IsChecked == true) OptionCont.setNumberOfMoonsOverGarden(Int32.Parse(numMoons.Text));
-            if (overridePressure.IsChecked == true) OptionCont.setAtmPressure = Double.Parse(numAtmPressure.Text);
-            if (chkOverrideTilt.IsChecked == true) OptionCont.setAxialTilt(Int32.Parse(numTilt.Text));
+            if (OverrideMoons.IsChecked == true) OptionCont.setNumberOfMoonsOverGarden(int.Parse(NumMoons.Text));
+            if (OverridePressure.IsChecked == true) OptionCont.setAtmPressure = double.Parse(NumAtmPressure.Text);
+            if (ChkOverrideTilt.IsChecked == true) OptionCont.setAxialTilt(int.Parse(NumTilt.Text));
 
             //set the moon option.
-            if (bookHigh.IsChecked == true) OptionCont.moonOrbitFlag = OptionCont.MOON_BOOKHIGH;
-            if (bookMoon.IsChecked == true) OptionCont.moonOrbitFlag = OptionCont.MOON_BOOK;
-            if (extendHigh.IsChecked == true) OptionCont.moonOrbitFlag = OptionCont.MOON_EXPANDHIGH;
-            if (extendNorm.IsChecked == true) OptionCont.moonOrbitFlag = OptionCont.MOON_EXPAND;
+            if (BookHigh.IsChecked == true) OptionCont.moonOrbitFlag = OptionCont.MOON_BOOKHIGH;
+            if (BookMoon.IsChecked == true) OptionCont.moonOrbitFlag = OptionCont.MOON_BOOK;
+            if (ExtendHigh.IsChecked == true) OptionCont.moonOrbitFlag = OptionCont.MOON_EXPANDHIGH;
+            if (ExtendNorm.IsChecked == true) OptionCont.moonOrbitFlag = OptionCont.MOON_EXPAND;
 
             //generate the planets!
-            int totalOrbCount = 0; //total orbital count
+            var totalOrbCount = 0; //total orbital count
 
             //first off, master loop. 
-            for (int currStar = 0; currStar < this.ourSystem.sysStars.Count; currStar++)
+            foreach (var star in OurSystem.sysStars)
             {
-                Range temp;
-                //draw up forbidden zones.
-                if (!this.ourSystem.sysStars[currStar].testInitlizationZones()) this.ourSystem.sysStars[currStar].initalizeZonesOfInterest();
-                for (int i = 1; i < this.ourSystem.sysStars.Count; i++)
+                if (!star.testInitlizationZones())
+                    star.initalizeZonesOfInterest();
+                for (var i = 1; i < OurSystem.sysStars.Count; i++)
                 {
-                    if (this.ourSystem.sysStars[i].parentID == this.ourSystem.sysStars[currStar].selfID)
+                    Range temp;
+                    if (OurSystem.sysStars[i].parentID == star.selfID)
                     {
-                        temp = new Range(this.ourSystem.sysStars[i].getInnerForbiddenZone(), this.ourSystem.sysStars[i].getOuterForbiddenZone());
-                        this.ourSystem.sysStars[currStar].createForbiddenZone(temp, this.ourSystem.sysStars[currStar].selfID, this.ourSystem.sysStars[i].selfID);
+                        temp = new Range(OurSystem.sysStars[i].getInnerForbiddenZone(),
+                            OurSystem.sysStars[i].getOuterForbiddenZone());
+                        star.createForbiddenZone(temp, star.selfID,
+                            OurSystem.sysStars[i].selfID);
                     }
-                    if (this.ourSystem.sysStars[i].selfID == this.ourSystem.sysStars[currStar].selfID)
-                    {
-                        temp = new Range(this.ourSystem.sysStars[i].getInnerForbiddenZone(), this.ourSystem.sysStars[i].getOuterForbiddenZone());
-                        this.ourSystem.sysStars[currStar].createForbiddenZone(temp, this.ourSystem.sysStars[currStar].parentID, this.ourSystem.sysStars[currStar].selfID);
-                    }
+                    if (OurSystem.sysStars[i].selfID != star.selfID) continue;
+                    temp = new Range(OurSystem.sysStars[i].getInnerForbiddenZone(),
+                        OurSystem.sysStars[i].getOuterForbiddenZone());
+                    star.createForbiddenZone(temp, star.parentID,
+                        star.selfID);
                 }
 
-                this.ourSystem.sysStars[currStar].sortForbidden();
-                this.ourSystem.sysStars[currStar].createCleanZones();
-                //gas giant flag
-                //                libStarGen.gasGiantFlag(this.ourSystem.sysStars[currStar], velvetBag.gurpsRoll());
-
-                Satellite placeHolder = new Satellite(0, 0, 0, 0);
-                int ownership, roll;
-                double orbit = 0;
-                if (this.ourSystem.sysStars[currStar].gasGiantFlag != Star.GASGIANT_NONE)
+                star.sortForbidden();
+                star.createCleanZones();
+                var placeHolder = new Satellite(0, 0, 0, 0);
+                int ownership;
+                if (star.gasGiantFlag != Star.GASGIANT_NONE)
                 {
                     double rangeAvail = 0, lowerBound = 0, diffRange = 0;
-                    Range spawnRange = new Range(0, 1);
+                    var spawnRange = new Range(0, 1);
 
                     //get range availability and spawn range
 
                     //CONVENTIONAL
-                    if (this.ourSystem.sysStars[currStar].gasGiantFlag == Star.GASGIANT_CONVENTIONAL)
+                    if (star.gasGiantFlag == Star.GASGIANT_CONVENTIONAL)
                     {
-                        rangeAvail = this.ourSystem.sysStars[currStar].checkConRange();
-                        lowerBound = Star.snowLine(this.ourSystem.sysStars[currStar].initLumin) * 1;
-                        diffRange = (Star.snowLine(this.ourSystem.sysStars[currStar].initLumin) * 1.5) - lowerBound;
-                        spawnRange = this.ourSystem.sysStars[currStar].getConventionalRange();
+                        rangeAvail = star.checkConRange();
+                        lowerBound = Star.snowLine(star.initLumin)*1;
+                        diffRange = Star.snowLine(star.initLumin)*1.5 - lowerBound;
+                        spawnRange = star.getConventionalRange();
                     }
 
                     //ECCENTRIC
-                    if (this.ourSystem.sysStars[currStar].gasGiantFlag == Star.GASGIANT_ECCENTRIC)
+                    if (star.gasGiantFlag == Star.GASGIANT_ECCENTRIC)
                     {
-                        rangeAvail = this.ourSystem.sysStars[currStar].checkEccRange();
-                        lowerBound = Star.snowLine(this.ourSystem.sysStars[currStar].initLumin) * .125;
-                        diffRange = (Star.snowLine(this.ourSystem.sysStars[currStar].initLumin) * .75) - lowerBound;
-                        spawnRange = this.ourSystem.sysStars[currStar].getEccentricRange();
+                        rangeAvail = star.checkEccRange();
+                        lowerBound = Star.snowLine(star.initLumin)*.125;
+                        diffRange = Star.snowLine(star.initLumin)*.75 - lowerBound;
+                        spawnRange = star.getEccentricRange();
                     }
 
                     //EPISTELLAR 
-                    if (this.ourSystem.sysStars[currStar].gasGiantFlag == Star.GASGIANT_EPISTELLAR)
+                    if (star.gasGiantFlag == Star.GASGIANT_EPISTELLAR)
                     {
-                        rangeAvail = this.ourSystem.sysStars[currStar].checkEpiRange();
-                        lowerBound = Star.innerRadius(this.ourSystem.sysStars[currStar].initLumin, this.ourSystem.sysStars[currStar].initMass) * .1;
-                        diffRange = (Star.innerRadius(this.ourSystem.sysStars[currStar].initLumin, this.ourSystem.sysStars[currStar].initMass) * 1.8) - lowerBound;
-                        spawnRange = this.ourSystem.sysStars[currStar].getEpistellarRange();
+                        rangeAvail = star.checkEpiRange();
+                        lowerBound =
+                            Star.innerRadius(star.initLumin,
+                                star.initMass)*.1;
+                        diffRange =
+                            Star.innerRadius(star.initLumin,
+                                star.initMass)*1.8 - lowerBound;
+                        spawnRange = star.getEpistellarRange();
                     }
 
+                    int roll;
+                    double orbit;
                     if (rangeAvail >= .25)
                     {
                         do
                         {
-                            orbit = velvetBag.rollRange(lowerBound, diffRange);
-                        } while (!this.ourSystem.sysStars[currStar].verifyCleanOrbit(orbit));
+                            orbit = VelvetBag.rollRange(lowerBound, diffRange);
+                        } while (!star.verifyCleanOrbit(orbit));
 
-                        ownership = this.ourSystem.sysStars[currStar].getOwnership(orbit);
+                        ownership = star.getOwnership(orbit);
 
-                        if (this.ourSystem.sysStars[currStar].gasGiantFlag == Star.GASGIANT_EPISTELLAR)
-                            ownership = this.ourSystem.sysStars[currStar].selfID;
+                        if (star.gasGiantFlag == Star.GASGIANT_EPISTELLAR)
+                            ownership = star.selfID;
 
                         placeHolder = new Satellite(ownership, 0, orbit, 0, Satellite.BASETYPE_GASGIANT);
 
-                        roll = velvetBag.gurpsRoll() + 4;
+                        roll = VelvetBag.gurpsRoll() + 4;
                         libStarGen.updateGasGiantSize(placeHolder, roll);
                     }
 
                     if (rangeAvail >= .005 && rangeAvail < .25)
                     {
-                        orbit = this.ourSystem.sysStars[currStar].pickInRange(spawnRange);
-                        ownership = this.ourSystem.sysStars[currStar].getOwnership(orbit);
-                        if (this.ourSystem.sysStars[currStar].gasGiantFlag == Star.GASGIANT_EPISTELLAR)
-                            ownership = this.ourSystem.sysStars[currStar].selfID;
+                        orbit = star.pickInRange(spawnRange);
+                        ownership = star.getOwnership(orbit);
+                        if (star.gasGiantFlag == Star.GASGIANT_EPISTELLAR)
+                            ownership = star.selfID;
 
                         placeHolder = new Satellite(ownership, 0, orbit, 0, Satellite.BASETYPE_GASGIANT);
 
-                        roll = velvetBag.gurpsRoll() + 4;
+                        roll = VelvetBag.gurpsRoll() + 4;
                         libStarGen.updateGasGiantSize(placeHolder, roll);
                     }
                 }
 
                 //now we've determined our placeholdr, let's start working on our orbitals.
 
-                double currOrbit = Star.innerRadius(this.ourSystem.sysStars[currStar].initLumin, this.ourSystem.sysStars[currStar].initMass), nextOrbit = 0;
-                double distance = .15;
+                double currOrbit = Star.innerRadius(star.initLumin,
+                    star.initMass),
+                    nextOrbit;
+                const double distance = .15;
 
                 //now we have our placeholder.
-                if (placeHolder.orbitalRadius != 0)
+                if (Math.Abs(placeHolder.orbitalRadius) > 0)
                 {
-                    this.ourSystem.sysStars[currStar].addSatellite(placeHolder);
+                    star.addSatellite(placeHolder);
                     currOrbit = placeHolder.orbitalRadius;
                 }
 
-                if (this.ourSystem.sysStars[currStar].gasGiantFlag != Star.GASGIANT_EPISTELLAR && placeHolder.orbitalRadius != 0)
+                if (star.gasGiantFlag != Star.GASGIANT_EPISTELLAR &&
+                    Math.Abs(placeHolder.orbitalRadius) > 0)
                 {
                     //we're moving left.
                     //LEFT RIGHT LEFT
                     //.. sorry about that
-                    double innerRadius = Star.innerRadius(this.ourSystem.sysStars[currStar].initLumin, this.ourSystem.sysStars[currStar].initMass);
+                    var innerRadius = Star.innerRadius(star.initLumin,
+                        star.initMass);
                     do
                     {
                         //as we're moving left, divide.
-                        nextOrbit = currOrbit / libStarGen.getOrbitalRatio(velvetBag);
+                        nextOrbit = currOrbit/libStarGen.getOrbitalRatio(VelvetBag);
 
                         if (nextOrbit > currOrbit - distance)
                             nextOrbit = currOrbit - distance;
 
-                        if (this.ourSystem.sysStars[currStar].verifyCleanOrbit(nextOrbit) && this.ourSystem.sysStars[currStar].withinCreationRange(nextOrbit))
+                        if (star.verifyCleanOrbit(nextOrbit) &&
+                            star.withinCreationRange(nextOrbit))
                         {
-                            ownership = this.ourSystem.sysStars[currStar].getOwnership(nextOrbit);
-                            this.ourSystem.sysStars[currStar].addSatellite(new Satellite(ownership, 0, nextOrbit, 0));
+                            ownership = star.getOwnership(nextOrbit);
+                            star.addSatellite(new Satellite(ownership, 0, nextOrbit, 0));
                         }
 
                         currOrbit = nextOrbit;
 
                         //now let's check on 
                     } while (currOrbit > innerRadius);
-
                 }
 
                 //MOVE RIGHT!
                 //now we have our placeholder.
-                if (this.ourSystem.sysStars[currStar].gasGiantFlag == Star.GASGIANT_EPISTELLAR || placeHolder.orbitalRadius == 0)
+                if (star.gasGiantFlag == Star.GASGIANT_EPISTELLAR ||
+                    Math.Abs(placeHolder.orbitalRadius) < 0)
                 {
-                    double outerRadius = Star.outerRadius(this.ourSystem.sysStars[currStar].initMass);
+                    var outerRadius = Star.outerRadius(star.initMass);
                     do
                     {
                         //as we're moving right, multiply.
-                        nextOrbit = currOrbit * libStarGen.getOrbitalRatio(velvetBag);
+                        nextOrbit = currOrbit*libStarGen.getOrbitalRatio(VelvetBag);
 
                         if (nextOrbit < currOrbit + distance)
                             nextOrbit = currOrbit + distance;
 
-                        if (this.ourSystem.sysStars[currStar].verifyCleanOrbit(nextOrbit) && this.ourSystem.sysStars[currStar].withinCreationRange(nextOrbit))
+                        if (star.verifyCleanOrbit(nextOrbit) &&
+                            star.withinCreationRange(nextOrbit))
                         {
-                            ownership = this.ourSystem.sysStars[currStar].getOwnership(nextOrbit);
-                            this.ourSystem.sysStars[currStar].addSatellite(new Satellite(ownership, 0, nextOrbit, 0));
+                            ownership = star.getOwnership(nextOrbit);
+                            star.addSatellite(new Satellite(ownership, 0, nextOrbit, 0));
                         }
 
                         currOrbit = nextOrbit;
@@ -278,63 +242,44 @@ namespace SWNAdmin
                 }
 
                 //if a clean zone has 0 planets, add one.
-                foreach (cleanZone c in this.ourSystem.sysStars[currStar].zonesOfInterest.formationZones)
+                foreach (var c in star.zonesOfInterest.formationZones)
                 {
-                    if (!this.ourSystem.sysStars[currStar].cleanZoneHasOrbits(c))
+                    if (!star.cleanZoneHasOrbits(c))
                     {
-                        nextOrbit = this.ourSystem.sysStars[currStar].pickInRange(c.getRange());
-                        ownership = this.ourSystem.sysStars[currStar].getOwnership(nextOrbit);
-                        this.ourSystem.sysStars[currStar].addSatellite(new Satellite(ownership, 0, nextOrbit, 0));
+                        nextOrbit = star.pickInRange(c.getRange());
+                        ownership = star.getOwnership(nextOrbit);
+                        star.addSatellite(new Satellite(ownership, 0, nextOrbit, 0));
                     }
                 }
 
                 //sort orbitals
-                this.ourSystem.sysStars[currStar].sortOrbitals();
-                this.ourSystem.sysStars[currStar].giveOrbitalsOrder(ref totalOrbCount);
+                star.sortOrbitals();
+                star.giveOrbitalsOrder(ref totalOrbCount);
 
                 //now we get orbital contents, then fill in details
-                libStarGen.populateOrbits(this.ourSystem.sysStars[currStar], velvetBag);
+                libStarGen.populateOrbits(star, VelvetBag);
 
                 //set any star with all empty orbits to have one planet
-                if (this.ourSystem.sysStars[currStar].isAllEmptyOrbits() && OptionCont.ensureOneOrbit)
+                if (star.isAllEmptyOrbits() && OptionCont.ensureOneOrbit)
                 {
-                    int newPlanet = velvetBag.rng(1, this.ourSystem.sysStars[currStar].sysPlanets.Count, -1);
-                    this.ourSystem.sysStars[currStar].sysPlanets[newPlanet].updateTypeSize(Satellite.BASETYPE_TERRESTIAL, Satellite.SIZE_MEDIUM);
+                    var newPlanet = VelvetBag.rng(1, star.sysPlanets.Count, -1);
+                    star.sysPlanets[newPlanet].updateTypeSize(Satellite.BASETYPE_TERRESTIAL,
+                        Satellite.SIZE_MEDIUM);
                 }
             }
 
-            for (int currStar = 0; currStar < this.ourSystem.sysStars.Count; currStar++)
+            foreach (var star in OurSystem.sysStars)
             {
-                double[,] distChart = libStarGen.genDistChart(this.ourSystem.sysStars);
-                for (int i = 0; i < this.ourSystem.sysStars[currStar].sysPlanets.Count; i++)
+                var distChart = libStarGen.genDistChart(OurSystem.sysStars);
+                foreach (var sat in star.sysPlanets)
                 {
-                    this.ourSystem.sysStars[currStar].sysPlanets[i].updateBlackBodyTemp(distChart, this.ourSystem.sysStars);
+                    sat.updateBlackBodyTemp(distChart, OurSystem.sysStars);
                 }
-                libStarGen.createPlanets(this.ourSystem, this.ourSystem.sysStars[currStar].sysPlanets, velvetBag);
+                libStarGen.createPlanets(OurSystem, star.sysPlanets, VelvetBag);
             }
 
-            parent.createPlanetsFinished = true;
-            this.Close(); //close the form
-        }
-
-        /// <summary>
-        /// Display or hide the override tilt based on if this is checked.
-        /// </summary>
-        /// <param name="sender">Sender object</param>
-        /// <param name="e">EventArgs object</param>
-        private void chkOverrideTilt_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkOverrideTilt.IsChecked == true)
-            {
-                lblDegrees.Visibility = Visibility.Visible;
-                numTilt.Visibility = Visibility.Visible;
-            }
-
-            if (chkOverrideTilt.IsChecked == false)
-            {
-                lblDegrees.Visibility = Visibility.Hidden;
-                numTilt.Visibility = Visibility.Hidden;
-            }
+            OParent.createPlanetsFinished = true;
+            Close(); //close the form
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)

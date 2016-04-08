@@ -1,34 +1,42 @@
-﻿<Window x:Class="SWNAdmin.Forms.DataBaseManager"
+﻿<Window x:Class="SWNAdmin.Forms.DatabaseManager.DataBaseManager"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SWNAdmin.Forms"
         xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
         themes:ThemeManager.Theme="ExpressionDark"
         mc:Ignorable="d"
         Title="DataBaseManager" Height="1000" Width="1000" WindowState="Maximized">
     <Window.Background>
-        <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
+        <SolidColorBrush Color="{DynamicResource SWNLightBackground}" />
     </Window.Background>
     <Grid>
-        <Menu x:Name="menu" Height="25" VerticalAlignment="Top">
+        <Menu x:Name="Menu" Height="25" VerticalAlignment="Top">
             <MenuItem Header="Manage">
-                <MenuItem x:Name="MenuManageAdvantage" Header="Advantage" HorizontalAlignment="Left" Width="161" Click="MenuManageAdvantage_Click" Margin="0,0,-21,0"/>
-                <MenuItem x:Name="MenuManageDisadvantage" Header="Disadvantage" HorizontalAlignment="Left" Width="161" Margin="0,0,-21,0" Click="MenuManageDisadvantage_Click"/>
-                <MenuItem x:Name="MenuManageStat" Header="Stats" HorizontalAlignment="Left" Width="140" Click="MenuManageStat_Click"/>
-                <MenuItem x:Name="MenuManageSkills" Header="Skills" HorizontalAlignment="Left" Width="140" Click="MenuManageSkills_Click" />
-                <MenuItem x:Name="MenuManagePrerequisites" Header="Prerequisites" HorizontalAlignment="Left" Width="140" Click="MenuManagePrerequisites_Click"/>
-                <MenuItem x:Name="MenuManageGroups" Header="Groups" HorizontalAlignment="Left" Width="140" Click="MenuManageGroups_Click" />
-                <MenuItem x:Name="MenuManageModifiers" Header="Modifiers" HorizontalAlignment="Left" Width="140" Click="MenuManageModifiers_Click" />
-                <MenuItem x:Name="MenuManageAlienRace" Header="Alien Races" HorizontalAlignment="Left" Width="140" Click="MenuManageAlienRace_Click" />
+                <MenuItem x:Name="MenuManageAdvantage" Header="Advantage" HorizontalAlignment="Left" Width="161"
+                          Click="MenuManageAdvantage_Click" Margin="0,0,-21,0" />
+                <MenuItem x:Name="MenuManageDisadvantage" Header="Disadvantage" HorizontalAlignment="Left" Width="161"
+                          Margin="0,0,-21,0" Click="MenuManageDisadvantage_Click" />
+                <MenuItem x:Name="MenuManageStat" Header="Stats" HorizontalAlignment="Left" Width="140"
+                          Click="MenuManageStat_Click" />
+                <MenuItem x:Name="MenuManageSkills" Header="Skills" HorizontalAlignment="Left" Width="140"
+                          Click="MenuManageSkills_Click" />
+                <MenuItem x:Name="MenuManagePrerequisites" Header="Prerequisites" HorizontalAlignment="Left"
+                          Width="140" Click="MenuManagePrerequisites_Click" />
+                <MenuItem x:Name="MenuManageGroups" Header="Groups" HorizontalAlignment="Left" Width="140"
+                          Click="MenuManageGroups_Click" />
+                <MenuItem x:Name="MenuManageModifiers" Header="Modifiers" HorizontalAlignment="Left" Width="140"
+                          Click="MenuManageModifiers_Click" />
+                <MenuItem x:Name="MenuManageAlienRace" Header="Alien Races" HorizontalAlignment="Left" Width="140"
+                          Click="MenuManageAlienRace_Click" />
             </MenuItem>
         </Menu>
-        <DataGrid x:Name="dgMain" Margin="108,27,10,0" VerticalAlignment="Top" Height="932">
+        <DataGrid x:Name="DgMain" Margin="108,27,10,0" VerticalAlignment="Top" Height="932">
             <DataGrid.Background>
-                <SolidColorBrush Color="{DynamicResource SWNDarkBackground}"/>
+                <SolidColorBrush Color="{DynamicResource SWNDarkBackground}" />
             </DataGrid.Background>
         </DataGrid>
-        <ComboBox x:Name="cbDatabaseSelector" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="93" SelectionChanged="cbDatabaseSelector_SelectionChanged"/>
+        <ComboBox x:Name="CbDatabaseSelector" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top"
+                  Width="93" SelectionChanged="cbDatabaseSelector_SelectionChanged" />
     </Grid>
 </Window>

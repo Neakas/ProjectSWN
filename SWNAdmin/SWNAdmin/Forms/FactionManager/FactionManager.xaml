@@ -1,20 +1,19 @@
-﻿<Window x:Class="SWNAdmin.FactionManager"
+﻿<Window x:Class="SWNAdmin.Forms.FactionManager.FactionManager"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SWNAdmin.Forms"
         xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
         themes:ThemeManager.Theme="ExpressionDark"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="FactionManager" Height="332.862" Width="646.117">
     <Window.Background>
-        <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
+        <SolidColorBrush Color="{DynamicResource SWNLightBackground}" />
     </Window.Background>
     <Grid>
-        <Menu x:Name="menu" Height="19" VerticalAlignment="Top">
-            <MenuItem x:Name="MenuItemCreate" Header="Manage Faction" Height="19" Margin="0" VerticalAlignment="Top" Foreground="White" Click="MenuItemCreate_Click"/>
+        <Menu Height="19" VerticalAlignment="Top">
+            <MenuItem Header="Manage Faction" Height="19" Margin="0" VerticalAlignment="Top"
+                      Foreground="White" Click="MenuItemCreate_Click" />
         </Menu>
 
     </Grid>

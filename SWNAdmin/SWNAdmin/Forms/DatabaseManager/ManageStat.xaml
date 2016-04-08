@@ -1,24 +1,30 @@
-﻿<Window x:Class="SWNAdmin.Forms.ManageStat"
+﻿<Window x:Class="SWNAdmin.Forms.DatabaseManager.ManageStat"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SWNAdmin.Forms"
         xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
         themes:ThemeManager.Theme="ExpressionDark"
         mc:Ignorable="d"
         Title="Manage Stats" Height="306.624" Width="412.619">
     <Window.Background>
-        <SolidColorBrush Color="{DynamicResource SWNLightBackground}"/>
+        <SolidColorBrush Color="{DynamicResource SWNLightBackground}" />
     </Window.Background>
     <Grid>
-        <Label x:Name="lblStat" Content="Stat-Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbStat" HorizontalAlignment="Left" Height="23" Margin="84,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btOk" Content="Ok" HorizontalAlignment="Left" Margin="10,246,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btCancel" Content="Cancel" HorizontalAlignment="Left" Margin="146,246,0,0" VerticalAlignment="Top" Width="75"/>
-        <ListBox x:Name="lbStats" HorizontalAlignment="Left" Height="256" Margin="226,10,0,0" VerticalAlignment="Top" Width="168" MouseDoubleClick="lbStats_MouseDoubleClick"/>
-        <Button x:Name="btAdd" Content="Add" HorizontalAlignment="Left" Margin="84,41,0,0" VerticalAlignment="Top" Width="50" Click="btAdd_Click"/>
-        <Button x:Name="btDel" Content="Remove" HorizontalAlignment="Left" Margin="139,41,0,0" VerticalAlignment="Top" Width="65" Click="btDel_Click"/>
+        <Label Content="Stat-Name:" HorizontalAlignment="Left" Margin="10,10,0,0"
+               VerticalAlignment="Top" />
+        <TextBox x:Name="TbStat" HorizontalAlignment="Left" Height="23" Margin="84,13,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="120" />
+        <Button Content="Ok" HorizontalAlignment="Left" Margin="10,246,0,0" VerticalAlignment="Top"
+                Width="75" />
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="146,246,0,0"
+                VerticalAlignment="Top" Width="75" />
+        <ListBox x:Name="LbStats" HorizontalAlignment="Left" Height="256" Margin="226,10,0,0" VerticalAlignment="Top"
+                 Width="168" MouseDoubleClick="lbStats_MouseDoubleClick" />
+        <Button x:Name="BtAdd" Content="Add" HorizontalAlignment="Left" Margin="84,41,0,0" VerticalAlignment="Top"
+                Width="50" Click="btAdd_Click" />
+        <Button x:Name="BtDel" Content="Remove" HorizontalAlignment="Left" Margin="139,41,0,0" VerticalAlignment="Top"
+                Width="65" Click="btDel_Click" />
 
     </Grid>
 </Window>

@@ -8,30 +8,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SWN.SWNServiceReference {
-    using System.Runtime.Serialization;
-    using System;
-    
-    
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+
+namespace SWN.Service_References.SWNServiceReference {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Client", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin")]
-    [System.SerializableAttribute()]
+    [DataContract(Name="Client", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin")]
+    [Serializable()]
     public partial class Client : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.NonSerializedAttribute()]
+        [NonSerialized()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.DateTime TimeField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string UserNameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string eMailField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string encPasswordField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -44,7 +44,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.DateTime Time {
             get {
                 return this.TimeField;
@@ -57,7 +57,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string UserName {
             get {
                 return this.UserNameField;
@@ -70,7 +70,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string eMail {
             get {
                 return this.eMailField;
@@ -83,7 +83,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string encPassword {
             get {
                 return this.encPasswordField;
@@ -108,20 +108,20 @@ namespace SWN.SWNServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Message", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin")]
-    [System.SerializableAttribute()]
+    [DataContract(Name="Message", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin")]
+    [Serializable()]
     public partial class Message : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.NonSerializedAttribute()]
+        [NonSerialized()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string ContentField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string SenderField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.DateTime TimeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -134,7 +134,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Content {
             get {
                 return this.ContentField;
@@ -147,7 +147,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Sender {
             get {
                 return this.SenderField;
@@ -160,7 +160,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.DateTime Time {
             get {
                 return this.TimeField;
@@ -185,86 +185,86 @@ namespace SWN.SWNServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Character", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
-    [System.SerializableAttribute()]
+    [DataContract(Name="Character", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
+    [Serializable()]
     public partial class Character : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.NonSerializedAttribute()]
+        [NonSerialized()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string AdvantagesField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> AgeField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string AppearanceField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> BasicLiftField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> BasicMoveField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> BasicSpeedField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> DexterityField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> FatiguePointsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> HealthField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> HeightField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> HitPointsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private int IdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> IntelligenceField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string NameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> ParryValueField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> PerceptionField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> PersonalTechnologyLevelField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private int PlayerIdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string PlayerNameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> PointTotalField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> SizeModifierField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> StrenghtField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> UnspendPointsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> WeightField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> WillPowerField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -277,7 +277,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Advantages {
             get {
                 return this.AdvantagesField;
@@ -290,7 +290,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> Age {
             get {
                 return this.AgeField;
@@ -303,7 +303,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Appearance {
             get {
                 return this.AppearanceField;
@@ -316,7 +316,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> BasicLift {
             get {
                 return this.BasicLiftField;
@@ -329,7 +329,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> BasicMove {
             get {
                 return this.BasicMoveField;
@@ -342,7 +342,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> BasicSpeed {
             get {
                 return this.BasicSpeedField;
@@ -355,7 +355,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> Dexterity {
             get {
                 return this.DexterityField;
@@ -368,7 +368,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> FatiguePoints {
             get {
                 return this.FatiguePointsField;
@@ -381,7 +381,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> Health {
             get {
                 return this.HealthField;
@@ -394,7 +394,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> Height {
             get {
                 return this.HeightField;
@@ -407,7 +407,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> HitPoints {
             get {
                 return this.HitPointsField;
@@ -420,7 +420,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public int Id {
             get {
                 return this.IdField;
@@ -433,7 +433,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> Intelligence {
             get {
                 return this.IntelligenceField;
@@ -446,7 +446,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Name {
             get {
                 return this.NameField;
@@ -459,7 +459,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> ParryValue {
             get {
                 return this.ParryValueField;
@@ -472,7 +472,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> Perception {
             get {
                 return this.PerceptionField;
@@ -485,7 +485,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> PersonalTechnologyLevel {
             get {
                 return this.PersonalTechnologyLevelField;
@@ -498,7 +498,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public int PlayerId {
             get {
                 return this.PlayerIdField;
@@ -511,7 +511,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string PlayerName {
             get {
                 return this.PlayerNameField;
@@ -524,7 +524,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> PointTotal {
             get {
                 return this.PointTotalField;
@@ -537,7 +537,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> SizeModifier {
             get {
                 return this.SizeModifierField;
@@ -550,7 +550,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> Strenght {
             get {
                 return this.StrenghtField;
@@ -563,7 +563,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> UnspendPoints {
             get {
                 return this.UnspendPointsField;
@@ -576,7 +576,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> Weight {
             get {
                 return this.WeightField;
@@ -589,7 +589,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> WillPower {
             get {
                 return this.WillPowerField;
@@ -614,59 +614,59 @@ namespace SWN.SWNServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Advantages", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
-    [System.SerializableAttribute()]
+    [DataContract(Name="Advantages", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
+    [Serializable()]
     public partial class Advantages : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.NonSerializedAttribute()]
+        [NonSerialized()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string DiscriptionField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private int IdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string LimitationField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string NameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> PointCostField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string ReferenceField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<bool> RequirementSetField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<bool> hasLevelsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<bool> isCreationLockedField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private bool isEnabledField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private bool isExoticField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private bool isMentalField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private bool isMundaneField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private bool isPhysicalField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private bool isSocialField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private bool isSuperNaturalField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -679,7 +679,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Discription {
             get {
                 return this.DiscriptionField;
@@ -692,7 +692,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public int Id {
             get {
                 return this.IdField;
@@ -705,7 +705,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Limitation {
             get {
                 return this.LimitationField;
@@ -718,7 +718,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Name {
             get {
                 return this.NameField;
@@ -731,7 +731,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> PointCost {
             get {
                 return this.PointCostField;
@@ -744,7 +744,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Reference {
             get {
                 return this.ReferenceField;
@@ -757,7 +757,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<bool> RequirementSet {
             get {
                 return this.RequirementSetField;
@@ -770,7 +770,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<bool> hasLevels {
             get {
                 return this.hasLevelsField;
@@ -783,7 +783,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<bool> isCreationLocked {
             get {
                 return this.isCreationLockedField;
@@ -796,7 +796,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public bool isEnabled {
             get {
                 return this.isEnabledField;
@@ -809,7 +809,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public bool isExotic {
             get {
                 return this.isExoticField;
@@ -822,7 +822,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public bool isMental {
             get {
                 return this.isMentalField;
@@ -835,7 +835,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public bool isMundane {
             get {
                 return this.isMundaneField;
@@ -848,7 +848,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public bool isPhysical {
             get {
                 return this.isPhysicalField;
@@ -861,7 +861,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public bool isSocial {
             get {
                 return this.isSocialField;
@@ -874,7 +874,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public bool isSuperNatural {
             get {
                 return this.isSuperNaturalField;
@@ -899,26 +899,26 @@ namespace SWN.SWNServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Disadvantages", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
-    [System.SerializableAttribute()]
+    [DataContract(Name="Disadvantages", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
+    [Serializable()]
     public partial class Disadvantages : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.NonSerializedAttribute()]
+        [NonSerialized()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string DiscriptionField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private int IdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string NameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> PointCostField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private bool isEnabledField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -931,7 +931,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Discription {
             get {
                 return this.DiscriptionField;
@@ -944,7 +944,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public int Id {
             get {
                 return this.IdField;
@@ -957,7 +957,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Name {
             get {
                 return this.NameField;
@@ -970,7 +970,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> PointCost {
             get {
                 return this.PointCostField;
@@ -983,7 +983,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public bool isEnabled {
             get {
                 return this.isEnabledField;
@@ -1008,38 +1008,38 @@ namespace SWN.SWNServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Requirements", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
-    [System.SerializableAttribute()]
+    [DataContract(Name="Requirements", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
+    [Serializable()]
     public partial class Requirements : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.NonSerializedAttribute()]
+        [NonSerialized()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string ConditionField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string ConditionValueField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private int IdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> SourceItemIDField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string SourceNameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string SourceTypeField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string TargetNameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> TargetRequirementIDField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string TargetTypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -1052,7 +1052,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Condition {
             get {
                 return this.ConditionField;
@@ -1065,7 +1065,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string ConditionValue {
             get {
                 return this.ConditionValueField;
@@ -1078,7 +1078,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public int Id {
             get {
                 return this.IdField;
@@ -1091,7 +1091,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> SourceItemID {
             get {
                 return this.SourceItemIDField;
@@ -1104,7 +1104,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string SourceName {
             get {
                 return this.SourceNameField;
@@ -1117,7 +1117,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string SourceType {
             get {
                 return this.SourceTypeField;
@@ -1130,7 +1130,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string TargetName {
             get {
                 return this.TargetNameField;
@@ -1143,7 +1143,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> TargetRequirementID {
             get {
                 return this.TargetRequirementIDField;
@@ -1156,7 +1156,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string TargetType {
             get {
                 return this.TargetTypeField;
@@ -1181,59 +1181,59 @@ namespace SWN.SWNServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Skills", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
-    [System.SerializableAttribute()]
+    [DataContract(Name="Skills", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
+    [Serializable()]
     public partial class Skills : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.NonSerializedAttribute()]
+        [NonSerialized()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string ControllingAttributeField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string DefaultsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string DescriptionField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string DifficultyLevelField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private int IdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string ModifiersField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string PrerequisitesField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<bool> RequirementSetField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string SkillNameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<SWN.SWNServiceReference.SkillSpecialization> SkillSpecializationField;
+        [OptionalField()]
+        private System.Collections.Generic.List<SkillSpecialization> SkillSpecializationField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private bool isEnabledField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string notesField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> pointsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string referenceField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string specializationField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string tech_levelField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -1246,7 +1246,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string ControllingAttribute {
             get {
                 return this.ControllingAttributeField;
@@ -1259,7 +1259,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Defaults {
             get {
                 return this.DefaultsField;
@@ -1272,7 +1272,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Description {
             get {
                 return this.DescriptionField;
@@ -1285,7 +1285,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string DifficultyLevel {
             get {
                 return this.DifficultyLevelField;
@@ -1298,7 +1298,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public int Id {
             get {
                 return this.IdField;
@@ -1311,7 +1311,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Modifiers {
             get {
                 return this.ModifiersField;
@@ -1324,7 +1324,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Prerequisites {
             get {
                 return this.PrerequisitesField;
@@ -1337,7 +1337,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<bool> RequirementSet {
             get {
                 return this.RequirementSetField;
@@ -1350,7 +1350,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string SkillName {
             get {
                 return this.SkillNameField;
@@ -1363,8 +1363,8 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SWN.SWNServiceReference.SkillSpecialization> SkillSpecialization {
+        [DataMember()]
+        public System.Collections.Generic.List<SkillSpecialization> SkillSpecialization {
             get {
                 return this.SkillSpecializationField;
             }
@@ -1376,7 +1376,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public bool isEnabled {
             get {
                 return this.isEnabledField;
@@ -1389,7 +1389,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string notes {
             get {
                 return this.notesField;
@@ -1402,7 +1402,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> points {
             get {
                 return this.pointsField;
@@ -1415,7 +1415,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string reference {
             get {
                 return this.referenceField;
@@ -1428,7 +1428,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string specialization {
             get {
                 return this.specializationField;
@@ -1441,7 +1441,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string tech_level {
             get {
                 return this.tech_levelField;
@@ -1466,42 +1466,42 @@ namespace SWN.SWNServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SkillSpecialization", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
-    [System.SerializableAttribute()]
+    [DataContract(Name="SkillSpecialization", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
+    [Serializable()]
     public partial class SkillSpecialization : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.NonSerializedAttribute()]
+        [NonSerialized()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string DefaultField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string DiscriptionField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private int IdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<bool> IsOptionalField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string ModifiersField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string NameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string PrerequisitesField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<bool> RequirementSetField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> SkillIdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SWN.SWNServiceReference.Skills SkillsField;
+        [OptionalField()]
+        private Skills SkillsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1513,7 +1513,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Default {
             get {
                 return this.DefaultField;
@@ -1526,7 +1526,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Discription {
             get {
                 return this.DiscriptionField;
@@ -1539,7 +1539,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public int Id {
             get {
                 return this.IdField;
@@ -1552,7 +1552,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<bool> IsOptional {
             get {
                 return this.IsOptionalField;
@@ -1565,7 +1565,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Modifiers {
             get {
                 return this.ModifiersField;
@@ -1578,7 +1578,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Name {
             get {
                 return this.NameField;
@@ -1591,7 +1591,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Prerequisites {
             get {
                 return this.PrerequisitesField;
@@ -1604,7 +1604,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<bool> RequirementSet {
             get {
                 return this.RequirementSetField;
@@ -1617,7 +1617,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> SkillId {
             get {
                 return this.SkillIdField;
@@ -1630,8 +1630,8 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SWN.SWNServiceReference.Skills Skills {
+        [DataMember()]
+        public Skills Skills {
             get {
                 return this.SkillsField;
             }
@@ -1655,47 +1655,47 @@ namespace SWN.SWNServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="StarSystems", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
-    [System.SerializableAttribute()]
+    [DataContract(Name="StarSystems", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
+    [Serializable()]
     public partial class StarSystems : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.NonSerializedAttribute()]
+        [NonSerialized()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private int IdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<SWN.SWNServiceReference.Stars> StarsField;
+        [OptionalField()]
+        private System.Collections.Generic.List<Stars> StarsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> habitableZonesField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private double maxMassField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> numDwarfPlanetsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> star2indexField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> star3indexField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> subCompanionStar2indexField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> subCompanionStar3indexField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private double sysAgeField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string sysNameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private int sysStarsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -1708,7 +1708,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public int Id {
             get {
                 return this.IdField;
@@ -1721,8 +1721,8 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SWN.SWNServiceReference.Stars> Stars {
+        [DataMember()]
+        public System.Collections.Generic.List<Stars> Stars {
             get {
                 return this.StarsField;
             }
@@ -1734,7 +1734,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> habitableZones {
             get {
                 return this.habitableZonesField;
@@ -1747,7 +1747,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public double maxMass {
             get {
                 return this.maxMassField;
@@ -1760,7 +1760,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> numDwarfPlanets {
             get {
                 return this.numDwarfPlanetsField;
@@ -1773,7 +1773,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> star2index {
             get {
                 return this.star2indexField;
@@ -1786,7 +1786,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> star3index {
             get {
                 return this.star3indexField;
@@ -1799,7 +1799,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> subCompanionStar2index {
             get {
                 return this.subCompanionStar2indexField;
@@ -1812,7 +1812,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> subCompanionStar3index {
             get {
                 return this.subCompanionStar3indexField;
@@ -1825,7 +1825,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public double sysAge {
             get {
                 return this.sysAgeField;
@@ -1838,7 +1838,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string sysName {
             get {
                 return this.sysNameField;
@@ -1851,7 +1851,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public int sysStars {
             get {
                 return this.sysStarsField;
@@ -1876,98 +1876,98 @@ namespace SWN.SWNServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Stars", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
-    [System.SerializableAttribute()]
+    [DataContract(Name="Stars", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
+    [Serializable()]
     public partial class Stars : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.NonSerializedAttribute()]
+        [NonSerialized()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private int IdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string OrbitalDetailsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<SWN.SWNServiceReference.Planets> PlanetsField;
+        [OptionalField()]
+        private System.Collections.Generic.List<Planets> PlanetsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string StarOrderField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string StarStringField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SWN.SWNServiceReference.StarSystems StarSystemsField;
+        [OptionalField()]
+        private StarSystems StarSystemsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string StellarEvolutionStageField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private int SystemIDField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private double currLuminField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private double distFromPrimaryField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private double effTempField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> gasGiantFlagField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private double initLuminField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private double initMassField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<bool> isFlareStarField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string nameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> orbitalEccentField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> orbitalPeriodField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> orbitalRadiusField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> orbitalSepField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> orderIDField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> parentIDField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string parentNameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private double radiusField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> selfIDField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string specTypeField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private double starAgeField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string starColorField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> sysPlanetsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -1980,7 +1980,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public int Id {
             get {
                 return this.IdField;
@@ -1993,7 +1993,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string OrbitalDetails {
             get {
                 return this.OrbitalDetailsField;
@@ -2006,8 +2006,8 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SWN.SWNServiceReference.Planets> Planets {
+        [DataMember()]
+        public System.Collections.Generic.List<Planets> Planets {
             get {
                 return this.PlanetsField;
             }
@@ -2019,7 +2019,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string StarOrder {
             get {
                 return this.StarOrderField;
@@ -2032,7 +2032,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string StarString {
             get {
                 return this.StarStringField;
@@ -2045,8 +2045,8 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SWN.SWNServiceReference.StarSystems StarSystems {
+        [DataMember()]
+        public StarSystems StarSystems {
             get {
                 return this.StarSystemsField;
             }
@@ -2058,7 +2058,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string StellarEvolutionStage {
             get {
                 return this.StellarEvolutionStageField;
@@ -2071,7 +2071,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public int SystemID {
             get {
                 return this.SystemIDField;
@@ -2084,7 +2084,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public double currLumin {
             get {
                 return this.currLuminField;
@@ -2097,7 +2097,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public double distFromPrimary {
             get {
                 return this.distFromPrimaryField;
@@ -2110,7 +2110,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public double effTemp {
             get {
                 return this.effTempField;
@@ -2123,7 +2123,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> gasGiantFlag {
             get {
                 return this.gasGiantFlagField;
@@ -2136,7 +2136,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public double initLumin {
             get {
                 return this.initLuminField;
@@ -2149,7 +2149,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public double initMass {
             get {
                 return this.initMassField;
@@ -2162,7 +2162,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<bool> isFlareStar {
             get {
                 return this.isFlareStarField;
@@ -2175,7 +2175,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string name {
             get {
                 return this.nameField;
@@ -2188,7 +2188,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> orbitalEccent {
             get {
                 return this.orbitalEccentField;
@@ -2201,7 +2201,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> orbitalPeriod {
             get {
                 return this.orbitalPeriodField;
@@ -2214,7 +2214,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> orbitalRadius {
             get {
                 return this.orbitalRadiusField;
@@ -2227,7 +2227,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> orbitalSep {
             get {
                 return this.orbitalSepField;
@@ -2240,7 +2240,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> orderID {
             get {
                 return this.orderIDField;
@@ -2253,7 +2253,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> parentID {
             get {
                 return this.parentIDField;
@@ -2266,7 +2266,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string parentName {
             get {
                 return this.parentNameField;
@@ -2279,7 +2279,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public double radius {
             get {
                 return this.radiusField;
@@ -2292,7 +2292,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> selfID {
             get {
                 return this.selfIDField;
@@ -2305,7 +2305,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string specType {
             get {
                 return this.specTypeField;
@@ -2318,7 +2318,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public double starAge {
             get {
                 return this.starAgeField;
@@ -2331,7 +2331,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string starColor {
             get {
                 return this.starColorField;
@@ -2344,7 +2344,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> sysPlanets {
             get {
                 return this.sysPlanetsField;
@@ -2369,158 +2369,158 @@ namespace SWN.SWNServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Planets", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
-    [System.SerializableAttribute()]
+    [DataContract(Name="Planets", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
+    [Serializable()]
     public partial class Planets : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.NonSerializedAttribute()]
+        [NonSerialized()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private int IdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<SWN.SWNServiceReference.InnerMoonlets> InnerMoonlets1Field;
+        [OptionalField()]
+        private System.Collections.Generic.List<InnerMoonlets> InnerMoonlets1Field;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<SWN.SWNServiceReference.MajorMoons> MajorMoons1Field;
+        [OptionalField()]
+        private System.Collections.Generic.List<MajorMoons> MajorMoons1Field;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<SWN.SWNServiceReference.OuterMoonlets> OuterMoonlets1Field;
+        [OptionalField()]
+        private System.Collections.Generic.List<OuterMoonlets> OuterMoonlets1Field;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string RVMField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> SatelliteSizeField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> SatelliteTypeField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private int StarIDField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SWN.SWNServiceReference.Stars StarsField;
+        [OptionalField()]
+        private Stars StarsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> atmCateField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> atmMassField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string atmPresField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string atmnoteField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> axialTiltField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> baseTypeField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> blackbodyTempField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> dayFaceModField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> densityField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> diameterField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> gravityField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string hydCoverageField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> innerMoonletsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<bool> isResonantField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<bool> isTideLockedField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> majorMoonsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> massField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> masterOrderIDField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> moonRadiusField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string nameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> nightFaceModField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> orbitalCycleField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> orbitalEccentField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> orbitalPeriodField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> orbitalRadiusField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> outerMoonletsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> parentDiamField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> parentIDField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string parentNameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string planetStringField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<bool> retrogradeMotionField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> rotationalPeriodField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string sattypeField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> selfIDField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> siderealPeriodField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> surfaceTempField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> tecActivityField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> tideForceField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> tideTotalField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> volActivityField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -2533,7 +2533,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public int Id {
             get {
                 return this.IdField;
@@ -2546,8 +2546,8 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SWN.SWNServiceReference.InnerMoonlets> InnerMoonlets1 {
+        [DataMember()]
+        public System.Collections.Generic.List<InnerMoonlets> InnerMoonlets1 {
             get {
                 return this.InnerMoonlets1Field;
             }
@@ -2559,8 +2559,8 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SWN.SWNServiceReference.MajorMoons> MajorMoons1 {
+        [DataMember()]
+        public System.Collections.Generic.List<MajorMoons> MajorMoons1 {
             get {
                 return this.MajorMoons1Field;
             }
@@ -2572,8 +2572,8 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<SWN.SWNServiceReference.OuterMoonlets> OuterMoonlets1 {
+        [DataMember()]
+        public System.Collections.Generic.List<OuterMoonlets> OuterMoonlets1 {
             get {
                 return this.OuterMoonlets1Field;
             }
@@ -2585,7 +2585,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string RVM {
             get {
                 return this.RVMField;
@@ -2598,7 +2598,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> SatelliteSize {
             get {
                 return this.SatelliteSizeField;
@@ -2611,7 +2611,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> SatelliteType {
             get {
                 return this.SatelliteTypeField;
@@ -2624,7 +2624,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public int StarID {
             get {
                 return this.StarIDField;
@@ -2637,8 +2637,8 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SWN.SWNServiceReference.Stars Stars {
+        [DataMember()]
+        public Stars Stars {
             get {
                 return this.StarsField;
             }
@@ -2650,7 +2650,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> atmCate {
             get {
                 return this.atmCateField;
@@ -2663,7 +2663,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> atmMass {
             get {
                 return this.atmMassField;
@@ -2676,7 +2676,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string atmPres {
             get {
                 return this.atmPresField;
@@ -2689,7 +2689,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string atmnote {
             get {
                 return this.atmnoteField;
@@ -2702,7 +2702,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> axialTilt {
             get {
                 return this.axialTiltField;
@@ -2715,7 +2715,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> baseType {
             get {
                 return this.baseTypeField;
@@ -2728,7 +2728,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> blackbodyTemp {
             get {
                 return this.blackbodyTempField;
@@ -2741,7 +2741,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> dayFaceMod {
             get {
                 return this.dayFaceModField;
@@ -2754,7 +2754,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> density {
             get {
                 return this.densityField;
@@ -2767,7 +2767,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> diameter {
             get {
                 return this.diameterField;
@@ -2780,7 +2780,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> gravity {
             get {
                 return this.gravityField;
@@ -2793,7 +2793,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string hydCoverage {
             get {
                 return this.hydCoverageField;
@@ -2806,7 +2806,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> innerMoonlets {
             get {
                 return this.innerMoonletsField;
@@ -2819,7 +2819,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<bool> isResonant {
             get {
                 return this.isResonantField;
@@ -2832,7 +2832,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<bool> isTideLocked {
             get {
                 return this.isTideLockedField;
@@ -2845,7 +2845,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> majorMoons {
             get {
                 return this.majorMoonsField;
@@ -2858,7 +2858,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> mass {
             get {
                 return this.massField;
@@ -2871,7 +2871,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> masterOrderID {
             get {
                 return this.masterOrderIDField;
@@ -2884,7 +2884,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> moonRadius {
             get {
                 return this.moonRadiusField;
@@ -2897,7 +2897,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string name {
             get {
                 return this.nameField;
@@ -2910,7 +2910,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> nightFaceMod {
             get {
                 return this.nightFaceModField;
@@ -2923,7 +2923,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> orbitalCycle {
             get {
                 return this.orbitalCycleField;
@@ -2936,7 +2936,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> orbitalEccent {
             get {
                 return this.orbitalEccentField;
@@ -2949,7 +2949,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> orbitalPeriod {
             get {
                 return this.orbitalPeriodField;
@@ -2962,7 +2962,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> orbitalRadius {
             get {
                 return this.orbitalRadiusField;
@@ -2975,7 +2975,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> outerMoonlets {
             get {
                 return this.outerMoonletsField;
@@ -2988,7 +2988,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> parentDiam {
             get {
                 return this.parentDiamField;
@@ -3001,7 +3001,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> parentID {
             get {
                 return this.parentIDField;
@@ -3014,7 +3014,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string parentName {
             get {
                 return this.parentNameField;
@@ -3027,7 +3027,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string planetString {
             get {
                 return this.planetStringField;
@@ -3040,7 +3040,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<bool> retrogradeMotion {
             get {
                 return this.retrogradeMotionField;
@@ -3053,7 +3053,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> rotationalPeriod {
             get {
                 return this.rotationalPeriodField;
@@ -3066,7 +3066,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string sattype {
             get {
                 return this.sattypeField;
@@ -3079,7 +3079,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> selfID {
             get {
                 return this.selfIDField;
@@ -3092,7 +3092,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> siderealPeriod {
             get {
                 return this.siderealPeriodField;
@@ -3105,7 +3105,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> surfaceTemp {
             get {
                 return this.surfaceTempField;
@@ -3118,7 +3118,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> tecActivity {
             get {
                 return this.tecActivityField;
@@ -3131,7 +3131,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> tideForce {
             get {
                 return this.tideForceField;
@@ -3144,7 +3144,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> tideTotal {
             get {
                 return this.tideTotalField;
@@ -3157,7 +3157,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> volActivity {
             get {
                 return this.volActivityField;
@@ -3182,50 +3182,50 @@ namespace SWN.SWNServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="InnerMoonlets", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
-    [System.SerializableAttribute()]
+    [DataContract(Name="InnerMoonlets", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
+    [Serializable()]
     public partial class InnerMoonlets : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.NonSerializedAttribute()]
+        [NonSerialized()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private int IdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SWN.SWNServiceReference.Planets PlanetsField;
+        [OptionalField()]
+        private Planets PlanetsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> blackbodyTempField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string innerMoonStringField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string nameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> orbitalEccentField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> orbitalPeriodField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> orbitalRadiusField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private int parentDBIDField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> parentIDField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string parentNameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> planetRadiusField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> selfIDField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -3238,7 +3238,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public int Id {
             get {
                 return this.IdField;
@@ -3251,8 +3251,8 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SWN.SWNServiceReference.Planets Planets {
+        [DataMember()]
+        public Planets Planets {
             get {
                 return this.PlanetsField;
             }
@@ -3264,7 +3264,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> blackbodyTemp {
             get {
                 return this.blackbodyTempField;
@@ -3277,7 +3277,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string innerMoonString {
             get {
                 return this.innerMoonStringField;
@@ -3290,7 +3290,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string name {
             get {
                 return this.nameField;
@@ -3303,7 +3303,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> orbitalEccent {
             get {
                 return this.orbitalEccentField;
@@ -3316,7 +3316,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> orbitalPeriod {
             get {
                 return this.orbitalPeriodField;
@@ -3329,7 +3329,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> orbitalRadius {
             get {
                 return this.orbitalRadiusField;
@@ -3342,7 +3342,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public int parentDBID {
             get {
                 return this.parentDBIDField;
@@ -3355,7 +3355,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> parentID {
             get {
                 return this.parentIDField;
@@ -3368,7 +3368,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string parentName {
             get {
                 return this.parentNameField;
@@ -3381,7 +3381,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> planetRadius {
             get {
                 return this.planetRadiusField;
@@ -3394,7 +3394,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> selfID {
             get {
                 return this.selfIDField;
@@ -3419,143 +3419,143 @@ namespace SWN.SWNServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MajorMoons", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
-    [System.SerializableAttribute()]
+    [DataContract(Name="MajorMoons", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
+    [Serializable()]
     public partial class MajorMoons : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.NonSerializedAttribute()]
+        [NonSerialized()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private int IdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string MajorMoonStringField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> ParentDBIDField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SWN.SWNServiceReference.Planets PlanetsField;
+        [OptionalField()]
+        private Planets PlanetsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> RVMField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> SatelliteSizeField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> SatelliteTypeField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> atmCateField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> atmMassField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> axialTiltField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> baseTypeField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> blackbodyTempField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> dayFaceModField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> densityField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> descListingField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> diameterField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> gravityField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string hydCoverageField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> innerMoonletsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<bool> isResonantField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<bool> isTideLockedField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> majorMoons1Field;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> massField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> masterOrderIdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> moonRadiusField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string nameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> nightFaceModField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> orbitalCycleField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> orbitalEccentField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> orbitalPeriodField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> orbitalRadiusField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> outerMoonletsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> parentDiamField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> parentIDField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string parentNameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<bool> retrogradeMotionField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> rotationalPeriodField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> selfIDField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> siderealPeriodField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> surfaceTempField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> tecActivityField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> tideForceField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> tideTotalField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> volActivityField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -3568,7 +3568,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public int Id {
             get {
                 return this.IdField;
@@ -3581,7 +3581,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string MajorMoonString {
             get {
                 return this.MajorMoonStringField;
@@ -3594,7 +3594,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> ParentDBID {
             get {
                 return this.ParentDBIDField;
@@ -3607,8 +3607,8 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SWN.SWNServiceReference.Planets Planets {
+        [DataMember()]
+        public Planets Planets {
             get {
                 return this.PlanetsField;
             }
@@ -3620,7 +3620,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> RVM {
             get {
                 return this.RVMField;
@@ -3633,7 +3633,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> SatelliteSize {
             get {
                 return this.SatelliteSizeField;
@@ -3646,7 +3646,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> SatelliteType {
             get {
                 return this.SatelliteTypeField;
@@ -3659,7 +3659,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> atmCate {
             get {
                 return this.atmCateField;
@@ -3672,7 +3672,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> atmMass {
             get {
                 return this.atmMassField;
@@ -3685,7 +3685,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> axialTilt {
             get {
                 return this.axialTiltField;
@@ -3698,7 +3698,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> baseType {
             get {
                 return this.baseTypeField;
@@ -3711,7 +3711,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> blackbodyTemp {
             get {
                 return this.blackbodyTempField;
@@ -3724,7 +3724,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> dayFaceMod {
             get {
                 return this.dayFaceModField;
@@ -3737,7 +3737,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> density {
             get {
                 return this.densityField;
@@ -3750,7 +3750,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> descListing {
             get {
                 return this.descListingField;
@@ -3763,7 +3763,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> diameter {
             get {
                 return this.diameterField;
@@ -3776,7 +3776,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> gravity {
             get {
                 return this.gravityField;
@@ -3789,7 +3789,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string hydCoverage {
             get {
                 return this.hydCoverageField;
@@ -3802,7 +3802,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> innerMoonlets {
             get {
                 return this.innerMoonletsField;
@@ -3815,7 +3815,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<bool> isResonant {
             get {
                 return this.isResonantField;
@@ -3828,7 +3828,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<bool> isTideLocked {
             get {
                 return this.isTideLockedField;
@@ -3841,7 +3841,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> majorMoons1 {
             get {
                 return this.majorMoons1Field;
@@ -3854,7 +3854,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> mass {
             get {
                 return this.massField;
@@ -3867,7 +3867,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> masterOrderId {
             get {
                 return this.masterOrderIdField;
@@ -3880,7 +3880,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> moonRadius {
             get {
                 return this.moonRadiusField;
@@ -3893,7 +3893,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string name {
             get {
                 return this.nameField;
@@ -3906,7 +3906,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> nightFaceMod {
             get {
                 return this.nightFaceModField;
@@ -3919,7 +3919,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> orbitalCycle {
             get {
                 return this.orbitalCycleField;
@@ -3932,7 +3932,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> orbitalEccent {
             get {
                 return this.orbitalEccentField;
@@ -3945,7 +3945,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> orbitalPeriod {
             get {
                 return this.orbitalPeriodField;
@@ -3958,7 +3958,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> orbitalRadius {
             get {
                 return this.orbitalRadiusField;
@@ -3971,7 +3971,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> outerMoonlets {
             get {
                 return this.outerMoonletsField;
@@ -3984,7 +3984,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> parentDiam {
             get {
                 return this.parentDiamField;
@@ -3997,7 +3997,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> parentID {
             get {
                 return this.parentIDField;
@@ -4010,7 +4010,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string parentName {
             get {
                 return this.parentNameField;
@@ -4023,7 +4023,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<bool> retrogradeMotion {
             get {
                 return this.retrogradeMotionField;
@@ -4036,7 +4036,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> rotationalPeriod {
             get {
                 return this.rotationalPeriodField;
@@ -4049,7 +4049,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> selfID {
             get {
                 return this.selfIDField;
@@ -4062,7 +4062,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> siderealPeriod {
             get {
                 return this.siderealPeriodField;
@@ -4075,7 +4075,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> surfaceTemp {
             get {
                 return this.surfaceTempField;
@@ -4088,7 +4088,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> tecActivity {
             get {
                 return this.tecActivityField;
@@ -4101,7 +4101,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> tideForce {
             get {
                 return this.tideForceField;
@@ -4114,7 +4114,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> tideTotal {
             get {
                 return this.tideTotalField;
@@ -4127,7 +4127,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> volActivity {
             get {
                 return this.volActivityField;
@@ -4152,50 +4152,50 @@ namespace SWN.SWNServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OuterMoonlets", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
-    [System.SerializableAttribute()]
+    [DataContract(Name="OuterMoonlets", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin.Utility")]
+    [Serializable()]
     public partial class OuterMoonlets : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.NonSerializedAttribute()]
+        [NonSerialized()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private int IdField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private int ParentDBIDField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SWN.SWNServiceReference.Planets PlanetsField;
+        [OptionalField()]
+        private Planets PlanetsField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> blackbodyTempField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string nameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> orbitalEccentField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> orbitalPeriodField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> orbitalRadiusField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string outerMoonStringField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> parentIDField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string parentNameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<double> planetRadiusField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.Nullable<int> selfIDField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -4208,7 +4208,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public int Id {
             get {
                 return this.IdField;
@@ -4221,7 +4221,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public int ParentDBID {
             get {
                 return this.ParentDBIDField;
@@ -4234,8 +4234,8 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SWN.SWNServiceReference.Planets Planets {
+        [DataMember()]
+        public Planets Planets {
             get {
                 return this.PlanetsField;
             }
@@ -4247,7 +4247,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> blackbodyTemp {
             get {
                 return this.blackbodyTempField;
@@ -4260,7 +4260,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string name {
             get {
                 return this.nameField;
@@ -4273,7 +4273,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> orbitalEccent {
             get {
                 return this.orbitalEccentField;
@@ -4286,7 +4286,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> orbitalPeriod {
             get {
                 return this.orbitalPeriodField;
@@ -4299,7 +4299,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> orbitalRadius {
             get {
                 return this.orbitalRadiusField;
@@ -4312,7 +4312,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string outerMoonString {
             get {
                 return this.outerMoonStringField;
@@ -4325,7 +4325,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> parentID {
             get {
                 return this.parentIDField;
@@ -4338,7 +4338,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string parentName {
             get {
                 return this.parentNameField;
@@ -4351,7 +4351,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<double> planetRadius {
             get {
                 return this.planetRadiusField;
@@ -4364,7 +4364,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.Nullable<int> selfID {
             get {
                 return this.selfIDField;
@@ -4389,23 +4389,23 @@ namespace SWN.SWNServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FileMessage", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin")]
-    [System.SerializableAttribute()]
+    [DataContract(Name="FileMessage", Namespace="http://schemas.datacontract.org/2004/07/SWNAdmin")]
+    [Serializable()]
     public partial class FileMessage : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.NonSerializedAttribute()]
+        [NonSerialized()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private byte[] DataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string FileNameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private string SenderField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        [OptionalField()]
         private System.DateTime TimeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -4418,7 +4418,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public byte[] Data {
             get {
                 return this.DataField;
@@ -4431,7 +4431,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string FileName {
             get {
                 return this.FileNameField;
@@ -4444,7 +4444,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public string Sender {
             get {
                 return this.SenderField;
@@ -4457,7 +4457,7 @@ namespace SWN.SWNServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [DataMember()]
         public System.DateTime Time {
             get {
                 return this.TimeField;
@@ -4481,32 +4481,32 @@ namespace SWN.SWNServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="SWNAdmin", ConfigurationName="SWNServiceReference.SWNService", CallbackContract=typeof(SWN.SWNServiceReference.SWNServiceCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="SWNAdmin", ConfigurationName="SWNServiceReference.SWNService", CallbackContract=typeof(SWNServiceCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface SWNService {
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/Connect", ReplyAction="SWNAdmin/SWNService/ConnectResponse")]
-        bool Connect(SWN.SWNServiceReference.Client client);
+        bool Connect(Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/Connect", ReplyAction="SWNAdmin/SWNService/ConnectResponse")]
-        System.Threading.Tasks.Task<bool> ConnectAsync(SWN.SWNServiceReference.Client client);
+        System.Threading.Tasks.Task<bool> ConnectAsync(Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/Register", ReplyAction="SWNAdmin/SWNService/RegisterResponse")]
-        bool Register(SWN.SWNServiceReference.Client client);
+        bool Register(Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/Register", ReplyAction="SWNAdmin/SWNService/RegisterResponse")]
-        System.Threading.Tasks.Task<bool> RegisterAsync(SWN.SWNServiceReference.Client client);
+        System.Threading.Tasks.Task<bool> RegisterAsync(Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/Disconnect", ReplyAction="SWNAdmin/SWNService/DisconnectResponse")]
-        void Disconnect(SWN.SWNServiceReference.Client client);
+        void Disconnect(Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/Disconnect", ReplyAction="SWNAdmin/SWNService/DisconnectResponse")]
-        System.Threading.Tasks.Task DisconnectAsync(SWN.SWNServiceReference.Client client);
+        System.Threading.Tasks.Task DisconnectAsync(Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/SendMessage", ReplyAction="SWNAdmin/SWNService/SendMessageResponse")]
-        void SendMessage(SWN.SWNServiceReference.Message msg);
+        void SendMessage(Message msg);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/SendMessage", ReplyAction="SWNAdmin/SWNService/SendMessageResponse")]
-        System.Threading.Tasks.Task SendMessageAsync(SWN.SWNServiceReference.Message msg);
+        System.Threading.Tasks.Task SendMessageAsync(Message msg);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestOnlineUsersList", ReplyAction="SWNAdmin/SWNService/RequestOnlineUsersListResponse")]
         System.Collections.Generic.List<string> RequestOnlineUsersList();
@@ -4515,62 +4515,62 @@ namespace SWN.SWNServiceReference {
         System.Threading.Tasks.Task<System.Collections.Generic.List<string>> RequestOnlineUsersListAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/GetBlankCharacter", ReplyAction="SWNAdmin/SWNService/GetBlankCharacterResponse")]
-        SWN.SWNServiceReference.Character GetBlankCharacter(SWN.SWNServiceReference.Client client);
+        Character GetBlankCharacter(Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/GetBlankCharacter", ReplyAction="SWNAdmin/SWNService/GetBlankCharacterResponse")]
-        System.Threading.Tasks.Task<SWN.SWNServiceReference.Character> GetBlankCharacterAsync(SWN.SWNServiceReference.Client client);
+        System.Threading.Tasks.Task<Character> GetBlankCharacterAsync(Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestAdvantages", ReplyAction="SWNAdmin/SWNService/RequestAdvantagesResponse")]
-        System.Collections.Generic.List<SWN.SWNServiceReference.Advantages> RequestAdvantages(SWN.SWNServiceReference.Client client);
+        System.Collections.Generic.List<Advantages> RequestAdvantages(Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestAdvantages", ReplyAction="SWNAdmin/SWNService/RequestAdvantagesResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Advantages>> RequestAdvantagesAsync(SWN.SWNServiceReference.Client client);
+        System.Threading.Tasks.Task<List<Advantages>> RequestAdvantagesAsync(Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestDisadvantages", ReplyAction="SWNAdmin/SWNService/RequestDisadvantagesResponse")]
-        System.Collections.Generic.List<SWN.SWNServiceReference.Disadvantages> RequestDisadvantages(SWN.SWNServiceReference.Client client);
+        System.Collections.Generic.List<Disadvantages> RequestDisadvantages(Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestDisadvantages", ReplyAction="SWNAdmin/SWNService/RequestDisadvantagesResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Disadvantages>> RequestDisadvantagesAsync(SWN.SWNServiceReference.Client client);
+        System.Threading.Tasks.Task<List<Disadvantages>> RequestDisadvantagesAsync(Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestRequirements", ReplyAction="SWNAdmin/SWNService/RequestRequirementsResponse")]
-        System.Collections.Generic.List<SWN.SWNServiceReference.Requirements> RequestRequirements(SWN.SWNServiceReference.Client client);
+        System.Collections.Generic.List<Requirements> RequestRequirements(Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestRequirements", ReplyAction="SWNAdmin/SWNService/RequestRequirementsResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Requirements>> RequestRequirementsAsync(SWN.SWNServiceReference.Client client);
+        System.Threading.Tasks.Task<List<Requirements>> RequestRequirementsAsync(Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestSkills", ReplyAction="SWNAdmin/SWNService/RequestSkillsResponse")]
-        System.Collections.Generic.List<SWN.SWNServiceReference.Skills> RequestSkills(SWN.SWNServiceReference.Client client);
+        System.Collections.Generic.List<Skills> RequestSkills(Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestSkills", ReplyAction="SWNAdmin/SWNService/RequestSkillsResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Skills>> RequestSkillsAsync(SWN.SWNServiceReference.Client client);
+        System.Threading.Tasks.Task<List<Skills>> RequestSkillsAsync(Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestSavedCharacters", ReplyAction="SWNAdmin/SWNService/RequestSavedCharactersResponse")]
-        System.Collections.Generic.List<SWN.SWNServiceReference.Character> RequestSavedCharacters(SWN.SWNServiceReference.Client client);
+        System.Collections.Generic.List<Character> RequestSavedCharacters(Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/RequestSavedCharacters", ReplyAction="SWNAdmin/SWNService/RequestSavedCharactersResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Character>> RequestSavedCharactersAsync(SWN.SWNServiceReference.Client client);
+        System.Threading.Tasks.Task<List<Character>> RequestSavedCharactersAsync(Client client);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/SaveCharacter", ReplyAction="SWNAdmin/SWNService/SaveCharacterResponse")]
-        bool SaveCharacter(SWN.SWNServiceReference.Client client, SWN.SWNServiceReference.Character c);
+        bool SaveCharacter(Client client, Character c);
         
         [System.ServiceModel.OperationContractAttribute(Action="SWNAdmin/SWNService/SaveCharacter", ReplyAction="SWNAdmin/SWNService/SaveCharacterResponse")]
-        System.Threading.Tasks.Task<bool> SaveCharacterAsync(SWN.SWNServiceReference.Client client, SWN.SWNServiceReference.Character c);
+        System.Threading.Tasks.Task<bool> SaveCharacterAsync(Client client, Character c);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface SWNServiceCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="SWNAdmin/SWNService/UserJoin")]
-        void UserJoin(SWN.SWNServiceReference.Client client);
+        void UserJoin(Client client);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="SWNAdmin/SWNService/UserLeft")]
-        void UserLeft(SWN.SWNServiceReference.Client client);
+        void UserLeft(Client client);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="SWNAdmin/SWNService/RefreshClients")]
         void RefreshClients(System.Collections.Generic.List<string> clients);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="SWNAdmin/SWNService/Receive")]
-        void Receive(SWN.SWNServiceReference.Message msg);
+        void Receive(Message msg);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="SWNAdmin/SWNService/SendErrorCode")]
         void SendErrorCode(string ErrorMessage);
@@ -4579,13 +4579,13 @@ namespace SWN.SWNServiceReference {
         void ServiceIsShuttingDown();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="SWNAdmin/SWNService/SendStarSystem")]
-        void SendStarSystem(SWN.SWNServiceReference.StarSystems StarSystem);
+        void SendStarSystem(StarSystems StarSystem);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="SWNAdmin/SWNService/SendImage")]
-        void SendImage(SWN.SWNServiceReference.FileMessage fMsg);
+        void SendImage(FileMessage fMsg);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="SWNAdmin/SWNService/SendFile")]
-        void SendFile(SWN.SWNServiceReference.FileMessage fMsg);
+        void SendFile(FileMessage fMsg);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="SWNAdmin/SWNService/KickUser")]
         void KickUser();
@@ -4595,12 +4595,12 @@ namespace SWN.SWNServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface SWNServiceChannel : SWN.SWNServiceReference.SWNService, System.ServiceModel.IClientChannel {
+    public interface SWNServiceChannel : SWNService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SWNServiceClient : System.ServiceModel.DuplexClientBase<SWN.SWNServiceReference.SWNService>, SWN.SWNServiceReference.SWNService {
+    public partial class SWNServiceClient : System.ServiceModel.DuplexClientBase<SWNService>, SWNService {
         
         public SWNServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
@@ -4622,35 +4622,35 @@ namespace SWN.SWNServiceReference {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public bool Connect(SWN.SWNServiceReference.Client client) {
+        public bool Connect(Client client) {
             return base.Channel.Connect(client);
         }
         
-        public System.Threading.Tasks.Task<bool> ConnectAsync(SWN.SWNServiceReference.Client client) {
+        public System.Threading.Tasks.Task<bool> ConnectAsync(Client client) {
             return base.Channel.ConnectAsync(client);
         }
         
-        public bool Register(SWN.SWNServiceReference.Client client) {
+        public bool Register(Client client) {
             return base.Channel.Register(client);
         }
         
-        public System.Threading.Tasks.Task<bool> RegisterAsync(SWN.SWNServiceReference.Client client) {
+        public System.Threading.Tasks.Task<bool> RegisterAsync(Client client) {
             return base.Channel.RegisterAsync(client);
         }
         
-        public void Disconnect(SWN.SWNServiceReference.Client client) {
+        public void Disconnect(Client client) {
             base.Channel.Disconnect(client);
         }
         
-        public System.Threading.Tasks.Task DisconnectAsync(SWN.SWNServiceReference.Client client) {
+        public System.Threading.Tasks.Task DisconnectAsync(Client client) {
             return base.Channel.DisconnectAsync(client);
         }
         
-        public void SendMessage(SWN.SWNServiceReference.Message msg) {
+        public void SendMessage(Message msg) {
             base.Channel.SendMessage(msg);
         }
         
-        public System.Threading.Tasks.Task SendMessageAsync(SWN.SWNServiceReference.Message msg) {
+        public System.Threading.Tasks.Task SendMessageAsync(Message msg) {
             return base.Channel.SendMessageAsync(msg);
         }
         
@@ -4662,59 +4662,59 @@ namespace SWN.SWNServiceReference {
             return base.Channel.RequestOnlineUsersListAsync();
         }
         
-        public SWN.SWNServiceReference.Character GetBlankCharacter(SWN.SWNServiceReference.Client client) {
+        public Character GetBlankCharacter(Client client) {
             return base.Channel.GetBlankCharacter(client);
         }
         
-        public System.Threading.Tasks.Task<SWN.SWNServiceReference.Character> GetBlankCharacterAsync(SWN.SWNServiceReference.Client client) {
+        public System.Threading.Tasks.Task<Character> GetBlankCharacterAsync(Client client) {
             return base.Channel.GetBlankCharacterAsync(client);
         }
         
-        public System.Collections.Generic.List<SWN.SWNServiceReference.Advantages> RequestAdvantages(SWN.SWNServiceReference.Client client) {
+        public System.Collections.Generic.List<Advantages> RequestAdvantages(Client client) {
             return base.Channel.RequestAdvantages(client);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Advantages>> RequestAdvantagesAsync(SWN.SWNServiceReference.Client client) {
+        public System.Threading.Tasks.Task<List<Advantages>> RequestAdvantagesAsync(Client client) {
             return base.Channel.RequestAdvantagesAsync(client);
         }
         
-        public System.Collections.Generic.List<SWN.SWNServiceReference.Disadvantages> RequestDisadvantages(SWN.SWNServiceReference.Client client) {
+        public System.Collections.Generic.List<Disadvantages> RequestDisadvantages(Client client) {
             return base.Channel.RequestDisadvantages(client);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Disadvantages>> RequestDisadvantagesAsync(SWN.SWNServiceReference.Client client) {
+        public System.Threading.Tasks.Task<List<Disadvantages>> RequestDisadvantagesAsync(Client client) {
             return base.Channel.RequestDisadvantagesAsync(client);
         }
         
-        public System.Collections.Generic.List<SWN.SWNServiceReference.Requirements> RequestRequirements(SWN.SWNServiceReference.Client client) {
+        public System.Collections.Generic.List<Requirements> RequestRequirements(Client client) {
             return base.Channel.RequestRequirements(client);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Requirements>> RequestRequirementsAsync(SWN.SWNServiceReference.Client client) {
+        public System.Threading.Tasks.Task<List<Requirements>> RequestRequirementsAsync(Client client) {
             return base.Channel.RequestRequirementsAsync(client);
         }
         
-        public System.Collections.Generic.List<SWN.SWNServiceReference.Skills> RequestSkills(SWN.SWNServiceReference.Client client) {
+        public System.Collections.Generic.List<Skills> RequestSkills(Client client) {
             return base.Channel.RequestSkills(client);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Skills>> RequestSkillsAsync(SWN.SWNServiceReference.Client client) {
+        public System.Threading.Tasks.Task<List<Skills>> RequestSkillsAsync(Client client) {
             return base.Channel.RequestSkillsAsync(client);
         }
         
-        public System.Collections.Generic.List<SWN.SWNServiceReference.Character> RequestSavedCharacters(SWN.SWNServiceReference.Client client) {
+        public System.Collections.Generic.List<Character> RequestSavedCharacters(Client client) {
             return base.Channel.RequestSavedCharacters(client);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<SWN.SWNServiceReference.Character>> RequestSavedCharactersAsync(SWN.SWNServiceReference.Client client) {
+        public System.Threading.Tasks.Task<List<Character>> RequestSavedCharactersAsync(Client client) {
             return base.Channel.RequestSavedCharactersAsync(client);
         }
         
-        public bool SaveCharacter(SWN.SWNServiceReference.Client client, SWN.SWNServiceReference.Character c) {
+        public bool SaveCharacter(Client client, Character c) {
             return base.Channel.SaveCharacter(client, c);
         }
         
-        public System.Threading.Tasks.Task<bool> SaveCharacterAsync(SWN.SWNServiceReference.Client client, SWN.SWNServiceReference.Character c) {
+        public System.Threading.Tasks.Task<bool> SaveCharacterAsync(Client client, Character c) {
             return base.Channel.SaveCharacterAsync(client, c);
         }
     }

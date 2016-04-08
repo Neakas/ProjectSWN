@@ -1,16 +1,21 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace SWNAdmin.UI.ValueConverters {
-    [ValueConversion(typeof(bool), typeof(Visibility))]
-    public class BooleanToVisiblityConverter : IValueConverter {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {
-            return (bool)value ? Visibility.Visible : Visibility.Collapsed;
+namespace SWNAdmin.Forms.EncyclopediaManager.ValueConverters
+{
+    [ValueConversion(typeof (bool), typeof (Visibility))]
+    public class BooleanToVisiblityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (bool) value ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {
-            return (Visibility)value == Visibility.Visible;
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (Visibility) value == Visibility.Visible;
         }
     }
 }

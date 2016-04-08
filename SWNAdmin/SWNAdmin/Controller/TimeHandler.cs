@@ -1,70 +1,53 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SWNAdmin.Utility;
 
-
-namespace SWNAdmin
+namespace SWNAdmin.Controller
 {
-    public class TimeHandler
+    public static class TimeHandler
     {
-
-        //setzt das StartDatum
-        public static void ResetDateTime()
-        {
-            //TestVar zum resetten.Später rausnehmen!
-            using (var context = new Utility.Db1Entities())
-            {
-                Utility.UDateTime UDateTime = new Utility.UDateTime();
-                DateTime dt = new DateTime(3000, 1, 1);
-                UDateTime.CurrentDateTime = dt;
-                UDateTime.SystemTime = DateTime.Now;
-                context.UDateTime.Add(UDateTime);
-                context.SaveChanges();
-            }
-        }
-
         //Erhöht die CurrentDateTime um die angegebene Menge an Tagen und schreibt den Neuen Wert zurück in die GlobalSettings
-        public static void IncrementDay(int Amount)
+        public static void IncrementDay(int amount)
         {
-            DateTime CurrentDateTime = GetCurrentDateTime();
-            CurrentDateTime = CurrentDateTime.Add(TimeSpan.FromDays(Amount));
-            SetCurrentDateTime(CurrentDateTime);
+            var currentDateTime = GetCurrentDateTime();
+            currentDateTime = currentDateTime.Add(TimeSpan.FromDays(amount));
+            SetCurrentDateTime(currentDateTime);
         }
 
         //Erhöht die CurrentDateTime um die angegebene Menge an Minuten und schreibt den Neuen Wert zurück in die GlobalSettings
-        public static void IncrementMinute(int Amount)
+        public static void IncrementMinute(int amount)
         {
-            DateTime CurrentDateTime = GetCurrentDateTime();
-            CurrentDateTime = CurrentDateTime.Add(TimeSpan.FromMinutes(Amount));
-            SetCurrentDateTime(CurrentDateTime);
+            var currentDateTime = GetCurrentDateTime();
+            currentDateTime = currentDateTime.Add(TimeSpan.FromMinutes(amount));
+            SetCurrentDateTime(currentDateTime);
         }
 
         //Erhöht die CurrentDateTime um die angegebene Menge an Stunden und schreibt den Neuen Wert zurück in die GlobalSettings
-        public static void IncrementHour(int Amount)
+        public static void IncrementHour(int amount)
         {
-            DateTime CurrentDateTime = GetCurrentDateTime();
-            CurrentDateTime = CurrentDateTime.Add(TimeSpan.FromHours(Amount));
-            SetCurrentDateTime(CurrentDateTime);
+            var currentDateTime = GetCurrentDateTime();
+            currentDateTime = currentDateTime.Add(TimeSpan.FromHours(amount));
+            SetCurrentDateTime(currentDateTime);
         }
 
         public static DateTime GetCurrentDateTime()
         {
-            var timecontext = new Utility.Db1Entities();
+            var timecontext = new Db1Entities();
             var query = from c in timecontext.UDateTime orderby c.Id descending select c;
             var filterquery = query.FirstOrDefault();
-            return (DateTime)filterquery.CurrentDateTime;
+            return filterquery?.CurrentDateTime ?? new DateTime();
         }
 
-        public static void SetCurrentDateTime(DateTime Dt)
+        public static void SetCurrentDateTime(DateTime dt)
         {
-            using (var context = new Utility.Db1Entities())
+            using (var context = new Db1Entities())
             {
-                Utility.UDateTime UDateTime = new Utility.UDateTime();
-                UDateTime.CurrentDateTime = Dt;
-                UDateTime.SystemTime = DateTime.Now;
-                context.UDateTime.Add(UDateTime);
+                var uDateTime = new UDateTime
+                {
+                    CurrentDateTime = dt,
+                    SystemTime = DateTime.Now
+                };
+                context.UDateTime.Add(uDateTime);
                 context.SaveChanges();
             }
         }

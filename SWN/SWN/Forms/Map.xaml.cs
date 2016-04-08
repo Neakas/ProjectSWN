@@ -1,27 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace SWN
+namespace SWN.Forms
 {
     /// <summary>
-    /// Interaction logic for Map.xaml
+    ///     Interaction logic for Map.xaml
     /// </summary>
     public partial class Map : Window
     {
+        public int MapColumns = 10;
         //Definiere Spalten und Reihen
         public int MapRows = 10;
-        public int MapColumns = 10;
 
         public Map()
         {
@@ -37,11 +26,11 @@ namespace SWN
         private void GenerateMap()
         {
             //Generiert die Karte
-            int R = 0;
-            int C = 0;
+            var R = 0;
+            var C = 0;
             for (C = 0; C < MapRows; C++)
             {
-                Button ColumnButton = new Button();
+                var ColumnButton = new Button();
                 Grid.SetRow(ColumnButton, R);
                 Grid.SetColumn(ColumnButton, C);
                 ColumnButton.Name = "Button" + R + C;
@@ -49,7 +38,7 @@ namespace SWN
                 HexGrid1.Children.Add(ColumnButton);
                 for (R = 0; R < MapRows; R++)
                 {
-                    Button RowButton = new Button();
+                    var RowButton = new Button();
                     Grid.SetRow(RowButton, R);
                     Grid.SetColumn(RowButton, C);
                     RowButton.Name = "Button" + R + C;

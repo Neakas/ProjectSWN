@@ -1,85 +1,69 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
+using System.Reflection;
 using System.Xml.Linq;
-using System.IO;
+using SWNAdmin.Properties;
+using SWNAdmin.Utility;
 
-namespace SWNAdmin
+namespace SWNAdmin.Controller
 {
-
-    public class SettingHandler
+    public static class SettingHandler
     {
-        public static bool GetIsLoggedIn()
+        public static string GetIpPort()
         {
-            bool isLoggedIN = SWNAdmin.Properties.Settings.Default.LoggedIn;
-            return isLoggedIN;
+            var ipPort = XmlHandler.GrabXMLValue(GrabSettingFile(), "ipPort");
+            return ipPort;
         }
 
-        public static void SetIsLoggedIn(bool Boolean)
+        public static void SetIpPort(string ipPort)
         {
-            SWNAdmin.Properties.Settings.Default.LoggedIn = Boolean;
-            SWNAdmin.Properties.Settings.Default.Save();
+            XmlHandler.SetXmlValue(GrabSettingFile(), "ipPort", ipPort);
         }
 
-        public static string GetIPPort()
+        private static XDocument GrabSettingFile()
         {
-            string IPPort = XmlHandler.GrabXMLValue(GrabSettingFile(), "IPPort");
-            return IPPort;
-        }
-
-        public static void SetIPPort(string IPPort)
-        {
-            XmlHandler.SetXmlValue(GrabSettingFile(), "IPPort", IPPort);
-        }
-
-        public static XDocument GrabSettingFile()
-        {
-            if (CheckSettingFile(SettingPath()))
-            {
-                XDocument xDoc = XDocument.Load(SettingPath());
-                return xDoc;
-            }
-            return null;
+            if (!CheckSettingFile()) return null;
+            var xDoc = XDocument.Load(SettingPath());
+            return xDoc;
         }
 
         public static string SettingPath()
         {
-            string TargetPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
-            TargetPath = TargetPath.Remove(0, 6);
-            string SettingFileName = "Settings.xml";
-            string sPath = Path.Combine(TargetPath, SettingFileName);
-            return sPath;
+            var targetPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
+            if (targetPath != null)
+            {
+                targetPath = targetPath.Remove(0, 6);
+                const string settingFileName = "Settings.xml";
+                var sPath = Path.Combine(targetPath, settingFileName);
+                return sPath;
+            }
+            return null;
         }
 
-        private static bool CheckSettingFile(string Path)
+        private static bool CheckSettingFile()
         {
             if (File.Exists(SettingPath()) == false)
             {
                 SetSettingInit(false);
                 File.Create(SettingPath()).Close();
             }
-            if (GetSettingInit() == false)
-            {
-                XDocument doc = new XDocument(new XElement("body", new XElement("Db1ConnectionString"), new XElement("IPPort")));
-                doc = XmlHandler.SetXmlValue(doc, "IPPort", "localhost:8000");
-                doc.Save(SettingPath());
-                SetSettingInit(true);
-            }
+            if (GetSettingInit()) return true;
+            var doc = new XDocument(new XElement("body", new XElement("Db1ConnectionString"), new XElement("ipPort")));
+            doc = XmlHandler.SetXmlValue(doc, "ipPort", "localhost:8000");
+            doc.Save(SettingPath());
+            SetSettingInit(true);
             return true;
         }
 
-        public static bool GetSettingInit()
+        private static bool GetSettingInit()
         {
-            bool SettingInit = SWNAdmin.Properties.Settings.Default.SettingInit;
-            return SettingInit;
+            var settingInit = Settings.Default.SettingInit;
+            return settingInit;
         }
 
-        public static void SetSettingInit(bool Boolean)
+        private static void SetSettingInit(bool boolean)
         {
-            SWNAdmin.Properties.Settings.Default.SettingInit = Boolean;
-            SWNAdmin.Properties.Settings.Default.Save();
+            Settings.Default.SettingInit = boolean;
+            Settings.Default.Save();
         }
     }
 }

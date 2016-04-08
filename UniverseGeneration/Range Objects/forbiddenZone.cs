@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UniverseGeneration.Stellar_Bodies;
 
-namespace UniverseGeneration
+namespace UniverseGeneration.Range_Objects
 {
     public class forbiddenZone : Range
     {

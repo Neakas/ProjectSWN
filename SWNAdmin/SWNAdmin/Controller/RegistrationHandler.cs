@@ -1,56 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SWNAdmin.Classes;
+using SWNAdmin.Utility;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
-using System.Data.SqlClient;
-using amexus.Encryption;
 
-
-namespace SWNAdmin
+namespace SWNAdmin.Controller
 {
     public class RegistrationHandler
     {
         public bool RegistrationCheck(Client c)
         {
-            bool vUserExists = UserExists(c.UserName);
+            var vUserExists = UserExists(c.UserName);
 
-            if (vUserExists == false)
+            if (vUserExists) return false;
+            using (var context = new Db1Entities())
             {
-                using (var context = new Utility.Db1Entities())
+                var newReg = new Registration
                 {
-                    Utility.Registration newReg = new Utility.Registration();
-                    newReg.Username = c.UserName;
-                    newReg.EMail = c.eMail;
-                    newReg.Password = c.encPassword;
-                    context.Registration.Add(newReg);
-                    context.SaveChanges();
-                }
-                return true;
+                    Username = c.UserName,
+                    EMail = c.EMail,
+                    Password = c.EncPassword
+                };
+                context.Registration.Add(newReg);
+                context.SaveChanges();
             }
-            else
-            {
-                return false;
-            }
+            return true;
         }
 
-        private bool UserExists(String UserName)
+        private static bool UserExists(string userName)
         {
             //grundsätzlich existiert er nicht
-            bool UserExists = false;
+            var userExists = false;
             //Neue SQL verbindung
 
-            var context = new Utility.Db1Entities();
-            var query = from c in context.Registration where c.Username == UserName select c;
+            var context = new Db1Entities();
+            var query = from c in context.Registration where c.Username == userName select c;
             var adv = query.FirstOrDefault();
 
             if (adv != null)
             {
                 //User existiert
-                UserExists = true;
+                userExists = true;
             }
-            return UserExists;
+            return userExists;
         }
     }
 }

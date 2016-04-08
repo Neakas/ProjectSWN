@@ -1,34 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Xml.Linq;
-using System.Xml;
-using System.IO;
-using UniverseGeneration;
-using SWNAdmin.Utility;
+using SWNAdmin.Controller;
+using UniverseGeneration.Stellar_Bodies;
 
-namespace SWNAdmin
+namespace SWNAdmin.Utility
 {
-    class XmlHandler
+    internal class XmlHandler
     {
         public static XElement CreateNode(string ElementName)
         {
-            XElement xEle = new XElement(ElementName);
+            var xEle = new XElement(ElementName);
             return xEle;
         }
 
         public static XElement CreateNode(string ElementName, string Content)
         {
-            XElement xEle = new XElement(ElementName, Content);
+            var xEle = new XElement(ElementName, Content);
             return xEle;
         }
 
         public static string GrabXMLValue(XDocument Document, string Element)
         {
-            string Value = "";
-            foreach (XElement xEle in Document.Element("body").Elements())
+            var Value = "";
+            foreach (var xEle in Document.Element("body").Elements())
             {
                 if (xEle.Name == Element)
                 {
@@ -41,7 +35,7 @@ namespace SWNAdmin
 
         public static XDocument SetXmlValue(XDocument Document, string Element, string Value)
         {
-            foreach (XElement xEle in Document.Element("body").Elements())
+            foreach (var xEle in Document.Element("body").Elements())
             {
                 if (xEle.Name == Element)
                 {
@@ -58,9 +52,8 @@ namespace SWNAdmin
             {
                 File.Create(Path).Close();
             }
-            XDocument XDoc = new XDocument(new XElement("StarSystem", new XAttribute("Name", System.sysName)));
+            var XDoc = new XDocument(new XElement("StarSystem", new XAttribute("Name", System.sysName)));
             XDoc.Save(Path);
         }
-
     }
 }

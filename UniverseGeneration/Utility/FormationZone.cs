@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using UniverseGeneration.Range_Objects;
 
-namespace UniverseGeneration
+namespace UniverseGeneration.Utility
 {
     class FormationZone
     {

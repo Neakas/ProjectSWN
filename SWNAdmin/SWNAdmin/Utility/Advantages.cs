@@ -19,12 +19,12 @@ namespace SWNAdmin.Utility
         public string Name { get; set; }
         public Nullable<int> PointCost { get; set; }
         public string Discription { get; set; }
-        public bool isPhysical { get; set; }
-        public bool isMental { get; set; }
-        public bool isSocial { get; set; }
-        public bool isExotic { get; set; }
-        public bool isSuperNatural { get; set; }
-        public bool isMundane { get; set; }
+        public Nullable<bool> isPhysical { get; set; }
+        public Nullable<bool> isMental { get; set; }
+        public Nullable<bool> isSocial { get; set; }
+        public Nullable<bool> isExotic { get; set; }
+        public Nullable<bool> isSuperNatural { get; set; }
+        public Nullable<bool> isMundane { get; set; }
         public string Limitation { get; set; }
         public Nullable<bool> RequirementSet { get; set; }
         public Nullable<bool> hasLevels { get; set; }

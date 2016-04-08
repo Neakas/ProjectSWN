@@ -1,63 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using SWNAdmin.Utility;
+using System.Linq;
 
-namespace SWNAdmin.Forms
+namespace SWNAdmin.Forms.DatabaseManager
 {
     /// <summary>
-    /// Interaction logic for ManagePrerequisites.xaml
+    ///     Interaction logic for ManagePrerequisites.xaml
     /// </summary>
-    public partial class ManagePrerequisites : Window
+    public partial class ManagePrerequisites
     {
-        public List<Skills> FoundSkills;
-        public List<SWNAdmin.Utility.Attribute> FoundAttributes;
-        public List<Requirements> FoundPrereqs;
-        public List<Advantages> FoundAdvantages;
-        Dictionary<String, Requirements> dictPrereq;
-        int SourceItemID;
-        int TargetItemID;
-        string SourceType;
-        string TargetType;
+        private Dictionary<string, Requirements> _dictPrereq;
+        private List<Advantages> _foundAdvantages;
+        private List<Attribute> _foundAttributes;
+        private List<Requirements> _foundPrereqs;
+        private List<Skills> _foundSkills;
+        private int _sourceItemId;
+        private string _sourceType;
+        private int _targetItemId;
+        private string _targetType;
 
         public ManagePrerequisites()
         {
             InitializeComponent();
-            List<string> Conditions = new List<string> { "<", "<=", "==",">",">=","Needs","Or" };
-            LoadTreeViewContent(tvObjects);
-            LoadTreeViewContent(tvTargets);
+            var conditions = new List<string> {"<", "<=", "==", ">", ">=", "Needs", "Or"};
+            LoadTreeViewContent(TvObjects);
+            LoadTreeViewContent(TvTargets);
             LoadSetPrereqList();
-            cbConditions.ItemsSource = Conditions;
+            CbConditions.ItemsSource = conditions;
         }
 
-        public void LoadTreeViewContent(TreeView treeview)
+        private void LoadTreeViewContent(TreeView treeview)
         {
             //Load Skills and SkillSpecialitations
-            var SkillContext = new Utility.Db1Entities();
-            FoundSkills = (from c in SkillContext.Skills.Include("SkillSpecialization") select c).ToList();
-            TreeViewItem SkillMain = new TreeViewItem();
-            SkillMain.Header = "Skills";
-            foreach (Skills Skillitem in FoundSkills)
+            var skillContext = new Db1Entities();
+            _foundSkills = (from c in skillContext.Skills.Include("SkillSpecialization") select c).ToList();
+            var skillMain = new TreeViewItem {Header = "Skills"};
+            foreach (var skillitem in _foundSkills)
             {
-                SkillTreeViewItem tvi = new SkillTreeViewItem();
-                if (Skillitem.SkillSpecialization.Count > 0)
+                var tvi = new SkillTreeViewItem();
+                if (skillitem.SkillSpecialization.Count > 0)
                 {
-                    foreach (SkillSpecialization skillspec in Skillitem.SkillSpecialization)
+                    foreach (var skillspec in skillitem.SkillSpecialization)
                     {
-                        SkillTreeViewItem tvi2 = new SkillTreeViewItem();
-                        tvi2.Header = skillspec.Name;
-                        tvi2.StoredObject = skillspec;
-                        tvi2.Foreground = Brushes.White;
+                        var tvi2 = new SkillTreeViewItem
+                        {
+                            Header = skillspec.Name,
+                            StoredObject = skillspec,
+                            Foreground = Brushes.White
+                        };
                         if (skillspec.RequirementSet == true)
                         {
                             tvi2.Foreground = Brushes.Green;
@@ -65,234 +59,256 @@ namespace SWNAdmin.Forms
                         tvi.Items.Add(tvi2);
                     }
                 }
-                tvi.Header = Skillitem.SkillName;
-                tvi.StoredObject = Skillitem;
+                tvi.Header = skillitem.SkillName;
+                tvi.StoredObject = skillitem;
                 tvi.Foreground = Brushes.White;
-                if (Skillitem.RequirementSet == true)
+                if (skillitem.RequirementSet == true)
                 {
                     tvi.Foreground = Brushes.Green;
                 }
-                SkillMain.Items.Add(tvi);
+                skillMain.Items.Add(tvi);
             }
-            treeview.Items.Add(SkillMain);
+            treeview.Items.Add(skillMain);
 
             //Load Attributes
-            TreeViewItem AttributeMain = new TreeViewItem();
-            AttributeMain.Header = "Attributes";
+            var attributeMain = new TreeViewItem {Header = "Attributes"};
 
-            var AttributeContext = new Db1Entities();
-            FoundAttributes = (from c in AttributeContext.Attribute select c).ToList();
-            foreach (Utility.Attribute AttItem in FoundAttributes)
+            var attributeContext = new Db1Entities();
+            _foundAttributes = (from c in attributeContext.Attribute select c).ToList();
+            foreach (var attItem in _foundAttributes)
             {
-                SkillTreeViewItem tvi = new SkillTreeViewItem();
-                tvi.Header = AttItem.Name;
-                tvi.StoredObject = AttItem;
-                tvi.Foreground = Brushes.White;
-                if (AttItem.RequirementSet == true)
+                var tvi = new SkillTreeViewItem
+                {
+                    Header = attItem.Name,
+                    StoredObject = attItem,
+                    Foreground = Brushes.White
+                };
+                if (attItem.RequirementSet == true)
                 {
                     tvi.Foreground = Brushes.Green;
                 }
-                AttributeMain.Items.Add(tvi);
+                attributeMain.Items.Add(tvi);
             }
-            treeview.Items.Add(AttributeMain);
+            treeview.Items.Add(attributeMain);
 
             //Load Advantages
-            TreeViewItem AdvantagesMain = new TreeViewItem();
-            AdvantagesMain.Header = "Advantages";
+            var advantagesMain = new TreeViewItem {Header = "Advantages"};
 
-            var AdvantageContext = new Db1Entities();
-            FoundAdvantages = (from c in AdvantageContext.Advantages select c).ToList();
-            foreach (Advantages AdvItem in FoundAdvantages)
+            var advantageContext = new Db1Entities();
+            _foundAdvantages = (from c in advantageContext.Advantages select c).ToList();
+            foreach (var advItem in _foundAdvantages)
             {
-                SkillTreeViewItem tvi = new SkillTreeViewItem();
-                tvi.Header = AdvItem.Name;
-                tvi.StoredObject = AdvItem;
-                tvi.Foreground = Brushes.White;
-                if (AdvItem.RequirementSet == true)
+                var tvi = new SkillTreeViewItem
+                {
+                    Header = advItem.Name,
+                    StoredObject = advItem,
+                    Foreground = Brushes.White
+                };
+                if (advItem.RequirementSet == true)
                 {
                     tvi.Foreground = Brushes.Green;
                 }
-                AdvantagesMain.Items.Add(tvi);
+                advantagesMain.Items.Add(tvi);
             }
-            treeview.Items.Add(AdvantagesMain);
+            treeview.Items.Add(advantagesMain);
         }
 
         private void tvObjects_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if ((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(Skills))
+            if ((TvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof (Skills))
             {
-                Skills s = (((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject) as Skills);
-                tbObject.Text = s.SkillName;
-                SourceItemID = s.Id;
-                SourceType = "Skills";
+                var s = ((SkillTreeViewItem) TvObjects.SelectedItem)?.StoredObject as Skills;
+                if (s != null)
+                {
+                    TbObject.Text = s.SkillName;
+                    _sourceItemId = s.Id;
+                }
+                _sourceType = "Skills";
             }
 
-            if ((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(SkillSpecialization))
+            if ((TvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof (SkillSpecialization))
             {
-                SkillSpecialization ss = (((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject) as SkillSpecialization);
-                tbObject.Text = ss.Name;
-                SourceItemID = ss.Id;
-                SourceType = "SkillSpecialization";
+                var ss = ((SkillTreeViewItem) TvObjects.SelectedItem)?.StoredObject as SkillSpecialization;
+                if (ss != null)
+                {
+                    TbObject.Text = ss.Name;
+                    _sourceItemId = ss.Id;
+                }
+                _sourceType = "SkillSpecialization";
             }
 
-            if ((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(SWNAdmin.Utility.Attribute))
+            if ((TvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof (Attribute))
             {
-                SWNAdmin.Utility.Attribute a = (((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject) as SWNAdmin.Utility.Attribute);
-                tbObject.Text = a.Name;
-                SourceItemID = a.Id;
-                SourceType = "Attribute";
+                var a = ((SkillTreeViewItem) TvObjects.SelectedItem)?.StoredObject as Attribute;
+                if (a != null)
+                {
+                    TbObject.Text = a.Name;
+                    _sourceItemId = a.Id;
+                }
+                _sourceType = "Attribute";
             }
 
-            if ((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(SWNAdmin.Utility.Advantages))
+            if ((TvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() != typeof (Advantages)) return;
             {
-                Advantages a = (((tvObjects.SelectedItem as SkillTreeViewItem)?.StoredObject) as SWNAdmin.Utility.Advantages);
-                tbObject.Text = a.Name;
-                SourceItemID = a.Id;
-                SourceType = "Advantage";
+                var a = ((SkillTreeViewItem) TvObjects.SelectedItem)?.StoredObject as Advantages;
+                if (a != null)
+                {
+                    TbObject.Text = a.Name;
+                    _sourceItemId = a.Id;
+                }
+                _sourceType = "Advantage";
             }
         }
 
         private void tvTargets_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if ((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(Skills))
+            if ((TvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof (Skills))
             {
-                Skills s = (((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject) as Skills);
-                tbTarget.Text = s.SkillName;
-                TargetItemID = s.Id;
-                TargetType = "Skills";
+                var s = ((SkillTreeViewItem) TvTargets.SelectedItem)?.StoredObject as Skills;
+                if (s != null)
+                {
+                    TbTarget.Text = s.SkillName;
+                    _targetItemId = s.Id;
+                }
+                _targetType = "Skills";
             }
 
-            if ((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(SkillSpecialization))
+            if ((TvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof (SkillSpecialization))
             {
-                SkillSpecialization ss = (((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject) as SkillSpecialization);
-                tbTarget.Text = ss.Name;
-                TargetItemID = ss.Id;
-                TargetType = "SkillSpecialization";
+                var ss = ((SkillTreeViewItem) TvTargets.SelectedItem)?.StoredObject as SkillSpecialization;
+                if (ss != null)
+                {
+                    TbTarget.Text = ss.Name;
+                    _targetItemId = ss.Id;
+                }
+                _targetType = "SkillSpecialization";
             }
 
-            if ((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(SWNAdmin.Utility.Attribute))
+            if ((TvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof (Attribute))
             {
-                SWNAdmin.Utility.Attribute a = (((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject) as SWNAdmin.Utility.Attribute);
-                tbTarget.Text = a.Name;
-                TargetItemID = a.Id;
-                TargetType = "Attribute";
+                var a = ((SkillTreeViewItem) TvTargets.SelectedItem)?.StoredObject as Attribute;
+                if (a != null)
+                {
+                    TbTarget.Text = a.Name;
+                    _targetItemId = a.Id;
+                }
+                _targetType = "Attribute";
             }
 
-            if ((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() == typeof(Advantages))
+            if ((TvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject.GetType() != typeof (Advantages)) return;
             {
-                Advantages a = (((tvTargets.SelectedItem as SkillTreeViewItem)?.StoredObject) as Advantages);
-                tbTarget.Text = a.Name;
-                TargetItemID = a.Id;
-                TargetType = "Advantage";
+                var a = ((SkillTreeViewItem) TvTargets.SelectedItem)?.StoredObject as Advantages;
+                if (a != null)
+                {
+                    TbTarget.Text = a.Name;
+                    _targetItemId = a.Id;
+                }
+                _targetType = "Advantage";
             }
         }
 
         private void tbObject_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tbTarget.Text != "" && tbTarget.Text != null)
+            if (!string.IsNullOrEmpty(TbTarget.Text))
             {
-                if (tbObject.Text != "" && tbObject.Text != null)
+                if (!string.IsNullOrEmpty(TbObject.Text))
                 {
-                    cbConditions.IsEnabled = true;
+                    CbConditions.IsEnabled = true;
                 }
             }
             else
             {
-                cbConditions.IsEnabled = false;
+                CbConditions.IsEnabled = false;
             }
         }
 
         private void tbTarget_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tbTarget.Text != "" && tbTarget.Text != null)
+            if (!string.IsNullOrEmpty(TbTarget.Text))
             {
-                if (tbObject.Text != "" && tbObject.Text != null)
+                if (!string.IsNullOrEmpty(TbObject.Text))
                 {
-                    cbConditions.IsEnabled = true;
+                    CbConditions.IsEnabled = true;
                 }
             }
             else
             {
-                cbConditions.IsEnabled = false;
+                CbConditions.IsEnabled = false;
             }
         }
 
         private void cbConditions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (tbTarget.Text != "" && tbTarget.Text != null)
+            if (string.IsNullOrEmpty(TbTarget.Text) || string.IsNullOrEmpty(TbObject.Text)) return;
+            if (CbConditions.SelectedValue.ToString() != "Needs" &&
+                CbConditions.SelectedValue.ToString() != "Or")
             {
-                if (tbObject.Text != "" && tbObject.Text != null)
-                {
-                    if (cbConditions.SelectedValue.ToString() != "Needs" && cbConditions.SelectedValue.ToString() != "Or")
-                    {
-                        tbConditionValue.IsEnabled = true;
-                        btAdd.IsEnabled = true;
-                    }
-                    if (cbConditions.SelectedValue.ToString() == "Needs" || cbConditions.SelectedValue.ToString() == "Or")
-                    {
-                            btAdd.IsEnabled = true;
-                            tbConditionValue.IsEnabled = false;
-                    }
-                    else
-                    {
-                        btAdd.IsEnabled = false;
-                    }
-                }
+                TbConditionValue.IsEnabled = true;
+                BtAdd.IsEnabled = true;
+            }
+            if (CbConditions.SelectedValue.ToString() == "Needs" ||
+                CbConditions.SelectedValue.ToString() == "Or")
+            {
+                BtAdd.IsEnabled = true;
+                TbConditionValue.IsEnabled = false;
+            }
+            else
+            {
+                BtAdd.IsEnabled = false;
             }
         }
 
         private void tbConditionValue_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tbConditionValue.Text != "" && tbConditionValue.Text != null)
-            {
-                btAdd.IsEnabled = true;
-            }
-            else
-            {
-                btAdd.IsEnabled = false;
-            }
+            BtAdd.IsEnabled = !string.IsNullOrEmpty(TbConditionValue.Text);
         }
 
         private void btAdd_Click(object sender, RoutedEventArgs e)
         {
-            using (var context = new Utility.Db1Entities())
+            using (var context = new Db1Entities())
             {
-                Requirements req = new Requirements();
-                req.SourceItemID = SourceItemID;
-                req.TargetRequirementID = TargetItemID;
-                req.TargetType = TargetType;
-                req.SourceType = SourceType;
-                req.Condition = cbConditions.SelectedValue.ToString();
-                req.SourceName = tbObject.Text;
-                req.TargetName = tbTarget.Text;
-                req.ConditionValue = tbConditionValue.Text;
+                var req = new Requirements
+                {
+                    SourceItemID = _sourceItemId,
+                    TargetRequirementID = _targetItemId,
+                    TargetType = _targetType,
+                    SourceType = _sourceType,
+                    Condition = CbConditions.SelectedValue.ToString(),
+                    SourceName = TbObject.Text,
+                    TargetName = TbTarget.Text,
+                    ConditionValue = TbConditionValue.Text
+                };
                 context.Requirements.Add(req);
                 context.SaveChanges();
             }
-            (tvObjects.SelectedItem as TreeViewItem).IsSelected = false;
-            (tvTargets.SelectedItem as TreeViewItem).IsSelected = false;
-            tbConditionValue.Text = "";
-            tbObject.Text = "";
-            tbTarget.Text = "";
+            var treeViewItem = TvObjects.SelectedItem as TreeViewItem;
+            if (treeViewItem != null)
+                treeViewItem.IsSelected = false;
+            var viewItem = TvTargets.SelectedItem as TreeViewItem;
+            if (viewItem != null)
+                viewItem.IsSelected = false;
+            TbConditionValue.Text = "";
+            TbObject.Text = "";
+            TbTarget.Text = "";
             LoadSetPrereqList();
         }
 
         private void btDel_Click(object sender, RoutedEventArgs e)
         {
-            string item = lbSetPrerequisites.SelectedItem.ToString();
+            var item = LbSetPrerequisites.SelectedItem.ToString();
             Requirements reqitem;
-            dictPrereq.TryGetValue(item, out reqitem);
+            _dictPrereq.TryGetValue(item, out reqitem);
 
             if (reqitem != null)
             {
-                var DelContext = new Utility.Db1Entities();
-                var DelQuery = from c in DelContext.Requirements where c.Id == reqitem.Id select c;
+                var delContext = new Db1Entities();
+                var delQuery = from c in delContext.Requirements where c.Id == reqitem.Id select c;
 
-                using (var cnt = new Utility.Db1Entities())
+                using (var context = new Db1Entities())
                 {
-                    Requirements Deletereq = DelQuery.FirstOrDefault();
-                    cnt.Entry(Deletereq).State = System.Data.Entity.EntityState.Deleted;
-                    cnt.SaveChanges();
+                    var deletereq = delQuery.FirstOrDefault();
+                    context.Entry(deletereq).State = EntityState.Deleted;
+                    context.SaveChanges();
                 }
             }
             LoadSetPrereqList();
@@ -300,35 +316,37 @@ namespace SWNAdmin.Forms
 
         private void LoadSetPrereqList()
         {
-            var RequirementContext = new Utility.Db1Entities();
-            var prereqquery = from c in RequirementContext.Requirements select c;
-            FoundPrereqs = prereqquery.ToList();
+            var requirementContext = new Db1Entities();
+            var prereqquery = from c in requirementContext.Requirements select c;
+            _foundPrereqs = prereqquery.ToList();
 
-            List<String> prereqList = new List<string>();
-            dictPrereq = new Dictionary<string, Requirements>();
+            var prereqList = new List<string>();
+            _dictPrereq = new Dictionary<string, Requirements>();
 
-            foreach (Requirements item in FoundPrereqs)
+            foreach (var item in _foundPrereqs)
             {
-                string prereqString = "(" + item.SourceType + ":" + item.SourceName + ")-(" + item.TargetType + ":" + item.TargetName + ":" + item.Condition.Replace(" ", "") + item.ConditionValue.Replace(" ","") + ")";
+                var prereqString = "(" + item.SourceType + ":" + item.SourceName + ")-(" + item.TargetType + ":" +
+                                   item.TargetName + ":" + item.Condition.Replace(" ", "") +
+                                   item.ConditionValue.Replace(" ", "") + ")";
                 prereqList.Add(prereqString);
-                dictPrereq.Add(prereqString, item);
+                _dictPrereq.Add(prereqString, item);
             }
-            lbSetPrerequisites.ItemsSource = prereqList;
+            LbSetPrerequisites.ItemsSource = prereqList;
         }
 
         private void lbSetPrerequisites_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lbSetPrerequisites.SelectedItem != null)
+            if (LbSetPrerequisites.SelectedItem != null)
             {
-                btDel.IsEnabled = true;
-                btAdd.IsEnabled = false;
-                btAdd.Visibility = Visibility.Hidden;
+                BtDel.IsEnabled = true;
+                BtAdd.IsEnabled = false;
+                BtAdd.Visibility = Visibility.Hidden;
             }
             else
             {
-                btDel.IsEnabled = false;
-                btAdd.IsEnabled = true;
-                btAdd.Visibility = Visibility.Visible;
+                BtDel.IsEnabled = false;
+                BtAdd.IsEnabled = true;
+                BtAdd.Visibility = Visibility.Visible;
             }
         }
     }
@@ -337,6 +355,4 @@ namespace SWNAdmin.Forms
     {
         public object StoredObject = new object();
     }
-
-
 }

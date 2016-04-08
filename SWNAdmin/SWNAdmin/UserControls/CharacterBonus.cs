@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SWNAdmin.UserControls
+﻿namespace SWNAdmin.UserControls
 {
-    class CharacterBonus
+    internal class CharacterBonus
     {
         public int ID { get; set; }
         public string BonusName { get; set; }

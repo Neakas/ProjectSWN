@@ -1,69 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using UniverseGeneration;
 using System.Windows.Forms;
-using System.ComponentModel;
+using SWNAdmin.Utility;
+using UniverseGeneration.Stellar_Bodies;
+using UniverseGeneration.Utility;
+using MessageBox = System.Windows.MessageBox;
 
-
-namespace SWNAdmin
+namespace SWNAdmin.Forms
 {
     public partial class SystemGeneration : Window
     {
         /// <summary>
-        ///   This is our star system. There are many like it, but this is ours. 
-        ///   Used to keep all of our details
-        /// </summary>
-        public StarSystem ourSystem { get; set; }
-
-        /// <summary>
-        ///  The dice this program uses. Our PRNG.
-        /// </summary>
-        public Dice velvetBag { get; set; }
-
-        /// <summary>
-        ///  The binding source for the star display DGV.
-        /// </summary>
-        private BindingSource starSource { get; set; }
-
-        /// <summary>
-        ///  The star display table. Used to abstract things.
-        /// </summary>
-        private DataTable starTable { get; set; }
-
-        /// <summary>
-        /// The binding soruce for the planet display DGV
-        /// </summary>
-        private BindingSource planetSource { get; set; }
-
-        /// <summary>
-        /// The plaent display table. Used to abstract things.
-        /// </summary>
-        private DataTable planetTable { get; set; }
-
-        /// <summary>
-        /// This is used to tell the parent form (this form) we're done with star generation
-        /// </summary>
-        public bool createStarsFinished { get; set; }
-
-        /// <summary>
-        /// This is used to tell the parent form (this form) we're done with planet generation.
-        /// </summary>
-        public bool createPlanetsFinished { get; set; }
-
-        /// <summary>
-        /// Constructor for the form object.
+        ///     Constructor for the form object.
         /// </summary>
         public SystemGeneration()
         {
@@ -72,30 +21,30 @@ namespace SWNAdmin
             InitializeComponent();
 
             starTable = new DataTable("starTable");
-            starTable.Columns.Add("Current Mass (sol mass)", typeof(double));
-            starTable.Columns.Add("Name", typeof(string));
-            starTable.Columns.Add("Order", typeof(string));
-            starTable.Columns.Add("Spectral Type", typeof(string));
-            starTable.Columns.Add("Current Luminosity (sol lumin)", typeof(double));
-            starTable.Columns.Add("Effective Temperature(K)", typeof(double));
-            starTable.Columns.Add("Orbital Radius (AU)", typeof(double));
-            starTable.Columns.Add("Gas Giant", typeof(string));
-            starTable.Columns.Add("Color", typeof(string));
-            starTable.Columns.Add("Stellar Evolution Stage", typeof(string));
-            starTable.Columns.Add("Flare Star", typeof(string));
-            starTable.Columns.Add("Orbital Details", typeof(string));
+            starTable.Columns.Add("Current Mass (sol mass)", typeof (double));
+            starTable.Columns.Add("Name", typeof (string));
+            starTable.Columns.Add("Order", typeof (string));
+            starTable.Columns.Add("Spectral Type", typeof (string));
+            starTable.Columns.Add("Current Luminosity (sol lumin)", typeof (double));
+            starTable.Columns.Add("Effective Temperature(K)", typeof (double));
+            starTable.Columns.Add("Orbital Radius (AU)", typeof (double));
+            starTable.Columns.Add("Gas Giant", typeof (string));
+            starTable.Columns.Add("Color", typeof (string));
+            starTable.Columns.Add("Stellar Evolution Stage", typeof (string));
+            starTable.Columns.Add("Flare Star", typeof (string));
+            starTable.Columns.Add("Orbital Details", typeof (string));
 
             planetTable = new DataTable("planetTable");
-            planetTable.Columns.Add("Name", typeof(string));
-            planetTable.Columns.Add("Size (Type)", typeof(string));
-            planetTable.Columns.Add("Diameter (KM)", typeof(double));
-            planetTable.Columns.Add("Orbital Radius (AU)", typeof(double));
-            planetTable.Columns.Add("Gravity (m/s)", typeof(double));
-            planetTable.Columns.Add("Atmosphere Pressure (atm)", typeof(string));
-            planetTable.Columns.Add("Atmosphere Notes", typeof(string));
-            planetTable.Columns.Add("Hydrographic Coverage", typeof(string));
-            planetTable.Columns.Add("Climate Data", typeof(string));
-            planetTable.Columns.Add("Resource Indicator", typeof(string));
+            planetTable.Columns.Add("Name", typeof (string));
+            planetTable.Columns.Add("Size (Type)", typeof (string));
+            planetTable.Columns.Add("Diameter (KM)", typeof (double));
+            planetTable.Columns.Add("Orbital Radius (AU)", typeof (double));
+            planetTable.Columns.Add("Gravity (m/s)", typeof (double));
+            planetTable.Columns.Add("Atmosphere Pressure (atm)", typeof (string));
+            planetTable.Columns.Add("Atmosphere Notes", typeof (string));
+            planetTable.Columns.Add("Hydrographic Coverage", typeof (string));
+            planetTable.Columns.Add("Climate Data", typeof (string));
+            planetTable.Columns.Add("Resource Indicator", typeof (string));
 
 
             //assign the source. We do it this way to allow for refreshing things.
@@ -117,11 +66,51 @@ namespace SWNAdmin
             //dgvPlanets.Columns[6].Width = 150;
             //dgvPlanets.Columns[7].Width = 100;
             //dgvPlanets.Columns[8].Width = 195;
-
         }
 
         /// <summary>
-        ///  This refreshes the DataGridView for displaying stars
+        ///     This is our star system. There are many like it, but this is ours.
+        ///     Used to keep all of our details
+        /// </summary>
+        public StarSystem ourSystem { get; set; }
+
+        /// <summary>
+        ///     The dice this program uses. Our PRNG.
+        /// </summary>
+        public Dice velvetBag { get; set; }
+
+        /// <summary>
+        ///     The binding source for the star display DGV.
+        /// </summary>
+        private BindingSource starSource { get; set; }
+
+        /// <summary>
+        ///     The star display table. Used to abstract things.
+        /// </summary>
+        private DataTable starTable { get; }
+
+        /// <summary>
+        ///     The binding soruce for the planet display DGV
+        /// </summary>
+        private BindingSource planetSource { get; set; }
+
+        /// <summary>
+        ///     The plaent display table. Used to abstract things.
+        /// </summary>
+        private DataTable planetTable { get; }
+
+        /// <summary>
+        ///     This is used to tell the parent form (this form) we're done with star generation
+        /// </summary>
+        public bool createStarsFinished { get; set; }
+
+        /// <summary>
+        ///     This is used to tell the parent form (this form) we're done with planet generation.
+        /// </summary>
+        public bool createPlanetsFinished { get; set; }
+
+        /// <summary>
+        ///     This refreshes the DataGridView for displaying stars
         /// </summary>
         private void refreshStarDGV()
         {
@@ -131,7 +120,7 @@ namespace SWNAdmin
         }
 
         /// <summary>
-        /// This refreshes the PlanetGridView for displaying planets
+        ///     This refreshes the PlanetGridView for displaying planets
         /// </summary>
         private void refreshPlanetDGV()
         {
@@ -139,65 +128,65 @@ namespace SWNAdmin
         }
 
         /// <summary>
-        /// Begin Step 1 - generating the base system and stars, then displays them
+        ///     Begin Step 1 - generating the base system and stars, then displays them
         /// </summary>
         /// <param name="sender">The sender object</param>
         /// <param name="e">The event arguments</param>
         private void btnGenStars_Click(object sender, EventArgs e)
         {
-            this.createStarsFinished = false;
+            createStarsFinished = false;
 
             //clear the tables.
-            if (this.ourSystem.countStars() > 0)
+            if (ourSystem.countStars() > 0)
             {
-                this.ourSystem.clearPlanets();
-                this.planetTable.Clear();
+                ourSystem.clearPlanets();
+                planetTable.Clear();
                 refreshPlanetDGV(); //woops! - run this BEFORE we dump the stars
 
-                this.ourSystem.sysStars.Clear();
-                this.starTable.Clear();
+                ourSystem.sysStars.Clear();
+                starTable.Clear();
                 refreshStarDGV();
             }
 
-            CreateStars nCS = new CreateStars(this.ourSystem, this.velvetBag, this);
+            var nCS = new CreateStars(ourSystem, velvetBag, this);
 
             //register a closed event here.
-            nCS.Closing += new CancelEventHandler(createStars_Closed);
+            nCS.Closing += createStars_Closed;
             nCS.ShowDialog();
         }
 
         /// <summary>
-        /// Resets the system.
+        ///     Resets the system.
         /// </summary>
         /// <param name="sender">The sender object</param>
         /// <param name="e">The event arguments</param>
         private void btnReset_Click(object sender, EventArgs e)
         {
-            this.ourSystem.resetSystem();
+            ourSystem.resetSystem();
             lblSysAge.Content = "";
             lblSysName.Content = "";
 
-            this.ourSystem.sysStars.Clear();
-            this.starTable.Clear();
+            ourSystem.sysStars.Clear();
+            starTable.Clear();
             refreshStarDGV();
 
             lblNumberPlanets.Content = "";
-            this.planetTable.Clear();
+            planetTable.Clear();
             refreshPlanetDGV();
         }
 
         /// <summary>
-        /// The object called when the create stars form is closed. Checks to see if we should update the listing
+        ///     The object called when the create stars form is closed. Checks to see if we should update the listing
         /// </summary>
         /// <param name="sender">The sender object</param>
         /// <param name="e">The event arguments</param>
         private void createStars_Closed(object sender, EventArgs e)
         {
-            if (this.createStarsFinished)
+            if (createStarsFinished)
             {
-                foreach (Star s in this.ourSystem.sysStars)
+                foreach (var s in ourSystem.sysStars)
                 {
-                    object[] rowVal = new object[12];
+                    var rowVal = new object[12];
                     rowVal[0] = s.currMass;
                     rowVal[1] = s.name;
                     rowVal[2] = Star.getDescFromFlag(s.selfID);
@@ -214,31 +203,31 @@ namespace SWNAdmin
                     starTable.Rows.Add(rowVal);
                 }
 
-                lblSysAge.Content = this.ourSystem.sysAge + " GYr";
-                lblSysName.Content = this.ourSystem.sysName;
+                lblSysAge.Content = ourSystem.sysAge + " GYr";
+                lblSysName.Content = ourSystem.sysName;
             }
         }
 
         /// <summary>
-        /// The object called when the create planets form is closed. Checks to see if we should update the listing
+        ///     The object called when the create planets form is closed. Checks to see if we should update the listing
         /// </summary>
         /// <param name="sender">The sender object</param>
         /// <param name="e">The event arguments</param>
         private void createPlanets_Closed(object sender, EventArgs e)
         {
-            if (this.createPlanetsFinished)
+            if (createPlanetsFinished)
             {
-                lblNumberPlanets.Content = this.ourSystem.countPlanets().ToString();
-                foreach (Star s in this.ourSystem.sysStars)
+                lblNumberPlanets.Content = ourSystem.countPlanets().ToString();
+                foreach (var s in ourSystem.sysStars)
                 {
-                    foreach (Satellite pl in s.sysPlanets)
+                    foreach (var pl in s.sysPlanets)
                     {
                         if (pl.baseType != Satellite.BASETYPE_EMPTY)
                         {
-                            object[] ourValues = new object[10];
+                            var ourValues = new object[10];
                             ourValues[0] = pl.name;
 
-                            if (pl.baseType != Satellite.BASETYPE_ASTEROIDBELT || OptionCont.expandAsteroidBelt)
+                            if (pl.baseType != Satellite.BASETYPE_ASTEROIDBELT || (bool) OptionCont.expandAsteroidBelt)
                             {
                                 ourValues[1] = pl.descSizeType();
                             }
@@ -249,7 +238,7 @@ namespace SWNAdmin
 
                             ourValues[2] = Math.Round(pl.diameterInKM(), 2);
                             ourValues[3] = Math.Round(pl.orbitalRadius, 2);
-                            ourValues[4] = Math.Round(pl.gravity * Satellite.GFORCE, 2);
+                            ourValues[4] = Math.Round(pl.gravity*Satellite.GFORCE, 2);
 
                             if (pl.baseType == Satellite.BASETYPE_ASTEROIDBELT)
                                 ourValues[5] = "None.";
@@ -262,10 +251,13 @@ namespace SWNAdmin
 
 
                             ourValues[6] = pl.descAtm();
-                            ourValues[7] = (pl.hydCoverage * 100) + "%";
+                            ourValues[7] = pl.hydCoverage*100 + "%";
 
                             if (pl.baseType == Satellite.BASETYPE_MOON || pl.baseType == Satellite.BASETYPE_TERRESTIAL)
-                                ourValues[8] = pl.getClimateDesc(pl.getClimate(pl.surfaceTemp)) + "( " + Math.Round(pl.surfaceTemp, 2) + "K/ " + Math.Round(libStarGen.convertTemp("kelvin", "celsius", pl.surfaceTemp), 2) + "C)";
+                                ourValues[8] = pl.getClimateDesc(pl.getClimate(pl.surfaceTemp)) + "( " +
+                                               Math.Round(pl.surfaceTemp, 2) + "K/ " +
+                                               Math.Round(libStarGen.convertTemp("kelvin", "celsius", pl.surfaceTemp), 2) +
+                                               "C)";
                             else
                                 ourValues[8] = "Blackbody Temperature: " + Math.Round(pl.blackbodyTemp, 2) + "K";
 
@@ -279,26 +271,26 @@ namespace SWNAdmin
         }
 
         /// <summary>
-        /// Starts the planetary generator
+        ///     Starts the planetary generator
         /// </summary>
         /// <param name="sender">The sender object</param>
         /// <param name="e">The event arguments</param>
         private void btnGenPlanets_Click(object sender, EventArgs e)
         {
-            this.createPlanetsFinished = false;
+            createPlanetsFinished = false;
 
             //clear the tables.
-            if (this.ourSystem.countPlanets() > 0)
+            if (ourSystem.countPlanets() > 0)
             {
-                this.ourSystem.clearPlanets();
-                this.planetTable.Clear();
+                ourSystem.clearPlanets();
+                planetTable.Clear();
                 refreshPlanetDGV();
             }
 
-            CreatePlanets pCS = new CreatePlanets(this.ourSystem, this.velvetBag, this);
+            var pCS = new CreatePlanets(ourSystem, velvetBag, this);
 
             //register a closed event here.
-            pCS.Closing += new CancelEventHandler(createPlanets_Closed);
+            pCS.Closing += createPlanets_Closed;
             pCS.ShowDialog();
         }
 
@@ -306,19 +298,19 @@ namespace SWNAdmin
         {
             if (chkEmptyDisplay.IsChecked == true)
             {
-                if (this.createPlanetsFinished)
+                if (createPlanetsFinished)
                 {
-                    lblNumberPlanets.Content = this.ourSystem.countPlanets().ToString();
-                    this.planetTable.Clear();
+                    lblNumberPlanets.Content = ourSystem.countPlanets().ToString();
+                    planetTable.Clear();
                     refreshPlanetDGV();
-                    foreach (Star s in this.ourSystem.sysStars)
+                    foreach (var s in ourSystem.sysStars)
                     {
-                        foreach (Satellite pl in s.sysPlanets)
+                        foreach (var pl in s.sysPlanets)
                         {
-                            object[] ourValues = new object[10];
+                            var ourValues = new object[10];
                             ourValues[0] = pl.name;
 
-                            if (pl.baseType != Satellite.BASETYPE_ASTEROIDBELT || OptionCont.expandAsteroidBelt)
+                            if (pl.baseType != Satellite.BASETYPE_ASTEROIDBELT || (bool) OptionCont.expandAsteroidBelt)
                             {
                                 ourValues[1] = pl.descSizeType();
                             }
@@ -332,9 +324,10 @@ namespace SWNAdmin
 
                             ourValues[2] = Math.Round(pl.diameterInKM(), 2);
                             ourValues[3] = Math.Round(pl.orbitalRadius, 2);
-                            ourValues[4] = Math.Round(pl.gravity * Satellite.GFORCE, 2);
+                            ourValues[4] = Math.Round(pl.gravity*Satellite.GFORCE, 2);
 
-                            if (pl.baseType == Satellite.BASETYPE_ASTEROIDBELT || pl.baseType == Satellite.BASETYPE_EMPTY)
+                            if (pl.baseType == Satellite.BASETYPE_ASTEROIDBELT ||
+                                pl.baseType == Satellite.BASETYPE_EMPTY)
                                 ourValues[5] = "None.";
 
                             if (pl.baseType == Satellite.BASETYPE_GASGIANT)
@@ -345,10 +338,13 @@ namespace SWNAdmin
 
 
                             ourValues[6] = pl.descAtm();
-                            ourValues[7] = (pl.hydCoverage * 100) + "%";
+                            ourValues[7] = pl.hydCoverage*100 + "%";
 
                             if (pl.baseType == Satellite.BASETYPE_MOON || pl.baseType == Satellite.BASETYPE_TERRESTIAL)
-                                ourValues[8] = pl.getClimateDesc(pl.getClimate(pl.surfaceTemp)) + "( " + Math.Round(pl.surfaceTemp, 2) + "K/ " + Math.Round(libStarGen.convertTemp("kelvin", "celsius", pl.surfaceTemp), 2) + "C)";
+                                ourValues[8] = pl.getClimateDesc(pl.getClimate(pl.surfaceTemp)) + "( " +
+                                               Math.Round(pl.surfaceTemp, 2) + "K/ " +
+                                               Math.Round(libStarGen.convertTemp("kelvin", "celsius", pl.surfaceTemp), 2) +
+                                               "C)";
                             else
                                 ourValues[8] = "Blackbody Temperature: " + Math.Round(pl.blackbodyTemp, 2) + "K";
 
@@ -362,21 +358,21 @@ namespace SWNAdmin
 
             if (chkEmptyDisplay.IsChecked == false)
             {
-                if (this.createPlanetsFinished)
+                if (createPlanetsFinished)
                 {
-                    lblNumberPlanets.Content = this.ourSystem.countPlanets().ToString();
-                    this.planetTable.Clear();
+                    lblNumberPlanets.Content = ourSystem.countPlanets().ToString();
+                    planetTable.Clear();
                     refreshPlanetDGV();
-                    foreach (Star s in this.ourSystem.sysStars)
+                    foreach (var s in ourSystem.sysStars)
                     {
-                        foreach (Satellite pl in s.sysPlanets)
+                        foreach (var pl in s.sysPlanets)
                         {
                             if (pl.baseType != Satellite.BASETYPE_EMPTY)
                             {
-                                object[] ourValues = new object[10];
+                                var ourValues = new object[10];
                                 ourValues[0] = pl.name;
 
-                                if (pl.baseType != Satellite.BASETYPE_ASTEROIDBELT || OptionCont.expandAsteroidBelt)
+                                if (pl.baseType != Satellite.BASETYPE_ASTEROIDBELT || (bool) OptionCont.expandAsteroidBelt)
                                 {
                                     ourValues[1] = pl.descSizeType();
                                 }
@@ -387,7 +383,7 @@ namespace SWNAdmin
 
                                 ourValues[2] = Math.Round(pl.diameterInKM(), 2);
                                 ourValues[3] = Math.Round(pl.orbitalRadius, 2);
-                                ourValues[4] = Math.Round(pl.gravity * Satellite.GFORCE, 2);
+                                ourValues[4] = Math.Round(pl.gravity*Satellite.GFORCE, 2);
 
                                 if (pl.baseType == Satellite.BASETYPE_ASTEROIDBELT)
                                     ourValues[5] = "None.";
@@ -395,15 +391,21 @@ namespace SWNAdmin
                                 if (pl.baseType == Satellite.BASETYPE_GASGIANT)
                                     ourValues[5] = "Superdense Atmosphere.";
 
-                                if (pl.baseType == Satellite.BASETYPE_MOON || pl.baseType == Satellite.BASETYPE_TERRESTIAL)
+                                if (pl.baseType == Satellite.BASETYPE_MOON ||
+                                    pl.baseType == Satellite.BASETYPE_TERRESTIAL)
                                     ourValues[5] = pl.getDescAtmCategory() + "(" + Math.Round(pl.atmPres, 2) + ")";
 
 
                                 ourValues[6] = pl.descAtm();
-                                ourValues[7] = (pl.hydCoverage * 100) + "%";
+                                ourValues[7] = pl.hydCoverage*100 + "%";
 
-                                if (pl.baseType == Satellite.BASETYPE_MOON || pl.baseType == Satellite.BASETYPE_TERRESTIAL)
-                                    ourValues[8] = pl.getClimateDesc(pl.getClimate(pl.surfaceTemp)) + "( " + Math.Round(pl.surfaceTemp, 2) + "K/ " + Math.Round(libStarGen.convertTemp("kelvin", "celsius", pl.surfaceTemp), 2) + "C)";
+                                if (pl.baseType == Satellite.BASETYPE_MOON ||
+                                    pl.baseType == Satellite.BASETYPE_TERRESTIAL)
+                                    ourValues[8] = pl.getClimateDesc(pl.getClimate(pl.surfaceTemp)) + "( " +
+                                                   Math.Round(pl.surfaceTemp, 2) + "K/ " +
+                                                   Math.Round(
+                                                       libStarGen.convertTemp("kelvin", "celsius", pl.surfaceTemp), 2) +
+                                                   "C)";
                                 else
                                     ourValues[8] = "Blackbody Temperature: " + Math.Round(pl.blackbodyTemp, 2) + "K";
 
@@ -419,25 +421,25 @@ namespace SWNAdmin
 
         private void btnGenFull_Click(object sender, EventArgs e)
         {
-            int Amount = Convert.ToInt32(tbAmount.Text);
+            var Amount = Convert.ToInt32(tbAmount.Text);
 
-            
-            MessageBoxResult mbr = System.Windows.MessageBox.Show("Generate '" + Amount + "' Systems?","Sure?",MessageBoxButton.YesNo);
+
+            var mbr = MessageBox.Show("Generate '" + Amount + "' Systems?", "Sure?", MessageBoxButton.YesNo);
             if (mbr == MessageBoxResult.Yes)
             {
-                DateTime Start = DateTime.Now;
-                for (int i = 0; i < Amount; i++)
+                var Start = DateTime.Now;
+                for (var i = 0; i < Amount; i++)
                 {
-                    StarSystem ss = new StarSystem();
-                    Dice d = new Dice();
-                    CreateStars cs = new CreateStars(ss, d);
+                    var ss = new StarSystem();
+                    var d = new Dice();
+                    var cs = new CreateStars(ss, d);
                     ss = cs.CreateNewSystem();
                     SqlManager.InsertSystem(ss);
                 }
-                DateTime Finish = DateTime.Now;
-                TimeSpan Span = Finish - Start;
-                System.Windows.MessageBox.Show("Done! Took: " + Span.Seconds.ToString() + "s and " + Span.Milliseconds.ToString() + "ms");
-            }    
+                var Finish = DateTime.Now;
+                var Span = Finish - Start;
+                MessageBox.Show("Done! Took: " + Span.Seconds + "s and " + Span.Milliseconds + "ms");
+            }
         }
     }
 }

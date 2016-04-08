@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+using UniverseGeneration.Range_Objects;
+using UniverseGeneration.Utility;
 
-namespace UniverseGeneration
+namespace UniverseGeneration.Stellar_Bodies
 {
     /* StarFlags.cs contains all the flags for the Star object
      * StarSatellite.cs contains all of the satellite options

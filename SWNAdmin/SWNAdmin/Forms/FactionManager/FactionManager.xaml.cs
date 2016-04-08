@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
-namespace SWNAdmin
+namespace SWNAdmin.Forms.FactionManager
 {
     /// <summary>
-    /// Interaction logic for FactionManager.xaml
+    ///     Interaction logic for FactionManager.xaml
     /// </summary>
     public partial class FactionManager : Window
     {
@@ -26,7 +14,7 @@ namespace SWNAdmin
 
         private void MenuItemCreate_Click(object sender, RoutedEventArgs e)
         {
-            CreateFaction cf = new CreateFaction();
+            var cf = new CreateFaction();
             cf.ShowDialog();
         }
     }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SWNAdmin
+﻿namespace SWNAdmin.Controller
 {
     public class RaceController
     {
@@ -19,9 +13,9 @@ namespace SWNAdmin
         public bool Spoken { get; set; }
         public bool Written { get; set; }
     }
+
     public class Culture
     {
         public string Name { get; set; }
     }
-
 }

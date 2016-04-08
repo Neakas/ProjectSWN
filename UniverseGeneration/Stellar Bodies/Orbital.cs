@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace UniverseGeneration
+namespace UniverseGeneration.Stellar_Bodies
 {
     /// <summary>
     ///  This is the base class to everything that occupies a potential Orbital. Stars, Satellites, Moonlets.

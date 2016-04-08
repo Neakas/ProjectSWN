@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UniverseGeneration
+﻿namespace UniverseGeneration.Stellar_Bodies
 {
     public partial class Star : Orbital
     {

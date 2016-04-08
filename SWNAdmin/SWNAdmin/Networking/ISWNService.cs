@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
+using SWNAdmin.Classes;
 using SWNAdmin.Utility;
 
-namespace SWNAdmin
+namespace SWNAdmin.Networking
 {
-    [ServiceContract(Name = "SWNService",Namespace = "SWNAdmin", SessionMode = SessionMode.Required,CallbackContract = typeof(ISWNServiceCallback))]
-    interface ISWNService
+    [ServiceContract(Name = "SWNService", Namespace = "SWNAdmin", SessionMode = SessionMode.Required,
+        CallbackContract = typeof (ISWNServiceCallback))]
+    internal interface ISWNService
     {
         [OperationContract(IsInitiating = true)]
         bool Connect(Client client);

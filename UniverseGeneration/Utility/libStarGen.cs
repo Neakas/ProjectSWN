@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using UniverseGeneration.Range_Objects;
+using UniverseGeneration.Stellar_Bodies;
 
-namespace UniverseGeneration
+namespace UniverseGeneration.Utility
 {
     /// <summary>
     /// This contains a series of helper functions to generate a Star System.
@@ -281,7 +283,7 @@ namespace UniverseGeneration
             int eccGaGiant = 0;
             int epiGaGiant = 0;
 
-            if (!OptionCont.moreConGasGiantChances)
+            if ((bool)!OptionCont.MoreConGasGiantChances)
             {
                 noGasGiant = 10;
                 conGaGiant = 12;
@@ -457,8 +459,8 @@ namespace UniverseGeneration
             if (roll > 18.5) s.tecActivity = Satellite.GEOLOGIC_EXTREME;
 
             //update RVM
-            if (!OptionCont.highRVMVal) roll = ourBag.gurpsRoll();
-            if (OptionCont.highRVMVal) roll = ourBag.rng(1, 6, 10);
+            if ((bool)!OptionCont.highRVMVal) roll = ourBag.gurpsRoll();
+            if ((bool)OptionCont.highRVMVal) roll = ourBag.rng(1, 6, 10);
 
             if (s.volActivity == Satellite.GEOLOGIC_NONE) roll = roll - 2;
             if (s.volActivity == Satellite.GEOLOGIC_LIGHT) roll = roll - 1;
@@ -473,7 +475,7 @@ namespace UniverseGeneration
             }
 
             //set stable activity here:
-            if (OptionCont.stableActivity && s.SatelliteSize >= Satellite.SIZE_SMALL && 
+            if ((bool)OptionCont.stableActivity && s.SatelliteSize >= Satellite.SIZE_SMALL && 
                 (s.baseType == Satellite.BASETYPE_MOON || s.baseType == Satellite.BASETYPE_TERRESTIAL))
             {
                 s.volActivity = Satellite.GEOLOGIC_MODERATE;
@@ -711,7 +713,7 @@ namespace UniverseGeneration
                         s.sysPlanets[i].updateType(Satellite.BASETYPE_ASTEROIDBELT);
 
                         //Expanded Asteroid Belt options
-                        if (OptionCont.expandAsteroidBelt)
+                        if ((bool)OptionCont.expandAsteroidBelt)
                         {
                             roll = myDice.gurpsRoll();
                             if (roll <= 6) s.sysPlanets[i].updateSize(Satellite.SIZE_TINY);

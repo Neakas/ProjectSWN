@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
+using UniverseGeneration.Utility;
 
-namespace UniverseGeneration
+namespace UniverseGeneration.Stellar_Bodies
 {
     /// <summary>
     /// The object for satelites and moons in this object
@@ -478,7 +476,7 @@ namespace UniverseGeneration
             if (this.atmPres > 0.01 && this.getClimate(this.surfaceTemp) == Satellite.CLIMATE_TROPICAL) mod = mod + 2;
             if (this.atmPres > 0.01 && this.getClimate(this.surfaceTemp) == Satellite.CLIMATE_HOT) mod = mod + 1;
 
-            if (mod >= 8 && !OptionCont.overrideHabitability) return 8;
+            if (mod >= 8 && (bool)!OptionCont.overrideHabitability) return 8;
             else return mod;
         }
 
@@ -566,7 +564,7 @@ namespace UniverseGeneration
 
                         roll = roll + mod;
 
-                        if (!OptionCont.noOceanOnlyGarden)
+                        if ((bool)!OptionCont.noOceanOnlyGarden)
                         {
                             if (roll >= 18) this.updateType(Satellite.SUBTYPE_GARDEN);
                             else this.updateType(Satellite.SUBTYPE_OCEAN);
@@ -595,11 +593,11 @@ namespace UniverseGeneration
                     {
                         int roll = ourBag.rng(3, 6, 0), mod = 0;
 
-                        if (OptionCont.moreAccurateO2Catastrophe) mod = (int)Math.Floor(sysAge / .3);
+                        if ((bool)OptionCont.moreAccurateO2Catastrophe) mod = (int)Math.Floor(sysAge / .3);
                         else mod = (int)Math.Floor(sysAge / .5);
 
-                        if (!OptionCont.moreLargeGarden) if (mod > 5) mod = 5;
-                        if (OptionCont.moreLargeGarden) if (mod > 10) mod = 10;
+                        if ((bool)!OptionCont.moreLargeGarden) if (mod > 5) mod = 5;
+                        if ((bool)OptionCont.moreLargeGarden) if (mod > 10) mod = 10;
 
                         roll = roll + mod;
 
@@ -1040,7 +1038,7 @@ namespace UniverseGeneration
                         }
                         break;
                 }
-            } while (OptionCont.rerollAxialTiltOver45 && this.axialTilt > 45);
+            } while ((bool)OptionCont.rerollAxialTiltOver45 && axialTilt > 45);
 
 
             if (OptionCont.getAxialTilt() != -1)
@@ -1146,7 +1144,7 @@ namespace UniverseGeneration
             {
                 this.atmMass = (ourBag.rng(3, 6, 0) / 10.0) + (ourBag.rng(1, 6, -1) / 100.0);
                 roll = ourBag.rng(3, 6, 0);
-                if (roll >= 12 && !OptionCont.noMarginalAtm)
+                if (roll >= 12 && (bool)!OptionCont.noMarginalAtm)
                 {
                     //add marginal code here
                     foreach (int i in genMarginal(ourBag))
@@ -2365,7 +2363,7 @@ namespace UniverseGeneration
             {
                 ret = "[ORBIT " + (this.selfID + 1) + "]";
 
-                if (OptionCont.expandAsteroidBelt)
+                if ((bool)OptionCont.expandAsteroidBelt)
                     ret = ret + nL + spacing + "Asteroid Belt (" + this.describeSatelliteSize() + ")";
                 else
                     ret = ret + nL + spacing + "Asteroid Belt";
@@ -2486,12 +2484,12 @@ namespace UniverseGeneration
                 ret = ret + nL + spacing + "This satellite is locked in a resonant pattern.";
 
             //tide data
-            if (this.hydCoverage > 0 || OptionCont.alwaysDisplayTidalData)
+            if (this.hydCoverage > 0 || (bool) OptionCont.alwaysDisplayTidalData)
             {
                 ret = ret + nL;
                 ret = ret + nL + spacing + "Tidal Data:";
-                if (OptionCont.getVerboseOutput() || OptionCont.alwaysDisplayTidalData) ret = ret + nL + spacing + "Total tidal force: " + Math.Round(this.tideTotal, 3) + " units";
-                if (OptionCont.getVerboseOutput() || OptionCont.alwaysDisplayTidalData) ret = ret + nL;
+                if (OptionCont.getVerboseOutput() || (bool) OptionCont.alwaysDisplayTidalData) ret = ret + nL + spacing + "Total tidal force: " + Math.Round(this.tideTotal, 3) + " units";
+                if (OptionCont.getVerboseOutput() || (bool) OptionCont.alwaysDisplayTidalData) ret = ret + nL;
 
                 ret = ret + this.displayTidalData() + nL;
             }
@@ -2619,7 +2617,7 @@ namespace UniverseGeneration
             double val = 0.0;
             foreach (KeyValuePair<int, double> tideData in this.tideForce)
             {
-                if (!((tideData.Key >= TIDE_MOON1 && tideData.Key <= TIDE_MOON10) && OptionCont.ignoreLunarTidesOnGardenWorlds))
+                if (!((tideData.Key >= TIDE_MOON1 && tideData.Key <= TIDE_MOON10) && (bool)OptionCont.ignoreLunarTidesOnGardenWorlds))
                     val = val + tideData.Value;
             }
 
@@ -2667,7 +2665,7 @@ namespace UniverseGeneration
 
                 if (tideData.Key >= Satellite.TIDE_MOON_BASE && tideData.Key <= (Satellite.TIDE_MOON_BASE + 10))
                 {
-                    if (OptionCont.ignoreLunarTidesOnGardenWorlds && this.SatelliteType == SUBTYPE_GARDEN)
+                    if ((bool)OptionCont.ignoreLunarTidesOnGardenWorlds && this.SatelliteType == SUBTYPE_GARDEN)
                         addStr = false;
                 }
 

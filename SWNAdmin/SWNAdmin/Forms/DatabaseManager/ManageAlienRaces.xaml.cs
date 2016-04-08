@@ -1,255 +1,245 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using UniverseGeneration;
+using Microsoft.Win32;
+using SWNAdmin.Networking;
+using SWNAdmin.Utility;
+using UniverseGeneration.OtherGeneration;
 
-namespace SWNAdmin.Forms
+namespace SWNAdmin.Forms.DatabaseManager
 {
     /// <summary>
-    /// Interaction logic for ManageAlienRaces.xaml
+    ///     Interaction logic for ManageAlienRaces.xaml
     /// </summary>
-    public partial class ManageAlienRaces : Window
+    public partial class ManageAlienRaces
     {
-        string ImagePath = "";
-
-        public Alien alien;
-        public Utility.Aliens LoadedAlien;
-        public ListBox LoadBox;
-        public Window LoadWindow;
-        public BitmapImage RaceBitmapImage;
-        public ManageAlienRaces CurrentInstance;
+        private Alien _alien;
+        private string _imagePath = "";
+        private ListBox _loadBox;
+        private Aliens _loadedAlien;
+        private Window _loadWindow;
+        private BitmapImage _raceBitmapImage;
 
         public ManageAlienRaces()
         {
-            CurrentInstance = this;
             InitializeComponent();
-            ContextMenu ImageContextMenu = new ContextMenu();
-            RaceImageWindow.ContextMenu = ImageContextMenu;
-            Button SendToClients = new Button();
-            SendToClients.Content = "Send to Clients";
-            ImageContextMenu.Items.Add(SendToClients);
-            SendToClients.Click += SendToClients_Click;
+            var imageContextMenu = new ContextMenu();
+            RaceImageWindow.ContextMenu = imageContextMenu;
+            var sendToClients = new Button {Content = "Send to Clients"};
+            imageContextMenu.Items.Add(sendToClients);
+            sendToClients.Click += SendToClients_Click;
         }
 
         private void btgenTest_Click(object sender, RoutedEventArgs e)
         {
+            BtSave.IsEnabled = true;
+            BtSave.Visibility = Visibility.Visible;
+            BtUpdate.IsEnabled = false;
+            BtUpdate.Visibility = Visibility.Hidden;
+            BtDelete.IsEnabled = false;
+            BtDelete.Visibility = Visibility.Hidden;
 
-            btSave.IsEnabled = true;
-            btSave.Visibility = Visibility.Visible;
-            btUpdate.IsEnabled = false;
-            btUpdate.Visibility = Visibility.Hidden;
-            btDelete.IsEnabled = false;
-            btDelete.Visibility = Visibility.Hidden;
+            _alien = new Alien();
+            DataContext = _alien;
+            CbChemicalBasis.ItemsSource = _alien.TypesofLifeDict;
+            CbChemicalBasis.DisplayMemberPath = "Value";
+            CbChemicalBasis.SelectedValuePath = "Key";
+            CbChemicalBasis.SelectedValue = _alien.chemicalBasis;
 
-            alien = new Alien();
-            this.DataContext = alien;
-            cbChemicalBasis.ItemsSource = alien.TypesofLifeDict;
-            cbChemicalBasis.DisplayMemberPath = "Value";
-            cbChemicalBasis.SelectedValuePath = "Key";
-            cbChemicalBasis.SelectedValue = alien.chemicalBasis;
+            CbLandOrWater.ItemsSource = _alien.LandWaterDict;
+            CbLandOrWater.DisplayMemberPath = "Value";
+            CbLandOrWater.SelectedValuePath = "Key";
+            CbLandOrWater.SelectedValue = _alien.LandOrWater;
 
-            cbLandOrWater.ItemsSource = alien.LandWaterDict;
-            cbLandOrWater.DisplayMemberPath = "Value";
-            cbLandOrWater.SelectedValuePath = "Key";
-            cbLandOrWater.SelectedValue = alien.LandOrWater;
+            CbLandHabitat.ItemsSource = _alien.TypesofLandHabitatsDict;
+            CbLandHabitat.DisplayMemberPath = "Value";
+            CbLandHabitat.SelectedValuePath = "Key";
+            CbLandHabitat.SelectedValue = _alien.LandHabitat;
 
-            cbLandHabitat.ItemsSource = alien.TypesofLandHabitatsDict;
-            cbLandHabitat.DisplayMemberPath = "Value";
-            cbLandHabitat.SelectedValuePath = "Key";
-            cbLandHabitat.SelectedValue = alien.LandHabitat;
+            CbWaterHabitat.ItemsSource = _alien.TypesofWaterHabitatsDict;
+            CbWaterHabitat.DisplayMemberPath = "Value";
+            CbWaterHabitat.SelectedValuePath = "Key";
+            CbWaterHabitat.SelectedValue = _alien.WaterHabitat;
 
-            cbWaterHabitat.ItemsSource = alien.TypesofWaterHabitatsDict;
-            cbWaterHabitat.DisplayMemberPath = "Value";
-            cbWaterHabitat.SelectedValuePath = "Key";
-            cbWaterHabitat.SelectedValue = alien.WaterHabitat;
+            CbThrophicDiet.ItemsSource = _alien.TrophicDietDict;
+            CbThrophicDiet.DisplayMemberPath = "Value";
+            CbThrophicDiet.SelectedValuePath = "Key";
+            CbThrophicDiet.SelectedValue = _alien.TrophicDiet;
 
-            cbThrophicDiet.ItemsSource = alien.TrophicDietDict;
-            cbThrophicDiet.DisplayMemberPath = "Value";
-            cbThrophicDiet.SelectedValuePath = "Key";
-            cbThrophicDiet.SelectedValue = alien.TrophicDiet;
+            CbPrimaryLocomotion.ItemsSource = _alien.LocomotionDict;
+            CbPrimaryLocomotion.DisplayMemberPath = "Value";
+            CbPrimaryLocomotion.SelectedValuePath = "Key";
+            CbPrimaryLocomotion.SelectedValue = _alien.PrimaryLocomotion;
 
-            cbPrimaryLocomotion.ItemsSource = alien.LocomotionDict;
-            cbPrimaryLocomotion.DisplayMemberPath = "Value";
-            cbPrimaryLocomotion.SelectedValuePath = "Key";
-            cbPrimaryLocomotion.SelectedValue = alien.PrimaryLocomotion;
+            CbSecondaryLocomotion.ItemsSource = _alien.LocomotionDict;
+            CbSecondaryLocomotion.DisplayMemberPath = "Value";
+            CbSecondaryLocomotion.SelectedValuePath = "Key";
+            CbSecondaryLocomotion.SelectedValue = _alien.SecondaryLocomotion;
 
-            cbSecondaryLocomotion.ItemsSource = alien.LocomotionDict;
-            cbSecondaryLocomotion.DisplayMemberPath = "Value";
-            cbSecondaryLocomotion.SelectedValuePath = "Key";
-            cbSecondaryLocomotion.SelectedValue = alien.SecondaryLocomotion;
+            CheckHasSecondaryLocmotion.IsChecked = _alien.hasSecondaryLocomotion;
 
-            checkHasSecondaryLocmotion.IsChecked = alien.hasSecondaryLocomotion;
+            CbSizeClass.ItemsSource = _alien.SizeClassDict;
+            CbSizeClass.DisplayMemberPath = "Value";
+            CbSizeClass.SelectedValuePath = "Key";
+            CbSizeClass.SelectedValue = _alien.SizeClass;
 
-            cbSizeClass.ItemsSource = alien.SizeClassDict;
-            cbSizeClass.DisplayMemberPath = "Value";
-            cbSizeClass.SelectedValuePath = "Key";
-            cbSizeClass.SelectedValue = alien.SizeClass;
+            CbSize.Text = _alien.Size.ToString();
 
-            cbSize.Text = alien.Size.ToString();
+            CbSymmetry.ItemsSource = _alien.SymmetryDict;
+            CbSymmetry.DisplayMemberPath = "Value";
+            CbSymmetry.SelectedValuePath = "Key";
+            CbSymmetry.SelectedValue = _alien.Symmetry;
 
-            cbSymmetry.ItemsSource = alien.SymmetryDict;
-            cbSymmetry.DisplayMemberPath = "Value";
-            cbSymmetry.SelectedValuePath = "Key";
-            cbSymmetry.SelectedValue = alien.Symmetry;
+            CbSides.Text = _alien.Sides.ToString();
 
-            cbSides.Text = alien.Sides.ToString();
+            CbLimbSegments.Text = _alien.LimbSegments.ToString();
 
-            cbLimbSegments.Text = alien.LimbSegments.ToString();
+            CbTails.ItemsSource = _alien.TailsDict;
+            CbTails.DisplayMemberPath = "Value";
+            CbTails.SelectedValuePath = "Key";
+            CbTails.SelectedValue = _alien.Tail;
 
-            cbTails.ItemsSource = alien.TailsDict;
-            cbTails.DisplayMemberPath = "Value";
-            cbTails.SelectedValuePath = "Key";
-            cbTails.SelectedValue = alien.Tail;
+            CbManipulators.Text = _alien.Manipulators.ToString();
 
-            cbManipulators.Text = alien.Manipulators.ToString();
+            CbSkeleton.ItemsSource = _alien.SkeletonDict;
+            CbSkeleton.DisplayMemberPath = "Value";
+            CbSkeleton.SelectedValuePath = "Key";
+            CbSkeleton.SelectedValue = _alien.Skeleton;
 
-            cbSkeleton.ItemsSource = alien.SkeletonDict;
-            cbSkeleton.DisplayMemberPath = "Value";
-            cbSkeleton.SelectedValuePath = "Key";
-            cbSkeleton.SelectedValue = alien.Skeleton;
+            CbSkinClass.ItemsSource = _alien.SkinTypeDict;
+            CbSkinClass.DisplayMemberPath = "Value";
+            CbSkinClass.SelectedValuePath = "Key";
+            CbSkinClass.SelectedValue = _alien.SkinClass;
 
-            cbSkinClass.ItemsSource = alien.SkinTypeDict;
-            cbSkinClass.DisplayMemberPath = "Value";
-            cbSkinClass.SelectedValuePath = "Key";
-            cbSkinClass.SelectedValue = alien.SkinClass;
+            CbSkin.ItemsSource = _alien.SkinDict;
+            CbSkin.DisplayMemberPath = "Value";
+            CbSkin.SelectedValuePath = "Key";
+            CbSkin.SelectedValue = _alien.Skin;
 
-            cbSkin.ItemsSource = alien.SkinDict;
-            cbSkin.DisplayMemberPath = "Value";
-            cbSkin.SelectedValuePath = "Key";
-            cbSkin.SelectedValue = alien.Skin;
+            CbBreathing.ItemsSource = _alien.BreathingMethodDict;
+            CbBreathing.DisplayMemberPath = "Value";
+            CbBreathing.SelectedValuePath = "Key";
+            CbBreathing.SelectedValue = _alien.Breathing;
 
-            cbBreathing.ItemsSource = alien.BreathingMethodDict;
-            cbBreathing.DisplayMemberPath = "Value";
-            cbBreathing.SelectedValuePath = "Key";
-            cbBreathing.SelectedValue = alien.Breathing;
+            CbTemperture.ItemsSource = _alien.TemperatureDict;
+            CbTemperture.DisplayMemberPath = "Value";
+            CbTemperture.SelectedValuePath = "Key";
+            CbTemperture.SelectedValue = _alien.Temperture;
 
-            cbTemperture.ItemsSource = alien.TemperatureDict;
-            cbTemperture.DisplayMemberPath = "Value";
-            cbTemperture.SelectedValuePath = "Key";
-            cbTemperture.SelectedValue = alien.Temperture;
+            CbGrowthRate.ItemsSource = _alien.GrowthDict;
+            CbGrowthRate.DisplayMemberPath = "Value";
+            CbGrowthRate.SelectedValuePath = "Key";
+            CbGrowthRate.SelectedValue = _alien.Growth;
 
-            cbGrowthRate.ItemsSource = alien.GrowthDict;
-            cbGrowthRate.DisplayMemberPath = "Value";
-            cbGrowthRate.SelectedValuePath = "Key";
-            cbGrowthRate.SelectedValue = alien.Growth;
+            CbSexes.ItemsSource = _alien.SexesDict;
+            CbSexes.DisplayMemberPath = "Value";
+            CbSexes.SelectedValuePath = "Key";
+            CbSexes.SelectedValue = _alien.Sex;
 
-            cbSexes.ItemsSource = alien.SexesDict;
-            cbSexes.DisplayMemberPath = "Value";
-            cbSexes.SelectedValuePath = "Key";
-            cbSexes.SelectedValue = alien.Sex;
+            CbGestation.ItemsSource = _alien.GestationDict;
+            CbGestation.DisplayMemberPath = "Value";
+            CbGestation.SelectedValuePath = "Key";
+            CbGestation.SelectedValue = _alien.Gestation;
 
-            cbGestation.ItemsSource = alien.GestationDict;
-            cbGestation.DisplayMemberPath = "Value";
-            cbGestation.SelectedValuePath = "Key";
-            cbGestation.SelectedValue = alien.Gestation;
+            CbStrategy.ItemsSource = _alien.StrategyDict;
+            CbStrategy.DisplayMemberPath = "Value";
+            CbStrategy.SelectedValuePath = "Key";
+            CbStrategy.SelectedValue = _alien.Strategy;
 
-            cbStrategy.ItemsSource = alien.StrategyDict;
-            cbStrategy.DisplayMemberPath = "Value";
-            cbStrategy.SelectedValuePath = "Key";
-            cbStrategy.SelectedValue = alien.Strategy;
+            CbOffspringCount.Text = _alien.OffspringCount.ToString();
 
-            cbOffspringCount.Text = alien.OffspringCount.ToString();
+            CbPrimarySense.ItemsSource = _alien.PrimarySenseDict;
+            CbPrimarySense.DisplayMemberPath = "Value";
+            CbPrimarySense.SelectedValuePath = "Key";
+            CbPrimarySense.SelectedValue = _alien.PrimarySense;
 
-            cbPrimarySense.ItemsSource = alien.PrimarySenseDict;
-            cbPrimarySense.DisplayMemberPath = "Value";
-            cbPrimarySense.SelectedValuePath = "Key";
-            cbPrimarySense.SelectedValue = alien.PrimarySense;
+            CbVision.ItemsSource = _alien.VisionDict;
+            CbVision.DisplayMemberPath = "Value";
+            CbVision.SelectedValuePath = "Key";
+            CbVision.SelectedValue = _alien.Vision;
 
-            cbVision.ItemsSource = alien.VisionDict;
-            cbVision.DisplayMemberPath = "Value";
-            cbVision.SelectedValuePath = "Key";
-            cbVision.SelectedValue = alien.Vision;
+            CbHearing.ItemsSource = _alien.HearingDict;
+            CbHearing.DisplayMemberPath = "Value";
+            CbHearing.SelectedValuePath = "Key";
+            CbHearing.SelectedValue = _alien.Hearing;
 
-            cbHearing.ItemsSource = alien.HearingDict;
-            cbHearing.DisplayMemberPath = "Value";
-            cbHearing.SelectedValuePath = "Key";
-            cbHearing.SelectedValue = alien.Hearing;
+            CbTouch.ItemsSource = _alien.TouchDict;
+            CbTouch.DisplayMemberPath = "Value";
+            CbTouch.SelectedValuePath = "Key";
+            CbTouch.SelectedValue = _alien.Touch;
 
-            cbTouch.ItemsSource = alien.TouchDict;
-            cbTouch.DisplayMemberPath = "Value";
-            cbTouch.SelectedValuePath = "Key";
-            cbTouch.SelectedValue = alien.Touch;
+            CbTasteSmell.ItemsSource = _alien.TasteSmellDict;
+            CbTasteSmell.DisplayMemberPath = "Value";
+            CbTasteSmell.SelectedValuePath = "Key";
+            CbTasteSmell.SelectedValue = _alien.TasteSmell;
 
-            cbTasteSmell.ItemsSource = alien.TasteSmellDict;
-            cbTasteSmell.DisplayMemberPath = "Value";
-            cbTasteSmell.SelectedValuePath = "Key";
-            cbTasteSmell.SelectedValue = alien.TasteSmell;
+            CbIntelligence.ItemsSource = _alien.IntelligenceDict;
+            CbIntelligence.DisplayMemberPath = "Value";
+            CbIntelligence.SelectedValuePath = "Key";
+            CbIntelligence.SelectedValue = _alien.Intelligence;
 
-            cbIntelligence.ItemsSource = alien.IntelligenceDict;
-            cbIntelligence.DisplayMemberPath = "Value";
-            cbIntelligence.SelectedValuePath = "Key";
-            cbIntelligence.SelectedValue = alien.Intelligence;
+            CbIntelligenceValue.Text = _alien.IntelligenceValue.ToString();
 
-            cbIntelligenceValue.Text = alien.IntelligenceValue.ToString();
+            CbMatingBehaviour.ItemsSource = _alien.MatingBahaviourDict;
+            CbMatingBehaviour.DisplayMemberPath = "Value";
+            CbMatingBehaviour.SelectedValuePath = "Key";
+            CbMatingBehaviour.SelectedValue = _alien.MatingBahavior;
 
-            cbMatingBehaviour.ItemsSource = alien.MatingBahaviourDict;
-            cbMatingBehaviour.DisplayMemberPath = "Value";
-            cbMatingBehaviour.SelectedValuePath = "Key";
-            cbMatingBehaviour.SelectedValue = alien.MatingBahavior;
+            CbSocialOrganization.ItemsSource = _alien.SocialOrganizationDict;
+            CbSocialOrganization.DisplayMemberPath = "Value";
+            CbSocialOrganization.SelectedValuePath = "Key";
+            CbSocialOrganization.SelectedValue = _alien.SocialOrganization;
 
-            cbSocialOrganization.ItemsSource = alien.SocialOrganizationDict;
-            cbSocialOrganization.DisplayMemberPath = "Value";
-            cbSocialOrganization.SelectedValuePath = "Key";
-            cbSocialOrganization.SelectedValue = alien.SocialOrganization;
+            CbSocialGroupSize.Text = _alien.SocialGroupSize.ToString();
 
-            cbSocialGroupSize.Text = alien.SocialGroupSize.ToString();
+            CbConcentration.ItemsSource = _alien.ConcentrationDict;
+            CbConcentration.DisplayMemberPath = "Value";
+            CbConcentration.SelectedValuePath = "Key";
+            CbConcentration.SelectedValue = _alien.Concentration;
 
-            cbConcentration.ItemsSource = alien.ConcentrationDict;
-            cbConcentration.DisplayMemberPath = "Value";
-            cbConcentration.SelectedValuePath = "Key";
-            cbConcentration.SelectedValue = alien.Concentration;
+            CbCuriosity.ItemsSource = _alien.CuriosityDict;
+            CbCuriosity.DisplayMemberPath = "Value";
+            CbCuriosity.SelectedValuePath = "Key";
+            CbCuriosity.SelectedValue = _alien.Curiosity;
 
-            cbCuriosity.ItemsSource = alien.CuriosityDict;
-            cbCuriosity.DisplayMemberPath = "Value";
-            cbCuriosity.SelectedValuePath = "Key";
-            cbCuriosity.SelectedValue = alien.Curiosity;
+            CbEgoism.ItemsSource = _alien.EgoismDict;
+            CbEgoism.DisplayMemberPath = "Value";
+            CbEgoism.SelectedValuePath = "Key";
+            CbEgoism.SelectedValue = _alien.Egoism;
 
-            cbEgoism.ItemsSource = alien.EgoismDict;
-            cbEgoism.DisplayMemberPath = "Value";
-            cbEgoism.SelectedValuePath = "Key";
-            cbEgoism.SelectedValue = alien.Egoism;
+            CbEmpathy.ItemsSource = _alien.EmpathyDict;
+            CbEmpathy.DisplayMemberPath = "Value";
+            CbEmpathy.SelectedValuePath = "Key";
+            CbEmpathy.SelectedValue = _alien.Empathy;
 
-            cbEmpathy.ItemsSource = alien.EmpathyDict;
-            cbEmpathy.DisplayMemberPath = "Value";
-            cbEmpathy.SelectedValuePath = "Key";
-            cbEmpathy.SelectedValue = alien.Empathy;
+            CbGegariousness.ItemsSource = _alien.GegariousnessnessDict;
+            CbGegariousness.DisplayMemberPath = "Value";
+            CbGegariousness.SelectedValuePath = "Key";
+            CbGegariousness.SelectedValue = _alien.Gegariousness;
 
-            cbGegariousness.ItemsSource = alien.GegariousnessnessDict;
-            cbGegariousness.DisplayMemberPath = "Value";
-            cbGegariousness.SelectedValuePath = "Key";
-            cbGegariousness.SelectedValue = alien.Gegariousness;
+            CbImagination.ItemsSource = _alien.ImaginationDict;
+            CbImagination.DisplayMemberPath = "Value";
+            CbImagination.SelectedValuePath = "Key";
+            CbImagination.SelectedValue = _alien.Imagination;
 
-            cbImagination.ItemsSource = alien.ImaginationDict;
-            cbImagination.DisplayMemberPath = "Value";
-            cbImagination.SelectedValuePath = "Key";
-            cbImagination.SelectedValue = alien.Imagination;
+            CbChauvinism.ItemsSource = _alien.ChauvinismDict;
+            CbChauvinism.DisplayMemberPath = "Value";
+            CbChauvinism.SelectedValuePath = "Key";
+            CbChauvinism.SelectedValue = _alien.Chauvinism;
 
-            cbChauvinism.ItemsSource = alien.ChauvinismDict;
-            cbChauvinism.DisplayMemberPath = "Value";
-            cbChauvinism.SelectedValuePath = "Key";
-            cbChauvinism.SelectedValue = alien.Chauvinism;
+            CbSuspicion.ItemsSource = _alien.SuspicionDict;
+            CbSuspicion.DisplayMemberPath = "Value";
+            CbSuspicion.SelectedValuePath = "Key";
+            CbSuspicion.SelectedValue = _alien.Suspicion;
 
-            cbSuspicion.ItemsSource = alien.SuspicionDict;
-            cbSuspicion.DisplayMemberPath = "Value";
-            cbSuspicion.SelectedValuePath = "Key";
-            cbSuspicion.SelectedValue = alien.Suspicion;
-
-            cbPlayfulness.ItemsSource = alien.PlayfulnessDict;
-            cbPlayfulness.DisplayMemberPath = "Value";
-            cbPlayfulness.SelectedValuePath = "Key";
-            cbPlayfulness.SelectedValue = alien.Playfulness;
+            CbPlayfulness.ItemsSource = _alien.PlayfulnessDict;
+            CbPlayfulness.DisplayMemberPath = "Value";
+            CbPlayfulness.SelectedValuePath = "Key";
+            CbPlayfulness.SelectedValue = _alien.Playfulness;
         }
 
         private void cbLandOrWater_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -258,60 +248,64 @@ namespace SWNAdmin.Forms
 
         private void btSave_Click(object sender, RoutedEventArgs e)
         {
-            using (var context = new Utility.Db1Entities())
+            using (var context = new Db1Entities())
             {
-                Utility.Aliens DBAlien = new Utility.Aliens();
-                DBAlien.Name = tbName.Text;
-                DBAlien.chemicalBasis = cbChemicalBasis.SelectedValue.ToString();
-                DBAlien.LandOrWater = cbLandOrWater.SelectedValue.ToString();
-                DBAlien.LandHabitat = cbLandHabitat.SelectedValue.ToString();
-                DBAlien.WaterHabitat = cbWaterHabitat.SelectedValue.ToString();
-                DBAlien.TrophicDiet = cbThrophicDiet.SelectedValue.ToString();
-                DBAlien.PrimaryLocomotion = cbPrimaryLocomotion.SelectedValue.ToString();
-                DBAlien.SecondaryLocomotion = cbSecondaryLocomotion.SelectedValue.ToString();
-                DBAlien.hasSecondaryLocomotuib = checkHasSecondaryLocmotion.IsChecked;
-                DBAlien.Gravity = null; //FIXME
-                DBAlien.SizeClass = cbSizeClass.SelectedValue.ToString();
-                DBAlien.Size = Double.Parse(cbSize.Text);
-                DBAlien.Symmetry = cbSymmetry.SelectedValue.ToString();
-                DBAlien.Sides = Int32.Parse(cbSides.Text);
-                DBAlien.LimbSegments = Int32.Parse(cbLimbSegments.Text);
-                DBAlien.Tail = cbTails.SelectedValue.ToString();
-                DBAlien.Manipulators = Int32.Parse(cbManipulators.Text);
-                DBAlien.Skeleton = cbSkeleton.SelectedValue.ToString();
-                DBAlien.SkinClass = cbSkinClass.SelectedValue.ToString();
-                DBAlien.Skin = cbSkin.SelectedValue.ToString();
-                DBAlien.Breathing = cbBreathing.SelectedValue.ToString();
-                DBAlien.Temperatur = cbTemperture.SelectedValue.ToString();
-                DBAlien.Growth = cbGrowthRate.SelectedValue.ToString();
-                DBAlien.Sex = cbSexes.SelectedValue.ToString();
-                DBAlien.Gestation = cbGestation.SelectedValue.ToString();
-                DBAlien.Strategy = cbStrategy.SelectedValue.ToString();
-                DBAlien.OffspringCount = Int32.Parse(cbOffspringCount.Text);
-                DBAlien.PrimarySense = cbPrimarySense.SelectedValue.ToString();
-                DBAlien.Vision = cbVision.SelectedValue.ToString();
-                DBAlien.Hearing = cbHearing.SelectedValue.ToString();
-                DBAlien.Touch = cbTouch.SelectedValue.ToString();
-                DBAlien.TasteSmell = cbTasteSmell.SelectedValue.ToString();
-                DBAlien.Intelligence = cbIntelligence.SelectedValue.ToString();
-                DBAlien.IntelligenceValue = Int32.Parse(cbIntelligenceValue.Text);
-                DBAlien.MatingBehaviour = cbMatingBehaviour.SelectedValue.ToString();
-                DBAlien.SocialOrganization = cbSocialOrganization.SelectedValue.ToString();
-                DBAlien.SocialGroupSize = Int32.Parse(cbSocialGroupSize.Text);
-                DBAlien.Concentration = cbConcentration.SelectedValue.ToString();
-                DBAlien.Curiosity = cbCuriosity.SelectedValue.ToString();
-                DBAlien.Egoism = cbEgoism.SelectedValue.ToString();
-                DBAlien.Empathy = cbEmpathy.SelectedValue.ToString();
-                DBAlien.Gegariousness = cbGegariousness.SelectedValue.ToString();
-                DBAlien.Imagination = cbImagination.SelectedValue.ToString();
-                DBAlien.Chauvinism = cbChauvinism.SelectedValue.ToString();
-                DBAlien.Suspicion = cbSuspicion.SelectedValue.ToString();
-                DBAlien.Playfulness = cbPlayfulness.SelectedValue.ToString();
+                var dbAlien = new Aliens
+                {
+                    Name = TbName.Text,
+                    chemicalBasis = CbChemicalBasis.SelectedValue.ToString(),
+                    LandOrWater = CbLandOrWater.SelectedValue.ToString(),
+                    LandHabitat = CbLandHabitat.SelectedValue.ToString(),
+                    WaterHabitat = CbWaterHabitat.SelectedValue.ToString(),
+                    TrophicDiet = CbThrophicDiet.SelectedValue.ToString(),
+                    PrimaryLocomotion = CbPrimaryLocomotion.SelectedValue.ToString(),
+                    SecondaryLocomotion = CbSecondaryLocomotion.SelectedValue.ToString(),
+                    hasSecondaryLocomotuib = CheckHasSecondaryLocmotion.IsChecked,
+                    Gravity = null,
+                    SizeClass = CbSizeClass.SelectedValue.ToString(),
+                    Size = double.Parse(CbSize.Text),
+                    Symmetry = CbSymmetry.SelectedValue.ToString(),
+                    Sides = int.Parse(CbSides.Text),
+                    LimbSegments = int.Parse(CbLimbSegments.Text),
+                    Tail = CbTails.SelectedValue.ToString(),
+                    Manipulators = int.Parse(CbManipulators.Text),
+                    Skeleton = CbSkeleton.SelectedValue.ToString(),
+                    SkinClass = CbSkinClass.SelectedValue.ToString(),
+                    Skin = CbSkin.SelectedValue.ToString(),
+                    Breathing = CbBreathing.SelectedValue.ToString(),
+                    Temperatur = CbTemperture.SelectedValue.ToString(),
+                    Growth = CbGrowthRate.SelectedValue.ToString(),
+                    Sex = CbSexes.SelectedValue.ToString(),
+                    Gestation = CbGestation.SelectedValue.ToString(),
+                    Strategy = CbStrategy.SelectedValue.ToString(),
+                    OffspringCount = int.Parse(CbOffspringCount.Text),
+                    PrimarySense = CbPrimarySense.SelectedValue.ToString(),
+                    Vision = CbVision.SelectedValue.ToString(),
+                    Hearing = CbHearing.SelectedValue.ToString(),
+                    Touch = CbTouch.SelectedValue.ToString(),
+                    TasteSmell = CbTasteSmell.SelectedValue.ToString(),
+                    Intelligence = CbIntelligence.SelectedValue.ToString(),
+                    IntelligenceValue = int.Parse(CbIntelligenceValue.Text),
+                    MatingBehaviour = CbMatingBehaviour.SelectedValue.ToString(),
+                    SocialOrganization = CbSocialOrganization.SelectedValue.ToString(),
+                    SocialGroupSize = int.Parse(CbSocialGroupSize.Text),
+                    Concentration = CbConcentration.SelectedValue.ToString(),
+                    Curiosity = CbCuriosity.SelectedValue.ToString(),
+                    Egoism = CbEgoism.SelectedValue.ToString(),
+                    Empathy = CbEmpathy.SelectedValue.ToString(),
+                    Gegariousness = CbGegariousness.SelectedValue.ToString(),
+                    Imagination = CbImagination.SelectedValue.ToString(),
+                    Chauvinism = CbChauvinism.SelectedValue.ToString(),
+                    Suspicion = CbSuspicion.SelectedValue.ToString(),
+                    Playfulness = CbPlayfulness.SelectedValue.ToString(),
+                    Image = BuildByteArrayFromImage(_raceBitmapImage)
+                };
+                //FIXME
 
                 //if (RaceImageWindow.Source != null)
                 //{
                 //    byte[] buffer;
-                //    FileStream fileStream = new FileStream(ImagePath, FileMode.Open, FileAccess.Read);
+                //    FileStream fileStream = new FileStream(_imagePath, FileMode.Open, FileAccess.Read);
                 //    try
                 //    {
                 //        int length = (int)fileStream.Length;  // get file length
@@ -327,265 +321,265 @@ namespace SWNAdmin.Forms
                 //    {
                 //        fileStream.Close();
                 //    }
-                //    DBAlien.Image = buffer;
+                //    DBAlien.image = buffer;
                 //}
 
-                
-                DBAlien.Image = BuildByteArrayFromImage(RaceBitmapImage);
 
-                context.Aliens.Add(DBAlien);
+
+                context.Aliens.Add(dbAlien);
                 context.SaveChanges();
             }
 
-            MessageBox.Show("The Alien '" + tbName.Text + "' has been saved in the Database");
+            MessageBox.Show("The Alien '" + TbName.Text + "' has been saved in the Database");
         }
 
         private void btLoadImage_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
+            var ofd = new OpenFileDialog();
             ofd.ShowDialog();
-            ImagePath = ofd.FileName;
-            RaceBitmapImage = new BitmapImage(new Uri(ofd.FileName));
-            RaceImageWindow.Source = RaceBitmapImage;
+            _imagePath = ofd.FileName;
+            _raceBitmapImage = new BitmapImage(new Uri(ofd.FileName));
+            RaceImageWindow.Source = _raceBitmapImage;
         }
 
         private void btLoad_Click(object sender, RoutedEventArgs e)
         {
-            LoadWindow = new Window();
-            LoadWindow.Width = 200;
-            LoadWindow.Height = 200;
-            LoadBox = new ListBox();
-            LoadWindow.Content = LoadBox;
-            using (var Context = new Utility.Db1Entities())
+            _loadWindow = new Window
             {
-                LoadBox.ItemsSource = (from c in Context.Aliens select c).ToList();
-                LoadBox.DisplayMemberPath = "Name";
-                LoadBox.MouseDoubleClick += LoadboxSelectionChanged;
-                
+                Width = 200,
+                Height = 200
+            };
+            _loadBox = new ListBox();
+            _loadWindow.Content = _loadBox;
+            using (var context = new Db1Entities())
+            {
+                _loadBox.ItemsSource = (from c in context.Aliens select c).ToList();
+                _loadBox.DisplayMemberPath = "Name";
+                _loadBox.MouseDoubleClick += LoadboxSelectionChanged;
             }
-            LoadWindow.ShowDialog();
+            _loadWindow.ShowDialog();
         }
 
         private void LoadboxSelectionChanged(object sender, RoutedEventArgs e)
         {
-            if (LoadBox.SelectedItem != null)
+            if (_loadBox.SelectedItem != null)
             {
-                LoadedAlien = (Utility.Aliens)LoadBox.SelectedItem;
-                LoadWindow.Close();
+                _loadedAlien = (Aliens) _loadBox.SelectedItem;
+                _loadWindow.Close();
                 LoadAlien();
             }
         }
 
         private void LoadAlien()
         {
-            btUpdate.Visibility = Visibility.Visible;
-            btUpdate.IsEnabled = true;
-            btSave.IsEnabled = false;
-            btSave.Visibility = Visibility.Hidden;
-            btDelete.Visibility = Visibility.Visible;
-            btDelete.IsEnabled = true;
+            BtUpdate.Visibility = Visibility.Visible;
+            BtUpdate.IsEnabled = true;
+            BtSave.IsEnabled = false;
+            BtSave.Visibility = Visibility.Hidden;
+            BtDelete.Visibility = Visibility.Visible;
+            BtDelete.IsEnabled = true;
 
-            alien = new Alien();
-            tbName.Text = LoadedAlien.Name;
-            RaceImageWindow.Source = BuildImageFromByteArray(LoadedAlien.Image);
+            _alien = new Alien();
+            TbName.Text = _loadedAlien.Name;
+            RaceImageWindow.Source = BuildImageFromByteArray(_loadedAlien.Image);
 
-            cbChemicalBasis.SelectedValue = LoadedAlien.chemicalBasis;
-            cbLandOrWater.SelectedValue = LoadedAlien.LandOrWater;
-            cbLandHabitat.SelectedValue = LoadedAlien.LandHabitat;
-            cbWaterHabitat.SelectedValue = LoadedAlien.WaterHabitat;
-            cbThrophicDiet.SelectedValue = LoadedAlien.TrophicDiet;
-            cbPrimaryLocomotion.SelectedValue = LoadedAlien.PrimaryLocomotion;
-            cbSecondaryLocomotion.SelectedValue = LoadedAlien.SecondaryLocomotion;
-            checkHasSecondaryLocmotion.IsChecked = LoadedAlien.hasSecondaryLocomotuib;
-            cbSizeClass.SelectedValue = LoadedAlien.SizeClass;
-            cbSize.Text = LoadedAlien.Size.ToString();
-            cbSymmetry.SelectedValue = LoadedAlien.Symmetry;
-            cbSides.Text = LoadedAlien.Sides.ToString();
-            cbLimbSegments.Text = LoadedAlien.LimbSegments.ToString();
-            cbTails.SelectedValue = LoadedAlien.Tail;
-            cbManipulators.Text = LoadedAlien.Manipulators.ToString();
-            cbSkeleton.SelectedValue = LoadedAlien.Skeleton;
-            cbSkinClass.SelectedValue = LoadedAlien.SkinClass;
-            cbSkin.SelectedValue = LoadedAlien.Skin;
-            cbBreathing.SelectedValue = LoadedAlien.Breathing;
-            cbTemperture.SelectedValue = LoadedAlien.Temperatur;
-            cbGrowthRate.SelectedValue = LoadedAlien.Growth;
-            cbSexes.SelectedValue = LoadedAlien.Sex;
-            cbGestation.SelectedValue = LoadedAlien.Gestation;
-            cbStrategy.SelectedValue = LoadedAlien.Strategy;
-            cbOffspringCount.Text = LoadedAlien.OffspringCount.ToString();
-            cbPrimarySense.SelectedValue = LoadedAlien.PrimarySense;
-            cbVision.SelectedValue = LoadedAlien.Vision;
-            cbHearing.SelectedValue = LoadedAlien.Hearing;
-            cbTouch.SelectedValue = LoadedAlien.Touch;
-            cbTasteSmell.SelectedValue = LoadedAlien.TasteSmell;
-            cbIntelligence.SelectedValue = LoadedAlien.Intelligence;
-            cbIntelligenceValue.Text = LoadedAlien.IntelligenceValue.ToString();
-            cbMatingBehaviour.SelectedValue = LoadedAlien.MatingBehaviour;
-            cbSocialOrganization.SelectedValue = LoadedAlien.SocialOrganization;
-            cbSocialGroupSize.Text = LoadedAlien.SocialGroupSize.ToString();
-            cbConcentration.SelectedValue = LoadedAlien.Concentration;
-            cbCuriosity.SelectedValue = LoadedAlien.Curiosity;
-            cbEgoism.SelectedValue = LoadedAlien.Egoism;
-            cbEmpathy.SelectedValue = LoadedAlien.Empathy;
-            cbGegariousness.SelectedValue = LoadedAlien.Gegariousness;
-            cbImagination.SelectedValue = LoadedAlien.Imagination;
-            cbChauvinism.SelectedValue = LoadedAlien.Chauvinism;
-            cbSuspicion.SelectedValue = LoadedAlien.Suspicion;
-            cbPlayfulness.SelectedValue = LoadedAlien.Playfulness;
+            CbChemicalBasis.SelectedValue = _loadedAlien.chemicalBasis;
+            CbLandOrWater.SelectedValue = _loadedAlien.LandOrWater;
+            CbLandHabitat.SelectedValue = _loadedAlien.LandHabitat;
+            CbWaterHabitat.SelectedValue = _loadedAlien.WaterHabitat;
+            CbThrophicDiet.SelectedValue = _loadedAlien.TrophicDiet;
+            CbPrimaryLocomotion.SelectedValue = _loadedAlien.PrimaryLocomotion;
+            CbSecondaryLocomotion.SelectedValue = _loadedAlien.SecondaryLocomotion;
+            CheckHasSecondaryLocmotion.IsChecked = _loadedAlien.hasSecondaryLocomotuib;
+            CbSizeClass.SelectedValue = _loadedAlien.SizeClass;
+            CbSize.Text = _loadedAlien.Size.ToString();
+            CbSymmetry.SelectedValue = _loadedAlien.Symmetry;
+            CbSides.Text = _loadedAlien.Sides.ToString();
+            CbLimbSegments.Text = _loadedAlien.LimbSegments.ToString();
+            CbTails.SelectedValue = _loadedAlien.Tail;
+            CbManipulators.Text = _loadedAlien.Manipulators.ToString();
+            CbSkeleton.SelectedValue = _loadedAlien.Skeleton;
+            CbSkinClass.SelectedValue = _loadedAlien.SkinClass;
+            CbSkin.SelectedValue = _loadedAlien.Skin;
+            CbBreathing.SelectedValue = _loadedAlien.Breathing;
+            CbTemperture.SelectedValue = _loadedAlien.Temperatur;
+            CbGrowthRate.SelectedValue = _loadedAlien.Growth;
+            CbSexes.SelectedValue = _loadedAlien.Sex;
+            CbGestation.SelectedValue = _loadedAlien.Gestation;
+            CbStrategy.SelectedValue = _loadedAlien.Strategy;
+            CbOffspringCount.Text = _loadedAlien.OffspringCount.ToString();
+            CbPrimarySense.SelectedValue = _loadedAlien.PrimarySense;
+            CbVision.SelectedValue = _loadedAlien.Vision;
+            CbHearing.SelectedValue = _loadedAlien.Hearing;
+            CbTouch.SelectedValue = _loadedAlien.Touch;
+            CbTasteSmell.SelectedValue = _loadedAlien.TasteSmell;
+            CbIntelligence.SelectedValue = _loadedAlien.Intelligence;
+            CbIntelligenceValue.Text = _loadedAlien.IntelligenceValue.ToString();
+            CbMatingBehaviour.SelectedValue = _loadedAlien.MatingBehaviour;
+            CbSocialOrganization.SelectedValue = _loadedAlien.SocialOrganization;
+            CbSocialGroupSize.Text = _loadedAlien.SocialGroupSize.ToString();
+            CbConcentration.SelectedValue = _loadedAlien.Concentration;
+            CbCuriosity.SelectedValue = _loadedAlien.Curiosity;
+            CbEgoism.SelectedValue = _loadedAlien.Egoism;
+            CbEmpathy.SelectedValue = _loadedAlien.Empathy;
+            CbGegariousness.SelectedValue = _loadedAlien.Gegariousness;
+            CbImagination.SelectedValue = _loadedAlien.Imagination;
+            CbChauvinism.SelectedValue = _loadedAlien.Chauvinism;
+            CbSuspicion.SelectedValue = _loadedAlien.Suspicion;
+            CbPlayfulness.SelectedValue = _loadedAlien.Playfulness;
 
-            cbChemicalBasis.ItemsSource = alien.TypesofLifeDict;
-            cbChemicalBasis.DisplayMemberPath = "Value";
-            cbChemicalBasis.SelectedValuePath = "Key";
+            CbChemicalBasis.ItemsSource = _alien.TypesofLifeDict;
+            CbChemicalBasis.DisplayMemberPath = "Value";
+            CbChemicalBasis.SelectedValuePath = "Key";
 
-            cbLandOrWater.ItemsSource = alien.LandWaterDict;
-            cbLandOrWater.DisplayMemberPath = "Value";
-            cbLandOrWater.SelectedValuePath = "Key";
+            CbLandOrWater.ItemsSource = _alien.LandWaterDict;
+            CbLandOrWater.DisplayMemberPath = "Value";
+            CbLandOrWater.SelectedValuePath = "Key";
 
-            cbLandHabitat.ItemsSource = alien.TypesofLandHabitatsDict;
-            cbLandHabitat.DisplayMemberPath = "Value";
-            cbLandHabitat.SelectedValuePath = "Key";
+            CbLandHabitat.ItemsSource = _alien.TypesofLandHabitatsDict;
+            CbLandHabitat.DisplayMemberPath = "Value";
+            CbLandHabitat.SelectedValuePath = "Key";
 
-            cbWaterHabitat.ItemsSource = alien.TypesofWaterHabitatsDict;
-            cbWaterHabitat.DisplayMemberPath = "Value";
-            cbWaterHabitat.SelectedValuePath = "Key";
+            CbWaterHabitat.ItemsSource = _alien.TypesofWaterHabitatsDict;
+            CbWaterHabitat.DisplayMemberPath = "Value";
+            CbWaterHabitat.SelectedValuePath = "Key";
 
-            cbThrophicDiet.ItemsSource = alien.TrophicDietDict;
-            cbThrophicDiet.DisplayMemberPath = "Value";
-            cbThrophicDiet.SelectedValuePath = "Key";
+            CbThrophicDiet.ItemsSource = _alien.TrophicDietDict;
+            CbThrophicDiet.DisplayMemberPath = "Value";
+            CbThrophicDiet.SelectedValuePath = "Key";
 
-            cbPrimaryLocomotion.ItemsSource = alien.LocomotionDict;
-            cbPrimaryLocomotion.DisplayMemberPath = "Value";
-            cbPrimaryLocomotion.SelectedValuePath = "Key";
+            CbPrimaryLocomotion.ItemsSource = _alien.LocomotionDict;
+            CbPrimaryLocomotion.DisplayMemberPath = "Value";
+            CbPrimaryLocomotion.SelectedValuePath = "Key";
 
-            cbSecondaryLocomotion.ItemsSource = alien.LocomotionDict;
-            cbSecondaryLocomotion.DisplayMemberPath = "Value";
-            cbSecondaryLocomotion.SelectedValuePath = "Key";
-
-
-            cbSizeClass.ItemsSource = alien.SizeClassDict;
-            cbSizeClass.DisplayMemberPath = "Value";
-            cbSizeClass.SelectedValuePath = "Key";
-
-            cbSymmetry.ItemsSource = alien.SymmetryDict;
-            cbSymmetry.DisplayMemberPath = "Value";
-            cbSymmetry.SelectedValuePath = "Key";
-
-            cbTails.ItemsSource = alien.TailsDict;
-            cbTails.DisplayMemberPath = "Value";
-            cbTails.SelectedValuePath = "Key";
+            CbSecondaryLocomotion.ItemsSource = _alien.LocomotionDict;
+            CbSecondaryLocomotion.DisplayMemberPath = "Value";
+            CbSecondaryLocomotion.SelectedValuePath = "Key";
 
 
-            cbSkeleton.ItemsSource = alien.SkeletonDict;
-            cbSkeleton.DisplayMemberPath = "Value";
-            cbSkeleton.SelectedValuePath = "Key";
+            CbSizeClass.ItemsSource = _alien.SizeClassDict;
+            CbSizeClass.DisplayMemberPath = "Value";
+            CbSizeClass.SelectedValuePath = "Key";
 
-            cbSkinClass.ItemsSource = alien.SkinTypeDict;
-            cbSkinClass.DisplayMemberPath = "Value";
-            cbSkinClass.SelectedValuePath = "Key";
+            CbSymmetry.ItemsSource = _alien.SymmetryDict;
+            CbSymmetry.DisplayMemberPath = "Value";
+            CbSymmetry.SelectedValuePath = "Key";
 
-            cbSkin.ItemsSource = alien.SkinDict;
-            cbSkin.DisplayMemberPath = "Value";
-            cbSkin.SelectedValuePath = "Key";
+            CbTails.ItemsSource = _alien.TailsDict;
+            CbTails.DisplayMemberPath = "Value";
+            CbTails.SelectedValuePath = "Key";
 
-            cbBreathing.ItemsSource = alien.BreathingMethodDict;
-            cbBreathing.DisplayMemberPath = "Value";
-            cbBreathing.SelectedValuePath = "Key";
 
-            cbTemperture.ItemsSource = alien.TemperatureDict;
-            cbTemperture.DisplayMemberPath = "Value";
-            cbTemperture.SelectedValuePath = "Key";
+            CbSkeleton.ItemsSource = _alien.SkeletonDict;
+            CbSkeleton.DisplayMemberPath = "Value";
+            CbSkeleton.SelectedValuePath = "Key";
 
-            cbGrowthRate.ItemsSource = alien.GrowthDict;
-            cbGrowthRate.DisplayMemberPath = "Value";
-            cbGrowthRate.SelectedValuePath = "Key";
+            CbSkinClass.ItemsSource = _alien.SkinTypeDict;
+            CbSkinClass.DisplayMemberPath = "Value";
+            CbSkinClass.SelectedValuePath = "Key";
 
-            cbSexes.ItemsSource = alien.SexesDict;
-            cbSexes.DisplayMemberPath = "Value";
-            cbSexes.SelectedValuePath = "Key";
+            CbSkin.ItemsSource = _alien.SkinDict;
+            CbSkin.DisplayMemberPath = "Value";
+            CbSkin.SelectedValuePath = "Key";
 
-            cbGestation.ItemsSource = alien.GestationDict;
-            cbGestation.DisplayMemberPath = "Value";
-            cbGestation.SelectedValuePath = "Key";
+            CbBreathing.ItemsSource = _alien.BreathingMethodDict;
+            CbBreathing.DisplayMemberPath = "Value";
+            CbBreathing.SelectedValuePath = "Key";
 
-            cbStrategy.ItemsSource = alien.StrategyDict;
-            cbStrategy.DisplayMemberPath = "Value";
-            cbStrategy.SelectedValuePath = "Key";
+            CbTemperture.ItemsSource = _alien.TemperatureDict;
+            CbTemperture.DisplayMemberPath = "Value";
+            CbTemperture.SelectedValuePath = "Key";
 
-            cbPrimarySense.ItemsSource = alien.PrimarySenseDict;
-            cbPrimarySense.DisplayMemberPath = "Value";
-            cbPrimarySense.SelectedValuePath = "Key";
+            CbGrowthRate.ItemsSource = _alien.GrowthDict;
+            CbGrowthRate.DisplayMemberPath = "Value";
+            CbGrowthRate.SelectedValuePath = "Key";
 
-            cbVision.ItemsSource = alien.VisionDict;
-            cbVision.DisplayMemberPath = "Value";
-            cbVision.SelectedValuePath = "Key";
+            CbSexes.ItemsSource = _alien.SexesDict;
+            CbSexes.DisplayMemberPath = "Value";
+            CbSexes.SelectedValuePath = "Key";
 
-            cbHearing.ItemsSource = alien.HearingDict;
-            cbHearing.DisplayMemberPath = "Value";
-            cbHearing.SelectedValuePath = "Key";
+            CbGestation.ItemsSource = _alien.GestationDict;
+            CbGestation.DisplayMemberPath = "Value";
+            CbGestation.SelectedValuePath = "Key";
 
-            cbTouch.ItemsSource = alien.TouchDict;
-            cbTouch.DisplayMemberPath = "Value";
-            cbTouch.SelectedValuePath = "Key";
+            CbStrategy.ItemsSource = _alien.StrategyDict;
+            CbStrategy.DisplayMemberPath = "Value";
+            CbStrategy.SelectedValuePath = "Key";
 
-            cbTasteSmell.ItemsSource = alien.TasteSmellDict;
-            cbTasteSmell.DisplayMemberPath = "Value";
-            cbTasteSmell.SelectedValuePath = "Key";
+            CbPrimarySense.ItemsSource = _alien.PrimarySenseDict;
+            CbPrimarySense.DisplayMemberPath = "Value";
+            CbPrimarySense.SelectedValuePath = "Key";
 
-            cbIntelligence.ItemsSource = alien.IntelligenceDict;
-            cbIntelligence.DisplayMemberPath = "Value";
-            cbIntelligence.SelectedValuePath = "Key";
+            CbVision.ItemsSource = _alien.VisionDict;
+            CbVision.DisplayMemberPath = "Value";
+            CbVision.SelectedValuePath = "Key";
 
-            cbIntelligenceValue.Text = alien.IntelligenceValue.ToString();
+            CbHearing.ItemsSource = _alien.HearingDict;
+            CbHearing.DisplayMemberPath = "Value";
+            CbHearing.SelectedValuePath = "Key";
 
-            cbMatingBehaviour.ItemsSource = alien.MatingBahaviourDict;
-            cbMatingBehaviour.DisplayMemberPath = "Value";
-            cbMatingBehaviour.SelectedValuePath = "Key";
+            CbTouch.ItemsSource = _alien.TouchDict;
+            CbTouch.DisplayMemberPath = "Value";
+            CbTouch.SelectedValuePath = "Key";
 
-            cbSocialOrganization.ItemsSource = alien.SocialOrganizationDict;
-            cbSocialOrganization.DisplayMemberPath = "Value";
-            cbSocialOrganization.SelectedValuePath = "Key";
+            CbTasteSmell.ItemsSource = _alien.TasteSmellDict;
+            CbTasteSmell.DisplayMemberPath = "Value";
+            CbTasteSmell.SelectedValuePath = "Key";
 
-            cbConcentration.ItemsSource = alien.ConcentrationDict;
-            cbConcentration.DisplayMemberPath = "Value";
-            cbConcentration.SelectedValuePath = "Key";
+            CbIntelligence.ItemsSource = _alien.IntelligenceDict;
+            CbIntelligence.DisplayMemberPath = "Value";
+            CbIntelligence.SelectedValuePath = "Key";
 
-            cbCuriosity.ItemsSource = alien.CuriosityDict;
-            cbCuriosity.DisplayMemberPath = "Value";
-            cbCuriosity.SelectedValuePath = "Key";
+            CbIntelligenceValue.Text = _alien.IntelligenceValue.ToString();
 
-            cbEgoism.ItemsSource = alien.EgoismDict;
-            cbEgoism.DisplayMemberPath = "Value";
-            cbEgoism.SelectedValuePath = "Key";
+            CbMatingBehaviour.ItemsSource = _alien.MatingBahaviourDict;
+            CbMatingBehaviour.DisplayMemberPath = "Value";
+            CbMatingBehaviour.SelectedValuePath = "Key";
 
-            cbEmpathy.ItemsSource = alien.EmpathyDict;
-            cbEmpathy.DisplayMemberPath = "Value";
-            cbEmpathy.SelectedValuePath = "Key";
+            CbSocialOrganization.ItemsSource = _alien.SocialOrganizationDict;
+            CbSocialOrganization.DisplayMemberPath = "Value";
+            CbSocialOrganization.SelectedValuePath = "Key";
 
-            cbGegariousness.ItemsSource = alien.GegariousnessnessDict;
-            cbGegariousness.DisplayMemberPath = "Value";
-            cbGegariousness.SelectedValuePath = "Key";
+            CbConcentration.ItemsSource = _alien.ConcentrationDict;
+            CbConcentration.DisplayMemberPath = "Value";
+            CbConcentration.SelectedValuePath = "Key";
 
-            cbImagination.ItemsSource = alien.ImaginationDict;
-            cbImagination.DisplayMemberPath = "Value";
-            cbImagination.SelectedValuePath = "Key";
+            CbCuriosity.ItemsSource = _alien.CuriosityDict;
+            CbCuriosity.DisplayMemberPath = "Value";
+            CbCuriosity.SelectedValuePath = "Key";
 
-            cbChauvinism.ItemsSource = alien.ChauvinismDict;
-            cbChauvinism.DisplayMemberPath = "Value";
-            cbChauvinism.SelectedValuePath = "Key";
+            CbEgoism.ItemsSource = _alien.EgoismDict;
+            CbEgoism.DisplayMemberPath = "Value";
+            CbEgoism.SelectedValuePath = "Key";
 
-            cbSuspicion.ItemsSource = alien.SuspicionDict;
-            cbSuspicion.DisplayMemberPath = "Value";
-            cbSuspicion.SelectedValuePath = "Key";
+            CbEmpathy.ItemsSource = _alien.EmpathyDict;
+            CbEmpathy.DisplayMemberPath = "Value";
+            CbEmpathy.SelectedValuePath = "Key";
 
-            cbPlayfulness.ItemsSource = alien.PlayfulnessDict;
-            cbPlayfulness.DisplayMemberPath = "Value";
-            cbPlayfulness.SelectedValuePath = "Key";
+            CbGegariousness.ItemsSource = _alien.GegariousnessnessDict;
+            CbGegariousness.DisplayMemberPath = "Value";
+            CbGegariousness.SelectedValuePath = "Key";
+
+            CbImagination.ItemsSource = _alien.ImaginationDict;
+            CbImagination.DisplayMemberPath = "Value";
+            CbImagination.SelectedValuePath = "Key";
+
+            CbChauvinism.ItemsSource = _alien.ChauvinismDict;
+            CbChauvinism.DisplayMemberPath = "Value";
+            CbChauvinism.SelectedValuePath = "Key";
+
+            CbSuspicion.ItemsSource = _alien.SuspicionDict;
+            CbSuspicion.DisplayMemberPath = "Value";
+            CbSuspicion.SelectedValuePath = "Key";
+
+            CbPlayfulness.ItemsSource = _alien.PlayfulnessDict;
+            CbPlayfulness.DisplayMemberPath = "Value";
+            CbPlayfulness.SelectedValuePath = "Key";
         }
 
-        public BitmapImage BuildImageFromByteArray(byte[] array)
+        private static BitmapImage BuildImageFromByteArray(byte[] array)
         {
-            using (var ms = new System.IO.MemoryStream(array))
+            using (var ms = new MemoryStream(array))
             {
                 var image = new BitmapImage();
                 image.BeginInit();
@@ -596,12 +590,12 @@ namespace SWNAdmin.Forms
             }
         }
 
-        public byte[] BuildByteArrayFromImage(BitmapImage Image)
+        private static byte[] BuildByteArrayFromImage(BitmapSource image)
         {
             byte[] data;
-            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(Image));
-            using (MemoryStream ms = new MemoryStream())
+            var encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(image));
+            using (var ms = new MemoryStream())
             {
                 encoder.Save(ms);
                 data = ms.ToArray();
@@ -609,154 +603,157 @@ namespace SWNAdmin.Forms
             return data;
         }
 
-        public void SendToClients_Click(object sender, RoutedEventArgs e)
+        private void SendToClients_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Send!");
-            SWNService.CurrentService.SendImage(LoadedAlien.Image);
+            SWNService.CurrentService.SendImage(_loadedAlien.Image);
         }
 
         private void btUpdate_Click(object sender, RoutedEventArgs e)
         {
-            using (var context = new Utility.Db1Entities())
+            using (var context = new Db1Entities())
             {
-                Utility.Aliens UpdateAlien = (from c in context.Aliens where c.Id == LoadedAlien.Id select c).FirstOrDefault();
-                UpdateAlien.Name = tbName.Text;
-                UpdateAlien.chemicalBasis = cbChemicalBasis.SelectedValue.ToString();
-                UpdateAlien.LandOrWater = cbLandOrWater.SelectedValue.ToString();
-                UpdateAlien.LandHabitat = cbLandHabitat.SelectedValue.ToString();
-                UpdateAlien.WaterHabitat = cbWaterHabitat.SelectedValue.ToString();
-                UpdateAlien.TrophicDiet = cbThrophicDiet.SelectedValue.ToString();
-                UpdateAlien.PrimaryLocomotion = cbPrimaryLocomotion.SelectedValue.ToString();
-                UpdateAlien.SecondaryLocomotion = cbSecondaryLocomotion.SelectedValue.ToString();
-                UpdateAlien.hasSecondaryLocomotuib = checkHasSecondaryLocmotion.IsChecked;
-                UpdateAlien.Gravity = null; //FIXME
-                UpdateAlien.SizeClass = cbSizeClass.SelectedValue.ToString();
-                UpdateAlien.Size = Double.Parse(cbSize.Text);
-                UpdateAlien.Symmetry = cbSymmetry.SelectedValue.ToString();
-                UpdateAlien.Sides = Int32.Parse(cbSides.Text);
-                UpdateAlien.LimbSegments = Int32.Parse(cbLimbSegments.Text);
-                UpdateAlien.Tail = cbTails.SelectedValue.ToString();
-                UpdateAlien.Manipulators = Int32.Parse(cbManipulators.Text);
-                UpdateAlien.Skeleton = cbSkeleton.SelectedValue.ToString();
-                UpdateAlien.SkinClass = cbSkinClass.SelectedValue.ToString();
-                UpdateAlien.Skin = cbSkin.SelectedValue.ToString();
-                UpdateAlien.Breathing = cbBreathing.SelectedValue.ToString();
-                UpdateAlien.Temperatur = cbTemperture.SelectedValue.ToString();
-                UpdateAlien.Growth = cbGrowthRate.SelectedValue.ToString();
-                UpdateAlien.Sex = cbSexes.SelectedValue.ToString();
-                UpdateAlien.Gestation = cbGestation.SelectedValue.ToString();
-                UpdateAlien.Strategy = cbStrategy.SelectedValue.ToString();
-                UpdateAlien.OffspringCount = Int32.Parse(cbOffspringCount.Text);
-                UpdateAlien.PrimarySense = cbPrimarySense.SelectedValue.ToString();
-                UpdateAlien.Vision = cbVision.SelectedValue.ToString();
-                UpdateAlien.Hearing = cbHearing.SelectedValue.ToString();
-                UpdateAlien.Touch = cbTouch.SelectedValue.ToString();
-                UpdateAlien.TasteSmell = cbTasteSmell.SelectedValue.ToString();
-                UpdateAlien.Intelligence = cbIntelligence.SelectedValue.ToString();
-                UpdateAlien.IntelligenceValue = Int32.Parse(cbIntelligenceValue.Text);
-                UpdateAlien.MatingBehaviour = cbMatingBehaviour.SelectedValue.ToString();
-                UpdateAlien.SocialOrganization = cbSocialOrganization.SelectedValue.ToString();
-                UpdateAlien.SocialGroupSize = Int32.Parse(cbSocialGroupSize.Text);
-                UpdateAlien.Concentration = cbConcentration.SelectedValue.ToString();
-                UpdateAlien.Curiosity = cbCuriosity.SelectedValue.ToString();
-                UpdateAlien.Egoism = cbEgoism.SelectedValue.ToString();
-                UpdateAlien.Empathy = cbEmpathy.SelectedValue.ToString();
-                UpdateAlien.Gegariousness = cbGegariousness.SelectedValue.ToString();
-                UpdateAlien.Imagination = cbImagination.SelectedValue.ToString();
-                UpdateAlien.Chauvinism = cbChauvinism.SelectedValue.ToString();
-                UpdateAlien.Suspicion = cbSuspicion.SelectedValue.ToString();
-                UpdateAlien.Playfulness = cbPlayfulness.SelectedValue.ToString();
-
-                if (RaceImageWindow.Source != null)
+                var updateAlien = (from c in context.Aliens where c.Id == _loadedAlien.Id select c).FirstOrDefault();
+                if (updateAlien != null)
                 {
-                    if (!LoadedAlien.Image.SequenceEqual(BuildByteArrayFromImage(RaceBitmapImage)))
-                    {
-                        byte[] buffer;
-                        FileStream fileStream = new FileStream(ImagePath, FileMode.Open, FileAccess.Read);
-                        try
-                        {
-                            int length = (int)fileStream.Length; // get file length
-                            buffer = new byte[length]; // create buffer
-                            int count; // actual number of bytes read
-                            int sum = 0; // total number of bytes read
+                    updateAlien.Name = TbName.Text;
+                    updateAlien.chemicalBasis = CbChemicalBasis.SelectedValue.ToString();
+                    updateAlien.LandOrWater = CbLandOrWater.SelectedValue.ToString();
+                    updateAlien.LandHabitat = CbLandHabitat.SelectedValue.ToString();
+                    updateAlien.WaterHabitat = CbWaterHabitat.SelectedValue.ToString();
+                    updateAlien.TrophicDiet = CbThrophicDiet.SelectedValue.ToString();
+                    updateAlien.PrimaryLocomotion = CbPrimaryLocomotion.SelectedValue.ToString();
+                    updateAlien.SecondaryLocomotion = CbSecondaryLocomotion.SelectedValue.ToString();
+                    updateAlien.hasSecondaryLocomotuib = CheckHasSecondaryLocmotion.IsChecked;
+                    updateAlien.Gravity = null; //FIXME
+                    updateAlien.SizeClass = CbSizeClass.SelectedValue.ToString();
+                    updateAlien.Size = double.Parse(CbSize.Text);
+                    updateAlien.Symmetry = CbSymmetry.SelectedValue.ToString();
+                    updateAlien.Sides = int.Parse(CbSides.Text);
+                    updateAlien.LimbSegments = int.Parse(CbLimbSegments.Text);
+                    updateAlien.Tail = CbTails.SelectedValue.ToString();
+                    updateAlien.Manipulators = int.Parse(CbManipulators.Text);
+                    updateAlien.Skeleton = CbSkeleton.SelectedValue.ToString();
+                    updateAlien.SkinClass = CbSkinClass.SelectedValue.ToString();
+                    updateAlien.Skin = CbSkin.SelectedValue.ToString();
+                    updateAlien.Breathing = CbBreathing.SelectedValue.ToString();
+                    updateAlien.Temperatur = CbTemperture.SelectedValue.ToString();
+                    updateAlien.Growth = CbGrowthRate.SelectedValue.ToString();
+                    updateAlien.Sex = CbSexes.SelectedValue.ToString();
+                    updateAlien.Gestation = CbGestation.SelectedValue.ToString();
+                    updateAlien.Strategy = CbStrategy.SelectedValue.ToString();
+                    updateAlien.OffspringCount = int.Parse(CbOffspringCount.Text);
+                    updateAlien.PrimarySense = CbPrimarySense.SelectedValue.ToString();
+                    updateAlien.Vision = CbVision.SelectedValue.ToString();
+                    updateAlien.Hearing = CbHearing.SelectedValue.ToString();
+                    updateAlien.Touch = CbTouch.SelectedValue.ToString();
+                    updateAlien.TasteSmell = CbTasteSmell.SelectedValue.ToString();
+                    updateAlien.Intelligence = CbIntelligence.SelectedValue.ToString();
+                    updateAlien.IntelligenceValue = int.Parse(CbIntelligenceValue.Text);
+                    updateAlien.MatingBehaviour = CbMatingBehaviour.SelectedValue.ToString();
+                    updateAlien.SocialOrganization = CbSocialOrganization.SelectedValue.ToString();
+                    updateAlien.SocialGroupSize = int.Parse(CbSocialGroupSize.Text);
+                    updateAlien.Concentration = CbConcentration.SelectedValue.ToString();
+                    updateAlien.Curiosity = CbCuriosity.SelectedValue.ToString();
+                    updateAlien.Egoism = CbEgoism.SelectedValue.ToString();
+                    updateAlien.Empathy = CbEmpathy.SelectedValue.ToString();
+                    updateAlien.Gegariousness = CbGegariousness.SelectedValue.ToString();
+                    updateAlien.Imagination = CbImagination.SelectedValue.ToString();
+                    updateAlien.Chauvinism = CbChauvinism.SelectedValue.ToString();
+                    updateAlien.Suspicion = CbSuspicion.SelectedValue.ToString();
+                    updateAlien.Playfulness = CbPlayfulness.SelectedValue.ToString();
 
-                            // read until Read method returns 0 (end of the stream has been reached)
-                            while ((count = fileStream.Read(buffer, sum, length - sum)) > 0)
-                                sum += count; // sum is a buffer offset for next reading
-                        }
-                        finally
+                    if (RaceImageWindow.Source != null)
+                    {
+                        if (!_loadedAlien.Image.SequenceEqual(BuildByteArrayFromImage(_raceBitmapImage)))
                         {
-                            fileStream.Close();
+                            byte[] buffer;
+                            var fileStream = new FileStream(_imagePath, FileMode.Open, FileAccess.Read);
+                            try
+                            {
+                                var length = (int) fileStream.Length; // get file length
+                                buffer = new byte[length]; // create buffer
+                                int count; // actual number of bytes read
+                                var sum = 0; // total number of bytes read
+
+                                // read until Read method returns 0 (end of the stream has been reached)
+                                while ((count = fileStream.Read(buffer, sum, length - sum)) > 0)
+                                    sum += count; // sum is a buffer offset for next reading
+                            }
+                            finally
+                            {
+                                fileStream.Close();
+                            }
+                            updateAlien.Image = buffer;
                         }
-                        UpdateAlien.Image = buffer;
-                    }  
+                    }
+                    context.Entry(updateAlien).State = EntityState.Modified;
                 }
-                context.Entry(UpdateAlien).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
             }
-            MessageBox.Show("The Alien '" + tbName.Text + "' has been Updated");
+            MessageBox.Show("The Alien '" + TbName.Text + "' has been Updated");
         }
 
         private void btDelete_Click(object sender, RoutedEventArgs e)
         {
-            using (var Context = new Utility.Db1Entities())
+            using (var context = new Db1Entities())
             {
-                Utility.Aliens delAlien = (from c in Context.Aliens where c.Id == LoadedAlien.Id select c).FirstOrDefault();
-                Context.Entry(delAlien).State = System.Data.Entity.EntityState.Deleted;
-                Context.SaveChanges();
-                MessageBox.Show("'" + LoadedAlien.Name + "' has been removed from the Database");
+                var delAlien = (from c in context.Aliens where c.Id == _loadedAlien.Id select c).FirstOrDefault();
+                context.Entry(delAlien).State = EntityState.Deleted;
+                context.SaveChanges();
+                MessageBox.Show("'" + _loadedAlien.Name + "' has been removed from the Database");
                 ClearControls();
             }
         }
 
         private void ClearControls()
         {
-            cbChemicalBasis.SelectedValue = null;
-            cbLandOrWater.SelectedValue = null;
-            cbLandHabitat.SelectedValue = null;
-            cbWaterHabitat.SelectedValue = null;
-            cbThrophicDiet.SelectedValue = null;
-            cbPrimaryLocomotion.SelectedValue = null;
-            cbSecondaryLocomotion.SelectedValue = null;
-            cbSizeClass.SelectedValue = null;
-            cbSize.Text = null;
-            cbSymmetry.SelectedValue = null;
-            cbSides.Text = null;
-            cbLimbSegments.Text = null;
-            cbTails.SelectedValue = null;
-            cbManipulators.Text = null;
-            cbSkeleton.SelectedValue = null;
-            cbSkinClass.SelectedValue = null;
-            cbSkin.SelectedValue = null;
-            cbBreathing.SelectedValue = null;
-            cbTemperture.SelectedValue = null;
-            cbGrowthRate.SelectedValue = null;
-            cbSexes.SelectedValue = null;
-            cbGestation.SelectedValue = null;
-            cbStrategy.SelectedValue = null;
-            cbOffspringCount.Text = null;
-            cbPrimarySense.SelectedValue = null;
-            cbVision.SelectedValue = null;
-            cbHearing.SelectedValue = null;
-            cbTouch.SelectedValue = null;
-            cbTasteSmell.SelectedValue = null;
-            cbIntelligence.SelectedValue = null;
-            cbIntelligenceValue.Text = null;
-            cbMatingBehaviour.SelectedValue = null;
-            cbSocialOrganization.SelectedValue = null;
-            cbSocialGroupSize.Text = null;
-            cbConcentration.SelectedValue = null;
-            cbCuriosity.SelectedValue = null;
-            cbEgoism.SelectedValue = null;
-            cbEmpathy.SelectedValue = null;
-            cbGegariousness.SelectedValue = null;
-            cbImagination.SelectedValue = null;
-            cbChauvinism.SelectedValue = null;
-            cbSuspicion.SelectedValue = null;
-            cbPlayfulness.SelectedValue = null;
-            RaceBitmapImage = null;
+            CbChemicalBasis.SelectedValue = null;
+            CbLandOrWater.SelectedValue = null;
+            CbLandHabitat.SelectedValue = null;
+            CbWaterHabitat.SelectedValue = null;
+            CbThrophicDiet.SelectedValue = null;
+            CbPrimaryLocomotion.SelectedValue = null;
+            CbSecondaryLocomotion.SelectedValue = null;
+            CbSizeClass.SelectedValue = null;
+            CbSize.Text = null;
+            CbSymmetry.SelectedValue = null;
+            CbSides.Text = null;
+            CbLimbSegments.Text = null;
+            CbTails.SelectedValue = null;
+            CbManipulators.Text = null;
+            CbSkeleton.SelectedValue = null;
+            CbSkinClass.SelectedValue = null;
+            CbSkin.SelectedValue = null;
+            CbBreathing.SelectedValue = null;
+            CbTemperture.SelectedValue = null;
+            CbGrowthRate.SelectedValue = null;
+            CbSexes.SelectedValue = null;
+            CbGestation.SelectedValue = null;
+            CbStrategy.SelectedValue = null;
+            CbOffspringCount.Text = null;
+            CbPrimarySense.SelectedValue = null;
+            CbVision.SelectedValue = null;
+            CbHearing.SelectedValue = null;
+            CbTouch.SelectedValue = null;
+            CbTasteSmell.SelectedValue = null;
+            CbIntelligence.SelectedValue = null;
+            CbIntelligenceValue.Text = null;
+            CbMatingBehaviour.SelectedValue = null;
+            CbSocialOrganization.SelectedValue = null;
+            CbSocialGroupSize.Text = null;
+            CbConcentration.SelectedValue = null;
+            CbCuriosity.SelectedValue = null;
+            CbEgoism.SelectedValue = null;
+            CbEmpathy.SelectedValue = null;
+            CbGegariousness.SelectedValue = null;
+            CbImagination.SelectedValue = null;
+            CbChauvinism.SelectedValue = null;
+            CbSuspicion.SelectedValue = null;
+            CbPlayfulness.SelectedValue = null;
+            _raceBitmapImage = null;
             RaceImageWindow.Source = null;
-            tbName.Text = "";
+            TbName.Text = "";
         }
 
         private void btClear_Click(object sender, RoutedEventArgs e)

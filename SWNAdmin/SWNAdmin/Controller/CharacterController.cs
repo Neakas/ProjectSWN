@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SWNAdmin.Classes;
 using SWNAdmin.Utility;
 
 namespace SWNAdmin.Controller
@@ -11,60 +9,73 @@ namespace SWNAdmin.Controller
     {
         public static Character GetBlankCharacter(Client client)
         {
-            Character c = new Character();
-            c.Age = 18;
-            c.Name = "";
-            c.Strenght = 10;
-            c.Intelligence = 10;
-            c.Dexterity = 10;
-            c.Health = 10;
-            c.BasicLift = CalcBasicLift((int)c.Strenght);
-            c.HitPoints = CalcHP((int)c.Strenght);
-            c.WillPower = CalcWillPower((int)c.Intelligence);
-            c.Perception = CalcPerception((int)c.Intelligence);
-            c.FatiguePoints = CalcBaseFatiguePoints((int)c.Health);
-            c.BasicSpeed = CalcBasicSpeed((int)c.Health, (int)c.Dexterity);
-            c.BasicMove = CalcBasicMove((double)c.BasicSpeed);
+            var c = new Character
+            {
+                Age = 18,
+                Name = "",
+                Strenght = 10,
+                Intelligence = 10,
+                Dexterity = 10,
+                Health = 10
+            };
+            if (c.Strenght != null)
+            {
+                c.BasicLift = CalcBasicLift((int)c.Strenght);
+                c.HitPoints = CalcHp((int) c.Strenght);
+            }
+            if (c.Intelligence != null)
+            {
+                c.WillPower = CalcWillPower((int) c.Intelligence);
+                c.Perception = CalcPerception((int) c.Intelligence);
+            }
+            if (c.Health != null)
+            {
+                c.FatiguePoints = CalcBaseFatiguePoints((int) c.Health);
+                if (c.Dexterity != null) c.BasicSpeed = CalcBasicSpeed((int) c.Health, (int) c.Dexterity);
+            }
+            if (c.BasicSpeed != null) c.BasicMove = CalcBasicMove((double) c.BasicSpeed);
             c.PlayerName = client.UserName;
             c.PointTotal = 100;
             var context = new Db1Entities();
-            c.PlayerId = (from cn in context.Registration where cn.Username == client.UserName select cn.Id).FirstOrDefault();
+            c.PlayerId =
+                (from cn in context.Registration where cn.Username == client.UserName select cn.Id).FirstOrDefault();
             return c;
         }
 
-        
 
-        public static int CalcHP(int strenght)
+        public static int CalcHp(int strenght)
         {
             return strenght;
         }
-        public static int CalcWillPower(int Intelligence)
+
+        public static int CalcWillPower(int intelligence)
         {
-            return Intelligence;
+            return intelligence;
         }
-        public static int CalcPerception(int Intelligence)
+
+        public static int CalcPerception(int intelligence)
         {
-            return Intelligence;
+            return intelligence;
         }
-        public static int CalcBaseFatiguePoints(int Health)
+
+        public static int CalcBaseFatiguePoints(int health)
         {
-            return Health;
+            return health;
         }
+
         public static int CalcBasicLift(int strenght)
         {
-            return (strenght * strenght) / 5;
+            return strenght*strenght/5;
         }
 
-        public static double CalcBasicSpeed(int Health,int Dexterity)
+        public static double CalcBasicSpeed(int health, int dexterity)
         {
-            return (Health + Dexterity) / 4;
+            return (health + dexterity)/4.00;
         }
-         
-        public static int CalcBasicMove(double BasicSpeed)
+
+        public static int CalcBasicMove(double basicSpeed)
         {
-            return (int)Math.Floor(BasicSpeed);
+            return (int) Math.Floor(basicSpeed);
         }
-
-
     }
 }

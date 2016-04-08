@@ -1,32 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.Text;
-using System.Threading.Tasks;
+using System.ServiceModel.Dispatcher;
 using System.Xml;
-using System.Xml.Serialization;
 
-namespace SWNAdmin
+namespace SWNAdmin.Classes
 {
     public class ReferencePreservingDataContractFormat : Attribute, IOperationBehavior
     {
-
         public void AddBindingParameters(OperationDescription description, BindingParameterCollection parameters)
         {
         }
 
-        public void ApplyClientBehavior(OperationDescription description, System.ServiceModel.Dispatcher.ClientOperation proxy)
+        public void ApplyClientBehavior(OperationDescription description, ClientOperation proxy)
         {
-            IOperationBehavior innerBehavior = new ReferencePreservingDataContractSerializerOperationBehavior(description);
+            IOperationBehavior innerBehavior =
+                new ReferencePreservingDataContractSerializerOperationBehavior(description);
             innerBehavior.ApplyClientBehavior(description, proxy);
         }
 
-        public void ApplyDispatchBehavior(OperationDescription description, System.ServiceModel.Dispatcher.DispatchOperation dispatch)
+        public void ApplyDispatchBehavior(OperationDescription description, DispatchOperation dispatch)
         {
-            IOperationBehavior innerBehavior = new ReferencePreservingDataContractSerializerOperationBehavior(description);
+            IOperationBehavior innerBehavior =
+                new ReferencePreservingDataContractSerializerOperationBehavior(description);
             innerBehavior.ApplyDispatchBehavior(description, dispatch);
         }
 
@@ -37,24 +35,29 @@ namespace SWNAdmin
 
     public class ReferencePreservingDataContractSerializerOperationBehavior : DataContractSerializerOperationBehavior
     {
-        public ReferencePreservingDataContractSerializerOperationBehavior(OperationDescription operationDescription) : base(operationDescription) { }
+        public ReferencePreservingDataContractSerializerOperationBehavior(OperationDescription operationDescription)
+            : base(operationDescription)
+        {
+        }
+
         public override XmlObjectSerializer CreateSerializer(Type type, string name, string ns, IList<Type> knownTypes)
         {
             return CreateDataContractSerializer(type, name, ns, knownTypes);
         }
 
-        private static XmlObjectSerializer CreateDataContractSerializer(Type type, string name, string ns, IList<Type> knownTypes)
+        private static XmlObjectSerializer CreateDataContractSerializer(Type type, string name, string ns,IList<Type> knownTypes)
         {
             return CreateDataContractSerializer(type, name, ns, knownTypes);
         }
 
-        public override XmlObjectSerializer CreateSerializer(Type type, XmlDictionaryString name, XmlDictionaryString ns, IList<Type> knownTypes)
+        public override XmlObjectSerializer CreateSerializer(Type type, XmlDictionaryString name, XmlDictionaryString ns,
+            IList<Type> knownTypes)
         {
             return new DataContractSerializer(type, name, ns, knownTypes,
-                    0x7FFF /*maxItemsInObjectGraph*/,
-                    false/*ignoreExtensionDataObject*/,
-                    true/*preserveObjectReferences*/,
-                    null/*dataContractSurrogate*/);
+                0x7FFF /*maxItemsInObjectGraph*/,
+                false /*ignoreExtensionDataObject*/,
+                true /*preserveObjectReferences*/,
+                null /*dataContractSurrogate*/);
         }
     }
 }

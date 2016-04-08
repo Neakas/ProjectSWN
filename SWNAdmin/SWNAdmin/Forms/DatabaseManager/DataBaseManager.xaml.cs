@@ -1,31 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core.Metadata.Edm;
-using System.Data.Entity.Core.Objects;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using SWNAdmin.Utility;
+using System.Linq;
 
-namespace SWNAdmin.Forms
+namespace SWNAdmin.Forms.DatabaseManager
 {
     /// <summary>
-    /// Interaction logic for DataBaseManager.xaml
+    ///     Interaction logic for DataBaseManager.xaml
     /// </summary>
-    public partial class DataBaseManager : Window
+    public partial class DataBaseManager
     {
-        public static DataBaseManager DataBaseManagerWindow;
         public DataBaseManager()
         {
-            DataBaseManagerWindow = this;
             InitializeComponent();
             //LoadDgMain(null);
             LoadDatabaseSelector();
@@ -34,15 +21,15 @@ namespace SWNAdmin.Forms
 
         private void MenuManageAdvantage_Click(object sender, RoutedEventArgs e)
         {
-            ManageAdvantage MA = new ManageAdvantage();
-            MA.ShowDialog();
+            var ma = new ManageAdvantage();
+            ma.ShowDialog();
             LoadDgMain(null);
         }
 
         private void MenuManageStat_Click(object sender, RoutedEventArgs e)
         {
-            ManageStat MS = new ManageStat();
-            MS.ShowDialog();
+            var ms = new ManageStat();
+            ms.ShowDialog();
             LoadDgMain(null);
         }
 
@@ -51,148 +38,153 @@ namespace SWNAdmin.Forms
             LoadDgMain(null);
         }
 
-        private void LoadDgMain(string SelectedItem)
+        private void LoadDgMain(string selectedItem)
         {
-            if (SelectedItem == null)
+            if (selectedItem == null)
             {
-                var context = new Utility.Db1Entities();
+                var context = new Db1Entities();
                 var query = from c in context.Advantages select c;
                 var advlist = query.ToList();
-                dgMain.ItemsSource = advlist;
+                DgMain.ItemsSource = advlist;
                 //
             }
             else
             {
-                if (SelectedItem == "Advantages")
+                if (selectedItem == "Advantages")
                 {
-                    var context = new Utility.Db1Entities();
+                    var context = new Db1Entities();
                     var query = from c in context.Advantages select c;
                     var advlist = query.ToList();
-                    dgMain.ItemsSource = advlist;
-                    dgMain.Columns[4].Visibility = Visibility.Collapsed;
+                    DgMain.ItemsSource = advlist;
+                    DgMain.Columns[4].Visibility = Visibility.Collapsed;
                 }
-                if (SelectedItem == "Disadvantages")
+                if (selectedItem == "Disadvantages")
                 {
-                    var context = new Utility.Db1Entities();
+                    var context = new Db1Entities();
                     var query = from c in context.Disadvantages select c;
                     var advlist = query.ToList();
-                    dgMain.ItemsSource = advlist;
+                    DgMain.ItemsSource = advlist;
                 }
-                if (SelectedItem == "Characters")
+                if (selectedItem == "Characters")
                 {
-                    var context = new Utility.Db1Entities();
+                    var context = new Db1Entities();
                     var query = from c in context.Character select c;
                     var advlist = query.ToList();
-                    dgMain.ItemsSource = advlist;
+                    DgMain.ItemsSource = advlist;
                 }
-                if (SelectedItem == "InnerMoonlets")
+                if (selectedItem == "InnerMoonlets")
                 {
-                    var context = new Utility.Db1Entities();
+                    var context = new Db1Entities();
                     var query = from c in context.InnerMoonlets select c;
                     var advlist = query.ToList();
-                    dgMain.ItemsSource = advlist;
+                    DgMain.ItemsSource = advlist;
                 }
-                if (SelectedItem == "MajorMoons")
+                if (selectedItem == "MajorMoons")
                 {
-                    var context = new Utility.Db1Entities();
+                    var context = new Db1Entities();
                     var query = from c in context.MajorMoons select c;
                     var advlist = query.ToList();
-                    dgMain.ItemsSource = advlist;
+                    DgMain.ItemsSource = advlist;
                 }
-                if (SelectedItem == "OuterMoonlets")
+                if (selectedItem == "OuterMoonlets")
                 {
-                    var context = new Utility.Db1Entities();
+                    var context = new Db1Entities();
                     var query = from c in context.OuterMoonlets select c;
                     var advlist = query.ToList();
-                    dgMain.ItemsSource = advlist;
+                    DgMain.ItemsSource = advlist;
                 }
-                if (SelectedItem == "Planets")
+                if (selectedItem == "Planets")
                 {
-                    var context = new Utility.Db1Entities();
+                    var context = new Db1Entities();
                     var query = from c in context.Planets select c;
                     var advlist = query.ToList();
-                    dgMain.ItemsSource = advlist;
-                    dgMain.Columns[44].Visibility = Visibility.Collapsed;
+                    DgMain.ItemsSource = advlist;
+                    DgMain.Columns[44].Visibility = Visibility.Collapsed;
                 }
-                if (SelectedItem == "Registration")
+                if (selectedItem == "Registration")
                 {
-                    var context = new Utility.Db1Entities();
+                    var context = new Db1Entities();
                     var query = from c in context.Registration select c;
                     var advlist = query.ToList();
-                    dgMain.ItemsSource = advlist;
+                    DgMain.ItemsSource = advlist;
                 }
-                if (SelectedItem == "Stars")
+                if (selectedItem == "Stars")
                 {
-                    var context = new Utility.Db1Entities();
+                    var context = new Db1Entities();
                     var query = from c in context.Stars select c;
                     var advlist = query.ToList();
-                    dgMain.ItemsSource = advlist;
-                    dgMain.Columns[26].Visibility = Visibility.Collapsed;
+                    DgMain.ItemsSource = advlist;
+                    DgMain.Columns[26].Visibility = Visibility.Collapsed;
                 }
-                if (SelectedItem == "StarSystems")
+                if (selectedItem == "StarSystems")
                 {
-                    var context = new Utility.Db1Entities();
+                    var context = new Db1Entities();
                     var query = from c in context.StarSystems select c;
                     var advlist = query.ToList();
-                    dgMain.ItemsSource = advlist;
+                    DgMain.ItemsSource = advlist;
                 }
-                if (SelectedItem == "Stats")
+                if (selectedItem == "Stats")
                 {
-                    var context = new Utility.Db1Entities();
+                    var context = new Db1Entities();
                     var query = from c in context.Attribute select c;
                     var advlist = query.ToList();
-                    dgMain.ItemsSource = advlist;
+                    DgMain.ItemsSource = advlist;
                 }
-                if (SelectedItem == "Skills")
+                if (selectedItem == "Skills")
                 {
-                    var context = new Utility.Db1Entities();
+                    var context = new Db1Entities();
                     var query = from c in context.Skills select c;
                     var advlist = query.ToList();
-                    dgMain.ItemsSource = advlist;
+                    DgMain.ItemsSource = advlist;
                 }
             }
         }
 
         private void LoadDatabaseSelector()
         {
-            List<string> ItemList = new List<string>();
-            ItemList.AddRange(new string[] { "Advantages", "Disadvantages", "CharacterBonus", "CharacterMalus","Characters","InnerMoonlets","MajorMoons","OuterMoonlets","Planets","Registration","Stars","StarSystems","Stats","UsedBonus","UsedMalus","Skills"});
-            cbDatabaseSelector.ItemsSource = ItemList;
+            var itemList = new List<string>();
+            itemList.AddRange(new[]
+            {
+                "Advantages", "Disadvantages", "CharacterBonus", "CharacterMalus", "Characters", "InnerMoonlets",
+                "MajorMoons", "OuterMoonlets", "Planets", "Registration", "Stars", "StarSystems", "Stats", "UsedBonus",
+                "UsedMalus", "Skills"
+            });
+            CbDatabaseSelector.ItemsSource = itemList;
         }
 
         private void cbDatabaseSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            LoadDgMain(cbDatabaseSelector.SelectedItem.ToString());
+            LoadDgMain(CbDatabaseSelector.SelectedItem.ToString());
         }
 
         private void MenuManageSkills_Click(object sender, RoutedEventArgs e)
         {
-            ManageSkills MSK = new ManageSkills();
-            MSK.ShowDialog();
+            var msk = new ManageSkills();
+            msk.ShowDialog();
             LoadDgMain(null);
         }
 
         private void MenuManagePrerequisites_Click(object sender, RoutedEventArgs e)
         {
-            ManagePrerequisites MPR = new ManagePrerequisites();
-            MPR.ShowDialog();
+            var mpr = new ManagePrerequisites();
+            mpr.ShowDialog();
         }
 
         private void MenuManageGroups_Click(object sender, RoutedEventArgs e)
         {
-            ManageGroups mg = new ManageGroups();
+            var mg = new ManageGroups();
             mg.ShowDialog();
         }
 
         private void MenuManageModifiers_Click(object sender, RoutedEventArgs e)
         {
-            ManageModifiers mmods = new ManageModifiers();
+            var mmods = new ManageModifiers();
             mmods.ShowDialog();
         }
 
         private void MenuManageAlienRace_Click(object sender, RoutedEventArgs e)
         {
-            ManageAlienRaces mar = new ManageAlienRaces();
+            var mar = new ManageAlienRaces();
             mar.ShowDialog();
         }
     }

@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UniverseGeneration;
-using System.Data.SqlClient;
 using System.Data;
-using System.Globalization;
-using System.Diagnostics;
+using System.Data.SqlClient;
 using System.IO;
-using System.Reflection;
+using System.Linq;
+using UniverseGeneration.Stellar_Bodies;
+using UniverseGeneration.Utility;
 
-namespace SWNAdmin
+namespace SWNAdmin.Utility
 {
     public class SqlManager
     {
-        static string projectDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+        private static readonly string projectDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
 
-        public static SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + projectDir + @"\Utility\Db1.mdf;Integrated Security=True;Connect Timeout=30");
+        public static SqlConnection con =
+            new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + projectDir +
+                              @"\Utility\Db1.mdf;Integrated Security=True;Connect Timeout=30");
 
         public static bool Connect()
         {
@@ -27,7 +25,7 @@ namespace SWNAdmin
             {
                 con.Open();
             }
-           
+
             return true;
         }
 
@@ -39,9 +37,9 @@ namespace SWNAdmin
 
         public static void InsertSystem(StarSystem system)
         {
-            using (var context = new Utility.Db1Entities())
+            using (var context = new Db1Entities())
             {
-                Utility.StarSystems NewSystem = new Utility.StarSystems();
+                var NewSystem = new StarSystems();
                 NewSystem.sysName = system.sysName;
                 NewSystem.habitableZones = system.habitableZones.Count;
                 NewSystem.maxMass = system.maxMass;
@@ -52,25 +50,25 @@ namespace SWNAdmin
                 NewSystem.subCompanionStar3index = system.subCompanionStar3index;
                 NewSystem.sysAge = system.sysAge;
                 NewSystem.sysStars = system.sysStars.Count;
-                foreach (Star star in system.sysStars)
+                foreach (var star in system.sysStars)
                 {
-                    Utility.Stars NewStar = new Utility.Stars();
+                    var NewStar = new Stars();
                     NewStar.currLumin = Math.Round(star.currLumin, 4);
                     NewStar.distFromPrimary = star.distFromPrimary;
-                    NewStar.effTemp = Math.Round(star.effTemp,4);
+                    NewStar.effTemp = Math.Round(star.effTemp, 4);
                     NewStar.gasGiantFlag = star.gasGiantFlag;
                     NewStar.initLumin = star.initLumin;
                     NewStar.initMass = star.initMass;
                     NewStar.isFlareStar = star.isFlareStar;
                     NewStar.name = star.name;
                     NewStar.orbitalEccent = star.orbitalEccent;
-                    NewStar.orbitalPeriod = Math.Round(star.orbitalPeriod,4);
+                    NewStar.orbitalPeriod = Math.Round(star.orbitalPeriod, 4);
                     NewStar.orbitalRadius = star.orbitalRadius;
                     NewStar.orbitalSep = star.orbitalSep;
                     NewStar.orderID = star.orderID;
                     NewStar.parentID = star.parentID;
                     NewStar.parentName = star.parentName;
-                    NewStar.radius = Math.Round(star.getRadiusAU(), 4);//radius;
+                    NewStar.radius = Math.Round(star.getRadiusAU(), 4); //radius;
                     NewStar.selfID = star.selfID;
                     NewStar.specType = star.specType;
                     NewStar.starAge = star.starAge;
@@ -80,14 +78,14 @@ namespace SWNAdmin
                     NewStar.StarOrder = star.returnCurrentBranchDesc();
                     NewStar.OrbitalDetails = star.printOrbitalDetails();
                     NewStar.StarString = star.ToString();
-                    
 
-                    foreach (Satellite Sat in star.sysPlanets)
+
+                    foreach (var Sat in star.sysPlanets)
                     {
-                        Utility.Planets NewSatellite = new Utility.Planets();
-                        string type = "";
-                        string Pressure = "";
-                        if (Sat.baseType != Satellite.BASETYPE_ASTEROIDBELT || OptionCont.expandAsteroidBelt)
+                        var NewSatellite = new Planets();
+                        var type = "";
+                        var Pressure = "";
+                        if (Sat.baseType != Satellite.BASETYPE_ASTEROIDBELT || (bool) OptionCont.expandAsteroidBelt)
                         {
                             type = Sat.descSizeType();
                         }
@@ -116,8 +114,8 @@ namespace SWNAdmin
                         NewSatellite.dayFaceMod = Convert.ToInt32(Sat.dayFaceMod);
                         NewSatellite.density = Sat.density;
                         NewSatellite.diameter = Math.Round(Sat.diameterInKM(), 2);
-                        NewSatellite.gravity = Math.Round(Sat.gravity * Satellite.GFORCE, 2);
-                        NewSatellite.hydCoverage = ((Sat.hydCoverage * 100) + "%");
+                        NewSatellite.gravity = Math.Round(Sat.gravity*Satellite.GFORCE, 2);
+                        NewSatellite.hydCoverage = Sat.hydCoverage*100 + "%";
                         NewSatellite.innerMoonlets = Sat.innerMoonlets.Count;
                         NewSatellite.isResonant = Sat.isResonant;
                         NewSatellite.isTideLocked = Sat.isTideLocked;
@@ -148,14 +146,14 @@ namespace SWNAdmin
                         NewSatellite.RVM = Sat.getRVMDesc();
                         NewSatellite.planetString = Sat.ToString();
 
-                        foreach (Moonlet InnerMoonlet in Sat.innerMoonlets)
+                        foreach (var InnerMoonlet in Sat.innerMoonlets)
                         {
-                            Utility.InnerMoonlets NewInnerMoonlet = new Utility.InnerMoonlets();
+                            var NewInnerMoonlet = new InnerMoonlets();
                             NewInnerMoonlet.blackbodyTemp = InnerMoonlet.blackbodyTemp;
                             NewInnerMoonlet.name = InnerMoonlet.name;
                             NewInnerMoonlet.orbitalEccent = InnerMoonlet.orbitalEccent;
                             NewInnerMoonlet.orbitalPeriod = InnerMoonlet.orbitalPeriod;
-                            NewInnerMoonlet.orbitalRadius = Math.Round(InnerMoonlet.orbitalRadius,2);
+                            NewInnerMoonlet.orbitalRadius = Math.Round(InnerMoonlet.orbitalRadius, 2);
                             NewInnerMoonlet.parentID = InnerMoonlet.parentID;
                             NewInnerMoonlet.parentName = InnerMoonlet.parentName;
                             NewInnerMoonlet.planetRadius = InnerMoonlet.planetRadius;
@@ -163,14 +161,14 @@ namespace SWNAdmin
                             NewInnerMoonlet.innerMoonString = InnerMoonlet.ToString();
                             NewSatellite.InnerMoonlets1.Add(NewInnerMoonlet);
                         }
-                        foreach (Moonlet OuterMoonlet in Sat.outerMoonlets)
+                        foreach (var OuterMoonlet in Sat.outerMoonlets)
                         {
-                            Utility.OuterMoonlets NewOuterMoonlet = new Utility.OuterMoonlets();
+                            var NewOuterMoonlet = new OuterMoonlets();
                             NewOuterMoonlet.blackbodyTemp = OuterMoonlet.blackbodyTemp;
                             NewOuterMoonlet.name = OuterMoonlet.name;
                             NewOuterMoonlet.orbitalEccent = OuterMoonlet.orbitalEccent;
                             NewOuterMoonlet.orbitalPeriod = OuterMoonlet.orbitalPeriod;
-                            NewOuterMoonlet.orbitalRadius = Math.Round(OuterMoonlet.orbitalRadius,2);
+                            NewOuterMoonlet.orbitalRadius = Math.Round(OuterMoonlet.orbitalRadius, 2);
                             NewOuterMoonlet.parentID = OuterMoonlet.parentID;
                             NewOuterMoonlet.parentName = OuterMoonlet.parentName;
                             NewOuterMoonlet.planetRadius = OuterMoonlet.planetRadius;
@@ -178,9 +176,9 @@ namespace SWNAdmin
                             NewOuterMoonlet.outerMoonString = OuterMoonlet.ToString();
                             NewSatellite.OuterMoonlets1.Add(NewOuterMoonlet);
                         }
-                        foreach (Satellite MajorMoon in Sat.majorMoons)
+                        foreach (var MajorMoon in Sat.majorMoons)
                         {
-                            Utility.MajorMoons NewMajorMoon = new Utility.MajorMoons();
+                            var NewMajorMoon = new MajorMoons();
                             NewMajorMoon.RVM = MajorMoon.RVM;
                             NewMajorMoon.SatelliteSize = MajorMoon.SatelliteSize;
                             NewMajorMoon.SatelliteType = MajorMoon.SatelliteType;
@@ -192,8 +190,8 @@ namespace SWNAdmin
                             NewMajorMoon.dayFaceMod = Convert.ToInt32(MajorMoon.dayFaceMod);
                             NewMajorMoon.density = MajorMoon.density;
                             NewMajorMoon.diameter = Math.Round(MajorMoon.diameterInKM(), 2);
-                            NewMajorMoon.gravity = Math.Round(MajorMoon.gravity * Satellite.GFORCE, 2);
-                            NewMajorMoon.hydCoverage = ((Sat.hydCoverage * 100) + "%");
+                            NewMajorMoon.gravity = Math.Round(MajorMoon.gravity*Satellite.GFORCE, 2);
+                            NewMajorMoon.hydCoverage = Sat.hydCoverage*100 + "%";
                             NewMajorMoon.innerMoonlets = MajorMoon.innerMoonlets.Count;
                             NewMajorMoon.isResonant = MajorMoon.isResonant;
                             NewMajorMoon.isTideLocked = MajorMoon.isTideLocked;
@@ -231,11 +229,11 @@ namespace SWNAdmin
             }
         }
 
-        public static List<Utility.StarSystems> LoadAllSystems()
+        public static List<StarSystems> LoadAllSystems()
         {
-            List<Utility.StarSystems> AllSystems = new List<Utility.StarSystems>();
+            var AllSystems = new List<StarSystems>();
 
-            var context = new Utility.Db1Entities();
+            var context = new Db1Entities();
             var query = from c in context.StarSystems select c;
             AllSystems = query.ToList();
 
@@ -244,17 +242,16 @@ namespace SWNAdmin
 
         public static void QuerySystem()
         {
-            var context = new Utility.Db1Entities();
-            var query = from c in context.StarSystems where c.Id == 5 select c ;
+            var context = new Db1Entities();
+            var query = from c in context.StarSystems where c.Id == 5 select c;
             var sysNames = query.ToList();
         }
 
         public static void QueryAdvantage()
         {
-            var context = new Utility.Db1Entities();
+            var context = new Db1Entities();
             var query = from c in context.Advantages where c.Id == 7 select c;
             var adv = query.FirstOrDefault();
         }
-
     }
 }

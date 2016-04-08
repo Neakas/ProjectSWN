@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace UniverseGeneration
+namespace UniverseGeneration.Utility
 {
     /// <summary>
     /// A base class for something with multiple segments (i.e a timeline)
