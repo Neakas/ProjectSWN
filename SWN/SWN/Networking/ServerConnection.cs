@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using SWN.Controller;
-using SWN.Service_References.SWNServiceReference;
+using SWN.Forms;
+using SWN.SWNServiceReference;
 
 namespace SWN.Networking
 {
-    [CallbackBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, UseSynchronizationContext = false)]
-    public class ServerConnection : SWNServiceCallback
+    [CallbackBehavior( ConcurrencyMode = ConcurrencyMode.Multiple, UseSynchronizationContext = false )]
+    public class ServerConnection : SwnServiceCallback
     {
         public ServerConnection()
         {
@@ -21,36 +23,32 @@ namespace SWN.Networking
             }
         }
 
-        public static SWNServiceClient LocalServiceClient { get; set; }
+        public static SwnServiceClient LocalServiceClient { get; set; }
 
         public static ServerConnection CurrentInstance { get; set; }
 
-        public void SendErrorCode(string ErrorCode)
+        public void SendErrorCode( string errorCode )
         {
-            Application.Current.Dispatcher.BeginInvoke(
-                (Action) delegate { Forms.Login.CurrentInstance.errormessage.Text = ErrorCode; });
+            if (errorCode == null)
+            {
+                throw new ArgumentNullException(nameof(errorCode));
+            }
+            Application.Current.Dispatcher.BeginInvoke((Action) delegate { Login.CurrentInstance.Errormessage.Text = errorCode; });
         }
 
-
-        public void SendImage(FileMessage fileMsg)
+        public void SendImage( FileMessage fileMsg )
         {
             var ok = true;
-            foreach (var img in SettingHandler.ImageList)
+            foreach (var img in SettingHandler.ImageList.Where(img => img == fileMsg.FileName))
             {
-                if (img == fileMsg.FileName)
-                {
-                    ok = false;
-                }
+                ok = false;
             }
             if (ok)
             {
                 MainWindow.CurrentInstance.UpdateFileReceive();
                 try
                 {
-                    var fileStrm =
-                        new FileStream(
-                            XmlHandler.GrabXmlValue(SettingHandler.GrabSettingFile(), "PicFilePath") + @"\" +
-                            fileMsg.FileName, FileMode.Create, FileAccess.ReadWrite);
+                    var fileStrm = new FileStream(XmlHandler.GrabXmlValue(SettingHandler.GrabSettingFile(), "PicFilePath") + @"\" + fileMsg.FileName, FileMode.Create, FileAccess.ReadWrite);
                     fileStrm.Write(fileMsg.Data, 0, fileMsg.Data.Length);
                     fileStrm.Close();
                 }
@@ -60,17 +58,12 @@ namespace SWN.Networking
                 }
             }
 
-            MainWindow.CurrentInstance.CreateNotification(
-                new Uri(XmlHandler.GrabXmlValue(SettingHandler.GrabSettingFile(), "PicFilePath") + @"\" +
-                        fileMsg.FileName));
+            MainWindow.CurrentInstance.CreateNotification(new Uri(XmlHandler.GrabXmlValue(SettingHandler.GrabSettingFile(), "PicFilePath") + @"\" + fileMsg.FileName));
 
             var picnotinlist = true;
-            foreach (var img in SettingHandler.ImageList)
+            foreach (var img in SettingHandler.ImageList.Where(img => fileMsg.FileName == img))
             {
-                if (fileMsg.FileName == img)
-                {
-                    picnotinlist = false;
-                }
+                picnotinlist = false;
             }
             if (picnotinlist)
             {
@@ -78,15 +71,12 @@ namespace SWN.Networking
             }
         }
 
-        public void SendFile(FileMessage fileMsg)
+        public void SendFile( FileMessage fileMsg )
         {
             MainWindow.CurrentInstance.UpdateFileReceive();
             try
             {
-                var fileStrm =
-                    new FileStream(XmlHandler.GrabXmlValue(SettingHandler.GrabSettingFile(), "DataFilePath") +
-                                   fileMsg.FileName, FileMode.Create,
-                        FileAccess.ReadWrite);
+                var fileStrm = new FileStream(XmlHandler.GrabXmlValue(SettingHandler.GrabSettingFile(), "DataFilePath") + fileMsg.FileName, FileMode.Create, FileAccess.ReadWrite);
                 fileStrm.Write(fileMsg.Data, 0, fileMsg.Data.Length);
                 fileStrm.Close();
             }
@@ -97,40 +87,39 @@ namespace SWN.Networking
             MainWindow.CurrentInstance.UpdateFileReceive(true);
         }
 
-        public async Task<bool> tryLogin(Client C)
+        public async Task<bool> TryLogin( Client client )
         {
-            Forms.Login.CurrentInstance.errormessage.Text = "";
+            Login.CurrentInstance.Errormessage.Text = "";
             try
             {
                 if (LocalServiceClient == null)
                 {
-                    LocalServiceClient = new SWNServiceClient(new InstanceContext(this), "netTcpBinding",
-                        "net.tcp://" + SettingHandler.GetIpPort() + "/swnservice");
+                    LocalServiceClient = new SwnServiceClient(new InstanceContext(this), "netTcpBinding", "net.tcp://" + SettingHandler.GetIpPort() + "/SwnService");
                 }
                 if (LocalServiceClient.State != CommunicationState.Opened)
                 {
                     LocalServiceClient.Open();
                 }
-                var SuccessfulLogin = await LocalServiceClient.ConnectAsync(C);
-                return SuccessfulLogin;
+                var successfulLogin = await LocalServiceClient.ConnectAsync(client);
+                return successfulLogin;
             }
             catch (FaultException exception)
             {
-                Forms.Login.CurrentInstance.errormessage.Text = "Got " + exception.GetType();
+                Login.CurrentInstance.Errormessage.Text = "Got " + exception.GetType();
                 CloseOrAbortServiceChannel(LocalServiceClient);
 
                 return false;
             }
             catch (CommunicationException)
             {
-                Forms.Login.CurrentInstance.errormessage.Text = "Server not Responding";
+                Login.CurrentInstance.Errormessage.Text = "Server not Responding";
                 CloseOrAbortServiceChannel(LocalServiceClient);
 
                 return false;
             }
             catch (TimeoutException exception)
             {
-                Forms.Login.CurrentInstance.errormessage.Text = "Got " + exception.GetType();
+                Login.CurrentInstance.Errormessage.Text = "Got " + exception.GetType();
                 CloseOrAbortServiceChannel(LocalServiceClient);
 
                 return false;
@@ -140,42 +129,39 @@ namespace SWN.Networking
                 MessageBox.Show(t.ToString());
                 CloseOrAbortServiceChannel(LocalServiceClient);
                 return false;
-                throw;
             }
         }
 
-
-        public async Task<bool> tryReg(Client C)
+        public async Task<bool> TryReg( Client client )
         {
             try
             {
                 if (LocalServiceClient == null)
                 {
-                    LocalServiceClient = new SWNServiceClient(new InstanceContext(this), "netTcpBinding",
-                        "net.tcp://" + SettingHandler.GetIpPort() + "/swnservice");
+                    LocalServiceClient = new SwnServiceClient(new InstanceContext(this), "netTcpBinding", "net.tcp://" + SettingHandler.GetIpPort() + "/SwnService");
                 }
                 if (LocalServiceClient.State != CommunicationState.Opened)
                 {
                     LocalServiceClient.Open();
                 }
-                var Successfulreg = await LocalServiceClient.RegisterAsync(C);
-                return Successfulreg;
+                var successfulreg = await LocalServiceClient.RegisterAsync(client);
+                return successfulreg;
             }
             catch (FaultException exception)
             {
-                Forms.Login.CurrentInstance.errormessage.Text = "Got " + exception.GetType();
+                Login.CurrentInstance.Errormessage.Text = "Got " + exception.GetType();
                 CloseOrAbortServiceChannel(LocalServiceClient);
                 return false;
             }
             catch (CommunicationException)
             {
-                Forms.Login.CurrentInstance.errormessage.Text = "Server not Responding";
+                Login.CurrentInstance.Errormessage.Text = "Server not Responding";
                 CloseOrAbortServiceChannel(LocalServiceClient);
                 return false;
             }
             catch (TimeoutException exception)
             {
-                Forms.Login.CurrentInstance.errormessage.Text = "Got " + exception.GetType();
+                Login.CurrentInstance.Errormessage.Text = "Got " + exception.GetType();
                 CloseOrAbortServiceChannel(LocalServiceClient);
                 return false;
             }
@@ -184,17 +170,16 @@ namespace SWN.Networking
                 MessageBox.Show(t.ToString());
                 CloseOrAbortServiceChannel(LocalServiceClient);
                 return false;
-                throw;
             }
         }
 
-        public void SendMessageToServer(string Message, string Username)
+        public void SendMessageToServer( string message, string username )
         {
             var m = new Message
             {
-                Sender = Username,
+                Sender = username,
                 Time = DateTime.Now,
-                Content = Message
+                Content = message
             };
             LocalServiceClient.SendMessage(m);
         }
@@ -206,7 +191,7 @@ namespace SWN.Networking
 
         #region Server Callbacks
 
-        public void RefreshClients(List<string> clients)
+        public void RefreshClients( List<string> clients )
         {
             if (MainWindow.CurrentInstance != null)
             {
@@ -214,25 +199,25 @@ namespace SWN.Networking
             }
         }
 
-        public void UserJoin(Client c)
+        public void UserJoin( Client client )
         {
             if (MainWindow.CurrentInstance != null)
             {
-                MainWindow.CurrentInstance.UpdateChatWindow("Server: " + c.UserName + " has Joined!");
+                MainWindow.CurrentInstance.UpdateChatWindow("Server: " + client.UserName + " has Joined!");
             }
         }
 
-        public void UserLeft(Client c)
+        public void UserLeft( Client client )
         {
-            MainWindow.CurrentInstance.UpdateChatWindow("Server: " + c.UserName + " has Left!");
+            MainWindow.CurrentInstance.UpdateChatWindow("Server: " + client.UserName + " has Left!");
         }
 
-        public void Receive(Message m)
+        public void Receive( Message message )
         {
-            MainWindow.CurrentInstance.UpdateChatWindow(m.Sender + ": " + m.Content);
+            MainWindow.CurrentInstance.UpdateChatWindow(message.Sender + ": " + message.Content);
         }
 
-        public void CloseOrAbortServiceChannel(ICommunicationObject communicationObject)
+        public void CloseOrAbortServiceChannel( ICommunicationObject communicationObject )
         {
             var isClosed = false;
 
@@ -243,11 +228,12 @@ namespace SWN.Networking
 
             try
             {
-                if (communicationObject.State != CommunicationState.Faulted)
+                if (communicationObject.State == CommunicationState.Faulted)
                 {
-                    communicationObject.Close();
-                    isClosed = true;
+                    return;
                 }
+                communicationObject.Close();
+                isClosed = true;
             }
             catch (CommunicationException)
             {
@@ -259,12 +245,6 @@ namespace SWN.Networking
                 // Catch this expected exception so it is not propagated further.
                 // Perhaps write this exception out to log file for gathering statistics...
             }
-            catch (Exception)
-            {
-                // An unexpected exception that we don't know how to handle.
-                // Perhaps write this exception out to log file for support purposes...
-                throw;
-            }
             finally
             {
                 // If State was Faulted or any exception occurred while doing the Close(), then do an Abort()
@@ -275,7 +255,7 @@ namespace SWN.Networking
             }
         }
 
-        private static void AbortServiceChannel(ICommunicationObject communicationObject)
+        private static void AbortServiceChannel( ICommunicationObject communicationObject )
         {
             try
             {
@@ -284,25 +264,23 @@ namespace SWN.Networking
             }
             catch (Exception)
             {
+                // ignored
             }
         }
 
         public bool CheckConnection()
         {
-            var AllGood = false;
-            if (LocalServiceClient != null)
+            if (LocalServiceClient == null)
             {
-                if (LocalServiceClient.State == CommunicationState.Faulted ||
-                    LocalServiceClient.State == CommunicationState.Closed ||
-                    LocalServiceClient.State == CommunicationState.Closing ||
-                    LocalServiceClient.InnerDuplexChannel.State == CommunicationState.Faulted)
-                {
-                    HandleProxy();
-                    return AllGood;
-                }
-                AllGood = true;
+                return false;
             }
-            return AllGood;
+            if (LocalServiceClient.State != CommunicationState.Faulted && LocalServiceClient.State != CommunicationState.Closed && LocalServiceClient.State != CommunicationState.Closing &&
+                LocalServiceClient.InnerDuplexChannel.State != CommunicationState.Faulted)
+            {
+                return true;
+            }
+            HandleProxy();
+            return false;
         }
 
         public void HandleProxy()
@@ -313,7 +291,7 @@ namespace SWN.Networking
                 {
                     case CommunicationState.Closed:
                         LocalServiceClient = null;
-                        MainWindow.CurrentInstance.lbUserOnline.Items.Clear();
+                        MainWindow.CurrentInstance.LbUserOnline.Items.Clear();
                         MessageBox.Show("Connection to Server Closed");
                         break;
                     case CommunicationState.Closing:
@@ -323,8 +301,8 @@ namespace SWN.Networking
                     case CommunicationState.Faulted:
                         LocalServiceClient.Abort();
                         LocalServiceClient = null;
-                        MainWindow.CurrentInstance.lbUserOnline.ItemsSource = null;
-                        MainWindow.CurrentInstance.lbUserOnline.Items.Clear();
+                        MainWindow.CurrentInstance.LbUserOnline.ItemsSource = null;
+                        MainWindow.CurrentInstance.LbUserOnline.Items.Clear();
                         MessageBox.Show("Connection to Server Lost");
                         MainWindow.CurrentInstance.Close();
                         break;
@@ -332,8 +310,6 @@ namespace SWN.Networking
                         MessageBox.Show("Connected");
                         break;
                     case CommunicationState.Opening:
-                        break;
-                    default:
                         break;
                 }
             }
@@ -346,13 +322,11 @@ namespace SWN.Networking
             LocalServiceClient.Close();
             MessageBox.Show("Server in Shutdown-Mode.Closing...");
             Environment.Exit(0);
-            Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
-            Application.Current.Shutdown();
         }
 
-        public void SendStarSystem(StarSystems System)
+        public void SendStarSystem( StarSystems system )
         {
-            XmlHandler.SerializeSystem(System);
+            XmlHandler.SerializeSystem(system);
         }
 
         public void KickUser()
@@ -363,13 +337,11 @@ namespace SWN.Networking
             LocalServiceClient.Close();
             MessageBox.Show("You were kicked from the Server");
             Environment.Exit(0);
-            Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
-            Application.Current.Shutdown();
         }
 
-        public void SendDateTime(DateTime Increment)
+        public void SendDateTime( DateTime increment )
         {
-            var CurrentDateTime = SettingHandler.GetCurrentDateTime();
+            SettingHandler.GetCurrentDateTime();
         }
 
         #endregion

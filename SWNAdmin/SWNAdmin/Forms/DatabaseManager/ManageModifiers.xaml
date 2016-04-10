@@ -21,14 +21,14 @@
                        VerticalAlignment="Top" />
                 <Label Content="Group:" HorizontalAlignment="Left" Margin="8,150,0,0"
                        VerticalAlignment="Top" />
-                <Label  Content="Id" HorizontalAlignment="Left" Margin="8,37,0,0" VerticalAlignment="Top" />
-                <Label  Content="Modifier Name:" HorizontalAlignment="Left" Margin="8,65,0,0"
+                <Label Content="Id" HorizontalAlignment="Left" Margin="8,37,0,0" VerticalAlignment="Top" />
+                <Label Content="Modifier Name:" HorizontalAlignment="Left" Margin="8,65,0,0"
                        VerticalAlignment="Top" />
-                <Label  Content="Existing Modifier:" HorizontalAlignment="Left" Margin="8,12,0,0"
+                <Label Content="Existing Modifier:" HorizontalAlignment="Left" Margin="8,12,0,0"
                        VerticalAlignment="Top" />
-                <Label  Content="Notes:" HorizontalAlignment="Left" Margin="8,93,0,0"
+                <Label Content="Notes:" HorizontalAlignment="Left" Margin="8,93,0,0"
                        VerticalAlignment="Top" />
-                <Label  Content="Property" HorizontalAlignment="Left" Margin="8,121,0,0"
+                <Label Content="Property" HorizontalAlignment="Left" Margin="8,121,0,0"
                        VerticalAlignment="Top" />
 
                 <ComboBox x:Name="CbExistingModifier" HorizontalAlignment="Left" Margin="104,10,0,0"
@@ -55,11 +55,11 @@
                         Visibility="Hidden" />
                 <Button x:Name="BtAdd" Content="Add" Margin="0,0,10,10" Click="btAdd_Click" Height="18"
                         VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" />
-                <Button x:Name="BtDelete" Content="Delete" HorizontalAlignment="Left" Margin="8,0,0,10" Width="75"
+                <Button x:Name="BtDelete" Content="delete" HorizontalAlignment="Left" Margin="8,0,0,10" Width="75"
                         Click="btDelete_Click" IsEnabled="False" Height="18" VerticalAlignment="Bottom" />
-                <Button x:Name="btClear" Content="Clear" HorizontalAlignment="Left" Margin="430,15,0,0"
+                <Button x:Name="BtClear" Content="Clear" HorizontalAlignment="Left" Margin="430,15,0,0"
                         VerticalAlignment="Top" Width="75" Click="btClear_Click" />
-                <Button x:Name="btCopy" Content="Copy" HorizontalAlignment="Left" Margin="385,15,0,0"
+                <Button x:Name="BtCopy" Content="Copy" HorizontalAlignment="Left" Margin="385,15,0,0"
                         VerticalAlignment="Top" Width="40" Click="btCopy_Click" />
             </Grid>
         </TabItem>

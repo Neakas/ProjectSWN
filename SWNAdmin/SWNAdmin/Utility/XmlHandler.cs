@@ -1,59 +1,56 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 using SWNAdmin.Controller;
 using UniverseGeneration.Stellar_Bodies;
 
 namespace SWNAdmin.Utility
 {
-    internal class XmlHandler
+    internal static class XmlHandler
     {
-        public static XElement CreateNode(string ElementName)
+        public static string GrabXmlValue( XDocument document, string element )
         {
-            var xEle = new XElement(ElementName);
-            return xEle;
-        }
-
-        public static XElement CreateNode(string ElementName, string Content)
-        {
-            var xEle = new XElement(ElementName, Content);
-            return xEle;
-        }
-
-        public static string GrabXMLValue(XDocument Document, string Element)
-        {
-            var Value = "";
-            foreach (var xEle in Document.Element("body").Elements())
+            var value = "";
+            var xElements = document?.Element("body")?.Elements().Where(xEle => xEle?.Name == element);
+            if (xElements == null)
             {
-                if (xEle.Name == Element)
+                return value;
+            }
+            {
+                foreach (var xEle in xElements)
                 {
-                    Value = xEle.Value;
-                    return Value;
+                    value = xEle.Value;
+                    return value;
                 }
             }
-            return Value;
+            return value;
         }
 
-        public static XDocument SetXmlValue(XDocument Document, string Element, string Value)
+        public static XDocument SetXmlValue( XDocument document, string element, string value )
         {
-            foreach (var xEle in Document.Element("body").Elements())
+            var xElements = document?.Element("body")?.Elements().Where(xEle => xEle.Name == element);
+            if (xElements == null)
             {
-                if (xEle.Name == Element)
+                return document;
+            }
+            {
+                foreach (var xEle in xElements)
                 {
-                    xEle.Value = Value;
-                    Document.Save(SettingHandler.SettingPath());
+                    xEle.Value = value;
+                    document.Save(SettingHandler.SettingPath());
                 }
             }
-            return Document;
+            return document;
         }
 
-        public static void ExportSystemToXml(StarSystem System, string Path)
+        public static void ExportSystemToXml( StarSystem system, string path )
         {
-            if (!File.Exists(Path))
+            if (!File.Exists(path))
             {
-                File.Create(Path).Close();
+                File.Create(path).Close();
             }
-            var XDoc = new XDocument(new XElement("StarSystem", new XAttribute("Name", System.sysName)));
-            XDoc.Save(Path);
+            var xDoc = new XDocument(new XElement("StarSystem", new XAttribute("Name", system.SysName)));
+            xDoc.Save(path);
         }
     }
 }

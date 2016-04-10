@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:SWN.UserControls"
              xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
              themes:ThemeManager.Theme="ExpressionDark"
              mc:Ignorable="d" Height="60.882" Width="313.236">
@@ -12,23 +11,23 @@
     <Grid Background="Black">
         <Rectangle>
             <Rectangle.Fill>
-                <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
+                <SolidColorBrush Color="{DynamicResource SwnBackgroundDark}" />
             </Rectangle.Fill>
         </Rectangle>
-        <Label x:Name="lblLanguage" Content="Language:" HorizontalAlignment="Left" Margin="10,10,0,0"
+        <Label x:Name="LblLanguage" Content="Language:" HorizontalAlignment="Left" Margin="10,10,0,0"
                VerticalAlignment="Top" Height="18" Width="55" FontStyle="Italic" />
-        <Label x:Name="lblSpoken" Content="Spoken:" HorizontalAlignment="Left" Margin="137,10,0,0"
+        <Label x:Name="LblSpoken" Content="Spoken:" HorizontalAlignment="Left" Margin="137,10,0,0"
                VerticalAlignment="Top" Height="18" Width="55" FontStyle="Italic" />
-        <Label x:Name="lblWritten" Content="Written:" HorizontalAlignment="Left" Margin="249,10,0,0"
+        <Label x:Name="LblWritten" Content="Written:" HorizontalAlignment="Left" Margin="249,10,0,0"
                VerticalAlignment="Top" Height="18" Width="55" FontStyle="Italic" />
-        <Label x:Name="lblLanguageValue" Content="{Binding Path=SpokenLanguage, ElementName=LanguageControl1}"
-               HorizontalAlignment="Left" Margin="23,30,0,0" VerticalAlignment="Top" Grid.Row="1" Height="16"
+        <Label x:Name="LblLanguageValue" Content="{Binding Path=SpokenLanguage, ElementName=LanguageControl1}"
+               HorizontalAlignment="Left" Margin="23,30,0,0" VerticalAlignment="Top" Height="16"
                Width="22" />
-        <Label x:Name="lblSpokenValue" Content="{Binding Path=Spoken, ElementName=LanguageControl1}"
-               HorizontalAlignment="Left" Margin="146,30,0,0" VerticalAlignment="Top" Grid.Row="1" Height="16"
+        <Label x:Name="LblSpokenValue" Content="{Binding Path=Spoken, ElementName=LanguageControl1}"
+               HorizontalAlignment="Left" Margin="146,30,0,0" VerticalAlignment="Top" Height="16"
                Width="22" />
-        <Label x:Name="lblWrittenValue" Content="{Binding Path=Written, ElementName=LanguageControl1}"
-               HorizontalAlignment="Left" Margin="260,30,0,0" VerticalAlignment="Top" Grid.Row="1" Height="16"
+        <Label x:Name="LblWrittenValue" Content="{Binding Path=Written, ElementName=LanguageControl1}"
+               HorizontalAlignment="Left" Margin="260,30,0,0" VerticalAlignment="Top" Height="16"
                Width="22" />
     </Grid>
 </UserControl>

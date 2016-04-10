@@ -1,7 +1,7 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using SWNAdmin.Utility;
-using System.Linq;
 
 namespace SWNAdmin.Forms.DatabaseManager
 {
@@ -26,7 +26,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             LbStats.SelectedValuePath = "Id";
         }
 
-        private void btAdd_Click(object sender, RoutedEventArgs e)
+        private void btAdd_Click( object sender, RoutedEventArgs e )
         {
             var findcontext = new Db1Entities();
             var query = from c in findcontext.Attribute where c.Name == TbStat.Text select c;
@@ -41,7 +41,10 @@ namespace SWNAdmin.Forms.DatabaseManager
                 {
                     using (var context = new Db1Entities())
                     {
-                        var newStat = new Attribute {Name = TbStat.Text};
+                        var newStat = new Attribute
+                        {
+                            Name = TbStat.Text
+                        };
                         context.Attribute.Add(newStat);
                         context.SaveChanges();
                     }
@@ -56,7 +59,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             }
         }
 
-        private void btDel_Click(object sender, RoutedEventArgs e)
+        private void btDel_Click( object sender, RoutedEventArgs e )
         {
             var context = new Db1Entities();
             var query = from c in context.Attribute where c.Name == TbStat.Text select c;
@@ -82,10 +85,13 @@ namespace SWNAdmin.Forms.DatabaseManager
             }
         }
 
-        private void lbStats_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void lbStats_MouseDoubleClick( object sender, MouseButtonEventArgs e )
         {
             var selectedStat = LbStats.SelectedItem as Attribute;
-            if (selectedStat != null) TbStat.Text = selectedStat.Name;
+            if (selectedStat != null)
+            {
+                TbStat.Text = selectedStat.Name;
+            }
         }
     }
 }

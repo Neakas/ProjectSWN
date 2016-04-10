@@ -3,53 +3,44 @@ using UniverseGeneration.Stellar_Bodies;
 
 namespace UniverseGeneration.Range_Objects
 {
-    public class forbiddenZone : Range
+    public class ForbiddenZone : Range
     {
-        public int primaryStar { get; set; }
-        public int secondaryStar { get; set; }
-
-        public forbiddenZone(double lower, double upper, int primary, int secondary)
-            : base(lower, upper)
+        public ForbiddenZone( double lower, double upper, int primary, int secondary ) : base(lower, upper)
         {
-            this.primaryStar = primary;
-            this.secondaryStar = secondary;
+            PrimaryStar = primary;
+            SecondaryStar = secondary;
         }
 
-        public forbiddenZone(Range incoming, int primary, int secondary)
-            : base(incoming)
+        public ForbiddenZone( Range incoming, int primary, int secondary ) : base(incoming)
         {
-            this.primaryStar = primary;
-            this.secondaryStar = secondary;
+            PrimaryStar = primary;
+            SecondaryStar = secondary;
         }
 
         //copy constructor
-        public forbiddenZone(forbiddenZone r)
-            : base(r.lowerBound, r.upperBound)
+        public ForbiddenZone( ForbiddenZone r ) : base(r.LowerBound, r.UpperBound)
         {
-            this.primaryStar = r.primaryStar;
-            this.secondaryStar = r.secondaryStar;
+            PrimaryStar = r.PrimaryStar;
+            SecondaryStar = r.SecondaryStar;
         }
 
-        private forbiddenZone() { }
-        public Range getRange()
+        public int PrimaryStar { get; set; }
+        public int SecondaryStar { get; set; }
+
+        public Range GetRange()
         {
-            return new Range(this.lowerBound, this.upperBound);
+            return new Range(LowerBound, UpperBound);
         }
 
-        public override bool withinRange(double number)
+        public override bool WithinRange( double number )
         {
-            if (lowerBound < number && number < upperBound)
-            {
-                return true;
-            }
-
-            return false;
+            return LowerBound < number && number < UpperBound;
         }
 
-        public override String ToString()
+        public override string ToString()
         {
-            String ret = "This forbidden zone is from " + this.lowerBound + " to " + this.upperBound + " AU";
-            ret = ret + Environment.NewLine + "      " + "From star " + Star.getDescSelfFlag(this.primaryStar) + " to " + Star.getDescSelfFlag(this.secondaryStar);
+            var ret = "This forbidden zone is from " + LowerBound + " to " + UpperBound + " AU";
+            ret = ret + Environment.NewLine + "      " + "From star " + Star.GetDescSelfFlag(PrimaryStar) + " to " + Star.GetDescSelfFlag(SecondaryStar);
 
             return ret;
         }

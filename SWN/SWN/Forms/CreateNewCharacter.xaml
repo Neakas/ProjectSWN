@@ -3,183 +3,182 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:SWN.Forms"
     themes:ThemeManager.Theme="ExpressionDark"
     xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-    xmlns:UserControls="clr-namespace:SWN.UserControls" x:Class="SWN.Forms.CreateNewCharacter"
+    x:Class="SWN.Forms.CreateNewCharacter"
     mc:Ignorable="d"
     Title="CreateNewCharacter" Height="669.5" Width="964" WindowState="Maximized">
     <Window.Background>
-        <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
+        <SolidColorBrush Color="{DynamicResource SwnBackgroundDark}" />
     </Window.Background>
     <Grid x:Name="GridMain">
 
-        <TabControl x:Name="tabControl" Margin="10,10,11,37">
+        <TabControl x:Name="TabControl" Margin="10,10,11,37">
             <TabItem Header="Main Stats" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="70">
                 <Grid>
                     <Grid.Background>
-                        <SolidColorBrush Color="{DynamicResource SWNBackgroundColorLight}" />
+                        <SolidColorBrush Color="{DynamicResource SwnBackgroundColorLight}" />
                     </Grid.Background>
-                    <Border x:Name="borderPersonal" Margin="10,8,0,0" BorderThickness="2" BorderBrush="Black"
+                    <Border x:Name="BorderPersonal" Margin="10,8,0,0" BorderThickness="2" BorderBrush="Black"
                             Height="76" VerticalAlignment="Top" HorizontalAlignment="Left" Width="538">
                         <Grid x:Name="GridPersonal">
-                            <Label x:Name="lName" Content="Name:" HorizontalAlignment="Left" Margin="10,13,0,0"
+                            <Label x:Name="LName" Content="Name:" HorizontalAlignment="Left" Margin="10,13,0,0"
                                    VerticalAlignment="Top" />
-                            <TextBox x:Name="tbName" HorizontalAlignment="Left" Height="23" Margin="49,10,0,0"
+                            <TextBox x:Name="TbName" HorizontalAlignment="Left" Height="23" Margin="49,10,0,0"
                                      TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Name}" />
-                            <Label x:Name="lPlayer" Content="Player:" HorizontalAlignment="Left" Margin="10,41,0,0"
+                            <Label x:Name="LPlayer" Content="Player:" HorizontalAlignment="Left" Margin="10,41,0,0"
                                    VerticalAlignment="Top" />
-                            <TextBox x:Name="tbPlayer" HorizontalAlignment="Left" Height="23" Margin="49,38,0,0"
+                            <TextBox x:Name="TbPlayer" HorizontalAlignment="Left" Height="23" Margin="49,38,0,0"
                                      TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"
                                      Focusable="False" Text="{Binding PlayerName}" />
 
-                            <Label x:Name="lAge" Content="Age:" HorizontalAlignment="Left" Margin="185,41,0,0"
+                            <Label x:Name="LAge" Content="Age:" HorizontalAlignment="Left" Margin="185,41,0,0"
                                    VerticalAlignment="Top" />
-                            <TextBox x:Name="tbAge" HorizontalAlignment="Left" Height="23" Margin="214,38,0,0"
+                            <TextBox x:Name="TbAge" HorizontalAlignment="Left" Height="23" Margin="214,38,0,0"
                                      TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Age}" />
-                            <Label x:Name="lPoints" Content="Points:" HorizontalAlignment="Left" Margin="175,13,0,0"
+                            <Label x:Name="LPoints" Content="_Points:" HorizontalAlignment="Left" Margin="175,13,0,0"
                                    VerticalAlignment="Top" />
-                            <TextBox x:Name="tbPoints" HorizontalAlignment="Left" Height="23" Margin="214,10,0,0"
+                            <TextBox x:Name="TbPoints" HorizontalAlignment="Left" Height="23" Margin="214,10,0,0"
                                      TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"
                                      Focusable="False" Text="{Binding PointTotal}" />
-                            <Label x:Name="lHeight" Content="Height:" HorizontalAlignment="Left" Margin="346,13,0,0"
+                            <Label x:Name="LHeight" Content="Height:" HorizontalAlignment="Left" Margin="346,13,0,0"
                                    VerticalAlignment="Top" />
-                            <TextBox x:Name="tbHeight" HorizontalAlignment="Left" Height="23" Margin="389,10,0,0"
+                            <TextBox x:Name="TbHeight" HorizontalAlignment="Left" Height="23" Margin="389,10,0,0"
                                      TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.00" />
-                            <Label x:Name="lWeight" Content="Weight:" HorizontalAlignment="Left" Margin="343,41,0,0"
+                            <Label x:Name="LWeight" Content="Weight:" HorizontalAlignment="Left" Margin="343,41,0,0"
                                    VerticalAlignment="Top" />
-                            <TextBox x:Name="tbWeight" HorizontalAlignment="Left" Height="23" Margin="389,38,0,0"
+                            <TextBox x:Name="TbWeight" HorizontalAlignment="Left" Height="23" Margin="389,38,0,0"
                                      TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0" />
                         </Grid>
                     </Border>
-                    <Border x:Name="borderStats" Margin="10,90,0,0" BorderThickness="2" BorderBrush="Black"
+                    <Border x:Name="BorderStats" Margin="10,90,0,0" BorderThickness="2" BorderBrush="Black"
                             HorizontalAlignment="Left" Width="345" Height="128" VerticalAlignment="Top">
                         <Grid x:Name="GridStats">
-                            <Label x:Name="lStrenght" Content="Str:" HorizontalAlignment="Left" Margin="10,10,0,0"
+                            <Label x:Name="LStrenght" Content="Str:" HorizontalAlignment="Left" Margin="10,10,0,0"
                                    VerticalAlignment="Top" />
-                            <xctk:IntegerUpDown x:Name="iudStrenght" HorizontalAlignment="Left" Height="23"
+                            <xctk:IntegerUpDown x:Name="IudStrenght" HorizontalAlignment="Left" Height="23"
                                                 Margin="32,7,0,0" VerticalAlignment="Top" Width="44" Focusable="False"
                                                 Text="{Binding Strenght}" Foreground="White" AllowTextInput="False"
                                                 ValueChanged="iudStrenght_ValueChanged" Minimum="1">
                                 <xctk:IntegerUpDown.Background>
-                                    <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
+                                    <SolidColorBrush Color="{DynamicResource SwnBackgroundDark}" />
                                 </xctk:IntegerUpDown.Background>
                             </xctk:IntegerUpDown>
-                            <Label x:Name="lDexterity" Content="Dex:" HorizontalAlignment="Left" Margin="4,38,0,0"
+                            <Label x:Name="LDexterity" Content="Dex:" HorizontalAlignment="Left" Margin="4,38,0,0"
                                    VerticalAlignment="Top" />
-                            <xctk:IntegerUpDown x:Name="iudDexterity" HorizontalAlignment="Left" Height="23"
+                            <xctk:IntegerUpDown x:Name="IudDexterity" HorizontalAlignment="Left" Height="23"
                                                 Margin="32,35,0,0" VerticalAlignment="Top" Width="44" Focusable="False"
                                                 Text="{Binding Dexterity}" Foreground="White" AllowTextInput="False"
                                                 Minimum="1" ValueChanged="iudDexterity_ValueChanged">
                                 <xctk:IntegerUpDown.Background>
-                                    <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
+                                    <SolidColorBrush Color="{DynamicResource SwnBackgroundDark}" />
                                 </xctk:IntegerUpDown.Background>
                             </xctk:IntegerUpDown>
-                            <Label x:Name="lIntelligence" Content="Int:" HorizontalAlignment="Left" Margin="10,66,0,0"
+                            <Label x:Name="LIntelligence" Content="Int:" HorizontalAlignment="Left" Margin="10,66,0,0"
                                    VerticalAlignment="Top" />
-                            <xctk:IntegerUpDown x:Name="iudIntelligence" HorizontalAlignment="Left" Height="23"
+                            <xctk:IntegerUpDown x:Name="IudIntelligence" HorizontalAlignment="Left" Height="23"
                                                 Margin="32,63,0,0" VerticalAlignment="Top" Width="44" Focusable="False"
                                                 Text="{Binding Intelligence}" Foreground="White" AllowTextInput="False"
                                                 Minimum="1" ValueChanged="iudIntelligence_ValueChanged">
                                 <xctk:IntegerUpDown.Background>
-                                    <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
+                                    <SolidColorBrush Color="{DynamicResource SwnBackgroundDark}" />
                                 </xctk:IntegerUpDown.Background>
                             </xctk:IntegerUpDown>
-                            <Label x:Name="lHealth" Content="HT:" HorizontalAlignment="Left" Margin="10,94,0,0"
+                            <Label x:Name="LHealth" Content="HT:" HorizontalAlignment="Left" Margin="10,94,0,0"
                                    VerticalAlignment="Top" />
-                            <xctk:IntegerUpDown x:Name="iudHealth" HorizontalAlignment="Left" Height="23"
+                            <xctk:IntegerUpDown x:Name="IudHealth" HorizontalAlignment="Left" Height="23"
                                                 Margin="32,91,0,0" VerticalAlignment="Top" Width="44" Focusable="False"
                                                 Text="{Binding Health}" Foreground="White" AllowTextInput="False"
                                                 Minimum="1" ValueChanged="iudHealth_ValueChanged">
                                 <xctk:IntegerUpDown.Background>
-                                    <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
+                                    <SolidColorBrush Color="{DynamicResource SwnBackgroundDark}" />
                                 </xctk:IntegerUpDown.Background>
                             </xctk:IntegerUpDown>
-                            <Label x:Name="lHitpoints" Content="HP:" HorizontalAlignment="Left" Margin="88,10,0,0"
+                            <Label x:Name="LHitpoints" Content="HP:" HorizontalAlignment="Left" Margin="88,10,0,0"
                                    VerticalAlignment="Top" />
-                            <xctk:IntegerUpDown x:Name="iudHitPoints" HorizontalAlignment="Left" Height="23"
+                            <xctk:IntegerUpDown x:Name="IudHitPoints" HorizontalAlignment="Left" Height="23"
                                                 Margin="110,7,0,0" VerticalAlignment="Top" Width="44" Focusable="False"
                                                 Text="" Foreground="White" AllowTextInput="False" Minimum="1"
                                                 ValueChanged="iudHitPoints_ValueChanged">
                                 <xctk:IntegerUpDown.Background>
-                                    <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
+                                    <SolidColorBrush Color="{DynamicResource SwnBackgroundDark}" />
                                 </xctk:IntegerUpDown.Background>
                             </xctk:IntegerUpDown>
-                            <Label x:Name="lWillPower" Content="Will:" HorizontalAlignment="Left" Margin="83,38,0,0"
+                            <Label x:Name="LWillPower" Content="Will:" HorizontalAlignment="Left" Margin="83,38,0,0"
                                    VerticalAlignment="Top" />
-                            <xctk:IntegerUpDown x:Name="iudWillPower" HorizontalAlignment="Left" Height="23"
+                            <xctk:IntegerUpDown x:Name="IudWillPower" HorizontalAlignment="Left" Height="23"
                                                 Margin="110,35,0,0" VerticalAlignment="Top" Width="44"
                                                 Focusable="False" Text="{Binding WillPower}" Foreground="White"
                                                 AllowTextInput="False" Minimum="1"
                                                 ValueChanged="iudWillPower_ValueChanged">
                                 <xctk:IntegerUpDown.Background>
-                                    <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
+                                    <SolidColorBrush Color="{DynamicResource SwnBackgroundDark}" />
                                 </xctk:IntegerUpDown.Background>
                             </xctk:IntegerUpDown>
-                            <Label x:Name="lPerception" Content="Per:" HorizontalAlignment="Left" Margin="85,66,0,0"
+                            <Label x:Name="LPerception" Content="Per:" HorizontalAlignment="Left" Margin="85,66,0,0"
                                    VerticalAlignment="Top" />
-                            <xctk:IntegerUpDown x:Name="iudPerception" HorizontalAlignment="Left" Height="23"
+                            <xctk:IntegerUpDown x:Name="IudPerception" HorizontalAlignment="Left" Height="23"
                                                 Margin="110,63,0,0" VerticalAlignment="Top" Width="44"
                                                 Focusable="False" Text="{Binding Perception}" Foreground="White"
                                                 AllowTextInput="False" Minimum="1"
                                                 ValueChanged="iudPerception_ValueChanged">
                                 <xctk:IntegerUpDown.Background>
-                                    <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
+                                    <SolidColorBrush Color="{DynamicResource SwnBackgroundDark}" />
                                 </xctk:IntegerUpDown.Background>
                             </xctk:IntegerUpDown>
-                            <Label x:Name="lFatiguePoints" Content="FP:" HorizontalAlignment="Left" Margin="90,94,0,0"
+                            <Label x:Name="LFatiguePoints" Content="FP:" HorizontalAlignment="Left" Margin="90,94,0,0"
                                    VerticalAlignment="Top" />
-                            <xctk:IntegerUpDown x:Name="iudFatiguePoints" HorizontalAlignment="Left" Height="23"
+                            <xctk:IntegerUpDown x:Name="IudFatiguePoints" HorizontalAlignment="Left" Height="23"
                                                 Margin="110,91,0,0" VerticalAlignment="Top" Width="44"
                                                 Focusable="False" Text="{Binding FatiguePoints}" Foreground="White"
                                                 AllowTextInput="False" Minimum="1"
                                                 ValueChanged="iudFatiguePoints_ValueChanged">
                                 <xctk:IntegerUpDown.Background>
-                                    <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
+                                    <SolidColorBrush Color="{DynamicResource SwnBackgroundDark}" />
                                 </xctk:IntegerUpDown.Background>
                             </xctk:IntegerUpDown>
-                            <Label x:Name="lBasicLift" Content="Basic Lift:" HorizontalAlignment="Left"
+                            <Label x:Name="LBasicLift" Content="Basic Lift:" HorizontalAlignment="Left"
                                    Margin="174,10,0,0" VerticalAlignment="Top" />
-                            <TextBox x:Name="tbBasicLift" HorizontalAlignment="Left" Height="23" Margin="228,7,0,0"
+                            <TextBox x:Name="TbBasicLift" HorizontalAlignment="Left" Height="23" Margin="228,7,0,0"
                                      VerticalAlignment="Top" Width="53" Focusable="False" Text="{Binding BasicLift}"
                                      Foreground="White" IsReadOnly="True" />
-                            <Label x:Name="lBasicSpeed" Content="Basic Speed:" HorizontalAlignment="Left"
+                            <Label x:Name="LBasicSpeed" Content="Basic Speed:" HorizontalAlignment="Left"
                                    Margin="158,38,0,0" VerticalAlignment="Top" />
-                            <xctk:DoubleUpDown x:Name="iudBasicSpeed" HorizontalAlignment="Left" Height="23"
+                            <xctk:DoubleUpDown x:Name="IudBasicSpeed" HorizontalAlignment="Left" Height="23"
                                                Margin="228,35,0,0" VerticalAlignment="Top" Width="53" Focusable="False"
                                                Text="{Binding BasicSpeed}" Foreground="White" AllowTextInput="False"
                                                Minimum="1" Increment="0.25" ValueChanged="iudBasicSpeed_ValueChanged">
                                 <xctk:DoubleUpDown.Background>
-                                    <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
+                                    <SolidColorBrush Color="{DynamicResource SwnBackgroundDark}" />
                                 </xctk:DoubleUpDown.Background>
                             </xctk:DoubleUpDown>
-                            <Label x:Name="lBasicMove" Content="Basic Move:" HorizontalAlignment="Left"
+                            <Label x:Name="LBasicMove" Content="Basic Move:" HorizontalAlignment="Left"
                                    Margin="158,66,0,0" VerticalAlignment="Top" />
-                            <xctk:IntegerUpDown x:Name="iudBasicMove" HorizontalAlignment="Left" Height="23"
+                            <xctk:IntegerUpDown x:Name="IudBasicMove" HorizontalAlignment="Left" Height="23"
                                                 Margin="228,63,0,0" VerticalAlignment="Top" Width="53"
                                                 Focusable="False" Text="{Binding BasicMove}" Foreground="White"
                                                 AllowTextInput="False" Minimum="1"
                                                 ValueChanged="iudBasicMove_ValueChanged">
                                 <xctk:IntegerUpDown.Background>
-                                    <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
+                                    <SolidColorBrush Color="{DynamicResource SwnBackgroundDark}" />
                                 </xctk:IntegerUpDown.Background>
                             </xctk:IntegerUpDown>
 
                         </Grid>
                     </Border>
-                    <Border x:Name="borderBuild" Margin="360,90,0,0" BorderThickness="2" BorderBrush="Black"
+                    <Border x:Name="BorderBuild" Margin="360,90,0,0" BorderThickness="2" BorderBrush="Black"
                             HorizontalAlignment="Left" Width="362" Height="128" VerticalAlignment="Top">
-                        <Grid x:Name="gridBuild" HorizontalAlignment="Left" Height="134" VerticalAlignment="Top"
+                        <Grid x:Name="GridBuild" HorizontalAlignment="Left" Height="134" VerticalAlignment="Top"
                               Width="362" />
                     </Border>
 
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tabitemAdvantages" Header="Advantages">
+            <TabItem x:Name="TabitemAdvantages" Header="Advantages">
                 <Grid>
                     <Grid.Background>
-                        <SolidColorBrush Color="{DynamicResource SWNBackgroundColorLight}" />
+                        <SolidColorBrush Color="{DynamicResource SwnBackgroundColorLight}" />
                     </Grid.Background>
 
                     <Grid Margin="0,0,377,0">
@@ -187,12 +186,13 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="5" />
                             <RowDefinition Height="*" />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <ListBox x:Name="lbAdvantages" Margin="0,2,0,0"
+                        <ListBox x:Name="LbAdvantages" Margin="0,2,0,0"
                                  SelectionChanged="lbAdvantages_SelectionChanged" />
                         <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
-                        <DataGrid x:Name="dgBoughtAdvantages" BorderBrush="#FF151515" Background="#FF333333"
+                        <DataGrid x:Name="DgBoughtAdvantages" BorderBrush="#FF151515" Background="#FF333333"
                                   Grid.Row="2" Grid.RowSpan="2" MouseDoubleClick="dgBoughtAdvantages_MouseDoubleClick"
                                   SelectionChanged="dgBoughtAdvantages_SelectionChanged">
                             <DataGrid.Resources>
@@ -204,30 +204,30 @@
                         </DataGrid>
 
                     </Grid>
-                    <TextBox x:Name="tbAdvType" Height="27" Margin="0,28,0,0" TextWrapping="Wrap"
+                    <TextBox x:Name="TbAdvType" Height="27" Margin="0,28,0,0" TextWrapping="Wrap"
                              VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Right" Width="377" />
-                    <TextBlock x:Name="txtbAdvDiscription" Background="#FF787878" Margin="0,56,0,61"
+                    <TextBlock x:Name="TxtbAdvDiscription" Background="#FF787878" Margin="0,56,0,61"
                                HorizontalAlignment="Right" Width="377" />
-                    <TextBox x:Name="tbAdvPointCost" Margin="0,0,232,6" TextWrapping="Wrap" IsReadOnly="True"
+                    <TextBox x:Name="TbAdvPointCost" Margin="0,0,232,6" TextWrapping="Wrap" IsReadOnly="True"
                              HorizontalAlignment="Right" Width="67" Height="22" VerticalAlignment="Bottom" />
-                    <Button x:Name="btBuyAdv" Content="Buy" Margin="0,0,10,6" Click="btBuyAdv_Click"
+                    <Button x:Name="BtBuyAdv" Content="Buy" Margin="0,0,10,6" Click="btBuyAdv_Click"
                             HorizontalAlignment="Right" Width="112" Height="50" VerticalAlignment="Bottom" />
-                    <Label x:Name="lbladvLevel" Content="per Level" Margin="0,0,179,4" Height="16"
+                    <Label x:Name="LbladvLevel" Content="per Level" Margin="0,0,179,4" Height="16"
                            VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="48" Visibility="Hidden" />
-                    <TextBox x:Name="tbAdvReq" Margin="0,0,151,33" TextWrapping="Wrap" IsReadOnly="True"
+                    <TextBox x:Name="TbAdvReq" Margin="0,0,151,33" TextWrapping="Wrap" IsReadOnly="True"
                              HorizontalAlignment="Right" Width="148" Height="23" VerticalAlignment="Bottom" />
-                    <Label x:Name="label1" Content="Requirement" Margin="0,0,304,40" HorizontalAlignment="Right"
+                    <Label x:Name="Label1" Content="Requirement" Margin="0,0,304,40" HorizontalAlignment="Right"
                            Width="68" Height="16" VerticalAlignment="Bottom" />
-                    <Label x:Name="label1_Copy" Content="Cost" Margin="0,0,304,10" HorizontalAlignment="Right"
+                    <Label x:Name="Label1Copy" Content="cost" Margin="0,0,304,10" HorizontalAlignment="Right"
                            Width="24" Height="16" VerticalAlignment="Bottom" />
-                    <TextBox x:Name="tbAdvName" Height="27" Margin="0,2,0,0" TextWrapping="Wrap"
+                    <TextBox x:Name="TbAdvName" Height="27" Margin="0,2,0,0" TextWrapping="Wrap"
                              VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Right" Width="377" />
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tabitemDisadvantages" Header="Disadvantages">
+            <TabItem x:Name="TabitemDisadvantages" Header="Disadvantages">
                 <Grid>
                     <Grid.Background>
-                        <SolidColorBrush Color="{DynamicResource SWNBackgroundColorLight}" />
+                        <SolidColorBrush Color="{DynamicResource SwnBackgroundColorLight}" />
                     </Grid.Background>
                     <Grid Margin="0,0,377,0">
                         <Grid.RowDefinitions>
@@ -236,41 +236,41 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <ListBox x:Name="lbDisAdvantages" />
+                        <ListBox x:Name="LbDisAdvantages" />
                         <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
-                        <DataGrid x:Name="dgBoughtDisAdvantages" Grid.Row="2" BorderBrush="#FF1B1B1B">
+                        <DataGrid x:Name="DgBoughtDisAdvantages" Grid.Row="2" BorderBrush="#FF1B1B1B">
                             <DataGrid.Background>
-                                <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
+                                <SolidColorBrush Color="{DynamicResource SwnBackgroundDark}" />
                             </DataGrid.Background>
                         </DataGrid>
                     </Grid>
-                    <TextBox x:Name="tbDisAdvType" Height="27" Margin="0,28,0,0" TextWrapping="Wrap"
+                    <TextBox x:Name="TbDisAdvType" Height="27" Margin="0,28,0,0" TextWrapping="Wrap"
                              VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Right" Width="377" />
-                    <TextBlock x:Name="txtbDisAdvDiscription" Background="#FF787878" Margin="0,56,0,61"
+                    <TextBlock x:Name="TxtbDisAdvDiscription" Background="#FF787878" Margin="0,56,0,61"
                                HorizontalAlignment="Right" Width="377" />
-                    <TextBox x:Name="tbDisAdvPointCost" Margin="0,0,232,6" TextWrapping="Wrap" IsReadOnly="True"
+                    <TextBox x:Name="TbDisAdvPointCost" Margin="0,0,232,6" TextWrapping="Wrap" IsReadOnly="True"
                              HorizontalAlignment="Right" Width="67" Height="22" VerticalAlignment="Bottom" />
-                    <Button x:Name="btBuyDisAdv" Content="Buy" Margin="0,0,10,6" Click="btBuyAdv_Click"
+                    <Button x:Name="BtBuyDisAdv" Content="Buy" Margin="0,0,10,6" Click="btBuyAdv_Click"
                             IsEnabled="False" HorizontalAlignment="Right" Width="112" Height="50"
                             VerticalAlignment="Bottom" />
-                    <Label x:Name="lblDisadvLevel" Content="per Level" Margin="0,0,179,4" Height="16"
+                    <Label x:Name="LblDisadvLevel" Content="per Level" Margin="0,0,179,4" Height="16"
                            VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="48" Visibility="Hidden" />
-                    <TextBox x:Name="tbDisAdvReq" Margin="0,0,151,33" TextWrapping="Wrap" IsReadOnly="True"
+                    <TextBox x:Name="TbDisAdvReq" Margin="0,0,151,33" TextWrapping="Wrap" IsReadOnly="True"
                              HorizontalAlignment="Right" Width="148" Height="23" VerticalAlignment="Bottom" />
                     <Label x:Name="Dislabel1" Content="Requirement" Margin="0,0,304,40" HorizontalAlignment="Right"
                            Width="68" Height="16" VerticalAlignment="Bottom" />
-                    <Label x:Name="Dislabel1_Copy" Content="Cost" Margin="0,0,304,10" HorizontalAlignment="Right"
+                    <Label x:Name="Dislabel1Copy" Content="cost" Margin="0,0,304,10" HorizontalAlignment="Right"
                            Width="24" Height="16" VerticalAlignment="Bottom" />
-                    <TextBox x:Name="tbDisAdvName" Height="27" Margin="0,2,0,0" TextWrapping="Wrap"
+                    <TextBox x:Name="TbDisAdvName" Height="27" Margin="0,2,0,0" TextWrapping="Wrap"
                              VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Right" Width="377" />
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button x:Name="btSaveCharacter" Content="Save Character" HorizontalAlignment="Right" Margin="0,0,11,10"
+        <Button x:Name="BtSaveCharacter" Content="Save Character" HorizontalAlignment="Right" Margin="0,0,11,10"
                 Width="100" Click="btSaveCharacter_Click" Height="19" VerticalAlignment="Bottom" />
-        <Label x:Name="lPoints_Copy" Content="Points:" HorizontalAlignment="Left" Margin="732,10,0,0"
+        <Label x:Name="LPointsCopy" Content="_Points:" HorizontalAlignment="Left" Margin="732,10,0,0"
                VerticalAlignment="Top" />
-        <TextBox x:Name="tbLinkedPoints" HorizontalAlignment="Left" Height="24" Margin="771,6,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbLinkedPoints" HorizontalAlignment="Left" Height="24" Margin="771,6,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" IsReadOnly="True" Focusable="False" Text="{Binding PointTotal}" />
     </Grid>
 </Window>

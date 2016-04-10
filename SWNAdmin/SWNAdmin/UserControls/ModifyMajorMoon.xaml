@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:SWNAdmin.UserControls"
              mc:Ignorable="d"
              xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
              themes:ThemeManager.Theme="ExpressionDark"
@@ -12,153 +11,153 @@
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource SWNLightBackground}" />
         </Grid.Background>
-        <Label x:Name="lblMoonName" Content="Moon Name:" HorizontalAlignment="Left" Margin="10,10,0,0"
+        <Label x:Name="LblMoonName" Content="Moon Name:" HorizontalAlignment="Left" Margin="10,10,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonName" HorizontalAlignment="Left" Height="23" Margin="105,8,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonName" HorizontalAlignment="Left" Height="23" Margin="105,8,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonID" Content="Moon ID:" HorizontalAlignment="Left" Margin="10,40,0,0"
+        <Label x:Name="LblMoonId" Content="Moon Id:" HorizontalAlignment="Left" Margin="10,40,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonID" HorizontalAlignment="Left" Height="23" Margin="105,38,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonId" HorizontalAlignment="Left" Height="23" Margin="105,38,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" IsEnabled="False" />
-        <Label x:Name="lblMoonAge" Content="Moon Age:" HorizontalAlignment="Left" Margin="10,70,0,0"
+        <Label x:Name="LblMoonAge" Content="Moon Age:" HorizontalAlignment="Left" Margin="10,70,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonAge" HorizontalAlignment="Left" Height="23" Margin="105,68,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonAge" HorizontalAlignment="Left" Height="23" Margin="105,68,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" IsEnabled="False" />
-        <Label x:Name="lblMoonatmCate" Content="Atm Cate:" HorizontalAlignment="Left" Margin="10,100,0,0"
+        <Label x:Name="LblMoonatmCate" Content="Atm Cate:" HorizontalAlignment="Left" Margin="10,100,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonatmCate" HorizontalAlignment="Left" Height="23" Margin="105,98,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonatmCate" HorizontalAlignment="Left" Height="23" Margin="105,98,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonOrder" Content="Moon Order:" HorizontalAlignment="Left" Margin="10,130,0,0"
+        <Label x:Name="LblMoonOrder" Content="Moon Order:" HorizontalAlignment="Left" Margin="10,130,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonOrder" HorizontalAlignment="Left" Height="23" Margin="105,128,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonOrder" HorizontalAlignment="Left" Height="23" Margin="105,128,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" IsEnabled="False" />
-        <Label x:Name="lblMoonatmMass" Content="Atm. Mass:" HorizontalAlignment="Left" Margin="10,160,0,0"
+        <Label x:Name="LblMoonatmMass" Content="Atm. Mass:" HorizontalAlignment="Left" Margin="10,160,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonatmMass" HorizontalAlignment="Left" Height="23" Margin="105,158,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonatmMass" HorizontalAlignment="Left" Height="23" Margin="105,158,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonatmPres" Content="Atm. Pressure:" HorizontalAlignment="Left" Margin="10,190,0,0"
+        <Label x:Name="LblMoonatmPres" Content="Atm. Pressure:" HorizontalAlignment="Left" Margin="10,190,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonatmPres" HorizontalAlignment="Left" Height="23" Margin="105,188,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonatmPres" HorizontalAlignment="Left" Height="23" Margin="105,188,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonatmNote" Content="Atm. Note:" HorizontalAlignment="Left" Margin="10,220,0,0"
+        <Label x:Name="LblMoonatmNote" Content="Atm. Note:" HorizontalAlignment="Left" Margin="10,220,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonatmNote" HorizontalAlignment="Left" Height="23" Margin="105,218,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonatmNote" HorizontalAlignment="Left" Height="23" Margin="105,218,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonaxialTilt" Content="Axial Tilt:" HorizontalAlignment="Left" Margin="10,250,0,0"
+        <Label x:Name="LblMoonaxialTilt" Content="Axial Tilt:" HorizontalAlignment="Left" Margin="10,250,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonaxialTilt" HorizontalAlignment="Left" Height="23" Margin="105,248,0,0"
+        <TextBox x:Name="TbMoonaxialTilt" HorizontalAlignment="Left" Height="23" Margin="105,248,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonMoonMass" Content="Moon Mass:" HorizontalAlignment="Left" Margin="10,280,0,0"
+        <Label x:Name="LblMoonMoonMass" Content="Moon Mass:" HorizontalAlignment="Left" Margin="10,280,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonMoonMass" HorizontalAlignment="Left" Height="23" Margin="105,278,0,0"
+        <TextBox x:Name="TbMoonMoonMass" HorizontalAlignment="Left" Height="23" Margin="105,278,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonRVM" Content="Moon RVM:" HorizontalAlignment="Left" Margin="10,310,0,0"
+        <Label x:Name="LblMoonRvm" Content="Moon RVM:" HorizontalAlignment="Left" Margin="10,310,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonRVM" HorizontalAlignment="Left" Height="23" Margin="105,308,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonRvm" HorizontalAlignment="Left" Height="23" Margin="105,308,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonorbitalEccent" Content="Orbital Eccent.:" HorizontalAlignment="Left" Margin="10,340,0,0"
+        <Label x:Name="LblMoonorbitalEccent" Content="Orbital Eccent.:" HorizontalAlignment="Left" Margin="10,340,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonorbitalEccent" HorizontalAlignment="Left" Height="23" Margin="105,338,0,0"
+        <TextBox x:Name="TbMoonorbitalEccent" HorizontalAlignment="Left" Height="23" Margin="105,338,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonorbitalPeriod" Content="Orbital Period:" HorizontalAlignment="Left" Margin="10,370,0,0"
+        <Label x:Name="LblMoonorbitalPeriod" Content="Orbital Period:" HorizontalAlignment="Left" Margin="10,370,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonorbitalPeriod" HorizontalAlignment="Left" Height="23" Margin="105,368,0,0"
+        <TextBox x:Name="TbMoonorbitalPeriod" HorizontalAlignment="Left" Height="23" Margin="105,368,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonorbitalRadius" Content="Orbital Radius:" HorizontalAlignment="Left" Margin="10,400,0,0"
+        <Label x:Name="LblMoonorbitalRadius" Content="Orbital Radius:" HorizontalAlignment="Left" Margin="10,400,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonorbitalRadius" HorizontalAlignment="Left" Height="23" Margin="105,398,0,0"
+        <TextBox x:Name="TbMoonorbitalRadius" HorizontalAlignment="Left" Height="23" Margin="105,398,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonRadius" Content="Moon Radius:" HorizontalAlignment="Left" Margin="10,430,0,0"
+        <Label x:Name="LblMoonRadius" Content="Moon Radius:" HorizontalAlignment="Left" Margin="10,430,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonRadius" HorizontalAlignment="Left" Height="23" Margin="105,428,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonRadius" HorizontalAlignment="Left" Height="23" Margin="105,428,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonType" Content="Moon Type:" HorizontalAlignment="Left" Margin="10,460,0,0"
+        <Label x:Name="LblMoonType" Content="Moon Type:" HorizontalAlignment="Left" Margin="10,460,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonType" HorizontalAlignment="Left" Height="23" Margin="105,458,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonType" HorizontalAlignment="Left" Height="23" Margin="105,458,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonSize" Content="MoonSize:" HorizontalAlignment="Left" Margin="10,490,0,0"
+        <Label x:Name="LblMoonSize" Content="MoonSize:" HorizontalAlignment="Left" Margin="10,490,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonSite" HorizontalAlignment="Left" Height="23" Margin="105,488,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonSite" HorizontalAlignment="Left" Height="23" Margin="105,488,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonbbt" Content="BlackBody Temp.:" HorizontalAlignment="Left" Margin="10,520,0,0"
+        <Label x:Name="LblMoonbbt" Content="BlackBody Temp.:" HorizontalAlignment="Left" Margin="10,520,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonbbt" HorizontalAlignment="Left" Height="23" Margin="105,518,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonbbt" HorizontalAlignment="Left" Height="23" Margin="105,518,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoondayfaceMod" Content="Day Face Mod:" HorizontalAlignment="Left" Margin="10,550,0,0"
+        <Label x:Name="LblMoondayfaceMod" Content="Day Face Mod:" HorizontalAlignment="Left" Margin="10,550,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoondayFaceMod" HorizontalAlignment="Left" Height="23" Margin="105,548,0,0"
+        <TextBox x:Name="TbMoondayFaceMod" HorizontalAlignment="Left" Height="23" Margin="105,548,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonDensity" Content="Moon Density:" HorizontalAlignment="Left" Margin="250,10,0,0"
+        <Label x:Name="LblMoonDensity" Content="Moon Density:" HorizontalAlignment="Left" Margin="250,10,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonDensity" HorizontalAlignment="Left" Height="23" Margin="355,8,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonDensity" HorizontalAlignment="Left" Height="23" Margin="355,8,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonDiameter" Content="Moon Diameter:" HorizontalAlignment="Left" Margin="250,40,0,0"
+        <Label x:Name="LblMoonDiameter" Content="Moon Diameter:" HorizontalAlignment="Left" Margin="250,40,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonDiameter" HorizontalAlignment="Left" Height="23" Margin="355,38,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonDiameter" HorizontalAlignment="Left" Height="23" Margin="355,38,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonGravity" Content="Moon Gravity:" HorizontalAlignment="Left" Margin="250,70,0,0"
+        <Label x:Name="LblMoonGravity" Content="Moon Gravity:" HorizontalAlignment="Left" Margin="250,70,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonGravity" HorizontalAlignment="Left" Height="23" Margin="355,68,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonGravity" HorizontalAlignment="Left" Height="23" Margin="355,68,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonhydCov" Content="Hydro. Coverage:" HorizontalAlignment="Left" Margin="250,100,0,0"
+        <Label x:Name="LblMoonhydCov" Content="Hydro. Coverage:" HorizontalAlignment="Left" Margin="250,100,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonhydCov" HorizontalAlignment="Left" Height="23" Margin="355,98,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonhydCov" HorizontalAlignment="Left" Height="23" Margin="355,98,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonisRes" Content="Is Resonant:" HorizontalAlignment="Left" Margin="250,130,0,0"
+        <Label x:Name="LblMoonisRes" Content="Is Resonant:" HorizontalAlignment="Left" Margin="250,130,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonisRes" HorizontalAlignment="Left" Height="23" Margin="355,128,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonisRes" HorizontalAlignment="Left" Height="23" Margin="355,128,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonisTideLock" Content="Tidal Locked:" HorizontalAlignment="Left" Margin="250,160,0,0"
+        <Label x:Name="LblMoonisTideLock" Content="Tidal Locked:" HorizontalAlignment="Left" Margin="250,160,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonisTideLock" HorizontalAlignment="Left" Height="23" Margin="355,158,0,0"
+        <TextBox x:Name="TbMoonisTideLock" HorizontalAlignment="Left" Height="23" Margin="355,158,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonNightFaceMod" Content="Day Face Mod:" HorizontalAlignment="Left" Margin="250,190,0,0"
+        <Label x:Name="LblMoonNightFaceMod" Content="Day Face Mod:" HorizontalAlignment="Left" Margin="250,190,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonNightFaceMod" HorizontalAlignment="Left" Height="23" Margin="355,188,0,0"
+        <TextBox x:Name="TbMoonNightFaceMod" HorizontalAlignment="Left" Height="23" Margin="355,188,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonretrogradeMotion" Content="Retrograde Motion" HorizontalAlignment="Left"
+        <Label x:Name="LblMoonretrogradeMotion" Content="Retrograde Motion" HorizontalAlignment="Left"
                Margin="250,220,0,0" VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonretrogradeMotion" HorizontalAlignment="Left" Height="23" Margin="355,218,0,0"
+        <TextBox x:Name="TbMoonretrogradeMotion" HorizontalAlignment="Left" Height="23" Margin="355,218,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonrotPeriod" Content="Rotational Period" HorizontalAlignment="Left" Margin="250,250,0,0"
+        <Label x:Name="LblMoonrotPeriod" Content="Rotational Period" HorizontalAlignment="Left" Margin="250,250,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonrotPeriod" HorizontalAlignment="Left" Height="23" Margin="355,248,0,0"
+        <TextBox x:Name="TbMoonrotPeriod" HorizontalAlignment="Left" Height="23" Margin="355,248,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonsatType" Content="Sat. Type" HorizontalAlignment="Left" Margin="250,280,0,0"
+        <Label x:Name="LblMoonsatType" Content="Sat. Type" HorizontalAlignment="Left" Margin="250,280,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonsatType" HorizontalAlignment="Left" Height="23" Margin="355,278,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbMoonsatType" HorizontalAlignment="Left" Height="23" Margin="355,278,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonsiderealPeriod" Content="Sidereal Period" HorizontalAlignment="Left" Margin="250,310,0,0"
+        <Label x:Name="LblMoonsiderealPeriod" Content="Sidereal Period" HorizontalAlignment="Left" Margin="250,310,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonsiderealPeriod" HorizontalAlignment="Left" Height="23" Margin="355,308,0,0"
+        <TextBox x:Name="TbMoonsiderealPeriod" HorizontalAlignment="Left" Height="23" Margin="355,308,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonsurfaceTemp" Content="Surface Temp." HorizontalAlignment="Left" Margin="250,340,0,0"
+        <Label x:Name="LblMoonsurfaceTemp" Content="Surface Temp." HorizontalAlignment="Left" Margin="250,340,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonsurfaceTemp" HorizontalAlignment="Left" Height="23" Margin="355,338,0,0"
+        <TextBox x:Name="TbMoonsurfaceTemp" HorizontalAlignment="Left" Height="23" Margin="355,338,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoontecActivity" Content="Tec. Activity" HorizontalAlignment="Left" Margin="250,370,0,0"
+        <Label x:Name="LblMoontecActivity" Content="Tec. Activity" HorizontalAlignment="Left" Margin="250,370,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoontecActivity" HorizontalAlignment="Left" Height="23" Margin="355,368,0,0"
+        <TextBox x:Name="TbMoontecActivity" HorizontalAlignment="Left" Height="23" Margin="355,368,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoontideForce" Content="Tide Force" HorizontalAlignment="Left" Margin="250,400,0,0"
+        <Label x:Name="LblMoontideForce" Content="Tide Force" HorizontalAlignment="Left" Margin="250,400,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoontideForce" HorizontalAlignment="Left" Height="23" Margin="355,398,0,0"
+        <TextBox x:Name="TbMoontideForce" HorizontalAlignment="Left" Height="23" Margin="355,398,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoontideTotal" Content="Tide Total" HorizontalAlignment="Left" Margin="250,430,0,0"
+        <Label x:Name="LblMoontideTotal" Content="Tide Total" HorizontalAlignment="Left" Margin="250,430,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoontideTotal" HorizontalAlignment="Left" Height="23" Margin="355,428,0,0"
+        <TextBox x:Name="TbMoontideTotal" HorizontalAlignment="Left" Height="23" Margin="355,428,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonvolActivity" Content="Vol. Activity" HorizontalAlignment="Left" Margin="250,460,0,0"
+        <Label x:Name="LblMoonvolActivity" Content="Vol. Activity" HorizontalAlignment="Left" Margin="250,460,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonvolActivity" HorizontalAlignment="Left" Height="23" Margin="355,458,0,0"
+        <TextBox x:Name="TbMoonvolActivity" HorizontalAlignment="Left" Height="23" Margin="355,458,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblMoonOrbitalCycle" Content="Orbital Cycle:" HorizontalAlignment="Left" Margin="250,490,0,0"
+        <Label x:Name="LblMoonOrbitalCycle" Content="Orbital Cycle:" HorizontalAlignment="Left" Margin="250,490,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbMoonOrbitalCycle" HorizontalAlignment="Left" Height="23" Margin="355,488,0,0"
+        <TextBox x:Name="TbMoonOrbitalCycle" HorizontalAlignment="Left" Height="23" Margin="355,488,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
 
 
-        <Button x:Name="btApply" Content="Apply" HorizontalAlignment="Left" Margin="515,572,0,0"
+        <Button x:Name="BtApply" Content="Apply" HorizontalAlignment="Left" Margin="515,572,0,0"
                 VerticalAlignment="Top" Width="75" Click="btApply_Click" />
     </Grid>
 </UserControl>

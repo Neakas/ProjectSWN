@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
         themes:ThemeManager.Theme="ExpressionDark"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="ManageAlienRaces" Height="653.724" Width="978">
     <Window.Background>
@@ -198,7 +197,7 @@
         <Button x:Name="BtUpdate" Content="Update" HorizontalAlignment="Left" Margin="854,578,0,0"
                 VerticalAlignment="Top" Width="106" Height="32" Click="btUpdate_Click" IsEnabled="False"
                 Visibility="Hidden" />
-        <Button x:Name="BtDelete" Content="Delete" HorizontalAlignment="Left" Margin="743,578,0,0"
+        <Button x:Name="BtDelete" Content="delete" HorizontalAlignment="Left" Margin="743,578,0,0"
                 VerticalAlignment="Top" Width="106" Height="32" Click="btDelete_Click" IsEnabled="False"
                 Visibility="Hidden" />
         <Button x:Name="BtClear" Content="Clear" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"

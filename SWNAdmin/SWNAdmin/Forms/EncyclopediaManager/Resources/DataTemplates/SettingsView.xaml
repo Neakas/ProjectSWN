@@ -5,14 +5,14 @@
     <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
         <Grid>
             <TreeView Style="{StaticResource ResourceKey=SearchableTreeView}"
-                      ItemsSource="{Binding Path=Roots, Mode=OneWay}" Background="Transparent" />
-            <Border Style="{StaticResource ResourceKey=searchBox}">
+                      ItemsSource="{Binding Path=Roots, Mode=OneWay}" />
+            <Border Style="{StaticResource ResourceKey=SearchBox}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Source="pack://application:,,,/Resources/Images/Search.png" />
+                    <Image Grid.Column="0" Source="pack://Forms/EncyclopediaManager/Resources/Images/Search.png" />
                     <ComboBox Grid.Column="1"
                               IsEditable="True"
                               ItemsSource="{Binding Path=PreviousCriteria, Mode=OneWay}"

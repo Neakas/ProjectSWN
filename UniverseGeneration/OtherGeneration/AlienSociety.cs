@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace UniverseGeneration.OtherGeneration
+﻿namespace UniverseGeneration.OtherGeneration
 {
-    class AlienSociety : Society
+    internal class AlienSociety : Society
     {
-
     }
 }

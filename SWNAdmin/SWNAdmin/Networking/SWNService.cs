@@ -14,90 +14,71 @@ using MessageBox = System.Windows.MessageBox;
 
 namespace SWNAdmin.Networking
 {
-    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.Single,
-        UseSynchronizationContext = false)]
-    public class SWNService : ISWNService
+    [ServiceBehavior( ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.Single, UseSynchronizationContext = false )]
+    public class SwnService : ISwnService
     {
-        public static SWNService CurrentService;
+        public static SwnService CurrentService;
         public static int LoggedInUsers = 0;
 
-        private readonly Dictionary<Client, ISWNServiceCallback> clientsDict =
-            new Dictionary<Client, ISWNServiceCallback>();
+        private readonly Dictionary<Client, ISwnServiceCallback> _clientsDict = new Dictionary<Client, ISwnServiceCallback>();
 
-        private readonly object syncObj = new object();
+        private readonly object _syncObj = new object();
 
-        public SWNService()
+        public SwnService()
         {
             CurrentService = this;
         }
 
-        public ISWNServiceCallback CurrentCallback
+        public ISwnServiceCallback CurrentCallback => OperationContext.Current.GetCallbackChannel<ISwnServiceCallback>();
+
+        private bool SearchClientsByName( string username )
         {
-            get { return OperationContext.Current.GetCallbackChannel<ISWNServiceCallback>(); }
+            return _clientsDict.Keys.Any(c => c.UserName == username);
         }
 
-        private bool SearchClientsByName(string username)
-        {
-            foreach (var c in clientsDict.Keys)
-            {
-                if (c.UserName == username)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+        #region ISwnService Members
 
-        #region ISWNService Members
-
-        public bool Connect(Client client)
+        public bool Connect( Client client )
         {
-            if (!clientsDict.ContainsValue(CurrentCallback) && !SearchClientsByName(client.UserName))
+            lock (_syncObj)
             {
-                lock (syncObj)
+                if (!_clientsDict.ContainsValue(CurrentCallback) && !SearchClientsByName(client.UserName))
                 {
-                    var LH = new LoginHandler();
                     if (LoginHandler.LoginCheck(client))
                     {
-                        MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") +
-                                                                 ": New Connection Attempt from: " +
-                                                                 getClientIpAddress(client));
-                        MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": The User '" +
-                                                                 client.UserName + "' logged in");
+                        MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": New Connection Attempt from: " + GetClientIpAddress());
+                        MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": The User '" + client.UserName + "' logged in");
                         MainWindow.CurrentInstance.UpdateUserOnline(client.UserName, false);
-                        clientsDict.Add(client, CurrentCallback);
-                        foreach (var key in clientsDict.Keys)
+                        _clientsDict.Add(client, CurrentCallback);
+                        foreach (var key in _clientsDict.Keys)
                         {
-                            var callback = clientsDict[key];
+                            var callback = _clientsDict[key];
                             try
                             {
-                                callback.RefreshClients((from c in clientsDict.Keys select c.UserName).ToList());
+                                callback.RefreshClients(( from c in _clientsDict.Keys select c.UserName ).ToList());
                                 callback.UserJoin(client);
                             }
                             catch (Exception)
                             {
-                                clientsDict.Remove(key);
+                                _clientsDict.Remove(key);
                                 CurrentCallback.SendErrorCode("Server send Abort-Request!");
                             }
                         }
                         return true;
                     }
-                    CurrentCallback.SendErrorCode("The User: " + client.UserName +
-                                                  " does not exist or the Password is Incorrect!");
+                    CurrentCallback.SendErrorCode("The User: " + client.UserName + " does not exist or the Password is Incorrect!");
                 }
+                else
+                {
+                    CurrentCallback.SendErrorCode("The User: " + client.UserName + " is already Logged-In! Wait a few Seconds for Cleanup...");
+                    InvalidateUser(client);
+                }
+                return false;
             }
-            else
-            {
-                CurrentCallback.SendErrorCode("The User: " + client.UserName +
-                                              " is already Logged-In! Wait a few Seconds for Cleanup...");
-                InvalidateUser(client);
-            }
-            return false;
         }
 
-        private void InvalidateUser(Client client)
+        private void InvalidateUser( Client client )
         {
-            var LH = new LoginHandler();
             if (LoginHandler.LoginCheck(client))
             {
                 //client is Ok. client wanted Access, but is allready Online. Can only be a Crash related Stuck Client + Callback
@@ -105,41 +86,38 @@ namespace SWNAdmin.Networking
             }
         }
 
-        public bool Register(Client client)
+        public bool Register( Client client )
         {
-            if (!clientsDict.ContainsValue(CurrentCallback) && !SearchClientsByName(client.UserName))
+            lock (_syncObj)
             {
-                lock (syncObj)
+                if (_clientsDict.ContainsValue(CurrentCallback) || SearchClientsByName(client.UserName))
                 {
-                    var RH = new RegistrationHandler();
-                    if (RH.RegistrationCheck(client))
-                    {
-                        MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": The User '" +
-                                                                 client.UserName + "' registered with the Server");
-                        return true;
-                    }
                     return false;
                 }
+                var rh = new RegistrationHandler();
+                if (!rh.RegistrationCheck(client))
+                {
+                    return false;
+                }
+                MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": The User '" + client.UserName + "' registered with the Server");
+                return true;
             }
-            return false;
         }
 
-
-        public void Disconnect(Client client)
+        public void Disconnect( Client client )
         {
-            foreach (var c in clientsDict.Keys)
+            lock (_syncObj)
             {
-                if (client.UserName == c.UserName)
+                foreach (var c in _clientsDict.Keys.Where(c => client.UserName == c.UserName))
                 {
-                    lock (syncObj)
+                    lock (_syncObj)
                     {
-                        clientsDict.Remove(c);
-                        MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": The User '" +
-                                                                 client.UserName + "' logged out");
+                        _clientsDict.Remove(c);
+                        MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": The User '" + client.UserName + "' logged out");
                         MainWindow.CurrentInstance.UpdateUserOnline(client.UserName, true);
-                        foreach (var callback in clientsDict.Values)
+                        foreach (var callback in _clientsDict.Values)
                         {
-                            callback.RefreshClients((from ce in clientsDict.Keys select ce.UserName).ToList());
+                            callback.RefreshClients(( from ce in _clientsDict.Keys select ce.UserName ).ToList());
                             callback.UserLeft(client);
                         }
                     }
@@ -148,62 +126,57 @@ namespace SWNAdmin.Networking
             }
         }
 
-        private string getClientIpAddress(Client c)
+        private static string GetClientIpAddress()
         {
             var ip = "";
             var context = OperationContext.Current;
             var prop = context.IncomingMessageProperties;
             var endpoint = prop[RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
-            ip = endpoint.Address;
-            if (ip == "::1")
+            if (endpoint != null)
             {
-                return "localhost";
+                ip = endpoint.Address;
             }
-            return ip;
+            return ip == "::1" ? "localhost" : ip;
         }
 
-        public Character GetBlankCharacter(Client client)
+        public Character GetBlankCharacter( Client client )
         {
             return CharacterController.GetBlankCharacter(client);
         }
 
-        public List<Advantages> RequestAdvantages(Client client)
+        public List<Advantages> RequestAdvantages( Client client )
         {
-            var Advlist = new List<Advantages>();
             var context = new Db1Entities();
-            Advlist = (from c in context.Advantages where c.isEnabled select c).ToList();
-            return Advlist;
+            var advlist = ( from c in context.Advantages where c.isEnabled select c ).ToList();
+            return advlist;
         }
 
-        public List<Disadvantages> RequestDisadvantages(Client client)
+        public List<Disadvantages> RequestDisadvantages( Client client )
         {
-            var disAdvlist = new List<Disadvantages>();
             var context = new Db1Entities();
-            disAdvlist = (from c in context.Disadvantages where c.isEnabled select c).ToList();
+            var disAdvlist = ( from c in context.Disadvantages where c.isEnabled select c ).ToList();
             return disAdvlist;
         }
 
-        public List<Requirements> RequestRequirements(Client client)
+        public List<Requirements> RequestRequirements( Client client )
         {
-            var reqlist = new List<Requirements>();
             var context = new Db1Entities();
-            reqlist = (from c in context.Requirements select c).ToList();
+            var reqlist = ( from c in context.Requirements select c ).ToList();
             return reqlist;
         }
 
-        public List<Skills> RequestSkills(Client client)
+        public List<Skills> RequestSkills( Client client )
         {
-            var SkillList = new List<Skills>();
             var context = new Db1Entities();
-            SkillList = (from c in context.Skills where c.isEnabled select c).ToList();
-            return SkillList;
+            var skillList = ( from c in context.Skills where c.isEnabled select c ).ToList();
+            return skillList;
         }
 
-        public void SendMessage(Message m)
+        public void SendMessage( Message m )
         {
-            lock (syncObj)
+            lock (_syncObj)
             {
-                foreach (var callback in clientsDict.Values)
+                foreach (var callback in _clientsDict.Values)
                 {
                     callback.Receive(m);
                 }
@@ -211,54 +184,59 @@ namespace SWNAdmin.Networking
             MainWindow.CurrentInstance.UpdateChatWindow(m.Content, m.Sender);
         }
 
-        public void SendSystem(StarSystems ssystem)
+        public void SendSystem( StarSystems ssystem )
         {
-            lock (syncObj)
+            lock (_syncObj)
             {
-                foreach (var callback in clientsDict.Values)
+                foreach (var callback in _clientsDict.Values)
                 {
                     callback.SendStarSystem(ssystem);
                 }
             }
         }
 
-        public void SendImage(byte[] ImageByteArray = null)
+        public void SendImage( byte[] imageByteArray = null )
         {
             Stream strm = null;
-            if (ImageByteArray == null)
+            if (imageByteArray == null)
             {
                 try
                 {
-                    var fileDialog = new OpenFileDialog();
-                    fileDialog.Filter =
-                        "All Files (*.*)|*.*|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif| JPEG files(*.jpeg)|*.jpeg";
-                    fileDialog.Multiselect = false;
-
-                    var Result = fileDialog.ShowDialog();
-
-                    if (Result == DialogResult.OK)
+                    var fileDialog = new OpenFileDialog
                     {
-                        MainWindow.CurrentInstance.UpdateImageWindow(new Uri(fileDialog.FileName, UriKind.Absolute));
-                        strm = fileDialog.OpenFile();
+                        Filter = @"All Files (*.*)|*.*|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif| JPEG files(*.jpeg)|*.jpeg",
+                        Multiselect = false
+                    };
 
-                        if (strm != null)
+                    var result = fileDialog.ShowDialog();
+
+                    if (result != DialogResult.OK)
+                    {
+                        return;
+                    }
+                    MainWindow.CurrentInstance.UpdateImageWindow(new Uri(fileDialog.FileName, UriKind.Absolute));
+                    strm = fileDialog.OpenFile();
+
+                    var buffer = new byte[(int) strm.Length];
+
+                    var i = strm.Read(buffer, 0, buffer.Length);
+
+                    if (i <= 0)
+                    {
+                        return;
+                    }
+                    var fMsg = new FileMessage
+                    {
+                        FileName = fileDialog.SafeFileName,
+                        Sender = "Dummy",
+                        Data = buffer
+                    };
+
+                    lock (_syncObj)
+                    {
+                        foreach (var callback in _clientsDict.Values)
                         {
-                            var buffer = new byte[(int) strm.Length];
-
-                            var i = strm.Read(buffer, 0, buffer.Length);
-
-                            if (i > 0)
-                            {
-                                var fMsg = new FileMessage();
-                                fMsg.FileName = fileDialog.SafeFileName;
-                                fMsg.Sender = "Dummy";
-                                fMsg.Data = buffer;
-
-                                foreach (var callback in clientsDict.Values)
-                                {
-                                    callback.SendImage(fMsg);
-                                }
-                            }
+                            callback.SendImage(fMsg);
                         }
                     }
                 }
@@ -268,44 +246,32 @@ namespace SWNAdmin.Networking
                 }
                 finally
                 {
-                    if (strm != null)
-                    {
-                        strm.Close();
-                    }
+                    strm?.Close();
                 }
             }
             else
             {
                 try
                 {
-                    var buffer = ImageByteArray;
+                    var buffer = imageByteArray;
 
-                    //int i = strm.Read(buffer, 0, buffer.Length);
-
-                    //if (i > 0)
-                    //{
                     var fMsg = new FileMessage();
                     var dice = new Dice();
-                    fMsg.FileName = "Image" + dice.rng(200000);
+                    fMsg.FileName = "Image" + dice.Rng(200000);
                     fMsg.Sender = "Dummy";
                     fMsg.Data = buffer;
 
-                    foreach (var callback in clientsDict.Values)
+                    lock (_syncObj)
                     {
-                        callback.SendImage(fMsg);
+                        foreach (var callback in _clientsDict.Values)
+                        {
+                            callback.SendImage(fMsg);
+                        }
                     }
-                    //}
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.ToString());
-                }
-                finally
-                {
-                    if (strm != null)
-                    {
-                        strm.Close();
-                    }
                 }
             }
         }
@@ -315,33 +281,37 @@ namespace SWNAdmin.Networking
             Stream strm = null;
             try
             {
-                var fileDialog = new OpenFileDialog();
-                fileDialog.Multiselect = false;
-                var Result = fileDialog.ShowDialog();
-
-                if (Result == DialogResult.OK)
+                var fileDialog = new OpenFileDialog
                 {
-                    strm = fileDialog.OpenFile();
-                    if (strm != null)
+                    Multiselect = false
+                };
+                var result = fileDialog.ShowDialog();
+
+                if (result != DialogResult.OK)
+                {
+                    return;
+                }
+                strm = fileDialog.OpenFile();
+                {
+                    var buffer = new byte[(int) strm.Length];
+
+                    var i = strm.Read(buffer, 0, buffer.Length);
+
+                    if (i <= 0)
                     {
-                        var buffer = new byte[(int) strm.Length];
-
-                        var i = strm.Read(buffer, 0, buffer.Length);
-
-                        if (i > 0)
+                        return;
+                    }
+                    var fMsg = new FileMessage
+                    {
+                        FileName = fileDialog.SafeFileName,
+                        Sender = "Dummy",
+                        Data = buffer
+                    };
+                    lock (_syncObj)
+                    {
+                        foreach (var callback in _clientsDict.Values)
                         {
-                            var fMsg = new FileMessage();
-                            fMsg.FileName = fileDialog.SafeFileName;
-                            fMsg.Sender = "Dummy";
-                            fMsg.Data = buffer;
-                            foreach (var callback in clientsDict.Values)
-                            {
-                                callback.SendFile(fMsg);
-                            }
-                            //_callbackList.ForEach(delegate (ISWNServiceCallback callback)
-                            //{
-                            //    callback.SendFile(fMsg);                            
-                            //});
+                            callback.SendFile(fMsg);
                         }
                     }
                 }
@@ -352,87 +322,79 @@ namespace SWNAdmin.Networking
             }
             finally
             {
-                if (strm != null)
-                {
-                    strm.Close();
-                }
+                strm?.Close();
             }
         }
 
-        public void ServerSendMessage(string Message, string UserName)
+        public void ServerSendMessage( string message, string userName )
         {
-            var m = new Message();
-            m.Sender = "Server";
-            m.Time = DateTime.Now;
-            m.Content = Message;
-            MainWindow.CurrentInstance.UpdateChatWindow(Message, UserName);
-            foreach (var callback in clientsDict.Values)
+            var m = new Message
             {
-                callback.Receive(m);
+                Sender = "Server",
+                Time = DateTime.Now,
+                Content = message
+            };
+            MainWindow.CurrentInstance.UpdateChatWindow(message, userName);
+            lock (_syncObj)
+            {
+                foreach (var callback in _clientsDict.Values)
+                {
+                    callback.Receive(m);
+                }
             }
-
-            //_callbackList.ForEach(delegate (ISWNServiceCallback callback)
-            //{
-            //    callback.NotifyNewMessage(Message, UserName);
-            //});
         }
 
         public void ServerIsInShutdownMode()
         {
-            lock (syncObj)
+            lock (_syncObj)
             {
-                foreach (var callback in clientsDict.Values)
+                if (_clientsDict != null)
                 {
-                    callback.ServiceIsShuttingDown();
-                }
-            }
-            MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": Server - Informing Clients");
-            MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") +
-                                                     ": Server - Waiting for Signoffs");
-        }
-
-        public void KickSelectedUser(Client c)
-        {
-            lock (syncObj)
-            {
-                foreach (var client in clientsDict.Keys)
-                {
-                    if (client.UserName == c.UserName)
+                    foreach (var callback in _clientsDict.Values)
                     {
-                        ISWNServiceCallback toKickUser;
-                        clientsDict.TryGetValue(client, out toKickUser);
-                        toKickUser.KickUser();
+                        callback.ServiceIsShuttingDown();
                     }
                 }
             }
-            MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": User: " + c.UserName +
-                                                     " kicked from the Server");
+            MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": Server - Informing Clients");
+            MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": Server - Waiting for Signoffs");
+        }
+
+        public void KickSelectedUser( Client c )
+        {
+            lock (_syncObj)
+            {
+                foreach (var client in _clientsDict.Keys.Where(client => client.UserName == c.UserName))
+                {
+                    ISwnServiceCallback toKickUser;
+                    _clientsDict.TryGetValue(client, out toKickUser);
+                    toKickUser?.KickUser();
+                }
+            }
+            MainWindow.CurrentInstance.UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + ": User: " + c.UserName + " kicked from the Server");
             MainWindow.CurrentInstance.UpdateUserOnline(c.UserName, true);
         }
 
         public List<string> RequestOnlineUsersList()
         {
-            return (from c in clientsDict.Keys select c.UserName).ToList();
+            return ( from c in _clientsDict.Keys select c.UserName ).ToList();
         }
 
-        public bool SaveCharacter(Client client, Character c)
+        public bool SaveCharacter( Client client, Character c )
         {
-            var success = false;
-
-            using (var Context = new Db1Entities())
+            using (var context = new Db1Entities())
             {
-                Context.Character.Add(c);
-                Context.SaveChanges();
-                success = true;
+                context.Character.Add(c);
+                context.SaveChanges();
             }
-            return success;
+            return true;
         }
 
-        public List<Character> RequestSavedCharacters(Client c)
+        public List<Character> RequestSavedCharacters( Client c )
         {
-            using (var Context = new Db1Entities())
+            using (var context = new Db1Entities())
             {
-                return (from q in Context.Character where q.PlayerName == c.UserName select q).ToList();
+                return ( from q in context.Character where q.PlayerName == c.UserName select q ).ToList();
             }
         }
     }

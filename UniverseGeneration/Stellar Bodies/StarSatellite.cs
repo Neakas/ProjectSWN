@@ -5,33 +5,35 @@ namespace UniverseGeneration.Stellar_Bodies
 {
     public partial class Star : Orbital
     {
-        public virtual void sortOrbitals()
+        public virtual void SortOrbitals()
         {
-            sysPlanets.Sort((x, y) => x.orbitalRadius.CompareTo(y.orbitalRadius));
+            SysPlanets.Sort(( x, y ) => x.OrbitalRadius.CompareTo(y.OrbitalRadius));
         }
 
-        public virtual void addSatellite(Satellite s)
+        public virtual void AddSatellite( Satellite s )
         {
-            this.sysPlanets.Add(s);
+            SysPlanets.Add(s);
         }
 
-        public virtual void printAllOrbitals()
+        public virtual void PrintAllOrbitals()
         {
             Console.WriteLine("This star's orbital array contains: ");
-            foreach (Orbital o in sysPlanets)
+            foreach (var o in SysPlanets)
+            {
                 Console.WriteLine("{0}", o);
+            }
             Console.WriteLine();
-
         }
 
-        public virtual void purgeSwallowedOrbits()
+        public virtual void PurgeSwallowedOrbits()
         {
-            if (!(this.evoLine.findCurrentAgeGroup(this.starAge) >= StarAgeLine.RET_GIANTBRANCH))
+            if (!( EvoLine.FindCurrentAgeGroup(StarAge) >= StarAgeLine.RetGiantbranch ))
+            {
                 throw new Exception("This star is not in supernova state or beyond.");
+            }
 
-            sysPlanets.RemoveAll(orbital => orbital.orbitalRadius <= this.getSwallowedSpace());
-            this.sortOrbitals();
+            SysPlanets.RemoveAll(orbital => orbital.OrbitalRadius <= GetSwallowedSpace());
+            SortOrbitals();
         }
-
     }
 }

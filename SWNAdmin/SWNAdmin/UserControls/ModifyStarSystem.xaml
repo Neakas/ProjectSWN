@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:SWNAdmin.UserControls"
              mc:Ignorable="d"
              xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
              themes:ThemeManager.Theme="ExpressionDark"
@@ -12,27 +11,27 @@
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource SWNLightBackground}" />
         </Grid.Background>
-        <Label x:Name="lblSysName" Content="System Name:" HorizontalAlignment="Left" Margin="10,10,0,0"
+        <Label x:Name="LblSysName" Content="System Name:" HorizontalAlignment="Left" Margin="10,10,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbSysName" HorizontalAlignment="Left" Height="23" Margin="105,8,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbSysName" HorizontalAlignment="Left" Height="23" Margin="105,8,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblSysID" Content="System ID:" HorizontalAlignment="Left" Margin="10,40,0,0"
+        <Label x:Name="LblSysId" Content="System Id:" HorizontalAlignment="Left" Margin="10,40,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbSysID" HorizontalAlignment="Left" Height="23" Margin="105,38,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbSysId" HorizontalAlignment="Left" Height="23" Margin="105,38,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" IsEnabled="False" />
-        <Label x:Name="lblSysAge" Content="System Age:" HorizontalAlignment="Left" Margin="10,70,0,0"
+        <Label x:Name="LblSysAge" Content="System Age:" HorizontalAlignment="Left" Margin="10,70,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbSysAge" HorizontalAlignment="Left" Height="23" Margin="105,68,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbSysAge" HorizontalAlignment="Left" Height="23" Margin="105,68,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblSysStars" Content="Stars in System:" HorizontalAlignment="Left" Margin="10,100,0,0"
+        <Label x:Name="LblSysStars" Content="Stars in System:" HorizontalAlignment="Left" Margin="10,100,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbSysStars" HorizontalAlignment="Left" Height="23" Margin="105,98,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbSysStars" HorizontalAlignment="Left" Height="23" Margin="105,98,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" IsEnabled="False" />
-        <Label x:Name="lblSysHab" Content="Habitable Zones:" HorizontalAlignment="Left" Margin="10,130,0,0"
+        <Label x:Name="LblSysHab" Content="Habitable Zones:" HorizontalAlignment="Left" Margin="10,130,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbSyshab" HorizontalAlignment="Left" Height="23" Margin="105,128,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbSyshab" HorizontalAlignment="Left" Height="23" Margin="105,128,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" IsEnabled="False" />
-        <Button x:Name="btApply" Content="Apply" HorizontalAlignment="Left" Margin="515,572,0,0"
+        <Button x:Name="BtApply" Content="Apply" HorizontalAlignment="Left" Margin="515,572,0,0"
                 VerticalAlignment="Top" Width="75" Click="btApply_Click" />
     </Grid>
 </UserControl>

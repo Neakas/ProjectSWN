@@ -1,28 +1,28 @@
 ﻿namespace UniverseGeneration.Stellar_Bodies
 {
-    public partial class Star : Orbital
+    public partial class Star
     {
         //flags        
         //description types
-        readonly public static int IS_PRIMARY = 9000; //flag for orbitals
-        readonly public static int IS_SECONDARY = 9001;
-        readonly public static int IS_TRINARY = 9002;
-        readonly public static int IS_SECCOMP = 9005;
-        readonly public static int IS_TRICOMP = 9006;
+        public static readonly int IsPrimary = 9000; //flag for orbitals
+        public static readonly int IsSecondary = 9001;
+        public static readonly int IsTrinary = 9002;
+        public static readonly int IsSeccomp = 9005;
+        public static readonly int IsTricomp = 9006;
 
         //gas giant flags.
-        readonly public static int GASGIANT_NONE = 700;
-        readonly public static int GASGIANT_CONVENTIONAL = 701;
-        readonly public static int GASGIANT_ECCENTRIC = 702;
-        readonly public static int GASGIANT_EPISTELLAR = 703;
+        public static readonly int GasgiantNone = 700;
+        public static readonly int GasgiantConventional = 701;
+        public static readonly int GasgiantEccentric = 702;
+        public static readonly int GasgiantEpistellar = 703;
 
         //orbital seperation flags
-        readonly public static int ORBSEP_NONE = 501;
-        readonly public static int ORBSEP_VERYCLOSE = 502;
-        readonly public static int ORBSEP_CLOSE = 503;
-        readonly public static int ORBSEP_MODERATE = 504;
-        readonly public static int ORBSEP_WIDE = 505;
-        readonly public static int ORBSEP_DISTANT = 506;
-        readonly public static int ORBSEP_CONTACT = 507;
+        public static readonly int OrbsepNone = 501;
+        public static readonly int OrbsepVeryclose = 502;
+        public static readonly int OrbsepClose = 503;
+        public static readonly int OrbsepModerate = 504;
+        public static readonly int OrbsepWide = 505;
+        public static readonly int OrbsepDistant = 506;
+        public static readonly int OrbsepContact = 507;
     }
 }

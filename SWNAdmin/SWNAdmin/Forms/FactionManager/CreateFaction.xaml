@@ -37,7 +37,7 @@
                 <SolidColorBrush Color="{DynamicResource SWNDarkBackground}" />
             </xctk:IntegerUpDown.Background>
         </xctk:IntegerUpDown>
-        <Label  Content="Cunning" HorizontalAlignment="Left" Margin="135,120,0,0"
+        <Label Content="Cunning" HorizontalAlignment="Left" Margin="135,120,0,0"
                VerticalAlignment="Top" Height="23" Width="53" />
         <xctk:IntegerUpDown x:Name="IudWealth" Margin="10,149,0,0" BorderBrush="Black" Height="24"
                             VerticalAlignment="Top" HorizontalAlignment="Left" Width="120" Foreground="White">
@@ -71,7 +71,7 @@
                 VerticalAlignment="Top" Width="75" Visibility="Hidden" IsEnabled="False" Click="btUpdate_Click" />
         <Button Content="Load" HorizontalAlignment="Left" Margin="170,251,0,0" VerticalAlignment="Top"
                 Width="75" Click="btLoad_Click" />
-        <Button x:Name="BtDelete" Content="Delete" HorizontalAlignment="Left" Margin="170,251,0,0"
+        <Button x:Name="BtDelete" Content="delete" HorizontalAlignment="Left" Margin="170,251,0,0"
                 VerticalAlignment="Top" Width="75" Click="btDelete_Click" Visibility="Hidden" IsEnabled="False" />
 
     </Grid>

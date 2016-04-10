@@ -1,19 +1,18 @@
 ﻿namespace UniverseGeneration.Utility
 {
-    class StarStringBuilder
+    internal class StarStringBuilder
     {
-        public static string GenerateString(bool isPrimary,string Starname,string StarType,string LuminocityClass,float mass, float SystemAge, float StarTemperature, float luminosity, float Radius)
+        public static string GenerateString( bool isPrimary, string starname, string starType, string luminocityClass, float mass, float systemAge, float starTemperature, float luminosity, float radius )
         {
-            string StarString;
-            string PartType = "Primary";
-            string grabbedStarname = Starname;
+            var partType = "Primary";
+            var grabbedStarname = starname;
             if (!isPrimary)
             {
-                PartType = "Companion";
+                partType = "Companion";
             }
-            StarString = PartType + " Star (" + grabbedStarname + "):\nSpectral type: " + StarType + " " + LuminocityClass + "\nMass: " + mass + " solar masses\nAge: " + SystemAge + " billion years\nEffective temperature: " +
-                StarTemperature + " Celcius\nLuminosity: " + luminosity + " solar luminosities\nRadius: " + Radius + " AU.";
-            return StarString;
+            var starString = partType + " Star (" + grabbedStarname + "):\nSpectral type: " + starType + " " + luminocityClass + "\nMass: " + mass + " solar masses\nAge: " + systemAge + " billion years\nEffective temperature: " +
+                             starTemperature + " Celcius\nLuminosity: " + luminosity + " solar luminosities\nRadius: " + radius + " AU.";
+            return starString;
         }
     }
 }

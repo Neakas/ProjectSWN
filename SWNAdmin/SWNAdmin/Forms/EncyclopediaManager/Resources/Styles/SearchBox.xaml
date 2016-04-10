@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style x:Key="searchBox" TargetType="{x:Type Border}">
+    <Style x:Key="SearchBox" TargetType="{x:Type Border}">
         <Style.Resources>
-            <ElasticEase x:Key="easeInEase" EasingMode="EaseOut" Oscillations="2" Springiness="10" />
-            <SineEase x:Key="easeOutEase" EasingMode="EaseIn" />
+            <ElasticEase x:Key="EaseInEase" EasingMode="EaseOut" Oscillations="2" Springiness="10" />
+            <SineEase x:Key="EaseOutEase" EasingMode="EaseIn" />
         </Style.Resources>
 
         <Setter Property="Width" Value="16" />
@@ -29,10 +29,10 @@
                 <BeginStoryboard>
                     <Storyboard>
                         <DoubleAnimation Storyboard.TargetProperty="(Border.Width)"
-                                         EasingFunction="{StaticResource ResourceKey=easeInEase}" To="200"
+                                         EasingFunction="{StaticResource ResourceKey=EaseInEase}" To="200"
                                          Duration="0:0:1.0" />
                         <DoubleAnimation Storyboard.TargetProperty="(Border.Height)"
-                                         EasingFunction="{StaticResource ResourceKey=easeInEase}" To="30"
+                                         EasingFunction="{StaticResource ResourceKey=EaseInEase}" To="30"
                                          Duration="0:0:1.0" />
                     </Storyboard>
                 </BeginStoryboard>
@@ -41,10 +41,10 @@
                 <BeginStoryboard>
                     <Storyboard>
                         <DoubleAnimation Storyboard.TargetProperty="(Border.Width)"
-                                         EasingFunction="{StaticResource ResourceKey=easeOutEase}" To="16"
+                                         EasingFunction="{StaticResource ResourceKey=EaseOutEase}" To="16"
                                          Duration="0:0:0.2" />
                         <DoubleAnimation Storyboard.TargetProperty="(Border.Height)"
-                                         EasingFunction="{StaticResource ResourceKey=easeOutEase}" To="16"
+                                         EasingFunction="{StaticResource ResourceKey=EaseOutEase}" To="16"
                                          Duration="0:0:0.2" />
                     </Storyboard>
                 </BeginStoryboard>

@@ -2,7 +2,7 @@
 {
     internal class CharacterBonus
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string BonusName { get; set; }
         public string Discription { get; set; }
         public int Value { get; set; }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Threading;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -10,171 +10,163 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using SWNAdmin.Classes;
 using SWNAdmin.Forms;
+using SWNAdmin.Forms.DatabaseManager;
 using SWNAdmin.Forms.EncyclopediaManager;
+using SWNAdmin.Forms.FactionManager;
 using SWNAdmin.Networking;
-using DataBaseManager = SWNAdmin.Forms.DatabaseManager.DataBaseManager;
 
 namespace SWNAdmin
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
-        private static AutoResetEvent stopFlag = new AutoResetEvent(false);
         public static MainWindow CurrentInstance;
         public static Server ServiceServer;
-        private Storyboard myStoryboard;
+        private Storyboard _myStoryboard;
         public bool StopFlag = false;
-        
-
 
         public MainWindow()
         {
             CurrentInstance = this;
             InitializeComponent();
-            btServerStart.IsEnabled = true;
-            btServerStop.IsEnabled = false;
+            BtServerStart.IsEnabled = true;
+            BtServerStop.IsEnabled = false;
             // SWNAdmin.Utility.XmlSkillImporter.Import();
         }
 
-
-        public void UpdateUserOnline(string User, bool Delete)
+        public void UpdateUserOnline( string user, bool delete )
         {
-            if (!Delete)
+            if (!delete)
             {
                 Application.Current.Dispatcher.BeginInvoke((Action) delegate
                 {
-                    var UserItem = new ListBoxItem();
+                    var userItem = new ListBoxItem();
                     var cm = new ContextMenu();
                     var mi = new MenuItem();
                     mi.Click += MenuItemClick;
                     mi.Header = "Kick";
                     mi.Background = Brushes.Black;
                     cm.Items.Add(mi);
-                    UserItem.ContextMenu = cm;
-                    UserItem.Content = User;
-                    lbUserOnline.Items.Add(UserItem);
+                    userItem.ContextMenu = cm;
+                    userItem.Content = user;
+                    LbUserOnline.Items.Add(userItem);
                 });
             }
-            if (Delete)
+            if (delete)
             {
                 Application.Current.Dispatcher.BeginInvoke((Action) delegate
                 {
                     var delitem = new ListBoxItem();
-                    foreach (ListBoxItem item in lbUserOnline.Items)
+                    foreach (var item in LbUserOnline.Items.Cast<ListBoxItem>().Where(item => item.Content.ToString() == user))
                     {
-                        if (item.Content.ToString() == User)
-                        {
-                            delitem = item;
-                        }
+                        delitem = item;
                     }
-                    lbUserOnline.Items.Remove(delitem);
+                    LbUserOnline.Items.Remove(delitem);
                 });
             }
         }
 
         //Test
-        public void MenuItemClick(object sender, RoutedEventArgs e)
+        public void MenuItemClick( object sender, RoutedEventArgs e )
         {
-            var selectedItem = lbUserOnline.SelectedItem as ListBoxItem;
-            var kickclient = new Client();
-            kickclient.UserName = selectedItem.Content.ToString();
-            SWNService.CurrentService.KickSelectedUser(kickclient);
+            var selectedItem = LbUserOnline.SelectedItem as ListBoxItem;
+            if (selectedItem == null)
+            {
+                return;
+            }
+            var kickclient = new Client
+            {
+                UserName = selectedItem.Content.ToString()
+            };
+            SwnService.CurrentService.KickSelectedUser(kickclient);
         }
 
-
-        public void UpdateServerStatus(bool Online)
+        public void UpdateServerStatus( bool online )
         {
-            if (Online)
+            if (online)
             {
                 Application.Current.Dispatcher.BeginInvoke((Action) delegate
                 {
-                    lServerStatus.Content = "Running";
+                    LServerStatus.Content = "Running";
                     UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + " Server - Running");
-                    UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + " Server - Listening on Port: " +
-                                  Server.CurrentServiceHost.Description.Endpoints[0].ListenUri.Port);
-                    lServerStatus.Foreground = Brushes.LimeGreen;
+                    UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + " Server - Listening on Port: " + Server.CurrentServiceHost.Description.Endpoints[0].ListenUri.Port);
+                    LServerStatus.Foreground = Brushes.LimeGreen;
 
                     var myDoubleAnimation = new DoubleAnimation();
-                    RegisterName(lServerStatus.Name, lServerStatus);
+                    RegisterName(LServerStatus.Name, LServerStatus);
                     myDoubleAnimation.From = 1.0;
                     myDoubleAnimation.To = 0.0;
                     myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
                     myDoubleAnimation.AutoReverse = true;
                     myDoubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
-                    myStoryboard = new Storyboard();
-                    myStoryboard.Children.Add(myDoubleAnimation);
-                    Storyboard.SetTargetName(myDoubleAnimation, lServerStatus.Name);
+                    _myStoryboard = new Storyboard();
+                    _myStoryboard.Children.Add(myDoubleAnimation);
+                    Storyboard.SetTargetName(myDoubleAnimation, LServerStatus.Name);
                     Storyboard.SetTargetProperty(myDoubleAnimation, new PropertyPath(OpacityProperty));
-                    myStoryboard.Begin(this);
+                    _myStoryboard.Begin(this);
                 });
             }
             else
             {
                 Application.Current.Dispatcher.BeginInvoke((Action) delegate
                 {
-                    lServerStatus.Content = "Shutdown";
-                    lServerStatus.Foreground = Brushes.Red;
+                    LServerStatus.Content = "Shutdown";
+                    LServerStatus.Foreground = Brushes.Red;
                     UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + " Server successfully Shutdown");
                     SwitchServerState();
-                    lbUserOnline.Items.Clear();
-                    tbChatPane.Clear();
+                    LbUserOnline.Items.Clear();
+                    TbChatPane.Clear();
                     var rb = new RepeatBehavior(0);
-                    myStoryboard.RepeatBehavior = rb;
-                    myStoryboard.Begin(this);
+                    _myStoryboard.RepeatBehavior = rb;
+                    _myStoryboard.Begin(this);
                 });
             }
         }
 
-        private void ServerLoaded(object sender, RoutedEventArgs e)
-        {
-            myStoryboard.Begin(this);
-        }
-
-        public void UpdateChatWindow(string Message, string UserName)
+        public void UpdateChatWindow( string message, string userName )
         {
             Application.Current.Dispatcher.BeginInvoke((Action) delegate
             {
-                tbChatPane.Focus();
-                tbChatPane.CaretIndex = tbChatPane.Text.Length;
-                tbChatPane.ScrollToEnd();
-                tbChatPane.Text += UserName + ": " + Message + "\r\n";
-                tbChatInput.Focus();
+                TbChatPane.Focus();
+                TbChatPane.CaretIndex = TbChatPane.Text.Length;
+                TbChatPane.ScrollToEnd();
+                TbChatPane.Text += userName + ": " + message + "\r\n";
+                TbChatInput.Focus();
             });
         }
 
-        public static void ProcessUITasks()
+        public static void ProcessUiTasks()
         {
             var frame = new DispatcherFrame();
-            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background,
-                new DispatcherOperationCallback(delegate
-                {
-                    frame.Continue = false;
-                    return null;
-                }), null);
+            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(delegate
+            {
+                frame.Continue = false;
+                return null;
+            }), null);
             Dispatcher.PushFrame(frame);
         }
 
-        public void btServerStart_Click(object sender, RoutedEventArgs e)
+        public void btServerStart_Click( object sender, RoutedEventArgs e )
         {
             SwitchServerState();
             ClearConsole();
             UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + " Server - Booting Up");
-            ProcessUITasks();
+            ProcessUiTasks();
             ServiceServer = new Server();
-            ProcessUITasks();
+            ProcessUiTasks();
         }
 
-        //TODOLOW Shutdown Message not Showing before Thread Block
-        public void btServerStop_Click(object sender, RoutedEventArgs e)
+        //TODOLOW Shutdown message not Showing before Thread Block
+        public void btServerStop_Click( object sender, RoutedEventArgs e )
         {
             UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + " Server - Shutting Down");
-            SWNService.CurrentService.ServerIsInShutdownMode();
-            ProcessUITasks();
+            SwnService.CurrentService.ServerIsInShutdownMode();
+            ProcessUiTasks();
             ServiceServer.StopService();
             UpdateConsole(DateTime.Now.ToString("HH:mm:ss") + " Server - Server Stopped");
-            ProcessUITasks();
+            ProcessUiTasks();
         }
 
-        private void Window_Closing(object sender, CancelEventArgs e)
+        private void Window_Closing( object sender, CancelEventArgs e )
         {
             //if (Server.CurrentServiceHost != null && Server.CurrentServiceHost.State == CommunicationState.Opened)
             //{
@@ -182,97 +174,97 @@ namespace SWNAdmin
             //}
         }
 
-        public void UpdateImageWindow(Uri uri)
+        public void UpdateImageWindow( Uri uri )
         {
             //Cleanup Check what is needed here!
-            Application.Current.Dispatcher.BeginInvoke(new Action(() => imgTest.Source = new BitmapImage(uri)));
+            Application.Current.Dispatcher.BeginInvoke(new Action(() => ImgTest.Source = new BitmapImage(uri)));
         }
 
-        private void submenuTimeManager_Click(object sender, RoutedEventArgs e)
+        private void submenuTimeManager_Click( object sender, RoutedEventArgs e )
         {
             var tm = new TimeManager();
             tm.Show();
         }
 
-        private void subMenuFactionManager_Click(object sender, RoutedEventArgs e)
+        private void subMenuFactionManager_Click( object sender, RoutedEventArgs e )
         {
-            var fm = new Forms.FactionManager.FactionManager();
+            var fm = new FactionManager();
             fm.Show();
         }
 
-        private void subMenuEncyclopediaManger_Click(object sender, RoutedEventArgs e)
+        private void subMenuEncyclopediaManger_Click( object sender, RoutedEventArgs e )
         {
             var enc = new MainEncyclopedia();
             enc.Show();
         }
 
-        private void ctxImageButton_Click(object sender, RoutedEventArgs e)
+        private void ctxImageButton_Click( object sender, RoutedEventArgs e )
         {
-            Application.Current.Dispatcher.BeginInvoke(new Action(() => imgTest.Source = null));
+            Application.Current.Dispatcher.BeginInvoke(new Action(() => ImgTest.Source = null));
         }
 
         #region Hide
 
         public void SwitchServerState()
         {
-            Application.Current.Dispatcher.BeginInvoke((Action)delegate
+            Application.Current.Dispatcher.BeginInvoke((Action) delegate
             {
-                if (btServerStart.IsEnabled)
+                if (BtServerStart.IsEnabled)
                 {
-                    btServerStart.IsEnabled = false;
-                    submenuTransferImage.IsEnabled = true;
-                    submenuTransferFile.IsEnabled = true;
+                    BtServerStart.IsEnabled = false;
+                    SubmenuTransferImage.IsEnabled = true;
+                    SubmenuTransferFile.IsEnabled = true;
                 }
                 else
                 {
-                    btServerStart.IsEnabled = true;
-                    submenuTransferImage.IsEnabled = false;
-                    submenuTransferFile.IsEnabled = false;
+                    BtServerStart.IsEnabled = true;
+                    SubmenuTransferImage.IsEnabled = false;
+                    SubmenuTransferFile.IsEnabled = false;
                 }
-                btServerStop.IsEnabled = !btServerStop.IsEnabled;
+                BtServerStop.IsEnabled = !BtServerStop.IsEnabled;
             });
         }
 
-        public bool UpdateConsole(string Msg)
+        public bool UpdateConsole( string msg )
         {
             Application.Current.Dispatcher.BeginInvoke((Action) delegate
             {
-                tbConsole.Text += Msg + "\r\n";
-                tbConsole.ScrollToEnd();
+                TbConsole.Text += msg + "\r\n";
+                TbConsole.ScrollToEnd();
             });
             return true;
         }
 
         public void ClearConsole()
         {
-            Application.Current.Dispatcher.BeginInvoke((Action) delegate { tbConsole.Text = ""; });
+            Application.Current.Dispatcher.BeginInvoke((Action) delegate { TbConsole.Text = ""; });
         }
 
-        public void btGenerate_Click(object sender, RoutedEventArgs e)
+        public void btGenerate_Click( object sender, RoutedEventArgs e )
         {
-            var SG = new Forms.SystemGeneration();
-            SG.ShowDialog();
+            var sg = new SystemGeneration();
+            sg.ShowDialog();
         }
 
-        private void MenuDatabaseManager_Click(object sender, RoutedEventArgs e)
+        private void MenuDatabaseManager_Click( object sender, RoutedEventArgs e )
         {
-            var DBM = new DataBaseManager();
-            DBM.ShowDialog();
+            var dbm = new DataBaseManager();
+            dbm.ShowDialog();
         }
 
-        private void btSend_Click(object sender, RoutedEventArgs e)
+        private void btSend_Click( object sender, RoutedEventArgs e )
         {
-            if (string.IsNullOrEmpty(tbChatInput.Text))
+            if (string.IsNullOrEmpty(TbChatInput.Text))
             {
             }
             else
             {
-                SWNService.CurrentService.ServerSendMessage(tbChatInput.Text, "Server");
-                tbChatInput.Text = "";
+                SwnService.CurrentService.ServerSendMessage(TbChatInput.Text, "Server");
+                TbChatInput.Text = "";
             }
         }
 
-        private void tbChatInput_KeyDown(object sender, KeyEventArgs e)
+        private void tbChatInput_KeyDown( object sender, KeyEventArgs e )
         {
             if (e.Key == Key.Enter)
             {
@@ -280,26 +272,26 @@ namespace SWNAdmin
             }
         }
 
-        private void submenuSystemSelector_Click(object sender, RoutedEventArgs e)
+        private void submenuSystemSelector_Click( object sender, RoutedEventArgs e )
         {
-            var SS = new SystemSelector();
-            SS.Show();
+            var ss = new SystemSelector();
+            ss.Show();
         }
 
-        private void subMenuSystemGeneration_Click(object sender, RoutedEventArgs e)
+        private void subMenuSystemGeneration_Click( object sender, RoutedEventArgs e )
         {
-            var SG = new Forms.SystemGeneration();
-            SG.ShowDialog();
+            var sg = new SystemGeneration();
+            sg.ShowDialog();
         }
 
-        private void submenuTransferImage_Click(object sender, RoutedEventArgs e)
+        private void submenuTransferImage_Click( object sender, RoutedEventArgs e )
         {
-            SWNService.CurrentService.SendImage();
+            SwnService.CurrentService.SendImage();
         }
 
-        private void submenuTransferFile_Click(object sender, RoutedEventArgs e)
+        private void submenuTransferFile_Click( object sender, RoutedEventArgs e )
         {
-            SWNService.CurrentService.SendFile();
+            SwnService.CurrentService.SendFile();
         }
 
         #endregion

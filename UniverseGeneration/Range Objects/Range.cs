@@ -1,53 +1,55 @@
-﻿using System;
-
-namespace UniverseGeneration.Range_Objects
+﻿namespace UniverseGeneration.Range_Objects
 {
     public class Range
     {
-        public double lowerBound { get; protected set; }
-        public double upperBound { get; protected set; }
-        public double length { get; protected set; }
-
-        public Range(double low, double high)
+        public Range( double low, double high )
         {
             /* if (high < low)
                 throw new Exception("Invalid argument: higher bound is lower than the lower bound");
             if (high == low)
                 throw new Exception("Invalid argument: Both range endpoints are the same number"); */
 
-            this.lowerBound = low;
-            this.upperBound = high;
-            this.length = this.upperBound - this.lowerBound;
-        }
-
-        public void setUpperBound(double bound){
-            this.upperBound = bound;
-            this.length = this.upperBound - this.lowerBound;
-        }
-
-        public void setLowerBound(double bound)
-        {
-            this.lowerBound = bound;
-            this.length = this.upperBound - this.lowerBound;
+            LowerBound = low;
+            UpperBound = high;
+            Length = UpperBound - LowerBound;
         }
 
         //copy constructor
-        public Range(Range incoming)
+        public Range( Range incoming )
         {
             /* if (incoming.upperBound < this.lowerBound)
                 throw new Exception("Invalid argument: higher bound is lower than the lower bound");
             if (this.upperBound == this.lowerBound) 
                 throw new Exception("Invalid argument: Both range endpoints are the same number"); */
 
-            this.lowerBound = incoming.lowerBound;
-            this.upperBound = incoming.upperBound;
-            this.length = incoming.length;
+            LowerBound = incoming.LowerBound;
+            UpperBound = incoming.UpperBound;
+            Length = incoming.Length;
         }
-        public Range() { }
 
-        public virtual bool withinRange(double number)
+        public Range()
         {
-            if (lowerBound <= number && number <= upperBound)
+        }
+
+        public double LowerBound { get; protected set; }
+        public double UpperBound { get; protected set; }
+        public double Length { get; protected set; }
+
+        public void SetUpperBound( double bound )
+        {
+            UpperBound = bound;
+            Length = UpperBound - LowerBound;
+        }
+
+        public void SetLowerBound( double bound )
+        {
+            LowerBound = bound;
+            Length = UpperBound - LowerBound;
+        }
+
+        public virtual bool WithinRange( double number )
+        {
+            if (LowerBound <= number && number <= UpperBound)
             {
                 return true;
             }
@@ -55,22 +57,19 @@ namespace UniverseGeneration.Range_Objects
             return false;
         }
 
-        public virtual double posWithinRange(double number)
+        public virtual double PosWithinRange( double number )
         {
-            if (this.withinRange(number))
+            if (WithinRange(number))
             {
-                return ((number - lowerBound) / this.length);
+                return ( number - LowerBound ) / Length;
             }
 
             return 0.0;
         }
 
-
-        public override String ToString()
+        public override string ToString()
         {
-            return ("This range is from " + this.lowerBound + " to " + this.upperBound);
+            return "This range is from " + LowerBound + " to " + UpperBound;
         }
-
-
     }
 }

@@ -3,19 +3,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:SWN"
-    xmlns:UserControls="clr-namespace:SWN.UserControls" x:Class="SWN.Forms.CharacterViewer"
+    xmlns:userControls="clr-namespace:SWN.UserControls" x:Class="SWN.Forms.CharacterViewer"
     xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
     themes:ThemeManager.Theme="ExpressionDark"
 
     mc:Ignorable="d"
     Title="CharacterViewer" Height="624" Width="802" WindowState="Maximized">
     <Window.Background>
-        <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
+        <SolidColorBrush Color="{DynamicResource SwnBackgroundDark}" />
     </Window.Background>
-    <Grid>
-
-        <UserControls:CharacterSheet HorizontalAlignment="Left" VerticalAlignment="Top" Height="594" Width="794" />
-
-    </Grid>
+    <Grid />
 </Window>

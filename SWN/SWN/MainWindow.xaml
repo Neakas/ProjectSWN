@@ -5,74 +5,63 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-    xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
-    xmlns:local="clr-namespace:SWN"
-    xmlns:UserControls="clr-namespace:SWN.UserControls" x:Class="SWN.MainWindow"
+    x:Class="SWN.MainWindow"
     themes:ThemeManager.Theme="ExpressionDark"
     mc:Ignorable="d"
     Title="MainWindow" Height="695.676" Width="1463.291" Loaded="Window_Loaded" Closed="Window_Closed"
     WindowState="Maximized" Background="#FF4B4B4B">
-    <Window.Resources>
-        <Color x:Key="SWNBackground">#FF4B4B4B</Color>
-    </Window.Resources>
     <Grid>
         <Calendar x:Name="MainCalendar" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top"
                   DisplayDate="3000-01-01" Focusable="False" IsHitTestVisible="False" SelectionMode="None"
                   IsTabStop="False" FirstDayOfWeek="Monday" Height="165" />
-        <TextBox x:Name="tbClock" HorizontalAlignment="Left" Height="23" Margin="10,28,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbClock" HorizontalAlignment="Left" Height="23" Margin="10,28,0,0" TextWrapping="Wrap"
                  Text="00:00:00" VerticalAlignment="Top" Width="54" IsEnabled="False" />
-        <Button x:Name="btOpenMap" Content="Open Mapping" HorizontalAlignment="Left" Margin="93,28,0,0"
-                VerticalAlignment="Top" Width="96" Click="btOpenMap_Click" Height="23" />
-        <Menu x:Name="menu" Height="23" VerticalAlignment="Top">
+        <Menu x:Name="Menu" Height="23" VerticalAlignment="Top">
             <MenuItem Header="Datei" />
             <MenuItem Header="Character">
-                <MenuItem x:Name="menuCreateNewCharacter" Header="Create New" HorizontalAlignment="Left" Width="215"
+                <MenuItem x:Name="MenuCreateNewCharacter" Header="Create New" HorizontalAlignment="Left" Width="215"
                           Margin="0,0,-50,0" Click="menuCreateNewCharacter_Click" />
-                <MenuItem x:Name="menuLoadCharacter" Header="Load" HorizontalAlignment="Left" Width="215"
+                <MenuItem x:Name="MenuLoadCharacter" Header="Load" HorizontalAlignment="Left" Width="215"
                           Margin="0,0,-50,0" Click="menuLoadCharacter_Click" />
-                <MenuItem x:Name="menuOpenCV" Header="Open CharacterViewer" HorizontalAlignment="Left" Width="215"
+                <MenuItem x:Name="MenuOpenCv" Header="Open CharacterViewer" HorizontalAlignment="Left" Width="215"
                           Margin="0,0,-50,0" Click="MenuOpenCV_Click" />
             </MenuItem>
-            <MenuItem x:Name="menuTools" Header="Tools" Margin="0" VerticalAlignment="Top">
-                <MenuItem x:Name="submenuOptions" Header="Options" HorizontalAlignment="Left" Width="150"
+            <MenuItem x:Name="MenuTools" Header="Tools" Margin="0" VerticalAlignment="Top">
+                <MenuItem x:Name="SubmenuOptions" Header="Options" HorizontalAlignment="Left" Width="150"
                           Click="submenuOptions_Click" />
-                <MenuItem x:Name="submenuSectorViewer" Header="Sector Viewer" HorizontalAlignment="Left" Width="150"
+                <MenuItem x:Name="SubmenuSectorViewer" Header="Sector Viewer" HorizontalAlignment="Left" Width="150"
                           Click="submenuSectorViewer_Click" />
             </MenuItem>
         </Menu>
-        <Grid x:Name="testgrid">
+        <Grid x:Name="Testgrid">
             <Border BorderBrush="Black" BorderThickness="2" Margin="10,286,0,0" HorizontalAlignment="Left" Width="405"
                     Height="362" VerticalAlignment="Top">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" BorderBrush="Black" BorderThickness="2">
-                    <StackPanel x:Name="sP1" HorizontalAlignment="Left" Width="403" VerticalAlignment="Top"
+                    <StackPanel x:Name="Sp1" HorizontalAlignment="Left" Width="403" VerticalAlignment="Top"
                                 Background="#FFC9C9C9" MinHeight="398" />
                 </ScrollViewer>
             </Border>
             <Border Margin="440,33,103,327" BorderBrush="Black" BorderThickness="2">
-                <xctk:BusyIndicator x:Name="biBusy" BusyContent="Loading Image..." IsHitTestVisible="True"
+                <xctk:BusyIndicator x:Name="BiBusy" BusyContent="Loading Image..." IsHitTestVisible="True"
                                     DisplayAfter="0">
-                    <Image x:Name="imgTest" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <Image x:Name="ImgTest" HorizontalAlignment="Left" VerticalAlignment="Top" />
                 </xctk:BusyIndicator>
             </Border>
-            <Label x:Name="lblFileTransfer" Content="No Filetransfer" HorizontalAlignment="Left" Margin="357,33,0,0"
+            <Label x:Name="LblFileTransfer" Content="No Filetransfer" HorizontalAlignment="Left" Margin="357,33,0,0"
                    VerticalAlignment="Top" Foreground="White" />
-            <StackPanel x:Name="spNotificationPanel" Height="366" Margin="0,28,-1,0" VerticalAlignment="Top"
+            <StackPanel x:Name="SpNotificationPanel" Height="366" Margin="0,28,-1,0" VerticalAlignment="Top"
                         HorizontalAlignment="Right" Width="99" />
         </Grid>
         <Grid x:Name="Chat" Height="275" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="497"
               Margin="0,0,99,10">
-            <TextBox x:Name="tbChatPane" Grid.Row="0" Width="373" AcceptsReturn="True" TextWrapping="Wrap"
+            <TextBox x:Name="TbChatPane" Grid.Row="0" Width="373" AcceptsReturn="True" TextWrapping="Wrap"
                      VerticalScrollBarVisibility="Auto" HorizontalAlignment="Right" Margin="0,0,10,37" Height="228"
-                     VerticalAlignment="Bottom" IsReadOnly="True">
-                <TextBox.Background>
-                    <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
-                </TextBox.Background>
-            </TextBox>
-            <TextBox x:Name="tbChatInput" HorizontalAlignment="Right" Width="294" Margin="0,243,89,10"
+                     VerticalAlignment="Bottom" IsReadOnly="True" />
+            <TextBox x:Name="TbChatInput" HorizontalAlignment="Right" Width="294" Margin="0,243,89,10"
                      KeyDown="tbChatInput_KeyDown" />
-            <Button x:Name="btsend" Content="Send" Click="btsend_Click" Height="22" VerticalAlignment="Bottom"
+            <Button x:Name="Btsend" Content="Send" Click="btsend_Click" Height="22" VerticalAlignment="Bottom"
                     HorizontalAlignment="Right" Width="74" Margin="0,0,10,10" />
-            <ListBox x:Name="lbUserOnline" HorizontalAlignment="Right" Width="100" Height="255"
+            <ListBox x:Name="LbUserOnline" HorizontalAlignment="Right" Width="100" Height="255"
                      VerticalAlignment="Bottom" Margin="0,0,387,10" />
         </Grid>
     </Grid>

@@ -1,13 +1,13 @@
 ﻿using System.Windows;
 using SWN.Networking;
-using SWN.Service_References.SWNServiceReference;
+using SWN.SWNServiceReference;
 
 namespace SWN.Forms
 {
     /// <summary>
     ///     Interaction logic for LoadCharacter.xaml
     /// </summary>
-    public partial class LoadCharacter : Window
+    public partial class LoadCharacter
     {
         public LoadCharacter()
         {
@@ -15,11 +15,11 @@ namespace SWN.Forms
             QueryChars();
         }
 
-        private void btLoad_Click(object sender, RoutedEventArgs e)
+        private void btLoad_Click( object sender, RoutedEventArgs e )
         {
-            if (lbCharacters.SelectedItem != null)
+            if (LbCharacters.SelectedItem != null)
             {
-                var cnc = new CreateNewCharacter(lbCharacters.SelectedItem as Character);
+                var cnc = new CreateNewCharacter(LbCharacters.SelectedItem as Character);
                 cnc.Show();
                 Close();
             }
@@ -31,9 +31,8 @@ namespace SWN.Forms
 
         private void QueryChars()
         {
-            lbCharacters.ItemsSource =
-                ServerConnection.LocalServiceClient.RequestSavedCharacters(MainWindow.CurrentInstance.LocalCient);
-            lbCharacters.DisplayMemberPath = "Name";
+            LbCharacters.ItemsSource = ServerConnection.LocalServiceClient.RequestSavedCharacters(MainWindow.CurrentInstance.LocalCient);
+            LbCharacters.DisplayMemberPath = "Name";
         }
     }
 }

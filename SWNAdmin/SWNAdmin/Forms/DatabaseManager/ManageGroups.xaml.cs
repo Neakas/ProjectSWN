@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using SWNAdmin.Utility;
-using System.Linq;
 
 namespace SWNAdmin.Forms.DatabaseManager
 {
@@ -19,11 +19,14 @@ namespace SWNAdmin.Forms.DatabaseManager
             LoadSubListBoxContent();
         }
 
-        private void btAdd_Click(object sender, RoutedEventArgs e)
+        private void btAdd_Click( object sender, RoutedEventArgs e )
         {
             using (var context = new Db1Entities())
             {
-                var sg = new StatGroup {Name = TbGroupName.Text};
+                var sg = new StatGroup
+                {
+                    Name = TbGroupName.Text
+                };
                 context.StatGroup.Add(sg);
                 context.SaveChanges();
             }
@@ -32,7 +35,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             TbGroupName1.Text = "";
         }
 
-        private void btDel_Click(object sender, RoutedEventArgs e)
+        private void btDel_Click( object sender, RoutedEventArgs e )
         {
             var context = new Db1Entities();
             var delGroup = LbGroups.SelectedItem as StatGroup;
@@ -49,7 +52,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             LoadListBoxContent();
         }
 
-        private void btUpd_Click(object sender, RoutedEventArgs e)
+        private void btUpd_Click( object sender, RoutedEventArgs e )
         {
             var context = new Db1Entities();
             var updateGroup = LbGroups.SelectedItem as StatGroup;
@@ -79,13 +82,15 @@ namespace SWNAdmin.Forms.DatabaseManager
             LbGroups.DisplayMemberPath = "Name";
         }
 
-        private void lbGroups_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void lbGroups_SelectionChanged( object sender, SelectionChangedEventArgs e )
         {
             if (LbGroups.SelectedItem != null)
             {
                 var statGroup = LbGroups.SelectedItem as StatGroup;
                 if (statGroup != null)
+                {
                     TbGroupName.Text = statGroup.Name;
+                }
                 TbGroupName1.Text = TbGroupName.Text;
                 BtAdd.Visibility = Visibility.Hidden;
                 BtUpd.Visibility = Visibility.Visible;
@@ -110,13 +115,15 @@ namespace SWNAdmin.Forms.DatabaseManager
 
         //SubGroups
 
-        private void lbGroups1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void lbGroups1_SelectionChanged( object sender, SelectionChangedEventArgs e )
         {
             if (LbSubGroups.SelectedItem != null)
             {
                 var statSubGroup = LbSubGroups.SelectedItem as StatSubGroup;
                 if (statSubGroup != null)
+                {
                     TbSubGroupName.Text = statSubGroup.Name;
+                }
                 BtAdd1.Visibility = Visibility.Hidden;
                 BtUpd1.Visibility = Visibility.Visible;
                 BtAdd1.IsEnabled = false;
@@ -134,7 +141,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             }
         }
 
-        private void btAdd1_Click(object sender, RoutedEventArgs e)
+        private void btAdd1_Click( object sender, RoutedEventArgs e )
         {
             using (var context = new Db1Entities())
             {
@@ -154,7 +161,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             TbSubGroupName.Text = "";
         }
 
-        private void btDel1_Click(object sender, RoutedEventArgs e)
+        private void btDel1_Click( object sender, RoutedEventArgs e )
         {
             var context = new Db1Entities();
             var groups = LbGroups.SelectedItem as StatGroup;
@@ -170,7 +177,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             LoadSubListBoxContent();
         }
 
-        private void btUpd1_Click(object sender, RoutedEventArgs e)
+        private void btUpd1_Click( object sender, RoutedEventArgs e )
         {
             var context = new Db1Entities();
             var updateSubGroup = LbSubGroups.SelectedItem as StatSubGroup;

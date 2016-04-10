@@ -31,7 +31,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             CbExistingSkill.DisplayMemberPath = "SkillName";
         }
 
-        private void cbExistingSkill_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbExistingSkill_SelectionChanged( object sender, SelectionChangedEventArgs e )
         {
             if (CbExistingSkill.SelectedItem != null)
             {
@@ -72,7 +72,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             //tbSkillName2.Text = TbSkillName.Text = _selectedSkill.SkillName?.ToString();
         }
 
-        private void btUpdate_Click(object sender, RoutedEventArgs e)
+        private void btUpdate_Click( object sender, RoutedEventArgs e )
         {
             var context = new Db1Entities();
             var id = int.Parse(TbId.Text);
@@ -102,7 +102,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             InitForm();
         }
 
-        private void btDelete_Click(object sender, RoutedEventArgs e)
+        private void btDelete_Click( object sender, RoutedEventArgs e )
         {
             var context = new Db1Entities();
             var id = int.Parse(TbId.Text);
@@ -117,7 +117,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             InitForm();
         }
 
-        private void btClear_Click(object sender, RoutedEventArgs e)
+        private void btClear_Click( object sender, RoutedEventArgs e )
         {
             CbExistingSkill.SelectedItem = null;
             BtAdd.Visibility = Visibility.Visible;
@@ -141,7 +141,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             TbPrerequisite.Text = "";
         }
 
-        private void btAdd_Click(object sender, RoutedEventArgs e)
+        private void btAdd_Click( object sender, RoutedEventArgs e )
         {
             int result;
             int.TryParse(TbPoints.Text, out result);
@@ -169,7 +169,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             btClear_Click(this, null);
         }
 
-        private void tbId_TextChanged(object sender, TextChangedEventArgs e)
+        private void tbId_TextChanged( object sender, TextChangedEventArgs e )
         {
             if (TbId.Text != "")
             {
@@ -182,7 +182,6 @@ namespace SWNAdmin.Forms.DatabaseManager
                 TabItemModifiers.IsEnabled = false;
             }
         }
-
 
         //Specialization TAB
         private void PreparePage1()
@@ -197,7 +196,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             LbSpecializations.DisplayMemberPath = "Name";
         }
 
-        private void btAddSpec_Click(object sender, RoutedEventArgs e)
+        private void btAddSpec_Click( object sender, RoutedEventArgs e )
         {
             if (TbSpecName.Text != "")
             {
@@ -221,14 +220,12 @@ namespace SWNAdmin.Forms.DatabaseManager
             PreparePage1();
         }
 
-        private void btDerlSpec_Click(object sender, RoutedEventArgs e)
+        private void btDerlSpec_Click( object sender, RoutedEventArgs e )
         {
             if (LbSpecializations.SelectedItem != null)
             {
                 var context = new Db1Entities();
-                var queryspec = from c in context.SkillSpecialization
-                    where c.Id == ((SkillSpecialization)LbSpecializations.SelectedItem).Id
-                    select c;
+                var queryspec = from c in context.SkillSpecialization where c.Id == ( (SkillSpecialization) LbSpecializations.SelectedItem ).Id select c;
 
                 using (context)
                 {
@@ -241,7 +238,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             PreparePage1();
         }
 
-        private void lbSpecializations_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void lbSpecializations_SelectionChanged( object sender, SelectionChangedEventArgs e )
         {
             if (LbSpecializations.SelectedItem != null)
             {
@@ -282,12 +279,10 @@ namespace SWNAdmin.Forms.DatabaseManager
             CbSpecIsOptional.IsChecked = false;
         }
 
-        private void btUpdateSpec_Click(object sender, RoutedEventArgs e)
+        private void btUpdateSpec_Click( object sender, RoutedEventArgs e )
         {
             var context = new Db1Entities();
-            var queryspec = from c in context.SkillSpecialization
-                where c.Id == ((SkillSpecialization)LbSpecializations.SelectedItem).Id
-                select c;
+            var queryspec = from c in context.SkillSpecialization where c.Id == ( (SkillSpecialization) LbSpecializations.SelectedItem ).Id select c;
 
             using (context)
             {

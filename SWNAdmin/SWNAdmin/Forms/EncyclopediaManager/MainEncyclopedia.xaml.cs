@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using SWNAdmin.Forms.EncyclopediaManager.ViewModels;
 using SWNAdmin.Utility;
-using System.Linq;
 
 namespace SWNAdmin.Forms.EncyclopediaManager
 {
@@ -32,7 +32,7 @@ namespace SWNAdmin.Forms.EncyclopediaManager
 
             using (var context = new Db1Entities())
             {
-                var raceList = (from c in context.Aliens select c).ToList();
+                var raceList = ( from c in context.Aliens select c ).ToList();
                 var raceNodeList = new List<TreeNodeViewModel>();
                 foreach (var t1 in raceList.Select(item => new TreeNodeViewModel(item.Name)))
                 {
@@ -41,26 +41,29 @@ namespace SWNAdmin.Forms.EncyclopediaManager
                 }
                 var n2 = new TreeNodeViewModel("Races", raceNodeList, null);
                 n2.PropertyChanged += UpdateTextBox;
-                var settings = new SettingsViewModel(new[] {n1, n2});
+                var settings = new SettingsViewModel(new[]
+                {
+                    n1, n2
+                });
 
                 DataContext = settings;
             }
         }
 
-        private void UpdateTextBox(object sender, PropertyChangedEventArgs e)
+        private void UpdateTextBox( object sender, PropertyChangedEventArgs e )
         {
             _loadedRange = new TextRange(RtbContent.Document.ContentStart, RtbContent.Document.ContentEnd);
 
-            if ((sender as TreeNodeViewModel)?.Parent?.Name == "Races")
+            if (( sender as TreeNodeViewModel )?.Parent?.Name == "Races")
             {
                 using (var context = new Db1Entities())
                 {
-                    var name = ((TreeNodeViewModel) sender).Name;
-                    var race = (from c in context.encycloRace where c.RaceName == name select c).FirstOrDefault();
+                    var name = ( (TreeNodeViewModel) sender ).Name;
+                    var race = ( from c in context.encycloRace where c.RaceName == name select c ).FirstOrDefault();
                     if (race != null)
                     {
                         _loadedItem = race.RaceName;
-                        _loadedParent = ((TreeNodeViewModel) sender).Parent?.Name;
+                        _loadedParent = ( (TreeNodeViewModel) sender ).Parent?.Name;
                         RtbContent.TextChanged -= RichTextBox_TextChanged;
                         _loadedRange.Text = race.RaceDiscription;
                     }
@@ -74,7 +77,7 @@ namespace SWNAdmin.Forms.EncyclopediaManager
         {
             using (var context = new Db1Entities())
             {
-                _loadedEncyclopedia = (from c in context.Encyclopedia select c).FirstOrDefault();
+                _loadedEncyclopedia = ( from c in context.Encyclopedia select c ).FirstOrDefault();
                 RefreshEncyclopedia(_loadedEncyclopedia);
             }
             //Type t = typeof(encycloPerson);
@@ -85,7 +88,7 @@ namespace SWNAdmin.Forms.EncyclopediaManager
             //ccMainCollection.NewItemTypes = typelist;
         }
 
-        private void subMenuNewEncy_Click(object sender, RoutedEventArgs e)
+        private void subMenuNewEncy_Click( object sender, RoutedEventArgs e )
         {
             _newEncyclopediaWindow = new Window
             {
@@ -101,7 +104,7 @@ namespace SWNAdmin.Forms.EncyclopediaManager
                 Content = "Encyclopedia Name:",
                 Margin = new Thickness(10, 10, 0, 0)
             };
-            var newTextbox = new TextBox()
+            var newTextbox = new TextBox
             {
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Top,
@@ -119,33 +122,41 @@ namespace SWNAdmin.Forms.EncyclopediaManager
             _newEncyclopediaWindow.ShowDialog();
         }
 
-        private static void newTextbox_KeyDown(object sender, KeyEventArgs e)
+        private static void newTextbox_KeyDown( object sender, KeyEventArgs e )
         {
-            if (e.Key != Key.Enter) return;
+            if (e.Key != Key.Enter)
+            {
+                return;
+            }
             using (var context = new Db1Entities())
             {
                 var textBox = sender as TextBox;
                 if (textBox != null)
                 {
-                    var encyclopedia = new Encyclopedia {Name = textBox.Text};
+                    var encyclopedia = new Encyclopedia
+                    {
+                        Name = textBox.Text
+                    };
                     context.Encyclopedia.Add(encyclopedia);
                 }
                 context.SaveChanges();
                 var box = sender as TextBox;
                 if (box != null)
+                {
                     MessageBox.Show("The Encyclopedia '" + box.Text + "' has been added to the Database");
+                }
             }
-            var grid = ((TextBox) sender).Parent as Grid;
-            (grid?.Parent as Window)?.Close();
+            var grid = ( (TextBox) sender ).Parent as Grid;
+            ( grid?.Parent as Window )?.Close();
         }
 
-        private static void RefreshEncyclopedia(Encyclopedia enc)
+        private static void RefreshEncyclopedia( Encyclopedia enc )
         {
             using (var context = new Db1Entities())
             {
                 //Races
-                var alienlist = (from c in context.Aliens select c).ToList();
-                var encyclorace = (from c in context.encycloRace select c).ToList();
+                var alienlist = ( from c in context.Aliens select c ).ToList();
+                var encyclorace = ( from c in context.encycloRace select c ).ToList();
 
                 var result = alienlist.Where(p => encyclorace.All(p2 => p2.RaceName != p.Name)).ToList();
                 foreach (var item in result)
@@ -162,14 +173,13 @@ namespace SWNAdmin.Forms.EncyclopediaManager
             }
         }
 
-        private void btSave_Click(object sender, RoutedEventArgs e)
+        private void btSave_Click( object sender, RoutedEventArgs e )
         {
             if (_loadedParent == "Races")
             {
                 using (var context = new Db1Entities())
                 {
-                    var updateRace =
-                        (from c in context.encycloRace where c.RaceName == _loadedItem select c).FirstOrDefault();
+                    var updateRace = ( from c in context.encycloRace where c.RaceName == _loadedItem select c ).FirstOrDefault();
                     if (updateRace != null)
                     {
                         updateRace.RaceDiscription = _loadedRange.Text;
@@ -181,7 +191,7 @@ namespace SWNAdmin.Forms.EncyclopediaManager
             BtSave.IsEnabled = false;
         }
 
-        private void RichTextBox_TextChanged(object sender, EventArgs e)
+        private void RichTextBox_TextChanged( object sender, EventArgs e )
         {
             BtSave.IsEnabled = true;
         }

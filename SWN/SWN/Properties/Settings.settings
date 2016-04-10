@@ -5,29 +5,19 @@
   <Profiles />
   <Settings>
     <Setting Name="CurrentDateTime" Type="System.DateTime" Scope="User">
-      <value Profile="(Default)" />
+      <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="isStartDate" Type="System.boolean" Scope="User">
-      <value Profile="(Default)">True</value>
+    <Setting Name="hasUndo" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="hasUndo" Type="System.boolean" Scope="User">
-      <value Profile="(Default)">False</value>
+    <Setting Name="LoggedIn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Db1ConnectionString" Type="(Connection string)" Scope="Application">
-      <DesignTimevalue Profile="(Default)">
-        &lt;?xml version="1.0" encoding="utf-16"?&gt;
-        &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-        &lt;ConnectionString&gt;Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Db1.mdf;Integrated Security=True;Connect Timeout=30&lt;/ConnectionString&gt;
-        &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
-        &lt;/SerializableConnectionString&gt;
-      </DesignTimevalue>
-      <value Profile="(Default)">Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Db1.mdf;Integrated Security=True;Connect Timeout=30</value>
-    </Setting>
-    <Setting Name="LoggedIn" Type="System.boolean" Scope="User">
-      <value Profile="(Default)">False</value>
+    <Setting Name="isStartDate" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="UserName" Type="System.String" Scope="User">
-      <value Profile="(Default)">""</value>
+      <Value Profile="(Default)">""</Value>
     </Setting>
   </Settings>
 </SettingsFile>

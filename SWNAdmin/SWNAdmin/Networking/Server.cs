@@ -8,21 +8,23 @@ namespace SWNAdmin.Networking
     {
         //ServiceHost SWNServiceHost;
         public static ServiceHost CurrentServiceHost;
-        private readonly Thread ServerThread;
-        public AutoResetEvent threadStopFlag = new AutoResetEvent(false);
+        private readonly Thread _serverThread;
+        private readonly AutoResetEvent _threadStopFlag = new AutoResetEvent(false);
 
         public Server()
         {
             CurrentServiceHost = null;
-            ServerThread = new Thread(StartService);
-            ServerThread.IsBackground = true;
-            ServerThread.Start();
+            _serverThread = new Thread(StartService)
+            {
+                IsBackground = true
+            };
+            _serverThread.Start();
             Thread.Sleep(2000);
         }
 
         private void StartService()
         {
-            CurrentServiceHost = new ServiceHost(typeof (SWNService));
+            CurrentServiceHost = new ServiceHost(typeof (SwnService));
             try
             {
                 CurrentServiceHost.Open();
@@ -39,8 +41,8 @@ namespace SWNAdmin.Networking
                     MainWindow.CurrentInstance.UpdateServerStatus(true);
                 }
             }
-            threadStopFlag.WaitOne();
-            ServerThread.Join();
+            _threadStopFlag.WaitOne();
+            _serverThread.Join();
         }
 
         public void StopService()
@@ -64,7 +66,7 @@ namespace SWNAdmin.Networking
                     }
                 }
             }
-            threadStopFlag.Set();
+            _threadStopFlag.Set();
         }
     }
 }

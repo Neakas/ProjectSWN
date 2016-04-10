@@ -18,7 +18,7 @@ namespace SWN.Controller
         }
 
         //Setzt die Aktuelle DateTime
-        public static void SetCurrentDateTime(DateTime dateTimeValue, bool isUndo = false)
+        public static void SetCurrentDateTime( DateTime dateTimeValue, bool isUndo = false )
         {
             Settings.Default.CurrentDateTime = dateTimeValue;
             Settings.Default.Save();
@@ -30,7 +30,7 @@ namespace SWN.Controller
             return isStartDate;
         }
 
-        public static void SetisStartDate(bool boolean)
+        public static void SetisStartDate( bool boolean )
         {
             Settings.Default.isStartDate = boolean;
             Settings.Default.Save();
@@ -41,7 +41,7 @@ namespace SWN.Controller
             return Settings.Default.hasUndo;
         }
 
-        public static void SethasUndo(bool boolean)
+        public static void SethasUndo( bool boolean )
         {
             Settings.Default.hasUndo = boolean;
             Settings.Default.Save();
@@ -52,7 +52,7 @@ namespace SWN.Controller
             return Settings.Default.LoggedIn;
         }
 
-        public static void SetIsLoggedIn(bool boolean)
+        public static void SetIsLoggedIn( bool boolean )
         {
             Settings.Default.LoggedIn = boolean;
             Settings.Default.Save();
@@ -63,7 +63,7 @@ namespace SWN.Controller
             return XmlHandler.GrabXmlValue(GrabSettingFile(), "ipPort");
         }
 
-        public static void SetIpPort(string ipPort)
+        public static void SetIpPort( string ipPort )
         {
             XmlHandler.SetXmlValue(GrabSettingFile(), "ipPort", ipPort);
         }
@@ -73,7 +73,7 @@ namespace SWN.Controller
             return bool.Parse(XmlHandler.GrabXmlValue(GrabSettingFile(), "TurnOffMusic"));
         }
 
-        public static void TurnOffMusic(bool value)
+        public static void TurnOffMusic( bool value )
         {
             value = !value;
             XmlHandler.SetXmlValue(GrabSettingFile(), "TurnOffMusic", value.ToString());
@@ -81,7 +81,10 @@ namespace SWN.Controller
 
         public static XDocument GrabSettingFile()
         {
-            if (!File.Exists(SettingPath())) return null;
+            if (!File.Exists(SettingPath()))
+            {
+                return null;
+            }
             var xDoc = XDocument.Load(SettingPath());
             return xDoc;
         }
@@ -89,7 +92,10 @@ namespace SWN.Controller
         public static string SettingPath()
         {
             var targetPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
-            if (targetPath == null) return null;
+            if (targetPath == null)
+            {
+                return null;
+            }
             targetPath = targetPath.Remove(0, 6);
             const string settingFileName = "Config.cfg";
             var sPath = Path.Combine(targetPath, settingFileName);
@@ -98,7 +104,10 @@ namespace SWN.Controller
 
         public static void InitSettingFile()
         {
-            if (XmlHandler.GrabXmlValue(GrabSettingFile(), "FirstLoad") != "true") return;
+            if (XmlHandler.GrabXmlValue(GrabSettingFile(), "FirstLoad") != "true")
+            {
+                return;
+            }
             var targetPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
             if (targetPath != null)
             {

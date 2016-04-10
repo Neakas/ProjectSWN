@@ -3,89 +3,81 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using SWN.Controller;
 using SWN.Networking;
-using SWN.Service_References.SWNServiceReference;
+using SWN.SWNServiceReference;
 
 namespace SWN.Forms
 
 {
-    public partial class Login : Window
+    public partial class Login
     {
         public Login()
         {
             InitializeComponent();
             CurrentInstance = this;
-            tbIPPort.Text = SettingHandler.GetIpPort();
+            TbIpPort.Text = SettingHandler.GetIpPort();
         }
 
         public static Login CurrentInstance { get; set; }
 
         public Client UserClient { get; set; }
 
-        private async void btLogin_Click(object sender, RoutedEventArgs e)
+        private async void btLogin_Click( object sender, RoutedEventArgs e )
         {
-            ServerConnection SC;
-            if (ServerConnection.CurrentInstance == null)
-            {
-                SC = new ServerConnection();
-            }
-            else
-            {
-                SC = ServerConnection.CurrentInstance;
-            }
+            var sc = ServerConnection.CurrentInstance ?? new ServerConnection();
 
             UserClient = new Client();
-            SettingHandler.SetIpPort(tbIPPort.Text);
+            SettingHandler.SetIpPort(TbIpPort.Text);
 
-            if (textBoxUsername.Text.Length == 0)
+            if (TextBoxUsername.Text.Length == 0)
             {
-                errormessage.Text = "Please enter a Username.";
-                textBoxUsername.Focus();
+                Errormessage.Text = "Please enter a Username.";
+                TextBoxUsername.Focus();
                 return;
             }
-            errormessage.Text = "";
-            biBusy.IsBusy = true;
+            Errormessage.Text = "";
+            BiBusy.IsBusy = true;
             //Force UI Redraw
             Dispatcher.Invoke(() => { }, DispatcherPriority.ContextIdle);
 
-            UserClient.UserName = textBoxUsername.Text;
-            var E = new Encryption(passwordBox1.Password);
-            UserClient.encPassword = E.EncryptStringToBytes(passwordBox1.Password);
-            var SuccessfullLogin = await SC.tryLogin(UserClient);
-            if (SuccessfullLogin)
+            UserClient.UserName = TextBoxUsername.Text;
+            UserClient.EncPassword = new Encryption(PasswordBox1.Password).EncryptStringToBytes(PasswordBox1.Password);
+            var successfullLogin = await sc.TryLogin(UserClient);
+            if (successfullLogin)
             {
-                var MW = new MainWindow();
+                var mw = new MainWindow
+                {
+                    LocalCient = UserClient
+                };
 
-                MW.LocalCient = UserClient;
                 SettingHandler.SetIsLoggedIn(true);
-                MW.Show();
+                mw.Show();
                 Close();
             }
             else
             {
-                biBusy.IsBusy = false;
+                BiBusy.IsBusy = false;
             }
         }
 
-        public static void ProcessUITasks()
+        public static void ProcessUiTasks()
         {
             var frame = new DispatcherFrame();
-            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background,
-                new DispatcherOperationCallback(delegate
-                {
-                    frame.Continue = false;
-                    return null;
-                }), null);
+            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(delegate
+            {
+                frame.Continue = false;
+                return null;
+            }), null);
             Dispatcher.PushFrame(frame);
         }
 
-        private void buttonRegister_Click(object sender, RoutedEventArgs e)
+        private void buttonRegister_Click( object sender, RoutedEventArgs e )
         {
             var registration = new Registration();
             registration.Show();
             Close();
         }
 
-        private void textBoxUsername_KeyDown(object sender, KeyEventArgs e)
+        private void textBoxUsername_KeyDown( object sender, KeyEventArgs e )
         {
             if (e.Key == Key.Enter)
             {
@@ -93,7 +85,7 @@ namespace SWN.Forms
             }
         }
 
-        private void passwordBox1_KeyDown(object sender, KeyEventArgs e)
+        private void passwordBox1_KeyDown( object sender, KeyEventArgs e )
         {
             if (e.Key == Key.Enter)
             {
@@ -101,24 +93,24 @@ namespace SWN.Forms
             }
         }
 
-        private void btOverride_Click(object sender, RoutedEventArgs e)
+        private void btOverride_Click( object sender, RoutedEventArgs e )
         {
-            var MW = new MainWindow();
-            MW.Show();
+            var mw = new MainWindow();
+            mw.Show();
             Close();
         }
 
-        private void btSound_Click(object sender, RoutedEventArgs e)
+        private void btSound_Click( object sender, RoutedEventArgs e )
         {
-            if (App.musicplaying)
+            if (App.Musicplaying)
             {
-                App.mplayer.Pause();
-                App.musicplaying = false;
+                App.Mplayer.Pause();
+                App.Musicplaying = false;
             }
             else
             {
-                App.mplayer.Play();
-                App.musicplaying = true;
+                App.Mplayer.Play();
+                App.Musicplaying = true;
             }
         }
     }

@@ -6,11 +6,11 @@ namespace SWN.Controller
 {
     public class HexagonGrid : Grid
     {
-        protected override Size MeasureOverride(Size constraint)
+        protected override Size MeasureOverride( Size constraint )
         {
             var side = HexagonSideLength;
-            var width = 2*side;
-            var height = side*Math.Sqrt(3.0);
+            var width = 2 * side;
+            var height = side * Math.Sqrt(3.0);
             var rowHeight = height;
 
             var availableChildSize = new Size(width, height);
@@ -20,21 +20,23 @@ namespace SWN.Controller
                 child.Measure(availableChildSize);
             }
 
-            var totalHeight = Rows*rowHeight;
+            var totalHeight = Rows * rowHeight;
             if (Columns > 1)
-                totalHeight += 0.5*rowHeight;
-            var totalWidth = Columns + 0.5*side;
+            {
+                totalHeight += 0.5 * rowHeight;
+            }
+            var totalWidth = Columns + 0.5 * side;
 
             var totalSize = new Size(totalWidth, totalHeight);
             return totalSize;
         }
 
-        protected override Size ArrangeOverride(Size arrangeSize)
+        protected override Size ArrangeOverride( Size arrangeSize )
         {
             var side = HexagonSideLength;
-            var width = 2*side;
-            var height = side*Math.Sqrt(3.0);
-            var colWidth = 0.75*width;
+            var width = 2 * side;
+            var height = side * Math.Sqrt(3.0);
+            var colWidth = 0.75 * width;
             var rowHeight = height;
 
             var childSize = new Size(width, height);
@@ -44,11 +46,13 @@ namespace SWN.Controller
                 var row = GetRow(child);
                 var col = GetColumn(child);
 
-                var left = col*colWidth;
-                var top = row*rowHeight;
-                var isUnevenCol = col%2 != 0;
+                var left = col * colWidth;
+                var top = row * rowHeight;
+                var isUnevenCol = col % 2 != 0;
                 if (isUnevenCol)
-                    top += 0.5*rowHeight;
+                {
+                    top += 0.5 * rowHeight;
+                }
 
                 child.Arrange(new Rect(new Point(left, top), childSize));
             }
@@ -70,10 +74,8 @@ namespace SWN.Controller
         /// <summary>
         ///     HexagonSideLength Dependency Property
         /// </summary>
-        public static readonly DependencyProperty HexagonSideLengthProperty =
-            DependencyProperty.Register("HexagonSideLength", typeof (double), typeof (HexagonGrid),
-                new FrameworkPropertyMetadata((double) 0,
-                    FrameworkPropertyMetadataOptions.AffectsMeasure));
+        public static readonly DependencyProperty HexagonSideLengthProperty = DependencyProperty.Register("HexagonSideLength", typeof (double), typeof (HexagonGrid),
+            new FrameworkPropertyMetadata((double) 0, FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         /// <summary>
         ///     Gets or sets the HexagonSideLength property. This dependency property
@@ -81,8 +83,14 @@ namespace SWN.Controller
         /// </summary>
         public double HexagonSideLength
         {
-            get { return (double) GetValue(HexagonSideLengthProperty); }
-            set { SetValue(HexagonSideLengthProperty, value); }
+            get
+            {
+                return (double) GetValue(HexagonSideLengthProperty);
+            }
+            set
+            {
+                SetValue(HexagonSideLengthProperty, value);
+            }
         }
 
         #endregion
@@ -92,18 +100,21 @@ namespace SWN.Controller
         /// <summary>
         ///     Rows Dependency Property
         /// </summary>
-        public static readonly DependencyProperty RowsProperty =
-            DependencyProperty.Register("Rows", typeof (int), typeof (HexagonGrid),
-                new FrameworkPropertyMetadata(1,
-                    FrameworkPropertyMetadataOptions.AffectsMeasure));
+        public static readonly DependencyProperty RowsProperty = DependencyProperty.Register("Rows", typeof (int), typeof (HexagonGrid), new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         /// <summary>
         ///     Gets or sets the Rows property.
         /// </summary>
         public int Rows
         {
-            get { return (int) GetValue(RowsProperty); }
-            set { SetValue(RowsProperty, value); }
+            get
+            {
+                return (int) GetValue(RowsProperty);
+            }
+            set
+            {
+                SetValue(RowsProperty, value);
+            }
         }
 
         #endregion
@@ -113,18 +124,21 @@ namespace SWN.Controller
         /// <summary>
         ///     Columns Dependency Property
         /// </summary>
-        public static readonly DependencyProperty ColumnsProperty =
-            DependencyProperty.Register("Columns", typeof (int), typeof (HexagonGrid),
-                new FrameworkPropertyMetadata(1,
-                    FrameworkPropertyMetadataOptions.AffectsMeasure));
+        public static readonly DependencyProperty ColumnsProperty = DependencyProperty.Register("Columns", typeof (int), typeof (HexagonGrid), new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         /// <summary>
         ///     Gets or sets the Columns property.
         /// </summary>
         public int Columns
         {
-            get { return (int) GetValue(ColumnsProperty); }
-            set { SetValue(ColumnsProperty, value); }
+            get
+            {
+                return (int) GetValue(ColumnsProperty);
+            }
+            set
+            {
+                SetValue(ColumnsProperty, value);
+            }
         }
 
         #endregion

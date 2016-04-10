@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SWNAdmin"
         xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
         themes:ThemeManager.Theme="ExpressionDark"
         mc:Ignorable="d"
@@ -12,52 +11,52 @@
         <SolidColorBrush Color="{DynamicResource SWNLightBackground}" />
     </Window.Background>
 
-    <Grid x:Name="grMain">
-        <Menu x:Name="menu" Height="24" VerticalAlignment="Top">
-            <MenuItem x:Name="menuDatei" Header="Datei" />
-            <MenuItem x:Name="menuCharacters" Header="Characters">
-                <MenuItem x:Name="submenuCharacterViewer" Header="View All Characters" />
+    <Grid x:Name="GrMain">
+        <Menu x:Name="Menu" Height="24" VerticalAlignment="Top">
+            <MenuItem x:Name="MenuDatei" Header="Datei" />
+            <MenuItem x:Name="MenuCharacters" Header="Characters">
+                <MenuItem x:Name="SubmenuCharacterViewer" Header="View All Characters" />
             </MenuItem>
-            <MenuItem x:Name="menuDatabase" Header="Database" Foreground="White">
-                <MenuItem x:Name="submenuDatabaseManager" Header="Database Manager" HorizontalAlignment="Left"
+            <MenuItem x:Name="MenuDatabase" Header="Database" Foreground="White">
+                <MenuItem x:Name="SubmenuDatabaseManager" Header="Database Manager" HorizontalAlignment="Left"
                           Width="185" Click="MenuDatabaseManager_Click" />
-                <MenuItem x:Name="submenuSystemSelector" Header="System Selector" HorizontalAlignment="Left"
+                <MenuItem x:Name="SubmenuSystemSelector" Header="System Selector" HorizontalAlignment="Left"
                           Width="185" Click="submenuSystemSelector_Click" />
             </MenuItem>
-            <MenuItem x:Name="menuUniverse" Header="Universe" VerticalAlignment="Top" Foreground="White">
-                <MenuItem x:Name="submenuTimeManager" Header="Time Manager" HorizontalAlignment="Left" Width="185"
+            <MenuItem x:Name="MenuUniverse" Header="Universe" VerticalAlignment="Top" Foreground="White">
+                <MenuItem x:Name="SubmenuTimeManager" Header="Time Manager" HorizontalAlignment="Left" Width="185"
                           Click="submenuTimeManager_Click" />
-                <MenuItem x:Name="subMenuSystemGeneration" Header="System Generation" HorizontalAlignment="Left"
+                <MenuItem x:Name="SubMenuSystemGeneration" Header="System Generation" HorizontalAlignment="Left"
                           Width="143" Click="subMenuSystemGeneration_Click" Margin="0,0,-1,0" />
-                <MenuItem x:Name="subMenuFactionManager" Header="Faction Manager" HorizontalAlignment="Left"
+                <MenuItem x:Name="SubMenuFactionManager" Header="Faction Manager" HorizontalAlignment="Left"
                           Width="143" Click="subMenuFactionManager_Click" Margin="0,0,-1,0" />
-                <MenuItem x:Name="subMenuEncyclopediaManger" Header="Encyclopedia Manager" HorizontalAlignment="Left"
+                <MenuItem x:Name="SubMenuEncyclopediaManger" Header="Encyclopedia Manager" HorizontalAlignment="Left"
                           Width="186" Click="subMenuEncyclopediaManger_Click" Margin="0,0,-1,0" />
             </MenuItem>
-            <MenuItem x:Name="menuNetwork" Header="Network" VerticalAlignment="Top" Foreground="White">
-                <MenuItem x:Name="submenuTransferImage" Header="Transfer Image" HorizontalAlignment="Left" Width="125"
+            <MenuItem x:Name="MenuNetwork" Header="Network" VerticalAlignment="Top" Foreground="White">
+                <MenuItem x:Name="SubmenuTransferImage" Header="Transfer Image" HorizontalAlignment="Left" Width="125"
                           Margin="0,0,-4,0" Click="submenuTransferImage_Click" IsEnabled="False" />
-                <MenuItem x:Name="submenuTransferFile" Header="Transfer File" HorizontalAlignment="Left" Width="125"
+                <MenuItem x:Name="SubmenuTransferFile" Header="Transfer File" HorizontalAlignment="Left" Width="125"
                           Margin="0,0,-4,0" Click="submenuTransferFile_Click" IsEnabled="False" />
             </MenuItem>
         </Menu>
 
         <Border BorderBrush="Black" BorderThickness="2" Width="501" Margin="10,246,0,0" Height="279"
                 VerticalAlignment="Top" HorizontalAlignment="Left">
-            <Grid x:Name="grChat" Height="273" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="501"
+            <Grid x:Name="GrChat" Height="273" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="501"
                   Margin="-4,0,0,0">
-                <TextBox x:Name="tbChatPane" Grid.Row="0" Width="373" HorizontalAlignment="Right" Margin="0,0,10,37"
+                <TextBox x:Name="TbChatPane" Grid.Row="0" Width="373" HorizontalAlignment="Right" Margin="0,0,10,37"
                          Height="228" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
                          VerticalAlignment="Bottom">
                     <TextBox.Background>
                         <SolidColorBrush Color="{DynamicResource SWNDarkBackground}" />
                     </TextBox.Background>
                 </TextBox>
-                <TextBox x:Name="tbChatInput" HorizontalAlignment="Right" Width="294" Margin="0,243,89,10"
+                <TextBox x:Name="TbChatInput" HorizontalAlignment="Right" Width="294" Margin="0,243,89,10"
                          KeyDown="tbChatInput_KeyDown" />
-                <Button x:Name="btsend" Content="Send" Click="btSend_Click" Height="22" VerticalAlignment="Bottom"
+                <Button x:Name="Btsend" Content="Send" Click="btSend_Click" Height="22" VerticalAlignment="Bottom"
                         HorizontalAlignment="Right" Width="74" Margin="0,0,10,10" />
-                <ListBox x:Name="lbUserOnline" HorizontalAlignment="Right" Width="100" Height="255"
+                <ListBox x:Name="LbUserOnline" HorizontalAlignment="Right" Width="100" Height="255"
                          VerticalAlignment="Bottom" Margin="0,0,387,10" />
             </Grid>
         </Border>
@@ -65,18 +64,18 @@
         <Border Margin="10,29,0,0" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Width="501"
                 Height="212" VerticalAlignment="Top">
             <Grid Name="ServerConsole" HorizontalAlignment="Left" Width="428" Height="208" VerticalAlignment="Top">
-                <Button x:Name="btServerStart" Content="Start" HorizontalAlignment="Left" Margin="10,54,0,0"
+                <Button x:Name="BtServerStart" Content="Start" HorizontalAlignment="Left" Margin="10,54,0,0"
                         VerticalAlignment="Top" Width="75" Click="btServerStart_Click" />
-                <Button x:Name="btServerStop" Content="Stop" HorizontalAlignment="Left" Margin="11,77,0,0"
+                <Button x:Name="BtServerStop" Content="Stop" HorizontalAlignment="Left" Margin="11,77,0,0"
                         VerticalAlignment="Top" Width="74" Click="btServerStop_Click" />
-                <TextBox x:Name="tbConsole" Margin="144,10,0,0" TextWrapping="Wrap" Text="" IsEnabled="False"
+                <TextBox x:Name="TbConsole" Margin="144,10,0,0" TextWrapping="Wrap" Text="" IsEnabled="False"
                          Background="Black" Foreground="Black" HorizontalAlignment="Left" Width="274" Height="188"
                          VerticalAlignment="Top" />
-                <Label x:Name="lServerStatus" Content="Shutdown" HorizontalAlignment="Left" VerticalAlignment="Top"
+                <Label x:Name="LServerStatus" Content="Shutdown" HorizontalAlignment="Left" VerticalAlignment="Top"
                        Foreground="Red" Visibility="Visible" Margin="85,34,0,0" Background="{x:Null}" />
-                <Label x:Name="label" Content="Server" HorizontalAlignment="Left" Margin="11,10,0,0"
+                <Label x:Name="Label" Content="Server" HorizontalAlignment="Left" Margin="11,10,0,0"
                        VerticalAlignment="Top" Width="74" FontSize="16" Height="30" />
-                <Label x:Name="label1" Content="Server Status:" HorizontalAlignment="Left" Margin="11,34,0,0"
+                <Label x:Name="Label1" Content="Server Status:" HorizontalAlignment="Left" Margin="11,34,0,0"
                        VerticalAlignment="Top" />
             </Grid>
         </Border>
@@ -85,10 +84,10 @@
             <Border.Background>
                 <SolidColorBrush Color="{DynamicResource SWNLightBackground}" />
             </Border.Background>
-            <Image x:Name="imgTest" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Image x:Name="ImgTest" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <ContextMenuService.ContextMenu>
-                    <ContextMenu x:Name="ctxImage">
-                        <Button x:Name="ctxImageButton" Click="ctxImageButton_Click" Content="Clear" />
+                    <ContextMenu x:Name="CtxImage">
+                        <Button x:Name="CtxImageButton" Click="ctxImageButton_Click" Content="Clear" />
                     </ContextMenu>
                 </ContextMenuService.ContextMenu>
             </Image>

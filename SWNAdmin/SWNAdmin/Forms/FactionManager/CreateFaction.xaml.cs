@@ -1,8 +1,8 @@
 ﻿using System.Data.Entity;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using SWNAdmin.Utility;
-using System.Linq;
 
 namespace SWNAdmin.Forms.FactionManager
 {
@@ -11,9 +11,9 @@ namespace SWNAdmin.Forms.FactionManager
     /// </summary>
     public partial class CreateFaction
     {
+        private const int LoadedId = 0;
         private ListBox _loadBox;
         private Factions _loadedFaction;
-        private const int LoadedId = 0;
         private Window _loadWindow;
 
         public CreateFaction()
@@ -26,13 +26,13 @@ namespace SWNAdmin.Forms.FactionManager
         {
             using (var context = new Db1Entities())
             {
-                CbRace.ItemsSource = (from c in context.Aliens select c).ToList();
+                CbRace.ItemsSource = ( from c in context.Aliens select c ).ToList();
                 CbRace.DisplayMemberPath = "Name";
                 CbRace.SelectedValuePath = "Id";
             }
         }
 
-        private void btClear_Click(object sender, RoutedEventArgs e)
+        private void btClear_Click( object sender, RoutedEventArgs e )
         {
             TbName.Text = "";
             CbRace.SelectedItem = null;
@@ -52,7 +52,7 @@ namespace SWNAdmin.Forms.FactionManager
             BtDelete.Visibility = Visibility.Hidden;
         }
 
-        private void btCreate_Click(object sender, RoutedEventArgs e)
+        private void btCreate_Click( object sender, RoutedEventArgs e )
         {
             using (var context = new Db1Entities())
             {
@@ -74,11 +74,11 @@ namespace SWNAdmin.Forms.FactionManager
             btClear_Click(this, null);
         }
 
-        private void btUpdate_Click(object sender, RoutedEventArgs e)
+        private void btUpdate_Click( object sender, RoutedEventArgs e )
         {
             using (var context = new Db1Entities())
             {
-                var updateFaction = (from c in context.Factions where c.Id == LoadedId select c).FirstOrDefault();
+                var updateFaction = ( from c in context.Factions where c.Id == LoadedId select c ).FirstOrDefault();
                 if (updateFaction != null)
                 {
                     updateFaction.Name = TbName.Text;
@@ -97,7 +97,7 @@ namespace SWNAdmin.Forms.FactionManager
             btClear_Click(this, null);
         }
 
-        private void btLoad_Click(object sender, RoutedEventArgs e)
+        private void btLoad_Click( object sender, RoutedEventArgs e )
         {
             _loadWindow = new Window
             {
@@ -108,16 +108,19 @@ namespace SWNAdmin.Forms.FactionManager
             _loadWindow.Content = _loadBox;
             using (var context = new Db1Entities())
             {
-                _loadBox.ItemsSource = (from c in context.Factions select c).ToList();
+                _loadBox.ItemsSource = ( from c in context.Factions select c ).ToList();
                 _loadBox.DisplayMemberPath = "Name";
                 _loadBox.MouseDoubleClick += LoadboxSelectionChanged;
             }
             _loadWindow.ShowDialog();
         }
 
-        private void LoadboxSelectionChanged(object sender, RoutedEventArgs e)
+        private void LoadboxSelectionChanged( object sender, RoutedEventArgs e )
         {
-            if (_loadBox.SelectedItem == null) return;
+            if (_loadBox.SelectedItem == null)
+            {
+                return;
+            }
             _loadedFaction = (Factions) _loadBox.SelectedItem;
             _loadWindow.Close();
             LoadFaction();
@@ -141,11 +144,11 @@ namespace SWNAdmin.Forms.FactionManager
             BtDelete.Visibility = Visibility.Visible;
         }
 
-        private void btDelete_Click(object sender, RoutedEventArgs e)
+        private void btDelete_Click( object sender, RoutedEventArgs e )
         {
             using (var context = new Db1Entities())
             {
-                var delFaction = (from c in context.Factions where c.Id == LoadedId select c).FirstOrDefault();
+                var delFaction = ( from c in context.Factions where c.Id == LoadedId select c ).FirstOrDefault();
                 context.Entry(delFaction).State = EntityState.Deleted;
                 context.SaveChanges();
             }

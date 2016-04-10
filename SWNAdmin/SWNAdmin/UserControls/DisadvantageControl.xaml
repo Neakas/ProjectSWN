@@ -3,19 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:SWNAdmin.UserControls"
              mc:Ignorable="d">
     <Border BorderBrush="#FF464646" BorderThickness="4" Width="605" Height="182" CornerRadius="4">
         <Grid Background="White" Height="176">
-            <Label x:Name="label" Content="Disadvantage:" Margin="10,10,474,0" FontSize="16" VerticalAlignment="Top" />
-            <Label x:Name="lblAdvLabel" Content="Label" Margin="123,10,286,0" FontSize="16" FontStyle="Italic"
+            <Label x:Name="Label" Content="Disadvantage:" Margin="10,10,474,0" FontSize="16" VerticalAlignment="Top" />
+            <Label x:Name="LblAdvLabel" Content="Label" Margin="123,10,286,0" FontSize="16" FontStyle="Italic"
                    Height="35" VerticalAlignment="Top" />
-            <TextBox x:Name="tbDiscription" Margin="84,49,69,0" TextWrapping="Wrap" Height="91" VerticalAlignment="Top"
+            <TextBox x:Name="TbDiscription" Margin="84,49,69,0" TextWrapping="Wrap" Height="91" VerticalAlignment="Top"
                      IsEnabled="False" />
-            <Label x:Name="label2" Content="Discription:" Margin="10,44,518,0" Height="38" VerticalAlignment="Top" />
-            <Label x:Name="label3" Content="Point Cost:" Margin="460,148,69,0" Height="38" VerticalAlignment="Top" />
-            <Label x:Name="lblAdvPoints" Content="Points" Margin="528,148,26,0" Height="38" VerticalAlignment="Top" />
-            <Button x:Name="btdel" Content="Del" HorizontalAlignment="Left" Margin="559,10,0,0" VerticalAlignment="Top"
+            <Label x:Name="Label2" Content="Discription:" Margin="10,44,518,0" Height="38" VerticalAlignment="Top" />
+            <Label x:Name="Label3" Content="Point Cost:" Margin="460,148,69,0" Height="38" VerticalAlignment="Top" />
+            <Label x:Name="LblAdvPoints" Content="Points" Margin="528,148,26,0" Height="38" VerticalAlignment="Top" />
+            <Button x:Name="Btdel" Content="Del" HorizontalAlignment="Left" Margin="559,10,0,0" VerticalAlignment="Top"
                     Width="28" Background="#FFF1AAAA" Click="btdel_Click" />
         </Grid>
     </Border>

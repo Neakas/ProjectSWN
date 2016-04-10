@@ -1,15 +1,13 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
-using SWNAdmin.Forms;
+using SWNAdmin.Forms.DatabaseManager;
 using SWNAdmin.Utility;
-using ManageAdvantage = SWNAdmin.Forms.DatabaseManager.ManageAdvantage;
 
 namespace SWNAdmin.UserControls
 {
     /// <summary>
     ///     Interaction logic for Advantage.xaml
     /// </summary>
-    public partial class AdvantageControl : UserControl
+    public partial class AdvantageControl
     {
         public int AdvantageId;
 
@@ -18,22 +16,22 @@ namespace SWNAdmin.UserControls
             InitializeComponent();
         }
 
-        public void InitControl(Advantages LoadedAdvantage)
+        public void InitControl( Advantages loadedAdvantage )
         {
-            AdvantageId = LoadedAdvantage.Id;
-            lblAdvLabel.Content = LoadedAdvantage.Name;
-            tbDiscription.Text = LoadedAdvantage.Discription;
-            tbDiscription.Text += "\n\nLimitation:";
-            tbDiscription.Text += "\n" + LoadedAdvantage.Limitation;
-            lblAdvPoints.Content = LoadedAdvantage.PointCost;
+            AdvantageId = loadedAdvantage.Id;
+            LblAdvLabel.Content = loadedAdvantage.Name;
+            TbDiscription.Text = loadedAdvantage.Discription;
+            TbDiscription.Text += "\n\nLimitation:";
+            TbDiscription.Text += "\n" + loadedAdvantage.Limitation;
+            LblAdvPoints.Content = loadedAdvantage.PointCost;
         }
 
-        private void btdel_Click(object sender, RoutedEventArgs e)
+        private void btdel_Click( object sender, RoutedEventArgs e )
         {
             ManageAdvantage.AdvWindow.DeleteAdvantage(this);
         }
 
-        private void btedit_Click(object sender, RoutedEventArgs e)
+        private void btedit_Click( object sender, RoutedEventArgs e )
         {
             ManageAdvantage.AdvWindow.UpdateAdvantage(this);
         }

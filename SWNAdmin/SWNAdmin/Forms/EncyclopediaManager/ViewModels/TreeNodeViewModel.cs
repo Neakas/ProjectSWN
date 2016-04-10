@@ -6,51 +6,58 @@ namespace SWNAdmin.Forms.EncyclopediaManager.ViewModels
 {
     public class TreeNodeViewModel : Notifier
     {
-        private readonly ObservableCollection<TreeNodeViewModel> children;
+        private readonly ObservableCollection<TreeNodeViewModel> _children;
 
-        private bool expanded;
-        public string logicalParent;
-        private bool match = true;
+        private bool _expanded;
+        private bool _match = true;
+        private bool _selected;
+        public string LogicalParent;
         public TreeNodeViewModel Parent;
-        private bool selected;
-        public string selectedNode;
+        public string SelectedNode;
 
-        public TreeNodeViewModel(string name, IEnumerable<TreeNodeViewModel> children, TreeNodeViewModel parent)
+        public TreeNodeViewModel( string name, IEnumerable<TreeNodeViewModel> children, TreeNodeViewModel parent )
         {
             Name = name;
-            this.children = new ObservableCollection<TreeNodeViewModel>(children);
-            foreach (var item in children)
+            if (children != null)
             {
-                item.Parent = this;
+                var treeNodeViewModels = children as IList<TreeNodeViewModel> ?? children.ToList();
+                _children = new ObservableCollection<TreeNodeViewModel>(treeNodeViewModels);
+                foreach (var item in treeNodeViewModels)
+                {
+                    item.Parent = this;
+                }
             }
             Parent = parent;
         }
 
-        public TreeNodeViewModel(string name)
-            : this(name, Enumerable.Empty<TreeNodeViewModel>(), null)
+        public TreeNodeViewModel( string name ) : this(name, Enumerable.Empty<TreeNodeViewModel>(), null)
         {
         }
 
-        public IEnumerable<TreeNodeViewModel> Children
-        {
-            get { return children; }
-        }
+        public IEnumerable<TreeNodeViewModel> Children => _children;
 
         public string Name { get; }
 
         public bool IsExpanded
         {
-            get { return expanded; }
+            get
+            {
+                return _expanded;
+            }
             set
             {
-                if (value == expanded)
+                if (value == _expanded)
+                {
                     return;
+                }
 
-                expanded = value;
-                if (expanded)
+                _expanded = value;
+                if (_expanded)
                 {
                     foreach (var child in Children)
+                    {
                         child.IsMatch = true;
+                    }
                 }
                 OnPropertyChanged("IsExpanded");
             }
@@ -58,45 +65,49 @@ namespace SWNAdmin.Forms.EncyclopediaManager.ViewModels
 
         public bool IsSelected
         {
-            get { return selected; }
+            get
+            {
+                return _selected;
+            }
             set
             {
-                selected = value;
-                selectedNode = Name;
+                _selected = value;
+                SelectedNode = Name;
                 OnPropertyChanged("IsSelected");
             }
         }
 
         public bool IsMatch
         {
-            get { return match; }
+            get
+            {
+                return _match;
+            }
             set
             {
-                if (value == match)
+                if (value == _match)
+                {
                     return;
+                }
 
-                match = value;
+                _match = value;
                 OnPropertyChanged("IsMatch");
             }
         }
 
-        public bool IsLeaf
-        {
-            get { return !Children.Any(); }
-        }
+        public bool IsLeaf => !Children.Any();
 
         public override string ToString()
         {
             return Name;
         }
 
-
-        private bool IsCriteriaMatched(string criteria)
+        private bool IsCriteriaMatched( string criteria )
         {
             return string.IsNullOrEmpty(criteria) || Name.Contains(criteria);
         }
 
-        public void ApplyCriteria(string criteria, Stack<TreeNodeViewModel> ancestors)
+        public void ApplyCriteria( string criteria, Stack<TreeNodeViewModel> ancestors )
         {
             if (IsCriteriaMatched(criteria))
             {
@@ -108,11 +119,15 @@ namespace SWNAdmin.Forms.EncyclopediaManager.ViewModels
                 }
             }
             else
+            {
                 IsMatch = false;
+            }
 
             ancestors.Push(this);
             foreach (var child in Children)
+            {
                 child.ApplyCriteria(criteria, ancestors);
+            }
 
             ancestors.Pop();
         }

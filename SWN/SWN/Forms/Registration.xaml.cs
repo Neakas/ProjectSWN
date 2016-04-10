@@ -2,86 +2,71 @@
 using System.Windows;
 using SWN.Controller;
 using SWN.Networking;
-using SWN.Service_References.SWNServiceReference;
+using SWN.SWNServiceReference;
 
 namespace SWN.Forms
 
 {
-    public partial class Registration : Window
+    public partial class Registration
     {
-        public Client localclient;
+        public Client Localclient;
 
         public Registration()
         {
             InitializeComponent();
-            tbIPPort.Text = SettingHandler.GetIpPort();
+            TbIpPort.Text = SettingHandler.GetIpPort();
         }
 
-        private void Login_Click(object sender, RoutedEventArgs e)
+        private void Login_Click( object sender, RoutedEventArgs e )
         {
             var login = new Login();
             login.Show();
             Close();
         }
 
-        private void button2_Click(object sender, RoutedEventArgs e)
+        private void button2_Click( object sender, RoutedEventArgs e )
         {
             Reset();
         }
 
         public void Reset()
         {
-            textBoxUserName.Text = "";
-            textBoxEmail.Text = "";
-            passwordBox1.Password = "";
-            passwordBoxConfirm.Password = "";
+            TextBoxUserName.Text = "";
+            TextBoxEmail.Text = "";
+            PasswordBox1.Password = "";
+            PasswordBoxConfirm.Password = "";
         }
 
-        private void button3_Click(object sender, RoutedEventArgs e)
+        private void button3_Click( object sender, RoutedEventArgs e )
         {
             Close();
         }
 
-        private async void Submit_Click(object sender, RoutedEventArgs e)
+        private async void Submit_Click( object sender, RoutedEventArgs e )
         {
-            localclient = new Client();
-            SettingHandler.SetIpPort(tbIPPort.Text);
-            ServerConnection SC;
-            if (textBoxEmail.Text.Length == 0)
+            Localclient = new Client();
+            SettingHandler.SetIpPort(TbIpPort.Text);
+            if (TextBoxEmail.Text.Length == 0)
             {
-                errormessage.Text = "Bitte Email-Addresse eingeben";
-                textBoxEmail.Focus();
+                Errormessage.Text = "Bitte Email-Addresse eingeben";
+                TextBoxEmail.Focus();
             }
-            else if (
-                !Regex.IsMatch(textBoxEmail.Text,
-                    @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
+            else if (!Regex.IsMatch(TextBoxEmail.Text, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
             {
-                errormessage.Text = "Bitte eine gültige EMail-Addresse eingeben";
-                textBoxEmail.Select(0, textBoxEmail.Text.Length);
-                textBoxEmail.Focus();
+                Errormessage.Text = "Bitte eine gültige EMail-Addresse eingeben";
+                TextBoxEmail.Select(0, TextBoxEmail.Text.Length);
+                TextBoxEmail.Focus();
             }
             else
             {
-                if (ServerConnection.CurrentInstance == null)
-                {
-                    SC = new ServerConnection();
-                }
-                else
-                {
-                    SC = ServerConnection.CurrentInstance;
-                }
-                localclient.UserName = textBoxUserName.Text;
-                localclient.eMail = textBoxEmail.Text;
-                var password = passwordBox1.Password;
-                var E = new Encryption(passwordBox1.Password);
-                localclient.encPassword = E.EncryptStringToBytes(passwordBox1.Password);
+                var sc = ServerConnection.CurrentInstance ?? new ServerConnection();
+                Localclient.UserName = TextBoxUserName.Text;
+                Localclient.EMail = TextBoxEmail.Text;
+                Localclient.EncPassword = new Encryption(PasswordBox1.Password).EncryptStringToBytes(PasswordBox1.Password);
 
-
-                var RegSuccessful = await SC.tryReg(localclient);
-
-                if (RegSuccessful)
+                if (await sc.TryReg(Localclient))
                 {
-                    errormessage.Text = "Erfolgreich Registriert";
+                    Errormessage.Text = "Erfolgreich Registriert";
                 }
                 //TODOLOW: Needs a Close for the Reg Connection
             }

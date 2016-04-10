@@ -3,20 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SWNAdmin.Forms"
         xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
         themes:ThemeManager.Theme="ExpressionDark"
         mc:Ignorable="d"
-        Title="SystemSelector" Height="653.807" Width="1192.319">
+        Title="systemSelector" Height="653.807" Width="1192.319">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource SWNLightBackground}" />
     </Window.Background>
     <Grid>
-        <ComboBox x:Name="cbSelectSystem" HorizontalAlignment="Left" Margin="20,22,0,0" VerticalAlignment="Top"
+        <ComboBox x:Name="CbSelectSystem" HorizontalAlignment="Left" Margin="20,22,0,0" VerticalAlignment="Top"
                   Width="120" SelectionChanged="cbSelectSystem_SelectionChanged" />
-        <Button x:Name="btSendSystem" Content="Send System" HorizontalAlignment="Left" Margin="10,0,0,20" Width="75"
+        <Button x:Name="BtSendSystem" Content="Send system" HorizontalAlignment="Left" Margin="10,0,0,20" Width="75"
                 Click="btSendSystem_Click" Height="20" VerticalAlignment="Bottom" />
-        <TreeView x:Name="tVSystem" HorizontalAlignment="Left" Height="284" Margin="20,49,0,0" VerticalAlignment="Top"
+        <TreeView x:Name="TvSystem" HorizontalAlignment="Left" Height="284" Margin="20,49,0,0" VerticalAlignment="Top"
                   Width="194" SelectedItemChanged="tVSystem_SelectedItemChanged" />
         <Border x:Name="ControlBorder" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="600"
                 Margin="219,10,0,0" VerticalAlignment="Top" Width="600">
@@ -24,7 +23,7 @@
                 <Canvas x:Name="ControlCanvas" />
             </Grid>
         </Border>
-        <TextBox x:Name="tbText" HorizontalAlignment="Left" Height="600" Margin="824,10,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbText" HorizontalAlignment="Left" Height="600" Margin="824,10,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="350" />
 
 

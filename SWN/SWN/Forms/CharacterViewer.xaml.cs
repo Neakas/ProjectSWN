@@ -1,11 +1,9 @@
-﻿using System.Windows;
-
-namespace SWN.Forms
+﻿namespace SWN.Forms
 {
     /// <summary>
     ///     Interaction logic for CharacterWindow.xaml
     /// </summary>
-    public partial class CharacterViewer : Window
+    public partial class CharacterViewer
     {
         //CharacterController LoadedCharacter;
 

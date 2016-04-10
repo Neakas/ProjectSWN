@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UniverseGeneration.Range_Objects;
 using UniverseGeneration.Utility;
 
@@ -13,287 +14,453 @@ namespace UniverseGeneration.Stellar_Bodies
      */
 
     /// <summary>
-    ///  Star contains the flags and objects for.. a star. Also for it's subject planets, and formation and forbidden zones.
-    ///  Is a child of <see cref="Orbital"/>
+    ///     Star contains the flags and objects for.. a star. Also for it's subject planets, and formation and forbidden zones.
+    ///     Is a child of <see cref="Orbital" />
     /// </summary>
-    public partial class Star : Orbital
+    public partial class Star
     {
-
         //member arrays of the object
 
         /// <summary>
-        /// This member contains the table we roll on for stellar mass. Contains an array of size 19x19, mainly to make passing dierolls easier.
+        ///     This member contains the table we roll on for stellar mass. Contains an array of size 19x19, mainly to make passing
+        ///     dierolls easier.
         /// </summary>
-        protected static double[][] starMassTableByRoll = new double[][]{
-                 new double[] {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //Index 0
-                 new double[] {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //Roll 1
-                 new double[] {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, //Roll 2
-                 new double[] {0,0,0,2,2,2,2,2,2,2,2,1.9,1.9,1.9,1.9,1.9,1.9,1.9,1.9}, //Roll: 3
-                 new double[] {0,0,0,1.8,1.8,1.8,1.8,1.8,1.8,1.7,1.7,1.7,1.6,1.6,1.6,1.6,1.6,1.6,1.6}, //Roll: 4
-                 new double[] {0,0,0,1.5,1.5,1.5,1.5,1.5,1.45,1.45,1.45,1.4,1.4,1.35,1.35,1.35,1.35,1.35,1.35,1.35}, //Roll:5
-                 new double[] {0,0,0,1.3,1.3,1.3,1.3,1.3,1.25,1.25,1.2,1.15,1.15,1.1,1.1,1.1,1.1,1.1,1.1}, //Roll: 6
-                 new double[] {0,0,0,1.05,1.05,1.05,1.05,1.05,1,1,.95,.9,.9,.85,.85,.85,.85,.85,.85}, //Roll: 7
-                 new double[] {0,0,0,.8,.8,.8,.8,.8,.8,.75,.75,.7,.65,.65,.6,.6,.6,.6,.6,.6}, //Roll: 8
-                 new double[] {0,0,0,.55,.55,.55,.55,.55,.55,.5,.5,.5,.45,.45,.45,.45,.45,.45,.45}, //Roll: 9
-                 new double[] {0,0,0,.4,.4,.4,.4,.4,.4,.35,.35,.35,.3,.3,.3,.3,.3,.3,.3}, //Roll: 10
-                 new double[] {0,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25}, //Roll 11
-                 new double[] {0,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2}, //Roll 12
-                 new double[] {0,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15}, //Roll 13
-                 new double[] {0,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1}, //Roll 14
-                 new double[] {0,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1}, //Roll 15
-                 new double[] {0,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1}, //Roll 16
-                 new double[] {0,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1}, //Roll 17
-                 new double[] {0,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1}, //Roll 18
-             };
-
-        /// <summary>
-        /// This member contains the table we use to determine stellar mass by index.
-        /// </summary>
-        protected static double[] starMassTableByIndex = new double[] { .1,.15,.2,.25,.3,.35,.4,.45,.5,.55,.6,.65,.7,.75,
-            .8,.85,.9,.95,1.0,1.05,1.1,1.15,1.2,1.25,1.3,1.35,1.4,1.45,1.5,1.55,1.6,1.65,1.7,1.75,1.8,1.85,1.9,1.95,2 };
-
-        /// <summary>
-        ///  The minimum luminosity of the star, given its' mass
-        /// </summary>
-        public static double[][] minLuminTable = new double[34][]{
-            new double[2]{.1, .0012},
-            new double[2]{.15, .0036},
-            new double[2] {.2, .0079 },
-            new double[2] {.25, .015 },
-            new double[2] {.3, .024 },
-            new double[2] {.35, .037 },
-            new double[2] {.4, .054 },
-            new double[2] {.45, .07 },
-            new double[2] {.5, .09 },
-            new double[2] {.55, .11 },
-            new double[2] {.6, .13 },
-            new double[2] {.65, .15 },
-            new double[2] {.7, .12 },
-            new double[2] {.75, .23 },
-            new double[2] {.8, .28 },
-            new double[2] {.85, .36 },
-            new double[2] {.9, .45 },
-            new double[2] {.95, .56 },
-            new double[2] {1, .68 },
-            new double[2] {1.05, .87 },
-            new double[2] {1.1, 1.1 },
-            new double[2] {1.15, 1.4 },
-            new double[2] {1.2, 1.7 },
-            new double[2] {1.25, 2.1 },
-            new double[2] {1.3, 2.5 },
-            new double[2] {1.35, 3.1 },
-            new double[2] {1.4, 3.7 },
-            new double[2] {1.45, 4.3 },
-            new double[2] {1.5, 5.1 },
-            new double[2] {1.6, 6.7 },
-            new double[2] {1.7, 8.6 },
-            new double[2] {1.8, 11 },
-            new double[2] {1.9, 13 },
-            new double[2] {2, 16 },
+        protected static double[][] StarMassTableByRoll =
+        {
+            new double[]
+            {
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+            }, //Index 0
+            new double[]
+            {
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+            }, //Roll 1
+            new double[]
+            {
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+            }, //Roll 2
+            new[]
+            {
+                0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9, 1.9
+            }, //Roll: 3
+            new[]
+            {
+                0, 0, 0, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.7, 1.7, 1.7, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6
+            }, //Roll: 4
+            new[]
+            {
+                0, 0, 0, 1.5, 1.5, 1.5, 1.5, 1.5, 1.45, 1.45, 1.45, 1.4, 1.4, 1.35, 1.35, 1.35, 1.35, 1.35, 1.35, 1.35
+            }, //Roll:5
+            new[]
+            {
+                0, 0, 0, 1.3, 1.3, 1.3, 1.3, 1.3, 1.25, 1.25, 1.2, 1.15, 1.15, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1
+            }, //Roll: 6
+            new[]
+            {
+                0, 0, 0, 1.05, 1.05, 1.05, 1.05, 1.05, 1, 1, .95, .9, .9, .85, .85, .85, .85, .85, .85
+            }, //Roll: 7
+            new[]
+            {
+                0, 0, 0, .8, .8, .8, .8, .8, .8, .75, .75, .7, .65, .65, .6, .6, .6, .6, .6, .6
+            }, //Roll: 8
+            new[]
+            {
+                0, 0, 0, .55, .55, .55, .55, .55, .55, .5, .5, .5, .45, .45, .45, .45, .45, .45, .45
+            }, //Roll: 9
+            new[]
+            {
+                0, 0, 0, .4, .4, .4, .4, .4, .4, .35, .35, .35, .3, .3, .3, .3, .3, .3, .3
+            }, //Roll: 10
+            new[]
+            {
+                0, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25
+            }, //Roll 11
+            new[]
+            {
+                0, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2
+            }, //Roll 12
+            new[]
+            {
+                0, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15
+            }, //Roll 13
+            new[]
+            {
+                0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1
+            }, //Roll 14
+            new[]
+            {
+                0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1
+            }, //Roll 15
+            new[]
+            {
+                0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1
+            }, //Roll 16
+            new[]
+            {
+                0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1
+            }, //Roll 17
+            new[]
+            {
+                0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1
+            } //Roll 18
         };
+
+        /// <summary>
+        ///     This member contains the table we use to determine stellar mass by index.
+        /// </summary>
+        protected static double[] StarMassTableByIndex =
+        {
+            .1, .15, .2, .25, .3, .35, .4, .45, .5, .55, .6, .65, .7, .75, .8, .85, .9, .95, 1.0, 1.05, 1.1, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4, 1.45, 1.5, 1.55, 1.6, 1.65, 1.7, 1.75, 1.8, 1.85, 1.9, 1.95, 2
+        };
+
+        /// <summary>
+        ///     The minimum luminosity of the star, given its' mass
+        /// </summary>
+        public static double[][] MinLuminTable =
+        {
+            new[]
+            {
+                .1, .0012
+            },
+            new[]
+            {
+                .15, .0036
+            },
+            new[]
+            {
+                .2, .0079
+            },
+            new[]
+            {
+                .25, .015
+            },
+            new[]
+            {
+                .3, .024
+            },
+            new[]
+            {
+                .35, .037
+            },
+            new[]
+            {
+                .4, .054
+            },
+            new[]
+            {
+                .45, .07
+            },
+            new[]
+            {
+                .5, .09
+            },
+            new[]
+            {
+                .55, .11
+            },
+            new[]
+            {
+                .6, .13
+            },
+            new[]
+            {
+                .65, .15
+            },
+            new[]
+            {
+                .7, .12
+            },
+            new[]
+            {
+                .75, .23
+            },
+            new[]
+            {
+                .8, .28
+            },
+            new[]
+            {
+                .85, .36
+            },
+            new[]
+            {
+                .9, .45
+            },
+            new[]
+            {
+                .95, .56
+            },
+            new[]
+            {
+                1, .68
+            },
+            new[]
+            {
+                1.05, .87
+            },
+            new[]
+            {
+                1.1, 1.1
+            },
+            new[]
+            {
+                1.15, 1.4
+            },
+            new[]
+            {
+                1.2, 1.7
+            },
+            new[]
+            {
+                1.25, 2.1
+            },
+            new[]
+            {
+                1.3, 2.5
+            },
+            new[]
+            {
+                1.35, 3.1
+            },
+            new[]
+            {
+                1.4, 3.7
+            },
+            new[]
+            {
+                1.45, 4.3
+            },
+            new[]
+            {
+                1.5, 5.1
+            },
+            new[]
+            {
+                1.6, 6.7
+            },
+            new[]
+            {
+                1.7, 8.6
+            },
+            new[]
+            {
+                1.8, 11
+            },
+            new[]
+            {
+                1.9, 13
+            },
+            new double[]
+            {
+                2, 16
+            }
+        };
+
+        /// <summary>
+        ///     Base constructor, given no details.
+        /// </summary>
+        /// <param name="parent">The parent this star belongs to. (IsPrimary for a primary star)</param>
+        /// <param name="self">The ID of this star</param>
+        public Star( int parent, int self ) : base(parent, self)
+        {
+            OrbitalRadius = 0.0;
+            GasGiantFlag = GasgiantNone; //set to none automatically. We will set it correctly later.
+            EvoLine = new StarAgeLine();
+            SysPlanets = new List<Satellite>();
+        }
+
+        /// <summary>
+        ///     A full constructor.
+        /// </summary>
+        /// <param name="age">The age of the star</param>
+        /// <param name="parent">The parent this star belongs to. (IsPrimary for a primary star)</param>
+        /// <param name="self">The ID of this star</param>
+        /// <param name="order">Where the star is in the sequence</param>
+        /// <param name="baseName">The name of the system</param>
+        public Star( double age, int parent, int self, int order, string baseName ) : base(parent, self)
+        {
+            StarAge = age;
+            OrbitalRadius = 0.0;
+            GasGiantFlag = GasgiantNone; //set to none automatically. We will set it correctly later.
+            OrderId = order;
+            Name = GenGenericName(baseName, order);
+            EvoLine = new StarAgeLine();
+            SysPlanets = new List<Satellite>();
+        }
+
+        /// <summary>
+        ///     Constructor given the age, parent, self and Order.
+        /// </summary>
+        /// <param name="age">Age of the star</param>
+        /// <param name="parent">The star this belongs to (for a priamry star, put IsPrimary here)</param>
+        /// <param name="self">The star's ID</param>
+        /// <param name="order">Where is it in the system?</param>
+        public Star( double age, int parent, int self, int order ) : base(parent, self)
+        {
+            StarAge = age;
+            OrbitalRadius = 0.0;
+            GasGiantFlag = GasgiantNone;
+            EvoLine = new StarAgeLine();
+            OrderId = order;
+            SysPlanets = new List<Satellite>();
+        }
 
         //properties of the star
 
         /// <summary>
-        ///   currMass is the current Mass of the star
+        ///     currMass is the current Mass of the star
         /// </summary>
-        public double currMass { get; protected set; }
+        public double CurrMass { get; protected set; }
 
         /// <summary>
-        ///  initMass is the initial mass of the star
-        ///  <remarks>This is one of the things placed here for white dwarves, 
-        ///  since they have an arbitrary changed mass.</remarks>
+        ///     initMass is the initial mass of the star
+        ///     <remarks>
+        ///         This is one of the things placed here for white dwarves,
+        ///         since they have an arbitrary changed mass.
+        ///     </remarks>
         /// </summary>
-        public double initMass { get; protected set; }
+        public double InitMass { get; protected set; }
 
         /// <summary>
-        /// The radius of the star, stored in __AU__. 
+        ///     The radius of the star, stored in __AU__.
         /// </summary>
-        public double radius { get; set; }
+        public double Radius { get; set; }
 
         /// <summary>
-        /// The current luminosity. Stored in __solar luminosities__
+        ///     The current luminosity. Stored in __solar luminosities__
         /// </summary>
-        public double currLumin { get; set; }
+        public double CurrLumin { get; set; }
 
         /// <summary>
-        /// The initial luminosity. Needed to determine various elements of formation.
+        ///     The initial luminosity. Needed to determine various elements of formation.
         /// </summary>
-        public double initLumin { get; protected set; }
+        public double InitLumin { get; protected set; }
 
         /// <summary>
-        ///  The maximum luminsoity. It's used for internal factors, but generally only relevant for giant and white dwarf phase
+        ///     The maximum luminsoity. It's used for internal factors, but generally only relevant for giant and white dwarf phase
         /// </summary>
-        protected double maxLumin { get; set; }
+        protected double MaxLumin { get; set; }
 
         /// <summary>
-        ///  The effective temperature of the surface of the star. 
+        ///     The effective temperature of the surface of the star.
         /// </summary>
-        public double effTemp { get; set; }
+        public double EffTemp { get; set; }
 
         /// <summary>
-        ///  The spectral type of the star.
+        ///     The spectral type of the star.
         /// </summary>
-        public string specType { get; set; }
+        public string SpecType { get; set; }
 
         /// <summary>
-        /// This determiners if it's a flare star 
+        ///     This determiners if it's a flare star
         /// </summary>
-        public bool isFlareStar { get; set; }
+        public bool IsFlareStar { get; set; }
 
         /// <summary>
-        ///  The age of the star. I don't LIKE storing it here, but the star needs to know it's own age in order to know where it is.
+        ///     The age of the star. I don't LIKE storing it here, but the star needs to know it's own age in order to know where
+        ///     it is.
         /// </summary>
-        public double starAge { get; set; }
+        public double StarAge { get; set; }
 
         //labeling and order properties
         /// <summary>
-        ///  Order ID: this stores a number from (0,9) which is used to determine the name. 
+        ///     Order ID: this stores a number from (0,9) which is used to determine the name.
         /// </summary>
-        public int orderID { get; set; }
+        public int OrderId { get; set; }
 
         /// <summary>
-        ///  Orbital Serpation Flag (Very Close, etc.)
+        ///     Orbital Serpation Flag (Very Close, etc.)
         /// </summary>
-        public int orbitalSep { get; set; }
+        public int OrbitalSep { get; set; }
 
         //flags for planetary creation
         /// <summary>
-        ///  In GURPS, whether or not you have any gas giants, and where they are, is dependent on this flag
+        ///     In GURPS, whether or not you have any gas giants, and where they are, is dependent on this flag
         /// </summary>
-        public int gasGiantFlag { get; set; }
+        public int GasGiantFlag { get; set; }
 
         /// <summary>
-        /// This contains every orbital that planets can form in the star.
+        ///     This contains every orbital that planets can form in the star.
         /// </summary>
-        public List<Satellite> sysPlanets { get; set; }
+        public List<Satellite> SysPlanets { get; set; }
 
         /// <summary>
-        /// Soon to be removed.
+        ///     Soon to be removed.
         /// </summary>
-        public formationHelper zonesOfInterest { get; set; }
+        public FormationHelper ZonesOfInterest { get; set; }
 
         /// <summary>
-        ///  Contains the segments that make up the lifespan of the star.
+        ///     Contains the segments that make up the lifespan of the star.
         /// </summary>
-        public StarAgeLine evoLine { get; set; }
+        public StarAgeLine EvoLine { get; set; }
 
         /// <summary>
-        ///  This stores the distance of each star from the primary. It's needed for blackbody calculations.
+        ///     This stores the distance of each star from the primary. It's needed for blackbody calculations.
         /// </summary>
-        public double distFromPrimary { get; set; }
+        public double DistFromPrimary { get; set; }
 
         /// <summary>
-        ///  This is the stellar color. Not always used.
+        ///     This is the stellar color. Not always used.
         /// </summary>
-        public string starColor { get; set; }
+        public string StarColor { get; set; }
 
         /// <summary>
-        ///  Base constructor, given no details.
-        /// </summary>
-        /// <param name="parent">The parent this star belongs to. (IS_PRIMARY for a primary star)</param>
-        /// <param name="self">The ID of this star</param>
-
-        public Star(int parent, int self) : base(parent, self)
-        {
-            this.orbitalRadius = 0.0;
-            this.gasGiantFlag = Star.GASGIANT_NONE; //set to none automatically. We will set it correctly later.
-            this.evoLine = new StarAgeLine();
-            this.sysPlanets = new List<Satellite>();
-        }
-        private Star() { }
-
-        /// <summary>
-        /// A full constructor.
-        /// </summary>
-        /// <param name="age">The age of the star</param>
-        /// <param name="parent">The parent this star belongs to. (IS_PRIMARY for a primary star)</param>
-        /// <param name="self">The ID of this star</param>
-        /// <param name="order">Where the star is in the sequence</param>
-        /// <param name="baseName">The name of the system</param>
-        public Star(double age, int parent, int self, int order, string baseName)
-            : base(parent, self)
-        {
-            this.starAge = age;
-            this.orbitalRadius = 0.0;
-            this.gasGiantFlag = Star.GASGIANT_NONE; //set to none automatically. We will set it correctly later.
-            this.orderID = order;
-            this.name = Star.genGenericName(baseName, order);
-            this.evoLine = new StarAgeLine();
-            this.sysPlanets = new List<Satellite>();
-        }
-
-        /// <summary>
-        /// Constructor given the age, parent, self and Order.
-        /// </summary>
-        /// <param name="age">Age of the star</param>
-        /// <param name="parent">The star this belongs to (for a priamry star, put IS_PRIMARY here)</param>
-        /// <param name="self">The star's ID</param>
-        /// <param name="order">Where is it in the system?</param>
-        public Star(double age, int parent, int self, int order) : base(parent,self)
-        {
-            this.starAge = age;
-            this.orbitalRadius = 0.0;
-            this.gasGiantFlag = Star.GASGIANT_NONE;
-            this.evoLine = new StarAgeLine();
-            this.orderID = order;
-            this.sysPlanets = new List<Satellite>();
-        }
-
-        /// <summary>
-        /// This function returns a generic name on the scheme [SYSTEMNAME-ID]
+        ///     This function returns a generic name on the scheme [SYSTEMNAME-ID]
         /// </summary>
         /// <param name="sysName">The system name</param>
         /// <param name="id">Where the star is in the system (number)</param>
         /// <returns>The generic name</returns>
-        public static string genGenericName(String sysName, int id)
+        public static string GenGenericName( string sysName, int id )
         {
-            char[] starNames = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I' };
-            return (sysName + "-" + starNames[id]);
+            char[] starNames =
+            {
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'
+            };
+            return sysName + "-" + starNames[id];
         }
 
         //zones of interest functions - both to see if it's initated and to create it.
 
         //init formulas
         //passthrough functions
-        public void createForbiddenZone(Range incoming, int primary, int secondary)
+        public void CreateForbiddenZone( Range incoming, int primary, int secondary )
         {
-            this.zonesOfInterest.createForbiddenZone(incoming, primary, secondary);
+            ZonesOfInterest.CreateForbiddenZone(incoming, primary, secondary);
         }
 
-        public void createCleanZones()
+        public void CreateCleanZones()
         {
-            this.zonesOfInterest.createCleanZones(Star.innerRadius(this.initLumin,this.initMass), Star.outerRadius(this.initMass));
+            ZonesOfInterest.CreateCleanZones(InnerRadius(InitLumin, InitMass), OuterRadius(InitMass));
         }
 
-        public void sortForbidden()
+        public void SortForbidden()
         {
-            this.zonesOfInterest.sortForbiddenZones();
+            ZonesOfInterest.SortForbiddenZones();
         }
 
-        public void sortClean()
+        public void SortClean()
         {
-            this.zonesOfInterest.sortCleanZones();
+            ZonesOfInterest.SortCleanZones();
         }
 
-        public double verifyRange(Range incoming)
+        public double VerifyRange( Range incoming )
         {
-            return this.zonesOfInterest.verifyRange(incoming);
+            return ZonesOfInterest.VerifyRange(incoming);
         }
 
-        public double pickInRange(Range incoming)
+        public double PickInRange( Range incoming )
         {
-            return this.zonesOfInterest.pickInRange(incoming);
+            return ZonesOfInterest.PickInRange(incoming);
         }
 
-        public bool verifyCleanOrbit(double incoming)
+        public bool VerifyCleanOrbit( double incoming )
         {
-            return this.zonesOfInterest.isWithinCleanZone(incoming);
+            return ZonesOfInterest.IsWithinCleanZone(incoming);
         }
 
-        public bool withinCreationRange(double incoming)
+        public bool WithinCreationRange( double incoming )
         {
-            if (incoming >= Star.innerRadius(this.initLumin, this.initMass) && incoming <= Star.outerRadius(this.initMass))
+            if (incoming >= InnerRadius(InitLumin, InitMass) && incoming <= OuterRadius(InitMass))
             {
                 return true;
             }
@@ -301,463 +468,579 @@ namespace UniverseGeneration.Stellar_Bodies
             return false;
         }
 
-        public List<cleanZone> getCleanZones()
+        public List<CleanZone> GetCleanZones()
         {
-            return this.zonesOfInterest.formationZones;
+            return ZonesOfInterest.FormationZones;
         }
 
-        public bool cleanZoneHasOrbits(cleanZone clear)
+        public bool CleanZoneHasOrbits( CleanZone clear )
         {
-            foreach (Satellite s in this.sysPlanets)
-            {
-                if (clear.withinRange(s.orbitalRadius)) return true;
-            }
-
-            return false;
+            return SysPlanets.Any(s => clear.WithinRange(s.OrbitalRadius));
         }
 
-        public bool verifyForbiddenOrbit(double incoming)
+        public bool VerifyForbiddenOrbit( double incoming )
         {
-            return this.zonesOfInterest.isWithinForbiddenZone(incoming);
+            return ZonesOfInterest.IsWithinForbiddenZone(incoming);
         }
 
-        public double getNextCleanOrbit(double orbit, int flag)
+        public double GetNextCleanOrbit( double orbit, int flag )
         {
-            return this.zonesOfInterest.getNextCleanOrbit(orbit, flag);
+            return ZonesOfInterest.GetNextCleanOrbit(orbit, flag);
         }
 
-        public double getMinCleanOrbit()
+        public double GetMinCleanOrbit()
         {
-            return this.zonesOfInterest.getMinimalCleanZone();
+            return ZonesOfInterest.GetMinimalCleanZone();
         }
 
-        public double getMaxCleanOrbit()
+        public double GetMaxCleanOrbit()
         {
-            return this.zonesOfInterest.getMaximalCleanZone();
+            return ZonesOfInterest.GetMaximalCleanZone();
         }
 
-        public double getRangeWidth(double orbit)
+        public double GetRangeWidth( double orbit )
         {
-            return this.zonesOfInterest.getRangeWidth(orbit);
+            return ZonesOfInterest.GetRangeWidth(orbit);
         }
 
-        public int getOwnership(double orbital)
+        public int GetOwnership( double orbital )
         {
-            return this.zonesOfInterest.getOwnership(orbital);
+            return ZonesOfInterest.GetOwnership(orbital);
         }
 
-        public int getAdjacencyMod(double orbital)
+        public int GetAdjacencyMod( double orbital )
         {
-            return this.zonesOfInterest.getAdjacencyMod(orbital);
+            return ZonesOfInterest.GetAdjacencyMod(orbital);
         }
 
-        public double pickInCurrentRange(double orbit, double minLimit)
+        public double PickInCurrentRange( double orbit, double minLimit )
         {
             double retValue;
 
-            if (this.zonesOfInterest.getRangeWidth(orbit) < minLimit)
+            if (ZonesOfInterest.GetRangeWidth(orbit) < minLimit)
             {
                 do
                 {
-                    retValue = this.zonesOfInterest.pickInRange(this.zonesOfInterest.getRange(orbit));
-                } while (retValue == orbit);
+                    retValue = ZonesOfInterest.PickInRange(ZonesOfInterest.GetRange(orbit));
+                }
+                while (Math.Abs(retValue - orbit) < 0.01);
             }
             else
             {
                 do
                 {
-                    retValue = this.zonesOfInterest.pickInRange(this.zonesOfInterest.getRange(orbit));
-                } while (retValue < orbit + minLimit);
+                    retValue = ZonesOfInterest.PickInRange(ZonesOfInterest.GetRange(orbit));
+                }
+                while (retValue < orbit + minLimit);
             }
-
 
             return retValue;
             //return this.zonesOfInterest.pickInRange(this.zonesOfInterest.getRange(orbit));
         }
 
-        public virtual bool isAllEmptyOrbits()
+        public virtual bool IsAllEmptyOrbits()
         {
-            foreach (Satellite s in this.sysPlanets)
-            {
-                if (s.baseType != Satellite.BASETYPE_EMPTY) return false;
-            }
-
-            return true;
+            return SysPlanets.All(s => s.BaseType == Satellite.BasetypeEmpty);
         }
 
         //mass functionality
-        public virtual void updateMass(double mass, bool isWhiteDwarf = false)
+        public virtual void UpdateMass( double mass, bool isWhiteDwarf = false )
         {
-            if (mass == 0)
+            if (mass == 0.00)
+            {
                 throw new Exception("Mass is 0 solar masses.");
-            
-            this.currMass = mass;
+            }
 
-            this.evoLine.addMainLimit(Star.findMainLimit(this.currMass));
-            this.evoLine.addSubLimit(Star.findSubLimit(this.currMass));
-            this.evoLine.addGiantLimit(Star.findGiantLimit(this.currMass));
-            
+            CurrMass = mass;
 
-            if (!isWhiteDwarf) this.initMass = mass;
+            EvoLine.AddMainLimit(FindMainLimit(CurrMass));
+            EvoLine.AddSubLimit(FindSubLimit(CurrMass));
+            EvoLine.AddGiantLimit(FindGiantLimit(CurrMass));
+
+            if (!isWhiteDwarf)
+            {
+                InitMass = mass;
+            }
         }
 
-
         /// <summary>
-        /// Sets the order of this star
+        ///     Sets the order of this star
         /// </summary>
-        /// <param name="orderID">The order of this star in the system</param>
-        public virtual void addOrder(int orderID)
+        /// <param name="orderId">The order of this star in the system</param>
+        public virtual void AddOrder( int orderId )
         {
-            this.orderID = orderID;
+            OrderId = orderId;
         }
 
         /// <summary>
-        /// This updates the star to what the current should be given no alterations.
+        ///     This updates the star to what the current should be given no alterations.
         /// </summary>
         /// <param name="ageL">the age line of the star</param>
         /// <param name="age">The age of the star</param>
         /// <param name="mass">The current mass of the star</param>
         /// <returns>The current lumonsity of the star</returns>
-        public static double getCurrLumin(StarAgeLine ageL, double age, double mass){
-            int ageGroup = ageL.findCurrentAgeGroup(age);
-    
-            if (ageGroup == StarAgeLine.RET_MAINBRANCH && mass < .45) //if it's under .45 solar masses, it'll always be the minimum luminosity.
-                return Star.getMinLumin(mass);
-            if (ageGroup == StarAgeLine.RET_MAINBRANCH && mass >= .45)  // now it's going to be somewhere between the minimum and maximum, given it's age.
-                    return (Star.getMinLumin(mass) + ((age / ageL.getMainLimit()) * (Star.getMaxLumin(mass) - Star.getMinLumin(mass))));
-            if (ageGroup == StarAgeLine.RET_SUBBRANCH) //simply maxmium luminsoity
-                    return Star.getMaxLumin(mass);
-            if (ageGroup == StarAgeLine.RET_GIANTBRANCH)
-                return Star.getMaxLumin(mass) * 10000; //IMPLEMENTED HOUSE RULE. Yeah. Uh.. Yeah.
-            if (ageGroup == StarAgeLine.RET_COLLASPEDSTAR)
-                return (1611047115.0 * mass * Math.Pow((ageL.getAgeFromCollapse(age) * 100000000),(-7.0 / 5.0))); //corrected from report.
+        public static double GetCurrLumin( StarAgeLine ageL, double age, double mass )
+        {
+            var ageGroup = ageL.FindCurrentAgeGroup(age);
+
+            if (ageGroup == StarAgeLine.RetMainbranch && mass < .45) //if it's under .45 solar masses, it'll always be the minimum luminosity.
+            {
+                return GetMinLumin(mass);
+            }
+            if (ageGroup == StarAgeLine.RetMainbranch && mass >= .45) // now it's going to be somewhere between the minimum and maximum, given it's age.
+            {
+                return GetMinLumin(mass) + age / ageL.GetMainLimit() * ( GetMaxLumin(mass) - GetMinLumin(mass) );
+            }
+            if (ageGroup == StarAgeLine.RetSubbranch) //simply maxmium luminsoity
+            {
+                return GetMaxLumin(mass);
+            }
+            if (ageGroup == StarAgeLine.RetGiantbranch)
+            {
+                return GetMaxLumin(mass) * 10000; //IMPLEMENTED HOUSE RULE. Yeah. Uh.. Yeah.
+            }
+            if (ageGroup == StarAgeLine.RetCollaspedstar)
+            {
+                return 1611047115.0 * mass * Math.Pow(ageL.GetAgeFromCollapse(age) * 100000000, -7.0 / 5.0); //corrected from report.
+            }
 
             return 0;
         }
+
         /// <summary>
-        /// This updates the star to the current surface temperature given no alterations
+        ///     This updates the star to the current surface temperature given no alterations
         /// </summary>
         /// <param name="ageL">the age line of the star</param>
         /// <param name="lumin">The current luminosity of the star (used for White Dwarfs)</param>
         /// <param name="age">The age of the star</param>
         /// <param name="mass">The current mass of the star</param>
-        /// <param name="ourDice">Dice (due to randomization of the temperature)</param>
+        /// <param name="ourDice">Ddice (due to randomization of the temperature)</param>
         /// <returns>The current temperature of the star</returns>
-        public static double getCurrentTemp(StarAgeLine ageL, double lumin, double age, double mass, Dice ourDice)
+        public static double GetCurrentTemp( StarAgeLine ageL, double lumin, double age, double mass, Dice ourDice )
         {
-            if (ageL.findCurrentAgeGroup(age) == StarAgeLine.RET_MAINBRANCH) 
-                return Star.getInitTemp(mass);
-            if (ageL.findCurrentAgeGroup(age) == StarAgeLine.RET_SUBBRANCH)
-                return (Star.getInitTemp(mass) - ageL.calcWithInSubLimit(age) * (Star.getInitTemp(mass) - 4800));
-            if (ageL.findCurrentAgeGroup(age) == StarAgeLine.RET_GIANTBRANCH)
-                return (3000 + ourDice.rng(2, 6, -2) * 200);
-            if (ageL.findCurrentAgeGroup(age) == StarAgeLine.RET_COLLASPEDSTAR)
-                return Math.Pow((lumin / Math.Pow(Star.getRadius(mass,0,lumin,StarAgeLine.RET_COLLASPEDSTAR), 2)) * (5.38937375 * Math.Pow(10, 26)), 1 / 4);
-
-            return 0;
+            if (ageL.FindCurrentAgeGroup(age) == StarAgeLine.RetMainbranch)
+            {
+                return GetInitTemp(mass);
+            }
+            if (ageL.FindCurrentAgeGroup(age) == StarAgeLine.RetSubbranch)
+            {
+                return GetInitTemp(mass) - ageL.CalcWithInSubLimit(age) * ( GetInitTemp(mass) - 4800 );
+            }
+            if (ageL.FindCurrentAgeGroup(age) == StarAgeLine.RetGiantbranch)
+            {
+                return 3000 + ourDice.Rng(2, 6, -2) * 200;
+            }
+            return ageL.FindCurrentAgeGroup(age) == StarAgeLine.RetCollaspedstar ? Math.Pow(lumin / Math.Pow(GetRadius(mass, 0, lumin, StarAgeLine.RetCollaspedstar), 2) * ( 5.38937375 * Math.Pow(10, 26) ), 1.00 / 4) : 0;
         }
 
         /// <summary>
-        /// This function sets the inital luminosity of a Star object
+        ///     This function sets the inital luminosity of a Star object
         /// </summary>
-        public virtual void setLumin(){
-            int currAgeGroup = this.evoLine.findCurrentAgeGroup(this.starAge);
-            this.initLumin = getMinLumin(); //this applies for most stars.
-  
-            this.currLumin = Star.getCurrLumin(this.evoLine, this.starAge, this.currMass);
-  
-            //set the maximum luminosity. Used for determining the formation zones if the star is in a few phases.
-            if (currAgeGroup == StarAgeLine.RET_GIANTBRANCH)
-                this.maxLumin = this.currLumin;
-
-            if (currAgeGroup == StarAgeLine.RET_COLLASPEDSTAR)
-                this.maxLumin = Star.getMinLumin(this.currMass) * 10000;
-        }
-
-        public virtual void updateLumin(double lumin)
+        public virtual void SetLumin()
         {
-            int currStatus = this.evoLine.findCurrentAgeGroup(this.starAge);
-            
-            if (currStatus == StarAgeLine.RET_MAINBRANCH && this.currMass < .45){
-                this.currLumin = lumin;
-                this.initLumin = lumin;
+            var currAgeGroup = EvoLine.FindCurrentAgeGroup(StarAge);
+            InitLumin = GetMinLumin(); //this applies for most stars.
+
+            CurrLumin = GetCurrLumin(EvoLine, StarAge, CurrMass);
+
+            //set the maximum luminosity. Used for determining the formation zones if the star is in a few phases.
+            if (currAgeGroup == StarAgeLine.RetGiantbranch)
+            {
+                MaxLumin = CurrLumin;
             }
 
-            if ((currStatus == StarAgeLine.RET_MAINBRANCH && this.currMass >= .45) || currStatus == StarAgeLine.RET_SUBBRANCH || currStatus == StarAgeLine.RET_GIANTBRANCH || currStatus == StarAgeLine.RET_GIANTBRANCH)
-                this.currLumin = lumin;
+            if (currAgeGroup == StarAgeLine.RetCollaspedstar)
+            {
+                MaxLumin = GetMinLumin(CurrMass) * 10000;
+            }
+        }
+
+        public virtual void UpdateLumin( double lumin )
+        {
+            var currStatus = EvoLine.FindCurrentAgeGroup(StarAge);
+
+            if (currStatus == StarAgeLine.RetMainbranch && CurrMass < .45)
+            {
+                CurrLumin = lumin;
+                InitLumin = lumin;
+            }
+
+            if (( currStatus == StarAgeLine.RetMainbranch && CurrMass >= .45 ) || currStatus == StarAgeLine.RetSubbranch || currStatus == StarAgeLine.RetGiantbranch || currStatus == StarAgeLine.RetGiantbranch)
+            {
+                CurrLumin = lumin;
+            }
         }
 
         //returns the radius in terms of either KM or AU.
-        public virtual double getRadiusAU() { return this.radius; }
-        public virtual double getRadiusKM() { return this.radius * Orbital.AUtoKM; }
+        public virtual double GetRadiusAu()
+        {
+            return Radius;
+        }
+
+        public virtual double GetRadiusKm()
+        {
+            return Radius * AUtoKm;
+        }
 
         //update temp.
-        public virtual void updateTemp(double effTemp)
+        public virtual void UpdateTemp( double effTemp )
         {
-            if (this.evoLine.findCurrentAgeGroup(this.starAge) == StarAgeLine.RET_SUBBRANCH || this.evoLine.findCurrentAgeGroup(this.starAge) == StarAgeLine.RET_GIANTBRANCH)
+            if (EvoLine.FindCurrentAgeGroup(StarAge) == StarAgeLine.RetSubbranch || EvoLine.FindCurrentAgeGroup(StarAge) == StarAgeLine.RetGiantbranch)
             {
-                this.effTemp = effTemp;
-                this.specType = Star.getStellarTypeFromTemp(this.effTemp);
+                EffTemp = effTemp;
+                SpecType = GetStellarTypeFromTemp(EffTemp);
             }
-            if (this.evoLine.findCurrentAgeGroup(this.starAge) == StarAgeLine.RET_MAINBRANCH) this.effTemp = effTemp;
+            if (EvoLine.FindCurrentAgeGroup(StarAge) == StarAgeLine.RetMainbranch)
+            {
+                EffTemp = effTemp;
+            }
         }
 
         //describes the age status.
-        public virtual String getStatusDesc()
+        public virtual string GetStatusDesc()
         {
-            if (this.evoLine.findCurrentAgeGroup(this.starAge) == StarAgeLine.RET_MAINBRANCH) return "Main Sequence";
-            if (this.evoLine.findCurrentAgeGroup(this.starAge) == StarAgeLine.RET_SUBBRANCH) return "Subgiant Branch";
-            if (this.evoLine.findCurrentAgeGroup(this.starAge) == StarAgeLine.RET_GIANTBRANCH) return "Asymptotic Giant Branch";
-            if (this.evoLine.findCurrentAgeGroup(this.starAge) == StarAgeLine.RET_COLLASPEDSTAR) return "White Dwarf";
+            if (EvoLine.FindCurrentAgeGroup(StarAge) == StarAgeLine.RetMainbranch)
+            {
+                return "Main Sequence";
+            }
+            if (EvoLine.FindCurrentAgeGroup(StarAge) == StarAgeLine.RetSubbranch)
+            {
+                return "Subgiant Branch";
+            }
+            if (EvoLine.FindCurrentAgeGroup(StarAge) == StarAgeLine.RetGiantbranch)
+            {
+                return "Asymptotic Giant Branch";
+            }
+            if (EvoLine.FindCurrentAgeGroup(StarAge) == StarAgeLine.RetCollaspedstar)
+            {
+                return "White Dwarf";
+            }
 
             return "INVALID STATUS";
         }
 
         /// <summary>
-        /// This sets the spectral type of our star.
+        ///     This sets the spectral type of our star.
         /// </summary>
-        public virtual void setSpectralType()
+        public virtual void SetSpectralType()
         {
-            if (this.evoLine.findCurrentAgeGroup(this.starAge) == StarAgeLine.RET_MAINBRANCH)
-                this.specType = Star.getStellarTypeFromMass(this.currMass) + " V";
-
-            if (this.evoLine.findCurrentAgeGroup(this.starAge) == StarAgeLine.RET_SUBBRANCH)
-                this.specType = Star.getStellarTypeFromTemp(this.currMass) + " IV";
-
-            if (this.evoLine.findCurrentAgeGroup(this.starAge) == StarAgeLine.RET_GIANTBRANCH)
-                this.specType = Star.getStellarTypeFromTemp(this.currMass) + " II";
-
-            //the fun one - white dwarf
-            if (this.evoLine.findCurrentAgeGroup(this.starAge) == StarAgeLine.RET_COLLASPEDSTAR)
+            if (EvoLine.FindCurrentAgeGroup(StarAge) == StarAgeLine.RetMainbranch)
             {
-                if (this.effTemp >= 1000)
-                    this.specType = "DA";
-                if (this.effTemp >= 300 && this.effTemp < 1000)
-                    this.specType = "DB";
-                if (this.effTemp < 300)
-                    this.specType = "DC";
+                SpecType = GetStellarTypeFromMass(CurrMass) + " V";
             }
 
+            if (EvoLine.FindCurrentAgeGroup(StarAge) == StarAgeLine.RetSubbranch)
+            {
+                SpecType = GetStellarTypeFromTemp(CurrMass) + " IV";
+            }
+
+            if (EvoLine.FindCurrentAgeGroup(StarAge) == StarAgeLine.RetGiantbranch)
+            {
+                SpecType = GetStellarTypeFromTemp(CurrMass) + " II";
+            }
+
+            //the fun one - white dwarf
+            if (EvoLine.FindCurrentAgeGroup(StarAge) == StarAgeLine.RetCollaspedstar)
+            {
+                if (EffTemp >= 1000)
+                {
+                    SpecType = "DA";
+                }
+                if (EffTemp >= 300 && EffTemp < 1000)
+                {
+                    SpecType = "DB";
+                }
+                if (EffTemp < 300)
+                {
+                    SpecType = "DC";
+                }
+            }
         }
-        
 
-        public static string setColor(Dice ourDice, double effTemp)
+        public static string SetColor( Dice ourDice, double effTemp )
         {
-
-            if (!OptionCont.fantasyColors)
+            if ((bool) !OptionCont.FantasyColors)
             {
                 if (effTemp >= 33000)
+                {
                     return "Blue";
+                }
                 if (effTemp >= 10000 && effTemp < 33000)
+                {
                     return "Blue-White";
-                if (effTemp >= 7500 && effTemp < 10000) 
+                }
+                if (effTemp >= 7500 && effTemp < 10000)
+                {
                     return "Whitish Blue";
-                if (effTemp >= 6000 && effTemp < 7500) 
+                }
+                if (effTemp >= 6000 && effTemp < 7500)
+                {
                     return "White";
-                if (effTemp >= 5200 && effTemp < 6000) 
+                }
+                if (effTemp >= 5200 && effTemp < 6000)
+                {
                     return "Yellow";
-                if (effTemp >= 4250 && effTemp < 5200) 
+                }
+                if (effTemp >= 4250 && effTemp < 5200)
+                {
                     return "Yellowish Orange";
-                if (effTemp >= 3700 && effTemp < 4250) 
+                }
+                if (effTemp >= 3700 && effTemp < 4250)
+                {
                     return "Orange";
-                if (effTemp >= 2000 && effTemp < 3700) 
+                }
+                if (effTemp >= 2000 && effTemp < 3700)
+                {
                     return "Orangish Red";
-                if (effTemp >= 1300 && effTemp < 2000) 
+                }
+                if (effTemp >= 1300 && effTemp < 2000)
+                {
                     return "Red";
-                if (effTemp >= 700 && effTemp < 1300) 
+                }
+                if (effTemp >= 700 && effTemp < 1300)
+                {
                     return "Purplish Red";
-                if (effTemp >= 100 && effTemp < 700) 
+                }
+                if (effTemp >= 100 && effTemp < 700)
+                {
                     return "Brown";
-                if (effTemp < 100) 
+                }
+                if (effTemp < 100)
+                {
                     return "Black";
+                }
             }
             else
             {
-                int roll = ourDice.rng(100019);
-                if (libStarGen.inbetween(roll, 0, 10)) 
+                var roll = ourDice.Rng(100019);
+                if (LibStarGen.Inbetween(roll, 0, 10))
+                {
                     return "Black";
-                if (libStarGen.inbetween(roll, 11, 531))
+                }
+                if (LibStarGen.Inbetween(roll, 11, 531))
+                {
                     return "Green";
-                if (libStarGen.inbetween(roll, 532, 952))
+                }
+                if (LibStarGen.Inbetween(roll, 532, 952))
+                {
                     return "Yellow-Green";
-                if (libStarGen.inbetween(roll, 953, 6057))
+                }
+                if (LibStarGen.Inbetween(roll, 953, 6057))
+                {
                     return "Red-Orange";
-                if (libStarGen.inbetween(roll, 6058, 6835))
+                }
+                if (LibStarGen.Inbetween(roll, 6058, 6835))
+                {
                     return "Blue";
-                if (libStarGen.inbetween(roll, 6836, 11940))
+                }
+                if (LibStarGen.Inbetween(roll, 6836, 11940))
+                {
                     return "Purple-Red";
-                if (libStarGen.inbetween(roll, 11941, 23948))
+                }
+                if (LibStarGen.Inbetween(roll, 11941, 23948))
+                {
                     return "Red";
-                if (libStarGen.inbetween(roll, 23949, 49960))
+                }
+                if (LibStarGen.Inbetween(roll, 23949, 49960))
+                {
                     return "Yellow";
-                if (libStarGen.inbetween(roll, 49961, 75972))
+                }
+                if (LibStarGen.Inbetween(roll, 49961, 75972))
+                {
                     return "Orange";
-                if (libStarGen.inbetween(roll, 75973, 87980))
+                }
+                if (LibStarGen.Inbetween(roll, 75973, 87980))
+                {
                     return "Yellow-Orange";
-                if (libStarGen.inbetween(roll, 87981, 93085))
+                }
+                if (LibStarGen.Inbetween(roll, 87981, 93085))
+                {
                     return "Blue-White";
-                if (libStarGen.inbetween(roll, 93086, 93763))
+                }
+                if (LibStarGen.Inbetween(roll, 93086, 93763))
+                {
                     return "White";
-                if (libStarGen.inbetween(roll, 93764, 98868))
+                }
+                if (LibStarGen.Inbetween(roll, 93764, 98868))
+                {
                     return "White-Blue";
-                if (libStarGen.inbetween(roll, 98869, 99289))
+                }
+                if (LibStarGen.Inbetween(roll, 98869, 99289))
+                {
                     return "Green-Blue";
-                if (libStarGen.inbetween(roll, 99290, 99710))
+                }
+                if (LibStarGen.Inbetween(roll, 99290, 99710))
+                {
                     return "Blue-Violet";
-                if (libStarGen.inbetween(roll, 99711, 100019))
+                }
+                if (LibStarGen.Inbetween(roll, 99711, 100019))
+                {
                     return "Purple";
+                }
             }
 
             return "ERROR";
         }
 
-
-        public virtual bool testInitlizationZones()
+        public virtual bool TestInitlizationZones()
         {
-            if (this.zonesOfInterest == null) return false;
+            if (ZonesOfInterest == null)
+            {
+                return false;
+            }
             return true;
         }
 
-        public virtual void initalizeZonesOfInterest()
+        public virtual void InitalizeZonesOfInterest()
         {
-            zonesOfInterest = new formationHelper(this.selfID);
+            ZonesOfInterest = new FormationHelper(SelfId);
         }
 
-        public void sortForbiddenZones()
+        public void SortForbiddenZones()
         {
-            this.zonesOfInterest.sortForbiddenZones();
+            ZonesOfInterest.SortForbiddenZones();
         }
 
-        public void sortCleanZones()
+        public void SortCleanZones()
         {
-            this.zonesOfInterest.sortCleanZones();
+            ZonesOfInterest.SortCleanZones();
         }
 
-        public double getClosestDistToForbiddenZone(double orbit)
+        public double GetClosestDistToForbiddenZone( double orbit )
         {
-            return this.zonesOfInterest.getClosestDistFromForbiddenZone(orbit);
+            return ZonesOfInterest.GetClosestDistFromForbiddenZone(orbit);
         }
 
-        public double getClosestForbiddenZoneRatio(double orbit)
+        public double GetClosestForbiddenZoneRatio( double orbit )
         {
-            return this.zonesOfInterest.getClosestForbiddenZoneRatio(orbit);
+            return ZonesOfInterest.GetClosestForbiddenZoneRatio(orbit);
         }
 
-        public bool containsGasGiants(bool pastSnowLine = true)
+        public bool ContainsGasGiants( bool pastSnowLine = true )
         {
-            foreach (Satellite s in this.sysPlanets)
+            foreach (var s in SysPlanets)
             {
-                if (!pastSnowLine) 
-                    if (s.SatelliteType == Satellite.BASETYPE_GASGIANT) return true;
-                else 
-                    if (s.SatelliteType == Satellite.BASETYPE_GASGIANT && s.orbitalRadius > Star.snowLine(this.initLumin) ) return true;
+                if (!pastSnowLine)
+                {
+                    if (s.SatelliteType == Satellite.BasetypeGasgiant)
+                    {
+                        return true;
+                    }
+                    else if (s.SatelliteType == Satellite.BasetypeGasgiant && s.OrbitalRadius > SnowLine(InitLumin))
+                    {
+                        return true;
+                    }
+                }
             }
 
             return false;
         }
 
         //checks the previous satellite to see if it's a gas giant
-        public bool isPrevSatelliteGasGiant(double orbitalRadius)
+        public bool IsPrevSatelliteGasGiant( double orbitalRadius )
         {
-            for (int i = 0; i < this.sysPlanets.Count; i++)
+            for (var i = 0; i < SysPlanets.Count; i++)
             {
-                if (this.sysPlanets[i].orbitalRadius == orbitalRadius)
+                if (SysPlanets[i].OrbitalRadius != orbitalRadius)
                 {
-                    if (i == 0)
-                        return false;
-                    else
-                        if (this.sysPlanets[i - 1].baseType == Satellite.BASETYPE_GASGIANT)
-                            return true;
+                    continue;
                 }
-
+                if (i == 0)
+                {
+                    return false;
+                }
+                if (SysPlanets[i - 1].BaseType == Satellite.BasetypeGasgiant)
+                {
+                    return true;
+                }
             }
 
             return false;
         }
-
 
         //checks the next satellite to see if it's a gas giant
-        public bool isNextSatelliteGasGiant(double orbitalRadius)
+        public bool IsNextSatelliteGasGiant( double orbitalRadius )
         {
-            for (int i = 0; i < this.sysPlanets.Count; i++)
+            for (var i = 0; i < SysPlanets.Count; i++)
             {
-                if (this.sysPlanets[i].orbitalRadius == orbitalRadius)
+                if (SysPlanets[i].OrbitalRadius != orbitalRadius)
                 {
-                    if (i == (this.sysPlanets.Count - 1))
-                        return false;
-                    else
-                        if (this.sysPlanets[i + 1].baseType == Satellite.BASETYPE_GASGIANT)
-                            return true;
+                    continue;
                 }
-
+                if (i == SysPlanets.Count - 1)
+                {
+                    return false;
+                }
+                if (SysPlanets[i + 1].BaseType == Satellite.BasetypeGasgiant)
+                {
+                    return true;
+                }
             }
 
             return false;
         }
 
-        public string printSummaryLine(string intro = "")
+        public string PrintSummaryLine( string intro = "" )
         {
-            string desc = "";
+            string desc;
 
-            if (this.selfID != IS_PRIMARY)
+            if (SelfId != IsPrimary)
             {
-                desc = intro + " " + this.currMass + " solar masses, " + Math.Round(this.currLumin, OptionCont.numberOfDecimal) + " solar luminosities. Eff Temp: " + this.effTemp + "K, apparent color ";
-                desc += this.starColor + ". This star orbits " + Star.getDescSelfFlag(this.parentID) + " at " + this.orbitalRadius + "AU out with an eccentricity of " + this.orbitalEccent;
+                desc = intro + " " + CurrMass + " solar masses, " + Math.Round(CurrLumin, OptionCont.NumberOfDecimal) + " solar luminosities. Eff Temp: " + EffTemp + "K, apparent color ";
+                desc += StarColor + ". This star orbits " + GetDescSelfFlag(ParentId) + " at " + OrbitalRadius + "AU out with an eccentricity of " + OrbitalEccent;
             }
             else
             {
-                desc = intro + " " + this.currMass + " solar masses, " + Math.Round(this.currLumin, OptionCont.numberOfDecimal) + " solar luminosities. Eff Temp: " + this.effTemp + "K, apparent color ";
-                desc += this.starColor;
+                desc = intro + " " + CurrMass + " solar masses, " + Math.Round(CurrLumin, OptionCont.NumberOfDecimal) + " solar luminosities. Eff Temp: " + EffTemp + "K, apparent color ";
+                desc += StarColor;
             }
 
             return desc;
         }
 
         /// <summary>
-        /// This function prints the Periapsis and Apapsis of stars around an orbiting primary.
+        ///     This function prints the Periapsis and Apapsis of stars around an orbiting primary.
         /// </summary>
         /// <returns></returns>
-        public string printOrbitalDetails()
+        public string PrintOrbitalDetails()
         {
-            if (this.selfID == IS_PRIMARY)
+            if (SelfId == IsPrimary)
+            {
                 return "N/A";
-            else
-                return "Periapsis - " + Math.Round(Orbital.getPeriapsis(this.orbitalEccent, this.orbitalRadius), OptionCont.numberOfDecimal) + " AU. Apapsis - " + 
-                    Math.Round(Orbital.getApapsis(this.orbitalEccent, this.orbitalRadius), OptionCont.numberOfDecimal);
-
+            }
+            return "Periapsis - " + Math.Round(GetPeriapsis(OrbitalEccent, OrbitalRadius), OptionCont.NumberOfDecimal) + " AU. Apapsis - " + Math.Round(GetApapsis(OrbitalEccent, OrbitalRadius), OptionCont.NumberOfDecimal);
         }
 
         public override string ToString()
         {
-            String ret;
-            String nL = Environment.NewLine + "    ";
+            var nL = Environment.NewLine + "    ";
 
-            ret = this.name + " is a " + this.getStatusDesc() + " star with spectral type " + this.specType;
-            ret = ret + nL + "This star has " + this.currMass + " solar masses, and a current luminosity of " + Math.Round(this.currLumin,OptionCont.numberOfDecimal);
-            ret = ret + nL + "solar luminosities. It has a surface temperature of " + Math.Round(this.effTemp,OptionCont.numberOfDecimal) + "K.";
-            ret = ret + nL + "This star's radius is " + Math.Round(this.getRadiusAU(),OptionCont.numberOfDecimal) + " AU.";
-            ret = ret + nL + "Apparent Color : " + this.starColor;
-            
-            if (OptionCont.getVerboseOutput())
+            var ret = Name + " is a " + GetStatusDesc() + " star with spectral type " + SpecType;
+            ret = ret + nL + "This star has " + CurrMass + " solar masses, and a current luminosity of " + Math.Round(CurrLumin, OptionCont.NumberOfDecimal);
+            ret = ret + nL + "solar luminosities. It has a surface temperature of " + Math.Round(EffTemp, OptionCont.NumberOfDecimal) + "K.";
+            ret = ret + nL + "This star's radius is " + Math.Round(GetRadiusAu(), OptionCont.NumberOfDecimal) + " AU.";
+            ret = ret + nL + "Apparent Color : " + StarColor;
+
+            if (OptionCont.GetVerboseOutput())
             {
                 ret = ret + Environment.NewLine;
-                ret = ret + nL + "Initial Luminosity: " + this.initLumin + " solar luminosities.";
-                ret = ret + nL + "Initial Mass: " + this.initMass + " solar masses";
-                ret = ret + nL + "Formation Zones: " + Star.innerRadius(this.initLumin, this.initMass) + " AU to " + Math.Round(Star.outerRadius(this.initMass), OptionCont.numberOfDecimal) + " AU";
-                ret = ret + nL + "Snow Line: " + Math.Round(Star.snowLine(this.initLumin),OptionCont.numberOfDecimal) + " AU.";
+                ret = ret + nL + "Initial Luminosity: " + InitLumin + " solar luminosities.";
+                ret = ret + nL + "Initial Mass: " + InitMass + " solar masses";
+                ret = ret + nL + "Formation Zones: " + InnerRadius(InitLumin, InitMass) + " AU to " + Math.Round(OuterRadius(InitMass), OptionCont.NumberOfDecimal) + " AU";
+                ret = ret + nL + "Snow Line: " + Math.Round(SnowLine(InitLumin), OptionCont.NumberOfDecimal) + " AU.";
             }
 
             ret = ret + Environment.NewLine;
-            if (this.isFlareStar)
+            if (IsFlareStar)
             {
                 ret = ret + nL + "This star is a flare star.";
             }
 
             ret = ret + Environment.NewLine;
 
-            if (OptionCont.getVerboseOutput())
+            if (OptionCont.GetVerboseOutput())
             {
-                ret = ret + nL + "Self ID: " + Star.getDescSelfFlag(this.selfID) + " and Parent ID: " + Star.getDescSelfFlag(this.parentID);
+                ret = ret + nL + "Self ID: " + GetDescSelfFlag(SelfId) + " and Parent ID: " + GetDescSelfFlag(ParentId);
                 ret = ret + nL;
             }
 
@@ -765,20 +1048,28 @@ namespace UniverseGeneration.Stellar_Bodies
             ret = ret + nL + "Evolution Data";
             ret = ret + Environment.NewLine;
 
-            if (this.evoLine.getGiantLimit() < 1000)
+            if (EvoLine.GetGiantLimit() < 1000)
             {
-                ret = ret + nL + "Main Sequence Ends: " + this.evoLine.getMainLimit() + " Gyr,";
-                ret = ret + " Subgiant Ends: " + this.evoLine.getSubLimit() + " Gyr";
-                ret = ret + nL + "Giant Stage Ends: " + this.evoLine.getGiantLimit() + " Gyr";
+                ret = ret + nL + "Main Sequence Ends: " + EvoLine.GetMainLimit() + " Gyr,";
+                ret = ret + " Subgiant Ends: " + EvoLine.GetSubLimit() + " Gyr";
+                ret = ret + nL + "Giant Stage Ends: " + EvoLine.GetGiantLimit() + " Gyr";
 
-                if (this.starAge < this.evoLine.getMainLimit())
-                    ret = ret + nL + "This star will exit the main sequence phase in: " + (this.evoLine.getMainLimit() - this.starAge) + " Gyr";
-                if (this.starAge >= this.evoLine.getMainLimit() && this.starAge < this.evoLine.getSubLimit())
-                    ret = ret + nL + "This star will exit the subgiant phase in: " + (this.evoLine.getSubLimit() - this.starAge) + " Gyr";
-                if (this.starAge >= this.evoLine.getSubLimit() && this.starAge < this.evoLine.getGiantLimit())
-                    ret = ret + nL + "This star will exit the giant phase in: " + (this.evoLine.getGiantLimit() - this.starAge) + " Gyr";
-                if (this.starAge >= this.evoLine.getGiantLimit())
-                    ret = ret + nL + "This star has been a white dwarf for: " + (this.starAge - this.evoLine.getGiantLimit()) + " Gyr";
+                if (StarAge < EvoLine.GetMainLimit())
+                {
+                    ret = ret + nL + "This star will exit the main sequence phase in: " + ( EvoLine.GetMainLimit() - StarAge ) + " Gyr";
+                }
+                if (StarAge >= EvoLine.GetMainLimit() && StarAge < EvoLine.GetSubLimit())
+                {
+                    ret = ret + nL + "This star will exit the subgiant phase in: " + ( EvoLine.GetSubLimit() - StarAge ) + " Gyr";
+                }
+                if (StarAge >= EvoLine.GetSubLimit() && StarAge < EvoLine.GetGiantLimit())
+                {
+                    ret = ret + nL + "This star will exit the giant phase in: " + ( EvoLine.GetGiantLimit() - StarAge ) + " Gyr";
+                }
+                if (StarAge >= EvoLine.GetGiantLimit())
+                {
+                    ret = ret + nL + "This star has been a white dwarf for: " + ( StarAge - EvoLine.GetGiantLimit() ) + " Gyr";
+                }
             }
 
             else
@@ -786,22 +1077,21 @@ namespace UniverseGeneration.Stellar_Bodies
                 ret = ret + nL + "This star will burn out sometime well after the galaxy disappears.";
             }
 
-            if (this.selfID != Star.IS_PRIMARY)
+            if (SelfId != IsPrimary)
             {
                 ret = ret + Environment.NewLine;
                 ret = ret + nL + "Orbital Details";
-                ret = ret + nL + "This orbits " + this.parentName + " at " + this.orbitalRadius + " AU.";
+                ret = ret + nL + "This orbits " + ParentName + " at " + OrbitalRadius + " AU.";
 
-                if (this.orbitalEccent > 0)
+                if (OrbitalEccent > 0)
                 {
-                    ret = ret + nL + "Eccentricity: " + this.orbitalEccent + ".";
-                    ret = ret + nL + "Periapsis: " + Orbital.getPeriapsis(this.orbitalEccent, this.orbitalRadius) + " AU and Apapasis: " + Orbital.getApapsis(this.orbitalEccent, this.orbitalRadius) + " AU.";
+                    ret = ret + nL + "Eccentricity: " + OrbitalEccent + ".";
+                    ret = ret + nL + "Periapsis: " + GetPeriapsis(OrbitalEccent, OrbitalRadius) + " AU and Apapasis: " + GetApapsis(OrbitalEccent, OrbitalRadius) + " AU.";
                 }
 
-                ret = ret + nL + "Orbital period is " + Math.Round(this.orbitalPeriod,2) + " years (" + Math.Round(this.orbitalPeriod * 365.25,2);
+                ret = ret + nL + "Orbital period is " + Math.Round(OrbitalPeriod, 2) + " years (" + Math.Round(OrbitalPeriod * 365.25, 2);
                 ret = ret + " days)";
-                ret = ret + nL + "This has a seperation of " + libStarGen.getSeperationStr(this.orbitalSep);
-
+                ret = ret + nL + "This has a seperation of " + LibStarGen.GetSeperationStr(OrbitalSep);
             }
 
             //ret = ret + nL;
@@ -813,76 +1103,118 @@ namespace UniverseGeneration.Stellar_Bodies
             //}
             //ret = ret + nL;
 
-            if (OptionCont.getVerboseOutput())
+            if (!OptionCont.GetVerboseOutput())
             {
-                ret = ret + nL;
-                ret = ret + nL + "Formation Zone Details";
-                ret = ret + nL;
-                foreach (forbiddenZone r in this.zonesOfInterest.forbiddenZones)
-                {
-                    ret = ret + nL + r;
-                }
-                ret = ret + nL;
-                foreach (cleanZone r in this.zonesOfInterest.formationZones)
-                {
-                    ret = ret + nL + r;
-                }
-                ret = ret + nL;
-                ret = ret + nL + "Gas Giant Flag: " + Star.descGasGiantFlag(this.gasGiantFlag);
-                ret = ret + nL;
+                return ret;
             }
+            ret = ret + nL;
+            ret = ret + nL + "Formation Zone Details";
+            ret = ret + nL;
+            ret = ZonesOfInterest.ForbiddenZones.Aggregate(ret, ( current, r ) => current + nL + r);
+            ret = ret + nL;
+            ret = ZonesOfInterest.FormationZones.Aggregate(ret, ( current, r ) => current + nL + r);
+            ret = ret + nL;
+            ret = ret + nL + "Gas Giant Flag: " + DescGasGiantFlag(GasGiantFlag);
+            ret = ret + nL;
 
             return ret;
         }
 
-        public static void generateEccentricity(int roll, Star s)
+        public static void GenerateEccentricity( int roll, Star s )
         {
             //set the eccentricity
-            if (roll <= 3) s.orbitalEccent = 0;
-            if (roll == 4) s.orbitalEccent = .1;
-            if (roll == 5) s.orbitalEccent = .2;
-            if (roll == 6) s.orbitalEccent = .3;
-            if (roll == 7 || roll == 8) s.orbitalEccent = .4;
-            if (roll >= 9 && roll <= 11) s.orbitalEccent = .5;
-            if (roll == 12 || roll == 13) s.orbitalEccent = .6;
-            if (roll == 14 || roll == 15) s.orbitalEccent = .7;
-            if (roll == 16) s.orbitalEccent = .8;
-            if (roll == 17) s.orbitalEccent = .9;
-            if (roll >= 18) s.orbitalEccent = .95;
+            if (roll <= 3)
+            {
+                s.OrbitalEccent = 0;
+            }
+            if (roll == 4)
+            {
+                s.OrbitalEccent = .1;
+            }
+            if (roll == 5)
+            {
+                s.OrbitalEccent = .2;
+            }
+            if (roll == 6)
+            {
+                s.OrbitalEccent = .3;
+            }
+            if (roll == 7 || roll == 8)
+            {
+                s.OrbitalEccent = .4;
+            }
+            if (roll >= 9 && roll <= 11)
+            {
+                s.OrbitalEccent = .5;
+            }
+            if (roll == 12 || roll == 13)
+            {
+                s.OrbitalEccent = .6;
+            }
+            if (roll == 14 || roll == 15)
+            {
+                s.OrbitalEccent = .7;
+            }
+            if (roll == 16)
+            {
+                s.OrbitalEccent = .8;
+            }
+            if (roll == 17)
+            {
+                s.OrbitalEccent = .9;
+            }
+            if (roll >= 18)
+            {
+                s.OrbitalEccent = .95;
+            }
         }
 
-        public static string getDescFromFlag(int flag)
+        public static string GetDescFromFlag( int flag )
         {
-            if (flag == Star.IS_PRIMARY) return "Primary Star";
-            if (flag == Star.IS_SECONDARY) return "Secondary Star";
-            if (flag == Star.IS_SECCOMP) return "Secondary Companion";
-            if (flag == Star.IS_TRINARY) return "Trinary Star";
-            if (flag == Star.IS_TRICOMP) return "Trinary Companion";
+            if (flag == IsPrimary)
+            {
+                return "Primary Star";
+            }
+            if (flag == IsSecondary)
+            {
+                return "Secondary Star";
+            }
+            if (flag == IsSeccomp)
+            {
+                return "Secondary Companion";
+            }
+            if (flag == IsTrinary)
+            {
+                return "Trinary Star";
+            }
+            if (flag == IsTricomp)
+            {
+                return "Trinary Companion";
+            }
 
             return "[ERROR]";
         }
 
         /// <summary>
-        /// This returns the current branch description for this star
+        ///     This returns the current branch description for this star
         /// </summary>
         /// <returns>A string containing the branch description</returns>
-        public string returnCurrentBranchDesc()
+        public string ReturnCurrentBranchDesc()
         {
-            return StarAgeLine.descBranch(this.evoLine.findCurrentAgeGroup(this.starAge));
+            return StarAgeLine.DescBranch(EvoLine.FindCurrentAgeGroup(StarAge));
         }
 
-        public void giveOrbitalsOrder(ref int totalOrbitals)
+        public void GiveOrbitalsOrder( ref int totalOrbitals )
         {
-            int currOrb = 0;
-            foreach (Satellite s in this.sysPlanets)
+            var currOrb = 0;
+            foreach (var s in SysPlanets)
             {
-                s.selfID = currOrb;
-                s.masterOrderID = totalOrbitals;
-              
+                s.SelfId = currOrb;
+                s.MasterOrderId = totalOrbitals;
+
                 totalOrbitals++;
                 currOrb++;
             }
         }
-
     }
 }

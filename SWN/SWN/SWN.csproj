@@ -115,6 +115,11 @@
     <Compile Include="Forms\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Service References\SWNServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -132,18 +137,12 @@
     <Compile Include="Forms\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Map.xaml.cs">
-      <DependentUpon>Map.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
     <Compile Include="Networking\ServerConnection.cs" />
     <Compile Include="Controller\SettingHandler.cs" />
     <Compile Include="Controller\XmlHandler.cs" />
-    <Compile Include="UserControls\CharacterSheet.xaml.cs">
-      <DependentUpon>CharacterSheet.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\LanguageControl.xaml.cs">
       <DependentUpon>LanguageControl.xaml</DependentUpon>
     </Compile>
@@ -192,15 +191,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Forms\Map.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Forms\Registration.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\CharacterSheet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -234,11 +225,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
+    <None Include="Service References\SWNServiceReference\SwnService1.disco" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -248,11 +235,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
+    <AppDesigner Include="Properties\" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <AppDesigner Include="Properties\" />
     <None Include="Service References\SWNServiceReference\SWN.SWNServiceReference.Advantages.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -268,21 +255,21 @@
     <None Include="Service References\SWNServiceReference\SWN.SWNServiceReference.Skills.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SWNServiceReference\SWNService.wsdl" />
-    <None Include="Service References\SWNServiceReference\SWNService.xsd">
+    <None Include="Service References\SWNServiceReference\SwnService2.wsdl" />
+    <None Include="Service References\SWNServiceReference\SwnService21.wsdl" />
+    <None Include="Service References\SWNServiceReference\SwnService5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SWNServiceReference\SWNService1.wsdl" />
-    <None Include="Service References\SWNServiceReference\SWNService1.xsd">
+    <None Include="Service References\SWNServiceReference\SwnService51.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SWNServiceReference\SWNService2.xsd">
+    <None Include="Service References\SWNServiceReference\SwnService52.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SWNServiceReference\SWNService3.xsd">
+    <None Include="Service References\SWNServiceReference\SwnService53.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SWNServiceReference\SWNService4.xsd">
+    <None Include="Service References\SWNServiceReference\SwnService54.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -321,9 +308,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\SWNServiceReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SWNServiceReference\SWNService.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\SWNServiceReference\configuration91.svcinfo" />

@@ -3,30 +3,29 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SWN.Forms"
         xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
         themes:ThemeManager.Theme="ExpressionDark"
         mc:Ignorable="d"
         Title="Options" Height="366.667" Width="586.666">
     <Window.Background>
-        <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
+        <SolidColorBrush Color="{DynamicResource SwnBackgroundDark}" />
     </Window.Background>
     <Grid>
-        <Label x:Name="lblRcvFiles" Content="Received-Files Directory" HorizontalAlignment="Left" Margin="10,10,0,0"
+        <Label x:Name="LblRcvFiles" Content="Received-Files Directory" HorizontalAlignment="Left" Margin="10,10,0,0"
                VerticalAlignment="Top" />
-        <Label x:Name="lblRcvImages" Content="Received-Images Directory" HorizontalAlignment="Left" Margin="10,35,0,0"
+        <Label x:Name="LblRcvImages" Content="Received-Images Directory" HorizontalAlignment="Left" Margin="10,35,0,0"
                VerticalAlignment="Top" />
-        <TextBox x:Name="tbFileDirectory" Height="23" Margin="167,7,66,0" Text="" VerticalAlignment="Top"
+        <TextBox x:Name="TbFileDirectory" Height="23" Margin="167,7,66,0" Text="" VerticalAlignment="Top"
                  IsReadOnly="True" />
-        <TextBox x:Name="tbImgDirectory" Height="23" Margin="167,35,66,0" Text="" VerticalAlignment="Top"
+        <TextBox x:Name="TbImgDirectory" Height="23" Margin="167,35,66,0" Text="" VerticalAlignment="Top"
                  IsReadOnly="True" />
-        <Button x:Name="btSave" Content="Save" Margin="0,0,10,10" Click="btSave_Click" Height="18"
+        <Button x:Name="BtSave" Content="Save" Margin="0,0,10,10" Click="btSave_Click" Height="18"
                 VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" />
-        <Button x:Name="btFileBrowse" Content="Browse" HorizontalAlignment="Left" Margin="518,10,0,0"
+        <Button x:Name="BtFileBrowse" Content="Browse" HorizontalAlignment="Left" Margin="518,10,0,0"
                 VerticalAlignment="Top" Width="52" Height="17" Click="btFileBrowse_Click" />
-        <Button x:Name="btImageBrowse" Content="Browse" HorizontalAlignment="Left" Margin="518,37,0,0"
+        <Button x:Name="BtImageBrowse" Content="Browse" HorizontalAlignment="Left" Margin="518,37,0,0"
                 VerticalAlignment="Top" Width="52" Height="17" Click="btImageBrowse_Click" />
-        <CheckBox x:Name="cbStartMusic" Content="Enable Startup-Music?" HorizontalAlignment="Left" Height="23"
+        <CheckBox x:Name="CbStartMusic" Content="Enable Startup-Music?" HorizontalAlignment="Left" Height="23"
                   Margin="23,79,0,0" VerticalAlignment="Top" Width="165" IsChecked="True" />
 
 

@@ -4,30 +4,29 @@ namespace UniverseGeneration.Stellar_Bodies
 {
     public class Moonlet : Orbital
     {
-        public double planetRadius { get; set; }
-        public string moonName { get; set; }
-
-        public Moonlet(int parent, int self, double planetRadius, string name) : base(parent, self)
+        public Moonlet( int parent, int self, double planetRadius, string name ) : base(parent, self)
         {
-            this.planetRadius = planetRadius;
-            this.moonName = name;
+            PlanetRadius = planetRadius;
+            MoonName = name;
         }
 
         //copy constructor
-        public Moonlet(Moonlet inBound) : base(inBound.parentID, inBound.selfID)
+        public Moonlet( Moonlet inBound ) : base(inBound.ParentId, inBound.SelfId)
         {
-            this.planetRadius = inBound.planetRadius;
-            this.moonName = inBound.moonName;
-            this.orbitalRadius = inBound.orbitalRadius;
-            this.orbitalPeriod = inBound.orbitalPeriod;
+            PlanetRadius = inBound.PlanetRadius;
+            MoonName = inBound.MoonName;
+            OrbitalRadius = inBound.OrbitalRadius;
+            OrbitalPeriod = inBound.OrbitalPeriod;
         }
-        private Moonlet() { }
+
+        public double PlanetRadius { get; set; }
+        public string MoonName { get; set; }
 
         public override string ToString()
         {
-            string ret = "";
-            ret = this.moonName + " orbiting at " + Math.Round(this.orbitalRadius, 3) + " Earth diameters and ";
-            ret = ret + this.planetRadius + " planetary radii";
+            var ret = "";
+            ret = MoonName + " orbiting at " + Math.Round(OrbitalRadius, 3) + " Earth diameters and ";
+            ret = ret + PlanetRadius + " planetary radii";
             return ret;
         }
     }

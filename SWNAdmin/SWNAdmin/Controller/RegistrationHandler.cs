@@ -1,16 +1,19 @@
-﻿using SWNAdmin.Classes;
+﻿using System.Linq;
+using SWNAdmin.Classes;
 using SWNAdmin.Utility;
-using System.Linq;
 
 namespace SWNAdmin.Controller
 {
     public class RegistrationHandler
     {
-        public bool RegistrationCheck(Client c)
+        public bool RegistrationCheck( Client c )
         {
             var vUserExists = UserExists(c.UserName);
 
-            if (vUserExists) return false;
+            if (vUserExists)
+            {
+                return false;
+            }
             using (var context = new Db1Entities())
             {
                 var newReg = new Registration
@@ -25,7 +28,7 @@ namespace SWNAdmin.Controller
             return true;
         }
 
-        private static bool UserExists(string userName)
+        private static bool UserExists( string userName )
         {
             //grundsätzlich existiert er nicht
             var userExists = false;
