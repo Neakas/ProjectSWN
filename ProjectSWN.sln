@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWNAdmin", "SWNAdmin\SWNAdmin\SWNAdmin.csproj", "{F94763F2-429E-46C1-8DDE-A1EB5B86B24C}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniverseGeneration", "UniverseGeneration\UniverseGeneration.csproj", "{C4D2597A-6BF1-4035-9845-DFE103223595}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SWNClientSetup", "SWNClientSetup\SWNClientSetup.vdproj", "{F315D52C-5463-4A06-A4ED-1A00EAE68465}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFDrawingTest", "WPFDrawingTest\WPFDrawingTest.csproj", "{4BDB0272-6367-47C7-8B5A-95A707D09A32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,10 @@ Global
 		{C4D2597A-6BF1-4035-9845-DFE103223595}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F315D52C-5463-4A06-A4ED-1A00EAE68465}.Debug|Any CPU.ActiveCfg = Debug
 		{F315D52C-5463-4A06-A4ED-1A00EAE68465}.Release|Any CPU.ActiveCfg = Release
+		{4BDB0272-6367-47C7-8B5A-95A707D09A32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BDB0272-6367-47C7-8B5A-95A707D09A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BDB0272-6367-47C7-8B5A-95A707D09A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BDB0272-6367-47C7-8B5A-95A707D09A32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

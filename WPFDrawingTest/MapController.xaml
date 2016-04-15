@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="WPFDrawingTest.MapController"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
+             themes:ThemeManager.Theme="ExpressionDark"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" Background="White" KeyDown="UserControl_KeyDown" KeyUp="UserControl_KeyUp" Height="327.551" Width="445.172">
+    <Grid x:Name="MainGrid">
+        <ToolBarTray Height="32" VerticalAlignment="Top" Background="Transparent">
+            <ToolBar Background="#FFB2B2B2" Margin="0,0,0,-22">
+                <Label Content="Mode"></Label>
+                <ComboBox x:Name="CbPaintModes" SelectionChanged="cbPaintModes_SelectionChanged" Height="24" Width="91">
+                    <ComboBoxItem x:Name="CbINone" Content="None" HorizontalAlignment="Center"/>
+                    <ComboBoxItem x:Name="CbILine" Content="Line" HorizontalAlignment="Center"/>
+                    <ComboBoxItem x:Name="CbIRect" Content="Rect" HorizontalAlignment="Center"/>
+                    <ComboBoxItem x:Name="CbIDel" Content="Delete" HorizontalAlignment="Center"/>
+                    <ComboBoxItem x:Name="CbIBrush" Content="Brush" HorizontalAlignment="Center"/>
+                </ComboBox>
+                <xctk:IntegerUpDown x:Name="IudStrokeSize" Value="5" ValueChanged="iudStrokeSize_ValueChanged"></xctk:IntegerUpDown>
+            </ToolBar>
+        </ToolBarTray>
+
+        <Canvas x:Name="MainCanvas" Margin="0,22" MouseDown="MainCanvas_MouseDown" ClipToBounds="True" MouseUp="MainCanvas_MouseUp" MouseMove="MainCanvas_MouseMove" Background="#00000000"/>
+        <StatusBar Height="22" VerticalAlignment="Bottom">
+            <StatusBarItem>
+                <TextBlock Name="LblPaintMode" Text="Test"></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+    <UserControl.Resources>
+        <ItemsPanelTemplate x:Key="MenuItemPanelTemplate">
+            <StackPanel Margin="-20,0,0,0" Background="#FF333333"/>
+        </ItemsPanelTemplate>
+        <Style TargetType="{x:Type MenuItem}">
+            <Setter Property="ItemsPanel" Value="{StaticResource MenuItemPanelTemplate}"/>
+        </Style>
+        <Style TargetType="{x:Type ContextMenu}">
+            <Setter Property="ItemsPanel" Value="{StaticResource MenuItemPanelTemplate}"/>
+        </Style>
+    </UserControl.Resources>
+</UserControl>
