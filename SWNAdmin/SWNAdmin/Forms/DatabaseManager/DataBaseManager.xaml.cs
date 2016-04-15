@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using SWNAdmin.Utility;
-using System.Linq;
 
 namespace SWNAdmin.Forms.DatabaseManager
 {
@@ -19,26 +19,26 @@ namespace SWNAdmin.Forms.DatabaseManager
             //LoadDgMain("Advantages");
         }
 
-        private void MenuManageAdvantage_Click(object sender, RoutedEventArgs e)
+        private void MenuManageAdvantage_Click( object sender, RoutedEventArgs e )
         {
             var ma = new ManageAdvantage();
             ma.ShowDialog();
             LoadDgMain(null);
         }
 
-        private void MenuManageStat_Click(object sender, RoutedEventArgs e)
+        private void MenuManageStat_Click( object sender, RoutedEventArgs e )
         {
             var ms = new ManageStat();
             ms.ShowDialog();
             LoadDgMain(null);
         }
 
-        private void MenuManageDisadvantage_Click(object sender, RoutedEventArgs e)
+        private void MenuManageDisadvantage_Click( object sender, RoutedEventArgs e )
         {
             LoadDgMain(null);
         }
 
-        private void LoadDgMain(string selectedItem)
+        private void LoadDgMain( string selectedItem )
         {
             if (selectedItem == null)
             {
@@ -145,44 +145,42 @@ namespace SWNAdmin.Forms.DatabaseManager
             var itemList = new List<string>();
             itemList.AddRange(new[]
             {
-                "Advantages", "Disadvantages", "CharacterBonus", "CharacterMalus", "Characters", "InnerMoonlets",
-                "MajorMoons", "OuterMoonlets", "Planets", "Registration", "Stars", "StarSystems", "Stats", "UsedBonus",
-                "UsedMalus", "Skills"
+                "Advantages", "Disadvantages", "CharacterBonus", "CharacterMalus", "Characters", "InnerMoonlets", "MajorMoons", "OuterMoonlets", "Planets", "Registration", "Stars", "StarSystems", "Stats", "UsedBonus", "UsedMalus", "Skills"
             });
             CbDatabaseSelector.ItemsSource = itemList;
         }
 
-        private void cbDatabaseSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbDatabaseSelector_SelectionChanged( object sender, SelectionChangedEventArgs e )
         {
             LoadDgMain(CbDatabaseSelector.SelectedItem.ToString());
         }
 
-        private void MenuManageSkills_Click(object sender, RoutedEventArgs e)
+        private void MenuManageSkills_Click( object sender, RoutedEventArgs e )
         {
             var msk = new ManageSkills();
             msk.ShowDialog();
             LoadDgMain(null);
         }
 
-        private void MenuManagePrerequisites_Click(object sender, RoutedEventArgs e)
+        private void MenuManagePrerequisites_Click( object sender, RoutedEventArgs e )
         {
             var mpr = new ManagePrerequisites();
             mpr.ShowDialog();
         }
 
-        private void MenuManageGroups_Click(object sender, RoutedEventArgs e)
+        private void MenuManageGroups_Click( object sender, RoutedEventArgs e )
         {
             var mg = new ManageGroups();
             mg.ShowDialog();
         }
 
-        private void MenuManageModifiers_Click(object sender, RoutedEventArgs e)
+        private void MenuManageModifiers_Click( object sender, RoutedEventArgs e )
         {
             var mmods = new ManageModifiers();
             mmods.ShowDialog();
         }
 
-        private void MenuManageAlienRace_Click(object sender, RoutedEventArgs e)
+        private void MenuManageAlienRace_Click( object sender, RoutedEventArgs e )
         {
             var mar = new ManageAlienRaces();
             mar.ShowDialog();

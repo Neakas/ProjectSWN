@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Serialization;
 using UniverseGeneration.Utility;
 
 namespace UniverseGeneration.Stellar_Bodies
 {
     /// <summary>
-    /// The object for satelites and moons in this object
+    ///     The object for satelites and moons in this object
     /// </summary>
-  
     public class Satellite : Orbital
     {
         //flags!
@@ -17,83 +17,83 @@ namespace UniverseGeneration.Stellar_Bodies
         // mainly used to release error conditions from functions
 
         /// <summary>
-        /// FLAG: The orbit has an error (or could not be correctly added)
+        ///     FLAG: The orbit has an error (or could not be correctly added)
         /// </summary>
-        readonly public static int ERROR_ORBIT = -1;
+        public static readonly int ErrorOrbit = -1;
 
         /// <summary>
-        /// FLAG: The basetype has an error (or could not be correctly set)
+        ///     FLAG: The basetype has an error (or could not be correctly set)
         /// </summary>
-        readonly public static int ERROR_BASETYPE = -2;
+        public static readonly int ErrorBasetype = -2;
 
         /// <summary>
-        /// FLAG: The subtype has an error (or could not be correctly set)
+        ///     FLAG: The subtype has an error (or could not be correctly set)
         /// </summary>
-        readonly public static int ERROR_SUBTYPE = -3;
+        public static readonly int ErrorSubtype = -3;
 
         /// <summary>
-        /// FLAG: The size has an error (or could not be correctly set)
+        ///     FLAG: The size has an error (or could not be correctly set)
         /// </summary>
-        readonly public static int ERROR_SIZE = -4;
+        public static readonly int ErrorSize = -4;
 
         /// <summary>
-        /// FLAG: The atmosphere size has an error (or could not be correctly set)
+        ///     FLAG: The atmosphere size has an error (or could not be correctly set)
         /// </summary>
-        readonly public static int ERROR_ATM = -5;
+        public static readonly int ErrorAtm = -5;
 
         /// <summary>
-        /// FLAG: The atmosphere condition has an error (or could not be correctly set)
+        ///     FLAG: The atmosphere condition has an error (or could not be correctly set)
         /// </summary>
-        readonly public static int ERROR_ATMCOND = -6;
+        public static readonly int ErrorAtmcond = -6;
 
         /// <summary>
-        /// FLAG: Unknown error!
+        ///     FLAG: Unknown error!
         /// </summary>
-        readonly public static int ERROR_GENERIC = -7;
+        public static readonly int ErrorGeneric = -7;
 
         /// <summary>
-        /// The amount of gravity on Earth.
+        ///     The amount of gravity on Earth.
         /// </summary>
-        readonly public static double GFORCE = 9.80665;
+        public static readonly double Gforce = 9.80665;
 
         // owner flags.
         // we use the star ids when it's just one star, though.
-        readonly public static int ORBIT_PRISEC = 9102; //primary and secondary
-        readonly public static int ORBIT_PRISECTRI = 9103; //all three
-        readonly public static int ORBIT_PRITRI = 9106; //shouldn't happen .(Primary and Trinary)
-        readonly public static int ORBIT_SECCOM = 9104; //secondary and companion
-        readonly public static int ORBIT_TRICOM = 9105; //trinary and companion
-        readonly public static int ORBIT_SECTRI = 9107; //this so shouldn't happen. Secondary and Trinary.
-        readonly public static int ORBIT_PLANET = 9108; //for moons
+        public static readonly int OrbitPrisec = 9102; //primary and secondary
+        public static readonly int OrbitPrisectri = 9103; //all three
+        public static readonly int OrbitPritri = 9106; //shouldn't happen .(Primary and Trinary)
+        public static readonly int OrbitSeccom = 9104; //secondary and companion
+        public static readonly int OrbitTricom = 9105; //trinary and companion
+        public static readonly int OrbitSectri = 9107; //this so shouldn't happen. Secondary and Trinary.
+        public static readonly int OrbitPlanet = 9108; //for moons
 
         // base type flags
         // these are used because certain things need to check what the base type is.
-        readonly public static int BASETYPE_MOON = 210;
-        readonly public static int BASETYPE_ASTEROIDBELT = 211;
-        readonly public static int BASETYPE_EMPTY = 212;
-        readonly public static int BASETYPE_GASGIANT = 220;
-        readonly public static int BASETYPE_TERRESTIAL = 230;
+        public static readonly int BasetypeMoon = 210;
+        public static readonly int BasetypeAsteroidbelt = 211;
+        public static readonly int BasetypeEmpty = 212;
+        public static readonly int BasetypeGasgiant = 220;
+        public static readonly int BasetypeTerrestial = 230;
 
-        readonly public static int BASETYPE_UNSET = 999;
+        public static readonly int BasetypeUnset = 999;
 
         //sub type flags: i.e a Terrestial(Ice) Small, for example.
-        readonly public static int SUBTYPE_ICE = 231;
-        readonly public static int SUBTYPE_ROCK = 232;
-        readonly public static int SUBTYPE_SULFUR = 233;
-        readonly public static int SUBTYPE_HADEAN = 234;
-        readonly public static int SUBTYPE_AMMONIA = 235;
-        readonly public static int SUBTYPE_GARDEN = 236;
-        readonly public static int SUBTYPE_OCEAN = 237;
-        readonly public static int SUBTYPE_GREENHOUSE = 238;
-        readonly public static int SUBTYPE_CHTHONIAN = 239;
+        public static readonly int SubtypeIce = 231;
+        public static readonly int SubtypeRock = 232;
+        public static readonly int SubtypeSulfur = 233;
+        public static readonly int SubtypeHadean = 234;
+        public static readonly int SubtypeAmmonia = 235;
+        public static readonly int SubtypeGarden = 236;
+        public static readonly int SubtypeOcean = 237;
+        public static readonly int SubtypeGreenhouse = 238;
+        public static readonly int SubtypeChthonian = 239;
 
         // size flags
         // grouped into related sizes for different base types.
-        readonly public static int SIZE_UNSET = BASETYPE_UNSET;
-        readonly public static int SIZE_TINY = 11;
-        readonly public static int SIZE_SMALL = 12;
-        readonly public static int SIZE_MEDIUM = 13;
-        readonly public static int SIZE_LARGE = 14;
+        public static readonly int SizeUnset = BasetypeUnset;
+        public static readonly int SizeTiny = 11;
+        public static readonly int SizeSmall = 12;
+        public static readonly int SizeMedium = 13;
+        public static readonly int SizeLarge = 14;
 
         /* CHART FOR SIZES:
          * TINY : Asteroid Belt (Sparse), Terrestial (Tiny)
@@ -101,704 +101,1027 @@ namespace UniverseGeneration.Stellar_Bodies
          * MEDIUM: Asteroid Belt (Moderate), Terrestial (Standard), Gas Giant (Medium)
          * LARGE: Asteroid Belt (Dense), Terrestial (Large), Gas Giant (Large) */
 
-
         // atm flags
         // flags for type. Used to make sure we keep all refrences consistant
-        readonly public static int ATM_BASE_PRES = 300;
-        readonly public static int ATM_PRES_NONE = ATM_BASE_PRES + 0;
-        readonly public static int ATM_PRES_TRACE = ATM_BASE_PRES + 1;
-        readonly public static int ATM_PRES_VERYTHIN = ATM_BASE_PRES + 2;
-        readonly public static int ATM_PRES_THIN = ATM_BASE_PRES + 3;
-        readonly public static int ATM_PRES_STANDARD = ATM_BASE_PRES + 4;
-        readonly public static int ATM_PRES_DENSE = ATM_BASE_PRES + 5;
-        readonly public static int ATM_PRES_VERYDENSE = ATM_BASE_PRES + 6;
-        readonly public static int ATM_PRES_SUPERDENSE = ATM_BASE_PRES + 7;
+        public static readonly int AtmBasePres = 300;
+        public static readonly int AtmPresNone = AtmBasePres + 0;
+        public static readonly int AtmPresTrace = AtmBasePres + 1;
+        public static readonly int AtmPresVerythin = AtmBasePres + 2;
+        public static readonly int AtmPresThin = AtmBasePres + 3;
+        public static readonly int AtmPresStandard = AtmBasePres + 4;
+        public static readonly int AtmPresDense = AtmBasePres + 5;
+        public static readonly int AtmPresVerydense = AtmBasePres + 6;
+        public static readonly int AtmPresSuperdense = AtmBasePres + 7;
 
         // flags for badstuff
-        readonly public static int ATM_BASE_COND = 330;
-        readonly public static int ATM_COND_CORROSIVE = ATM_BASE_COND + 0;
-        readonly public static int ATM_COND_SUFFOCATING = ATM_BASE_COND + 1;
-        readonly public static int ATM_COND_FLAMP1 = ATM_BASE_COND + 2;
+        public static readonly int AtmBaseCond = 330;
+        public static readonly int AtmCondCorrosive = AtmBaseCond + 0;
+        public static readonly int AtmCondSuffocating = AtmBaseCond + 1;
+        public static readonly int AtmCondFlamp1 = AtmBaseCond + 2;
 
         //the following are [Toxic]
-        readonly public static int ATM_BASE_TOXIC = 340;
-        readonly public static int ATM_TOXIC_MILDLY = ATM_BASE_TOXIC + 0;
-        readonly public static int ATM_TOXIC_HIGHLY = ATM_BASE_TOXIC + 1;
-        readonly public static int ATM_TOXIC_LETHALLY = ATM_BASE_TOXIC + 2;
+        public static readonly int AtmBaseToxic = 340;
+        public static readonly int AtmToxicMildly = AtmBaseToxic + 0;
+        public static readonly int AtmToxicHighly = AtmBaseToxic + 1;
+        public static readonly int AtmToxicLethally = AtmBaseToxic + 2;
 
         // the following are [Marginal].
-        readonly public static int ATM_BASE_MARGINAL = 350;
-        readonly public static int ATM_MARG_INERT = ATM_BASE_MARGINAL + 0;
-        readonly public static int ATM_MARG_CHLORINE = ATM_BASE_MARGINAL + 1;
-        readonly public static int ATM_MARG_FLOURINE = ATM_BASE_MARGINAL + 2;
-        readonly public static int ATM_MARG_SULFUR = ATM_BASE_MARGINAL + 3;
-        readonly public static int ATM_MARG_NITROGEN = ATM_BASE_MARGINAL + 4;
-        readonly public static int ATM_MARG_ORGANIC = ATM_BASE_MARGINAL + 5;
-        readonly public static int ATM_MARG_LOWOXY = ATM_BASE_MARGINAL + 6;
-        readonly public static int ATM_MARG_HIGHOXY = ATM_BASE_MARGINAL + 7;
-        readonly public static int ATM_MARG_POLLUTANTS = ATM_BASE_MARGINAL + 8;
-        readonly public static int ATM_MARG_HIGHCO2 = ATM_BASE_MARGINAL + 9;
+        public static readonly int AtmBaseMarginal = 350;
+        public static readonly int AtmMargInert = AtmBaseMarginal + 0;
+        public static readonly int AtmMargChlorine = AtmBaseMarginal + 1;
+        public static readonly int AtmMargFlourine = AtmBaseMarginal + 2;
+        public static readonly int AtmMargSulfur = AtmBaseMarginal + 3;
+        public static readonly int AtmMargNitrogen = AtmBaseMarginal + 4;
+        public static readonly int AtmMargOrganic = AtmBaseMarginal + 5;
+        public static readonly int AtmMargLowoxy = AtmBaseMarginal + 6;
+        public static readonly int AtmMargHighoxy = AtmBaseMarginal + 7;
+        public static readonly int AtmMargPollutants = AtmBaseMarginal + 8;
+        public static readonly int AtmMargHighco2 = AtmBaseMarginal + 9;
 
         /// <summary>
-        /// This flag stores the count of marginal flags. If you add one, please increment this.
+        ///     This flag stores the count of marginal flags. If you add one, please increment this.
         /// </summary>
-        readonly protected static int MARGINAL_INCREMENT = 10;
+        protected static readonly int MarginalIncrement = 10;
 
         /// <summary>
-        /// This flag stors the count of conditional flags. If you add one, please increment this
+        ///     This flag stors the count of conditional flags. If you add one, please increment this
         /// </summary>
-        readonly protected static int COND_INCREMENT = 3;
+        protected static readonly int CondIncrement = 3;
 
         /// <summary>
-        /// This flag stores the count of toxicity flags.
+        ///     This flag stores the count of toxicity flags.
         /// </summary>
-        readonly protected static int TOXIC_INCREMENT = 3;
+        protected static readonly int ToxicIncrement = 3;
 
         // range flags
         // used to calc further down (can be altered at will)
-        readonly public static int RNG_ATMTOXIC = 3;
+        public static readonly int RngAtmtoxic = 3;
 
         // geologic flags
         // used for both tectonic and heavy actvitiy.
-        readonly public static int GEOLOGIC_NONE = 30;
-        readonly public static int GEOLOGIC_LIGHT = 31;
-        readonly public static int GEOLOGIC_MODERATE = 32;
-        readonly public static int GEOLOGIC_HEAVY = 33;
-        readonly public static int GEOLOGIC_EXTREME = 34;
+        public static readonly int GeologicNone = 30;
+        public static readonly int GeologicLight = 31;
+        public static readonly int GeologicModerate = 32;
+        public static readonly int GeologicHeavy = 33;
+        public static readonly int GeologicExtreme = 34;
 
         // climate flags
         // climates are decided via temperatures. We store them here
         // These are their stories *CLANG CLANG*
-        readonly public static int CLIMATE_FROZEN = 40;
-        readonly public static int CLIMATE_VERYCOLD = 41;
-        readonly public static int CLIMATE_COLD = 42;
-        readonly public static int CLIMATE_CHILLY = 43;
-        readonly public static int CLIMATE_COOL = 44;
-        readonly public static int CLIMATE_NORMAL = 45;
-        readonly public static int CLIMATE_WARM = 46;
-        readonly public static int CLIMATE_TROPICAL = 47;
-        readonly public static int CLIMATE_HOT = 48;
-        readonly public static int CLIMATE_VERYHOT = 49;
-        readonly public static int CLIMATE_INFERNAL = 50;
-        readonly public static int CLIMATE_NONE = 51;
+        public static readonly int ClimateFrozen = 40;
+        public static readonly int ClimateVerycold = 41;
+        public static readonly int ClimateCold = 42;
+        public static readonly int ClimateChilly = 43;
+        public static readonly int ClimateCool = 44;
+        public static readonly int ClimateNormal = 45;
+        public static readonly int ClimateWarm = 46;
+        public static readonly int ClimateTropical = 47;
+        public static readonly int ClimateHot = 48;
+        public static readonly int ClimateVeryhot = 49;
+        public static readonly int ClimateInfernal = 50;
+        public static readonly int ClimateNone = 51;
 
         //description flags
-        readonly public static int DESC_SUBSURFOCEAN = 61;
-        readonly public static int DESC_RAD_HIGHBACK = 62;
-        readonly public static int DESC_RAD_LETHALBACK = 63;
-        readonly public static int DESC_SPECRINGSYS = 64;
-        readonly public static int DESC_FAINTRINGSYS = 65;
+        public static readonly int DescSubsurfocean = 61;
+        public static readonly int DescRadHighback = 62;
+        public static readonly int DescRadLethalback = 63;
+        public static readonly int DescSpecringsys = 64;
+        public static readonly int DescFaintringsys = 65;
 
         //converstion factors
-        readonly public static double CONVFAC_DENSITY = 5.52;
-        readonly public static double CONVFAC_DIAMETER = 12756.2;
-        readonly public static double CONVFAC_GRAVITY = 9.81;
-
+        public static readonly double ConvfacDensity = 5.52;
+        public static readonly double ConvfacDiameter = 12756.2;
+        public static readonly double ConvfacGravity = 9.81;
 
         //tide flags
-        readonly public static int TIDE_PRIMARYSTAR = 101;
-        readonly public static int TIDE_SECONDARYSTAR = 102;
-        readonly public static int TIDE_TRINARYSTAR = 103;
-        readonly public static int TIDE_SECCOMPSTAR = 104;
-        readonly public static int TIDE_TRICOMPSTAR = 105;
-        readonly public static int TIDE_PARPLANET = 107;
+        public static readonly int TidePrimarystar = 101;
+        public static readonly int TideSecondarystar = 102;
+        public static readonly int TideTrinarystar = 103;
+        public static readonly int TideSeccompstar = 104;
+        public static readonly int TideTricompstar = 105;
+        public static readonly int TideParplanet = 107;
 
-        readonly public static int TIDE_MOON_BASE = 110;
-        readonly public static int TIDE_MOON1 = 111;
-        readonly public static int TIDE_MOON2 = 112;
-        readonly public static int TIDE_MOON3 = 113;
-        readonly public static int TIDE_MOON4 = 114;
-        readonly public static int TIDE_MOON5 = 115;
-        readonly public static int TIDE_MOON6 = 116;
-        readonly public static int TIDE_MOON7 = 117;
-        readonly public static int TIDE_MOON8 = 118;
-        readonly public static int TIDE_MOON9 = 119;
-        readonly public static int TIDE_MOON10 = 120;
-
-
-        //general properties - Satellite size and type: these fields deteremine the base type.
-        public int baseType { get; protected set; }
-        public int SatelliteType { get; protected set; }
-        public int SatelliteSize { get; protected set; }
-
-        //planet properties - moon properties
-        public List<Moonlet> innerMoonlets { get; set; }
-        public List<Satellite> majorMoons { get; set; }
-        public List<Moonlet> outerMoonlets { get; set; } //For Gas Giants: Used for outermost family.
-
-        //moon properties
-        public double orbitalCycle { get; set; } //apparent motion of this Satellite around it's primary. Only used if it's a moon.
-        public double parentDiam { get; set; }
-        public double moonRadius { get; set; }
-
-        //general properties - self properties
-        public double diameter { get; set; }
-        public double mass { get; set; }
-        public double density { get; set; }
-        public double gravity { get; set; } //I'd like to say this should be derived. Sigh.
-        public double axialTilt { get; set; }
-
-        //general properties - orbital properties
-        public double siderealPeriod { get; set; } //base sidereal day
-        public double rotationalPeriod { get; set; } //solar day
-        public bool retrogradeMotion { get; set; } //does this orbit in retrograde?      
-
-        //general properties - climate and atmosphere properties
-        public double hydCoverage { get; set; }
-        public double surfaceTemp { get; set; }
-        public double dayFaceMod { get; set; }
-        public double nightFaceMod { get; set; }
-
-        public double atmMass { get; set; }
-        public double atmPres { get; protected set; }
-        public List<int> atmCate { get; set; }
-        protected List<int> descListing { get; set; }
-
-        //general properties - resources and geologic properties
-        public int RVM { get; set; }
-        public int volActivity { get; set; }
-        public int tecActivity { get; set; }
-
-        //general properties - tide data
-        [XmlIgnore]
-        public Dictionary<int, double> tideForce { get; set; }
-        public bool isResonant { get; set; }
-        public bool isTideLocked { get; set; }
-        public double tideTotal { get; set; }
-
-        //order properties
-        public int masterOrderID { get; set; } //used to track what planet this is in a multi-star system.
+        public static readonly int TideMoonBase = 110;
+        public static readonly int TideMoon1 = 111;
+        public static readonly int TideMoon2 = 112;
+        public static readonly int TideMoon3 = 113;
+        public static readonly int TideMoon4 = 114;
+        public static readonly int TideMoon5 = 115;
+        public static readonly int TideMoon6 = 116;
+        public static readonly int TideMoon7 = 117;
+        public static readonly int TideMoon8 = 118;
+        public static readonly int TideMoon9 = 119;
+        public static readonly int TideMoon10 = 120;
 
         //gas giant properties: lookup table for gas giants.
-   
-        public double[][] gasGiantTable = new double[][]{
-                 new double[] {0}, //Index 0
-                 new double[] {0}, //Roll 1
-                 new double[] {0}, //Roll 2
-                 new double[] {10,.42,100,.18,600,.31}, //Roll 3
-                 new double[] {10,.42,100,.18,600,.31}, //Roll 4
-                 new double[] {10,.42,100,.18,600,.31}, //Roll 5
-                 new double[] {10,.42,100,.18,600,.31}, //Roll 6
-                 new double[] {10,.42,100,.18,600,.31}, //Roll 7
-                 new double[] {10,.42,100,.18,600,.31}, //Roll 8
-                 new double[] {15,.26,150,.19,800,.35}, //Roll 9
-                 new double[] {15,.26,150,.19,800,.35}, //Roll 10
-                 new double[] {20,.22,200,.20,1000,.4}, //Roll 11
-                 new double[] {30,.19,250,.22,1500,.6}, //Roll 12
-                 new double[] {40,.17,300,.24,2000,.8}, //Roll 13
-                 new double[] {50,.17,350,.25,2500,1.0}, //Roll 14
-                 new double[] {60,.17,400,.26,3000,1.2}, //Roll 15
-                 new double[] {70,.17,450,.27,3500,1.4}, //Roll 16
-                 new double[] {80,.17,500,.29,4000,1.6}, //Roll 17
-                 new double[] {80,.17,500,.29,4000,1.6}, //Roll 18
-        };
 
-        public double[][] terrDenTable = new double[][]{
-            new double[] {0}, //Index 0
-            new double[] {0}, //Roll 1
-            new double[] {0}, //Roll 2
-            new double[] {.3,.6,.8}, //Roll 3
-            new double[] {.3,.6,.8}, //Roll 4
-            new double[] {.3,.6,.8}, //Roll 5 
-            new double[] {.3,.6,.8}, //Roll 6
-            new double[] {.4,.7,.9}, //Roll 7
-            new double[] {.4,.7,.9}, //Roll 8
-            new double[] {.4,.7,.9}, //Roll 9
-            new double[] {.4,.7,.9}, //Roll 10
-            new double[] {.5,.8,1.0}, //Roll 11
-            new double[] {.5,.8,1.0}, //Roll 12
-            new double[] {.5,.8,1.0}, //Roll 13
-            new double[] {.5,.8,1.0}, //Roll 14
-            new double[] {.6,.9,1.1}, //Roll 15
-            new double[] {.6,.9,1.1}, //Roll 16
-            new double[] {.6,.9,1.1}, //Roll 17
-            new double[] {.7,1.0,1.2}, //Roll 18
-        };
-
-        protected void initiateLists()
+        public double[][] GasGiantTable =
         {
-            this.majorMoons = new List<Satellite>();
-            this.atmCate = new List<int>();
-            this.innerMoonlets = new List<Moonlet>();
-            this.outerMoonlets = new List<Moonlet>();
-            this.descListing = new List<int>();
-            this.tideForce = new Dictionary<int, double>();
-        }
-
-        public void updateAtmPres(double atmPres)
-        {
-            this.atmPres = atmPres;
-            if (this.atmPres == 0)
+            new double[]
             {
-                //reset mass to 0
-                this.atmMass = 0.0;
+                0
+            }, //Index 0
+            new double[]
+            {
+                0
+            }, //Roll 1
+            new double[]
+            {
+                0
+            }, //Roll 2
+            new[]
+            {
+                10, .42, 100, .18, 600, .31
+            }, //Roll 3
+            new[]
+            {
+                10, .42, 100, .18, 600, .31
+            }, //Roll 4
+            new[]
+            {
+                10, .42, 100, .18, 600, .31
+            }, //Roll 5
+            new[]
+            {
+                10, .42, 100, .18, 600, .31
+            }, //Roll 6
+            new[]
+            {
+                10, .42, 100, .18, 600, .31
+            }, //Roll 7
+            new[]
+            {
+                10, .42, 100, .18, 600, .31
+            }, //Roll 8
+            new[]
+            {
+                15, .26, 150, .19, 800, .35
+            }, //Roll 9
+            new[]
+            {
+                15, .26, 150, .19, 800, .35
+            }, //Roll 10
+            new[]
+            {
+                20, .22, 200, .20, 1000, .4
+            }, //Roll 11
+            new[]
+            {
+                30, .19, 250, .22, 1500, .6
+            }, //Roll 12
+            new[]
+            {
+                40, .17, 300, .24, 2000, .8
+            }, //Roll 13
+            new[]
+            {
+                50, .17, 350, .25, 2500, 1.0
+            }, //Roll 14
+            new[]
+            {
+                60, .17, 400, .26, 3000, 1.2
+            }, //Roll 15
+            new[]
+            {
+                70, .17, 450, .27, 3500, 1.4
+            }, //Roll 16
+            new[]
+            {
+                80, .17, 500, .29, 4000, 1.6
+            }, //Roll 17
+            new[]
+            {
+                80, .17, 500, .29, 4000, 1.6
+            } //Roll 18
+        };
 
-                //nuke it.
-                if (this.atmCate.Count > 0)
-                    this.atmCate.RemoveRange(0, this.atmCate.Count);
-            }
-        }
+        public double[][] TerrDenTable =
+        {
+            new double[]
+            {
+                0
+            }, //Index 0
+            new double[]
+            {
+                0
+            }, //Roll 1
+            new double[]
+            {
+                0
+            }, //Roll 2
+            new[]
+            {
+                .3, .6, .8
+            }, //Roll 3
+            new[]
+            {
+                .3, .6, .8
+            }, //Roll 4
+            new[]
+            {
+                .3, .6, .8
+            }, //Roll 5 
+            new[]
+            {
+                .3, .6, .8
+            }, //Roll 6
+            new[]
+            {
+                .4, .7, .9
+            }, //Roll 7
+            new[]
+            {
+                .4, .7, .9
+            }, //Roll 8
+            new[]
+            {
+                .4, .7, .9
+            }, //Roll 9
+            new[]
+            {
+                .4, .7, .9
+            }, //Roll 10
+            new[]
+            {
+                .5, .8, 1.0
+            }, //Roll 11
+            new[]
+            {
+                .5, .8, 1.0
+            }, //Roll 12
+            new[]
+            {
+                .5, .8, 1.0
+            }, //Roll 13
+            new[]
+            {
+                .5, .8, 1.0
+            }, //Roll 14
+            new[]
+            {
+                .6, .9, 1.1
+            }, //Roll 15
+            new[]
+            {
+                .6, .9, 1.1
+            }, //Roll 16
+            new[]
+            {
+                .6, .9, 1.1
+            }, //Roll 17
+            new[]
+            {
+                .7, 1.0, 1.2
+            } //Roll 18
+        };
 
         /// <summary>
-        /// Constructor object
+        ///     Constructor object
         /// </summary>
         /// <param name="parent">The parent ID (inherited from Orbital)</param>
         /// <param name="self">Self ID (inherited from Orbital)</param>
         /// <param name="radius">Orbital Radius of the satelite</param>
         /// <param name="masterCount">In a system, the ordinal of the planet from the sun</param>
         /// <param name="satType">The Satelite Type. Default is BASETYPE_UNSET</param>
-        public Satellite(int parent, int self, double radius, int masterCount, int satType = 999)
-            : base(parent, self)
+        public Satellite( int parent, int self, double radius, int masterCount, int satType = 999 ) : base(parent, self)
         {
-            initiateLists();
-            updateType(satType); //call updateType.
+            InitiateLists();
+            UpdateType(satType); //call updateType.
 
-            this.orbitalRadius = radius;
-            this.masterOrderID = masterCount;
-            this.SatelliteSize = Satellite.SIZE_UNSET;
-            this.isResonant = false;
+            OrbitalRadius = radius;
+            MasterOrderId = masterCount;
+            SatelliteSize = SizeUnset;
+            IsResonant = false;
         }
 
         /// <summary>
-        /// The copy constructor
+        ///     The copy constructor
         /// </summary>
         /// <param name="s">The satelite object we are copying</param>
-        public Satellite(Satellite s) : base(s.parentID, s.selfID)
+        public Satellite( Satellite s ) : base(s.ParentId, s.SelfId)
         {
-
             // .. it's a copy constructor.
-            initiateLists();
-            updateType(s.SatelliteType);
-            updateSize(s.SatelliteSize);
+            InitiateLists();
+            UpdateType(s.SatelliteType);
+            UpdateSize(s.SatelliteSize);
 
-            foreach (Moonlet m in s.innerMoonlets)
-                this.innerMoonlets.Add(new Moonlet(m));
-
-            foreach (Moonlet m in s.outerMoonlets)
-                this.outerMoonlets.Add(new Moonlet(m));
-
-            foreach (Satellite m in s.majorMoons)
-                this.majorMoons.Add(new Satellite(m));
-
-            this.orbitalCycle = s.orbitalCycle;
-            this.diameter = s.diameter;
-            this.mass = s.mass;
-            this.density = s.density;
-            this.axialTilt = s.axialTilt;
-            this.siderealPeriod = s.siderealPeriod;
-            this.rotationalPeriod = s.rotationalPeriod;
-            this.retrogradeMotion = s.retrogradeMotion;
-
-            foreach (int atmType in s.atmCate)
-                this.atmCate.Add(atmType);
-
-            foreach (KeyValuePair<int, double> kvp in s.tideForce)
+            foreach (var m in s.InnerMoonlets)
             {
-                this.tideForce.Add(kvp.Key, kvp.Value);
+                InnerMoonlets.Add(new Moonlet(m));
             }
 
-            this.volActivity = s.volActivity;
-            this.tecActivity = s.tecActivity;
-            this.masterOrderID = s.masterOrderID;
+            foreach (var m in s.OuterMoonlets)
+            {
+                OuterMoonlets.Add(new Moonlet(m));
+            }
 
-            this.surfaceTemp = s.surfaceTemp;
-            this.dayFaceMod = s.dayFaceMod;
-            this.nightFaceMod = s.nightFaceMod;
+            foreach (var m in s.MajorMoons)
+            {
+                MajorMoons.Add(new Satellite(m));
+            }
 
-            this.hydCoverage = s.hydCoverage;
-            this.atmMass = s.atmMass;
-            this.atmPres = s.atmPres;
-            this.RVM = s.RVM;
-            this.isResonant = s.isResonant;
+            OrbitalCycle = s.OrbitalCycle;
+            Diameter = s.Diameter;
+            Mass = s.Mass;
+            Density = s.Density;
+            AxialTilt = s.AxialTilt;
+            SiderealPeriod = s.SiderealPeriod;
+            RotationalPeriod = s.RotationalPeriod;
+            RetrogradeMotion = s.RetrogradeMotion;
 
+            foreach (var atmType in s.AtmCate)
+            {
+                AtmCate.Add(atmType);
+            }
+
+            foreach (var kvp in s.TideForce)
+            {
+                TideForce.Add(kvp.Key, kvp.Value);
+            }
+
+            VolActivity = s.VolActivity;
+            TecActivity = s.TecActivity;
+            MasterOrderId = s.MasterOrderId;
+
+            SurfaceTemp = s.SurfaceTemp;
+            DayFaceMod = s.DayFaceMod;
+            NightFaceMod = s.NightFaceMod;
+
+            HydCoverage = s.HydCoverage;
+            AtmMass = s.AtmMass;
+            AtmPres = s.AtmPres;
+            Rvm = s.Rvm;
+            IsResonant = s.IsResonant;
         }
 
-        private Satellite() { }
+        //general properties - Satellite size and type: these fields deteremine the base type.
+        public int BaseType { get; protected set; }
+        public int SatelliteType { get; protected set; }
+        public int SatelliteSize { get; protected set; }
+
+        //planet properties - moon properties
+        public List<Moonlet> InnerMoonlets { get; set; }
+        public List<Satellite> MajorMoons { get; set; }
+        public List<Moonlet> OuterMoonlets { get; set; } //For Gas Giants: Used for outermost family.
+
+        //moon properties
+        public double OrbitalCycle { get; set; } //apparent motion of this Satellite around it's primary. Only used if it's a moon.
+        public double ParentDiam { get; set; }
+        public double MoonRadius { get; set; }
+
+        //general properties - self properties
+        public double Diameter { get; set; }
+        public double Mass { get; set; }
+        public double Density { get; set; }
+        public double Gravity { get; set; } //I'd like to say this should be derived. Sigh.
+        public double AxialTilt { get; set; }
+
+        //general properties - orbital properties
+        public double SiderealPeriod { get; set; } //base sidereal day
+        public double RotationalPeriod { get; set; } //solar day
+        public bool RetrogradeMotion { get; set; } //does this orbit in retrograde?      
+
+        //general properties - climate and atmosphere properties
+        public double HydCoverage { get; set; }
+        public double SurfaceTemp { get; set; }
+        public double DayFaceMod { get; set; }
+        public double NightFaceMod { get; set; }
+
+        public double AtmMass { get; set; }
+        public double AtmPres { get; protected set; }
+        public List<int> AtmCate { get; set; }
+        protected List<int> DescListing { get; set; }
+
+        //general properties - resources and geologic properties
+        public int Rvm { get; set; }
+        public int VolActivity { get; set; }
+        public int TecActivity { get; set; }
+
+        //general properties - tide data
+        [XmlIgnore]
+        public Dictionary<int, double> TideForce { get; set; }
+
+        public bool IsResonant { get; set; }
+        public bool IsTideLocked { get; set; }
+        public double TideTotal { get; set; }
+
+        //order properties
+        public int MasterOrderId { get; set; } //used to track what planet this is in a multi-star system.
+
+        protected void InitiateLists()
+        {
+            MajorMoons = new List<Satellite>();
+            AtmCate = new List<int>();
+            InnerMoonlets = new List<Moonlet>();
+            OuterMoonlets = new List<Moonlet>();
+            DescListing = new List<int>();
+            TideForce = new Dictionary<int, double>();
+        }
+
+        public void UpdateAtmPres( double atmPres )
+        {
+            AtmPres = atmPres;
+            if (!( Math.Abs(AtmPres) < 0 ))
+            {
+                return;
+            }
+            //reset mass to 0
+            AtmMass = 0.0;
+
+            //nuke it.
+            if (AtmCate.Count > 0)
+            {
+                AtmCate.RemoveRange(0, AtmCate.Count);
+            }
+        }
 
         /// <summary>
-        /// This determines the habitability score of a satelite
+        ///     This determines the habitability score of a satelite
         /// </summary>
         /// <returns>The habitability score of a satelite</returns>
-        public virtual int getHabitability()
+        public virtual int GetHabitability()
         {
-            int mod = 0;
+            var mod = 0;
 
             //Geologic modifiers
-            if (this.volActivity == GEOLOGIC_HEAVY)
-                mod = mod - 1;
-            if (this.volActivity == GEOLOGIC_EXTREME)
-                mod = mod - 2;
-            if (this.tecActivity == GEOLOGIC_EXTREME)
-                mod = mod - 2;
-
-            bool isMarginal = false;
-            if (this.atmCate.Count > 0)
+            if (VolActivity == GeologicHeavy)
             {
-                foreach (int currAtmNote in this.atmCate)
-                {
-                    if (currAtmNote >= ATM_BASE_TOXIC && currAtmNote < (ATM_BASE_TOXIC + RNG_ATMTOXIC))
-                        mod = mod - 1;
-                    if (currAtmNote == ATM_COND_CORROSIVE)
-                        mod = mod - 1;
+                mod = mod - 1;
+            }
+            if (VolActivity == GeologicExtreme)
+            {
+                mod = mod - 2;
+            }
+            if (TecActivity == GeologicExtreme)
+            {
+                mod = mod - 2;
+            }
 
-                    if (currAtmNote >= ATM_BASE_MARGINAL && currAtmNote < (ATM_BASE_MARGINAL + MARGINAL_INCREMENT))
+            var isMarginal = false;
+            if (AtmCate.Count > 0)
+            {
+                foreach (var currAtmNote in AtmCate)
+                {
+                    if (currAtmNote >= AtmBaseToxic && currAtmNote < AtmBaseToxic + RngAtmtoxic)
+                    {
+                        mod = mod - 1;
+                    }
+                    if (currAtmNote == AtmCondCorrosive)
+                    {
+                        mod = mod - 1;
+                    }
+
+                    if (currAtmNote >= AtmBaseMarginal && currAtmNote < AtmBaseMarginal + MarginalIncrement)
+                    {
                         isMarginal = true;
+                    }
                 }
             }
 
-            if (this.getAtmCategory() == ATM_PRES_VERYTHIN)
+            if (GetAtmCategory() == AtmPresVerythin)
+            {
                 mod = mod + 1;
-            if (this.getAtmCategory() == ATM_PRES_THIN)
+            }
+            if (GetAtmCategory() == AtmPresThin)
+            {
                 mod = mod + 2;
-            if (this.getAtmCategory() == ATM_PRES_STANDARD)
+            }
+            if (GetAtmCategory() == AtmPresStandard)
+            {
                 mod = mod + 3;
-            if (this.getAtmCategory() == ATM_PRES_DENSE)
+            }
+            if (GetAtmCategory() == AtmPresDense)
+            {
                 mod = mod + 3;
-            if (this.getAtmCategory() == ATM_PRES_VERYDENSE)
+            }
+            if (GetAtmCategory() == AtmPresVerydense)
+            {
                 mod = mod + 1;
-            if (this.getAtmCategory() == ATM_PRES_SUPERDENSE)
+            }
+            if (GetAtmCategory() == AtmPresSuperdense)
+            {
                 mod = mod + 1;
+            }
 
             if (isMarginal)
+            {
                 mod = mod + 1;
-            if (this.hydCoverage > .0 && this.hydCoverage <= .59)
+            }
+            if (HydCoverage > .0 && HydCoverage <= .59)
+            {
                 mod = mod + 1;
-            if (this.hydCoverage > .59 && this.hydCoverage <= .90)
+            }
+            if (HydCoverage > .59 && HydCoverage <= .90)
+            {
                 mod = mod + 2;
-            if (this.hydCoverage > .90 && this.hydCoverage <= .99)
+            }
+            if (HydCoverage > .90 && HydCoverage <= .99)
+            {
                 mod = mod + 1;
+            }
 
-            if (this.atmPres > 0.01 && this.getClimate(this.surfaceTemp) == Satellite.CLIMATE_COLD) mod = mod + 1;
-            if (this.atmPres > 0.01 && this.getClimate(this.surfaceTemp) == Satellite.CLIMATE_CHILLY) mod = mod + 2;
-            if (this.atmPres > 0.01 && this.getClimate(this.surfaceTemp) == Satellite.CLIMATE_COOL) mod = mod + 2;
-            if (this.atmPres > 0.01 && this.getClimate(this.surfaceTemp) == Satellite.CLIMATE_NORMAL) mod = mod + 2;
-            if (this.atmPres > 0.01 && this.getClimate(this.surfaceTemp) == Satellite.CLIMATE_WARM) mod = mod + 2;
-            if (this.atmPres > 0.01 && this.getClimate(this.surfaceTemp) == Satellite.CLIMATE_TROPICAL) mod = mod + 2;
-            if (this.atmPres > 0.01 && this.getClimate(this.surfaceTemp) == Satellite.CLIMATE_HOT) mod = mod + 1;
+            if (AtmPres > 0.01 && GetClimate(SurfaceTemp) == ClimateCold)
+            {
+                mod = mod + 1;
+            }
+            if (AtmPres > 0.01 && GetClimate(SurfaceTemp) == ClimateChilly)
+            {
+                mod = mod + 2;
+            }
+            if (AtmPres > 0.01 && GetClimate(SurfaceTemp) == ClimateCool)
+            {
+                mod = mod + 2;
+            }
+            if (AtmPres > 0.01 && GetClimate(SurfaceTemp) == ClimateNormal)
+            {
+                mod = mod + 2;
+            }
+            if (AtmPres > 0.01 && GetClimate(SurfaceTemp) == ClimateWarm)
+            {
+                mod = mod + 2;
+            }
+            if (AtmPres > 0.01 && GetClimate(SurfaceTemp) == ClimateTropical)
+            {
+                mod = mod + 2;
+            }
+            if (AtmPres > 0.01 && GetClimate(SurfaceTemp) == ClimateHot)
+            {
+                mod = mod + 1;
+            }
 
-            if (mod >= 8 && (bool)!OptionCont.overrideHabitability) return 8;
-            else return mod;
+            if (mod >= 8 && (bool) !OptionCont.OverrideHabitability)
+            {
+                return 8;
+            }
+            return mod;
         }
 
         /// <summary>
-        /// This returns the description of the RVM score according to the GURPS ruleset
+        ///     This returns the description of the RVM score according to the GURPS ruleset
         /// </summary>
         /// <returns>A string describing the RVM score</returns>
-        public virtual string getRVMDesc()
+        public virtual string GetRvmDesc()
         {
-            if (this.RVM == -5) return "Worthless";
-            if (this.RVM == -4) return "Very Scant";
-            if (this.RVM == -3) return "Scant";
-            if (this.RVM == -2) return "Very Poor";
-            if (this.RVM == -1) return "Poor";
-            if (this.RVM == 0) return "Average";
-            if (this.RVM == 1) return "Abundant";
-            if (this.RVM == 2) return "Very Abundant";
-            if (this.RVM == 3) return "Rich";
-            if (this.RVM == 4) return "Very Rich";
-            if (this.RVM == 5) return "Motherlode";
+            if (Rvm == -5)
+            {
+                return "Worthless";
+            }
+            if (Rvm == -4)
+            {
+                return "Very Scant";
+            }
+            if (Rvm == -3)
+            {
+                return "Scant";
+            }
+            if (Rvm == -2)
+            {
+                return "Very Poor";
+            }
+            if (Rvm == -1)
+            {
+                return "Poor";
+            }
+            if (Rvm == 0)
+            {
+                return "Average";
+            }
+            if (Rvm == 1)
+            {
+                return "Abundant";
+            }
+            if (Rvm == 2)
+            {
+                return "Very Abundant";
+            }
+            if (Rvm == 3)
+            {
+                return "Rich";
+            }
+            if (Rvm == 4)
+            {
+                return "Very Rich";
+            }
+            if (Rvm == 5)
+            {
+                return "Motherlode";
+            }
 
             return "Error";
         }
 
         //sets the total planet # in a multi star, as well as the current one around it's parent.
         // in the case of a one-star system you shouldn't assign them different numbers. 
-        public virtual void updateOrbitalData(int masterOrbPos, int localOrbPos)
+        public virtual void UpdateOrbitalData( int masterOrbPos, int localOrbPos )
         {
-            this.masterOrderID = masterOrbPos;
-            this.selfID = localOrbPos;
+            MasterOrderId = masterOrbPos;
+            SelfId = localOrbPos;
         }
 
         /// <summary>
-        /// Adds an ATM Category Flag
+        ///     Adds an ATM Category Flag
         /// </summary>
         /// <param name="s">The flag to be added</param>
-        public virtual void addAtmCategory(int s)
+        public virtual void AddAtmCategory( int s )
         {
-            this.atmCate.Add(s);
+            AtmCate.Add(s);
         }
 
         /// <summary>
-        /// This generates the world type, given our age, blackbody temperature and mass.
+        ///     This generates the world type, given our age, blackbody temperature and mass.
         /// </summary>
         /// <param name="maxMass">The mass of the star (used for Ammonia worlds)</param>
         /// <param name="sysAge">Age of the planet</param>
-        /// <param name="ourBag">Dice object used for rolls</param>
-        /// <remarks>This is placed here so that somoene with the Satellite class can create one almost without additional logic coding.</remarks>
-        public virtual void genWorldType(double maxMass, double sysAge, Dice ourBag)
+        /// <param name="ourBag">Ddice object used for rolls</param>
+        /// <remarks>
+        ///     This is placed here so that somoene with the Satellite class can create one almost without additional logic
+        ///     coding.
+        /// </remarks>
+        public virtual void GenWorldType( double maxMass, double sysAge, Dice ourBag )
         {
-            if ((this.baseType == Satellite.BASETYPE_TERRESTIAL) || (this.baseType == Satellite.BASETYPE_MOON))
+            if (( BaseType != BasetypeTerrestial ) && ( BaseType != BasetypeMoon ))
             {
-                if (this.SatelliteSize == Satellite.SIZE_TINY)
+                return;
+            }
+            if (SatelliteSize == SizeTiny)
+            {
+                if (BlackbodyTemp <= 140.50)
                 {
-                    if (this.blackbodyTemp <= 140.50) this.updateType(Satellite.SUBTYPE_ICE);
-                    if (this.blackbodyTemp > 140.50) this.updateType(Satellite.SUBTYPE_ROCK);
+                    UpdateType(SubtypeIce);
                 }
-
-                if (this.SatelliteSize == Satellite.SIZE_SMALL)
+                if (BlackbodyTemp > 140.50)
                 {
-                    if (this.blackbodyTemp <= 80.50) this.updateType(Satellite.SUBTYPE_HADEAN);
-                    if ((80.50 < this.blackbodyTemp) && (this.blackbodyTemp <= 140.50)) this.updateType(Satellite.SUBTYPE_ICE);
-                    if (this.blackbodyTemp > 140.50) this.updateType(Satellite.SUBTYPE_ROCK);
-
-                }
-
-                if (this.SatelliteSize == Satellite.SIZE_MEDIUM)
-                {
-                    if (this.blackbodyTemp <= 80.50) this.updateType(Satellite.SUBTYPE_HADEAN);
-                    if ((this.blackbodyTemp > 80.50) && (this.blackbodyTemp <= 150.50)) this.updateType(Satellite.SUBTYPE_ICE);
-
-                    if ((this.blackbodyTemp > 150.50) && (this.blackbodyTemp <= 230.50))
-                    {
-                        if (maxMass <= .65) this.updateType(Satellite.SUBTYPE_AMMONIA);
-                        else this.updateType(Satellite.SUBTYPE_ICE);
-                    }
-
-                    if ((this.blackbodyTemp > 230.50) && (this.blackbodyTemp <= 240.50)) this.updateType(Satellite.SUBTYPE_ICE);
-                    if ((this.blackbodyTemp > 240.50) && (this.blackbodyTemp <= 320.50))
-                    {
-                        int roll = ourBag.rng(3, 6, 0), mod = 0;
-
-                        mod = (int)Math.Floor(sysAge / .5);
-                        if (mod > 10) mod = 10;
-
-                        roll = roll + mod;
-
-                        if ((bool)!OptionCont.noOceanOnlyGarden)
-                        {
-                            if (roll >= 18) this.updateType(Satellite.SUBTYPE_GARDEN);
-                            else this.updateType(Satellite.SUBTYPE_OCEAN);
-                        }
-                        else
-                            this.updateType(Satellite.SUBTYPE_GARDEN);
-
-                    }
-
-                    if ((this.blackbodyTemp > 321.50) && (this.blackbodyTemp <= 500.50)) this.updateType(Satellite.SUBTYPE_GREENHOUSE);
-                    if (this.blackbodyTemp > 500.50) this.updateType(Satellite.SUBTYPE_CHTHONIAN);
-
-                }
-
-                if (this.SatelliteSize == Satellite.SIZE_LARGE)
-                {
-                    if (this.blackbodyTemp <= 150.50) this.updateType(Satellite.SUBTYPE_HADEAN);
-                    if ((this.blackbodyTemp > 150.50) && (this.blackbodyTemp <= 230.50))
-                    {
-                        if (maxMass <= .65) this.updateType(Satellite.SUBTYPE_AMMONIA);
-                        else this.updateType(Satellite.SUBTYPE_ICE);
-                    }
-
-                    if ((this.blackbodyTemp > 230.50) && (this.blackbodyTemp <= 240.50)) this.updateType(Satellite.SUBTYPE_ICE);
-                    if ((this.blackbodyTemp > 240.50) && (this.blackbodyTemp <= 320.50))
-                    {
-                        int roll = ourBag.rng(3, 6, 0), mod = 0;
-
-                        if ((bool)OptionCont.moreAccurateO2Catastrophe) mod = (int)Math.Floor(sysAge / .3);
-                        else mod = (int)Math.Floor(sysAge / .5);
-
-                        if ((bool)!OptionCont.moreLargeGarden) if (mod > 5) mod = 5;
-                        if ((bool)OptionCont.moreLargeGarden) if (mod > 10) mod = 10;
-
-                        roll = roll + mod;
-
-                        this.updateType(Satellite.SUBTYPE_GARDEN);
-
-                    }
-
-                    if ((this.blackbodyTemp > 321.50) && (this.blackbodyTemp <= 500.50)) this.updateType(Satellite.SUBTYPE_GREENHOUSE);
-                    if (this.blackbodyTemp > 500.50) this.updateType(Satellite.SUBTYPE_CHTHONIAN);
+                    UpdateType(SubtypeRock);
                 }
             }
 
+            if (SatelliteSize == SizeSmall)
+            {
+                if (BlackbodyTemp <= 80.50)
+                {
+                    UpdateType(SubtypeHadean);
+                }
+                if (( 80.50 < BlackbodyTemp ) && ( BlackbodyTemp <= 140.50 ))
+                {
+                    UpdateType(SubtypeIce);
+                }
+                if (BlackbodyTemp > 140.50)
+                {
+                    UpdateType(SubtypeRock);
+                }
+            }
+
+            if (SatelliteSize == SizeMedium)
+            {
+                if (BlackbodyTemp <= 80.50)
+                {
+                    UpdateType(SubtypeHadean);
+                }
+                if (( BlackbodyTemp > 80.50 ) && ( BlackbodyTemp <= 150.50 ))
+                {
+                    UpdateType(SubtypeIce);
+                }
+
+                if (( BlackbodyTemp > 150.50 ) && ( BlackbodyTemp <= 230.50 ))
+                {
+                    UpdateType(maxMass <= .65 ? SubtypeAmmonia : SubtypeIce);
+                }
+
+                if (( BlackbodyTemp > 230.50 ) && ( BlackbodyTemp <= 240.50 ))
+                {
+                    UpdateType(SubtypeIce);
+                }
+                if (( BlackbodyTemp > 240.50 ) && ( BlackbodyTemp <= 320.50 ))
+                {
+                    var roll = ourBag.Rng(3, 6, 0);
+
+                    var mod = (int) Math.Floor(sysAge / .5);
+                    if (mod > 10)
+                    {
+                        mod = 10;
+                    }
+
+                    roll = roll + mod;
+
+                    if ((bool) !OptionCont.NoOceanOnlyGarden)
+                    {
+                        UpdateType(roll >= 18 ? SubtypeGarden : SubtypeOcean);
+                    }
+                    else
+                    {
+                        UpdateType(SubtypeGarden);
+                    }
+                }
+
+                if (( BlackbodyTemp > 321.50 ) && ( BlackbodyTemp <= 500.50 ))
+                {
+                    UpdateType(SubtypeGreenhouse);
+                }
+                if (BlackbodyTemp > 500.50)
+                {
+                    UpdateType(SubtypeChthonian);
+                }
+            }
+
+            if (SatelliteSize != SizeLarge)
+            {
+                return;
+            }
+            {
+                if (BlackbodyTemp <= 150.50)
+                {
+                    UpdateType(SubtypeHadean);
+                }
+                if (( BlackbodyTemp > 150.50 ) && ( BlackbodyTemp <= 230.50 ))
+                {
+                    UpdateType(maxMass <= .65 ? SubtypeAmmonia : SubtypeIce);
+                }
+
+                if (( BlackbodyTemp > 230.50 ) && ( BlackbodyTemp <= 240.50 ))
+                {
+                    UpdateType(SubtypeIce);
+                }
+                if (( BlackbodyTemp > 240.50 ) && ( BlackbodyTemp <= 320.50 ))
+                {
+                    ourBag.Rng(3, 6, 0);
+                    int mod;
+
+                    if (OptionCont.MoreAccurateO2Catastrophe != null && (bool) OptionCont.MoreAccurateO2Catastrophe)
+                    {
+                        mod = (int) Math.Floor(sysAge / .3);
+                    }
+                    else
+                    {
+                        mod = (int) Math.Floor(sysAge / .5);
+                    }
+
+                    if (OptionCont.MoreLargeGarden != null && (bool) !OptionCont.MoreLargeGarden)
+                    {
+                        if (mod > 5)
+                        {
+                            mod = 5;
+                        }
+                    }
+                    if (OptionCont.MoreLargeGarden != null && (bool) OptionCont.MoreLargeGarden)
+                    {
+                        if (mod > 10)
+                        {
+                            mod = 10;
+                        }
+                    }
+
+                    UpdateType(SubtypeGarden);
+                }
+
+                if (( BlackbodyTemp > 321.50 ) && ( BlackbodyTemp <= 500.50 ))
+                {
+                    UpdateType(SubtypeGreenhouse);
+                }
+                if (BlackbodyTemp > 500.50)
+                {
+                    UpdateType(SubtypeChthonian);
+                }
+            }
         }
 
-
         /// <summary>
-        /// Blackbody wrapper if you're invoking for the same satelite you want the temp for. Invokes the other function
+        ///     Blackbody wrapper if you're invoking for the same satelite you want the temp for. Invokes the other function
         /// </summary>
         /// <param name="distChart">The distance chart of each star to each other</param>
         /// <param name="ourStars">List of our stars</param>
-        public virtual void updateBlackBodyTemp(double[,] distChart, List<Star> ourStars)
+        public virtual void UpdateBlackBodyTemp( double[,] distChart, List<Star> ourStars )
         {
-            this.blackbodyTemp = calcBlackbodyTemp(distChart, ourStars, this.orbitalRadius, this.parentID);
+            BlackbodyTemp = CalcBlackbodyTemp(distChart, ourStars, OrbitalRadius, ParentId);
         }
 
         //There might be a better way to calc this than I did.
         /// <summary>
-        /// Blackbody function that calcluates our temperatuer
+        ///     Blackbody function that calcluates our temperatuer
         /// </summary>
         /// <param name="distChart">The distance chart of each star to each other</param>
         /// <param name="stars">List of our stars</param>
         /// <param name="planetRadius">Radius of this satellite</param>
         /// <param name="planetOwnership">The parent ID (what star does this satellite orbit)</param>
         /// <returns></returns>
-        public virtual double calcBlackbodyTemp(double[,] distChart, List<Star> stars, double planetRadius, int planetOwnership)
+        public virtual double CalcBlackbodyTemp( double[,] distChart, List<Star> stars, double planetRadius, int planetOwnership )
         {
-            double currTemp = 0.0;
-            double blackMulti = 278.0;
-            double currDistance = 0.0;
+            var currTemp = 0.0;
+            const double blackMulti = 278.0;
             //first get distances of each star to the primary.
-            var distTable = new Dictionary<int, Dictionary<int, double>>();
-            int[] satIDFlags = new int[5] { Star.IS_PRIMARY, Star.IS_SECONDARY, Star.IS_TRINARY, Star.IS_SECCOMP, Star.IS_TRICOMP };
+            new Dictionary<int, Dictionary<int, double>>();
 
-            for (int i = 0; i < stars.Count; i++)
+            foreach (var star in stars)
             {
-
-
                 int currStar = 0, planetOwner = 0;
 
                 //first, determine the lookup for the planet ownership
-                if ((planetOwnership == Satellite.ORBIT_PRISEC) || (planetOwnership == Satellite.ORBIT_PRISECTRI) ||
-                    (planetOwnership == Satellite.ORBIT_PRITRI) || (planetOwnership == Star.IS_PRIMARY))
+                if (( planetOwnership == OrbitPrisec ) || ( planetOwnership == OrbitPrisectri ) || ( planetOwnership == OrbitPritri ) || ( planetOwnership == Star.IsPrimary ))
+                {
                     planetOwner = 0;
-                if ((planetOwnership == Satellite.ORBIT_SECCOM) || (planetOwnership == Satellite.ORBIT_SECTRI) ||
-                    (planetOwnership == Star.IS_SECONDARY))
+                }
+                if (( planetOwnership == OrbitSeccom ) || ( planetOwnership == OrbitSectri ) || ( planetOwnership == Star.IsSecondary ))
+                {
                     planetOwner = 1;
-                if ((planetOwnership == Satellite.ORBIT_TRICOM) || (planetOwnership == Star.IS_TRINARY))
+                }
+                if (( planetOwnership == OrbitTricom ) || ( planetOwnership == Star.IsTrinary ))
+                {
                     planetOwner = 2;
-                if (planetOwnership == Star.IS_SECCOMP) planetOwner = 3;
-                if (planetOwnership == Star.IS_TRICOMP) planetOwner = 4;
-
+                }
+                if (planetOwnership == Star.IsSeccomp)
+                {
+                    planetOwner = 3;
+                }
+                if (planetOwnership == Star.IsTricomp)
+                {
+                    planetOwner = 4;
+                }
 
                 //second, lookup for the star we're in.
-                if (stars[i].orderID == Star.IS_PRIMARY) currStar = 0;
-                if (stars[i].orderID == Star.IS_SECONDARY) currStar = 1;
-                if (stars[i].orderID == Star.IS_TRINARY) currStar = 2;
-                if (stars[i].orderID == Star.IS_SECCOMP) currStar = 3;
-                if (stars[i].orderID == Star.IS_TRICOMP) currStar = 4;
+                if (star.OrderId == Star.IsPrimary)
+                {
+                    currStar = 0;
+                }
+                if (star.OrderId == Star.IsSecondary)
+                {
+                    currStar = 1;
+                }
+                if (star.OrderId == Star.IsTrinary)
+                {
+                    currStar = 2;
+                }
+                if (star.OrderId == Star.IsSeccomp)
+                {
+                    currStar = 3;
+                }
+                if (star.OrderId == Star.IsTricomp)
+                {
+                    currStar = 4;
+                }
 
-                currDistance = Math.Abs(distChart[planetOwner, currStar] + planetRadius);
+                var currDistance = Math.Abs(distChart[planetOwner, currStar] + planetRadius);
 
                 //add the blackbody for this star
-                currTemp = currTemp + Math.Pow((blackMulti * Math.Pow(stars[i].currLumin, .25)) / Math.Sqrt(currDistance), 4);
+                currTemp = currTemp + Math.Pow(blackMulti * Math.Pow(star.CurrLumin, .25) / Math.Sqrt(currDistance), 4);
             }
 
             currTemp = Math.Pow(currTemp, .25);
             return currTemp;
-
         }
 
-
-
         /// <summary>
-        /// This determines what types can be added. It performs some sanity checking to make sure that invalid combinations are not allowed.
+        ///     This determines what types can be added. It performs some sanity checking to make sure that invalid combinations
+        ///     are not allowed.
         /// </summary>
         /// <param name="flag">The flag we are updating for</param>
         /// <exception cref="Exception">Throws an exception if you attempt to set an invalid combo.</exception>
-        public virtual void updateType(int flag)
+        public virtual void UpdateType( int flag )
         {
-            if (flag == Satellite.BASETYPE_ASTEROIDBELT)
-                this.baseType = flag;
-            if (flag == Satellite.BASETYPE_EMPTY)
-                this.baseType = flag;
-            if (flag == Satellite.BASETYPE_GASGIANT)
-                this.baseType = flag;
-            if (flag == Satellite.BASETYPE_MOON)
-                this.baseType = flag;
-            if (flag == Satellite.BASETYPE_TERRESTIAL)
-                this.baseType = flag;
-
-            if (flag == Satellite.BASETYPE_UNSET)
+            if (flag == BasetypeAsteroidbelt)
             {
-                this.baseType = flag;
-                this.SatelliteType = flag;
+                BaseType = flag;
+            }
+            if (flag == BasetypeEmpty)
+            {
+                BaseType = flag;
+            }
+            if (flag == BasetypeGasgiant)
+            {
+                BaseType = flag;
+            }
+            if (flag == BasetypeMoon)
+            {
+                BaseType = flag;
+            }
+            if (flag == BasetypeTerrestial)
+            {
+                BaseType = flag;
             }
 
-            if (flag == Satellite.SUBTYPE_AMMONIA)
+            if (flag == BasetypeUnset)
             {
-                if (!(this.baseType == Satellite.BASETYPE_TERRESTIAL || this.baseType == Satellite.BASETYPE_MOON
-                    || this.baseType == Satellite.BASETYPE_UNSET))
+                BaseType = flag;
+                SatelliteType = flag;
+            }
+
+            if (flag == SubtypeAmmonia)
+            {
+                if (!( BaseType == BasetypeTerrestial || BaseType == BasetypeMoon || BaseType == BasetypeUnset ))
+                {
                     throw new Exception("Cannot set this as a type for this base type.");
+                }
 
-                if (this.baseType == Satellite.BASETYPE_UNSET)
-                    this.baseType = Satellite.BASETYPE_TERRESTIAL; //moons MUST set this or you'll kinda regret it.
+                if (BaseType == BasetypeUnset)
+                {
+                    BaseType = BasetypeTerrestial; //moons MUST set this or you'll kinda regret it.
+                }
 
-                this.SatelliteType = flag;
+                SatelliteType = flag;
             }
 
-            if (flag == Satellite.SUBTYPE_CHTHONIAN)
+            if (flag == SubtypeChthonian)
             {
-                if (!(this.baseType == Satellite.BASETYPE_TERRESTIAL || this.baseType == Satellite.BASETYPE_MOON
-                    || this.baseType == Satellite.BASETYPE_UNSET))
+                if (!( BaseType == BasetypeTerrestial || BaseType == BasetypeMoon || BaseType == BasetypeUnset ))
+                {
                     throw new Exception("Cannot set this as a type for this base type.");
+                }
 
-                if (this.baseType == Satellite.BASETYPE_UNSET)
-                    this.baseType = Satellite.BASETYPE_TERRESTIAL; //moons MUST set this or you'll kinda regret it.
+                if (BaseType == BasetypeUnset)
+                {
+                    BaseType = BasetypeTerrestial; //moons MUST set this or you'll kinda regret it.
+                }
 
-                this.SatelliteType = flag;
+                SatelliteType = flag;
             }
 
-            if (flag == Satellite.SUBTYPE_GARDEN)
+            if (flag == SubtypeGarden)
             {
-                if (!(this.baseType == Satellite.BASETYPE_TERRESTIAL || this.baseType == Satellite.BASETYPE_MOON
-                    || this.baseType == Satellite.BASETYPE_UNSET))
+                if (!( BaseType == BasetypeTerrestial || BaseType == BasetypeMoon || BaseType == BasetypeUnset ))
+                {
                     throw new Exception("Cannot set this as a type for this base type.");
+                }
 
-                if (this.baseType == Satellite.BASETYPE_UNSET)
-                    this.baseType = Satellite.BASETYPE_TERRESTIAL; //moons MUST set this or you'll kinda regret it.
+                if (BaseType == BasetypeUnset)
+                {
+                    BaseType = BasetypeTerrestial; //moons MUST set this or you'll kinda regret it.
+                }
 
-                this.SatelliteType = flag;
+                SatelliteType = flag;
             }
 
-            if (flag == Satellite.SUBTYPE_GREENHOUSE)
+            if (flag == SubtypeGreenhouse)
             {
-                if (!(this.baseType == Satellite.BASETYPE_TERRESTIAL || this.baseType == Satellite.BASETYPE_MOON
-                    || this.baseType == Satellite.BASETYPE_UNSET))
+                if (!( BaseType == BasetypeTerrestial || BaseType == BasetypeMoon || BaseType == BasetypeUnset ))
+                {
                     throw new Exception("Cannot set this as a type for this base type.");
+                }
 
-                if (this.baseType == Satellite.BASETYPE_UNSET)
-                    this.baseType = Satellite.BASETYPE_TERRESTIAL; //moons MUST set this or you'll kinda regret it.
+                if (BaseType == BasetypeUnset)
+                {
+                    BaseType = BasetypeTerrestial; //moons MUST set this or you'll kinda regret it.
+                }
 
-                this.SatelliteType = flag;
+                SatelliteType = flag;
             }
 
-            if (flag == Satellite.SUBTYPE_HADEAN)
+            if (flag == SubtypeHadean)
             {
-                if (!(this.baseType == Satellite.BASETYPE_TERRESTIAL || this.baseType == Satellite.BASETYPE_MOON
-                    || this.baseType == Satellite.BASETYPE_UNSET))
+                if (!( BaseType == BasetypeTerrestial || BaseType == BasetypeMoon || BaseType == BasetypeUnset ))
+                {
                     throw new Exception("Cannot set this as a type for this base type.");
+                }
 
-                if (this.baseType == Satellite.BASETYPE_UNSET)
-                    this.baseType = Satellite.BASETYPE_TERRESTIAL; //moons MUST set this or you'll kinda regret it.
+                if (BaseType == BasetypeUnset)
+                {
+                    BaseType = BasetypeTerrestial; //moons MUST set this or you'll kinda regret it.
+                }
 
-                this.SatelliteType = flag;
+                SatelliteType = flag;
             }
 
-            if (flag == Satellite.SUBTYPE_ICE)
+            if (flag == SubtypeIce)
             {
-                if (!(this.baseType == Satellite.BASETYPE_TERRESTIAL || this.baseType == Satellite.BASETYPE_MOON
-                    || this.baseType == Satellite.BASETYPE_UNSET))
+                if (!( BaseType == BasetypeTerrestial || BaseType == BasetypeMoon || BaseType == BasetypeUnset ))
+                {
                     throw new Exception("Cannot set this as a type for this base type.");
+                }
 
-                if (this.baseType == Satellite.BASETYPE_UNSET)
-                    this.baseType = Satellite.BASETYPE_TERRESTIAL; //moons MUST set this or you'll kinda regret it.
+                if (BaseType == BasetypeUnset)
+                {
+                    BaseType = BasetypeTerrestial; //moons MUST set this or you'll kinda regret it.
+                }
 
-                this.SatelliteType = flag;
+                SatelliteType = flag;
             }
 
-            if (flag == Satellite.SUBTYPE_ROCK)
+            if (flag == SubtypeRock)
             {
-                if (!(this.baseType == Satellite.BASETYPE_TERRESTIAL || this.baseType == Satellite.BASETYPE_MOON
-                    || this.baseType == Satellite.BASETYPE_UNSET))
+                if (!( BaseType == BasetypeTerrestial || BaseType == BasetypeMoon || BaseType == BasetypeUnset ))
+                {
                     throw new Exception("Cannot set this as a type for this base type.");
+                }
 
-                if (this.baseType == Satellite.BASETYPE_UNSET)
-                    this.baseType = Satellite.BASETYPE_TERRESTIAL; //moons MUST set this or you'll kinda regret it.
+                if (BaseType == BasetypeUnset)
+                {
+                    BaseType = BasetypeTerrestial; //moons MUST set this or you'll kinda regret it.
+                }
 
-                this.SatelliteType = flag;
+                SatelliteType = flag;
             }
 
-            if (flag == Satellite.SUBTYPE_SULFUR)
+            if (flag == SubtypeSulfur)
             {
-                if (!(this.baseType == Satellite.BASETYPE_MOON || this.baseType == Satellite.BASETYPE_UNSET))
+                if (!( BaseType == BasetypeMoon || BaseType == BasetypeUnset ))
+                {
                     throw new Exception("Cannot set this as a type for this base type.");
+                }
 
-                if (this.baseType == Satellite.BASETYPE_UNSET)
-                    this.baseType = Satellite.BASETYPE_MOON; //Can only be a moon.
+                if (BaseType == BasetypeUnset)
+                {
+                    BaseType = BasetypeMoon; //Can only be a moon.
+                }
 
-                this.SatelliteType = flag;
+                SatelliteType = flag;
             }
-
         }
 
         /* the following functions will create the physical properties of terrestial and gas planets. 
@@ -808,869 +1131,1226 @@ namespace UniverseGeneration.Stellar_Bodies
         // letting it stand now.
 
         /// <summary>
-        /// This function generates the density of a sateltie. You MUST have set a basetype first.
+        ///     This function generates the density of a sateltie. You MUST have set a basetype first.
         /// </summary>
-        /// <param name="ourBag">Our dice object</param>
-        /// <exception cref="Exception">Throws an exception if you attempt to invoke this on an satellite with any of: UNSET, EMPTY OR ASTEROID basetypes.</exception>
+        /// <param name="ourBag">Our Ddice object</param>
+        /// <exception cref="Exception">
+        ///     Throws an exception if you attempt to invoke this on an satellite with any of: UNSET, EMPTY
+        ///     OR ASTEROID basetypes.
+        /// </exception>
         /// <remarks>For a satellite with a basetype of GASGIANT, it will auto set the mass. </remarks>
-        public virtual void genDensity(Dice ourBag)
+        public virtual void GenDensity( Dice ourBag )
         {
-            if (this.baseType == Satellite.BASETYPE_EMPTY || this.baseType == Satellite.BASETYPE_ASTEROIDBELT)
-                throw new Exception("You cannot give these types of orbits a density.");
-            if (this.baseType == Satellite.BASETYPE_UNSET || this.SatelliteSize == Satellite.SIZE_UNSET)
-                throw new Exception("Please give this orbit a size or basetype first.");
-
-            int roll = ourBag.rng(3, 6, 0);
-            if (this.baseType == Satellite.BASETYPE_GASGIANT)
+            if (BaseType == BasetypeEmpty || BaseType == BasetypeAsteroidbelt)
             {
-                double varMass = ourBag.rng(1, 50, 0) * .01;
+                throw new Exception("You cannot give these types of orbits a density.");
+            }
+            if (BaseType == BasetypeUnset || SatelliteSize == SizeUnset)
+            {
+                throw new Exception("Please give this orbit a size or basetype first.");
+            }
+
+            var roll = ourBag.Rng(3, 6, 0);
+            if (BaseType == BasetypeGasgiant)
+            {
+                var varMass = ourBag.Rng(1, 50, 0) * .01;
                 if (roll != 18)
                 {
                     int massEntry = 0, densityEntry = 1;
-                    if (this.SatelliteSize == Satellite.SIZE_MEDIUM)
+                    if (SatelliteSize == SizeMedium)
                     {
                         massEntry = 2;
                         densityEntry = 3;
                     }
 
-                    if (this.SatelliteSize == Satellite.SIZE_LARGE)
+                    if (SatelliteSize == SizeLarge)
                     {
                         massEntry = 4;
                         densityEntry = 5;
                     }
 
                     //now we interporlate
-                    this.mass = ((this.gasGiantTable[roll + 1][massEntry] - this.gasGiantTable[roll][massEntry] * varMass) + this.gasGiantTable[roll][massEntry]);
-                    this.density = ((this.gasGiantTable[roll + 1][densityEntry] - this.gasGiantTable[roll][densityEntry] * varMass) + this.gasGiantTable[roll][densityEntry]);
+                    Mass = GasGiantTable[roll + 1][massEntry] - GasGiantTable[roll][massEntry] * varMass + GasGiantTable[roll][massEntry];
+                    Density = GasGiantTable[roll + 1][densityEntry] - GasGiantTable[roll][densityEntry] * varMass + GasGiantTable[roll][densityEntry];
                 }
                 else if (roll == 18)
                 {
                     int massEntry = 0, densityEntry = 1;
-                    if (this.SatelliteSize == Satellite.SIZE_MEDIUM)
+                    if (SatelliteSize == SizeMedium)
                     {
                         massEntry = 2;
                         densityEntry = 3;
                     }
 
-                    if (this.SatelliteSize == Satellite.SIZE_LARGE)
+                    if (SatelliteSize == SizeLarge)
                     {
                         massEntry = 4;
                         densityEntry = 5;
                     }
 
-                    this.mass = this.gasGiantTable[roll][massEntry];
-                    this.density = this.gasGiantTable[roll][densityEntry];
+                    Mass = GasGiantTable[roll][massEntry];
+                    Density = GasGiantTable[roll][densityEntry];
                 }
             }
 
-            if (this.baseType == Satellite.BASETYPE_TERRESTIAL || this.baseType == Satellite.BASETYPE_MOON)
+            if (BaseType == BasetypeTerrestial || BaseType == BasetypeMoon)
             {
+                var densityEntry = 0; //means we don't need to bother specifying for icy core!
+                if (SatelliteType == SubtypeRock)
+                {
+                    densityEntry = 1;
+                }
 
-                int densityEntry = 0; //means we don't need to bother specifying for icy core!
-                if (this.SatelliteType == Satellite.SUBTYPE_ROCK) densityEntry = 1;
-
-                if (this.SatelliteType == Satellite.SUBTYPE_OCEAN) densityEntry = 2;
-                if (this.SatelliteType == Satellite.SUBTYPE_GARDEN) densityEntry = 2;
-                if (this.SatelliteType == Satellite.SUBTYPE_GREENHOUSE) densityEntry = 2;
-                if (this.SatelliteType == Satellite.SUBTYPE_CHTHONIAN) densityEntry = 2;
-                if (this.SatelliteType == Satellite.SUBTYPE_ICE && this.SatelliteSize == Satellite.SIZE_LARGE)
+                if (SatelliteType == SubtypeOcean)
+                {
                     densityEntry = 2;
+                }
+                if (SatelliteType == SubtypeGarden)
+                {
+                    densityEntry = 2;
+                }
+                if (SatelliteType == SubtypeGreenhouse)
+                {
+                    densityEntry = 2;
+                }
+                if (SatelliteType == SubtypeChthonian)
+                {
+                    densityEntry = 2;
+                }
+                if (SatelliteType == SubtypeIce && SatelliteSize == SizeLarge)
+                {
+                    densityEntry = 2;
+                }
 
-                this.density = this.terrDenTable[roll][densityEntry];
+                Density = TerrDenTable[roll][densityEntry];
             }
         }
 
         /// <summary>
-        /// This function will set the diameter, mass and gravity, given the density.
+        ///     This function will set the diameter, mass and gravity, given the density.
         /// </summary>
-        /// <param name="ourBag">Our dice object</param>
+        /// <param name="ourBag">Our Ddice object</param>
         /// <exception cref="Exception">Throws an exception if it's called on anything but a moon and gas giant</exception>
         /// <exception cref="Exception">Throws an exception if the density is unset.</exception>
-        public virtual void genPhysicalParameters(Dice ourBag)
+        public virtual void GenPhysicalParameters( Dice ourBag )
         {
-            if (this.baseType == Satellite.BASETYPE_ASTEROIDBELT || this.baseType == Satellite.BASETYPE_EMPTY || this.baseType == Satellite.BASETYPE_UNSET)
-                throw new Exception("Please only call this on a moon, terrestial planet or gas giant.");
-            if (this.density == 0)
-                throw new Exception("Density unset.");
-
-            if (this.baseType == Satellite.BASETYPE_TERRESTIAL || this.baseType == Satellite.BASETYPE_MOON)
+            if (BaseType == BasetypeAsteroidbelt || BaseType == BasetypeEmpty || BaseType == BasetypeUnset)
             {
-                double baseVal = Math.Sqrt(this.blackbodyTemp / this.density);
+                throw new Exception("Please only call this on a moon, terrestial planet or gas giant.");
+            }
+            if (Math.Abs(Density) < 0)
+            {
+                throw new Exception("Density unset.");
+            }
+
+            if (BaseType == BasetypeTerrestial || BaseType == BasetypeMoon)
+            {
+                var baseVal = Math.Sqrt(BlackbodyTemp / Density);
 
                 //range for small is .004 to .024
-                if (this.SatelliteSize == Satellite.SIZE_TINY)
-                    this.diameter = ourBag.rollRange(.004, .020) * baseVal;
+                if (SatelliteSize == SizeTiny)
+                {
+                    Diameter = ourBag.RollRange(.004, .020) * baseVal;
+                }
 
                 //range for small is .024 to .030
-                if (this.SatelliteSize == Satellite.SIZE_SMALL)
-                    this.diameter = ourBag.rollRange(.024, .006) * baseVal;
+                if (SatelliteSize == SizeSmall)
+                {
+                    Diameter = ourBag.RollRange(.024, .006) * baseVal;
+                }
 
                 //range for medium is .030 to .065
-                if (this.SatelliteSize == Satellite.SIZE_MEDIUM)
-                    this.diameter = ourBag.rollRange(.030, .035) * baseVal;
+                if (SatelliteSize == SizeMedium)
+                {
+                    Diameter = ourBag.RollRange(.030, .035) * baseVal;
+                }
 
                 //range for large is .065 to .091
-                if (this.SatelliteSize == Satellite.SIZE_LARGE)
-                    this.diameter = ourBag.rollRange(.065, .026) * baseVal;
+                if (SatelliteSize == SizeLarge)
+                {
+                    Diameter = ourBag.RollRange(.065, .026) * baseVal;
+                }
 
-                this.mass = this.density * Math.Pow(this.diameter, 3);
-                this.gravity = this.density * this.diameter;
+                Mass = Density * Math.Pow(Diameter, 3);
+                Gravity = Density * Diameter;
             }
 
-            if (this.baseType == Satellite.BASETYPE_GASGIANT)
+            if (BaseType == BasetypeGasgiant)
             {
-                this.diameter = Math.Pow((this.mass / this.density), .33);
-                this.gravity = this.density * this.diameter;
+                Diameter = Math.Pow(Mass / Density, .33);
+                Gravity = Density * Diameter;
             }
         }
 
         /// <summary>
-        /// This sets the atmospheric pressure given the table and various properties of the atmosphere.
+        ///     This sets the atmospheric pressure given the table and various properties of the atmosphere.
         /// </summary>
-        public virtual void calcAtmPres()
+        public virtual void CalcAtmPres()
         {
-            if (!(this.baseType == Satellite.BASETYPE_MOON || this.baseType == Satellite.BASETYPE_TERRESTIAL))
+            if (!( BaseType == BasetypeMoon || BaseType == BasetypeTerrestial ))
+            {
                 throw new Exception("You can only invoke this on a terrestial planet or terrestial moon.");
+            }
 
-            if (this.gravity == 0)
+            if (Math.Abs(Gravity) < 0)
+            {
                 throw new Exception("You cannot calculate Atmospheric pressure until you have gravity defined.");
+            }
 
-            double presFact = 0.0;
+            var presFact = 0.0;
 
             //pull the fact from the table. Well, from this..
-            if (this.SatelliteSize == Satellite.SIZE_SMALL && this.SatelliteType == Satellite.SUBTYPE_ICE)
+            if (SatelliteSize == SizeSmall && SatelliteType == SubtypeIce)
+            {
                 presFact = 10.0;
+            }
 
-            if (this.SatelliteSize == Satellite.SIZE_MEDIUM && this.SatelliteType == Satellite.SUBTYPE_GREENHOUSE)
+            if (SatelliteSize == SizeMedium && SatelliteType == SubtypeGreenhouse)
+            {
                 presFact = 100.0;
+            }
 
-            if (this.SatelliteSize == Satellite.SIZE_LARGE && this.SatelliteType == Satellite.SUBTYPE_GREENHOUSE)
+            if (SatelliteSize == SizeLarge && SatelliteType == SubtypeGreenhouse)
+            {
                 presFact = 500.0;
-
-            if (this.SatelliteSize == Satellite.SIZE_MEDIUM)
-            {
-                if (this.SatelliteType == Satellite.SUBTYPE_AMMONIA) presFact = 1.0;
-                if (this.SatelliteType == Satellite.SUBTYPE_ICE) presFact = 1.0;
-                if (this.SatelliteType == Satellite.SUBTYPE_OCEAN) presFact = 1.0;
-                if (this.SatelliteType == Satellite.SUBTYPE_GARDEN) presFact = 1.0;
             }
 
-            if (this.SatelliteSize == Satellite.SIZE_LARGE)
+            if (SatelliteSize == SizeMedium)
             {
-                if (this.SatelliteType == Satellite.SUBTYPE_AMMONIA) presFact = 5.0;
-                if (this.SatelliteType == Satellite.SUBTYPE_ICE) presFact = 5.0;
-                if (this.SatelliteType == Satellite.SUBTYPE_OCEAN) presFact = 5.0;
-                if (this.SatelliteType == Satellite.SUBTYPE_GARDEN) presFact = 5.0;
+                if (SatelliteType == SubtypeAmmonia)
+                {
+                    presFact = 1.0;
+                }
+                if (SatelliteType == SubtypeIce)
+                {
+                    presFact = 1.0;
+                }
+                if (SatelliteType == SubtypeOcean)
+                {
+                    presFact = 1.0;
+                }
+                if (SatelliteType == SubtypeGarden)
+                {
+                    presFact = 1.0;
+                }
             }
 
-            this.atmPres = this.atmMass * this.gravity * presFact;
-
-            if ((this.SatelliteSize == Satellite.SIZE_TINY) || (this.SatelliteType == Satellite.SUBTYPE_HADEAN))
+            if (SatelliteSize == SizeLarge)
             {
-                this.atmPres = 0;
-                this.atmMass = 0;
+                if (SatelliteType == SubtypeAmmonia)
+                {
+                    presFact = 5.0;
+                }
+                if (SatelliteType == SubtypeIce)
+                {
+                    presFact = 5.0;
+                }
+                if (SatelliteType == SubtypeOcean)
+                {
+                    presFact = 5.0;
+                }
+                if (SatelliteType == SubtypeGarden)
+                {
+                    presFact = 5.0;
+                }
             }
 
-            if ((this.SatelliteType == Satellite.SUBTYPE_CHTHONIAN) ||
-                (this.SatelliteType == Satellite.SUBTYPE_ROCK && this.SatelliteSize == Satellite.SIZE_SMALL))
+            AtmPres = AtmMass * Gravity * presFact;
+
+            if (( SatelliteSize == SizeTiny ) || ( SatelliteType == SubtypeHadean ))
             {
-                this.atmPres = .01;
-                this.atmMass = .01;
+                AtmPres = 0;
+                AtmMass = 0;
             }
 
-            if (OptionCont.setAtmPressure != -1 && this.SatelliteType == Satellite.SUBTYPE_GARDEN)
-                this.atmPres = OptionCont.setAtmPressure;
+            if (( SatelliteType == SubtypeChthonian ) || ( SatelliteType == SubtypeRock && SatelliteSize == SizeSmall ))
+            {
+                AtmPres = .01;
+                AtmMass = .01;
+            }
 
+            if (Math.Abs(OptionCont.SetAtmPressure - -1) > 0 && SatelliteType == SubtypeGarden)
+            {
+                AtmPres = OptionCont.SetAtmPressure;
+            }
         }
 
         /// <summary>
-        /// Calculates an axial tilt of a satellite given the ruleset
+        ///     Calculates an axial tilt of a satellite given the ruleset
         /// </summary>
         /// <param name="ourBag"></param>
-        public virtual void createAxialTilt(Dice ourBag)
+        public virtual void CreateAxialTilt( Dice ourBag )
         {
             do
             {
-                switch (ourBag.gurpsRoll())
+                switch (ourBag.GurpsRoll())
                 {
                     case 3:
                     case 4:
                     case 5:
                     case 6:
-                        this.axialTilt = ourBag.rng(2, 6, -2);
+                        AxialTilt = ourBag.Rng(2, 6, -2);
                         break;
                     case 7:
                     case 8:
                     case 9:
-                        this.axialTilt = 10 + ourBag.rng(2, 6, -2);
+                        AxialTilt = 10 + ourBag.Rng(2, 6, -2);
                         break;
                     case 10:
                     case 11:
                     case 12:
-                        this.axialTilt = 20 + ourBag.rng(2, 6, -2);
+                        AxialTilt = 20 + ourBag.Rng(2, 6, -2);
                         break;
                     case 13:
                     case 14:
-                        this.axialTilt = 30 + ourBag.rng(2, 6, -2);
+                        AxialTilt = 30 + ourBag.Rng(2, 6, -2);
                         break;
                     case 15:
                     case 16:
-                        this.axialTilt = 30 + ourBag.rng(2, 6, -2);
+                        AxialTilt = 30 + ourBag.Rng(2, 6, -2);
                         break;
                     case 17:
                     case 18:
-                        switch (ourBag.rng(1, 6, 0))
+                        switch (ourBag.Rng(1, 6, 0))
                         {
                             case 1:
                             case 2:
-                                this.axialTilt = 50 + ourBag.rng(2, 6, -2);
+                                AxialTilt = 50 + ourBag.Rng(2, 6, -2);
                                 break;
                             case 3:
                             case 4:
-                                this.axialTilt = 60 + ourBag.rng(2, 6, -2);
+                                AxialTilt = 60 + ourBag.Rng(2, 6, -2);
                                 break;
                             case 5:
-                                this.axialTilt = 70 + ourBag.rng(2, 6, -2);
+                                AxialTilt = 70 + ourBag.Rng(2, 6, -2);
                                 break;
                             case 6:
-                                this.axialTilt = 80 + ourBag.rng(2, 6, -2);
+                                AxialTilt = 80 + ourBag.Rng(2, 6, -2);
                                 break;
                         }
                         break;
                 }
-            } while ((bool)OptionCont.rerollAxialTiltOver45 && axialTilt > 45);
+            }
+            while (OptionCont.RerollAxialTiltOver45 != null && (bool) OptionCont.RerollAxialTiltOver45 && AxialTilt > 45);
 
-
-            if (OptionCont.getAxialTilt() != -1)
-                this.axialTilt = OptionCont.getAxialTilt();
+            if (OptionCont.GetAxialTilt() != -1)
+            {
+                AxialTilt = OptionCont.GetAxialTilt();
+            }
         }
 
         /// <summary>
-        /// Sets the Resource Value Modifier for this satelite
+        ///     Sets the Resource Value Modifier for this satelite
         /// </summary>
-        /// <param name="roll">The dice roll</param>
-        public virtual void populateRVM(int roll)
+        /// <param name="roll">The Ddice roll</param>
+        public virtual void PopulateRvm( int roll )
         {
-            if (this.baseType == Satellite.BASETYPE_ASTEROIDBELT)
+            if (BaseType == BasetypeAsteroidbelt)
             {
-                if (roll == 3) this.RVM = -5;
-                if (roll == 4) this.RVM = -4;
-                if (roll == 5) this.RVM = -3;
-                if (roll == 6 || roll == 7) this.RVM = -2;
-                if (roll == 8 || roll == 9) this.RVM = -1;
-                if (roll == 10 || roll == 11) this.RVM = 0;
-                if (roll == 12 || roll == 13) this.RVM = 1;
-                if (roll == 14 || roll == 15) this.RVM = 2;
-                if (roll == 16) this.RVM = 3;
-                if (roll == 17) this.RVM = 4;
-                if (roll == 18) this.RVM = 5;
+                if (roll == 3)
+                {
+                    Rvm = -5;
+                }
+                if (roll == 4)
+                {
+                    Rvm = -4;
+                }
+                if (roll == 5)
+                {
+                    Rvm = -3;
+                }
+                if (roll == 6 || roll == 7)
+                {
+                    Rvm = -2;
+                }
+                if (roll == 8 || roll == 9)
+                {
+                    Rvm = -1;
+                }
+                if (roll == 10 || roll == 11)
+                {
+                    Rvm = 0;
+                }
+                if (roll == 12 || roll == 13)
+                {
+                    Rvm = 1;
+                }
+                if (roll == 14 || roll == 15)
+                {
+                    Rvm = 2;
+                }
+                if (roll == 16)
+                {
+                    Rvm = 3;
+                }
+                if (roll == 17)
+                {
+                    Rvm = 4;
+                }
+                if (roll == 18)
+                {
+                    Rvm = 5;
+                }
             }
 
             else
             {
-                if (roll <= 2) this.RVM = -3;
-                if (roll == 3 || roll == 4) this.RVM = -2;
-                if (roll >= 5 && roll <= 7) this.RVM = -1;
-                if (roll >= 8 && roll <= 13) this.RVM = 0;
-                if (roll >= 14 && roll <= 16) this.RVM = 1;
-                if (roll >= 17 && roll <= 18) this.RVM = 2;
-                if (roll >= 19) this.RVM = 3;
+                if (roll <= 2)
+                {
+                    Rvm = -3;
+                }
+                if (roll == 3 || roll == 4)
+                {
+                    Rvm = -2;
+                }
+                if (roll >= 5 && roll <= 7)
+                {
+                    Rvm = -1;
+                }
+                if (roll >= 8 && roll <= 13)
+                {
+                    Rvm = 0;
+                }
+                if (roll >= 14 && roll <= 16)
+                {
+                    Rvm = 1;
+                }
+                if (roll >= 17 && roll <= 18)
+                {
+                    Rvm = 2;
+                }
+                if (roll >= 19)
+                {
+                    Rvm = 3;
+                }
             }
         }
 
         /// <summary>
-        /// Sets climate and atmospheric data for this satelite. 
+        ///     Sets climate and atmospheric data for this satelite.
         /// </summary>
         /// <param name="maxMass">The maximum mass of the star</param>
-        /// <param name="ourBag">The Dice object</param>
-        public void setClimateData(double maxMass, Dice ourBag)
+        /// <param name="ourBag">The Ddice object</param>
+        public void SetClimateData( double maxMass, Dice ourBag )
         {
             int roll;
             //atm mass first.
-            this.atmMass = 0.01; //default case
+            AtmMass = 0.01; //default case
 
             //ice case
-            if ((this.SatelliteType == Satellite.SUBTYPE_ICE))
+            if (SatelliteType == SubtypeIce)
             {
-                this.atmMass = (ourBag.rng(3, 6, 0) / 10.0) + (ourBag.rng(1, 6, -1) / 100.0);
-                this.atmCate.Add(ATM_COND_SUFFOCATING);
+                AtmMass = ourBag.Rng(3, 6, 0) / 10.0 + ourBag.Rng(1, 6, -1) / 100.0;
+                AtmCate.Add(AtmCondSuffocating);
 
-                if (this.SatelliteSize == Satellite.SIZE_SMALL)
+                if (SatelliteSize == SizeSmall)
                 {
-                    roll = ourBag.rng(3, 6, 0);
-                    if (roll >= 15) this.atmCate.Add(ATM_TOXIC_HIGHLY);
-                    else this.atmCate.Add(ATM_TOXIC_MILDLY);
+                    roll = ourBag.Rng(3, 6, 0);
+                    AtmCate.Add(roll >= 15 ? AtmToxicHighly : AtmToxicMildly);
                 }
 
-                else if (this.SatelliteSize == Satellite.SIZE_MEDIUM)
+                else if (SatelliteSize == SizeMedium)
                 {
-                    roll = ourBag.rng(3, 6, 0);
-                    if (roll >= 13) this.atmCate.Add(ATM_TOXIC_MILDLY);
+                    roll = ourBag.Rng(3, 6, 0);
+                    if (roll >= 13)
+                    {
+                        AtmCate.Add(AtmToxicMildly);
+                    }
                 }
 
-                else if (this.SatelliteSize == Satellite.SIZE_LARGE) this.atmCate.Add(ATM_TOXIC_HIGHLY);
+                else if (SatelliteSize == SizeLarge)
+                {
+                    AtmCate.Add(AtmToxicHighly);
+                }
             }
 
             //Either ammonia or greenhouse
-            if (this.SatelliteType == Satellite.SUBTYPE_AMMONIA || this.SatelliteType == Satellite.SUBTYPE_GREENHOUSE)
+            if (SatelliteType == SubtypeAmmonia || SatelliteType == SubtypeGreenhouse)
             {
-                this.atmMass = (ourBag.rng(3, 6, 0) / 10.0) + (ourBag.rng(1, 6, -1) / 100.0);
-                this.atmCate.Add(ATM_COND_SUFFOCATING);
-                this.atmCate.Add(ATM_TOXIC_LETHALLY);
-                this.atmCate.Add(ATM_COND_CORROSIVE);
+                AtmMass = ourBag.Rng(3, 6, 0) / 10.0 + ourBag.Rng(1, 6, -1) / 100.0;
+                AtmCate.Add(AtmCondSuffocating);
+                AtmCate.Add(AtmToxicLethally);
+                AtmCate.Add(AtmCondCorrosive);
             }
 
             //ocean case
-            if (this.SatelliteType == Satellite.SUBTYPE_OCEAN)
+            if (SatelliteType == SubtypeOcean)
             {
-                this.atmMass = (ourBag.rng(3, 6, 0) / 10.0) + (ourBag.rng(1, 6, -1) / 100.0);
-                this.atmCate.Add(ATM_COND_SUFFOCATING);
+                AtmMass = ourBag.Rng(3, 6, 0) / 10.0 + ourBag.Rng(1, 6, -1) / 100.0;
+                AtmCate.Add(AtmCondSuffocating);
 
-                if (this.SatelliteSize == Satellite.SIZE_MEDIUM)
+                if (SatelliteSize == SizeMedium)
                 {
-                    roll = ourBag.rng(3, 6, 0);
-                    if (roll >= 13) this.atmCate.Add(ATM_TOXIC_MILDLY);
+                    roll = ourBag.Rng(3, 6, 0);
+                    if (roll >= 13)
+                    {
+                        AtmCate.Add(AtmToxicMildly);
+                    }
                 }
 
-                else if (this.SatelliteSize == Satellite.SIZE_LARGE)
+                else if (SatelliteSize == SizeLarge)
                 {
-                    this.atmCate.Add(ATM_COND_SUFFOCATING);
-                    this.atmCate.Add(ATM_TOXIC_HIGHLY);
+                    AtmCate.Add(AtmCondSuffocating);
+                    AtmCate.Add(AtmToxicHighly);
                 }
             }
 
             //either garden
-            if (this.SatelliteType == Satellite.SUBTYPE_GARDEN)
+            if (SatelliteType == SubtypeGarden)
             {
-                this.atmMass = (ourBag.rng(3, 6, 0) / 10.0) + (ourBag.rng(1, 6, -1) / 100.0);
-                roll = ourBag.rng(3, 6, 0);
-                if (roll >= 12 && (bool)!OptionCont.noMarginalAtm)
+                AtmMass = ourBag.Rng(3, 6, 0) / 10.0 + ourBag.Rng(1, 6, -1) / 100.0;
+                roll = ourBag.Rng(3, 6, 0);
+                if (roll >= 12 && (bool) !OptionCont.NoMarginalAtm)
                 {
                     //add marginal code here
-                    foreach (int i in genMarginal(ourBag))
-                        this.atmCate.Add(i);
-
+                    foreach (var i in GenMarginal(ourBag))
+                    {
+                        AtmCate.Add(i);
+                    }
                 }
             }
-
 
             //NOW, for hydrographic coverage
-            this.hydCoverage = 0.0; //default.
-            if (this.SatelliteType == Satellite.SUBTYPE_ICE)
+            HydCoverage = 0.0; //default.
+            if (SatelliteType == SubtypeIce)
             {
-                if (this.SatelliteSize == Satellite.SIZE_SMALL)
+                if (SatelliteSize == SizeSmall)
                 {
-                    roll = ourBag.rng(1, 6, 2);
-                    this.hydCoverage = roll * .1;
+                    roll = ourBag.Rng(1, 6, 2);
+                    HydCoverage = roll * .1;
                 }
 
-                if (this.SatelliteSize == Satellite.SIZE_MEDIUM || this.SatelliteSize == Satellite.SIZE_LARGE)
+                if (SatelliteSize == SizeMedium || SatelliteSize == SizeLarge)
                 {
-                    roll = ourBag.rng(2, 6, -2);
-                    if (roll < 0) roll = 0;
-                    this.hydCoverage = roll * .1;
-                }
-            }
-
-            if (this.SatelliteType == Satellite.SUBTYPE_AMMONIA)
-            {
-                roll = ourBag.rng(2, 6, 0);
-                if (roll > 10) roll = 10;
-                this.hydCoverage = roll * .1;
-            }
-
-            if (this.SatelliteType == Satellite.SUBTYPE_OCEAN || this.SatelliteType == Satellite.SUBTYPE_GARDEN)
-            {
-                if (this.SatelliteSize == Satellite.SIZE_MEDIUM)
-                {
-                    roll = ourBag.rng(1, 6, 4);
-                    this.hydCoverage = roll * .1;
-                }
-
-                if (this.SatelliteSize == Satellite.SIZE_LARGE)
-                {
-                    roll = ourBag.rng(1, 6, 6);
-                    if (roll > 10) roll = 10;
-                    this.hydCoverage = roll * .1;
+                    roll = ourBag.Rng(2, 6, -2);
+                    if (roll < 0)
+                    {
+                        roll = 0;
+                    }
+                    HydCoverage = roll * .1;
                 }
             }
 
-            if (this.SatelliteType == Satellite.SUBTYPE_GREENHOUSE)
+            if (SatelliteType == SubtypeAmmonia)
             {
-                roll = ourBag.rng(2, 6, -7);
-                if (roll < 0) roll = 0;
-                this.hydCoverage = roll * .1;
+                roll = ourBag.Rng(2, 6, 0);
+                if (roll > 10)
+                {
+                    roll = 10;
+                }
+                HydCoverage = roll * .1;
+            }
+
+            if (SatelliteType == SubtypeOcean || SatelliteType == SubtypeGarden)
+            {
+                if (SatelliteSize == SizeMedium)
+                {
+                    roll = ourBag.Rng(1, 6, 4);
+                    HydCoverage = roll * .1;
+                }
+
+                if (SatelliteSize == SizeLarge)
+                {
+                    roll = ourBag.Rng(1, 6, 6);
+                    if (roll > 10)
+                    {
+                        roll = 10;
+                    }
+                    HydCoverage = roll * .1;
+                }
+            }
+
+            if (SatelliteType == SubtypeGreenhouse)
+            {
+                roll = ourBag.Rng(2, 6, -7);
+                if (roll < 0)
+                {
+                    roll = 0;
+                }
+                HydCoverage = roll * .1;
             }
 
             //randomize coverage!
-            if (this.hydCoverage >= .1)
+            if (HydCoverage >= .1)
             {
-                roll = ourBag.rng(1, 10, -5);
-                this.hydCoverage = this.hydCoverage + (roll * .01);
+                roll = ourBag.Rng(1, 10, -5);
+                HydCoverage = HydCoverage + roll * .01;
             }
-
         }
 
-        public virtual void detSurfaceTemp(double modifiers)
+        public virtual void DetSurfaceTemp( double modifiers )
         {
             double absorptionFactor = 0.0, greenHouseFactor = 0.0;
 
-            if (this.baseType == Satellite.BASETYPE_ASTEROIDBELT) absorptionFactor = getAbsorptionFactor(modifiers);
-            if (this.SatelliteType == Satellite.SUBTYPE_ICE && this.SatelliteSize == Satellite.SIZE_TINY)
-                absorptionFactor = getAbsorptionFactor(modifiers);
-            if (this.SatelliteType == Satellite.SUBTYPE_ROCK && this.SatelliteSize == Satellite.SIZE_TINY)
-                absorptionFactor = getAbsorptionFactor(modifiers);
-            if (this.SatelliteType == Satellite.SUBTYPE_SULFUR && this.SatelliteSize == Satellite.SIZE_TINY)
-                absorptionFactor = getAbsorptionFactor(modifiers);
-            if (this.SatelliteType == Satellite.SUBTYPE_HADEAN && this.SatelliteSize == Satellite.SIZE_SMALL)
-                absorptionFactor = getAbsorptionFactor(modifiers);
-            if (this.SatelliteType == Satellite.SUBTYPE_ICE && this.SatelliteSize == Satellite.SIZE_SMALL)
+            if (BaseType == BasetypeAsteroidbelt)
             {
-                absorptionFactor = getAbsorptionFactor(modifiers);
+                absorptionFactor = GetAbsorptionFactor(modifiers);
+            }
+            if (SatelliteType == SubtypeIce && SatelliteSize == SizeTiny)
+            {
+                absorptionFactor = GetAbsorptionFactor(modifiers);
+            }
+            if (SatelliteType == SubtypeRock && SatelliteSize == SizeTiny)
+            {
+                absorptionFactor = GetAbsorptionFactor(modifiers);
+            }
+            if (SatelliteType == SubtypeSulfur && SatelliteSize == SizeTiny)
+            {
+                absorptionFactor = GetAbsorptionFactor(modifiers);
+            }
+            if (SatelliteType == SubtypeHadean && SatelliteSize == SizeSmall)
+            {
+                absorptionFactor = GetAbsorptionFactor(modifiers);
+            }
+            if (SatelliteType == SubtypeIce && SatelliteSize == SizeSmall)
+            {
+                absorptionFactor = GetAbsorptionFactor(modifiers);
                 greenHouseFactor = .10;
             }
-            if (this.SatelliteType == Satellite.SUBTYPE_ROCK && this.SatelliteSize == Satellite.SIZE_SMALL)
-                absorptionFactor = getAbsorptionFactor(modifiers);
-            if (this.SatelliteType == Satellite.SUBTYPE_HADEAN && this.SatelliteSize == Satellite.SIZE_MEDIUM)
-                absorptionFactor = getAbsorptionFactor(modifiers);
-            if (this.SatelliteType == Satellite.SUBTYPE_AMMONIA)
+            if (SatelliteType == SubtypeRock && SatelliteSize == SizeSmall)
             {
-                absorptionFactor = getAbsorptionFactor(modifiers);
+                absorptionFactor = GetAbsorptionFactor(modifiers);
+            }
+            if (SatelliteType == SubtypeHadean && SatelliteSize == SizeMedium)
+            {
+                absorptionFactor = GetAbsorptionFactor(modifiers);
+            }
+            if (SatelliteType == SubtypeAmmonia)
+            {
+                absorptionFactor = GetAbsorptionFactor(modifiers);
                 greenHouseFactor = .20;
             }
-            if (this.SatelliteType == Satellite.SUBTYPE_ICE &&
-                (this.SatelliteSize == Satellite.SIZE_MEDIUM || this.SatelliteSize == Satellite.SIZE_LARGE))
+            if (SatelliteType == SubtypeIce && ( SatelliteSize == SizeMedium || SatelliteSize == SizeLarge ))
             {
-                absorptionFactor = getAbsorptionFactor(modifiers);
+                absorptionFactor = GetAbsorptionFactor(modifiers);
                 greenHouseFactor = .20;
             }
 
-            if (this.SatelliteType == Satellite.SUBTYPE_OCEAN || this.SatelliteType == Satellite.SUBTYPE_GARDEN)
+            if (SatelliteType == SubtypeOcean || SatelliteType == SubtypeGarden)
             {
-                if (this.hydCoverage <= .20)
+                if (HydCoverage <= .20)
                 {
-                    absorptionFactor = getAbsorptionFactor(modifiers);
+                    absorptionFactor = GetAbsorptionFactor(modifiers);
                     greenHouseFactor = .16;
                 }
 
-                if (this.hydCoverage > .20 && this.hydCoverage <= .50)
+                if (HydCoverage > .20 && HydCoverage <= .50)
                 {
-                    absorptionFactor = getAbsorptionFactor(modifiers);
+                    absorptionFactor = GetAbsorptionFactor(modifiers);
                     greenHouseFactor = .16;
                 }
 
-                if (this.hydCoverage > .50 && this.hydCoverage <= .90)
+                if (HydCoverage > .50 && HydCoverage <= .90)
                 {
-                    absorptionFactor = getAbsorptionFactor(modifiers);
+                    absorptionFactor = GetAbsorptionFactor(modifiers);
                     greenHouseFactor = .16;
                 }
 
-                if (this.hydCoverage > .90)
+                if (HydCoverage > .90)
                 {
-                    absorptionFactor = getAbsorptionFactor(modifiers);
+                    absorptionFactor = GetAbsorptionFactor(modifiers);
                     greenHouseFactor = .16;
                 }
             }
 
-            if (this.SatelliteType == Satellite.SUBTYPE_GREENHOUSE)
+            if (SatelliteType == SubtypeGreenhouse)
             {
-                absorptionFactor = getAbsorptionFactor(modifiers);
+                absorptionFactor = GetAbsorptionFactor(modifiers);
                 greenHouseFactor = 2.0;
             }
 
-            if (this.SatelliteType == Satellite.SUBTYPE_CHTHONIAN)
+            if (SatelliteType == SubtypeChthonian)
             {
-                absorptionFactor = getAbsorptionFactor(modifiers);
+                absorptionFactor = GetAbsorptionFactor(modifiers);
             }
 
             //get the surface temp.
-            this.surfaceTemp = this.blackbodyTemp * (absorptionFactor * (1 + (this.atmMass * greenHouseFactor)));
+            SurfaceTemp = BlackbodyTemp * ( absorptionFactor * ( 1 + AtmMass * greenHouseFactor ) );
         }
 
-        public virtual double getAbsorptionFactor(double modifiers)
+        public virtual double GetAbsorptionFactor( double modifiers )
         {
             double absorptionFactor = 0;
 
-            if (this.baseType == Satellite.BASETYPE_ASTEROIDBELT) absorptionFactor = .97;
-            if (this.SatelliteType == Satellite.SUBTYPE_ICE && this.SatelliteSize == Satellite.SIZE_TINY)
-                absorptionFactor = .86;
-            if (this.SatelliteType == Satellite.SUBTYPE_ROCK && this.SatelliteSize == Satellite.SIZE_TINY)
-                absorptionFactor = .97;
-            if (this.SatelliteType == Satellite.SUBTYPE_SULFUR && this.SatelliteSize == Satellite.SIZE_TINY)
-                absorptionFactor = .77;
-            if (this.SatelliteType == Satellite.SUBTYPE_HADEAN && this.SatelliteSize == Satellite.SIZE_SMALL)
-                absorptionFactor = .67;
-            if (this.SatelliteType == Satellite.SUBTYPE_ICE && this.SatelliteSize == Satellite.SIZE_SMALL)
-                absorptionFactor = .93;
-            if (this.SatelliteType == Satellite.SUBTYPE_ROCK && this.SatelliteSize == Satellite.SIZE_SMALL)
-                absorptionFactor = .96;
-            if (this.SatelliteType == Satellite.SUBTYPE_HADEAN && this.SatelliteSize == Satellite.SIZE_MEDIUM)
-                absorptionFactor = .67;
-            if (this.SatelliteType == Satellite.SUBTYPE_AMMONIA)
-                absorptionFactor = .84;
-            if (this.SatelliteType == Satellite.SUBTYPE_ICE &&
-                (this.SatelliteSize == Satellite.SIZE_MEDIUM || this.SatelliteSize == Satellite.SIZE_LARGE))
-                absorptionFactor = .86;
-
-            if (this.SatelliteType == Satellite.SUBTYPE_OCEAN || this.SatelliteType == Satellite.SUBTYPE_GARDEN)
+            if (BaseType == BasetypeAsteroidbelt)
             {
-                if (this.hydCoverage <= .20)
-                    absorptionFactor = .95;
-                if (this.hydCoverage > .20 && this.hydCoverage <= .50)
-                    absorptionFactor = .92;
-
-                if (this.hydCoverage > .50 && this.hydCoverage <= .90)
-                    absorptionFactor = .88;
-
-                if (this.hydCoverage > .90)
-                    absorptionFactor = .84;
+                absorptionFactor = .97;
+            }
+            if (SatelliteType == SubtypeIce && SatelliteSize == SizeTiny)
+            {
+                absorptionFactor = .86;
+            }
+            if (SatelliteType == SubtypeRock && SatelliteSize == SizeTiny)
+            {
+                absorptionFactor = .97;
+            }
+            if (SatelliteType == SubtypeSulfur && SatelliteSize == SizeTiny)
+            {
+                absorptionFactor = .77;
+            }
+            if (SatelliteType == SubtypeHadean && SatelliteSize == SizeSmall)
+            {
+                absorptionFactor = .67;
+            }
+            if (SatelliteType == SubtypeIce && SatelliteSize == SizeSmall)
+            {
+                absorptionFactor = .93;
+            }
+            if (SatelliteType == SubtypeRock && SatelliteSize == SizeSmall)
+            {
+                absorptionFactor = .96;
+            }
+            if (SatelliteType == SubtypeHadean && SatelliteSize == SizeMedium)
+            {
+                absorptionFactor = .67;
+            }
+            if (SatelliteType == SubtypeAmmonia)
+            {
+                absorptionFactor = .84;
+            }
+            if (SatelliteType == SubtypeIce && ( SatelliteSize == SizeMedium || SatelliteSize == SizeLarge ))
+            {
+                absorptionFactor = .86;
             }
 
-            if (this.SatelliteType == Satellite.SUBTYPE_GREENHOUSE)
-                absorptionFactor = .77;
+            if (SatelliteType == SubtypeOcean || SatelliteType == SubtypeGarden)
+            {
+                if (HydCoverage <= .20)
+                {
+                    absorptionFactor = .95;
+                }
+                if (HydCoverage > .20 && HydCoverage <= .50)
+                {
+                    absorptionFactor = .92;
+                }
 
-            if (this.SatelliteType == Satellite.SUBTYPE_CHTHONIAN)
+                if (HydCoverage > .50 && HydCoverage <= .90)
+                {
+                    absorptionFactor = .88;
+                }
+
+                if (HydCoverage > .90)
+                {
+                    absorptionFactor = .84;
+                }
+            }
+
+            if (SatelliteType == SubtypeGreenhouse)
+            {
+                absorptionFactor = .77;
+            }
+
+            if (SatelliteType == SubtypeChthonian)
+            {
                 absorptionFactor = .97;
+            }
 
             return absorptionFactor + modifiers;
         }
 
-        public virtual List<int> genMarginal(Dice ourBag)
+        public virtual List<int> GenMarginal( Dice ourBag )
         {
             var ret = new List<int>();
-            int roll = ourBag.rng(3, 6, 0);
+            var roll = ourBag.Rng(3, 6, 0);
             if (roll == 3 || roll == 4)
             {
-                roll = ourBag.rng(3, 6, 0);
+                roll = ourBag.Rng(3, 6, 0);
                 //for the difference
-                if (roll >= 16) ret.Add(ATM_MARG_FLOURINE);
-                else ret.Add(ATM_MARG_CHLORINE);
+                ret.Add(roll >= 16 ? AtmMargFlourine : AtmMargChlorine);
 
                 //always true
-                ret.Add(ATM_TOXIC_HIGHLY);
+                ret.Add(AtmToxicHighly);
             }
-
 
             if (roll == 5 || roll == 6)
             {
-                ret.Add(ATM_MARG_SULFUR);
-                ret.Add(ATM_TOXIC_MILDLY);
+                ret.Add(AtmMargSulfur);
+                ret.Add(AtmToxicMildly);
             }
 
             if (roll == 7)
             {
-                ret.Add(ATM_MARG_NITROGEN);
-                ret.Add(ATM_TOXIC_MILDLY);
+                ret.Add(AtmMargNitrogen);
+                ret.Add(AtmToxicMildly);
             }
 
             if (roll == 8 || roll == 9)
             {
-                ret.Add(ATM_MARG_ORGANIC);
-                roll = ourBag.rng(3, 6, 0);
-                if (roll >= 17) ret.Add(ATM_TOXIC_HIGHLY);
-                else if (roll >= 12 && roll <= 16) ret.Add(ATM_TOXIC_MILDLY);
+                ret.Add(AtmMargOrganic);
+                roll = ourBag.Rng(3, 6, 0);
+                if (roll >= 17)
+                {
+                    ret.Add(AtmToxicHighly);
+                }
+                else if (roll >= 12 && roll <= 16)
+                {
+                    ret.Add(AtmToxicMildly);
+                }
             }
 
             if (roll == 10 || roll == 11)
             {
-                ret.Add(ATM_MARG_LOWOXY);
+                ret.Add(AtmMargLowoxy);
             }
 
             if (roll == 12 || roll == 13)
             {
-                ret.Add(ATM_MARG_POLLUTANTS);
-                roll = ourBag.rng(3, 6, 0);
-                if (roll >= 9 && roll <= 11) ret.Add(ATM_TOXIC_MILDLY);
-                else if (roll >= 17) ret.Add(ATM_TOXIC_HIGHLY);
+                ret.Add(AtmMargPollutants);
+                roll = ourBag.Rng(3, 6, 0);
+                if (roll >= 9 && roll <= 11)
+                {
+                    ret.Add(AtmToxicMildly);
+                }
+                else if (roll >= 17)
+                {
+                    ret.Add(AtmToxicHighly);
+                }
             }
 
             if (roll == 14)
             {
-                ret.Add(ATM_MARG_HIGHCO2);
-                roll = ourBag.rng(3, 6, 0);
-                if (roll >= 15) ret.Add(ATM_TOXIC_MILDLY);
+                ret.Add(AtmMargHighco2);
+                roll = ourBag.Rng(3, 6, 0);
+                if (roll >= 15)
+                {
+                    ret.Add(AtmToxicMildly);
+                }
             }
 
             if (roll == 15 || roll == 16)
             {
-                ret.Add(ATM_MARG_HIGHOXY);
-                roll = ourBag.rng(3, 6, 0);
+                ret.Add(AtmMargHighoxy);
+                roll = ourBag.Rng(3, 6, 0);
                 if (roll >= 15)
                 {
-                    ret.Add(ATM_TOXIC_MILDLY);
-                    ret.Add(ATM_COND_FLAMP1);
+                    ret.Add(AtmToxicMildly);
+                    ret.Add(AtmCondFlamp1);
                 }
             }
             if (roll == 17 || roll == 18)
             {
-                ret.Add(ATM_MARG_INERT);
+                ret.Add(AtmMargInert);
             }
-
 
             return ret;
-
         }
 
-        public virtual void generateOrbitalPeriod(double parentMass)
+        public virtual void GenerateOrbitalPeriod( double parentMass )
         {
-            if (this.baseType == Satellite.BASETYPE_TERRESTIAL || this.baseType == Satellite.BASETYPE_GASGIANT)
+            if (BaseType == BasetypeTerrestial || BaseType == BasetypeGasgiant)
             {
-                this.orbitalPeriod = (Math.Sqrt(Math.Pow(this.orbitalRadius, 3) / ((this.mass * .0000030024584) + parentMass)) * 365.25);
+                OrbitalPeriod = Math.Sqrt(Math.Pow(OrbitalRadius, 3) / ( Mass * .0000030024584 + parentMass )) * 365.25;
             }
-            if (this.baseType == Satellite.BASETYPE_MOON)
+            if (BaseType == BasetypeMoon)
             {
-                this.orbitalPeriod = .166 * Math.Sqrt(Math.Pow(this.orbitalRadius, 3) / (this.mass + parentMass));
+                OrbitalPeriod = .166 * Math.Sqrt(Math.Pow(OrbitalRadius, 3) / ( Mass + parentMass ));
             }
         }
 
         /// <summary>
-        /// This function sets the size of a satelite.
+        ///     This function sets the size of a satelite.
         /// </summary>
         /// <param name="flag">The size to set to</param>
         /// <exception cref="Exception">It will throw an exception if you attempt to set Tiny on a Gas Giant</exception>
-        public virtual void updateSize(int flag)
+        public virtual void UpdateSize( int flag )
         {
-            if (this.baseType == Satellite.BASETYPE_GASGIANT && flag == Satellite.SIZE_TINY)
+            if (BaseType == BasetypeGasgiant && flag == SizeTiny)
+            {
                 throw new Exception("You cannot have Tiny Gas Giants");
+            }
 
-            this.SatelliteSize = flag;
-            this.SatelliteSize = this.SatelliteSize;
+            SatelliteSize = flag;
+            SatelliteSize = SatelliteSize;
         }
 
         /// <summary>
-        /// A shortcut function to update both the type and size of a satellite
+        ///     A shortcut function to update both the type and size of a satellite
         /// </summary>
         /// <param name="typeFlag">The type of a satellite</param>
         /// <param name="sizeFlag">The size of a satellite</param>
-        public virtual void updateTypeSize(int typeFlag, int sizeFlag)
+        public virtual void UpdateTypeSize( int typeFlag, int sizeFlag )
         {
-            this.updateType(typeFlag);
-            this.updateSize(sizeFlag);
+            UpdateType(typeFlag);
+            UpdateSize(sizeFlag);
         }
 
         /// <summary>
-        /// Returns the affinity of the planet
+        ///     Returns the affinity of the planet
         /// </summary>
         /// <returns>The affinity (RVM + Habitability)</returns>
-        public virtual int getAffinity()
+        public virtual int GetAffinity()
         {
-            return getHabitability() + RVM;
+            return GetHabitability() + Rvm;
         }
 
         /// <summary>
-        /// This factor calculates the differentation on a moon. Should only be invoked on a gas giant moon
+        ///     This factor calculates the differentation on a moon. Should only be invoked on a gas giant moon
         /// </summary>
         /// <param name="parentMass">The parent mass of the moon</param>
-        /// <param name="ourBag">Dice object used for rolls</param>
+        /// <param name="ourBag">Ddice object used for rolls</param>
         /// <returns>The differentation factor</returns>
         /// <exception cref="Exception">Will throw an exception if you invoke this on a satellite that isn't a moon</exception>
-        public double getDifferentationFactor(double parentMass, Dice ourBag)
+        public double GetDifferentationFactor( double parentMass, Dice ourBag )
         {
-            if (!(this.baseType == Satellite.BASETYPE_MOON))
+            if (BaseType != BasetypeMoon)
+            {
                 throw new Exception("Cannot call this except on a moon.");
+            }
 
-            double value = 0;
             double factor = 0;
 
-            if (parentMass > 3900) factor = .7;
+            if (parentMass > 3900)
+            {
+                factor = .7;
+            }
 
-            if (parentMass > 2500 && parentMass < 3900) factor = .6;
-            if (parentMass > 1000 && parentMass < 2500) factor = .5;
-            if (parentMass > 300 && parentMass < 1000) factor = .4;
-            if (parentMass < 300) factor = .3;
+            if (parentMass > 2500 && parentMass < 3900)
+            {
+                factor = .6;
+            }
+            if (parentMass > 1000 && parentMass < 2500)
+            {
+                factor = .5;
+            }
+            if (parentMass > 300 && parentMass < 1000)
+            {
+                factor = .4;
+            }
+            if (parentMass < 300)
+            {
+                factor = .3;
+            }
 
-
-            value = (1 / Math.Sqrt(this.moonRadius * factor) * 100);
+            var value = 1 / Math.Sqrt(MoonRadius * factor) * 100;
 
             return value;
         }
 
         /// <summary>
-        /// This function calculates the category given the atmospheric pressure
+        ///     This function calculates the category given the atmospheric pressure
         /// </summary>
         /// <returns>The flag describing the pressure category</returns>
-        public virtual int getAtmCategory()
+        public virtual int GetAtmCategory()
         {
-            if (this.atmPres < 0.01) return ATM_PRES_NONE;
-            if (this.atmPres == 0.01) return ATM_PRES_TRACE;
-            if (0.01 < this.atmPres && this.atmPres <= 0.5) return ATM_PRES_VERYTHIN;
-            if (0.5 < this.atmPres && this.atmPres <= 0.8) return ATM_PRES_THIN;
-            if (0.8 < this.atmPres && this.atmPres <= 1.2) return ATM_PRES_STANDARD;
-            if (1.2 < this.atmPres && this.atmPres <= 1.5) return ATM_PRES_DENSE;
-            if (1.5 < this.atmPres && this.atmPres <= 10) return ATM_PRES_VERYDENSE;
-            if (this.atmPres > 10) return ATM_PRES_SUPERDENSE;
+            if (AtmPres < 0.01)
+            {
+                return AtmPresNone;
+            }
+            if (Math.Abs(AtmPres - 0.01) < 0)
+            {
+                return AtmPresTrace;
+            }
+            if (0.01 < AtmPres && AtmPres <= 0.5)
+            {
+                return AtmPresVerythin;
+            }
+            if (0.5 < AtmPres && AtmPres <= 0.8)
+            {
+                return AtmPresThin;
+            }
+            if (0.8 < AtmPres && AtmPres <= 1.2)
+            {
+                return AtmPresStandard;
+            }
+            if (1.2 < AtmPres && AtmPres <= 1.5)
+            {
+                return AtmPresDense;
+            }
+            if (1.5 < AtmPres && AtmPres <= 10)
+            {
+                return AtmPresVerydense;
+            }
+            if (AtmPres > 10)
+            {
+                return AtmPresSuperdense;
+            }
 
-            return ERROR_ATM;
+            return ErrorAtm;
         }
 
         /// <summary>
-        /// Describes the volcanic activity of this satelite
+        ///     Describes the volcanic activity of this satelite
         /// </summary>
         /// <returns>The description (a string)</returns>
-        public virtual string getVolDesc()
+        public virtual string GetVolDesc()
         {
-            if (this.volActivity == Satellite.GEOLOGIC_NONE) return "None";
-            if (this.volActivity == Satellite.GEOLOGIC_LIGHT) return "Light";
-            if (this.volActivity == Satellite.GEOLOGIC_MODERATE) return "Moderate";
-            if (this.volActivity == Satellite.GEOLOGIC_HEAVY) return "Heavy";
-            if (this.volActivity == Satellite.GEOLOGIC_EXTREME) return "Extreme";
+            if (VolActivity == GeologicNone)
+            {
+                return "None";
+            }
+            if (VolActivity == GeologicLight)
+            {
+                return "Light";
+            }
+            if (VolActivity == GeologicModerate)
+            {
+                return "Moderate";
+            }
+            if (VolActivity == GeologicHeavy)
+            {
+                return "Heavy";
+            }
+            if (VolActivity == GeologicExtreme)
+            {
+                return "Extreme";
+            }
 
             return "Error";
         }
 
         /// <summary>
-        /// Describes the tectonic activity of this satelite
+        ///     Describes the tectonic activity of this satelite
         /// </summary>
         /// <returns>The description (a string)</returns>
-        public virtual string getTecDesc()
+        public virtual string GetTecDesc()
         {
-            if (this.tecActivity == Satellite.GEOLOGIC_NONE) return "None";
-            if (this.tecActivity == Satellite.GEOLOGIC_LIGHT) return "Light";
-            if (this.tecActivity == Satellite.GEOLOGIC_MODERATE) return "Moderate";
-            if (this.tecActivity == Satellite.GEOLOGIC_HEAVY) return "Heavy";
-            if (this.tecActivity == Satellite.GEOLOGIC_EXTREME) return "Extreme";
+            if (TecActivity == GeologicNone)
+            {
+                return "None";
+            }
+            if (TecActivity == GeologicLight)
+            {
+                return "Light";
+            }
+            if (TecActivity == GeologicModerate)
+            {
+                return "Moderate";
+            }
+            if (TecActivity == GeologicHeavy)
+            {
+                return "Heavy";
+            }
+            if (TecActivity == GeologicExtreme)
+            {
+                return "Extreme";
+            }
 
             return "Error";
         }
 
         /// <summary>
-        /// Used to describe the satellite type within the object
+        ///     Used to describe the satellite type within the object
         /// </summary>
         /// <returns>The description</returns>
-        protected virtual string convSatelliteTypeToString()
+        protected virtual string ConvSatelliteTypeToString()
         {
-            if (this.SatelliteType == Satellite.SUBTYPE_AMMONIA)
+            if (SatelliteType == SubtypeAmmonia)
+            {
                 return "Ammonia";
-            if (this.SatelliteType == Satellite.SUBTYPE_CHTHONIAN)
+            }
+            if (SatelliteType == SubtypeChthonian)
+            {
                 return "Chthonian";
-            if (this.SatelliteType == Satellite.SUBTYPE_GARDEN)
+            }
+            if (SatelliteType == SubtypeGarden)
             {
-                if (this.hydCoverage < 1)
+                if (HydCoverage < 1)
+                {
                     return "Garden";
-                else
-                    return "Oceanic Garden";
+                }
+                return "Oceanic Garden";
             }
-            if (this.SatelliteType == Satellite.SUBTYPE_GREENHOUSE)
+            if (SatelliteType == SubtypeGreenhouse)
             {
-                if (this.hydCoverage > 0)
+                if (HydCoverage > 0)
+                {
                     return "Wet Greenhouse";
-                else
-                    return "Dry Greenhouse";
+                }
+                return "Dry Greenhouse";
             }
-            if (this.SatelliteType == Satellite.SUBTYPE_HADEAN)
+            if (SatelliteType == SubtypeHadean)
+            {
                 return "Hadean";
-            if (this.SatelliteType == Satellite.SUBTYPE_ICE)
+            }
+            if (SatelliteType == SubtypeIce)
+            {
                 return "Ice";
-            if (this.SatelliteType == Satellite.SUBTYPE_OCEAN)
+            }
+            if (SatelliteType == SubtypeOcean)
+            {
                 return "Ocean";
-            if (this.SatelliteType == Satellite.SUBTYPE_ROCK)
+            }
+            if (SatelliteType == SubtypeRock)
+            {
                 return "Rock";
-            if (this.SatelliteType == Satellite.SUBTYPE_SULFUR)
+            }
+            if (SatelliteType == SubtypeSulfur)
+            {
                 return "Sulfur";
+            }
 
             //base types
-            if (this.baseType == Satellite.BASETYPE_ASTEROIDBELT)
+            if (BaseType == BasetypeAsteroidbelt)
+            {
                 return "Asteroid Belt";
-            if (this.baseType == Satellite.BASETYPE_EMPTY)
+            }
+            if (BaseType == BasetypeEmpty)
+            {
                 return "Empty";
-            if (this.baseType == Satellite.BASETYPE_TERRESTIAL)
+            }
+            if (BaseType == BasetypeTerrestial)
+            {
                 return "Terrestial";
-            if (this.baseType == Satellite.BASETYPE_MOON)
+            }
+            if (BaseType == BasetypeMoon)
+            {
                 return "Moon";
-            if (this.baseType == Satellite.BASETYPE_UNSET)
+            }
+            if (BaseType == BasetypeUnset)
+            {
                 return "Unset";
-            if (this.baseType == Satellite.BASETYPE_GASGIANT)
+            }
+            if (BaseType == BasetypeGasgiant)
+            {
                 return "Gas Giant";
+            }
 
             return "???";
-
         }
 
         /// <summary>
-        /// Describes the satelite type, given the subtype.
+        ///     Describes the satelite type, given the subtype.
         /// </summary>
         /// <param name="flag">Subtype flag</param>
         /// <param name="hydCoverage">The hydrographic coverage of the planet</param>
         /// <returns>description of the satellite</returns>
-        public virtual string convSatelliteTypeToString(double hydCoverage, int flag)
+        public virtual string ConvSatelliteTypeToString( double hydCoverage, int flag )
         {
-            if (flag == Satellite.SUBTYPE_AMMONIA)
+            if (flag == SubtypeAmmonia)
+            {
                 return "Ammonia";
-            if (flag == Satellite.SUBTYPE_CHTHONIAN)
+            }
+            if (flag == SubtypeChthonian)
+            {
                 return "Chthonian";
-            if (flag == Satellite.SUBTYPE_GARDEN)
+            }
+            if (flag == SubtypeGarden)
             {
                 if (hydCoverage < 1)
+                {
                     return "Garden";
-                else
-                    return "Oceanic Garden";
+                }
+                return "Oceanic Garden";
             }
-            if (flag == Satellite.SUBTYPE_GREENHOUSE)
+            if (flag == SubtypeGreenhouse)
             {
                 if (hydCoverage > 0)
+                {
                     return "Wet Greenhouse";
-                else
-                    return "Dry Greenhouse";
+                }
+                return "Dry Greenhouse";
             }
-            if (flag == Satellite.SUBTYPE_HADEAN)
+            if (flag == SubtypeHadean)
+            {
                 return "Hadean";
-            if (flag == Satellite.SUBTYPE_ICE)
+            }
+            if (flag == SubtypeIce)
+            {
                 return "Ice";
-            if (flag == Satellite.SUBTYPE_OCEAN)
+            }
+            if (flag == SubtypeOcean)
+            {
                 return "Ocean";
-            if (flag == Satellite.SUBTYPE_ROCK)
+            }
+            if (flag == SubtypeRock)
+            {
                 return "Rock";
-            if (flag == Satellite.SUBTYPE_SULFUR)
+            }
+            if (flag == SubtypeSulfur)
+            {
                 return "Sulfur";
+            }
 
             //base types
-            if (flag == Satellite.BASETYPE_ASTEROIDBELT)
+            if (flag == BasetypeAsteroidbelt)
+            {
                 return "Asteroid Belt";
-            if (flag == Satellite.BASETYPE_EMPTY)
+            }
+            if (flag == BasetypeEmpty)
+            {
                 return "Empty";
-            if (flag == Satellite.BASETYPE_TERRESTIAL)
+            }
+            if (flag == BasetypeTerrestial)
+            {
                 return "Terrestial";
-            if (flag == Satellite.BASETYPE_MOON)
+            }
+            if (flag == BasetypeMoon)
+            {
                 return "Moon";
-            if (flag == Satellite.BASETYPE_UNSET)
+            }
+            if (flag == BasetypeUnset)
+            {
                 return "Unset";
+            }
             return "???";
-
         }
 
         /// <summary>
-        ///  Describe the size of the satelite of the self object
+        ///     Describe the size of the satelite of the self object
         /// </summary>
         /// <returns>Return the description (string)</returns>
-        protected virtual string describeSatelliteSize()
+        protected virtual string DescribeSatelliteSize()
         {
-            if (this.baseType == Satellite.BASETYPE_MOON || this.baseType == Satellite.BASETYPE_TERRESTIAL)
+            if (BaseType == BasetypeMoon || BaseType == BasetypeTerrestial)
             {
-                if (this.SatelliteSize == Satellite.SIZE_TINY) return "Tiny";
-                if (this.SatelliteSize == Satellite.SIZE_SMALL) return "Small";
-                if (this.SatelliteSize == Satellite.SIZE_MEDIUM) return "Standard";
-                if (this.SatelliteSize == Satellite.SIZE_LARGE) return "Large";
+                if (SatelliteSize == SizeTiny)
+                {
+                    return "Tiny";
+                }
+                if (SatelliteSize == SizeSmall)
+                {
+                    return "Small";
+                }
+                if (SatelliteSize == SizeMedium)
+                {
+                    return "Standard";
+                }
+                if (SatelliteSize == SizeLarge)
+                {
+                    return "Large";
+                }
                 return "???";
             }
 
-            if (this.baseType == Satellite.BASETYPE_GASGIANT)
+            if (BaseType == BasetypeGasgiant)
             {
-                if (this.SatelliteSize == Satellite.SIZE_SMALL) return "Small";
-                if (this.SatelliteSize == Satellite.SIZE_MEDIUM) return "Medium";
-                if (this.SatelliteSize == Satellite.SIZE_LARGE) return "Large";
+                if (SatelliteSize == SizeSmall)
+                {
+                    return "Small";
+                }
+                if (SatelliteSize == SizeMedium)
+                {
+                    return "Medium";
+                }
+                if (SatelliteSize == SizeLarge)
+                {
+                    return "Large";
+                }
                 return "???";
             }
 
-            if (this.baseType == Satellite.BASETYPE_ASTEROIDBELT)
+            if (BaseType == BasetypeAsteroidbelt)
             {
-                if (this.SatelliteSize == Satellite.SIZE_TINY) return "Sparse";
-                if (this.SatelliteSize == Satellite.SIZE_SMALL) return "Light";
-                if (this.SatelliteSize == Satellite.SIZE_MEDIUM) return "Moderate";
-                if (this.SatelliteSize == Satellite.SIZE_LARGE) return "Dense";
+                if (SatelliteSize == SizeTiny)
+                {
+                    return "Sparse";
+                }
+                if (SatelliteSize == SizeSmall)
+                {
+                    return "Light";
+                }
+                if (SatelliteSize == SizeMedium)
+                {
+                    return "Moderate";
+                }
+                if (SatelliteSize == SizeLarge)
+                {
+                    return "Dense";
+                }
                 return "???";
             }
 
-            if (this.baseType == Satellite.BASETYPE_EMPTY)
+            if (BaseType == BasetypeEmpty)
             {
                 return "";
             }
@@ -1679,36 +2359,69 @@ namespace UniverseGeneration.Stellar_Bodies
         }
 
         /// <summary>
-        /// Describe the satellite size given a flag (used for access outside the object)
+        ///     Describe the satellite size given a flag (used for access outside the object)
         /// </summary>
         /// <param name="flag">The flag describing the size of the satellite</param>
         /// <param name="baseType">The flag describing the base type of the satellite</param>
         /// <returns>The description</returns>
-        public static string describeSatelliteSize(int baseType, int flag)
+        public static string DescribeSatelliteSize( int baseType, int flag )
         {
-            if (baseType == Satellite.BASETYPE_MOON || baseType == Satellite.BASETYPE_TERRESTIAL)
+            if (baseType == BasetypeMoon || baseType == BasetypeTerrestial)
             {
-                if (flag == Satellite.SIZE_TINY) return "Tiny";
-                if (flag == Satellite.SIZE_SMALL) return "Small";
-                if (flag == Satellite.SIZE_MEDIUM) return "Standard";
-                if (flag == Satellite.SIZE_LARGE) return "Large";
+                if (flag == SizeTiny)
+                {
+                    return "Tiny";
+                }
+                if (flag == SizeSmall)
+                {
+                    return "Small";
+                }
+                if (flag == SizeMedium)
+                {
+                    return "Standard";
+                }
+                if (flag == SizeLarge)
+                {
+                    return "Large";
+                }
                 return "???";
             }
 
-            if (baseType == Satellite.BASETYPE_GASGIANT)
+            if (baseType == BasetypeGasgiant)
             {
-                if (flag == Satellite.SIZE_SMALL) return "Small";
-                if (flag == Satellite.SIZE_MEDIUM) return "Medium";
-                if (flag == Satellite.SIZE_LARGE) return "Large";
+                if (flag == SizeSmall)
+                {
+                    return "Small";
+                }
+                if (flag == SizeMedium)
+                {
+                    return "Medium";
+                }
+                if (flag == SizeLarge)
+                {
+                    return "Large";
+                }
                 return "???";
             }
 
-            if (baseType == Satellite.BASETYPE_ASTEROIDBELT)
+            if (baseType == BasetypeAsteroidbelt)
             {
-                if (flag == Satellite.SIZE_TINY) return "Sparse";
-                if (flag == Satellite.SIZE_SMALL) return "Light";
-                if (flag == Satellite.SIZE_MEDIUM) return "Moderate";
-                if (flag == Satellite.SIZE_LARGE) return "Dense";
+                if (flag == SizeTiny)
+                {
+                    return "Sparse";
+                }
+                if (flag == SizeSmall)
+                {
+                    return "Light";
+                }
+                if (flag == SizeMedium)
+                {
+                    return "Moderate";
+                }
+                if (flag == SizeLarge)
+                {
+                    return "Dense";
+                }
                 return "???";
             }
 
@@ -1716,716 +2429,1025 @@ namespace UniverseGeneration.Stellar_Bodies
         }
 
         /// <summary>
-        /// Returns the planetary diameter in KM, rather than Earth diameters
+        ///     Returns the planetary diameter in KM, rather than Earth diameters
         /// </summary>
         /// <returns>double diameter in KM</returns>
-        public virtual double diameterInKM()
+        public virtual double DiameterInKm()
         {
-            return this.diameter * 12756;
+            return Diameter * 12756;
         }
 
-        public virtual string descCurrentClimate()
+        public virtual string DescCurrentClimate()
         {
-            return this.getClimateDesc(this.getClimate(this.surfaceTemp));
+            return GetClimateDesc(GetClimate(SurfaceTemp));
         }
 
         /// <summary>
-        /// This describes the climate given a flag.
+        ///     This describes the climate given a flag.
         /// </summary>
         /// <param name="climate">The climate flag</param>
         /// <returns>The description (a string) of this climate</returns>
-        public virtual string getClimateDesc(int climate)
+        public virtual string GetClimateDesc( int climate )
         {
-
-            if (climate == CLIMATE_NONE)
+            if (climate == ClimateNone)
+            {
                 return "Climate: No atmosphere";
+            }
 
-            if (climate == CLIMATE_FROZEN)
+            if (climate == ClimateFrozen)
+            {
                 return "Climate: Frozen (Below -20° F)";
-            if (climate == CLIMATE_VERYCOLD)
+            }
+            if (climate == ClimateVerycold)
+            {
                 return "Climate: Very Cold (Between -20°F and 0°F)";
+            }
 
-            if (climate == CLIMATE_COLD)
+            if (climate == ClimateCold)
+            {
                 return "Climate: Cold (Between 0°F and 20°F)";
+            }
 
-            if (climate == CLIMATE_CHILLY)
+            if (climate == ClimateChilly)
+            {
                 return "Climate: Chilly (Between 20°F and 40°F)";
+            }
 
-            if (climate == CLIMATE_COOL)
+            if (climate == ClimateCool)
+            {
                 return "Climate: Cool (Between 40°F and 60°F)";
+            }
 
-            if (climate == CLIMATE_NORMAL)
+            if (climate == ClimateNormal)
+            {
                 return "Climate: Normal (Between 60°F and 80°F)";
+            }
 
-            if (climate == CLIMATE_WARM)
+            if (climate == ClimateWarm)
+            {
                 return "Climate: Warm (Between 80°F and 100°F)";
+            }
 
-            if (climate == CLIMATE_TROPICAL)
+            if (climate == ClimateTropical)
+            {
                 return "Climate: Tropical (Between 100°F and 120°F)";
+            }
 
-            if (climate == CLIMATE_HOT)
+            if (climate == ClimateHot)
+            {
                 return "Climate: Hot (Between 120°F and 140°F)";
+            }
 
-            if (climate == CLIMATE_VERYHOT)
+            if (climate == ClimateVeryhot)
+            {
                 return "Climate: Very Hot (Between 140°F and 160°F)";
+            }
 
-            if (climate == CLIMATE_INFERNAL)
+            if (climate == ClimateInfernal)
+            {
                 return "Climate: Infernal (Above 160°F)";
+            }
 
-            else
-                return "Climate: ????";
+            return "Climate: ????";
         }
 
         //calculates the climate given a temperature.
         // like the others, this is overrridable, if you wish to use a different table than the GURPS 4e one. 
-        public virtual int getClimate(double temp)
+        public virtual int GetClimate( double temp )
         {
-            if (this.atmMass <= 0.01) return CLIMATE_NONE;
-            else
+            if (AtmMass <= 0.01)
             {
-
-                if (temp <= 244.50) return CLIMATE_FROZEN;
-                if (temp > 244.50 && temp <= 255.50) return CLIMATE_VERYCOLD;
-                if (temp > 255.50 && temp <= 266.50) return CLIMATE_COLD;
-                if (temp > 266.50 && temp <= 278.50) return CLIMATE_CHILLY;
-                if (temp > 278.50 && temp <= 289.50) return CLIMATE_COOL;
-                if (temp > 289.50 && temp <= 300.50) return CLIMATE_NORMAL;
-                if (temp > 300.50 && temp <= 311.50) return CLIMATE_WARM;
-                if (temp > 311.50 && temp <= 322.50) return CLIMATE_TROPICAL;
-                if (temp > 322.50 && temp <= 333.50) return CLIMATE_HOT;
-                if (temp > 333.50 && temp <= 344.50) return CLIMATE_VERYHOT;
-                if (temp > 344.50) return CLIMATE_INFERNAL;
+                return ClimateNone;
+            }
+            if (temp <= 244.50)
+            {
+                return ClimateFrozen;
+            }
+            if (temp > 244.50 && temp <= 255.50)
+            {
+                return ClimateVerycold;
+            }
+            if (temp > 255.50 && temp <= 266.50)
+            {
+                return ClimateCold;
+            }
+            if (temp > 266.50 && temp <= 278.50)
+            {
+                return ClimateChilly;
+            }
+            if (temp > 278.50 && temp <= 289.50)
+            {
+                return ClimateCool;
+            }
+            if (temp > 289.50 && temp <= 300.50)
+            {
+                return ClimateNormal;
+            }
+            if (temp > 300.50 && temp <= 311.50)
+            {
+                return ClimateWarm;
+            }
+            if (temp > 311.50 && temp <= 322.50)
+            {
+                return ClimateTropical;
+            }
+            if (temp > 322.50 && temp <= 333.50)
+            {
+                return ClimateHot;
+            }
+            if (temp > 333.50 && temp <= 344.50)
+            {
+                return ClimateVeryhot;
+            }
+            if (temp > 344.50)
+            {
+                return ClimateInfernal;
             }
 
-
-            return ERROR_GENERIC;
+            return ErrorGeneric;
         }
 
         /// <summary>
-        /// This describes the current atmospheric category
+        ///     This describes the current atmospheric category
         /// </summary>
         /// <returns>A string description of the category</returns>
-        public virtual string getDescAtmCategory()
+        public virtual string GetDescAtmCategory()
         {
-
-            if (this.getAtmCategory() == ATM_PRES_NONE)
+            if (GetAtmCategory() == AtmPresNone)
+            {
                 return "None";
-            if (this.getAtmCategory() == ATM_PRES_TRACE)
+            }
+            if (GetAtmCategory() == AtmPresTrace)
+            {
                 return "Trace";
-            if (this.getAtmCategory() == ATM_PRES_VERYTHIN)
+            }
+            if (GetAtmCategory() == AtmPresVerythin)
+            {
                 return "Very Thin";
-            if (this.getAtmCategory() == ATM_PRES_THIN)
+            }
+            if (GetAtmCategory() == AtmPresThin)
+            {
                 return "Thin";
-            if (this.getAtmCategory() == ATM_PRES_STANDARD)
+            }
+            if (GetAtmCategory() == AtmPresStandard)
+            {
                 return "Standard";
-            if (this.getAtmCategory() == ATM_PRES_DENSE)
+            }
+            if (GetAtmCategory() == AtmPresDense)
+            {
                 return "Dense";
-            if (this.getAtmCategory() == ATM_PRES_VERYDENSE)
+            }
+            if (GetAtmCategory() == AtmPresVerydense)
+            {
                 return "Very Dense";
-            if (this.getAtmCategory() == ATM_PRES_SUPERDENSE)
+            }
+            if (GetAtmCategory() == AtmPresSuperdense)
+            {
                 return "Superdense";
+            }
 
             return "???";
         }
 
         /// <summary>
-        /// Converting the flags describing various atmospheric conditions
+        ///     Converting the flags describing various atmospheric conditions
         /// </summary>
         /// <param name="code">The code to be described</param>
         /// <returns>A description of the code</returns>
-        public virtual string convAtmCodeToString(int code)
+        public virtual string ConvAtmCodeToString( int code )
         {
-            String ret = "";
+            var ret = "";
 
             //condtionals
-            if (code == ATM_COND_CORROSIVE) return "Corrosive";
-            if (code == ATM_COND_FLAMP1) return "Flammability Class +1";
-            if (code == ATM_COND_SUFFOCATING) return "Suffocating";
+            if (code == AtmCondCorrosive)
+            {
+                return "Corrosive";
+            }
+            if (code == AtmCondFlamp1)
+            {
+                return "Flammability Class +1";
+            }
+            if (code == AtmCondSuffocating)
+            {
+                return "Suffocating";
+            }
 
             //marginal
-            if (code == ATM_MARG_CHLORINE) return "Marginal: Chlorine";
-            if (code == ATM_MARG_FLOURINE) return "Marginal: Flourine";
-            if (code == ATM_MARG_HIGHCO2) return "Marginal: High Carbon Dioxide";
-            if (code == ATM_MARG_HIGHOXY) return "Marginal: High Oxygen";
-            if (code == ATM_MARG_INERT) return "Marginal: Inert Gases";
-            if (code == ATM_MARG_LOWOXY) return "Marginal: Low Oxygen";
-            if (code == ATM_MARG_NITROGEN) return "Marginal: Nitrogen";
-            if (code == ATM_MARG_ORGANIC) return "Marginal: Organic Toxins";
-            if (code == ATM_MARG_POLLUTANTS) return "Marginal: Pollutants";
-            if (code == ATM_MARG_SULFUR) return "Marginal: Sulfur";
+            if (code == AtmMargChlorine)
+            {
+                return "Marginal: Chlorine";
+            }
+            if (code == AtmMargFlourine)
+            {
+                return "Marginal: Flourine";
+            }
+            if (code == AtmMargHighco2)
+            {
+                return "Marginal: High Carbon Dioxide";
+            }
+            if (code == AtmMargHighoxy)
+            {
+                return "Marginal: High Oxygen";
+            }
+            if (code == AtmMargInert)
+            {
+                return "Marginal: Inert Gases";
+            }
+            if (code == AtmMargLowoxy)
+            {
+                return "Marginal: Low Oxygen";
+            }
+            if (code == AtmMargNitrogen)
+            {
+                return "Marginal: Nitrogen";
+            }
+            if (code == AtmMargOrganic)
+            {
+                return "Marginal: Organic Toxins";
+            }
+            if (code == AtmMargPollutants)
+            {
+                return "Marginal: Pollutants";
+            }
+            if (code == AtmMargSulfur)
+            {
+                return "Marginal: Sulfur";
+            }
 
             //toxic
-            if (code == ATM_TOXIC_HIGHLY) return "Highly Toxic";
-            if (code == ATM_TOXIC_LETHALLY) return "Lethally Toxic";
-            if (code == ATM_TOXIC_MILDLY) return "Mildly Toxic";
+            if (code == AtmToxicHighly)
+            {
+                return "Highly Toxic";
+            }
+            if (code == AtmToxicLethally)
+            {
+                return "Lethally Toxic";
+            }
+            if (code == AtmToxicMildly)
+            {
+                return "Mildly Toxic";
+            }
 
             return ret;
-
         }
 
         /// <summary>
-        /// Convert the description flag to a string for description
+        ///     Convert the description flag to a string for description
         /// </summary>
         /// <param name="i">The flag</param>
         /// <returns>The string describing the flag</returns>
-        public virtual string convDescCodeToString(int i)
+        public virtual string ConvDescCodeToString( int i )
         {
-            if (i == Satellite.DESC_FAINTRINGSYS) return "Faint Ring System";
-            if (i == Satellite.DESC_RAD_HIGHBACK) return "High Background Radiation";
-            if (i == Satellite.DESC_RAD_LETHALBACK) return "Lethal Background Radiation";
-            if (i == Satellite.DESC_SPECRINGSYS) return "Spectular Ring System";
-            if (i == Satellite.DESC_SUBSURFOCEAN) return "Subsurface Ocean";
+            if (i == DescFaintringsys)
+            {
+                return "Faint Ring System";
+            }
+            if (i == DescRadHighback)
+            {
+                return "High Background Radiation";
+            }
+            if (i == DescRadLethalback)
+            {
+                return "Lethal Background Radiation";
+            }
+            if (i == DescSpecringsys)
+            {
+                return "Spectular Ring System";
+            }
+            if (i == DescSubsurfocean)
+            {
+                return "Subsurface Ocean";
+            }
 
             return "???";
         }
 
         /// <summary>
-        /// Generates the eccentricity of the planet's orbit around it's primary.
+        ///     Generates the eccentricity of the planet's orbit around it's primary.
         /// </summary>
         /// <param name="flag">The gas giant flag</param>
         /// <param name="snowLine">Location of the snow line</param>
-        /// <param name="ourDice">Our dice object</param>
-        public virtual void getPlanetEccentricity(int flag, double snowLine, Dice ourDice)
+        /// <param name="ourDice">Our Ddice object</param>
+        public virtual void GetPlanetEccentricity( int flag, double snowLine, Dice ourDice )
         {
-
-            int roll = ourDice.gurpsRoll();
+            var roll = ourDice.GurpsRoll();
             double mod = 0;
 
-            if (this.selfID == 0 && this.baseType == Satellite.BASETYPE_GASGIANT && flag == Star.GASGIANT_EPISTELLAR)
+            if (SelfId == 0 && BaseType == BasetypeGasgiant && flag == Star.GasgiantEpistellar)
+            {
                 roll = roll - 6;
-            if (this.baseType == Satellite.BASETYPE_GASGIANT && flag == Star.GASGIANT_ECCENTRIC && this.orbitalRadius < snowLine)
+            }
+            if (BaseType == BasetypeGasgiant && flag == Star.GasgiantEccentric && OrbitalRadius < snowLine)
+            {
                 roll = roll + 4;
-            if (flag == Star.GASGIANT_CONVENTIONAL)
+            }
+            if (flag == Star.GasgiantConventional)
+            {
                 roll = roll - 6;
-            if (roll <= 3) this.orbitalEccent = .0;
-            else if (roll >= 4 && roll <= 6) this.orbitalEccent = .05;
-            else if (roll >= 7 && roll <= 9) this.orbitalEccent = .1;
-            else if (roll >= 10 && roll <= 11) this.orbitalEccent = .15;
-            else if (roll == 12) this.orbitalEccent = .2;
-            else if (roll == 13) this.orbitalEccent = .3;
-            else if (roll == 14) this.orbitalEccent = .4;
-            else if (roll == 15) this.orbitalEccent = .5;
-            else if (roll == 16) this.orbitalEccent = .6;
-            else if (roll == 17) this.orbitalEccent = .7;
-            else if (roll >= 18) this.orbitalEccent = .8;
+            }
+            if (roll <= 3)
+            {
+                OrbitalEccent = .0;
+            }
+            else if (roll >= 4 && roll <= 6)
+            {
+                OrbitalEccent = .05;
+            }
+            else if (roll >= 7 && roll <= 9)
+            {
+                OrbitalEccent = .1;
+            }
+            else if (roll >= 10 && roll <= 11)
+            {
+                OrbitalEccent = .15;
+            }
+            else if (roll == 12)
+            {
+                OrbitalEccent = .2;
+            }
+            else if (roll == 13)
+            {
+                OrbitalEccent = .3;
+            }
+            else if (roll == 14)
+            {
+                OrbitalEccent = .4;
+            }
+            else if (roll == 15)
+            {
+                OrbitalEccent = .5;
+            }
+            else if (roll == 16)
+            {
+                OrbitalEccent = .6;
+            }
+            else if (roll == 17)
+            {
+                OrbitalEccent = .7;
+            }
+            else if (roll >= 18)
+            {
+                OrbitalEccent = .8;
+            }
 
             if (roll <= 11 && roll != 3)
             {
-                mod = ourDice.rng(1, 5, -2) * .01;
+                mod = ourDice.Rng(1, 5, -2) * .01;
             }
             else if (roll >= 12)
             {
-                mod = ourDice.rng(1, 10, -5) * .01;
+                mod = ourDice.Rng(1, 10, -5) * .01;
             }
 
-            this.orbitalEccent = this.orbitalEccent + mod;
+            OrbitalEccent = OrbitalEccent + mod;
         }
 
         /// <summary>
-        /// Generate (and store) the orbital velocity for an object (sidereal period)
+        ///     Generate (and store) the orbital velocity for an object (sidereal period)
         /// </summary>
-        /// <param name="ourBag">Dice object</param>
-        public void generateOrbitalVelocity(Dice ourBag)
+        /// <param name="ourBag">Ddice object</param>
+        public void GenerateOrbitalVelocity( Dice ourBag )
         {
-            if (this.tideTotal < 50)
+            if (TideTotal < 50)
             {
-                int roll = ourBag.gurpsRoll();
-                int temp = (int)Math.Floor(roll + this.tideTotal);
+                var roll = ourBag.GurpsRoll();
+                var temp = (int) Math.Floor(roll + TideTotal);
 
-                if (this.SatelliteSize == Satellite.SIZE_TINY) temp = temp + 18;
-                if (this.SatelliteSize == Satellite.SIZE_SMALL) temp = temp + 14;
-                if (this.SatelliteSize == Satellite.SIZE_MEDIUM) temp = temp + 10;
-                if (this.SatelliteSize == Satellite.SIZE_LARGE) temp = temp + 6;
-
-                if ((roll >= 16) || (temp >= 36))
+                if (SatelliteSize == SizeTiny)
                 {
+                    temp = temp + 18;
+                }
+                if (SatelliteSize == SizeSmall)
+                {
+                    temp = temp + 14;
+                }
+                if (SatelliteSize == SizeMedium)
+                {
+                    temp = temp + 10;
+                }
+                if (SatelliteSize == SizeLarge)
+                {
+                    temp = temp + 6;
+                }
 
-                    switch (ourBag.rng(2, 6, 0))
+                if (( roll >= 16 ) || ( temp >= 36 ))
+                {
+                    switch (ourBag.Rng(2, 6, 0))
                     {
                         case 3:
                         case 4:
                         case 5:
                         case 6:
-                            this.siderealPeriod = (temp / 24.0);
+                            SiderealPeriod = temp / 24.0;
                             break;
                         case 7:
-                            this.siderealPeriod = (ourBag.rng(1, 6) * 2);
+                            SiderealPeriod = ourBag.Rng(1, 6) * 2;
                             break;
                         case 8:
-                            this.siderealPeriod = (ourBag.rng(1, 6) * 5);
+                            SiderealPeriod = ourBag.Rng(1, 6) * 5;
                             break;
                         case 9:
-                            this.siderealPeriod = (ourBag.rng(1, 6) * 10);
+                            SiderealPeriod = ourBag.Rng(1, 6) * 10;
                             break;
                         case 10:
-                            this.siderealPeriod = (ourBag.rng(1, 6) * 20);
+                            SiderealPeriod = ourBag.Rng(1, 6) * 20;
                             break;
                         case 11:
-                            this.siderealPeriod = (ourBag.rng(1, 6) * 50);
+                            SiderealPeriod = ourBag.Rng(1, 6) * 50;
                             break;
                         case 12:
-                            this.siderealPeriod = (ourBag.rng(1, 6) * 100);
+                            SiderealPeriod = ourBag.Rng(1, 6) * 100;
                             break;
                     }
-
-
-
                 }
-                else if (!this.isTideLocked) this.siderealPeriod = (double)(temp / 24.0);
+                else if (!IsTideLocked)
+                {
+                    SiderealPeriod = temp / 24.0;
+                }
 
-                if (this.isTideLocked) this.siderealPeriod = this.orbitalPeriod;
+                if (IsTideLocked)
+                {
+                    SiderealPeriod = OrbitalPeriod;
+                }
             }
-            if (this.siderealPeriod >= this.orbitalPeriod)
+            if (SiderealPeriod >= OrbitalPeriod)
             {
-                this.isTideLocked = true;
+                IsTideLocked = true;
             }
         }
 
         /// <summary>
-        /// This function creates a generic name for satellites and moons
+        ///     This function creates a generic name for satellites and moons
         /// </summary>
         /// <param name="parentName">The star's name</param>
         /// <param name="systemName">The system's name</param>
-        public virtual void genGenericName(String parentName, String systemName)
+        public void GenGenericName( string parentName, string systemName )
         {
-            base.genGenericName();
-            if (this.baseType == Satellite.BASETYPE_TERRESTIAL ||
-                this.baseType == Satellite.BASETYPE_GASGIANT)
+            GenGenericName();
+            if (BaseType == BasetypeTerrestial || BaseType == BasetypeGasgiant)
             {
-                if (this.parentID >= 9000 && this.parentID <= 9050)
-                    this.name = parentName + (this.selfID + 1);
+                if (ParentId >= 9000 && ParentId <= 9050)
+                {
+                    Name = parentName + ( SelfId + 1 );
+                }
                 else
                 {
-                    if (this.parentID == Satellite.ORBIT_PRISEC)
-                        this.name = systemName + "-AB" + (this.selfID + 1);
-                    if (this.parentID == Satellite.ORBIT_PRISECTRI)
-                        this.name = systemName + "-ABC" + (this.selfID + 1);
-                    if (this.parentID == Satellite.ORBIT_PRITRI)
-                        this.name = systemName + "-AC" + (this.selfID + 1);
-                    if (this.parentID == Satellite.ORBIT_SECCOM)
-                        this.name = systemName + "-BD" + (this.selfID + 1);
-                    if (this.parentID == Satellite.ORBIT_SECTRI)
-                        this.name = systemName + "-BC" + (this.selfID + 1);
-                    if (this.parentID == Satellite.ORBIT_TRICOM)
-                        this.name = systemName + "-CE" + (this.selfID + 1);
+                    if (ParentId == OrbitPrisec)
+                    {
+                        Name = systemName + "-AB" + ( SelfId + 1 );
+                    }
+                    if (ParentId == OrbitPrisectri)
+                    {
+                        Name = systemName + "-ABC" + ( SelfId + 1 );
+                    }
+                    if (ParentId == OrbitPritri)
+                    {
+                        Name = systemName + "-AC" + ( SelfId + 1 );
+                    }
+                    if (ParentId == OrbitSeccom)
+                    {
+                        Name = systemName + "-BD" + ( SelfId + 1 );
+                    }
+                    if (ParentId == OrbitSectri)
+                    {
+                        Name = systemName + "-BC" + ( SelfId + 1 );
+                    }
+                    if (ParentId == OrbitTricom)
+                    {
+                        Name = systemName + "-CE" + ( SelfId + 1 );
+                    }
                 }
-
-
             }
-            if (this.baseType == Satellite.BASETYPE_MOON)
+            if (BaseType == BasetypeMoon)
             {
-                string[] moonStr = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV" };
-                this.name = parentName + moonStr[this.selfID];
+                string[] moonStr =
+                {
+                    "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV"
+                };
+                Name = parentName + moonStr[SelfId];
             }
         }
 
         /// <summary>
-        /// Creaates moons around sateliets according to GURPS 4e rules.
+        ///     Creaates moons around sateliets according to GURPS 4e rules.
         /// </summary>
         /// <param name="sysName">The system name</param>
-        /// <param name="ourBag">Dice object used in rolling</param>
+        /// <param name="ourBag">Ddice object used in rolling</param>
         /// <param name="flag">The OptionCont flag describing where we put moon orbits</param>
-        public void createMoons(string sysName, Dice ourBag, int flag = 0)
+        public void CreateMoons( string sysName, Dice ourBag, int flag = 0 )
         {
-            String[] moonletNames = { "Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta", "Iota", "Kappa", "Lambda", "Mu",
-                                      "Nu", "Ksi", "Omicron", "Pi", "Rho", "Sigma", "Tau", "Upsilon", "Phi", "Chi", "Psi", "Omega" };
-
+            string[] moonletNames =
+            {
+                "Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta", "Iota", "Kappa", "Lambda", "Mu", "Nu", "Ksi", "Omicron", "Pi", "Rho", "Sigma", "Tau", "Upsilon", "Phi", "Chi", "Psi", "Omega"
+            };
 
             //initiate objects
-            int currMoonlet = 0;
+            var currMoonlet = 0;
             var occupiedOrbits = new List<double>();
             double currOrbit;
 
-            int mods, numRoll, roll; //roll variables
+            int numRoll, roll; //roll variables
 
             //terrestial
-            if (this.baseType == BASETYPE_TERRESTIAL)
+            if (BaseType == BasetypeTerrestial)
             {
                 //moonlets
-                numRoll = ourBag.rng(1, 6, -2);
+                numRoll = ourBag.Rng(1, 6, -2);
 
                 //modifiers for moonlets
-                if (this.SatelliteSize == Satellite.SIZE_TINY)
+                if (SatelliteSize == SizeTiny)
+                {
                     numRoll = numRoll - 2;
-                if (this.SatelliteSize == Satellite.SIZE_SMALL)
+                }
+                if (SatelliteSize == SizeSmall)
+                {
                     numRoll = numRoll - 1;
-                if (this.SatelliteSize == Satellite.SIZE_LARGE)
+                }
+                if (SatelliteSize == SizeLarge)
+                {
                     numRoll = numRoll + 1;
-                if (this.orbitalRadius <= 1.5 && .75 < this.orbitalRadius)
+                }
+                if (OrbitalRadius <= 1.5 && .75 < OrbitalRadius)
+                {
                     numRoll = numRoll - 1;
-                if (this.orbitalRadius <= .75 && .5 < this.orbitalRadius)
+                }
+                if (OrbitalRadius <= .75 && .5 < OrbitalRadius)
+                {
                     numRoll = numRoll - 3;
+                }
 
-                if (this.orbitalRadius <= .5) numRoll = 0; //set to 0, since we cannot have any in this range
+                if (OrbitalRadius <= .5)
+                {
+                    numRoll = 0; //set to 0, since we cannot have any in this range
+                }
 
                 if (numRoll > 0)
                 {
-                    for (int i = 0; i < numRoll; i++)
+                    for (var i = 0; i < numRoll; i++)
                     {
                         do
                         {
-                            roll = ourBag.rng(1, 6, 4);
-                            currOrbit = (roll / 4.0);
-                        } while ((scanOccupiedOrbits(occupiedOrbits, currOrbit)));
+                            roll = ourBag.Rng(1, 6, 4);
+                            currOrbit = roll / 4.0;
+                        }
+                        while (ScanOccupiedOrbits(occupiedOrbits, currOrbit));
 
                         occupiedOrbits.Add(currOrbit);
-                        this.innerMoonlets.Add(new Moonlet(this.selfID, i, currOrbit, moonletNames[currMoonlet]));
-                        this.innerMoonlets[i].orbitalRadius = this.innerMoonlets[i].planetRadius * this.diameter;
+                        InnerMoonlets.Add(new Moonlet(SelfId, i, currOrbit, moonletNames[currMoonlet]));
+                        InnerMoonlets[i].OrbitalRadius = InnerMoonlets[i].PlanetRadius * Diameter;
                         currMoonlet++;
                     }
                 }
 
                 //major moons
-                numRoll = ourBag.rng(1, 6, -4);
+                numRoll = ourBag.Rng(1, 6, -4);
 
-                if (this.SatelliteSize == Satellite.SIZE_TINY)
+                if (SatelliteSize == SizeTiny)
+                {
                     numRoll = numRoll - 2;
-                if (this.SatelliteSize == Satellite.SIZE_SMALL)
+                }
+                if (SatelliteSize == SizeSmall)
+                {
                     numRoll = numRoll + 1;
-                if (this.SatelliteSize == Satellite.SIZE_LARGE)
+                }
+                if (SatelliteSize == SizeLarge)
+                {
                     numRoll = numRoll - 1;
-                if (this.orbitalRadius <= 1.5 && .75 < this.orbitalRadius)
+                }
+                if (OrbitalRadius <= 1.5 && .75 < OrbitalRadius)
+                {
                     numRoll = numRoll - 1;
+                }
 
-                if (this.orbitalRadius <= .75) numRoll = 0;
+                if (OrbitalRadius <= .75)
+                {
+                    numRoll = 0;
+                }
 
-                if (OptionCont.getNumberOfMoonsOverGarden() != -1 && this.SatelliteType == SUBTYPE_GARDEN)
-                    numRoll = OptionCont.getNumberOfMoonsOverGarden();
+                if (OptionCont.GetNumberOfMoonsOverGarden() != -1 && SatelliteType == SubtypeGarden)
+                {
+                    numRoll = OptionCont.GetNumberOfMoonsOverGarden();
+                }
 
                 if (numRoll > 0)
                 {
-                    for (int i = 0; i < numRoll; i++)
+                    for (var i = 0; i < numRoll; i++)
                     {
-                        int size = Satellite.SIZE_MEDIUM;
+                        var size = SizeMedium;
 
-                        roll = ourBag.rng(3, 6, 0);
-                        if (this.SatelliteSize == Satellite.SIZE_TINY) size = Satellite.SIZE_TINY;
-
-                        if (this.SatelliteSize == Satellite.SIZE_SMALL) size = Satellite.SIZE_TINY;
-
-                        if (this.SatelliteSize == Satellite.SIZE_MEDIUM)
+                        roll = ourBag.Rng(3, 6, 0);
+                        if (SatelliteSize == SizeTiny)
                         {
-                            if (roll >= 10) size = Satellite.SIZE_SMALL;
-                            else size = Satellite.SIZE_TINY;
+                            size = SizeTiny;
                         }
 
-                        if (this.SatelliteSize == Satellite.SIZE_LARGE)
+                        if (SatelliteSize == SizeSmall)
                         {
-                            if (roll >= 15) size = Satellite.SIZE_MEDIUM;
-                            if (roll >= 12 && roll <= 14) size = Satellite.SIZE_SMALL;
-                            size = Satellite.SIZE_TINY;
+                            size = SizeTiny;
+                        }
+
+                        if (SatelliteSize == SizeMedium)
+                        {
+                            size = roll >= 10 ? SizeSmall : SizeTiny;
+                        }
+
+                        if (SatelliteSize == SizeLarge)
+                        {
+                            if (roll >= 15)
+                            {
+                                size = SizeMedium;
+                            }
+                            if (roll >= 12 && roll <= 14)
+                            {
+                                size = SizeSmall;
+                            }
+                            size = SizeTiny;
                         }
 
                         do
                         {
-                            mods = 0;
-                            if (this.SatelliteType - size == 2) mods = 2;
-                            if (this.SatelliteType - size == 1) mods = 4;
+                            var mods = 0; //roll variables
+                            if (SatelliteType - size == 2)
+                            {
+                                mods = 2;
+                            }
+                            if (SatelliteType - size == 1)
+                            {
+                                mods = 4;
+                            }
 
-                            if (flag == OptionCont.MOON_BOOK) roll = ourBag.rng(2, 6, mods);
-                            if (flag == OptionCont.MOON_BOOKHIGH) roll = ourBag.rng(1, 6, mods + 6);
-                            if (flag == OptionCont.MOON_EXPAND) roll = ourBag.rng(2, 10, mods);
-                            if (flag == OptionCont.MOON_EXPANDHIGH) roll = ourBag.rng(2, 6, mods + 12);
+                            if (flag == OptionCont.MoonBook)
+                            {
+                                roll = ourBag.Rng(2, 6, mods);
+                            }
+                            if (flag == OptionCont.MoonBookhigh)
+                            {
+                                roll = ourBag.Rng(1, 6, mods + 6);
+                            }
+                            if (flag == OptionCont.MoonExpand)
+                            {
+                                roll = ourBag.Rng(2, 10, mods);
+                            }
+                            if (flag == OptionCont.MoonExpandhigh)
+                            {
+                                roll = ourBag.Rng(2, 6, mods + 12);
+                            }
 
                             currOrbit = roll * 2.5;
-
-                        } while ((scanOccupiedOrbits(occupiedOrbits, currOrbit)) && !(withinOtherOrbits(occupiedOrbits, currOrbit, 5.0)));
+                        }
+                        while (ScanOccupiedOrbits(occupiedOrbits, currOrbit) && !WithinOtherOrbits(occupiedOrbits, currOrbit, 5.0));
 
                         occupiedOrbits.Add(currOrbit);
-                        this.majorMoons.Add(new Satellite(Satellite.ORBIT_PLANET, i, (currOrbit * this.diameter), i, Satellite.BASETYPE_MOON));
-                        this.majorMoons[i].updateSize(size);
-                        this.majorMoons[i].moonRadius = currOrbit;
-                        this.majorMoons[i].blackbodyTemp = this.blackbodyTemp;
-                        this.majorMoons[i].parentDiam = this.diameter * 12756.2;
+                        MajorMoons.Add(new Satellite(OrbitPlanet, i, currOrbit * Diameter, i, BasetypeMoon));
+                        MajorMoons[i].UpdateSize(size);
+                        MajorMoons[i].MoonRadius = currOrbit;
+                        MajorMoons[i].BlackbodyTemp = BlackbodyTemp;
+                        MajorMoons[i].ParentDiam = Diameter * 12756.2;
                     }
                 }
             }
 
             //gas giant
-            if (this.baseType == Satellite.BASETYPE_GASGIANT)
+            if (BaseType == BasetypeGasgiant)
             {
                 //moonlets (inner)
-                numRoll = ourBag.rng(2, 6, 0);
-                if (this.orbitalRadius <= .1)
+                numRoll = ourBag.Rng(2, 6, 0);
+                if (OrbitalRadius <= .1)
+                {
                     numRoll = numRoll - 10;
-                else if (this.orbitalRadius > .1 && .5 >= this.orbitalRadius)
+                }
+                else if (OrbitalRadius > .1 && .5 >= OrbitalRadius)
+                {
                     numRoll = numRoll - 8;
-                else if (this.orbitalRadius > .5 && .75 >= this.orbitalRadius)
+                }
+                else if (OrbitalRadius > .5 && .75 >= OrbitalRadius)
+                {
                     numRoll = numRoll - 6;
-                else if (this.orbitalRadius > .75 && 1.5 >= this.orbitalRadius)
+                }
+                else if (OrbitalRadius > .75 && 1.5 >= OrbitalRadius)
+                {
                     numRoll = numRoll - 3;
+                }
 
                 if (numRoll > 0)
                 {
-                    for (int i = 0; i < numRoll; i++)
+                    for (var i = 0; i < numRoll; i++)
                     {
-                        currOrbit = ourBag.rng(1, 6, 4) * .25;
-                        this.innerMoonlets.Add(new Moonlet(this.selfID, currMoonlet, currOrbit, moonletNames[currMoonlet]));
-                        this.innerMoonlets[i].orbitalRadius = currOrbit * this.diameter;
+                        currOrbit = ourBag.Rng(1, 6, 4) * .25;
+                        InnerMoonlets.Add(new Moonlet(SelfId, currMoonlet, currOrbit, moonletNames[currMoonlet]));
+                        InnerMoonlets[i].OrbitalRadius = currOrbit * Diameter;
                         currMoonlet++;
                     }
                 }
 
                 //major moons
-                numRoll = ourBag.rng(1, 6, 0);
-                if (this.orbitalRadius <= .1)
+                numRoll = ourBag.Rng(1, 6, 0);
+                if (OrbitalRadius <= .1)
+                {
                     numRoll = numRoll - 6;
-                else if (this.orbitalRadius > .1 && .5 >= this.orbitalRadius)
+                }
+                else if (OrbitalRadius > .1 && .5 >= OrbitalRadius)
+                {
                     numRoll = numRoll - 5;
-                else if (this.orbitalRadius > .5 && .75 >= this.orbitalRadius)
+                }
+                else if (OrbitalRadius > .5 && .75 >= OrbitalRadius)
+                {
                     numRoll = numRoll - 4;
-                else if (this.orbitalRadius > .75 && 1.5 >= this.orbitalRadius)
+                }
+                else if (OrbitalRadius > .75 && 1.5 >= OrbitalRadius)
+                {
                     numRoll = numRoll - 1;
+                }
 
                 if (numRoll > 0)
                 {
-                    for (int i = 0; i < numRoll; i++)
+                    for (var i = 0; i < numRoll; i++)
                     {
-                        int size = Satellite.SIZE_MEDIUM;
+                        var size = SizeMedium;
 
-                        roll = ourBag.gurpsRoll();
-                        if (roll >= 15) size = Satellite.SIZE_MEDIUM;
-                        if (roll >= 12 && roll <= 14) size = Satellite.SIZE_SMALL;
-                        if (roll < 12) size = Satellite.SIZE_TINY;
-
+                        roll = ourBag.GurpsRoll();
+                        if (roll >= 15)
+                        {
+                            size = SizeMedium;
+                        }
+                        if (roll >= 12 && roll <= 14)
+                        {
+                            size = SizeSmall;
+                        }
+                        if (roll < 12)
+                        {
+                            size = SizeTiny;
+                        }
 
                         do
                         {
-                            roll = ourBag.rng(3, 6, 3);
-                            if (roll >= 15) roll = roll + ourBag.rng(2, 6, 0);
+                            roll = ourBag.Rng(3, 6, 3);
+                            if (roll >= 15)
+                            {
+                                roll = roll + ourBag.Rng(2, 6, 0);
+                            }
                             currOrbit = roll / 2.0;
-
-                        } while ((scanOccupiedOrbits(occupiedOrbits, currOrbit)) && !(withinOtherOrbits(occupiedOrbits, currOrbit, 1.0)));
+                        }
+                        while (ScanOccupiedOrbits(occupiedOrbits, currOrbit) && !WithinOtherOrbits(occupiedOrbits, currOrbit, 1.0));
 
                         occupiedOrbits.Add(currOrbit);
-                        this.majorMoons.Add(new Satellite(Satellite.ORBIT_PLANET, i, (currOrbit * this.diameter), i, Satellite.BASETYPE_MOON));
-                        this.majorMoons[i].updateSize(size);
-                        this.majorMoons[i].moonRadius = currOrbit;
-                        this.majorMoons[i].blackbodyTemp = this.blackbodyTemp;
-                        this.majorMoons[i].parentDiam = this.diameter * 12756.2;
+                        MajorMoons.Add(new Satellite(OrbitPlanet, i, currOrbit * Diameter, i, BasetypeMoon));
+                        MajorMoons[i].UpdateSize(size);
+                        MajorMoons[i].MoonRadius = currOrbit;
+                        MajorMoons[i].BlackbodyTemp = BlackbodyTemp;
+                        MajorMoons[i].ParentDiam = Diameter * 12756.2;
                     }
                 }
 
                 //Captured Moons
-                numRoll = ourBag.rng(1, 6, 0);
-                if (this.orbitalRadius <= .5)
+                numRoll = ourBag.Rng(1, 6, 0);
+                if (OrbitalRadius <= .5)
+                {
                     numRoll = numRoll - 6;
-                else if (this.orbitalRadius > .5 && .75 >= this.orbitalRadius)
+                }
+                else if (OrbitalRadius > .5 && .75 >= OrbitalRadius)
+                {
                     numRoll = numRoll - 5;
-                else if (this.orbitalRadius > .75 && 1.5 >= this.orbitalRadius)
+                }
+                else if (OrbitalRadius > .75 && 1.5 >= OrbitalRadius)
+                {
                     numRoll = numRoll - 4;
-                else if (this.orbitalRadius > 1.5 && 3 >= this.orbitalRadius)
+                }
+                else if (OrbitalRadius > 1.5 && 3 >= OrbitalRadius)
+                {
                     numRoll = numRoll - 1;
+                }
 
                 if (numRoll > 0)
                 {
-                    for (int i = 0; i < numRoll; i++)
+                    for (var i = 0; i < numRoll; i++)
                     {
                         do
                         {
-                            roll = ourBag.rng(1, 280, 20);
+                            roll = ourBag.Rng(1, 280, 20);
                             currOrbit = roll;
-                        } while ((scanOccupiedOrbits(occupiedOrbits, currOrbit)));
+                        }
+                        while (ScanOccupiedOrbits(occupiedOrbits, currOrbit));
                         occupiedOrbits.Add(currOrbit);
 
-                        this.outerMoonlets.Add(new Moonlet(this.selfID, currMoonlet, currOrbit, moonletNames[currMoonlet]));
-                        this.outerMoonlets[i].orbitalRadius = currMoonlet * this.diameter;
+                        OuterMoonlets.Add(new Moonlet(SelfId, currMoonlet, currOrbit, moonletNames[currMoonlet]));
+                        OuterMoonlets[i].OrbitalRadius = currMoonlet * Diameter;
                         currMoonlet++;
                     }
                 }
-
             }
 
-
-
-            if (this.baseType == Satellite.BASETYPE_GASGIANT)
+            if (BaseType == BasetypeGasgiant)
             {
-                if (this.innerMoonlets.Count >= 10)
+                if (InnerMoonlets.Count >= 10)
                 {
-                    this.updateDescListing(Satellite.DESC_SPECRINGSYS);
+                    UpdateDescListing(DescSpecringsys);
                 }
-                if (this.innerMoonlets.Count >= 6 && this.innerMoonlets.Count < 9)
+                if (InnerMoonlets.Count >= 6 && InnerMoonlets.Count < 9)
                 {
-                    this.updateDescListing(Satellite.DESC_FAINTRINGSYS);
+                    UpdateDescListing(DescFaintringsys);
                 }
             }
         }
 
         /// <summary>
-        ///  This function describes the atm in a string.
+        ///     This function describes the atm in a string.
         /// </summary>
         /// <returns></returns>
-        public string descAtm()
+        public string DescAtm()
         {
-            List<string> dA = new List<string>();
+            var dA = new List<string>();
 
             //find conditions
-            foreach (int i in this.atmCate)
+            foreach (var i in AtmCate)
             {
-                if (i > ATM_BASE_COND && i < (COND_INCREMENT + ATM_BASE_COND)) dA.Add("Special Condition");
-                if (i > ATM_BASE_MARGINAL && i < (MARGINAL_INCREMENT + ATM_BASE_MARGINAL)) dA.Add("Marginal");
-                if (i > ATM_BASE_TOXIC && i < (TOXIC_INCREMENT + ATM_BASE_TOXIC)) dA.Add("Toxic");
+                if (i > AtmBaseCond && i < CondIncrement + AtmBaseCond)
+                {
+                    dA.Add("Special Condition");
+                }
+                if (i > AtmBaseMarginal && i < MarginalIncrement + AtmBaseMarginal)
+                {
+                    dA.Add("Marginal");
+                }
+                if (i > AtmBaseToxic && i < ToxicIncrement + AtmBaseToxic)
+                {
+                    dA.Add("Toxic");
+                }
             }
 
-            string desc = "";
-            for (int i = 0; i < dA.Count; i++)
+            var desc = "";
+            for (var i = 0; i < dA.Count; i++)
             {
                 desc += dA[i];
-                if ((i + 1) < dA.Count) desc += " & ";
+                if (i + 1 < dA.Count)
+                {
+                    desc += " & ";
+                }
             }
 
             return desc;
         }
 
         /// <summary>
-        /// Updates the description of the atmosphere
+        ///     Updates the description of the atmosphere
         /// </summary>
         /// <param name="flag">The flag we're adding to the atmosphere</param>
-        public void updateDescListing(int flag)
+        public void UpdateDescListing( int flag )
         {
-            this.descListing.Add(flag);
+            DescListing.Add(flag);
         }
 
         /// <summary>
-        /// Describes a planet in the format of Large(Rock) for example
+        ///     Describes a planet in the format of Large(Rock) for example
         /// </summary>
         /// <returns>string describing size(type)</returns>
-        public string descSizeType()
+        public string DescSizeType()
         {
-            return (this.describeSatelliteSize() + "(" + this.convSatelliteTypeToString() + ")");
+            return DescribeSatelliteSize() + "(" + ConvSatelliteTypeToString() + ")";
         }
 
         /// <summary>
-        /// A helper function to scan for occupied orbits (during moon generation)
+        ///     A helper function to scan for occupied orbits (during moon generation)
         /// </summary>
         /// <param name="occuOrbits">The list of occupied orbits</param>
         /// <param name="current">The orbit to add</param>
         /// <returns>True if there is an orbit conflict, false otherwise</returns>
-        protected static bool scanOccupiedOrbits(List<double> occuOrbits, double current)
+        protected static bool ScanOccupiedOrbits( List<double> occuOrbits, double current )
         {
-            foreach (double orbit in occuOrbits)
-            {
-                if (orbit == current) return true;
-            }
-
-            return false;
+            return occuOrbits.Any(orbit => Math.Abs(orbit - current) < 0);
         }
 
         /// <summary>
-        /// Another helper function: makes sure that the orbit is not within the safety margin
+        ///     Another helper function: makes sure that the orbit is not within the safety margin
         /// </summary>
         /// <param name="occuOrbits">The list of current objects</param>
         /// <param name="current">the orbit to be added</param>
         /// <param name="margin">The margin of safety</param>
         /// <returns></returns>
-        protected static bool withinOtherOrbits(List<double> occuOrbits, double current, double margin)
+        protected static bool WithinOtherOrbits( List<double> occuOrbits, double current, double margin )
         {
-            foreach (double orbit in occuOrbits)
-            {
-                if (orbit + margin <= current) return true;
-            }
-
-            return false;
+            return occuOrbits.Any(orbit => orbit + margin <= current);
         }
 
         /// <summary>
-        /// The ToString Object for our planet or moon
+        ///     The ToString Object for our planet or moon
         /// </summary>
         /// <returns>A description of the object</returns>
         public override string ToString()
         {
-            String ret = "";
-            String nL = Environment.NewLine;
-            String spacing = "    ";
-            int numOfDigits = OptionCont.numberOfDecimal;
-            int numOfSmallDigits = 2;
+            string ret;
+            var nL = Environment.NewLine;
+            const string spacing = "    ";
+            var numOfDigits = OptionCont.NumberOfDecimal;
+            const int numOfSmallDigits = 2;
 
-            if (this.rotationalPeriod < 0)
+            if (RotationalPeriod < 0)
             {
-                this.rotationalPeriod = this.rotationalPeriod * -1;
-                this.retrogradeMotion = true;
+                RotationalPeriod = RotationalPeriod * -1;
+                RetrogradeMotion = true;
             }
 
             //short cut.
-            if (this.baseType == Satellite.BASETYPE_UNSET)
+            if (BaseType == BasetypeUnset)
             {
-                ret = "[ORBIT " + (this.selfID + 1) + "] Unset Orbital at " + Math.Round(this.orbitalRadius, numOfDigits) + " AU.";
+                ret = "[ORBIT " + ( SelfId + 1 ) + "] Unset Orbital at " + Math.Round(OrbitalRadius, numOfDigits) + " AU.";
                 return ret;
             }
 
-            if (this.baseType == Satellite.BASETYPE_EMPTY)
+            if (BaseType == BasetypeEmpty)
             {
-                ret = "[ORBIT " + (this.selfID + 1) + "] Empty Orbital at " + Math.Round(this.orbitalRadius, numOfDigits) + " AU.";
+                ret = "[ORBIT " + ( SelfId + 1 ) + "] Empty Orbital at " + Math.Round(OrbitalRadius, numOfDigits) + " AU.";
                 return ret;
             }
 
-            if (this.baseType == Satellite.BASETYPE_ASTEROIDBELT)
+            if (BaseType == BasetypeAsteroidbelt)
             {
-                ret = "[ORBIT " + (this.selfID + 1) + "]";
+                ret = "[ORBIT " + ( SelfId + 1 ) + "]";
 
-                if ((bool)OptionCont.expandAsteroidBelt)
-                    ret = ret + nL + spacing + "Asteroid Belt (" + this.describeSatelliteSize() + ")";
+                if (OptionCont.ExpandAsteroidBelt != null && (bool) OptionCont.ExpandAsteroidBelt)
+                {
+                    ret = ret + nL + spacing + "Asteroid Belt (" + DescribeSatelliteSize() + ")";
+                }
                 else
+                {
                     ret = ret + nL + spacing + "Asteroid Belt";
+                }
 
-                ret = ret + " and orbits at " + Math.Round(this.orbitalRadius, numOfDigits) + " AU.";
-                ret = ret + nL + spacing + "Blackbody Temperature is " + Math.Round(this.blackbodyTemp, numOfSmallDigits) + "K";
-                ret = ret + nL + spacing + "RVM: " + this.RVM + " (" + this.getRVMDesc() + ")";
+                ret = ret + " and orbits at " + Math.Round(OrbitalRadius, numOfDigits) + " AU.";
+                ret = ret + nL + spacing + "Blackbody Temperature is " + Math.Round(BlackbodyTemp, numOfSmallDigits) + "K";
+                ret = ret + nL + spacing + "RVM: " + Rvm + " (" + GetRvmDesc() + ")";
                 return ret;
             }
 
             //main block
-            if (this.baseType == Satellite.BASETYPE_MOON)
+            if (BaseType == BasetypeMoon)
             {
-                ret = "[MOON " + (this.selfID + 1) + "]";
-                ret = ret + nL + spacing + this.name + " is a ";
+                ret = "[MOON " + ( SelfId + 1 ) + "]";
+                ret = ret + nL + spacing + Name + " is a ";
             }
             else
             {
-                ret = "[ORBIT " + (this.selfID + 1) + "]";
-                ret = ret + nL + spacing + this.name + " is a ";
+                ret = "[ORBIT " + ( SelfId + 1 ) + "]";
+                ret = ret + nL + spacing + Name + " is a ";
             }
 
-            if (!(this.baseType == Satellite.BASETYPE_GASGIANT))
-                ret = ret + this.describeSatelliteSize() + " (" + this.convSatelliteTypeToString() + ")";
-            else
-                ret = ret + "Gas Giant (" + this.describeSatelliteSize() + ")";
-
-            if (!(this.baseType == Satellite.BASETYPE_MOON))
+            if (BaseType != BasetypeGasgiant)
             {
-                ret = ret + " and orbits at " + Math.Round(this.orbitalRadius, numOfDigits) + " AU";
-                if (this.retrogradeMotion) ret = ret + " in a retrograde manner.";
-                else ret = ret + ".";
+                ret = ret + DescribeSatelliteSize() + " (" + ConvSatelliteTypeToString() + ")";
             }
             else
             {
-                ret = ret + " and orbits at " + Math.Round(this.orbitalRadius, numOfDigits) + " earth diameters.";
-                ret = ret + nL + spacing + "Planetary Diameters: " + this.moonRadius;
-                if (this.retrogradeMotion) ret = ret + nL + spacing + "Orbits in a retrograde manner.";
+                ret = ret + "Gas Giant (" + DescribeSatelliteSize() + ")";
             }
 
-            ret = ret + nL + spacing + "Blackbody Temperature is " + Math.Round(this.blackbodyTemp, numOfSmallDigits) + "K";
+            if (BaseType != BasetypeMoon)
+            {
+                ret = ret + " and orbits at " + Math.Round(OrbitalRadius, numOfDigits) + " AU";
+                if (RetrogradeMotion)
+                {
+                    ret = ret + " in a retrograde manner.";
+                }
+                else
+                {
+                    ret = ret + ".";
+                }
+            }
+            else
+            {
+                ret = ret + " and orbits at " + Math.Round(OrbitalRadius, numOfDigits) + " earth diameters.";
+                ret = ret + nL + spacing + "Planetary Diameters: " + MoonRadius;
+                if (RetrogradeMotion)
+                {
+                    ret = ret + nL + spacing + "Orbits in a retrograde manner.";
+                }
+            }
 
-            ret = ret + nL + spacing + "Orbital Parent: " + Star.getDescSelfFlag(this.parentID) + ".";
+            ret = ret + nL + spacing + "Blackbody Temperature is " + Math.Round(BlackbodyTemp, numOfSmallDigits) + "K";
+
+            ret = ret + nL + spacing + "Orbital Parent: " + Star.GetDescSelfFlag(ParentId) + ".";
 
             ret = ret + nL;
 
             //atmospheric data
-            if (this.baseType == Satellite.BASETYPE_MOON || this.baseType == Satellite.BASETYPE_TERRESTIAL)
+            if (BaseType == BasetypeMoon || BaseType == BasetypeTerrestial)
             {
                 ret = ret + nL + spacing + "Atmospheric Data:";
-                ret = ret + nL + spacing + "Pressure: " + this.getDescAtmCategory() + " (" + Math.Round(this.atmPres, (numOfSmallDigits + 1)) + " atm).";
-                ret = ret + nL + spacing + "Atmospheric Mass: " + this.atmMass + " standard atmospheric mass";
+                ret = ret + nL + spacing + "Pressure: " + GetDescAtmCategory() + " (" + Math.Round(AtmPres, numOfSmallDigits + 1) + " atm).";
+                ret = ret + nL + spacing + "Atmospheric Mass: " + AtmMass + " standard atmospheric mass";
 
-                if (this.atmCate.Count > 0)
+                if (AtmCate.Count > 0)
                 {
                     ret = ret + nL + spacing + "Atm Notes: ";
-                    for (int i = 0; i < this.atmCate.Count; i++)
+                    for (var i = 0; i < AtmCate.Count; i++)
                     {
-                        if (i != this.atmCate.Count - 1)
-                            ret = ret + this.convAtmCodeToString(this.atmCate[i]) + ", ";
+                        if (i != AtmCate.Count - 1)
+                        {
+                            ret = ret + ConvAtmCodeToString(AtmCate[i]) + ", ";
+                        }
                         else
-                            ret = ret + this.convAtmCodeToString(this.atmCate[i]);
+                        {
+                            ret = ret + ConvAtmCodeToString(AtmCate[i]);
+                        }
                     }
                 }
 
@@ -2434,79 +3456,98 @@ namespace UniverseGeneration.Stellar_Bodies
                 //climate data.
                 ret = ret + nL + spacing + "Climate Data:";
 
-                if (this.isTideLocked)
+                if (IsTideLocked)
                 {
-                    double temp = this.surfaceTemp * this.dayFaceMod;
-                    ret = ret + nL + spacing + "Day Side Surface Temperature: " + this.tempInKelFarCel(temp);
-                    if (this.atmPres > 0)
-                        ret = ret + nL + spacing + "Day Side Climate: " + this.getClimateDesc(this.getClimate(temp));
+                    var temp = SurfaceTemp * DayFaceMod;
+                    ret = ret + nL + spacing + "Day Side Surface Temperature: " + TempInKelFarCel(temp);
+                    if (AtmPres > 0)
+                    {
+                        ret = ret + nL + spacing + "Day Side Climate: " + GetClimateDesc(GetClimate(temp));
+                    }
 
-                    temp = this.surfaceTemp * this.nightFaceMod;
-                    ret = ret + nL + spacing + "Night Side Surface Temperature: " + this.tempInKelFarCel(temp);
-                    if (this.atmPres > 0)
-                        ret = ret + nL + spacing + "Night Side Climate: " + this.getClimateDesc(this.getClimate(temp));
-
+                    temp = SurfaceTemp * NightFaceMod;
+                    ret = ret + nL + spacing + "Night Side Surface Temperature: " + TempInKelFarCel(temp);
+                    if (AtmPres > 0)
+                    {
+                        ret = ret + nL + spacing + "Night Side Climate: " + GetClimateDesc(GetClimate(temp));
+                    }
                 }
                 else
                 {
-                    ret = ret + nL + spacing + "Surface Temperature: " + this.tempInKelFarCel(this.surfaceTemp);
-                    if (this.atmPres > 0)
-                        ret = ret + nL + spacing + this.getClimateDesc(this.getClimate(this.surfaceTemp));
+                    ret = ret + nL + spacing + "Surface Temperature: " + TempInKelFarCel(SurfaceTemp);
+                    if (AtmPres > 0)
+                    {
+                        ret = ret + nL + spacing + GetClimateDesc(GetClimate(SurfaceTemp));
+                    }
                 }
                 ret = ret + nL;
             }
 
             //physical properties
             ret = ret + nL + spacing + "Physical Properties:";
-            ret = ret + nL + spacing + "Density: " + this.density + " Earth densities (" + (this.density * CONVFAC_DENSITY) + " g/cc)";
-            ret = ret + nL + spacing + "Diameter: " + Math.Round(this.diameter, 3) + " Earth diameters (" + (Math.Round(this.diameter * CONVFAC_DIAMETER, 3)) + " km)";
-            ret = ret + nL + spacing + "Mass: " + Math.Round(this.mass, 3) + " Earth masses";
-            ret = ret + nL + spacing + "Axial Tilt: " + this.axialTilt + "°";
-            ret = ret + nL + spacing + "Gravity: " + Math.Round(this.gravity, 3) + " Earth gravities (" + Math.Round(this.gravity * CONVFAC_GRAVITY, 3) + " m/s²)";
-            ret = ret + nL + spacing + "RVM: " + this.RVM + " (" + this.getRVMDesc() + "), Tectonic: " + this.getTecDesc() + ", Volcanic: " + this.getVolDesc();
-            ret = ret + nL + spacing + "Hydrographic Coverage: " + String.Format("{0:P}", this.hydCoverage);
+            ret = ret + nL + spacing + "Density: " + Density + " Earth densities (" + Density * ConvfacDensity + " g/cc)";
+            ret = ret + nL + spacing + "Diameter: " + Math.Round(Diameter, 3) + " Earth diameters (" + Math.Round(Diameter * ConvfacDiameter, 3) + " km)";
+            ret = ret + nL + spacing + "Mass: " + Math.Round(Mass, 3) + " Earth masses";
+            ret = ret + nL + spacing + "Axial Tilt: " + AxialTilt + "°";
+            ret = ret + nL + spacing + "Gravity: " + Math.Round(Gravity, 3) + " Earth gravities (" + Math.Round(Gravity * ConvfacGravity, 3) + " m/s²)";
+            ret = ret + nL + spacing + "RVM: " + Rvm + " (" + GetRvmDesc() + "), Tectonic: " + GetTecDesc() + ", Volcanic: " + GetVolDesc();
+            ret = ret + nL + spacing + "Hydrographic Coverage: " + $"{HydCoverage:P}";
 
             //orbital properties
             ret = ret + nL;
             ret = ret + nL + spacing + "Orbital Properties:";
-            ret = ret + nL + spacing + "Orbital Period: " + Math.Round(this.orbitalPeriod, 3) + "d (" + Math.Round(this.orbitalPeriod / 365.25, 3) + "y).";
+            ret = ret + nL + spacing + "Orbital Period: " + Math.Round(OrbitalPeriod, 3) + "d (" + Math.Round(OrbitalPeriod / 365.25, 3) + "y).";
 
-            if (!this.isTideLocked)
+            if (!IsTideLocked)
             {
-                ret = ret + nL + spacing + "Sidereal Period: " + Math.Round(this.siderealPeriod, 3) + "d.";
-                ret = ret + " Solar Day: " + Math.Round(this.rotationalPeriod, 3) + "d.";
+                ret = ret + nL + spacing + "Sidereal Period: " + Math.Round(SiderealPeriod, 3) + "d.";
+                ret = ret + " Solar Day: " + Math.Round(RotationalPeriod, 3) + "d.";
             }
 
             //tide locked.
-            if (this.isTideLocked && !this.isResonant)
+            if (IsTideLocked && !IsResonant)
+            {
                 ret = ret + nL + spacing + "This satellite is tide locked.";
-            else if (this.isResonant)
+            }
+            else if (IsResonant)
+            {
                 ret = ret + nL + spacing + "This satellite is locked in a resonant pattern.";
+            }
 
             //tide data
-            if (this.hydCoverage > 0 || (bool) OptionCont.alwaysDisplayTidalData)
+            if (OptionCont.AlwaysDisplayTidalData != null && ( HydCoverage > 0 || (bool) OptionCont.AlwaysDisplayTidalData ))
             {
                 ret = ret + nL;
                 ret = ret + nL + spacing + "Tidal Data:";
-                if (OptionCont.getVerboseOutput() || (bool) OptionCont.alwaysDisplayTidalData) ret = ret + nL + spacing + "Total tidal force: " + Math.Round(this.tideTotal, 3) + " units";
-                if (OptionCont.getVerboseOutput() || (bool) OptionCont.alwaysDisplayTidalData) ret = ret + nL;
+                if (OptionCont.GetVerboseOutput() || (bool) OptionCont.AlwaysDisplayTidalData)
+                {
+                    ret = ret + nL + spacing + "Total tidal force: " + Math.Round(TideTotal, 3) + " units";
+                }
+                if (OptionCont.GetVerboseOutput() || (bool) OptionCont.AlwaysDisplayTidalData)
+                {
+                    ret = ret + nL;
+                }
 
-                ret = ret + this.displayTidalData() + nL;
+                ret = ret + DisplayTidalData() + nL;
             }
 
             //description block
 
-            if (this.descListing.Count > 0)
+            if (DescListing.Count > 0)
             {
                 ret = ret + nL;
                 ret = ret + nL + spacing + "Special Description Notes: ";
                 ret = ret + " ";
-                for (int i = 0; i < this.descListing.Count; i++)
+                for (var i = 0; i < DescListing.Count; i++)
                 {
-                    if (i == (this.descListing.Count - 1))
-                        ret = ret + convDescCodeToString(this.descListing[i]) + " ";
+                    if (i == DescListing.Count - 1)
+                    {
+                        ret = ret + ConvDescCodeToString(DescListing[i]) + " ";
+                    }
                     else
-                        ret = ret + convDescCodeToString(this.descListing[i]) + ", ";
+                    {
+                        ret = ret + ConvDescCodeToString(DescListing[i]) + ", ";
+                    }
                 }
             }
 
@@ -2593,87 +3634,131 @@ namespace UniverseGeneration.Stellar_Bodies
         }
 
         /// <summary>
-        /// This lists Kelvin, Farenheit and Celsius temperatures. 
+        ///     This lists Kelvin, Farenheit and Celsius temperatures.
         /// </summary>
         /// <param name="temp">The temperature in Kelvin</param>
         /// <returns>A string describing all three</returns>
-        protected string tempInKelFarCel(double temp)
+        protected string TempInKelFarCel( double temp )
         {
-            String ret = "";
+            var ret = "";
             ret = ret + Math.Round(temp, 3) + "K, ";
-            ret = ret + Math.Round(((temp - 273.15) * 1.8) + 32, 3) + "°F, ";
+            ret = ret + Math.Round(( temp - 273.15 ) * 1.8 + 32, 3) + "°F, ";
             ret = ret + Math.Round(temp - 273.15, 3) + "°C";
             return ret;
-
         }
 
         /// <summary>
-        /// Calculates the total tidal force acting on an object
+        ///     Calculates the total tidal force acting on an object
         /// </summary>
         /// <param name="sysAge">The age of the system</param>
         /// <returns>The Tidal Force</returns>
-        public double totalTidalForce(double sysAge)
+        public double TotalTidalForce( double sysAge )
         {
-            double val = 0.0;
-            foreach (KeyValuePair<int, double> tideData in this.tideForce)
-            {
-                if (!((tideData.Key >= TIDE_MOON1 && tideData.Key <= TIDE_MOON10) && (bool)OptionCont.ignoreLunarTidesOnGardenWorlds))
-                    val = val + tideData.Value;
-            }
+            var val = TideForce.Where(tideData => OptionCont.IgnoreLunarTidesOnGardenWorlds != null && !( tideData.Key >= TideMoon1 && tideData.Key <= TideMoon10 && (bool) OptionCont.IgnoreLunarTidesOnGardenWorlds ))
+                .Aggregate(0.0, ( current, tideData ) => current + tideData.Value);
 
-            val = (val * sysAge) / this.mass;
+            val = val * sysAge / Mass;
             return val;
         }
 
         /// <summary>
-        /// Output formatted tidal data 
+        ///     Output formatted tidal data
         /// </summary>
         /// <returns>Formatted Tidal Data</returns>
-        public string displayTidalData()
+        public string DisplayTidalData()
         {
-            string ret = "";
-            string nL = Environment.NewLine;
-            string spacing = "    ";
-            string ourFlag = " ";
-            string toBeAdded = "";
-            bool addStr;
-            double tideVal;
+            var ret = "";
+            var nL = Environment.NewLine;
+            const string spacing = "    ";
+            var ourFlag = " ";
 
-            foreach (KeyValuePair<int, double> tideData in this.tideForce)
+            foreach (var tideData in TideForce)
             {
-                addStr = true;
-                if (tideData.Key == Satellite.TIDE_MOON1) ourFlag = "moon one";
-                if (tideData.Key == Satellite.TIDE_MOON2) ourFlag = "moon two";
-                if (tideData.Key == Satellite.TIDE_MOON3) ourFlag = "moon three";
-                if (tideData.Key == Satellite.TIDE_MOON4) ourFlag = "moon four";
-                if (tideData.Key == Satellite.TIDE_MOON5) ourFlag = "moon five";
-                if (tideData.Key == Satellite.TIDE_MOON6) ourFlag = "moon six";
-                if (tideData.Key == Satellite.TIDE_MOON7) ourFlag = "moon seven";
-                if (tideData.Key == Satellite.TIDE_MOON8) ourFlag = "moon eight";
-                if (tideData.Key == Satellite.TIDE_MOON9) ourFlag = "moon nine";
-                if (tideData.Key == Satellite.TIDE_MOON10) ourFlag = "moon ten";
-
-                if (tideData.Key == Satellite.TIDE_PRIMARYSTAR) ourFlag = "the primary star";
-                if (tideData.Key == Satellite.TIDE_SECONDARYSTAR) ourFlag = "the secondary star";
-                if (tideData.Key == Satellite.TIDE_TRINARYSTAR) ourFlag = "the trinary star";
-                if (tideData.Key == Satellite.TIDE_SECCOMPSTAR) ourFlag = "the secondary companion star";
-                if (tideData.Key == Satellite.TIDE_TRICOMPSTAR) ourFlag = "the trinary companion star";
-                if (tideData.Key == Satellite.TIDE_PARPLANET) ourFlag = "parent planet";
-
-                tideVal = tideData.Value;
-                toBeAdded = nL + spacing + "Tidal Force generated by " + ourFlag + " is " + String.Format("{0:N2}", tideVal) + "ft amplitude";
-
-                if (tideData.Key >= Satellite.TIDE_MOON_BASE && tideData.Key <= (Satellite.TIDE_MOON_BASE + 10))
+                var addStr = true;
+                if (tideData.Key == TideMoon1)
                 {
-                    if ((bool)OptionCont.ignoreLunarTidesOnGardenWorlds && this.SatelliteType == SUBTYPE_GARDEN)
-                        addStr = false;
+                    ourFlag = "moon one";
+                }
+                if (tideData.Key == TideMoon2)
+                {
+                    ourFlag = "moon two";
+                }
+                if (tideData.Key == TideMoon3)
+                {
+                    ourFlag = "moon three";
+                }
+                if (tideData.Key == TideMoon4)
+                {
+                    ourFlag = "moon four";
+                }
+                if (tideData.Key == TideMoon5)
+                {
+                    ourFlag = "moon five";
+                }
+                if (tideData.Key == TideMoon6)
+                {
+                    ourFlag = "moon six";
+                }
+                if (tideData.Key == TideMoon7)
+                {
+                    ourFlag = "moon seven";
+                }
+                if (tideData.Key == TideMoon8)
+                {
+                    ourFlag = "moon eight";
+                }
+                if (tideData.Key == TideMoon9)
+                {
+                    ourFlag = "moon nine";
+                }
+                if (tideData.Key == TideMoon10)
+                {
+                    ourFlag = "moon ten";
                 }
 
-                if (addStr) ret = ret + toBeAdded;
+                if (tideData.Key == TidePrimarystar)
+                {
+                    ourFlag = "the primary star";
+                }
+                if (tideData.Key == TideSecondarystar)
+                {
+                    ourFlag = "the secondary star";
+                }
+                if (tideData.Key == TideTrinarystar)
+                {
+                    ourFlag = "the trinary star";
+                }
+                if (tideData.Key == TideSeccompstar)
+                {
+                    ourFlag = "the secondary companion star";
+                }
+                if (tideData.Key == TideTricompstar)
+                {
+                    ourFlag = "the trinary companion star";
+                }
+                if (tideData.Key == TideParplanet)
+                {
+                    ourFlag = "parent planet";
+                }
+
+                var tideVal = tideData.Value;
+                var toBeAdded = nL + spacing + "Tidal Force generated by " + ourFlag + " is " + $"{tideVal:N2}" + "ft amplitude";
+
+                if (tideData.Key >= TideMoonBase && tideData.Key <= TideMoonBase + 10)
+                {
+                    if (OptionCont.IgnoreLunarTidesOnGardenWorlds != null && (bool) OptionCont.IgnoreLunarTidesOnGardenWorlds && SatelliteType == SubtypeGarden)
+                    {
+                        addStr = false;
+                    }
+                }
+
+                if (addStr)
+                {
+                    ret = ret + toBeAdded;
+                }
             }
 
             return ret;
-
         }
     }
 }

@@ -1,14 +1,13 @@
 ﻿using System.Data.Entity;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using SWNAdmin.Utility;
-using System.Linq;
 
 namespace SWNAdmin.Forms.DatabaseManager
 {
     public partial class ManageModifiers
     {
-
         private Modifier _selectedModifier;
 
         public ManageModifiers()
@@ -21,15 +20,14 @@ namespace SWNAdmin.Forms.DatabaseManager
         private void InitForm()
         {
             var context = new Db1Entities();
-            CbExistingModifier.ItemsSource =
-                (from c in context.Modifier select c).ToList().OrderBy(modifier => modifier.Name);
+            CbExistingModifier.ItemsSource = ( from c in context.Modifier select c ).ToList().OrderBy(modifier => modifier.Name);
             CbExistingModifier.DisplayMemberPath = "Name";
         }
 
         private void LoadComboBoxGroups()
         {
             var context = new Db1Entities();
-            CbGroup.ItemsSource = (from c in context.StatGroup select c).ToList().OrderBy(statGroup => statGroup.Name);
+            CbGroup.ItemsSource = ( from c in context.StatGroup select c ).ToList().OrderBy(statGroup => statGroup.Name);
             CbGroup.DisplayMemberPath = "Name";
         }
 
@@ -37,13 +35,11 @@ namespace SWNAdmin.Forms.DatabaseManager
         {
             var context = new Db1Entities();
             var sg = CbGroup.SelectedItem as StatGroup;
-            CbSubGroup.ItemsSource =
-                (from c in context.StatSubGroup where c.GroupId == sg.Id select c).ToList()
-                    .OrderBy(statSubGroup => statSubGroup.Name);
+            CbSubGroup.ItemsSource = ( from c in context.StatSubGroup where c.GroupId == sg.Id select c ).ToList().OrderBy(statSubGroup => statSubGroup.Name);
             CbSubGroup.DisplayMemberPath = "Name";
         }
 
-        private void cbExistingModifier_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbExistingModifier_SelectionChanged( object sender, SelectionChangedEventArgs e )
         {
             if (CbExistingModifier.SelectedItem != null)
             {
@@ -53,7 +49,10 @@ namespace SWNAdmin.Forms.DatabaseManager
                 BtUpdate.IsEnabled = true;
                 BtDelete.IsEnabled = true;
                 _selectedModifier = CbExistingModifier.SelectedItem as Modifier;
-                if (_selectedModifier == null) return;
+                if (_selectedModifier == null)
+                {
+                    return;
+                }
                 TbId.Text = _selectedModifier.Id.ToString();
                 TbModifierName.Text = _selectedModifier.Name;
                 TbNotes.Text = _selectedModifier.Notes;
@@ -68,7 +67,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             }
         }
 
-        private void btUpdate_Click(object sender, RoutedEventArgs e)
+        private void btUpdate_Click( object sender, RoutedEventArgs e )
         {
             var context = new Db1Entities();
             var id = int.Parse(TbId.Text);
@@ -93,7 +92,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             btClear_Click(this, null);
         }
 
-        private void btDelete_Click(object sender, RoutedEventArgs e)
+        private void btDelete_Click( object sender, RoutedEventArgs e )
         {
             var context = new Db1Entities();
             var id = int.Parse(TbId.Text);
@@ -109,7 +108,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             btClear_Click(this, null);
         }
 
-        private void btClear_Click(object sender, RoutedEventArgs e)
+        private void btClear_Click( object sender, RoutedEventArgs e )
         {
             CbExistingModifier.SelectedItem = null;
             BtAdd.Visibility = Visibility.Visible;
@@ -126,7 +125,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             CbSubGroup.SelectedItem = null;
         }
 
-        private void btAdd_Click(object sender, RoutedEventArgs e)
+        private void btAdd_Click( object sender, RoutedEventArgs e )
         {
             using (var context = new Db1Entities())
             {
@@ -146,14 +145,14 @@ namespace SWNAdmin.Forms.DatabaseManager
             btClear_Click(this, null);
         }
 
-        private void btOpenGroups_Click(object sender, RoutedEventArgs e)
+        private void btOpenGroups_Click( object sender, RoutedEventArgs e )
         {
             var mg = new ManageGroups();
             mg.ShowDialog();
             LoadComboBoxGroups();
         }
 
-        private void cbGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbGroup_SelectionChanged( object sender, SelectionChangedEventArgs e )
         {
             if (CbGroup.SelectedItem != null)
             {
@@ -166,7 +165,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             }
         }
 
-        private void btCopy_Click(object sender, RoutedEventArgs e)
+        private void btCopy_Click( object sender, RoutedEventArgs e )
         {
             TbId.Text = "";
             CbExistingModifier.SelectedItem = null;

@@ -5,44 +5,43 @@ using SWNAdmin.Utility;
 
 namespace SWNAdmin.Networking
 {
-    [ServiceContract(Name = "SWNService", Namespace = "SWNAdmin", SessionMode = SessionMode.Required,
-        CallbackContract = typeof (ISWNServiceCallback))]
-    internal interface ISWNService
+    [ServiceContract( Name = "SwnService", Namespace = "SWNAdmin", SessionMode = SessionMode.Required, CallbackContract = typeof (ISwnServiceCallback) )]
+    internal interface ISwnService
     {
-        [OperationContract(IsInitiating = true)]
-        bool Connect(Client client);
+        [OperationContract( IsInitiating = true )]
+        bool Connect( Client client );
 
-        [OperationContract(IsInitiating = true)]
-        bool Register(Client client);
-
-        [OperationContract]
-        void Disconnect(Client client);
+        [OperationContract( IsInitiating = true )]
+        bool Register( Client client );
 
         [OperationContract]
-        void SendMessage(Message msg);
+        void Disconnect( Client client );
+
+        [OperationContract]
+        void SendMessage( Message msg );
 
         [OperationContract]
         List<string> RequestOnlineUsersList();
 
         [OperationContract]
-        Character GetBlankCharacter(Client client);
+        Character GetBlankCharacter( Client client );
 
         [OperationContract]
-        List<Advantages> RequestAdvantages(Client client);
+        List<Advantages> RequestAdvantages( Client client );
 
         [OperationContract]
-        List<Disadvantages> RequestDisadvantages(Client client);
+        List<Disadvantages> RequestDisadvantages( Client client );
 
         [OperationContract]
-        List<Requirements> RequestRequirements(Client client);
+        List<Requirements> RequestRequirements( Client client );
 
         [OperationContract]
-        List<Skills> RequestSkills(Client client);
+        List<Skills> RequestSkills( Client client );
 
         [OperationContract]
-        List<Character> RequestSavedCharacters(Client client);
+        List<Character> RequestSavedCharacters( Client client );
 
         [OperationContract]
-        bool SaveCharacter(Client client, Character c);
+        bool SaveCharacter( Client client, Character c );
     }
 }

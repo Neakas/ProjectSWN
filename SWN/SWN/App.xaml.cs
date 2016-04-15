@@ -11,36 +11,28 @@ namespace SWN
     /// </summary>
     public partial class App : Application
     {
-        public static bool musicplaying;
-        public static MediaPlayer mplayer = new MediaPlayer();
+        public static bool Musicplaying;
+        public static MediaPlayer Mplayer = new MediaPlayer();
 
-        private void Application_Startup(object sender, StartupEventArgs e)
+        private void Application_Startup( object sender, StartupEventArgs e )
         {
             SettingHandler.InitSettingFile();
             SettingHandler.GrabSettingFile();
             SettingHandler.PreloadImages();
-            var audioclip =
-                new Uri(@"pack://siteoforigin:,,,/Assets/Popskyy - Popskyy MEGA PACK 1 - 26 Dragon's Fire.mp3");
+            var audioclip = new Uri(@"pack://siteoforigin:,,,/Assets/Popskyy - Popskyy MEGA PACK 1 - 26 Dragon's Fire.mp3");
             if (!SettingHandler.GetTurnOffMusic())
             {
-                if (!mplayer.HasAudio)
+                if (!Mplayer.HasAudio)
                 {
-                    mplayer.Open(audioclip);
+                    Mplayer.Open(audioclip);
                 }
-                if (!musicplaying)
+                if (!Musicplaying)
                 {
-                    mplayer.Play();
-                    musicplaying = true;
+                    Mplayer.Play();
+                    Musicplaying = true;
                 }
             }
-            if (Settings.Default.LoggedIn)
-            {
-                StartupUri = new Uri("Forms/Login.xaml", UriKind.Relative);
-            }
-            else
-            {
-                StartupUri = new Uri("Forms/Registration.xaml", UriKind.Relative);
-            }
+            StartupUri = Settings.Default.LoggedIn ? new Uri("Forms/Login.xaml", UriKind.Relative) : new Uri("Forms/Registration.xaml", UriKind.Relative);
         }
     }
 }

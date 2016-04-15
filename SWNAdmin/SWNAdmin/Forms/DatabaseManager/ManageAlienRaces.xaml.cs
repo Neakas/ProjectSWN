@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -29,12 +30,15 @@ namespace SWNAdmin.Forms.DatabaseManager
             InitializeComponent();
             var imageContextMenu = new ContextMenu();
             RaceImageWindow.ContextMenu = imageContextMenu;
-            var sendToClients = new Button {Content = "Send to Clients"};
+            var sendToClients = new Button
+            {
+                Content = "Send to Clients"
+            };
             imageContextMenu.Items.Add(sendToClients);
             sendToClients.Click += SendToClients_Click;
         }
 
-        private void btgenTest_Click(object sender, RoutedEventArgs e)
+        private void btgenTest_Click( object sender, RoutedEventArgs e )
         {
             BtSave.IsEnabled = true;
             BtSave.Visibility = Visibility.Visible;
@@ -48,7 +52,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             CbChemicalBasis.ItemsSource = _alien.TypesofLifeDict;
             CbChemicalBasis.DisplayMemberPath = "Value";
             CbChemicalBasis.SelectedValuePath = "Key";
-            CbChemicalBasis.SelectedValue = _alien.chemicalBasis;
+            CbChemicalBasis.SelectedValue = _alien.ChemicalBase;
 
             CbLandOrWater.ItemsSource = _alien.LandWaterDict;
             CbLandOrWater.DisplayMemberPath = "Value";
@@ -80,14 +84,14 @@ namespace SWNAdmin.Forms.DatabaseManager
             CbSecondaryLocomotion.SelectedValuePath = "Key";
             CbSecondaryLocomotion.SelectedValue = _alien.SecondaryLocomotion;
 
-            CheckHasSecondaryLocmotion.IsChecked = _alien.hasSecondaryLocomotion;
+            CheckHasSecondaryLocmotion.IsChecked = _alien.HasSecondaryLocomotion;
 
             CbSizeClass.ItemsSource = _alien.SizeClassDict;
             CbSizeClass.DisplayMemberPath = "Value";
             CbSizeClass.SelectedValuePath = "Key";
             CbSizeClass.SelectedValue = _alien.SizeClass;
 
-            CbSize.Text = _alien.Size.ToString();
+            CbSize.Text = _alien.Size.ToString(CultureInfo.InvariantCulture);
 
             CbSymmetry.ItemsSource = _alien.SymmetryDict;
             CbSymmetry.DisplayMemberPath = "Value";
@@ -242,11 +246,11 @@ namespace SWNAdmin.Forms.DatabaseManager
             CbPlayfulness.SelectedValue = _alien.Playfulness;
         }
 
-        private void cbLandOrWater_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbLandOrWater_SelectionChanged( object sender, SelectionChangedEventArgs e )
         {
         }
 
-        private void btSave_Click(object sender, RoutedEventArgs e)
+        private void btSave_Click( object sender, RoutedEventArgs e )
         {
             using (var context = new Db1Entities())
             {
@@ -324,8 +328,6 @@ namespace SWNAdmin.Forms.DatabaseManager
                 //    DBAlien.image = buffer;
                 //}
 
-
-
                 context.Aliens.Add(dbAlien);
                 context.SaveChanges();
             }
@@ -333,7 +335,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             MessageBox.Show("The Alien '" + TbName.Text + "' has been saved in the Database");
         }
 
-        private void btLoadImage_Click(object sender, RoutedEventArgs e)
+        private void btLoadImage_Click( object sender, RoutedEventArgs e )
         {
             var ofd = new OpenFileDialog();
             ofd.ShowDialog();
@@ -342,7 +344,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             RaceImageWindow.Source = _raceBitmapImage;
         }
 
-        private void btLoad_Click(object sender, RoutedEventArgs e)
+        private void btLoad_Click( object sender, RoutedEventArgs e )
         {
             _loadWindow = new Window
             {
@@ -353,14 +355,14 @@ namespace SWNAdmin.Forms.DatabaseManager
             _loadWindow.Content = _loadBox;
             using (var context = new Db1Entities())
             {
-                _loadBox.ItemsSource = (from c in context.Aliens select c).ToList();
+                _loadBox.ItemsSource = ( from c in context.Aliens select c ).ToList();
                 _loadBox.DisplayMemberPath = "Name";
                 _loadBox.MouseDoubleClick += LoadboxSelectionChanged;
             }
             _loadWindow.ShowDialog();
         }
 
-        private void LoadboxSelectionChanged(object sender, RoutedEventArgs e)
+        private void LoadboxSelectionChanged( object sender, RoutedEventArgs e )
         {
             if (_loadBox.SelectedItem != null)
             {
@@ -456,7 +458,6 @@ namespace SWNAdmin.Forms.DatabaseManager
             CbSecondaryLocomotion.DisplayMemberPath = "Value";
             CbSecondaryLocomotion.SelectedValuePath = "Key";
 
-
             CbSizeClass.ItemsSource = _alien.SizeClassDict;
             CbSizeClass.DisplayMemberPath = "Value";
             CbSizeClass.SelectedValuePath = "Key";
@@ -468,7 +469,6 @@ namespace SWNAdmin.Forms.DatabaseManager
             CbTails.ItemsSource = _alien.TailsDict;
             CbTails.DisplayMemberPath = "Value";
             CbTails.SelectedValuePath = "Key";
-
 
             CbSkeleton.ItemsSource = _alien.SkeletonDict;
             CbSkeleton.DisplayMemberPath = "Value";
@@ -577,7 +577,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             CbPlayfulness.SelectedValuePath = "Key";
         }
 
-        private static BitmapImage BuildImageFromByteArray(byte[] array)
+        private static BitmapImage BuildImageFromByteArray( byte[] array )
         {
             using (var ms = new MemoryStream(array))
             {
@@ -590,7 +590,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             }
         }
 
-        private static byte[] BuildByteArrayFromImage(BitmapSource image)
+        private static byte[] BuildByteArrayFromImage( BitmapSource image )
         {
             byte[] data;
             var encoder = new JpegBitmapEncoder();
@@ -603,17 +603,17 @@ namespace SWNAdmin.Forms.DatabaseManager
             return data;
         }
 
-        private void SendToClients_Click(object sender, RoutedEventArgs e)
+        private void SendToClients_Click( object sender, RoutedEventArgs e )
         {
             MessageBox.Show("Send!");
-            SWNService.CurrentService.SendImage(_loadedAlien.Image);
+            SwnService.CurrentService.SendImage(_loadedAlien.Image);
         }
 
-        private void btUpdate_Click(object sender, RoutedEventArgs e)
+        private void btUpdate_Click( object sender, RoutedEventArgs e )
         {
             using (var context = new Db1Entities())
             {
-                var updateAlien = (from c in context.Aliens where c.Id == _loadedAlien.Id select c).FirstOrDefault();
+                var updateAlien = ( from c in context.Aliens where c.Id == _loadedAlien.Id select c ).FirstOrDefault();
                 if (updateAlien != null)
                 {
                     updateAlien.Name = TbName.Text;
@@ -677,8 +677,10 @@ namespace SWNAdmin.Forms.DatabaseManager
                                 var sum = 0; // total number of bytes read
 
                                 // read until Read method returns 0 (end of the stream has been reached)
-                                while ((count = fileStream.Read(buffer, sum, length - sum)) > 0)
+                                while (( count = fileStream.Read(buffer, sum, length - sum) ) > 0)
+                                {
                                     sum += count; // sum is a buffer offset for next reading
+                                }
                             }
                             finally
                             {
@@ -694,11 +696,11 @@ namespace SWNAdmin.Forms.DatabaseManager
             MessageBox.Show("The Alien '" + TbName.Text + "' has been Updated");
         }
 
-        private void btDelete_Click(object sender, RoutedEventArgs e)
+        private void btDelete_Click( object sender, RoutedEventArgs e )
         {
             using (var context = new Db1Entities())
             {
-                var delAlien = (from c in context.Aliens where c.Id == _loadedAlien.Id select c).FirstOrDefault();
+                var delAlien = ( from c in context.Aliens where c.Id == _loadedAlien.Id select c ).FirstOrDefault();
                 context.Entry(delAlien).State = EntityState.Deleted;
                 context.SaveChanges();
                 MessageBox.Show("'" + _loadedAlien.Name + "' has been removed from the Database");
@@ -756,7 +758,7 @@ namespace SWNAdmin.Forms.DatabaseManager
             TbName.Text = "";
         }
 
-        private void btClear_Click(object sender, RoutedEventArgs e)
+        private void btClear_Click( object sender, RoutedEventArgs e )
         {
             ClearControls();
         }

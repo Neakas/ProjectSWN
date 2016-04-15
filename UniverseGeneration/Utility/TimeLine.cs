@@ -4,92 +4,89 @@ using System.Collections.Generic;
 namespace UniverseGeneration.Utility
 {
     /// <summary>
-    /// A base class for something with multiple segments (i.e a timeline)
+    ///     A base class for something with multiple segments (i.e a timeline)
     /// </summary>
     public class TimeLine
     {
         /// <summary>
-        /// Internal array to track points.
+        ///     Internal array to track points.
         /// </summary>
-        protected List<double> points;
-
+        protected List<double> Points;
 
         /// <summary>
-        /// A function used to initiate the <see cref="TimeLine.points"/> object
-        /// </summary>
-        public void initList()
-        {
-            this.points = new List<double>();
-        }
-
-        /// <summary>
-        /// A constructor assuming a list of existing points.
+        ///     A constructor assuming a list of existing points.
         /// </summary>
         /// <param name="inLen">The list of existing points</param>
-        public TimeLine(double[] inLen)
+        public TimeLine( IList<double> inLen )
         {
-            initList();
-            for (int i = 0; i < inLen.Length; i++)
-                this.points.Add(inLen[i]);
-        }
-
-        /// <summary>
-        /// Base constructor
-        /// </summary>
-        public TimeLine()
-        {
-            initList();
-        }
-
-        /// <summary>
-        /// Used to get a count of the number of points
-        /// </summary>
-        /// <returns>The number of points in the internal array</returns>
-        public int Count()
-        {
-            return this.points.Count;
-        }
-
-        /// <summary>
-        /// Copy constructor
-        /// </summary>
-        /// <param name="t">The object to be copied</param>
-        public TimeLine(TimeLine t)
-        {
-            initList();
-            foreach (double d in t.points)
+            InitList();
+            foreach (var t in inLen)
             {
-                this.points.Add(d);
+                Points.Add(t);
             }
         }
 
         /// <summary>
-        /// Gets the distance from the first point and the last point
+        ///     Base constructor
+        /// </summary>
+        public TimeLine()
+        {
+            InitList();
+        }
+
+        /// <summary>
+        ///     Copy constructor
+        /// </summary>
+        /// <param name="t">The object to be copied</param>
+        public TimeLine( TimeLine t )
+        {
+            InitList();
+            foreach (var d in t.Points)
+            {
+                Points.Add(d);
+            }
+        }
+
+        /// <summary>
+        ///     A function used to initiate the <see cref="Points" /> object
+        /// </summary>
+        public void InitList()
+        {
+            Points = new List<double>();
+        }
+
+        /// <summary>
+        ///     Used to get a count of the number of points
+        /// </summary>
+        /// <returns>The number of points in the internal array</returns>
+        public int Count()
+        {
+            return Points.Count;
+        }
+
+        /// <summary>
+        ///     Gets the distance from the first point and the last point
         /// </summary>
         /// <returns>The distance</returns>
-        public double getMaxLength()
+        public double GetMaxLength()
         {
-            double total = 0;
-            double max = this.points[this.points.Count - 1];
-            double min = this.points[0];
+            var max = Points[Points.Count - 1];
+            var min = Points[0];
 
-            total = Math.Abs(Math.Abs(max) - Math.Abs(min));
+            var total = Math.Abs(Math.Abs(max) - Math.Abs(min));
 
             return total;
         }
 
         /// <summary>
-        /// Adds a point to the line
+        ///     Adds a point to the line
         /// </summary>
         /// <param name="d">The point to be added to the line</param>
         /// <remarks>This automatically sorts it, so that the list will always have points correctly placed</remarks>
-        public void addToLine(double d)
+        public void AddToLine( double d )
         {
-            this.points.Add(d);
-            this.points.Sort();
+            Points.Add(d);
+            Points.Sort();
         }
-
-
-
     }
 }

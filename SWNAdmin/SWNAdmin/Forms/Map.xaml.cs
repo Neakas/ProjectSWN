@@ -6,7 +6,7 @@ namespace SWNAdmin.Forms
     /// <summary>
     ///     Interaction logic for Map.xaml
     /// </summary>
-    public partial class Map : Window
+    public partial class Map
     {
         public int MapColumns = 10;
         //Definiere Spalten und Reihen
@@ -17,7 +17,7 @@ namespace SWNAdmin.Forms
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded( object sender, RoutedEventArgs e )
         {
             //bei Fenster Laden wird die Karte Generiert
             GenerateMap();
@@ -26,24 +26,24 @@ namespace SWNAdmin.Forms
         private void GenerateMap()
         {
             //Generiert die Karte
-            var R = 0;
-            var C = 0;
-            for (C = 0; C < MapRows; C++)
+            var r = 0;
+            int c;
+            for (c = 0; 0 < MapRows; c++)
             {
-                var ColumnButton = new Button();
-                Grid.SetRow(ColumnButton, R);
-                Grid.SetColumn(ColumnButton, C);
-                ColumnButton.Name = "Button" + R + C;
-                ColumnButton.Content = R + "," + C;
-                HexGrid1.Children.Add(ColumnButton);
-                for (R = 0; R < MapRows; R++)
+                var columnButton = new Button();
+                Grid.SetRow(columnButton, r);
+                Grid.SetColumn(columnButton, 0);
+                columnButton.Name = "Button" + r + 0;
+                columnButton.Content = r + "," + 0;
+                HexGrid1.Children.Add(columnButton);
+                for (r = 0; r < MapRows; r++)
                 {
-                    var RowButton = new Button();
-                    Grid.SetRow(RowButton, R);
-                    Grid.SetColumn(RowButton, C);
-                    RowButton.Name = "Button" + R + C;
-                    RowButton.Content = R + "," + C;
-                    HexGrid1.Children.Add(RowButton);
+                    var rowButton = new Button();
+                    Grid.SetRow(rowButton, r);
+                    Grid.SetColumn(rowButton, 0);
+                    rowButton.Name = "Button" + r + 0;
+                    rowButton.Content = r + "," + 0;
+                    HexGrid1.Children.Add(rowButton);
                 }
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UniverseGeneration.Range_Objects;
 using UniverseGeneration.Utility;
 
@@ -7,193 +8,234 @@ namespace UniverseGeneration.Stellar_Bodies
 {
     public class StarSystem
     {
-        //fields
-        public string sysName { get; set; }
-        public double sysAge { get; set; }
-        public List<Star> sysStars { get; set; }
-        public List<Range> habitableZones { get; set; }
-        //derived field
-        public double maxMass { get; set; }
-
-        //outer system details
-        public int numDwarfPlanets { get; set; }
-        public double helioPause { get; set; }
-
-        public int subCompanionStar2index { get; set; }
-        public int subCompanionStar3index { get; set; }
-        public int star2index { get; set; }
-        public int star3index { get; set; }
-
-        public void initateLists()
-        {
-            sysStars = new List<Star>();
-            habitableZones = new List<Range>();
-        }
-
         public StarSystem()
         {
-            initateLists();
+            InitateLists();
         }
 
+        //fields
+        public string SysName { get; set; }
+        public double SysAge { get; set; }
+        public List<Star> SysStars { get; set; }
+        public List<Range> HabitableZones { get; set; }
+        //derived field
+        public double MaxMass { get; set; }
 
-        public void resetSystem()
+        //outer system details
+        public int NumDwarfPlanets { get; set; }
+        public double HelioPause { get; set; }
+
+        public int SubCompanionStar2Index { get; set; }
+        public int SubCompanionStar3Index { get; set; }
+        public int Star2Index { get; set; }
+        public int Star3Index { get; set; }
+
+        public void InitateLists()
         {
-            this.sysAge = 0.0;
-            this.maxMass = 0.0;
-            this.numDwarfPlanets = 0;
-            this.helioPause = 0.0;
-            this.subCompanionStar2index = 0;
-            this.subCompanionStar3index = 0;
-            this.star2index = 0;
-            this.star3index = 0;
-            this.sysStars.Clear();
-            this.habitableZones.Clear();
+            SysStars = new List<Star>();
+            HabitableZones = new List<Range>();
         }
 
-        public void addStar(Star newStar)
+        public void ResetSystem()
         {
-            this.sysStars.Add(newStar);
+            SysAge = 0.0;
+            MaxMass = 0.0;
+            NumDwarfPlanets = 0;
+            HelioPause = 0.0;
+            SubCompanionStar2Index = 0;
+            SubCompanionStar3Index = 0;
+            Star2Index = 0;
+            Star3Index = 0;
+            SysStars.Clear();
+            HabitableZones.Clear();
         }
 
-        public void addStar(int selfID, int parent, int order)
+        public void AddStar( Star newStar )
         {
-            if (this.sysAge == 0)
+            SysStars.Add(newStar);
+        }
+
+        public void AddStar( int selfId, int parent, int order )
+        {
+            if (Math.Abs(SysAge) < 0)
+            {
                 throw new Exception("This star system needs an age.");
+            }
 
             //Set flags here.
-            int curPos = this.sysStars.Count;
+            var curPos = SysStars.Count;
 
-            if (selfID == Star.IS_SECONDARY)
-                this.star2index = curPos;
+            if (selfId == Star.IsSecondary)
+            {
+                Star2Index = curPos;
+            }
 
-            if (selfID == Star.IS_SECCOMP)
-                this.subCompanionStar2index = curPos;
+            if (selfId == Star.IsSeccomp)
+            {
+                SubCompanionStar2Index = curPos;
+            }
 
-            if (selfID == Star.IS_TRINARY)
-                this.star3index = curPos;
+            if (selfId == Star.IsTrinary)
+            {
+                Star3Index = curPos;
+            }
 
-            if (selfID == Star.IS_TRICOMP)
-                this.subCompanionStar3index = curPos;
+            if (selfId == Star.IsTricomp)
+            {
+                SubCompanionStar3Index = curPos;
+            }
 
             //add it now
 
-            this.sysStars.Add(new Star(this.sysAge, parent, selfID, order, this.sysName));
+            SysStars.Add(new Star(SysAge, parent, selfId, order, SysName));
         }
 
-
-        public int getPositionByID(int selfID)
+        public int GetPositionById( int selfId )
         {
-            for (int i = 0; i < this.sysStars.Count; i++)
+            for (var i = 0; i < SysStars.Count; i++)
             {
-                if (sysStars[i].selfID == selfID) return i;
+                if (SysStars[i].SelfId == selfId)
+                {
+                    return i;
+                }
             }
 
             return 0;
         }
 
-
-
-        public int getValidParent(int parentFlag)
+        public int GetValidParent( int parentFlag )
         {
-            int planetOwner = 0;
+            var planetOwner = 0;
 
-            if ((parentFlag == Satellite.ORBIT_PRISEC) || (parentFlag == Satellite.ORBIT_PRISECTRI) ||
-                (parentFlag == Satellite.ORBIT_PRITRI) || (parentFlag == Star.IS_PRIMARY))
+            if (( parentFlag == Satellite.OrbitPrisec ) || ( parentFlag == Satellite.OrbitPrisectri ) || ( parentFlag == Satellite.OrbitPritri ) || ( parentFlag == Star.IsPrimary ))
+            {
                 planetOwner = 0;
-            if ((parentFlag == Satellite.ORBIT_SECCOM) || (parentFlag == Satellite.ORBIT_SECTRI) ||
-                (parentFlag == Star.IS_SECONDARY))
-                planetOwner = this.star2index;
-            if ((parentFlag == Satellite.ORBIT_TRICOM) || (parentFlag == Star.IS_TRINARY))
-                planetOwner = this.star3index;
-            if (parentFlag == Star.IS_SECCOMP) planetOwner = this.subCompanionStar2index;
-            if (parentFlag == Star.IS_TRICOMP) planetOwner = this.subCompanionStar3index;
+            }
+            if (( parentFlag == Satellite.OrbitSeccom ) || ( parentFlag == Satellite.OrbitSectri ) || ( parentFlag == Star.IsSecondary ))
+            {
+                planetOwner = Star2Index;
+            }
+            if (( parentFlag == Satellite.OrbitTricom ) || ( parentFlag == Star.IsTrinary ))
+            {
+                planetOwner = Star3Index;
+            }
+            if (parentFlag == Star.IsSeccomp)
+            {
+                planetOwner = SubCompanionStar2Index;
+            }
+            if (parentFlag == Star.IsTricomp)
+            {
+                planetOwner = SubCompanionStar3Index;
+            }
 
             return planetOwner;
         }
 
-        public int getStellarParentID(int ID)
+        public int GetStellarParentId( int id )
         {
-            if (ID == Star.IS_PRIMARY) return 0;
-            if (ID == Star.IS_SECONDARY) return this.star2index;
-            if (ID == Star.IS_TRINARY) return this.star3index;
-            if (ID == Star.IS_SECCOMP) return this.subCompanionStar2index;
-            if (ID == Star.IS_TRICOMP) return this.subCompanionStar3index;
-
-            return 0;
+            if (id == Star.IsPrimary)
+            {
+                return 0;
+            }
+            if (id == Star.IsSecondary)
+            {
+                return Star2Index;
+            }
+            if (id == Star.IsTrinary)
+            {
+                return Star3Index;
+            }
+            if (id == Star.IsSeccomp)
+            {
+                return SubCompanionStar2Index;
+            }
+            return id == Star.IsTricomp ? SubCompanionStar3Index : 0;
         }
 
-        public static int genNumOfStars(Dice ourDice)
+        public static int GenNumOfStars( Dice ourDice )
         {
-            int roll = 0;
-
             //if there's an override in, autoreturn it.
             //if (OptionCont.numStarOverride) return OptionCont.numStars;
 
-            roll = ourDice.gurpsRoll();
+            var roll = ourDice.GurpsRoll();
 
-            if (OptionCont.inOpenCluster) roll = roll + 3;
+            if (OptionCont.InOpenCluster)
+            {
+                roll = roll + 3;
+            }
 
-            roll = (int)Math.Floor((roll - 1) / 5.0);
+            roll = (int) Math.Floor(( roll - 1 ) / 5.0);
 
             //logic bugs.
-            if (roll < 1) roll = 1;
-            if (roll > 3) roll = 3;
+            if (roll < 1)
+            {
+                roll = 1;
+            }
+            if (roll > 3)
+            {
+                roll = 3;
+            }
 
             return roll;
         }
 
         /// <summary>
-        /// Gets the population from the age
+        ///     Gets the population from the age
         /// </summary>
         /// <param name="age">The age</param>
         /// <returns>The age description</returns>
-        public static String getPopulationFromAge(double age)
+        public static string GetPopulationFromAge( double age )
         {
-            if (age >= .01 && age < .1) return "Extreme Population I";
-            if (age >= .1 && age < 2) return "Young Population I";
-            if (age >= 2 && age < 5.6) return "Intermediate Population I";
-            if (age >= 5.6 && age < 8.2) return "Old Population I";
-            if (age >= 8.2 && age < 10.4) return "Intermediate Population II";
-            if (age >= 10.4) return "Extreme Population II";
-
-            return "???";
+            if (age >= .01 && age < .1)
+            {
+                return "Extreme Population I";
+            }
+            if (age >= .1 && age < 2)
+            {
+                return "Young Population I";
+            }
+            if (age >= 2 && age < 5.6)
+            {
+                return "Intermediate Population I";
+            }
+            if (age >= 5.6 && age < 8.2)
+            {
+                return "Old Population I";
+            }
+            if (age >= 8.2 && age < 10.4)
+            {
+                return "Intermediate Population II";
+            }
+            return age >= 10.4 ? "Extreme Population II" : "???";
         }
 
         /// <summary>
-        /// This counts the number of stars in this solar system.
+        ///     This counts the number of stars in this solar system.
         /// </summary>
         /// <returns>Returns an integer of the number of stars</returns>
-        public int countStars()
+        public int CountStars()
         {
-            return this.sysStars.Count;
+            return SysStars.Count;
         }
 
         /// <summary>
-        /// This counts the total number of planets in this solar system
+        ///     This counts the total number of planets in this solar system
         /// </summary>
         /// <returns>Returns an integer of the number of planets</returns>
-        public int countPlanets()
+        public int CountPlanets()
         {
-            int totalPlanets = 0;
-
-            for (int i = 0; i < this.sysStars.Count; i++)
-            {
-                totalPlanets += this.sysStars[i].sysPlanets.Count;
-            }
-
-            return totalPlanets;
+            return SysStars.Sum(t => t.SysPlanets.Count);
         }
 
         /// <summary>
-        /// Clears all planets without removing the stars.
+        ///     Clears all planets without removing the stars.
         /// </summary>
-        public void clearPlanets()
+        public void ClearPlanets()
         {
-            foreach (Star s in this.sysStars)
+            foreach (var s in SysStars)
             {
-                s.sysPlanets.Clear();
+                s.SysPlanets.Clear();
             }
         }
-
     }
 }

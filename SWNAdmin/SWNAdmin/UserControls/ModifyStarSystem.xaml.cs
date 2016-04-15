@@ -1,7 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using SWNAdmin.Forms;
 using SWNAdmin.Utility;
 
@@ -10,33 +9,30 @@ namespace SWNAdmin.UserControls
     /// <summary>
     ///     Interaction logic for ModifyStarSystem.xaml
     /// </summary>
-    public partial class ModifyStarSystem : UserControl
+    public partial class ModifyStarSystem
     {
         public ModifyStarSystem()
         {
             InitializeComponent();
         }
 
-        public StarSystems conObject { get; set; }
+        public StarSystems ConObject { get; set; }
 
-        private void btApply_Click(object sender, RoutedEventArgs e)
+        private void btApply_Click( object sender, RoutedEventArgs e )
         {
             StarSystems updatesystem;
             using (var ctx = new Db1Entities())
             {
-                updatesystem = ctx.StarSystems.Where(s => s.Id.ToString() == tbSysID.Text).FirstOrDefault();
+                updatesystem = ctx.StarSystems.FirstOrDefault(s => s.Id.ToString() == TbSysId.Text);
             }
             if (updatesystem != null)
             {
-                updatesystem.sysName = tbSysName.Text;
-                updatesystem.sysAge = double.Parse(tbSysAge.Text);
+                updatesystem.sysName = TbSysName.Text;
+                updatesystem.sysAge = double.Parse(TbSysAge.Text);
             }
             using (var dbCtx = new Db1Entities())
             {
-                //3. Mark entity as modified
                 dbCtx.Entry(updatesystem).State = EntityState.Modified;
-
-                //4. call SaveChanges
                 dbCtx.SaveChanges();
             }
             SystemSelector.CurrentInstance.LoadSystemsFromSql();

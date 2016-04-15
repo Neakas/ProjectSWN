@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -10,82 +9,92 @@ namespace SWN.UserControls
     /// <summary>
     ///     Interaction logic for Notification.xaml
     /// </summary>
-    public partial class Notification : UserControl
+    public partial class Notification
     {
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("NotificationText",
-            typeof (string), typeof (Notification), new FrameworkPropertyMetadata(string.Empty));
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("NotificationText", typeof (string), typeof (Notification), new FrameworkPropertyMetadata(string.Empty));
 
-        private readonly object NotificationObject;
+        private readonly object _notificationObject;
 
-        private Storyboard myStoryboard;
-        private string Objecttype;
+        private Storyboard _myStoryboard;
 
-        public Notification(object notificationObject)
+        public Notification( object notificationObject )
         {
-            NotificationObject = notificationObject;
-            Objecttype = NotificationObject.ToString();
+            _notificationObject = notificationObject;
             InitializeComponent();
-            MouseEnter += onMouseEnter;
-            MouseLeave += onMouseLeave;
-            MouseLeftButtonDown += onMouseClick;
-            var animatedBrush = new SolidColorBrush();
-            animatedBrush.Color = Colors.Black;
-            animatedBrush.Opacity = 0;
+            MouseEnter += OnMouseEnter;
+            MouseLeave += OnMouseLeave;
+            MouseLeftButtonDown += OnMouseClick;
+            var animatedBrush = new SolidColorBrush
+            {
+                Color = Colors.Black,
+                Opacity = 0
+            };
             if (FindName("myanimatedbrush") == null)
             {
                 RegisterName("myanimatedbrush", animatedBrush);
             }
-            tbBorder.BorderBrush = animatedBrush;
+            TbBorder.BorderBrush = animatedBrush;
         }
 
         public string NotificationText
         {
-            get { return GetValue(TextProperty).ToString(); }
-            set { SetValue(TextProperty, value); }
-        }
-
-        private void onMouseEnter(object sender, MouseEventArgs e)
-        {
-            var myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.From = 0.0;
-            myDoubleAnimation.To = 1.0;
-            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-            myStoryboard = new Storyboard();
-            myStoryboard.Children.Add(myDoubleAnimation);
-            Storyboard.SetTargetName(myDoubleAnimation, "myanimatedbrush");
-            Storyboard.SetTargetProperty(myDoubleAnimation, new PropertyPath(Brush.OpacityProperty));
-            myStoryboard.Begin(tbBorder);
-        }
-
-        private void onMouseLeave(object sender, MouseEventArgs e)
-        {
-            var myDoubleAnimation = new DoubleAnimation();
-            myDoubleAnimation.From = 1.0;
-            myDoubleAnimation.To = 0.0;
-            myDoubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-            myStoryboard = new Storyboard();
-            myStoryboard.Children.Add(myDoubleAnimation);
-            Storyboard.SetTargetName(myDoubleAnimation, "myanimatedbrush");
-            Storyboard.SetTargetProperty(myDoubleAnimation, new PropertyPath(Brush.OpacityProperty));
-            myStoryboard.Begin(tbBorder);
-        }
-
-        private void onMouseClick(object sender, MouseButtonEventArgs e)
-        {
-            if (NotificationObject.GetType().Name == "Uri")
+            get
             {
-                //We got an Uri/ImageUri...Load the Image into the ImageGrid
-                MainWindow.CurrentInstance.SetImageGridBusy();
-                MainWindow.CurrentInstance.UpdateImageWindow((Uri) NotificationObject);
-                RemoveNotification();
+                return GetValue(TextProperty).ToString();
             }
+            set
+            {
+                SetValue(TextProperty, value);
+            }
+        }
+
+        private void OnMouseEnter( object sender, MouseEventArgs e )
+        {
+            var myDoubleAnimation = new DoubleAnimation
+            {
+                From = 0.0,
+                To = 1.0,
+                Duration = new Duration(TimeSpan.FromSeconds(0.5))
+            };
+            _myStoryboard = new Storyboard();
+            _myStoryboard.Children.Add(myDoubleAnimation);
+            Storyboard.SetTargetName(myDoubleAnimation, "myanimatedbrush");
+            Storyboard.SetTargetProperty(myDoubleAnimation, new PropertyPath(Brush.OpacityProperty));
+            _myStoryboard.Begin(TbBorder);
+        }
+
+        private void OnMouseLeave( object sender, MouseEventArgs e )
+        {
+            var myDoubleAnimation = new DoubleAnimation
+            {
+                From = 1.0,
+                To = 0.0,
+                Duration = new Duration(TimeSpan.FromSeconds(0.5))
+            };
+            _myStoryboard = new Storyboard();
+            _myStoryboard.Children.Add(myDoubleAnimation);
+            Storyboard.SetTargetName(myDoubleAnimation, "myanimatedbrush");
+            Storyboard.SetTargetProperty(myDoubleAnimation, new PropertyPath(Brush.OpacityProperty));
+            _myStoryboard.Begin(TbBorder);
+        }
+
+        private void OnMouseClick( object sender, MouseButtonEventArgs e )
+        {
+            if (_notificationObject.GetType().Name != "Uri")
+            {
+                return;
+            }
+            //We got an Uri/ImageUri...Load the Image into the ImageGrid
+            MainWindow.CurrentInstance.SetImageGridBusy();
+            MainWindow.CurrentInstance.UpdateImageWindow((Uri) _notificationObject);
+            RemoveNotification();
         }
 
         private void RemoveNotification()
         {
             MainWindow.CurrentInstance.UnregisterName(MainWindow.CurrentInstance.NotificationDict[this]);
             MainWindow.CurrentInstance.NotificationDict.Remove(this);
-            MainWindow.CurrentInstance.spNotificationPanel.Children.Remove(this);
+            MainWindow.CurrentInstance.SpNotificationPanel.Children.Remove(this);
         }
     }
 }

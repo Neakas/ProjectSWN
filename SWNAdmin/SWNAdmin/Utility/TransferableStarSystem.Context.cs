@@ -26,35 +26,35 @@ namespace SWNAdmin.Utility
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<PName> PName { get; set; }
+        public virtual DbSet<Registration> Registration { get; set; }
+        public virtual DbSet<SatelliteBaseTypes> SatelliteBaseTypes { get; set; }
+        public virtual DbSet<UDateTime> UDateTime { get; set; }
+        public virtual DbSet<Attribute> Attribute { get; set; }
+        public virtual DbSet<StatGroup> StatGroup { get; set; }
+        public virtual DbSet<StatSubGroup> StatSubGroup { get; set; }
+        public virtual DbSet<UsedModifier> UsedModifier { get; set; }
+        public virtual DbSet<Character> Character { get; set; }
+        public virtual DbSet<FactionGoals> FactionGoals { get; set; }
+        public virtual DbSet<Factions> Factions { get; set; }
+        public virtual DbSet<FactionTags> FactionTags { get; set; }
+        public virtual DbSet<encycloFactions> encycloFactions { get; set; }
+        public virtual DbSet<encycloPlanets> encycloPlanets { get; set; }
+        public virtual DbSet<encycloRace> encycloRace { get; set; }
+        public virtual DbSet<Aliens> Aliens { get; set; }
+        public virtual DbSet<Encyclopedia> Encyclopedia { get; set; }
+        public virtual DbSet<Modifier> Modifier { get; set; }
+        public virtual DbSet<Planets> Planets { get; set; }
+        public virtual DbSet<Requirements> Requirements { get; set; }
         public virtual DbSet<Advantages> Advantages { get; set; }
         public virtual DbSet<Disadvantages> Disadvantages { get; set; }
         public virtual DbSet<InnerMoonlets> InnerMoonlets { get; set; }
         public virtual DbSet<MajorMoons> MajorMoons { get; set; }
         public virtual DbSet<OuterMoonlets> OuterMoonlets { get; set; }
-        public virtual DbSet<Planets> Planets { get; set; }
-        public virtual DbSet<PName> PName { get; set; }
-        public virtual DbSet<Registration> Registration { get; set; }
-        public virtual DbSet<SatelliteBaseTypes> SatelliteBaseTypes { get; set; }
         public virtual DbSet<Stars> Stars { get; set; }
         public virtual DbSet<StarSystems> StarSystems { get; set; }
-        public virtual DbSet<UDateTime> UDateTime { get; set; }
-        public virtual DbSet<Attribute> Attribute { get; set; }
         public virtual DbSet<Skills> Skills { get; set; }
         public virtual DbSet<SkillSpecialization> SkillSpecialization { get; set; }
-        public virtual DbSet<Requirements> Requirements { get; set; }
-        public virtual DbSet<Modifier> Modifier { get; set; }
-        public virtual DbSet<StatGroup> StatGroup { get; set; }
-        public virtual DbSet<StatSubGroup> StatSubGroup { get; set; }
-        public virtual DbSet<UsedModifier> UsedModifier { get; set; }
-        public virtual DbSet<Character> Character { get; set; }
-        public virtual DbSet<Aliens> Aliens { get; set; }
-        public virtual DbSet<FactionGoals> FactionGoals { get; set; }
-        public virtual DbSet<Factions> Factions { get; set; }
-        public virtual DbSet<FactionTags> FactionTags { get; set; }
-        public virtual DbSet<encycloFactions> encycloFactions { get; set; }
-        public virtual DbSet<Encyclopedia> Encyclopedia { get; set; }
         public virtual DbSet<encycloPerson> encycloPerson { get; set; }
-        public virtual DbSet<encycloPlanets> encycloPlanets { get; set; }
-        public virtual DbSet<encycloRace> encycloRace { get; set; }
     }
 }

@@ -1,18 +1,16 @@
 ﻿using System;
 using System.IO;
-using System.Windows;
 
 namespace SWNAdmin
 {
     /// <summary>
     ///     Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
         private App()
         {
-            AppDomain.CurrentDomain.SetData("DataDirectory",
-                Path.Combine(AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug", string.Empty), "Utility"));
+            AppDomain.CurrentDomain.SetData("DataDirectory", Path.Combine(AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug", string.Empty), "Utility"));
         }
     }
 }

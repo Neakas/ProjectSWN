@@ -3,44 +3,42 @@ using UniverseGeneration.Stellar_Bodies;
 
 namespace UniverseGeneration.Range_Objects
 {
-    public class cleanZone : Range
+    public class CleanZone : Range
     {
-        public int ownershipFlag { get; set; }
-        public int orbitDesc { get; set; }
-
-        public cleanZone(double lower, double upper, int ownership, int orbitDesc) : base(lower, upper)
+        public CleanZone( double lower, double upper, int ownership, int orbitDesc ) : base(lower, upper)
         {
-            this.ownershipFlag = ownership;
-            this.orbitDesc = orbitDesc;
+            OwnershipFlag = ownership;
+            OrbitDesc = orbitDesc;
         }
 
-        public cleanZone(Range incoming, int ownership, int orbitDesc) : base(incoming)
+        public CleanZone( Range incoming, int ownership, int orbitDesc ) : base(incoming)
         {
-            this.ownershipFlag = ownership;
-            this.orbitDesc = orbitDesc;
+            OwnershipFlag = ownership;
+            OrbitDesc = orbitDesc;
         }
 
         //copy constructor
-        public cleanZone(cleanZone c) : base(c.lowerBound, c.upperBound)
+        public CleanZone( CleanZone c ) : base(c.LowerBound, c.UpperBound)
         {
-            this.ownershipFlag = c.ownershipFlag;
-            this.orbitDesc = c.orbitDesc;
+            OwnershipFlag = c.OwnershipFlag;
+            OrbitDesc = c.OrbitDesc;
         }
 
-        private cleanZone(){ }
+        public int OwnershipFlag { get; set; }
+        public int OrbitDesc { get; set; }
 
-        public Range getRange()
+        public Range GetRange()
         {
-            return new Range(this.lowerBound, this.upperBound);
+            return new Range(LowerBound, UpperBound);
         }
 
-        public override String ToString()
+        public override string ToString()
         {
-            String ret = "This clean zone is from " + this.lowerBound + " to " + this.upperBound + " AU";
-            ret = ret + Environment.NewLine + "    " + " with ownership " + Star.getDescSelfFlag(this.ownershipFlag) + " and ";
-            ret = ret + "orbit desc of " + Star.getDescSelfFlag(this.orbitDesc);
+            var ret = "This clean zone is from " + LowerBound + " to " + UpperBound + " AU";
+            ret = ret + Environment.NewLine + "    " + " with ownership " + Star.GetDescSelfFlag(OwnershipFlag) + " and ";
+            ret = ret + "orbit desc of " + Star.GetDescSelfFlag(OrbitDesc);
 
             return ret;
         }
-    } 
+    }
 }

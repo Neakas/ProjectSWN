@@ -11,19 +11,17 @@ namespace SWNAdmin.Utility
 {
     public class SqlManager
     {
-        private static readonly string projectDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+        private static readonly string ProjectDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent?.FullName;
 
-        public static SqlConnection con =
-            new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + projectDir +
-                              @"\Utility\Db1.mdf;Integrated Security=True;Connect Timeout=30");
+        public static SqlConnection Con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + ProjectDir + @"\Utility\Db1.mdf;Integrated Security=True;Connect Timeout=30");
 
         public static bool Connect()
         {
             //Neue SQL Verbindung
             //Öffne die Verbindung
-            if (con.State == ConnectionState.Closed)
+            if (Con.State == ConnectionState.Closed)
             {
-                con.Open();
+                Con.Open();
             }
 
             return true;
@@ -31,227 +29,226 @@ namespace SWNAdmin.Utility
 
         public static bool Disconnect()
         {
-            con.Close();
+            Con.Close();
             return true;
         }
 
-        public static void InsertSystem(StarSystem system)
+        public static void InsertSystem( StarSystem system )
         {
             using (var context = new Db1Entities())
             {
-                var NewSystem = new StarSystems();
-                NewSystem.sysName = system.sysName;
-                NewSystem.habitableZones = system.habitableZones.Count;
-                NewSystem.maxMass = system.maxMass;
-                NewSystem.numDwarfPlanets = system.numDwarfPlanets;
-                NewSystem.star2index = system.star2index;
-                NewSystem.star3index = system.star3index;
-                NewSystem.subCompanionStar2index = system.subCompanionStar2index;
-                NewSystem.subCompanionStar3index = system.subCompanionStar3index;
-                NewSystem.sysAge = system.sysAge;
-                NewSystem.sysStars = system.sysStars.Count;
-                foreach (var star in system.sysStars)
+                var newSystem = new StarSystems
                 {
-                    var NewStar = new Stars();
-                    NewStar.currLumin = Math.Round(star.currLumin, 4);
-                    NewStar.distFromPrimary = star.distFromPrimary;
-                    NewStar.effTemp = Math.Round(star.effTemp, 4);
-                    NewStar.gasGiantFlag = star.gasGiantFlag;
-                    NewStar.initLumin = star.initLumin;
-                    NewStar.initMass = star.initMass;
-                    NewStar.isFlareStar = star.isFlareStar;
-                    NewStar.name = star.name;
-                    NewStar.orbitalEccent = star.orbitalEccent;
-                    NewStar.orbitalPeriod = Math.Round(star.orbitalPeriod, 4);
-                    NewStar.orbitalRadius = star.orbitalRadius;
-                    NewStar.orbitalSep = star.orbitalSep;
-                    NewStar.orderID = star.orderID;
-                    NewStar.parentID = star.parentID;
-                    NewStar.parentName = star.parentName;
-                    NewStar.radius = Math.Round(star.getRadiusAU(), 4); //radius;
-                    NewStar.selfID = star.selfID;
-                    NewStar.specType = star.specType;
-                    NewStar.starAge = star.starAge;
-                    NewStar.starColor = star.starColor;
-                    NewStar.sysPlanets = star.sysPlanets.Count();
-                    NewStar.StarOrder = Star.getDescFromFlag(star.selfID);
-                    NewStar.StarOrder = star.returnCurrentBranchDesc();
-                    NewStar.OrbitalDetails = star.printOrbitalDetails();
-                    NewStar.StarString = star.ToString();
-
-
-                    foreach (var Sat in star.sysPlanets)
+                    sysName = system.SysName,
+                    habitableZones = system.HabitableZones.Count,
+                    maxMass = system.MaxMass,
+                    numDwarfPlanets = system.NumDwarfPlanets,
+                    star2index = system.Star2Index,
+                    star3index = system.Star3Index,
+                    subCompanionStar2index = system.SubCompanionStar2Index,
+                    subCompanionStar3index = system.SubCompanionStar3Index,
+                    sysAge = system.SysAge,
+                    sysStars = system.SysStars.Count
+                };
+                foreach (var star in system.SysStars)
+                {
+                    var newStar = new Stars
                     {
-                        var NewSatellite = new Planets();
+                        currLumin = Math.Round(star.CurrLumin, 4),
+                        distFromPrimary = star.DistFromPrimary,
+                        effTemp = Math.Round(star.EffTemp, 4),
+                        gasGiantFlag = star.GasGiantFlag,
+                        initLumin = star.InitLumin,
+                        initMass = star.InitMass,
+                        isFlareStar = star.IsFlareStar,
+                        name = star.Name,
+                        orbitalEccent = star.OrbitalEccent,
+                        orbitalPeriod = Math.Round(star.OrbitalPeriod, 4),
+                        orbitalRadius = star.OrbitalRadius,
+                        orbitalSep = star.OrbitalSep,
+                        orderID = star.OrderId,
+                        parentID = star.ParentId,
+                        parentName = star.ParentName,
+                        radius = Math.Round(star.GetRadiusAu(), 4),
+                        selfID = star.SelfId,
+                        specType = star.SpecType,
+                        starAge = star.StarAge,
+                        starColor = star.StarColor,
+                        sysPlanets = star.SysPlanets.Count,
+                        StarOrder = Star.GetDescFromFlag(star.SelfId)
+                    };
+                    newStar.StarOrder = star.ReturnCurrentBranchDesc();
+                    newStar.OrbitalDetails = star.PrintOrbitalDetails();
+                    newStar.StarString = star.ToString();
+
+                    foreach (var sat in star.SysPlanets)
+                    {
+                        var newSatellite = new Planets();
                         var type = "";
-                        var Pressure = "";
-                        if (Sat.baseType != Satellite.BASETYPE_ASTEROIDBELT || (bool) OptionCont.expandAsteroidBelt)
+                        var pressure = "";
+                        if (OptionCont.ExpandAsteroidBelt != null && ( sat.BaseType != Satellite.BasetypeAsteroidbelt || (bool) OptionCont.ExpandAsteroidBelt ))
                         {
-                            type = Sat.descSizeType();
+                            type = sat.DescSizeType();
                         }
-                        if (Sat.baseType == Satellite.BASETYPE_ASTEROIDBELT)
+                        if (sat.BaseType == Satellite.BasetypeAsteroidbelt)
                         {
                             type = "Asteroid Belt";
                         }
 
-                        if (Sat.baseType == Satellite.BASETYPE_ASTEROIDBELT)
-                            Pressure = "None.";
-
-                        if (Sat.baseType == Satellite.BASETYPE_GASGIANT)
-                            Pressure = "Superdense Atmosphere.";
-
-                        if (Sat.baseType == Satellite.BASETYPE_MOON || Sat.baseType == Satellite.BASETYPE_TERRESTIAL)
-                            Pressure = Sat.getDescAtmCategory() + "(" + Math.Round(Sat.atmPres, 2) + ")";
-
-                        NewSatellite.SatelliteSize = Sat.SatelliteSize;
-                        NewSatellite.SatelliteType = Sat.SatelliteType;
-                        NewSatellite.atmCate = Sat.atmCate.Count;
-                        NewSatellite.atmMass = Sat.atmMass;
-                        NewSatellite.atmPres = Pressure;
-                        NewSatellite.axialTilt = Sat.axialTilt;
-                        NewSatellite.baseType = Sat.baseType;
-                        NewSatellite.blackbodyTemp = Sat.blackbodyTemp;
-                        NewSatellite.dayFaceMod = Convert.ToInt32(Sat.dayFaceMod);
-                        NewSatellite.density = Sat.density;
-                        NewSatellite.diameter = Math.Round(Sat.diameterInKM(), 2);
-                        NewSatellite.gravity = Math.Round(Sat.gravity*Satellite.GFORCE, 2);
-                        NewSatellite.hydCoverage = Sat.hydCoverage*100 + "%";
-                        NewSatellite.innerMoonlets = Sat.innerMoonlets.Count;
-                        NewSatellite.isResonant = Sat.isResonant;
-                        NewSatellite.isTideLocked = Sat.isTideLocked;
-                        NewSatellite.majorMoons = Sat.majorMoons.Count;
-                        NewSatellite.mass = Sat.mass;
-                        NewSatellite.masterOrderID = Sat.masterOrderID;
-                        NewSatellite.moonRadius = Sat.moonRadius;
-                        NewSatellite.name = Sat.name;
-                        NewSatellite.nightFaceMod = Convert.ToInt32(Sat.nightFaceMod);
-                        NewSatellite.orbitalCycle = Sat.orbitalCycle;
-                        NewSatellite.orbitalEccent = Sat.orbitalEccent;
-                        NewSatellite.orbitalPeriod = Sat.orbitalPeriod;
-                        NewSatellite.orbitalRadius = Math.Round(Sat.orbitalRadius, 2);
-                        NewSatellite.outerMoonlets = Sat.outerMoonlets.Count;
-                        NewSatellite.parentDiam = Sat.parentDiam;
-                        NewSatellite.parentID = Sat.parentID;
-                        NewSatellite.parentName = Sat.parentName;
-                        NewSatellite.retrogradeMotion = Sat.retrogradeMotion;
-                        NewSatellite.rotationalPeriod = Sat.rotationalPeriod;
-                        NewSatellite.selfID = Sat.selfID;
-                        NewSatellite.siderealPeriod = Sat.siderealPeriod;
-                        NewSatellite.surfaceTemp = Sat.surfaceTemp;
-                        NewSatellite.tecActivity = Sat.tecActivity;
-                        NewSatellite.tideTotal = Sat.tideTotal;
-                        NewSatellite.volActivity = Sat.volActivity;
-                        NewSatellite.sattype = type;
-                        NewSatellite.atmnote = Sat.descAtm();
-                        NewSatellite.RVM = Sat.getRVMDesc();
-                        NewSatellite.planetString = Sat.ToString();
-
-                        foreach (var InnerMoonlet in Sat.innerMoonlets)
+                        if (sat.BaseType == Satellite.BasetypeAsteroidbelt)
                         {
-                            var NewInnerMoonlet = new InnerMoonlets();
-                            NewInnerMoonlet.blackbodyTemp = InnerMoonlet.blackbodyTemp;
-                            NewInnerMoonlet.name = InnerMoonlet.name;
-                            NewInnerMoonlet.orbitalEccent = InnerMoonlet.orbitalEccent;
-                            NewInnerMoonlet.orbitalPeriod = InnerMoonlet.orbitalPeriod;
-                            NewInnerMoonlet.orbitalRadius = Math.Round(InnerMoonlet.orbitalRadius, 2);
-                            NewInnerMoonlet.parentID = InnerMoonlet.parentID;
-                            NewInnerMoonlet.parentName = InnerMoonlet.parentName;
-                            NewInnerMoonlet.planetRadius = InnerMoonlet.planetRadius;
-                            NewInnerMoonlet.selfID = InnerMoonlet.selfID;
-                            NewInnerMoonlet.innerMoonString = InnerMoonlet.ToString();
-                            NewSatellite.InnerMoonlets1.Add(NewInnerMoonlet);
+                            pressure = "None.";
                         }
-                        foreach (var OuterMoonlet in Sat.outerMoonlets)
+
+                        if (sat.BaseType == Satellite.BasetypeGasgiant)
                         {
-                            var NewOuterMoonlet = new OuterMoonlets();
-                            NewOuterMoonlet.blackbodyTemp = OuterMoonlet.blackbodyTemp;
-                            NewOuterMoonlet.name = OuterMoonlet.name;
-                            NewOuterMoonlet.orbitalEccent = OuterMoonlet.orbitalEccent;
-                            NewOuterMoonlet.orbitalPeriod = OuterMoonlet.orbitalPeriod;
-                            NewOuterMoonlet.orbitalRadius = Math.Round(OuterMoonlet.orbitalRadius, 2);
-                            NewOuterMoonlet.parentID = OuterMoonlet.parentID;
-                            NewOuterMoonlet.parentName = OuterMoonlet.parentName;
-                            NewOuterMoonlet.planetRadius = OuterMoonlet.planetRadius;
-                            NewOuterMoonlet.selfID = OuterMoonlet.selfID;
-                            NewOuterMoonlet.outerMoonString = OuterMoonlet.ToString();
-                            NewSatellite.OuterMoonlets1.Add(NewOuterMoonlet);
+                            pressure = "Superdense Atmosphere.";
                         }
-                        foreach (var MajorMoon in Sat.majorMoons)
+
+                        if (sat.BaseType == Satellite.BasetypeMoon || sat.BaseType == Satellite.BasetypeTerrestial)
                         {
-                            var NewMajorMoon = new MajorMoons();
-                            NewMajorMoon.RVM = MajorMoon.RVM;
-                            NewMajorMoon.SatelliteSize = MajorMoon.SatelliteSize;
-                            NewMajorMoon.SatelliteType = MajorMoon.SatelliteType;
-                            NewMajorMoon.atmCate = MajorMoon.atmCate.Count;
-                            NewMajorMoon.atmMass = MajorMoon.atmMass;
-                            NewMajorMoon.axialTilt = MajorMoon.axialTilt;
-                            NewMajorMoon.baseType = MajorMoon.baseType;
-                            NewMajorMoon.blackbodyTemp = MajorMoon.blackbodyTemp;
-                            NewMajorMoon.dayFaceMod = Convert.ToInt32(MajorMoon.dayFaceMod);
-                            NewMajorMoon.density = MajorMoon.density;
-                            NewMajorMoon.diameter = Math.Round(MajorMoon.diameterInKM(), 2);
-                            NewMajorMoon.gravity = Math.Round(MajorMoon.gravity*Satellite.GFORCE, 2);
-                            NewMajorMoon.hydCoverage = Sat.hydCoverage*100 + "%";
-                            NewMajorMoon.innerMoonlets = MajorMoon.innerMoonlets.Count;
-                            NewMajorMoon.isResonant = MajorMoon.isResonant;
-                            NewMajorMoon.isTideLocked = MajorMoon.isTideLocked;
-                            NewMajorMoon.majorMoons1 = MajorMoon.majorMoons.Count;
-                            NewMajorMoon.mass = MajorMoon.mass;
-                            NewMajorMoon.moonRadius = MajorMoon.moonRadius;
-                            NewMajorMoon.name = MajorMoon.name;
-                            NewMajorMoon.nightFaceMod = Convert.ToInt32(MajorMoon.nightFaceMod);
-                            NewMajorMoon.orbitalCycle = MajorMoon.orbitalCycle;
-                            NewMajorMoon.orbitalEccent = MajorMoon.orbitalEccent;
-                            NewMajorMoon.orbitalPeriod = MajorMoon.orbitalPeriod;
-                            NewMajorMoon.orbitalRadius = Math.Round(MajorMoon.orbitalRadius, 2);
-                            NewMajorMoon.outerMoonlets = MajorMoon.outerMoonlets.Count;
-                            NewMajorMoon.parentDiam = MajorMoon.parentDiam;
-                            NewMajorMoon.parentID = MajorMoon.parentID;
-                            NewMajorMoon.parentName = MajorMoon.parentName;
-                            NewMajorMoon.retrogradeMotion = MajorMoon.retrogradeMotion;
-                            NewMajorMoon.rotationalPeriod = MajorMoon.rotationalPeriod;
-                            NewMajorMoon.selfID = MajorMoon.selfID;
-                            NewMajorMoon.siderealPeriod = MajorMoon.siderealPeriod;
-                            NewMajorMoon.surfaceTemp = MajorMoon.surfaceTemp;
-                            NewMajorMoon.tecActivity = MajorMoon.tecActivity;
-                            NewMajorMoon.tideForce = MajorMoon.tideForce.Count;
-                            NewMajorMoon.tideTotal = MajorMoon.tideTotal;
-                            NewMajorMoon.volActivity = MajorMoon.volActivity;
-                            NewMajorMoon.MajorMoonString = MajorMoon.ToString();
-                            NewSatellite.MajorMoons1.Add(NewMajorMoon);
+                            pressure = sat.GetDescAtmCategory() + "(" + Math.Round(sat.AtmPres, 2) + ")";
                         }
-                        NewStar.Planets.Add(NewSatellite);
+
+                        newSatellite.SatelliteSize = sat.SatelliteSize;
+                        newSatellite.SatelliteType = sat.SatelliteType;
+                        newSatellite.atmCate = sat.AtmCate.Count;
+                        newSatellite.atmMass = sat.AtmMass;
+                        newSatellite.atmPres = pressure;
+                        newSatellite.axialTilt = sat.AxialTilt;
+                        newSatellite.baseType = sat.BaseType;
+                        newSatellite.blackbodyTemp = sat.BlackbodyTemp;
+                        newSatellite.dayFaceMod = Convert.ToInt32(sat.DayFaceMod);
+                        newSatellite.density = sat.Density;
+                        newSatellite.diameter = Math.Round(sat.DiameterInKm(), 2);
+                        newSatellite.gravity = Math.Round(sat.Gravity * Satellite.Gforce, 2);
+                        newSatellite.hydCoverage = sat.HydCoverage * 100 + "%";
+                        newSatellite.innerMoonlets = sat.InnerMoonlets.Count;
+                        newSatellite.isResonant = sat.IsResonant;
+                        newSatellite.isTideLocked = sat.IsTideLocked;
+                        newSatellite.majorMoons = sat.MajorMoons.Count;
+                        newSatellite.mass = sat.Mass;
+                        newSatellite.masterOrderID = sat.MasterOrderId;
+                        newSatellite.moonRadius = sat.MoonRadius;
+                        newSatellite.name = sat.Name;
+                        newSatellite.nightFaceMod = Convert.ToInt32(sat.NightFaceMod);
+                        newSatellite.orbitalCycle = sat.OrbitalCycle;
+                        newSatellite.orbitalEccent = sat.OrbitalEccent;
+                        newSatellite.orbitalPeriod = sat.OrbitalPeriod;
+                        newSatellite.orbitalRadius = Math.Round(sat.OrbitalRadius, 2);
+                        newSatellite.outerMoonlets = sat.OuterMoonlets.Count;
+                        newSatellite.parentDiam = sat.ParentDiam;
+                        newSatellite.parentID = sat.ParentId;
+                        newSatellite.parentName = sat.ParentName;
+                        newSatellite.retrogradeMotion = sat.RetrogradeMotion;
+                        newSatellite.rotationalPeriod = sat.RotationalPeriod;
+                        newSatellite.selfID = sat.SelfId;
+                        newSatellite.siderealPeriod = sat.SiderealPeriod;
+                        newSatellite.surfaceTemp = sat.SurfaceTemp;
+                        newSatellite.tecActivity = sat.TecActivity;
+                        newSatellite.tideTotal = sat.TideTotal;
+                        newSatellite.volActivity = sat.VolActivity;
+                        newSatellite.sattype = type;
+                        newSatellite.atmnote = sat.DescAtm();
+                        newSatellite.RVM = sat.GetRvmDesc();
+                        newSatellite.planetString = sat.ToString();
+
+                        foreach (var innerMoonlet in sat.InnerMoonlets)
+                        {
+                            var newInnerMoonlet = new InnerMoonlets
+                            {
+                                blackbodyTemp = innerMoonlet.BlackbodyTemp,
+                                name = innerMoonlet.Name,
+                                orbitalEccent = innerMoonlet.OrbitalEccent,
+                                orbitalPeriod = innerMoonlet.OrbitalPeriod,
+                                orbitalRadius = Math.Round(innerMoonlet.OrbitalRadius, 2),
+                                parentID = innerMoonlet.ParentId,
+                                parentName = innerMoonlet.ParentName,
+                                planetRadius = innerMoonlet.PlanetRadius,
+                                selfID = innerMoonlet.SelfId,
+                                innerMoonString = innerMoonlet.ToString()
+                            };
+                            newSatellite.InnerMoonlets1.Add(newInnerMoonlet);
+                        }
+                        foreach (var outerMoonlet in sat.OuterMoonlets)
+                        {
+                            var newOuterMoonlet = new OuterMoonlets
+                            {
+                                blackbodyTemp = outerMoonlet.BlackbodyTemp,
+                                name = outerMoonlet.Name,
+                                orbitalEccent = outerMoonlet.OrbitalEccent,
+                                orbitalPeriod = outerMoonlet.OrbitalPeriod,
+                                orbitalRadius = Math.Round(outerMoonlet.OrbitalRadius, 2),
+                                parentID = outerMoonlet.ParentId,
+                                parentName = outerMoonlet.ParentName,
+                                planetRadius = outerMoonlet.PlanetRadius,
+                                selfID = outerMoonlet.SelfId,
+                                outerMoonString = outerMoonlet.ToString()
+                            };
+                            newSatellite.OuterMoonlets1.Add(newOuterMoonlet);
+                        }
+                        foreach (var majorMoon in sat.MajorMoons)
+                        {
+                            var newMajorMoon = new MajorMoons
+                            {
+                                RVM = majorMoon.Rvm,
+                                SatelliteSize = majorMoon.SatelliteSize,
+                                SatelliteType = majorMoon.SatelliteType,
+                                atmCate = majorMoon.AtmCate.Count,
+                                atmMass = majorMoon.AtmMass,
+                                axialTilt = majorMoon.AxialTilt,
+                                baseType = majorMoon.BaseType,
+                                blackbodyTemp = majorMoon.BlackbodyTemp,
+                                dayFaceMod = Convert.ToInt32(majorMoon.DayFaceMod),
+                                density = majorMoon.Density,
+                                diameter = Math.Round(majorMoon.DiameterInKm(), 2),
+                                gravity = Math.Round(majorMoon.Gravity * Satellite.Gforce, 2),
+                                hydCoverage = sat.HydCoverage * 100 + "%",
+                                innerMoonlets = majorMoon.InnerMoonlets.Count,
+                                isResonant = majorMoon.IsResonant,
+                                isTideLocked = majorMoon.IsTideLocked,
+                                majorMoons1 = majorMoon.MajorMoons.Count,
+                                mass = majorMoon.Mass,
+                                moonRadius = majorMoon.MoonRadius,
+                                name = majorMoon.Name,
+                                nightFaceMod = Convert.ToInt32(majorMoon.NightFaceMod),
+                                orbitalCycle = majorMoon.OrbitalCycle,
+                                orbitalEccent = majorMoon.OrbitalEccent,
+                                orbitalPeriod = majorMoon.OrbitalPeriod,
+                                orbitalRadius = Math.Round(majorMoon.OrbitalRadius, 2),
+                                outerMoonlets = majorMoon.OuterMoonlets.Count,
+                                parentDiam = majorMoon.ParentDiam,
+                                parentID = majorMoon.ParentId,
+                                parentName = majorMoon.ParentName,
+                                retrogradeMotion = majorMoon.RetrogradeMotion,
+                                rotationalPeriod = majorMoon.RotationalPeriod,
+                                selfID = majorMoon.SelfId,
+                                siderealPeriod = majorMoon.SiderealPeriod,
+                                surfaceTemp = majorMoon.SurfaceTemp,
+                                tecActivity = majorMoon.TecActivity,
+                                tideForce = majorMoon.TideForce.Count,
+                                tideTotal = majorMoon.TideTotal,
+                                volActivity = majorMoon.VolActivity,
+                                MajorMoonString = majorMoon.ToString()
+                            };
+                            newSatellite.MajorMoons1.Add(newMajorMoon);
+                        }
+                        newStar.Planets.Add(newSatellite);
                     }
-                    context.Stars.Add(NewStar);
+                    context.Stars.Add(newStar);
                 }
-                context.StarSystems.Add(NewSystem);
+                context.StarSystems.Add(newSystem);
                 context.SaveChanges();
             }
         }
 
         public static List<StarSystems> LoadAllSystems()
         {
-            var AllSystems = new List<StarSystems>();
-
             var context = new Db1Entities();
             var query = from c in context.StarSystems select c;
-            AllSystems = query.ToList();
+            var allSystems = query.ToList();
 
-            return AllSystems;
-        }
-
-        public static void QuerySystem()
-        {
-            var context = new Db1Entities();
-            var query = from c in context.StarSystems where c.Id == 5 select c;
-            var sysNames = query.ToList();
-        }
-
-        public static void QueryAdvantage()
-        {
-            var context = new Db1Entities();
-            var query = from c in context.Advantages where c.Id == 7 select c;
-            var adv = query.FirstOrDefault();
+            return allSystems;
         }
     }
 }

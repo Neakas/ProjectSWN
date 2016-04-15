@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:SWNAdmin.UserControls"
              mc:Ignorable="d"
              xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
              themes:ThemeManager.Theme="ExpressionDark"
@@ -12,76 +11,76 @@
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource SWNLightBackground}" />
         </Grid.Background>
-        <Label x:Name="lblStarName" Content="Star Name:" HorizontalAlignment="Left" Margin="10,10,0,0"
+        <Label x:Name="LblStarName" Content="Star Name:" HorizontalAlignment="Left" Margin="10,10,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbStarName" HorizontalAlignment="Left" Height="23" Margin="105,8,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbStarName" HorizontalAlignment="Left" Height="23" Margin="105,8,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblStarID" Content="Star ID:" HorizontalAlignment="Left" Margin="10,40,0,0"
+        <Label x:Name="LblStarId" Content="Star Id:" HorizontalAlignment="Left" Margin="10,40,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbStarID" HorizontalAlignment="Left" Height="23" Margin="105,38,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbStarId" HorizontalAlignment="Left" Height="23" Margin="105,38,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" IsEnabled="False" />
-        <Label x:Name="lblStarAge" Content="Star Age:" HorizontalAlignment="Left" Margin="10,70,0,0"
+        <Label x:Name="LblStarAge" Content="Star Age:" HorizontalAlignment="Left" Margin="10,70,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbStarAge" HorizontalAlignment="Left" Height="23" Margin="105,68,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbStarAge" HorizontalAlignment="Left" Height="23" Margin="105,68,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblStarPlanets" Content="Planets on Star:" HorizontalAlignment="Left" Margin="10,100,0,0"
+        <Label x:Name="LblStarPlanets" Content="Planets on Star:" HorizontalAlignment="Left" Margin="10,100,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbStarPlanets" HorizontalAlignment="Left" Height="23" Margin="105,98,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbStarPlanets" HorizontalAlignment="Left" Height="23" Margin="105,98,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" IsEnabled="False" />
-        <Label x:Name="lblStarOrder" Content="Star Order:" HorizontalAlignment="Left" Margin="10,130,0,0"
+        <Label x:Name="LblStarOrder" Content="Star Order:" HorizontalAlignment="Left" Margin="10,130,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbStarOrder" HorizontalAlignment="Left" Height="23" Margin="105,128,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbStarOrder" HorizontalAlignment="Left" Height="23" Margin="105,128,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" IsEnabled="False" />
-        <Label x:Name="lblStarLum" Content="Current Lum.:" HorizontalAlignment="Left" Margin="10,160,0,0"
+        <Label x:Name="LblStarLum" Content="Current Lum.:" HorizontalAlignment="Left" Margin="10,160,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbStarLum" HorizontalAlignment="Left" Height="23" Margin="105,158,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbStarLum" HorizontalAlignment="Left" Height="23" Margin="105,158,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblStarDistFromPrim" Content="Dist from Prim.:" HorizontalAlignment="Left" Margin="10,190,0,0"
+        <Label x:Name="LblStarDistFromPrim" Content="Dist from Prim.:" HorizontalAlignment="Left" Margin="10,190,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbStarDistFromPrim" HorizontalAlignment="Left" Height="23" Margin="105,188,0,0"
+        <TextBox x:Name="TbStarDistFromPrim" HorizontalAlignment="Left" Height="23" Margin="105,188,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblStareffTemp" Content="Effective Temp:" HorizontalAlignment="Left" Margin="10,220,0,0"
+        <Label x:Name="LblStareffTemp" Content="Effective Temp:" HorizontalAlignment="Left" Margin="10,220,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbStareffTemp" HorizontalAlignment="Left" Height="23" Margin="105,218,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbStareffTemp" HorizontalAlignment="Left" Height="23" Margin="105,218,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblStarinitLum" Content="Initial Lum.:" HorizontalAlignment="Left" Margin="10,250,0,0"
+        <Label x:Name="LblStarinitLum" Content="Initial Lum.:" HorizontalAlignment="Left" Margin="10,250,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbStarinitLum" HorizontalAlignment="Left" Height="23" Margin="105,248,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbStarinitLum" HorizontalAlignment="Left" Height="23" Margin="105,248,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblStarinitMass" Content="Initial Mass:" HorizontalAlignment="Left" Margin="10,280,0,0"
+        <Label x:Name="LblStarinitMass" Content="Initial Mass:" HorizontalAlignment="Left" Margin="10,280,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbStarinitMass" HorizontalAlignment="Left" Height="23" Margin="105,278,0,0"
+        <TextBox x:Name="TbStarinitMass" HorizontalAlignment="Left" Height="23" Margin="105,278,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblStarisFlare" Content="Flare Star:" HorizontalAlignment="Left" Margin="10,310,0,0"
+        <Label x:Name="LblStarisFlare" Content="Flare Star:" HorizontalAlignment="Left" Margin="10,310,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbStarisFlare" HorizontalAlignment="Left" Height="23" Margin="105,308,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbStarisFlare" HorizontalAlignment="Left" Height="23" Margin="105,308,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblStarorbitalEccent" Content="Orbital Eccent.:" HorizontalAlignment="Left" Margin="10,340,0,0"
+        <Label x:Name="LblStarorbitalEccent" Content="Orbital Eccent.:" HorizontalAlignment="Left" Margin="10,340,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbStarorbitalEccent" HorizontalAlignment="Left" Height="23" Margin="105,338,0,0"
+        <TextBox x:Name="TbStarorbitalEccent" HorizontalAlignment="Left" Height="23" Margin="105,338,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblStarorbitalPeriod" Content="Orbital Period:" HorizontalAlignment="Left" Margin="10,370,0,0"
+        <Label x:Name="LblStarorbitalPeriod" Content="Orbital Period:" HorizontalAlignment="Left" Margin="10,370,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbStarorbitalPeriod" HorizontalAlignment="Left" Height="23" Margin="105,368,0,0"
+        <TextBox x:Name="TbStarorbitalPeriod" HorizontalAlignment="Left" Height="23" Margin="105,368,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblStarorbitalRadius" Content="Orbital Radius:" HorizontalAlignment="Left" Margin="10,400,0,0"
+        <Label x:Name="LblStarorbitalRadius" Content="Orbital Radius:" HorizontalAlignment="Left" Margin="10,400,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbStarorbitalRadius" HorizontalAlignment="Left" Height="23" Margin="105,398,0,0"
+        <TextBox x:Name="TbStarorbitalRadius" HorizontalAlignment="Left" Height="23" Margin="105,398,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblStarRadius" Content="Star Radius:" HorizontalAlignment="Left" Margin="10,430,0,0"
+        <Label x:Name="LblStarRadius" Content="Star Radius:" HorizontalAlignment="Left" Margin="10,430,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbStarRadius" HorizontalAlignment="Left" Height="23" Margin="105,428,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbStarRadius" HorizontalAlignment="Left" Height="23" Margin="105,428,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblStarSpecType" Content="Spectral Type:" HorizontalAlignment="Left" Margin="10,460,0,0"
+        <Label x:Name="LblStarSpecType" Content="Spectral Type:" HorizontalAlignment="Left" Margin="10,460,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbStarSpecType" HorizontalAlignment="Left" Height="23" Margin="105,458,0,0"
+        <TextBox x:Name="TbStarSpecType" HorizontalAlignment="Left" Height="23" Margin="105,458,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label x:Name="lblStarColor" Content="Star Color:" HorizontalAlignment="Left" Margin="10,490,0,0"
+        <Label x:Name="LblStarColor" Content="Star Color:" HorizontalAlignment="Left" Margin="10,490,0,0"
                VerticalAlignment="Top" Height="20" Width="90" />
-        <TextBox x:Name="tbStarColor" HorizontalAlignment="Left" Height="23" Margin="105,488,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbStarColor" HorizontalAlignment="Left" Height="23" Margin="105,488,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" />
 
-        <Button x:Name="btApply" Content="Apply" HorizontalAlignment="Left" Margin="515,572,0,0"
+        <Button x:Name="BtApply" Content="Apply" HorizontalAlignment="Left" Margin="515,572,0,0"
                 VerticalAlignment="Top" Width="75" Click="btApply_Click" />
     </Grid>
 </UserControl>

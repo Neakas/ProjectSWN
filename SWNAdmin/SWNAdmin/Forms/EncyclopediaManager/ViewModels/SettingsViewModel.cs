@@ -8,18 +8,17 @@ namespace SWNAdmin.Forms.EncyclopediaManager.ViewModels
 {
     public class SettingsViewModel : Notifier
     {
-        private readonly ObservableCollection<string> previousCriteria = new ObservableCollection<string>();
+        private readonly ObservableCollection<string> _previousCriteria = new ObservableCollection<string>();
 
-        private readonly ObservableCollection<TreeNodeViewModel> roots = new ObservableCollection<TreeNodeViewModel>();
-        private string changedNode = string.Empty;
-        private string currentCriteria = string.Empty;
-        private string selectedCriteria = string.Empty;
+        private readonly ObservableCollection<TreeNodeViewModel> _roots = new ObservableCollection<TreeNodeViewModel>();
+        private string _currentCriteria = string.Empty;
+        private string _selectedCriteria = string.Empty;
 
-        public SettingsViewModel(IEnumerable<TreeNodeViewModel> roots)
+        public SettingsViewModel( IEnumerable<TreeNodeViewModel> roots )
         {
             foreach (var node in roots)
             {
-                this.roots.Add(node);
+                _roots.Add(node);
                 node.PropertyChanged += ChangedNode;
             }
 
@@ -28,63 +27,72 @@ namespace SWNAdmin.Forms.EncyclopediaManager.ViewModels
 
         public ICommand StoreInPreviousCommand { get; }
 
-        public IEnumerable<TreeNodeViewModel> Roots
-        {
-            get { return roots; }
-        }
+        public IEnumerable<TreeNodeViewModel> Roots => _roots;
 
-        public IEnumerable<string> PreviousCriteria
-        {
-            get { return previousCriteria; }
-        }
+        public IEnumerable<string> PreviousCriteria => _previousCriteria;
 
         public string SelectedCriteria
         {
-            get { return selectedCriteria; }
+            get
+            {
+                return _selectedCriteria;
+            }
             set
             {
-                if (value == selectedCriteria)
+                if (value == _selectedCriteria)
+                {
                     return;
+                }
 
-                selectedCriteria = value;
+                _selectedCriteria = value;
                 OnPropertyChanged("SelectedCriteria");
             }
         }
 
         public string CurrentCriteria
         {
-            get { return currentCriteria; }
+            get
+            {
+                return _currentCriteria;
+            }
             set
             {
-                if (value == currentCriteria)
+                if (value == _currentCriteria)
+                {
                     return;
+                }
 
-                currentCriteria = value;
+                _currentCriteria = value;
                 OnPropertyChanged("CurrentCriteria");
                 ApplyFilter();
             }
         }
 
-        private void StoreInPrevious(object dummy)
+        private void StoreInPrevious( object dummy )
         {
             if (string.IsNullOrEmpty(CurrentCriteria))
+            {
                 return;
+            }
 
-            if (!previousCriteria.Contains(CurrentCriteria))
-                previousCriteria.Add(CurrentCriteria);
+            if (!_previousCriteria.Contains(CurrentCriteria))
+            {
+                _previousCriteria.Add(CurrentCriteria);
+            }
 
             SelectedCriteria = CurrentCriteria;
         }
 
-        private void ChangedNode(object Sender, PropertyChangedEventArgs e)
+        private static void ChangedNode( object sender, PropertyChangedEventArgs e )
         {
-            changedNode = e.PropertyName;
         }
 
         private void ApplyFilter()
         {
-            foreach (var node in roots)
+            foreach (var node in _roots)
+            {
                 node.ApplyCriteria(CurrentCriteria, new Stack<TreeNodeViewModel>());
+            }
         }
     }
 }

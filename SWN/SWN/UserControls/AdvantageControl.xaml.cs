@@ -1,11 +1,9 @@
-﻿using System.Windows.Controls;
-
-namespace SWN.UserControls
+﻿namespace SWN.UserControls
 {
     /// <summary>
     ///     Interaction logic for AdvantageControl.xaml
     /// </summary>
-    public partial class AdvantageControl : UserControl
+    public partial class AdvantageControl
     {
         public int AdvantageId;
 
@@ -14,13 +12,13 @@ namespace SWN.UserControls
             InitializeComponent();
         }
 
-        //public void InitControl(SWNAdmin.Utility.Advantages LoadedAdvantage)
-
         //{
+
+        //public void InitControl(SWNAdmin.Utility.Advantages LoadedAdvantage)
         //    AdvantageId = LoadedAdvantage.Id;
-        //    lblAdvLabel.Content = LoadedAdvantage.Name;
-        //    tbDiscription.Text = LoadedAdvantage.Discription;
-        //    lblAdvPoints.Content = LoadedAdvantage.PointCost;
+        //    LblAdvLabel.Content = LoadedAdvantage.Name;
+        //    TbDiscription.Text = LoadedAdvantage.Discription;
+        //    LblAdvPoints.Content = LoadedAdvantage.PointCost;
         //}
     }
 }

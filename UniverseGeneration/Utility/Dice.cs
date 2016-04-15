@@ -4,61 +4,54 @@ namespace UniverseGeneration.Utility
 {
     public class Dice
     {
-            protected MersenneTwister dice = new MersenneTwister((int)DateTime.Now.Ticks/ 10);
+        protected MersenneTwister Ddice = new MersenneTwister((int) DateTime.Now.Ticks / 10);
 
-            public Dice(){
-             }
-
-             public int probablity(int probSize = 100){
-                return (int)(probSize * dice.NextDoublePositive() + 1);
-            }
-
-            public int gurpsRoll()
-            {
-                return this.rng(3,6);
-            }
-
-            public int gurpsRoll(int mod)
-            {
-                return this.rng(3, 6, mod);
-            }
-
-            public int rng(int size)
-            {
-                return (int)(size * dice.NextDoublePositive() + 1);
-            }
-
-            public int rng(int num, int size)
-            {
-                int total = 0;
-                for (int i = 0; i < num; i++)
-                {
-                    total = total + this.rng(size);
-                }
-
-                return total;
-            }
-
-            public int rng(int num, int size, int mod)
-            {
-                int total;
-                total = this.rng(num, size) + mod;
-                return total;
-            }
-
-
-            public double rollRange(double startVal, double range){
-
-                return (dice.NextDoublePositive()) * range + startVal;
-            }
-
-            public double rollInRange(double startVal, double endVal)
-            {
-                double range = endVal - startVal;
-                return (dice.NextDoublePositive() * range + startVal);
-            }
-
+        public int Probablity( int probSize = 100 )
+        {
+            return (int) ( probSize * Ddice.NextDoublePositive() + 1 );
         }
 
+        public int GurpsRoll()
+        {
+            return Rng(3, 6);
+        }
 
+        public int GurpsRoll( int mod )
+        {
+            return Rng(3, 6, mod);
+        }
+
+        public int Rng( int size )
+        {
+            return (int) ( size * Ddice.NextDoublePositive() + 1 );
+        }
+
+        public int Rng( int num, int size )
+        {
+            var total = 0;
+            for (var i = 0; i < num; i++)
+            {
+                total = total + Rng(size);
+            }
+
+            return total;
+        }
+
+        public int Rng( int num, int size, int mod )
+        {
+            var total = Rng(num, size) + mod;
+            return total;
+        }
+
+        public double RollRange( double startVal, double range )
+        {
+            return Ddice.NextDoublePositive() * range + startVal;
+        }
+
+        public double RollInRange( double startVal, double endVal )
+        {
+            var range = endVal - startVal;
+            return Ddice.NextDoublePositive() * range + startVal;
+        }
+    }
 }

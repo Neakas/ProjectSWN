@@ -24,14 +24,14 @@
     <MetadataSource Address="http://localhost:8000/swnservice" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="SWNService.wsdl" MetadataType="Wsdl" ID="7496fe1c-0fd5-4fe1-bdd6-df415d8ef20a" SourceId="1" SourceUrl="http://localhost:8000/SWNService?wsdl=wsdl0" />
-    <MetadataFile FileName="SWNService1.wsdl" MetadataType="Wsdl" ID="271ee1ab-e0d0-4ca8-896f-bec877ba454f" SourceId="1" SourceUrl="http://localhost:8000/SWNService?wsdl" />
-    <MetadataFile FileName="SWNService3.xsd" MetadataType="Schema" ID="d1dfb4e5-1894-44aa-a8e9-30eb60446281" SourceId="1" SourceUrl="http://localhost:8000/SWNService?xsd=xsd3" />
-    <MetadataFile FileName="SWNService.xsd" MetadataType="Schema" ID="be37c70c-60dd-499a-b610-0de08a55844b" SourceId="1" SourceUrl="http://localhost:8000/SWNService?xsd=xsd2" />
-    <MetadataFile FileName="SWNService1.xsd" MetadataType="Schema" ID="bf184921-0467-4687-a63e-bb2284e83289" SourceId="1" SourceUrl="http://localhost:8000/SWNService?xsd=xsd1" />
-    <MetadataFile FileName="SWNService2.xsd" MetadataType="Schema" ID="06df7ad4-f9ce-42be-88d0-c8edc198f880" SourceId="1" SourceUrl="http://localhost:8000/SWNService?xsd=xsd0" />
-    <MetadataFile FileName="SWNService4.xsd" MetadataType="Schema" ID="5c9e5f73-1768-4e03-bc5e-a474a8c7a789" SourceId="1" SourceUrl="http://localhost:8000/SWNService?xsd=xsd4" />
-    <MetadataFile FileName="SWNService.disco" MetadataType="Disco" ID="b6d52bb0-a6a2-4c26-9b76-b2ee35852707" SourceId="1" SourceUrl="http://localhost:8000/SWNService?disco" />
+    <MetadataFile FileName="SwnService1.disco" MetadataType="Disco" ID="5c4bd64b-82aa-4419-8a8e-cdb7b8667d8e" SourceId="1" SourceUrl="http://localhost:8000/SwnService?disco" />
+    <MetadataFile FileName="SwnService2.wsdl" MetadataType="Wsdl" ID="56cd85aa-0f09-4284-b326-955f1754092c" SourceId="1" SourceUrl="http://localhost:8000/SwnService?wsdl" />
+    <MetadataFile FileName="SwnService5.xsd" MetadataType="Schema" ID="8305bfcf-6602-419f-9cc1-7c78ca9ed5cb" SourceId="1" SourceUrl="http://localhost:8000/SwnService?xsd=xsd3" />
+    <MetadataFile FileName="SwnService51.xsd" MetadataType="Schema" ID="55f80cca-94c2-41f3-a145-3100dc341e0e" SourceId="1" SourceUrl="http://localhost:8000/SwnService?xsd=xsd2" />
+    <MetadataFile FileName="SwnService52.xsd" MetadataType="Schema" ID="212d10d9-74c8-463e-89be-ff0329a72969" SourceId="1" SourceUrl="http://localhost:8000/SwnService?xsd=xsd1" />
+    <MetadataFile FileName="SwnService53.xsd" MetadataType="Schema" ID="05d7b268-184e-4ef9-a9c7-de351ce109b1" SourceId="1" SourceUrl="http://localhost:8000/SwnService?xsd=xsd0" />
+    <MetadataFile FileName="SwnService54.xsd" MetadataType="Schema" ID="1e2f33d0-01d5-4de6-ac32-f74ce3088626" SourceId="1" SourceUrl="http://localhost:8000/SwnService?xsd=xsd4" />
+    <MetadataFile FileName="SwnService21.wsdl" MetadataType="Wsdl" ID="78820dfc-cd53-4104-a271-62b5ff8d9c50" SourceId="1" SourceUrl="http://localhost:8000/SwnService?wsdl=wsdl0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using SWNAdmin.Utility;
 
 namespace SWNAdmin.UserControls
@@ -7,7 +6,7 @@ namespace SWNAdmin.UserControls
     /// <summary>
     ///     Interaction logic for Disadvantage.xaml
     /// </summary>
-    public partial class DisadvantageControl : UserControl
+    public partial class DisadvantageControl
     {
         public int DisadvantageId;
 
@@ -16,15 +15,15 @@ namespace SWNAdmin.UserControls
             InitializeComponent();
         }
 
-        public void InitControl(Disadvantages LoadedDisadvantage)
+        public void InitControl( Disadvantages loadedDisadvantage )
         {
-            DisadvantageId = LoadedDisadvantage.Id;
-            lblAdvLabel.Content = LoadedDisadvantage.Name;
-            tbDiscription.Text = LoadedDisadvantage.Discription;
-            lblAdvPoints.Content = LoadedDisadvantage.PointCost;
+            DisadvantageId = loadedDisadvantage.Id;
+            LblAdvLabel.Content = loadedDisadvantage.Name;
+            TbDiscription.Text = loadedDisadvantage.Discription;
+            LblAdvPoints.Content = loadedDisadvantage.PointCost;
         }
 
-        private void btdel_Click(object sender, RoutedEventArgs e)
+        private void btdel_Click( object sender, RoutedEventArgs e )
         {
         }
     }

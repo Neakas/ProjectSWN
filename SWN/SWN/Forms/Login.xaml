@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SWN"
         xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
         themes:ThemeManager.Theme="ExpressionDark"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
@@ -12,43 +11,38 @@
     <Window.Background>
         <ImageBrush ImageSource="pack://siteoforigin:,,,/Assets/LoginBackground.jpg" />
     </Window.Background>
-    <xctk:BusyIndicator x:Name="biBusy" BusyContent="Connecting..." IsHitTestVisible="True" DisplayAfter="0">
+    <xctk:BusyIndicator x:Name="BiBusy" BusyContent="Connecting..." IsHitTestVisible="True" DisplayAfter="0">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
 
             <TextBlock HorizontalAlignment="Left" Margin="24,0,0,172" Name="LoginHeading" Text="Login:" FontSize="17"
                        FontStretch="ExtraCondensed" Foreground="White" Height="23" VerticalAlignment="Bottom" />
-            <TextBlock Margin="0,0,10,0" Name="textBlockHeading" FontSize="12" FontStyle="Italic" Padding="5"
+            <TextBlock Margin="0,0,10,0" Name="TextBlockHeading" FontSize="12" FontStyle="Italic" Padding="5"
                        Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Right"
                        Width="123">
 
-                Note: Bitte einloggen! <LineBreak /><!--line break-->
-                <!--textblock as a Hyperlink.-->
+                Note: Bitte einloggen! <LineBreak />
                 <TextBlock>
                     <Hyperlink Click="buttonRegister_Click" FontSize="14" FontStyle="Normal">Register</Hyperlink>
                 </TextBlock>
-                <!--end textblock as a hyperlink-->
             </TextBlock>
-            <TextBlock Margin="24,0,0,144" Name="textBlock1" Text="Username" Foreground="White" Height="23"
+            <TextBlock Margin="24,0,0,144" Name="TextBlock1" Text="username" Foreground="White" Height="23"
                        VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="67" />
-            <TextBlock Margin="24,0,0,98" Name="textBlock2" Text="Password" Foreground="White" Height="23"
+            <TextBlock Margin="24,0,0,98" Name="TextBlock2" Text="Password" Foreground="White" Height="23"
                        VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="67" />
-            <TextBox Margin="24,0,0,121" x:Name="textBoxUsername" KeyDown="textBoxUsername_KeyDown"
+            <TextBox Margin="24,0,0,121" x:Name="TextBoxUsername" KeyDown="textBoxUsername_KeyDown"
                      Background="#FF333333" HorizontalAlignment="Left" Width="238" Height="23"
                      VerticalAlignment="Bottom" />
-            <PasswordBox Margin="24,0,0,74" Name="passwordBox1" KeyDown="passwordBox1_KeyDown" Height="24"
+            <PasswordBox Margin="24,0,0,74" Name="PasswordBox1" KeyDown="passwordBox1_KeyDown" Height="24"
                          VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="238" />
-            <Button Content="Login" HorizontalAlignment="Left" Margin="24,0,0,40" x:Name="btLogin" Width="104"
+            <Button Content="Login" HorizontalAlignment="Left" Margin="24,0,0,40" x:Name="BtLogin" Width="104"
                     Click="btLogin_Click" Height="23" VerticalAlignment="Bottom" />
-            <TextBlock HorizontalAlignment="Left" x:Name="errormessage" Width="399" Margin="24,0,0,200"
+            <TextBlock HorizontalAlignment="Left" x:Name="Errormessage" Width="399" Margin="24,0,0,200"
                        OpacityMask="Crimson" Foreground="#FFE5572C" Height="23" VerticalAlignment="Bottom" />
-            <TextBox x:Name="tbIPPort" HorizontalAlignment="Left" Margin="133,0,0,39" TextWrapping="Wrap"
+            <TextBox x:Name="TbIpPort" HorizontalAlignment="Left" Margin="133,0,0,39" TextWrapping="Wrap"
                      Text="Neakas.GoIP.de:25565" Width="129" Height="23" VerticalAlignment="Bottom" />
-            <Button x:Name="btOverride" Content="Override" Margin="0,32,31,0" Click="btOverride_Click" Height="22"
+            <Button x:Name="BtOverride" Content="Override" Margin="0,32,31,0" Click="btOverride_Click" Height="22"
                     VerticalAlignment="Top" HorizontalAlignment="Right" Width="76" />
-            <Button x:Name="btSound" Content="Button" Margin="274,0,0,10" Foreground="{x:Null}" BorderBrush="Black"
+            <Button x:Name="BtSound" Content="Button" Margin="274,0,0,10" Foreground="{x:Null}" BorderBrush="Black"
                     IsHitTestVisible="True" RenderTransformOrigin="0.294,0.438" Click="btSound_Click"
                     HorizontalAlignment="Left" Width="34" Height="32" VerticalAlignment="Bottom">
                 <Button.Background>

@@ -9,9 +9,9 @@ namespace SWN.Forms
     /// <summary>
     ///     Interaction logic for Options.xaml
     /// </summary>
-    public partial class Options : Window
+    public partial class Options
     {
-        private XDocument cfgfile;
+        private XDocument _cfgfile;
 
         public Options()
         {
@@ -21,40 +21,40 @@ namespace SWN.Forms
 
         private void LoadSettings()
         {
-            cfgfile = SettingHandler.GrabSettingFile();
-            tbFileDirectory.Text = XmlHandler.GrabXmlValue(cfgfile, "DataFilePath");
-            tbImgDirectory.Text = XmlHandler.GrabXmlValue(cfgfile, "PicFilePath");
-            cbStartMusic.IsChecked = !bool.Parse(XmlHandler.GrabXmlValue(cfgfile, "TurnOffMusic"));
+            _cfgfile = SettingHandler.GrabSettingFile();
+            TbFileDirectory.Text = XmlHandler.GrabXmlValue(_cfgfile, "DataFilePath");
+            TbImgDirectory.Text = XmlHandler.GrabXmlValue(_cfgfile, "PicFilePath");
+            CbStartMusic.IsChecked = !bool.Parse(XmlHandler.GrabXmlValue(_cfgfile, "TurnOffMusic"));
         }
 
-        private void btSave_Click(object sender, RoutedEventArgs e)
+        private void btSave_Click( object sender, RoutedEventArgs e )
         {
             //TODOLOW Needs Sanity Checks for Correct Directory
-            var value = (bool) cbStartMusic.IsChecked;
+            var value = CbStartMusic.IsChecked != null && (bool) CbStartMusic.IsChecked;
             value = !value;
-            XmlHandler.SetXmlValue(cfgfile, "DataFilePath", tbFileDirectory.Text);
-            XmlHandler.SetXmlValue(cfgfile, "PicFilePath", tbImgDirectory.Text);
-            XmlHandler.SetXmlValue(cfgfile, "TurnOffMusic", value.ToString());
+            XmlHandler.SetXmlValue(_cfgfile, "DataFilePath", TbFileDirectory.Text);
+            XmlHandler.SetXmlValue(_cfgfile, "PicFilePath", TbImgDirectory.Text);
+            XmlHandler.SetXmlValue(_cfgfile, "TurnOffMusic", value.ToString());
             MessageBox.Show("Saved to Config-File");
         }
 
-        private void btFileBrowse_Click(object sender, RoutedEventArgs e)
+        private void btFileBrowse_Click( object sender, RoutedEventArgs e )
         {
             var fbd = new FolderBrowserDialog();
-            var Result = fbd.ShowDialog();
-            if (Result == System.Windows.Forms.DialogResult.OK)
+            var result = fbd.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
             {
-                tbFileDirectory.Text = fbd.SelectedPath;
+                TbFileDirectory.Text = fbd.SelectedPath;
             }
         }
 
-        private void btImageBrowse_Click(object sender, RoutedEventArgs e)
+        private void btImageBrowse_Click( object sender, RoutedEventArgs e )
         {
             var fbd = new FolderBrowserDialog();
-            var Result = fbd.ShowDialog();
-            if (Result == System.Windows.Forms.DialogResult.OK)
+            var result = fbd.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
             {
-                tbImgDirectory.Text = fbd.SelectedPath;
+                TbImgDirectory.Text = fbd.SelectedPath;
             }
         }
     }

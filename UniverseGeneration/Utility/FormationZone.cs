@@ -1,92 +1,99 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UniverseGeneration.Range_Objects;
 
 namespace UniverseGeneration.Utility
 {
-    class FormationZone
+    internal class FormationZone
     {
         //flags
-        public static int FZ_VALIDORBIT = 610;
-        public static int FZ_TOOCLOSE = 611;
-        public static int FZ_FORBIDDEN = 612;
-        public static int FZ_OUTBOUNDS = 613;
-        public static int FZ_BADPARENT = 9999;
-
+        public static int FzValidorbit = 610;
+        public static int FzTooclose = 611;
+        public static int FzForbidden = 612;
+        public static int FzOutbounds = 613;
+        public static int FzBadparent = 9999;
 
         //constants
-        public static double minDistance = .15;
-        public static double minOrbitalRatio = 1.4;
-        public static double maxOrbitalRatio = 2.1;
+        public static double MinDistance = .15;
+        public static double MinOrbitalRatio = 1.4;
+        public static double MaxOrbitalRatio = 2.1;
 
-        public List<FormationSegment> segments { get; set; }
-        public int parentID { get; set; }
-        public List<double> ourOrbits { get; set; }
-
-        public FormationZone(double lower, double upper, int parentID)
+        public FormationZone( double lower, double upper, int parentId )
         {
-            this.segments = new List<FormationSegment>();
-            this.segments.Add(new FormationSegment(parentID, lower, upper));
-            this.parentID = parentID;
-            this.ourOrbits = new List<double>();
-        }
-
-        public FormationZone(Range incoming, int parentID)
-        {
-            this.segments = new List<FormationSegment>();
-            this.segments.Add(new FormationSegment(parentID, incoming));
-            this.parentID = parentID;
-            this.ourOrbits = new List<double>();
-        }
-
-
-        public int checkOrbit(double orbit)
-        {
-            foreach (FormationSegment l in segments)
+            Segments = new List<FormationSegment>
             {
-                if (l.withinRange(orbit))
-                {
-                    if (l.parentID == FormationZone.FZ_BADPARENT) return FZ_FORBIDDEN;
-                    foreach (double d in ourOrbits)
-                    {
-                        if (d - .15 < orbit && orbit > d + .15)
-                            return FZ_TOOCLOSE;
-                        if (d / 1.4 < orbit && orbit > d * 1.4)
-                            return FZ_TOOCLOSE;
-                    }
+                new FormationSegment(parentId, lower, upper)
+            };
+            ParentId = parentId;
+            OurOrbits = new List<double>();
+        }
 
-                    return FZ_VALIDORBIT;
+        public FormationZone( Range incoming, int parentId )
+        {
+            Segments = new List<FormationSegment>
+            {
+                new FormationSegment(parentId, incoming)
+            };
+            ParentId = parentId;
+            OurOrbits = new List<double>();
+        }
+
+        public List<FormationSegment> Segments { get; set; }
+        public int ParentId { get; set; }
+        public List<double> OurOrbits { get; set; }
+
+        public int CheckOrbit( double orbit )
+        {
+            foreach (var l in Segments.Where(l => l.WithinRange(orbit)))
+            {
+                if (l.ParentId == FzBadparent)
+                {
+                    return FzForbidden;
                 }
+                foreach (var d in OurOrbits)
+                {
+                    if (d - .15 < orbit && orbit > d + .15)
+                    {
+                        return FzTooclose;
+                    }
+                    if (d / 1.4 < orbit && orbit > d * 1.4)
+                    {
+                        return FzTooclose;
+                    }
+                }
+
+                return FzValidorbit;
             }
 
-            return FZ_OUTBOUNDS;
+            return FzOutbounds;
         }
 
-        public double nextCleanOrbit(double orbit)
+        public double NextCleanOrbit( double orbit )
         {
-            bool nextSegment = false;
-            foreach (FormationSegment l in segments)
+            var nextSegment = false;
+            foreach (var l in Segments)
             {
-                if (l.withinRange(orbit))
+                if (l.WithinRange(orbit))
                 {
                     nextSegment = true;
                 }
 
-                if (nextSegment)
+                if (!nextSegment)
                 {
-                    //skip if it's a bad parent.
-                    //else return the start of this segment.
-                    if (l.parentID == FZ_BADPARENT)
-                    {
-                        nextSegment = true;
-                    }
-                    else
-                    {
-                        return l.lowerBound;
-                    }
+                    continue;
+                }
+                //skip if it's a bad parent.
+                //else return the start of this segment.
+                if (l.ParentId == FzBadparent)
+                {
+                }
+                else
+                {
+                    return l.LowerBound;
                 }
             }
 
-            return FZ_OUTBOUNDS;
+            return FzOutbounds;
         }
     }
 }

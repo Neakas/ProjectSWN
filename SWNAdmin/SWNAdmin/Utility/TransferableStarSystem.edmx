@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Db1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Db1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self"
+              xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Advantages">
           <Key>
             <PropertyRef Name="Id" />
@@ -654,180 +658,14 @@
             <End Role="StatSubGroup" EntitySet="StatSubGroup" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Db1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Advantages">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="isEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PointCost" Type="Int32" />
-          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="isPhysical" Type="Boolean" />
-          <Property Name="isMental" Type="Boolean" />
-          <Property Name="isSocial" Type="Boolean" />
-          <Property Name="isExotic" Type="Boolean" />
-          <Property Name="isSuperNatural" Type="Boolean" />
-          <Property Name="isMundane" Type="Boolean" />
-          <Property Name="Limitation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="RequirementSet" Type="Boolean" />
-          <Property Name="hasLevels" Type="Boolean" />
-          <Property Name="isCreationLocked" Type="Boolean" />
-          <Property Name="Reference" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Disadvantages">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="isEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PointCost" Type="Int32" />
-          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="InnerMoonlets">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="parentDBID" Type="Int32" Nullable="false" />
-          <Property Name="blackbodyTemp" Type="Double" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="orbitalEccent" Type="Double" />
-          <Property Name="orbitalPeriod" Type="Double" />
-          <Property Name="orbitalRadius" Type="Double" />
-          <Property Name="parentID" Type="Int32" />
-          <Property Name="parentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="planetRadius" Type="Double" />
-          <Property Name="selfID" Type="Int32" />
-          <NavigationProperty Name="Planets" Relationship="Self.FK_InnerMoonlets_Planets" FromRole="InnerMoonlets" ToRole="Planets" />
-          <Property Name="innerMoonString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="MajorMoons">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ParentDBID" Type="Int32" />
-          <Property Name="RVM" Type="Double" />
-          <Property Name="SatelliteSize" Type="Double" />
-          <Property Name="SatelliteType" Type="Int32" />
-          <Property Name="atmCate" Type="Int32" />
-          <Property Name="atmMass" Type="Double" />
-          <Property Name="axialTilt" Type="Double" />
-          <Property Name="baseType" Type="Int32" />
-          <Property Name="blackbodyTemp" Type="Double" />
-          <Property Name="dayFaceMod" Type="Double" />
-          <Property Name="density" Type="Double" />
-          <Property Name="descListing" Type="Int32" />
-          <Property Name="diameter" Type="Double" />
-          <Property Name="gravity" Type="Double" />
-          <Property Name="hydCoverage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="innerMoonlets" Type="Int32" />
-          <Property Name="isResonant" Type="Boolean" />
-          <Property Name="isTideLocked" Type="Boolean" />
-          <Property Name="majorMoons1" Type="Int32" />
-          <Property Name="mass" Type="Double" />
-          <Property Name="masterOrderId" Type="Int32" />
-          <Property Name="moonRadius" Type="Double" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="nightFaceMod" Type="Double" />
-          <Property Name="orbitalCycle" Type="Double" />
-          <Property Name="orbitalEccent" Type="Double" />
-          <Property Name="orbitalPeriod" Type="Double" />
-          <Property Name="orbitalRadius" Type="Double" />
-          <Property Name="outerMoonlets" Type="Int32" />
-          <Property Name="parentDiam" Type="Double" />
-          <Property Name="parentID" Type="Int32" />
-          <Property Name="parentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="retrogradeMotion" Type="Boolean" />
-          <Property Name="rotationalPeriod" Type="Double" />
-          <Property Name="selfID" Type="Int32" />
-          <Property Name="siderealPeriod" Type="Double" />
-          <Property Name="surfaceTemp" Type="Double" />
-          <Property Name="tecActivity" Type="Double" />
-          <Property Name="tideForce" Type="Int32" />
-          <Property Name="tideTotal" Type="Double" />
-          <Property Name="volActivity" Type="Double" />
-          <NavigationProperty Name="Planets" Relationship="Self.FK_MajorMoons_Planets" FromRole="MajorMoons" ToRole="Planets" />
-          <Property Name="MajorMoonString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="OuterMoonlets">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ParentDBID" Type="Int32" Nullable="false" />
-          <Property Name="blackbodyTemp" Type="Double" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="orbitalEccent" Type="Double" />
-          <Property Name="orbitalPeriod" Type="Double" />
-          <Property Name="orbitalRadius" Type="Double" />
-          <Property Name="parentID" Type="Int32" />
-          <Property Name="parentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="planetRadius" Type="Double" />
-          <Property Name="selfID" Type="Int32" />
-          <NavigationProperty Name="Planets" Relationship="Self.FK_OuterMoonlets_Planets" FromRole="OuterMoonlets" ToRole="Planets" />
-          <Property Name="outerMoonString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Planets">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StarID" Type="Int32" Nullable="false" />
-          <Property Name="SatelliteSize" Type="Int32" />
-          <Property Name="SatelliteType" Type="Int32" />
-          <Property Name="atmCate" Type="Int32" />
-          <Property Name="atmMass" Type="Double" />
-          <Property Name="atmPres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="axialTilt" Type="Double" />
-          <Property Name="baseType" Type="Int32" />
-          <Property Name="blackbodyTemp" Type="Double" />
-          <Property Name="dayFaceMod" Type="Int32" />
-          <Property Name="density" Type="Double" />
-          <Property Name="diameter" Type="Double" />
-          <Property Name="gravity" Type="Double" />
-          <Property Name="hydCoverage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="innerMoonlets" Type="Int32" />
-          <Property Name="isResonant" Type="Boolean" />
-          <Property Name="isTideLocked" Type="Boolean" />
-          <Property Name="majorMoons" Type="Int32" />
-          <Property Name="mass" Type="Double" />
-          <Property Name="masterOrderID" Type="Int32" />
-          <Property Name="moonRadius" Type="Double" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="nightFaceMod" Type="Int32" />
-          <Property Name="orbitalCycle" Type="Double" />
-          <Property Name="orbitalEccent" Type="Double" />
-          <Property Name="orbitalPeriod" Type="Double" />
-          <Property Name="orbitalRadius" Type="Double" />
-          <Property Name="outerMoonlets" Type="Int32" />
-          <Property Name="parentDiam" Type="Double" />
-          <Property Name="parentID" Type="Int32" />
-          <Property Name="parentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="retrogradeMotion" Type="Boolean" />
-          <Property Name="rotationalPeriod" Type="Double" />
-          <Property Name="selfID" Type="Int32" />
-          <Property Name="siderealPeriod" Type="Double" />
-          <Property Name="surfaceTemp" Type="Double" />
-          <Property Name="tecActivity" Type="Double" />
-          <Property Name="tideForce" Type="Double" />
-          <Property Name="tideTotal" Type="Double" />
-          <Property Name="volActivity" Type="Double" />
-          <Property Name="sattype" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="atmnote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RVM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="InnerMoonlets1" Relationship="Self.FK_InnerMoonlets_Planets" FromRole="Planets" ToRole="InnerMoonlets" />
-          <NavigationProperty Name="MajorMoons1" Relationship="Self.FK_MajorMoons_Planets" FromRole="Planets" ToRole="MajorMoons" />
-          <NavigationProperty Name="OuterMoonlets1" Relationship="Self.FK_OuterMoonlets_Planets" FromRole="Planets" ToRole="OuterMoonlets" />
-          <NavigationProperty Name="Stars" Relationship="Self.FK_Planets_Stars" FromRole="Planets" ToRole="Stars" />
-          <Property Name="planetString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
+      <Schema Namespace="Db1Model" Alias="Self" annotation:UseStrongSpatialTypes="false"
+              xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="PName">
           <Key>
             <PropertyRef Name="Id" />
@@ -853,159 +691,12 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Stars">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SystemID" Type="Int32" Nullable="false" />
-          <Property Name="currLumin" Type="Double" Nullable="false" />
-          <Property Name="distFromPrimary" Type="Double" Nullable="false" />
-          <Property Name="effTemp" Type="Double" Nullable="false" />
-          <Property Name="gasGiantFlag" Type="Int32" />
-          <Property Name="initLumin" Type="Double" Nullable="false" />
-          <Property Name="initMass" Type="Double" Nullable="false" />
-          <Property Name="isFlareStar" Type="Boolean" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="orbitalEccent" Type="Double" />
-          <Property Name="orbitalPeriod" Type="Double" />
-          <Property Name="orbitalRadius" Type="Double" />
-          <Property Name="orbitalSep" Type="Double" />
-          <Property Name="orderID" Type="Int32" />
-          <Property Name="parentID" Type="Int32" />
-          <Property Name="parentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="radius" Type="Double" Nullable="false" />
-          <Property Name="selfID" Type="Int32" />
-          <Property Name="specType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="starAge" Type="Double" Nullable="false" />
-          <Property Name="starColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="sysPlanets" Type="Int32" />
-          <Property Name="StarOrder" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="StellarEvolutionStage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="OrbitalDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Planets" Relationship="Self.FK_Planets_Stars" FromRole="Stars" ToRole="Planets" />
-          <NavigationProperty Name="StarSystems" Relationship="Self.FK_Stars_SystemID" FromRole="Stars" ToRole="StarSystems" />
-          <Property Name="StarString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="StarSystems">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="sysName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="habitableZones" Type="Int32" />
-          <Property Name="maxMass" Type="Double" Nullable="false" />
-          <Property Name="numDwarfPlanets" Type="Int32" />
-          <Property Name="star2index" Type="Int32" />
-          <Property Name="star3index" Type="Int32" />
-          <Property Name="subCompanionStar2index" Type="Int32" />
-          <Property Name="subCompanionStar3index" Type="Int32" />
-          <Property Name="sysAge" Type="Double" Nullable="false" />
-          <Property Name="sysStars" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Stars" Relationship="Self.FK_Stars_SystemID" FromRole="StarSystems" ToRole="Stars" />
-        </EntityType>
-        <Association Name="FK_InnerMoonlets_Planets">
-          <End Role="Planets" Type="Self.Planets" Multiplicity="1" />
-          <End Role="InnerMoonlets" Type="Self.InnerMoonlets" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Planets">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="InnerMoonlets">
-              <PropertyRef Name="parentDBID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MajorMoons_Planets">
-          <End Role="Planets" Type="Self.Planets" Multiplicity="0..1" />
-          <End Role="MajorMoons" Type="Self.MajorMoons" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Planets">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MajorMoons">
-              <PropertyRef Name="ParentDBID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OuterMoonlets_Planets">
-          <End Role="Planets" Type="Self.Planets" Multiplicity="1" />
-          <End Role="OuterMoonlets" Type="Self.OuterMoonlets" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Planets">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OuterMoonlets">
-              <PropertyRef Name="ParentDBID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Planets_Stars">
-          <End Role="Stars" Type="Self.Stars" Multiplicity="1" />
-          <End Role="Planets" Type="Self.Planets" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Stars">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Planets">
-              <PropertyRef Name="StarID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Stars_SystemID">
-          <End Role="StarSystems" Type="Self.StarSystems" Multiplicity="1" />
-          <End Role="Stars" Type="Self.Stars" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StarSystems">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Stars">
-              <PropertyRef Name="SystemID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Db1Entities" annotation:LazyLoadingEnabled="false">
-          <EntitySet Name="Advantages" EntityType="Self.Advantages" />
-          <EntitySet Name="Disadvantages" EntityType="Self.Disadvantages" />
-          <EntitySet Name="InnerMoonlets" EntityType="Self.InnerMoonlets" />
-          <EntitySet Name="MajorMoons" EntityType="Self.MajorMoons" />
-          <EntitySet Name="OuterMoonlets" EntityType="Self.OuterMoonlets" />
-          <EntitySet Name="Planets" EntityType="Self.Planets" />
           <EntitySet Name="PName" EntityType="Self.PName" />
           <EntitySet Name="Registration" EntityType="Self.Registration" />
           <EntitySet Name="SatelliteBaseTypes" EntityType="Self.SatelliteBaseTypes" />
-          <EntitySet Name="Stars" EntityType="Self.Stars" />
-          <EntitySet Name="StarSystems" EntityType="Self.StarSystems" />
-          <AssociationSet Name="FK_InnerMoonlets_Planets" Association="Self.FK_InnerMoonlets_Planets">
-            <End Role="Planets" EntitySet="Planets" />
-            <End Role="InnerMoonlets" EntitySet="InnerMoonlets" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MajorMoons_Planets" Association="Self.FK_MajorMoons_Planets">
-            <End Role="Planets" EntitySet="Planets" />
-            <End Role="MajorMoons" EntitySet="MajorMoons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OuterMoonlets_Planets" Association="Self.FK_OuterMoonlets_Planets">
-            <End Role="Planets" EntitySet="Planets" />
-            <End Role="OuterMoonlets" EntitySet="OuterMoonlets" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Planets_Stars" Association="Self.FK_Planets_Stars">
-            <End Role="Stars" EntitySet="Stars" />
-            <End Role="Planets" EntitySet="Planets" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Stars_SystemID" Association="Self.FK_Stars_SystemID">
-            <End Role="StarSystems" EntitySet="StarSystems" />
-            <End Role="Stars" EntitySet="Stars" />
-          </AssociationSet>
           <EntitySet Name="UDateTime" EntityType="Db1Model.UDateTime" />
           <EntitySet Name="Attribute" EntityType="Db1Model.Attribute" />
-          <EntitySet Name="Skills" EntityType="Db1Model.Skills" />
-          <EntitySet Name="SkillSpecialization" EntityType="Db1Model.SkillSpecialization" />
-          <EntitySet Name="Requirements" EntityType="Db1Model.Requirements" />
-          <AssociationSet Name="FK_SkillSpecialization_Skills" Association="Db1Model.FK_SkillSpecialization_Skills">
-            <End Role="Skills" EntitySet="Skills" />
-            <End Role="SkillSpecialization" EntitySet="SkillSpecialization" />
-          </AssociationSet>
-          <EntitySet Name="Modifier" EntityType="Db1Model.Modifier" />
           <EntitySet Name="StatGroup" EntityType="Db1Model.StatGroup" />
           <EntitySet Name="StatSubGroup" EntityType="Db1Model.StatSubGroup" />
           <AssociationSet Name="FK_StatSubGroup_StatGroup1" Association="Db1Model.FK_StatSubGroup_StatGroup1">
@@ -1014,15 +705,51 @@
           </AssociationSet>
           <EntitySet Name="UsedModifier" EntityType="Db1Model.UsedModifier" />
           <EntitySet Name="Character" EntityType="Db1Model.Character" />
-          <EntitySet Name="Aliens" EntityType="Db1Model.Aliens" />
           <EntitySet Name="FactionGoals" EntityType="Db1Model.FactionGoals" />
           <EntitySet Name="Factions" EntityType="Db1Model.Factions" />
           <EntitySet Name="FactionTags" EntityType="Db1Model.FactionTags" />
           <EntitySet Name="encycloFactions" EntityType="Db1Model.encycloFactions" />
-          <EntitySet Name="Encyclopedia" EntityType="Db1Model.Encyclopedia" />
-          <EntitySet Name="encycloPerson" EntityType="Db1Model.encycloPerson" />
           <EntitySet Name="encycloPlanets" EntityType="Db1Model.encycloPlanets" />
           <EntitySet Name="encycloRace" EntityType="Db1Model.encycloRace" />
+          <EntitySet Name="Aliens" EntityType="Db1Model.Aliens" />
+          <EntitySet Name="Encyclopedia" EntityType="Db1Model.Encyclopedia" />
+          <EntitySet Name="Modifier" EntityType="Db1Model.Modifier" />
+          <EntitySet Name="Planets" EntityType="Db1Model.Planets" />
+          <EntitySet Name="Requirements" EntityType="Db1Model.Requirements" />
+          <EntitySet Name="Advantages" EntityType="Db1Model.Advantages" />
+          <EntitySet Name="Disadvantages" EntityType="Db1Model.Disadvantages" />
+          <EntitySet Name="InnerMoonlets" EntityType="Db1Model.InnerMoonlets" />
+          <EntitySet Name="MajorMoons" EntityType="Db1Model.MajorMoons" />
+          <EntitySet Name="OuterMoonlets" EntityType="Db1Model.OuterMoonlets" />
+          <AssociationSet Name="FK_InnerMoonlets_Planets" Association="Db1Model.FK_InnerMoonlets_Planets">
+            <End Role="Planets" EntitySet="Planets" />
+            <End Role="InnerMoonlets" EntitySet="InnerMoonlets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MajorMoons_Planets" Association="Db1Model.FK_MajorMoons_Planets">
+            <End Role="Planets" EntitySet="Planets" />
+            <End Role="MajorMoons" EntitySet="MajorMoons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OuterMoonlets_Planets" Association="Db1Model.FK_OuterMoonlets_Planets">
+            <End Role="Planets" EntitySet="Planets" />
+            <End Role="OuterMoonlets" EntitySet="OuterMoonlets" />
+          </AssociationSet>
+          <EntitySet Name="Stars" EntityType="Db1Model.Stars" />
+          <EntitySet Name="StarSystems" EntityType="Db1Model.StarSystems" />
+          <AssociationSet Name="FK_Planets_Stars" Association="Db1Model.FK_Planets_Stars">
+            <End Role="Stars" EntitySet="Stars" />
+            <End Role="Planets" EntitySet="Planets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stars_SystemID" Association="Db1Model.FK_Stars_SystemID">
+            <End Role="StarSystems" EntitySet="StarSystems" />
+            <End Role="Stars" EntitySet="Stars" />
+          </AssociationSet>
+          <EntitySet Name="Skills" EntityType="Db1Model.Skills" />
+          <EntitySet Name="SkillSpecialization" EntityType="Db1Model.SkillSpecialization" />
+          <AssociationSet Name="FK_SkillSpecialization_Skills" Association="Db1Model.FK_SkillSpecialization_Skills">
+            <End Role="Skills" EntitySet="Skills" />
+            <End Role="SkillSpecialization" EntitySet="SkillSpecialization" />
+          </AssociationSet>
+          <EntitySet Name="encycloPerson" EntityType="Db1Model.encycloPerson" />
         </EntityContainer>
         <EntityType Name="UDateTime">
           <Key>
@@ -1040,87 +767,14 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RequirementSet" Type="Boolean" />
         </EntityType>
-        <EntityType Name="Skills">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="SkillName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DifficultyLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="points" Type="Int32" />
-          <Property Name="reference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="specialization" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="tech_level" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ControllingAttribute" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Modifiers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Defaults" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Prerequisites" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SkillSpecialization" Relationship="Db1Model.FK_SkillSpecialization_Skills" FromRole="Skills" ToRole="SkillSpecialization" />
-          <Property Name="RequirementSet" Type="Boolean" />
-          <Property Name="isEnabled" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="SkillSpecialization">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SkillId" Type="Int32" />
-          <Property Name="Default" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Prerequisites" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Modifiers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsOptional" Type="Boolean" />
-          <NavigationProperty Name="Skills" Relationship="Db1Model.FK_SkillSpecialization_Skills" FromRole="SkillSpecialization" ToRole="Skills" />
-          <Property Name="RequirementSet" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="Requirements">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="TargetRequirementID" Type="Int32" />
-          <Property Name="SourceItemID" Type="Int32" />
-          <Property Name="Condition" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="SourceType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TargetType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SourceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TargetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ConditionValue" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-        </EntityType>
-        <Association Name="FK_SkillSpecialization_Skills">
-          <End Type="Db1Model.Skills" Role="Skills" Multiplicity="0..1" />
-          <End Type="Db1Model.SkillSpecialization" Role="SkillSpecialization" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Skills">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SkillSpecialization">
-              <PropertyRef Name="SkillId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Modifier">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Group" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SubGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Modifying_Property" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="StatGroup">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="StatSubGroup" Relationship="Db1Model.FK_StatSubGroup_StatGroup1" FromRole="StatGroup" ToRole="StatSubGroup" />
+          <NavigationProperty Name="StatSubGroup" Relationship="Db1Model.FK_StatSubGroup_StatGroup1"
+                              FromRole="StatGroup" ToRole="StatSubGroup" />
         </EntityType>
         <EntityType Name="StatSubGroup">
           <Key>
@@ -1129,7 +783,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GroupId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="StatGroup" Relationship="Db1Model.FK_StatSubGroup_StatGroup1" FromRole="StatSubGroup" ToRole="StatGroup" />
+          <NavigationProperty Name="StatGroup" Relationship="Db1Model.FK_StatSubGroup_StatGroup1"
+                              FromRole="StatSubGroup" ToRole="StatGroup" />
         </EntityType>
         <Association Name="FK_StatSubGroup_StatGroup1">
           <End Type="Db1Model.StatGroup" Role="StatGroup" Multiplicity="1" />
@@ -1184,11 +839,76 @@
           <Property Name="FatiguePoints" Type="Int32" />
           <Property Name="Advantages" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Aliens">
+        <EntityType Name="FactionGoals">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FactionId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Discription" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Factions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HomePlanet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Race" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Force" Type="Int32" />
+          <Property Name="Cunning" Type="Int32" />
+          <Property Name="Wealth" Type="Int32" />
+          <Property Name="CurrentHp" Type="Int32" />
+          <Property Name="MaxHp" Type="Int32" />
+          <Property Name="Income" Type="Int32" />
+          <Property Name="CurrectFacCreds" Type="Int32" />
+          <Property Name="Exp" Type="Int32" />
+          <Property Name="RelationShip" Type="Int32" />
+        </EntityType>
+        <EntityType Name="FactionTags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FactionId" Type="Int32" Nullable="false" />
+          <Property Name="TagName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Effect" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="encycloFactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EncyclopediaId" Type="Int32" />
+          <Property Name="FactionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FactionDataId" Type="Int32" />
+          <Property Name="FactionDiscription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="encycloPlanets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EncyclopediaId" Type="Int32" />
+          <Property Name="PlanetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PlanetDiscription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="encycloRace">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EncyclopediaId" Type="Int32" />
+          <Property Name="RaceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RaceDiscription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Aliens">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="HomePlanet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="chemicalBasis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1238,88 +958,388 @@
           <Property Name="Playfulness" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="FactionGoals">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="FactionId" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Discription" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Factions">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="HomePlanet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Race" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Force" Type="Int32" />
-          <Property Name="Cunning" Type="Int32" />
-          <Property Name="Wealth" Type="Int32" />
-          <Property Name="CurrentHp" Type="Int32" />
-          <Property Name="MaxHp" Type="Int32" />
-          <Property Name="Income" Type="Int32" />
-          <Property Name="CurrectFacCreds" Type="Int32" />
-          <Property Name="Exp" Type="Int32" />
-          <Property Name="RelationShip" Type="Int32" />
-        </EntityType>
-        <EntityType Name="FactionTags">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="FactionId" Type="Int32" Nullable="false" />
-          <Property Name="TagName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Effect" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="encycloFactions">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EncyclopediaId" Type="Int32" />
-          <Property Name="FactionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FactionDataId" Type="Int32" />
-          <Property Name="FactionDiscription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Encyclopedia">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Modifier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Group" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Modifying_Property" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Planets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StarID" Type="Int32" Nullable="false" />
+          <Property Name="SatelliteSize" Type="Int32" />
+          <Property Name="SatelliteType" Type="Int32" />
+          <Property Name="atmCate" Type="Int32" />
+          <Property Name="atmMass" Type="Double" />
+          <Property Name="atmPres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="axialTilt" Type="Double" />
+          <Property Name="baseType" Type="Int32" />
+          <Property Name="blackbodyTemp" Type="Double" />
+          <Property Name="dayFaceMod" Type="Int32" />
+          <Property Name="density" Type="Double" />
+          <Property Name="diameter" Type="Double" />
+          <Property Name="gravity" Type="Double" />
+          <Property Name="hydCoverage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="innerMoonlets" Type="Int32" />
+          <Property Name="isResonant" Type="Boolean" />
+          <Property Name="isTideLocked" Type="Boolean" />
+          <Property Name="majorMoons" Type="Int32" />
+          <Property Name="mass" Type="Double" />
+          <Property Name="masterOrderID" Type="Int32" />
+          <Property Name="moonRadius" Type="Double" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nightFaceMod" Type="Int32" />
+          <Property Name="orbitalCycle" Type="Double" />
+          <Property Name="orbitalEccent" Type="Double" />
+          <Property Name="orbitalPeriod" Type="Double" />
+          <Property Name="orbitalRadius" Type="Double" />
+          <Property Name="outerMoonlets" Type="Int32" />
+          <Property Name="parentDiam" Type="Double" />
+          <Property Name="parentID" Type="Int32" />
+          <Property Name="parentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="retrogradeMotion" Type="Boolean" />
+          <Property Name="rotationalPeriod" Type="Double" />
+          <Property Name="selfID" Type="Int32" />
+          <Property Name="siderealPeriod" Type="Double" />
+          <Property Name="surfaceTemp" Type="Double" />
+          <Property Name="tecActivity" Type="Double" />
+          <Property Name="tideForce" Type="Double" />
+          <Property Name="tideTotal" Type="Double" />
+          <Property Name="volActivity" Type="Double" />
+          <Property Name="sattype" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="atmnote" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RVM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="planetString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InnerMoonlets1" Relationship="Db1Model.FK_InnerMoonlets_Planets" FromRole="Planets"
+                              ToRole="InnerMoonlets" />
+          <NavigationProperty Name="MajorMoons1" Relationship="Db1Model.FK_MajorMoons_Planets" FromRole="Planets"
+                              ToRole="MajorMoons" />
+          <NavigationProperty Name="OuterMoonlets1" Relationship="Db1Model.FK_OuterMoonlets_Planets" FromRole="Planets"
+                              ToRole="OuterMoonlets" />
+          <NavigationProperty Name="Stars" Relationship="Db1Model.FK_Planets_Stars" FromRole="Planets" ToRole="Stars" />
+        </EntityType>
+        <EntityType Name="Requirements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SourceType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TargetRequirementID" Type="Int32" />
+          <Property Name="SourceItemID" Type="Int32" />
+          <Property Name="Condition" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="TargetType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SourceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TargetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ConditionValue" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Advantages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="isEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PointCost" Type="Int32" />
+          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isPhysical" Type="Boolean" />
+          <Property Name="isMental" Type="Boolean" />
+          <Property Name="isSocial" Type="Boolean" />
+          <Property Name="isExotic" Type="Boolean" />
+          <Property Name="isSuperNatural" Type="Boolean" />
+          <Property Name="isMundane" Type="Boolean" />
+          <Property Name="Limitation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RequirementSet" Type="Boolean" />
+          <Property Name="hasLevels" Type="Boolean" />
+          <Property Name="isCreationLocked" Type="Boolean" />
+          <Property Name="Reference" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Disadvantages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="isEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PointCost" Type="Int32" />
+          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="InnerMoonlets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="parentDBID" Type="Int32" Nullable="false" />
+          <Property Name="blackbodyTemp" Type="Double" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="orbitalEccent" Type="Double" />
+          <Property Name="orbitalPeriod" Type="Double" />
+          <Property Name="orbitalRadius" Type="Double" />
+          <Property Name="parentID" Type="Int32" />
+          <Property Name="parentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="planetRadius" Type="Double" />
+          <Property Name="selfID" Type="Int32" />
+          <Property Name="innerMoonString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Planets" Relationship="Db1Model.FK_InnerMoonlets_Planets" FromRole="InnerMoonlets"
+                              ToRole="Planets" />
+        </EntityType>
+        <EntityType Name="MajorMoons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentDBID" Type="Int32" />
+          <Property Name="RVM" Type="Double" />
+          <Property Name="SatelliteSize" Type="Double" />
+          <Property Name="SatelliteType" Type="Int32" />
+          <Property Name="atmCate" Type="Int32" />
+          <Property Name="atmMass" Type="Double" />
+          <Property Name="axialTilt" Type="Double" />
+          <Property Name="baseType" Type="Int32" />
+          <Property Name="blackbodyTemp" Type="Double" />
+          <Property Name="dayFaceMod" Type="Double" />
+          <Property Name="density" Type="Double" />
+          <Property Name="descListing" Type="Int32" />
+          <Property Name="diameter" Type="Double" />
+          <Property Name="gravity" Type="Double" />
+          <Property Name="hydCoverage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="innerMoonlets" Type="Int32" />
+          <Property Name="isResonant" Type="Boolean" />
+          <Property Name="isTideLocked" Type="Boolean" />
+          <Property Name="majorMoons1" Type="Int32" />
+          <Property Name="mass" Type="Double" />
+          <Property Name="masterOrderId" Type="Int32" />
+          <Property Name="moonRadius" Type="Double" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nightFaceMod" Type="Double" />
+          <Property Name="orbitalCycle" Type="Double" />
+          <Property Name="orbitalEccent" Type="Double" />
+          <Property Name="orbitalPeriod" Type="Double" />
+          <Property Name="orbitalRadius" Type="Double" />
+          <Property Name="outerMoonlets" Type="Int32" />
+          <Property Name="parentDiam" Type="Double" />
+          <Property Name="parentID" Type="Int32" />
+          <Property Name="parentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="retrogradeMotion" Type="Boolean" />
+          <Property Name="rotationalPeriod" Type="Double" />
+          <Property Name="selfID" Type="Int32" />
+          <Property Name="siderealPeriod" Type="Double" />
+          <Property Name="surfaceTemp" Type="Double" />
+          <Property Name="tecActivity" Type="Double" />
+          <Property Name="tideForce" Type="Int32" />
+          <Property Name="tideTotal" Type="Double" />
+          <Property Name="volActivity" Type="Double" />
+          <Property Name="MajorMoonString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Planets" Relationship="Db1Model.FK_MajorMoons_Planets" FromRole="MajorMoons"
+                              ToRole="Planets" />
+        </EntityType>
+        <EntityType Name="OuterMoonlets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentDBID" Type="Int32" Nullable="false" />
+          <Property Name="blackbodyTemp" Type="Double" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="orbitalEccent" Type="Double" />
+          <Property Name="orbitalPeriod" Type="Double" />
+          <Property Name="orbitalRadius" Type="Double" />
+          <Property Name="parentID" Type="Int32" />
+          <Property Name="parentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="planetRadius" Type="Double" />
+          <Property Name="selfID" Type="Int32" />
+          <Property Name="outerMoonString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Planets" Relationship="Db1Model.FK_OuterMoonlets_Planets" FromRole="OuterMoonlets"
+                              ToRole="Planets" />
+        </EntityType>
+        <Association Name="FK_InnerMoonlets_Planets">
+          <End Type="Db1Model.Planets" Role="Planets" Multiplicity="1" />
+          <End Type="Db1Model.InnerMoonlets" Role="InnerMoonlets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InnerMoonlets">
+              <PropertyRef Name="parentDBID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MajorMoons_Planets">
+          <End Type="Db1Model.Planets" Role="Planets" Multiplicity="0..1" />
+          <End Type="Db1Model.MajorMoons" Role="MajorMoons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MajorMoons">
+              <PropertyRef Name="ParentDBID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OuterMoonlets_Planets">
+          <End Type="Db1Model.Planets" Role="Planets" Multiplicity="1" />
+          <End Type="Db1Model.OuterMoonlets" Role="OuterMoonlets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OuterMoonlets">
+              <PropertyRef Name="ParentDBID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Stars">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SystemID" Type="Int32" Nullable="false" />
+          <Property Name="currLumin" Type="Double" Nullable="false" />
+          <Property Name="distFromPrimary" Type="Double" Nullable="false" />
+          <Property Name="effTemp" Type="Double" Nullable="false" />
+          <Property Name="gasGiantFlag" Type="Int32" />
+          <Property Name="initLumin" Type="Double" Nullable="false" />
+          <Property Name="initMass" Type="Double" Nullable="false" />
+          <Property Name="isFlareStar" Type="Boolean" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="orbitalEccent" Type="Double" />
+          <Property Name="orbitalPeriod" Type="Double" />
+          <Property Name="orbitalRadius" Type="Double" />
+          <Property Name="orbitalSep" Type="Double" />
+          <Property Name="orderID" Type="Int32" />
+          <Property Name="parentID" Type="Int32" />
+          <Property Name="parentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="radius" Type="Double" Nullable="false" />
+          <Property Name="selfID" Type="Int32" />
+          <Property Name="specType" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="starAge" Type="Double" Nullable="false" />
+          <Property Name="starColor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sysPlanets" Type="Int32" />
+          <Property Name="StarOrder" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StellarEvolutionStage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrbitalDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StarString" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Planets" Relationship="Db1Model.FK_Planets_Stars" FromRole="Stars" ToRole="Planets" />
+          <NavigationProperty Name="StarSystems" Relationship="Db1Model.FK_Stars_SystemID" FromRole="Stars"
+                              ToRole="StarSystems" />
+        </EntityType>
+        <EntityType Name="StarSystems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sysName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="habitableZones" Type="Int32" />
+          <Property Name="maxMass" Type="Double" Nullable="false" />
+          <Property Name="numDwarfPlanets" Type="Int32" />
+          <Property Name="star2index" Type="Int32" />
+          <Property Name="star3index" Type="Int32" />
+          <Property Name="subCompanionStar2index" Type="Int32" />
+          <Property Name="subCompanionStar3index" Type="Int32" />
+          <Property Name="sysAge" Type="Double" Nullable="false" />
+          <Property Name="sysStars" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Stars" Relationship="Db1Model.FK_Stars_SystemID" FromRole="StarSystems"
+                              ToRole="Stars" />
+        </EntityType>
+        <Association Name="FK_Planets_Stars">
+          <End Type="Db1Model.Stars" Role="Stars" Multiplicity="1" />
+          <End Type="Db1Model.Planets" Role="Planets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Planets">
+              <PropertyRef Name="StarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stars_SystemID">
+          <End Type="Db1Model.StarSystems" Role="StarSystems" Multiplicity="1" />
+          <End Type="Db1Model.Stars" Role="Stars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StarSystems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stars">
+              <PropertyRef Name="SystemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Skills">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SkillName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DifficultyLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="points" Type="Int32" />
+          <Property Name="reference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="specialization" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tech_level" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ControllingAttribute" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Modifiers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Defaults" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Prerequisites" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RequirementSet" Type="Boolean" />
+          <Property Name="isEnabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SkillSpecialization" Relationship="Db1Model.FK_SkillSpecialization_Skills"
+                              FromRole="Skills" ToRole="SkillSpecialization" />
+        </EntityType>
+        <EntityType Name="SkillSpecialization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SkillId" Type="Int32" />
+          <Property Name="Default" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Prerequisites" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Modifiers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsOptional" Type="Boolean" />
+          <Property Name="RequirementSet" Type="Boolean" />
+          <NavigationProperty Name="Skills" Relationship="Db1Model.FK_SkillSpecialization_Skills"
+                              FromRole="SkillSpecialization" ToRole="Skills" />
+        </EntityType>
+        <Association Name="FK_SkillSpecialization_Skills">
+          <End Type="Db1Model.Skills" Role="Skills" Multiplicity="0..1" />
+          <End Type="Db1Model.SkillSpecialization" Role="SkillSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skills">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SkillSpecialization">
+              <PropertyRef Name="SkillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="encycloPerson">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EncyclopediaID" Type="Int32" />
           <Property Name="PersonName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PersonDiscription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PersonFactionId" Type="Int32" />
           <Property Name="PersonFactionRank" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="encycloPlanets">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="EncyclopediaId" Type="Int32" />
-          <Property Name="PlanetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PlanetDiscription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="encycloRace">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="EncyclopediaId" Type="Int32" />
-          <Property Name="RaceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RaceDiscription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1327,175 +1347,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Db1ModelStoreContainer" CdmEntityContainer="Db1Entities">
-          <EntitySetMapping Name="Advantages">
-            <EntityTypeMapping TypeName="Db1Model.Advantages">
-              <MappingFragment StoreEntitySet="Advantages">
-                <ScalarProperty Name="Reference" ColumnName="Reference" />
-                <ScalarProperty Name="isCreationLocked" ColumnName="isCreationLocked" />
-                <ScalarProperty Name="hasLevels" ColumnName="hasLevels" />
-                <ScalarProperty Name="RequirementSet" ColumnName="RequirementSet" />
-                <ScalarProperty Name="Limitation" ColumnName="Limitation" />
-                <ScalarProperty Name="isMundane" ColumnName="isMundane" />
-                <ScalarProperty Name="isSuperNatural" ColumnName="isSuperNatural" />
-                <ScalarProperty Name="isExotic" ColumnName="isExotic" />
-                <ScalarProperty Name="isSocial" ColumnName="isSocial" />
-                <ScalarProperty Name="isMental" ColumnName="isMental" />
-                <ScalarProperty Name="isPhysical" ColumnName="isPhysical" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="PointCost" ColumnName="PointCost" />
-                <ScalarProperty Name="Discription" ColumnName="Discription" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Disadvantages">
-            <EntityTypeMapping TypeName="Db1Model.Disadvantages">
-              <MappingFragment StoreEntitySet="Disadvantages">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="PointCost" ColumnName="PointCost" />
-                <ScalarProperty Name="Discription" ColumnName="Discription" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InnerMoonlets">
-            <EntityTypeMapping TypeName="Db1Model.InnerMoonlets">
-              <MappingFragment StoreEntitySet="InnerMoonlets">
-                <ScalarProperty Name="innerMoonString" ColumnName="innerMoonString" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="parentDBID" ColumnName="parentDBID" />
-                <ScalarProperty Name="blackbodyTemp" ColumnName="blackbodyTemp" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="orbitalEccent" ColumnName="orbitalEccent" />
-                <ScalarProperty Name="orbitalPeriod" ColumnName="orbitalPeriod" />
-                <ScalarProperty Name="orbitalRadius" ColumnName="orbitalRadius" />
-                <ScalarProperty Name="parentID" ColumnName="parentID" />
-                <ScalarProperty Name="parentName" ColumnName="parentName" />
-                <ScalarProperty Name="planetRadius" ColumnName="planetRadius" />
-                <ScalarProperty Name="selfID" ColumnName="selfID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MajorMoons">
-            <EntityTypeMapping TypeName="Db1Model.MajorMoons">
-              <MappingFragment StoreEntitySet="MajorMoons">
-                <ScalarProperty Name="MajorMoonString" ColumnName="MajorMoonString" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ParentDBID" ColumnName="ParentDBID" />
-                <ScalarProperty Name="RVM" ColumnName="RVM" />
-                <ScalarProperty Name="SatelliteSize" ColumnName="SatelliteSize" />
-                <ScalarProperty Name="SatelliteType" ColumnName="SatelliteType" />
-                <ScalarProperty Name="atmCate" ColumnName="atmCate" />
-                <ScalarProperty Name="atmMass" ColumnName="atmMass" />
-                <ScalarProperty Name="axialTilt" ColumnName="axialTilt" />
-                <ScalarProperty Name="baseType" ColumnName="baseType" />
-                <ScalarProperty Name="blackbodyTemp" ColumnName="blackbodyTemp" />
-                <ScalarProperty Name="dayFaceMod" ColumnName="dayFaceMod" />
-                <ScalarProperty Name="density" ColumnName="density" />
-                <ScalarProperty Name="descListing" ColumnName="descListing" />
-                <ScalarProperty Name="diameter" ColumnName="diameter" />
-                <ScalarProperty Name="gravity" ColumnName="gravity" />
-                <ScalarProperty Name="hydCoverage" ColumnName="hydCoverage" />
-                <ScalarProperty Name="innerMoonlets" ColumnName="innerMoonlets" />
-                <ScalarProperty Name="isResonant" ColumnName="isResonant" />
-                <ScalarProperty Name="isTideLocked" ColumnName="isTideLocked" />
-                <ScalarProperty Name="majorMoons1" ColumnName="majorMoons" />
-                <ScalarProperty Name="mass" ColumnName="mass" />
-                <ScalarProperty Name="masterOrderId" ColumnName="masterOrderId" />
-                <ScalarProperty Name="moonRadius" ColumnName="moonRadius" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="nightFaceMod" ColumnName="nightFaceMod" />
-                <ScalarProperty Name="orbitalCycle" ColumnName="orbitalCycle" />
-                <ScalarProperty Name="orbitalEccent" ColumnName="orbitalEccent" />
-                <ScalarProperty Name="orbitalPeriod" ColumnName="orbitalPeriod" />
-                <ScalarProperty Name="orbitalRadius" ColumnName="orbitalRadius" />
-                <ScalarProperty Name="outerMoonlets" ColumnName="outerMoonlets" />
-                <ScalarProperty Name="parentDiam" ColumnName="parentDiam" />
-                <ScalarProperty Name="parentID" ColumnName="parentID" />
-                <ScalarProperty Name="parentName" ColumnName="parentName" />
-                <ScalarProperty Name="retrogradeMotion" ColumnName="retrogradeMotion" />
-                <ScalarProperty Name="rotationalPeriod" ColumnName="rotationalPeriod" />
-                <ScalarProperty Name="selfID" ColumnName="selfID" />
-                <ScalarProperty Name="siderealPeriod" ColumnName="siderealPeriod" />
-                <ScalarProperty Name="surfaceTemp" ColumnName="surfaceTemp" />
-                <ScalarProperty Name="tecActivity" ColumnName="tecActivity" />
-                <ScalarProperty Name="tideForce" ColumnName="tideForce" />
-                <ScalarProperty Name="tideTotal" ColumnName="tideTotal" />
-                <ScalarProperty Name="volActivity" ColumnName="volActivity" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OuterMoonlets">
-            <EntityTypeMapping TypeName="Db1Model.OuterMoonlets">
-              <MappingFragment StoreEntitySet="OuterMoonlets">
-                <ScalarProperty Name="outerMoonString" ColumnName="outerMoonString" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ParentDBID" ColumnName="ParentDBID" />
-                <ScalarProperty Name="blackbodyTemp" ColumnName="blackbodyTemp" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="orbitalEccent" ColumnName="orbitalEccent" />
-                <ScalarProperty Name="orbitalPeriod" ColumnName="orbitalPeriod" />
-                <ScalarProperty Name="orbitalRadius" ColumnName="orbitalRadius" />
-                <ScalarProperty Name="parentID" ColumnName="parentID" />
-                <ScalarProperty Name="parentName" ColumnName="parentName" />
-                <ScalarProperty Name="planetRadius" ColumnName="planetRadius" />
-                <ScalarProperty Name="selfID" ColumnName="selfID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Planets">
-            <EntityTypeMapping TypeName="Db1Model.Planets">
-              <MappingFragment StoreEntitySet="Planets">
-                <ScalarProperty Name="planetString" ColumnName="planetString" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="StarID" ColumnName="StarID" />
-                <ScalarProperty Name="SatelliteSize" ColumnName="SatelliteSize" />
-                <ScalarProperty Name="SatelliteType" ColumnName="SatelliteType" />
-                <ScalarProperty Name="atmCate" ColumnName="atmCate" />
-                <ScalarProperty Name="atmMass" ColumnName="atmMass" />
-                <ScalarProperty Name="atmPres" ColumnName="atmPres" />
-                <ScalarProperty Name="axialTilt" ColumnName="axialTilt" />
-                <ScalarProperty Name="baseType" ColumnName="baseType" />
-                <ScalarProperty Name="blackbodyTemp" ColumnName="blackbodyTemp" />
-                <ScalarProperty Name="dayFaceMod" ColumnName="dayFaceMod" />
-                <ScalarProperty Name="density" ColumnName="density" />
-                <ScalarProperty Name="diameter" ColumnName="diameter" />
-                <ScalarProperty Name="gravity" ColumnName="gravity" />
-                <ScalarProperty Name="hydCoverage" ColumnName="hydCoverage" />
-                <ScalarProperty Name="innerMoonlets" ColumnName="innerMoonlets" />
-                <ScalarProperty Name="isResonant" ColumnName="isResonant" />
-                <ScalarProperty Name="isTideLocked" ColumnName="isTideLocked" />
-                <ScalarProperty Name="majorMoons" ColumnName="majorMoons" />
-                <ScalarProperty Name="mass" ColumnName="mass" />
-                <ScalarProperty Name="masterOrderID" ColumnName="masterOrderID" />
-                <ScalarProperty Name="moonRadius" ColumnName="moonRadius" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="nightFaceMod" ColumnName="nightFaceMod" />
-                <ScalarProperty Name="orbitalCycle" ColumnName="orbitalCycle" />
-                <ScalarProperty Name="orbitalEccent" ColumnName="orbitalEccent" />
-                <ScalarProperty Name="orbitalPeriod" ColumnName="orbitalPeriod" />
-                <ScalarProperty Name="orbitalRadius" ColumnName="orbitalRadius" />
-                <ScalarProperty Name="outerMoonlets" ColumnName="outerMoonlets" />
-                <ScalarProperty Name="parentDiam" ColumnName="parentDiam" />
-                <ScalarProperty Name="parentID" ColumnName="parentID" />
-                <ScalarProperty Name="parentName" ColumnName="parentName" />
-                <ScalarProperty Name="retrogradeMotion" ColumnName="retrogradeMotion" />
-                <ScalarProperty Name="rotationalPeriod" ColumnName="rotationalPeriod" />
-                <ScalarProperty Name="selfID" ColumnName="selfID" />
-                <ScalarProperty Name="siderealPeriod" ColumnName="siderealPeriod" />
-                <ScalarProperty Name="surfaceTemp" ColumnName="surfaceTemp" />
-                <ScalarProperty Name="tecActivity" ColumnName="tecActivity" />
-                <ScalarProperty Name="tideForce" ColumnName="tideForce" />
-                <ScalarProperty Name="tideTotal" ColumnName="tideTotal" />
-                <ScalarProperty Name="volActivity" ColumnName="volActivity" />
-                <ScalarProperty Name="sattype" ColumnName="sattype" />
-                <ScalarProperty Name="atmnote" ColumnName="atmnote" />
-                <ScalarProperty Name="RVM" ColumnName="RVM" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PName">
             <EntityTypeMapping TypeName="Db1Model.PName">
               <MappingFragment StoreEntitySet="PName">
@@ -1524,56 +1375,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Stars">
-            <EntityTypeMapping TypeName="Db1Model.Stars">
-              <MappingFragment StoreEntitySet="Stars">
-                <ScalarProperty Name="StarString" ColumnName="StarString" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="SystemID" ColumnName="SystemID" />
-                <ScalarProperty Name="currLumin" ColumnName="currLumin" />
-                <ScalarProperty Name="distFromPrimary" ColumnName="distFromPrimary" />
-                <ScalarProperty Name="effTemp" ColumnName="effTemp" />
-                <ScalarProperty Name="gasGiantFlag" ColumnName="gasGiantFlag" />
-                <ScalarProperty Name="initLumin" ColumnName="initLumin" />
-                <ScalarProperty Name="initMass" ColumnName="initMass" />
-                <ScalarProperty Name="isFlareStar" ColumnName="isFlareStar" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="orbitalEccent" ColumnName="orbitalEccent" />
-                <ScalarProperty Name="orbitalPeriod" ColumnName="orbitalPeriod" />
-                <ScalarProperty Name="orbitalRadius" ColumnName="orbitalRadius" />
-                <ScalarProperty Name="orbitalSep" ColumnName="orbitalSep" />
-                <ScalarProperty Name="orderID" ColumnName="orderID" />
-                <ScalarProperty Name="parentID" ColumnName="parentID" />
-                <ScalarProperty Name="parentName" ColumnName="parentName" />
-                <ScalarProperty Name="radius" ColumnName="radius" />
-                <ScalarProperty Name="selfID" ColumnName="selfID" />
-                <ScalarProperty Name="specType" ColumnName="specType" />
-                <ScalarProperty Name="starAge" ColumnName="starAge" />
-                <ScalarProperty Name="starColor" ColumnName="starColor" />
-                <ScalarProperty Name="sysPlanets" ColumnName="sysPlanets" />
-                <ScalarProperty Name="StarOrder" ColumnName="StarOrder" />
-                <ScalarProperty Name="StellarEvolutionStage" ColumnName="StellarEvolutionStage" />
-                <ScalarProperty Name="OrbitalDetails" ColumnName="OrbitalDetails" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StarSystems">
-            <EntityTypeMapping TypeName="Db1Model.StarSystems">
-              <MappingFragment StoreEntitySet="StarSystems">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="sysName" ColumnName="sysName" />
-                <ScalarProperty Name="habitableZones" ColumnName="habitableZones" />
-                <ScalarProperty Name="maxMass" ColumnName="maxMass" />
-                <ScalarProperty Name="numDwarfPlanets" ColumnName="numDwarfPlanets" />
-                <ScalarProperty Name="star2index" ColumnName="star2index" />
-                <ScalarProperty Name="star3index" ColumnName="star3index" />
-                <ScalarProperty Name="subCompanionStar2index" ColumnName="subCompanionStar2index" />
-                <ScalarProperty Name="subCompanionStar3index" ColumnName="subCompanionStar3index" />
-                <ScalarProperty Name="sysAge" ColumnName="sysAge" />
-                <ScalarProperty Name="sysStars" ColumnName="sysStars" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UDateTime">
             <EntityTypeMapping TypeName="Db1Model.UDateTime">
               <MappingFragment StoreEntitySet="UDateTime">
@@ -1588,70 +1389,6 @@
               <MappingFragment StoreEntitySet="Attribute">
                 <ScalarProperty Name="RequirementSet" ColumnName="RequirementSet" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Skills">
-            <EntityTypeMapping TypeName="Db1Model.Skills">
-              <MappingFragment StoreEntitySet="Skills">
-                <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
-                <ScalarProperty Name="RequirementSet" ColumnName="RequirementSet" />
-                <ScalarProperty Name="Prerequisites" ColumnName="Prerequisites" />
-                <ScalarProperty Name="Defaults" ColumnName="Defaults" />
-                <ScalarProperty Name="Modifiers" ColumnName="Modifiers" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ControllingAttribute" ColumnName="ControllingAttribute" />
-                <ScalarProperty Name="tech_level" ColumnName="tech_level" />
-                <ScalarProperty Name="specialization" ColumnName="specialization" />
-                <ScalarProperty Name="reference" ColumnName="reference" />
-                <ScalarProperty Name="points" ColumnName="points" />
-                <ScalarProperty Name="notes" ColumnName="notes" />
-                <ScalarProperty Name="DifficultyLevel" ColumnName="DifficultyLevel" />
-                <ScalarProperty Name="SkillName" ColumnName="SkillName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SkillSpecialization">
-            <EntityTypeMapping TypeName="Db1Model.SkillSpecialization">
-              <MappingFragment StoreEntitySet="SkillSpecialization">
-                <ScalarProperty Name="RequirementSet" ColumnName="RequirementSet" />
-                <ScalarProperty Name="IsOptional" ColumnName="IsOptional" />
-                <ScalarProperty Name="Modifiers" ColumnName="Modifiers" />
-                <ScalarProperty Name="Prerequisites" ColumnName="Prerequisites" />
-                <ScalarProperty Name="Discription" ColumnName="Discription" />
-                <ScalarProperty Name="Default" ColumnName="Default" />
-                <ScalarProperty Name="SkillId" ColumnName="SkillId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Requirements">
-            <EntityTypeMapping TypeName="Db1Model.Requirements">
-              <MappingFragment StoreEntitySet="Requirements">
-                <ScalarProperty Name="ConditionValue" ColumnName="ConditionValue" />
-                <ScalarProperty Name="TargetName" ColumnName="TargetName" />
-                <ScalarProperty Name="SourceName" ColumnName="SourceName" />
-                <ScalarProperty Name="TargetType" ColumnName="TargetType" />
-                <ScalarProperty Name="SourceType" ColumnName="SourceType" />
-                <ScalarProperty Name="Condition" ColumnName="Condition" />
-                <ScalarProperty Name="SourceItemID" ColumnName="SourceItemID" />
-                <ScalarProperty Name="TargetRequirementID" ColumnName="TargetRequirementID" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Modifier">
-            <EntityTypeMapping TypeName="Db1Model.Modifier">
-              <MappingFragment StoreEntitySet="Modifier">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Modifying_Property" ColumnName="Modifying Property" />
-                <ScalarProperty Name="SubGroup" ColumnName="SubGroup" />
-                <ScalarProperty Name="Group" ColumnName="Group" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1716,6 +1453,77 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="FactionGoals">
+            <EntityTypeMapping TypeName="Db1Model.FactionGoals">
+              <MappingFragment StoreEntitySet="FactionGoals">
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FactionId" ColumnName="FactionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Factions">
+            <EntityTypeMapping TypeName="Db1Model.Factions">
+              <MappingFragment StoreEntitySet="Factions">
+                <ScalarProperty Name="RelationShip" ColumnName="RelationShip" />
+                <ScalarProperty Name="Exp" ColumnName="Exp" />
+                <ScalarProperty Name="CurrectFacCreds" ColumnName="CurrectFacCreds" />
+                <ScalarProperty Name="Income" ColumnName="Income" />
+                <ScalarProperty Name="MaxHp" ColumnName="MaxHp" />
+                <ScalarProperty Name="CurrentHp" ColumnName="CurrentHp" />
+                <ScalarProperty Name="Wealth" ColumnName="Wealth" />
+                <ScalarProperty Name="Cunning" ColumnName="Cunning" />
+                <ScalarProperty Name="Force" ColumnName="Force" />
+                <ScalarProperty Name="Race" ColumnName="Race" />
+                <ScalarProperty Name="HomePlanet" ColumnName="HomePlanet" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FactionTags">
+            <EntityTypeMapping TypeName="Db1Model.FactionTags">
+              <MappingFragment StoreEntitySet="FactionTags">
+                <ScalarProperty Name="Effect" ColumnName="Effect" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+                <ScalarProperty Name="FactionId" ColumnName="FactionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="encycloFactions">
+            <EntityTypeMapping TypeName="Db1Model.encycloFactions">
+              <MappingFragment StoreEntitySet="encycloFactions">
+                <ScalarProperty Name="FactionDiscription" ColumnName="FactionDiscription" />
+                <ScalarProperty Name="FactionDataId" ColumnName="FactionDataId" />
+                <ScalarProperty Name="FactionName" ColumnName="FactionName" />
+                <ScalarProperty Name="EncyclopediaId" ColumnName="EncyclopediaId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="encycloPlanets">
+            <EntityTypeMapping TypeName="Db1Model.encycloPlanets">
+              <MappingFragment StoreEntitySet="encycloPlanets">
+                <ScalarProperty Name="PlanetDiscription" ColumnName="PlanetDiscription" />
+                <ScalarProperty Name="PlanetName" ColumnName="PlanetName" />
+                <ScalarProperty Name="EncyclopediaId" ColumnName="EncyclopediaId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="encycloRace">
+            <EntityTypeMapping TypeName="Db1Model.encycloRace">
+              <MappingFragment StoreEntitySet="encycloRace">
+                <ScalarProperty Name="RaceDiscription" ColumnName="RaceDiscription" />
+                <ScalarProperty Name="RaceName" ColumnName="RaceName" />
+                <ScalarProperty Name="EncyclopediaId" ColumnName="EncyclopediaId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Aliens">
             <EntityTypeMapping TypeName="Db1Model.Aliens">
               <MappingFragment StoreEntitySet="Aliens">
@@ -1771,60 +1579,292 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FactionGoals">
-            <EntityTypeMapping TypeName="Db1Model.FactionGoals">
-              <MappingFragment StoreEntitySet="FactionGoals">
-                <ScalarProperty Name="Discription" ColumnName="Discription" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="FactionId" ColumnName="FactionId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Factions">
-            <EntityTypeMapping TypeName="Db1Model.Factions">
-              <MappingFragment StoreEntitySet="Factions">
-                <ScalarProperty Name="RelationShip" ColumnName="RelationShip" />
-                <ScalarProperty Name="Exp" ColumnName="Exp" />
-                <ScalarProperty Name="CurrectFacCreds" ColumnName="CurrectFacCreds" />
-                <ScalarProperty Name="Income" ColumnName="Income" />
-                <ScalarProperty Name="MaxHp" ColumnName="MaxHp" />
-                <ScalarProperty Name="CurrentHp" ColumnName="CurrentHp" />
-                <ScalarProperty Name="Wealth" ColumnName="Wealth" />
-                <ScalarProperty Name="Cunning" ColumnName="Cunning" />
-                <ScalarProperty Name="Force" ColumnName="Force" />
-                <ScalarProperty Name="Race" ColumnName="Race" />
-                <ScalarProperty Name="HomePlanet" ColumnName="HomePlanet" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FactionTags">
-            <EntityTypeMapping TypeName="Db1Model.FactionTags">
-              <MappingFragment StoreEntitySet="FactionTags">
-                <ScalarProperty Name="Effect" ColumnName="Effect" />
-                <ScalarProperty Name="Discription" ColumnName="Discription" />
-                <ScalarProperty Name="TagName" ColumnName="TagName" />
-                <ScalarProperty Name="FactionId" ColumnName="FactionId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="encycloFactions">
-            <EntityTypeMapping TypeName="Db1Model.encycloFactions">
-              <MappingFragment StoreEntitySet="encycloFactions">
-                <ScalarProperty Name="FactionDiscription" ColumnName="FactionDiscription" />
-                <ScalarProperty Name="FactionDataId" ColumnName="FactionDataId" />
-                <ScalarProperty Name="FactionName" ColumnName="FactionName" />
-                <ScalarProperty Name="EncyclopediaId" ColumnName="EncyclopediaId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Encyclopedia">
             <EntityTypeMapping TypeName="Db1Model.Encyclopedia">
               <MappingFragment StoreEntitySet="Encyclopedia">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modifier">
+            <EntityTypeMapping TypeName="Db1Model.Modifier">
+              <MappingFragment StoreEntitySet="Modifier">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Modifying_Property" ColumnName="Modifying Property" />
+                <ScalarProperty Name="SubGroup" ColumnName="SubGroup" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Planets">
+            <EntityTypeMapping TypeName="Db1Model.Planets">
+              <MappingFragment StoreEntitySet="Planets">
+                <ScalarProperty Name="planetString" ColumnName="planetString" />
+                <ScalarProperty Name="RVM" ColumnName="RVM" />
+                <ScalarProperty Name="atmnote" ColumnName="atmnote" />
+                <ScalarProperty Name="sattype" ColumnName="sattype" />
+                <ScalarProperty Name="volActivity" ColumnName="volActivity" />
+                <ScalarProperty Name="tideTotal" ColumnName="tideTotal" />
+                <ScalarProperty Name="tideForce" ColumnName="tideForce" />
+                <ScalarProperty Name="tecActivity" ColumnName="tecActivity" />
+                <ScalarProperty Name="surfaceTemp" ColumnName="surfaceTemp" />
+                <ScalarProperty Name="siderealPeriod" ColumnName="siderealPeriod" />
+                <ScalarProperty Name="selfID" ColumnName="selfID" />
+                <ScalarProperty Name="rotationalPeriod" ColumnName="rotationalPeriod" />
+                <ScalarProperty Name="retrogradeMotion" ColumnName="retrogradeMotion" />
+                <ScalarProperty Name="parentName" ColumnName="parentName" />
+                <ScalarProperty Name="parentID" ColumnName="parentID" />
+                <ScalarProperty Name="parentDiam" ColumnName="parentDiam" />
+                <ScalarProperty Name="outerMoonlets" ColumnName="outerMoonlets" />
+                <ScalarProperty Name="orbitalRadius" ColumnName="orbitalRadius" />
+                <ScalarProperty Name="orbitalPeriod" ColumnName="orbitalPeriod" />
+                <ScalarProperty Name="orbitalEccent" ColumnName="orbitalEccent" />
+                <ScalarProperty Name="orbitalCycle" ColumnName="orbitalCycle" />
+                <ScalarProperty Name="nightFaceMod" ColumnName="nightFaceMod" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="moonRadius" ColumnName="moonRadius" />
+                <ScalarProperty Name="masterOrderID" ColumnName="masterOrderID" />
+                <ScalarProperty Name="mass" ColumnName="mass" />
+                <ScalarProperty Name="majorMoons" ColumnName="majorMoons" />
+                <ScalarProperty Name="isTideLocked" ColumnName="isTideLocked" />
+                <ScalarProperty Name="isResonant" ColumnName="isResonant" />
+                <ScalarProperty Name="innerMoonlets" ColumnName="innerMoonlets" />
+                <ScalarProperty Name="hydCoverage" ColumnName="hydCoverage" />
+                <ScalarProperty Name="gravity" ColumnName="gravity" />
+                <ScalarProperty Name="diameter" ColumnName="diameter" />
+                <ScalarProperty Name="density" ColumnName="density" />
+                <ScalarProperty Name="dayFaceMod" ColumnName="dayFaceMod" />
+                <ScalarProperty Name="blackbodyTemp" ColumnName="blackbodyTemp" />
+                <ScalarProperty Name="baseType" ColumnName="baseType" />
+                <ScalarProperty Name="axialTilt" ColumnName="axialTilt" />
+                <ScalarProperty Name="atmPres" ColumnName="atmPres" />
+                <ScalarProperty Name="atmMass" ColumnName="atmMass" />
+                <ScalarProperty Name="atmCate" ColumnName="atmCate" />
+                <ScalarProperty Name="SatelliteType" ColumnName="SatelliteType" />
+                <ScalarProperty Name="SatelliteSize" ColumnName="SatelliteSize" />
+                <ScalarProperty Name="StarID" ColumnName="StarID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requirements">
+            <EntityTypeMapping TypeName="Db1Model.Requirements">
+              <MappingFragment StoreEntitySet="Requirements">
+                <ScalarProperty Name="ConditionValue" ColumnName="ConditionValue" />
+                <ScalarProperty Name="TargetName" ColumnName="TargetName" />
+                <ScalarProperty Name="SourceName" ColumnName="SourceName" />
+                <ScalarProperty Name="TargetType" ColumnName="TargetType" />
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+                <ScalarProperty Name="SourceItemID" ColumnName="SourceItemID" />
+                <ScalarProperty Name="TargetRequirementID" ColumnName="TargetRequirementID" />
+                <ScalarProperty Name="SourceType" ColumnName="SourceType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Advantages">
+            <EntityTypeMapping TypeName="Db1Model.Advantages">
+              <MappingFragment StoreEntitySet="Advantages">
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="isCreationLocked" ColumnName="isCreationLocked" />
+                <ScalarProperty Name="hasLevels" ColumnName="hasLevels" />
+                <ScalarProperty Name="RequirementSet" ColumnName="RequirementSet" />
+                <ScalarProperty Name="Limitation" ColumnName="Limitation" />
+                <ScalarProperty Name="isMundane" ColumnName="isMundane" />
+                <ScalarProperty Name="isSuperNatural" ColumnName="isSuperNatural" />
+                <ScalarProperty Name="isExotic" ColumnName="isExotic" />
+                <ScalarProperty Name="isSocial" ColumnName="isSocial" />
+                <ScalarProperty Name="isMental" ColumnName="isMental" />
+                <ScalarProperty Name="isPhysical" ColumnName="isPhysical" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="PointCost" ColumnName="PointCost" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Disadvantages">
+            <EntityTypeMapping TypeName="Db1Model.Disadvantages">
+              <MappingFragment StoreEntitySet="Disadvantages">
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="PointCost" ColumnName="PointCost" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InnerMoonlets">
+            <EntityTypeMapping TypeName="Db1Model.InnerMoonlets">
+              <MappingFragment StoreEntitySet="InnerMoonlets">
+                <ScalarProperty Name="innerMoonString" ColumnName="innerMoonString" />
+                <ScalarProperty Name="selfID" ColumnName="selfID" />
+                <ScalarProperty Name="planetRadius" ColumnName="planetRadius" />
+                <ScalarProperty Name="parentName" ColumnName="parentName" />
+                <ScalarProperty Name="parentID" ColumnName="parentID" />
+                <ScalarProperty Name="orbitalRadius" ColumnName="orbitalRadius" />
+                <ScalarProperty Name="orbitalPeriod" ColumnName="orbitalPeriod" />
+                <ScalarProperty Name="orbitalEccent" ColumnName="orbitalEccent" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="blackbodyTemp" ColumnName="blackbodyTemp" />
+                <ScalarProperty Name="parentDBID" ColumnName="parentDBID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MajorMoons">
+            <EntityTypeMapping TypeName="Db1Model.MajorMoons">
+              <MappingFragment StoreEntitySet="MajorMoons">
+                <ScalarProperty Name="MajorMoonString" ColumnName="MajorMoonString" />
+                <ScalarProperty Name="volActivity" ColumnName="volActivity" />
+                <ScalarProperty Name="tideTotal" ColumnName="tideTotal" />
+                <ScalarProperty Name="tideForce" ColumnName="tideForce" />
+                <ScalarProperty Name="tecActivity" ColumnName="tecActivity" />
+                <ScalarProperty Name="surfaceTemp" ColumnName="surfaceTemp" />
+                <ScalarProperty Name="siderealPeriod" ColumnName="siderealPeriod" />
+                <ScalarProperty Name="selfID" ColumnName="selfID" />
+                <ScalarProperty Name="rotationalPeriod" ColumnName="rotationalPeriod" />
+                <ScalarProperty Name="retrogradeMotion" ColumnName="retrogradeMotion" />
+                <ScalarProperty Name="parentName" ColumnName="parentName" />
+                <ScalarProperty Name="parentID" ColumnName="parentID" />
+                <ScalarProperty Name="parentDiam" ColumnName="parentDiam" />
+                <ScalarProperty Name="outerMoonlets" ColumnName="outerMoonlets" />
+                <ScalarProperty Name="orbitalRadius" ColumnName="orbitalRadius" />
+                <ScalarProperty Name="orbitalPeriod" ColumnName="orbitalPeriod" />
+                <ScalarProperty Name="orbitalEccent" ColumnName="orbitalEccent" />
+                <ScalarProperty Name="orbitalCycle" ColumnName="orbitalCycle" />
+                <ScalarProperty Name="nightFaceMod" ColumnName="nightFaceMod" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="moonRadius" ColumnName="moonRadius" />
+                <ScalarProperty Name="masterOrderId" ColumnName="masterOrderId" />
+                <ScalarProperty Name="mass" ColumnName="mass" />
+                <ScalarProperty Name="majorMoons1" ColumnName="majorMoons" />
+                <ScalarProperty Name="isTideLocked" ColumnName="isTideLocked" />
+                <ScalarProperty Name="isResonant" ColumnName="isResonant" />
+                <ScalarProperty Name="innerMoonlets" ColumnName="innerMoonlets" />
+                <ScalarProperty Name="hydCoverage" ColumnName="hydCoverage" />
+                <ScalarProperty Name="gravity" ColumnName="gravity" />
+                <ScalarProperty Name="diameter" ColumnName="diameter" />
+                <ScalarProperty Name="descListing" ColumnName="descListing" />
+                <ScalarProperty Name="density" ColumnName="density" />
+                <ScalarProperty Name="dayFaceMod" ColumnName="dayFaceMod" />
+                <ScalarProperty Name="blackbodyTemp" ColumnName="blackbodyTemp" />
+                <ScalarProperty Name="baseType" ColumnName="baseType" />
+                <ScalarProperty Name="axialTilt" ColumnName="axialTilt" />
+                <ScalarProperty Name="atmMass" ColumnName="atmMass" />
+                <ScalarProperty Name="atmCate" ColumnName="atmCate" />
+                <ScalarProperty Name="SatelliteType" ColumnName="SatelliteType" />
+                <ScalarProperty Name="SatelliteSize" ColumnName="SatelliteSize" />
+                <ScalarProperty Name="RVM" ColumnName="RVM" />
+                <ScalarProperty Name="ParentDBID" ColumnName="ParentDBID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OuterMoonlets">
+            <EntityTypeMapping TypeName="Db1Model.OuterMoonlets">
+              <MappingFragment StoreEntitySet="OuterMoonlets">
+                <ScalarProperty Name="outerMoonString" ColumnName="outerMoonString" />
+                <ScalarProperty Name="selfID" ColumnName="selfID" />
+                <ScalarProperty Name="planetRadius" ColumnName="planetRadius" />
+                <ScalarProperty Name="parentName" ColumnName="parentName" />
+                <ScalarProperty Name="parentID" ColumnName="parentID" />
+                <ScalarProperty Name="orbitalRadius" ColumnName="orbitalRadius" />
+                <ScalarProperty Name="orbitalPeriod" ColumnName="orbitalPeriod" />
+                <ScalarProperty Name="orbitalEccent" ColumnName="orbitalEccent" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="blackbodyTemp" ColumnName="blackbodyTemp" />
+                <ScalarProperty Name="ParentDBID" ColumnName="ParentDBID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stars">
+            <EntityTypeMapping TypeName="Db1Model.Stars">
+              <MappingFragment StoreEntitySet="Stars">
+                <ScalarProperty Name="StarString" ColumnName="StarString" />
+                <ScalarProperty Name="OrbitalDetails" ColumnName="OrbitalDetails" />
+                <ScalarProperty Name="StellarEvolutionStage" ColumnName="StellarEvolutionStage" />
+                <ScalarProperty Name="StarOrder" ColumnName="StarOrder" />
+                <ScalarProperty Name="sysPlanets" ColumnName="sysPlanets" />
+                <ScalarProperty Name="starColor" ColumnName="starColor" />
+                <ScalarProperty Name="starAge" ColumnName="starAge" />
+                <ScalarProperty Name="specType" ColumnName="specType" />
+                <ScalarProperty Name="selfID" ColumnName="selfID" />
+                <ScalarProperty Name="radius" ColumnName="radius" />
+                <ScalarProperty Name="parentName" ColumnName="parentName" />
+                <ScalarProperty Name="parentID" ColumnName="parentID" />
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+                <ScalarProperty Name="orbitalSep" ColumnName="orbitalSep" />
+                <ScalarProperty Name="orbitalRadius" ColumnName="orbitalRadius" />
+                <ScalarProperty Name="orbitalPeriod" ColumnName="orbitalPeriod" />
+                <ScalarProperty Name="orbitalEccent" ColumnName="orbitalEccent" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="isFlareStar" ColumnName="isFlareStar" />
+                <ScalarProperty Name="initMass" ColumnName="initMass" />
+                <ScalarProperty Name="initLumin" ColumnName="initLumin" />
+                <ScalarProperty Name="gasGiantFlag" ColumnName="gasGiantFlag" />
+                <ScalarProperty Name="effTemp" ColumnName="effTemp" />
+                <ScalarProperty Name="distFromPrimary" ColumnName="distFromPrimary" />
+                <ScalarProperty Name="currLumin" ColumnName="currLumin" />
+                <ScalarProperty Name="SystemID" ColumnName="SystemID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StarSystems">
+            <EntityTypeMapping TypeName="Db1Model.StarSystems">
+              <MappingFragment StoreEntitySet="StarSystems">
+                <ScalarProperty Name="sysStars" ColumnName="sysStars" />
+                <ScalarProperty Name="sysAge" ColumnName="sysAge" />
+                <ScalarProperty Name="subCompanionStar3index" ColumnName="subCompanionStar3index" />
+                <ScalarProperty Name="subCompanionStar2index" ColumnName="subCompanionStar2index" />
+                <ScalarProperty Name="star3index" ColumnName="star3index" />
+                <ScalarProperty Name="star2index" ColumnName="star2index" />
+                <ScalarProperty Name="numDwarfPlanets" ColumnName="numDwarfPlanets" />
+                <ScalarProperty Name="maxMass" ColumnName="maxMass" />
+                <ScalarProperty Name="habitableZones" ColumnName="habitableZones" />
+                <ScalarProperty Name="sysName" ColumnName="sysName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Skills">
+            <EntityTypeMapping TypeName="Db1Model.Skills">
+              <MappingFragment StoreEntitySet="Skills">
+                <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
+                <ScalarProperty Name="RequirementSet" ColumnName="RequirementSet" />
+                <ScalarProperty Name="Prerequisites" ColumnName="Prerequisites" />
+                <ScalarProperty Name="Defaults" ColumnName="Defaults" />
+                <ScalarProperty Name="Modifiers" ColumnName="Modifiers" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ControllingAttribute" ColumnName="ControllingAttribute" />
+                <ScalarProperty Name="tech_level" ColumnName="tech_level" />
+                <ScalarProperty Name="specialization" ColumnName="specialization" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="points" ColumnName="points" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="DifficultyLevel" ColumnName="DifficultyLevel" />
+                <ScalarProperty Name="SkillName" ColumnName="SkillName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SkillSpecialization">
+            <EntityTypeMapping TypeName="Db1Model.SkillSpecialization">
+              <MappingFragment StoreEntitySet="SkillSpecialization">
+                <ScalarProperty Name="RequirementSet" ColumnName="RequirementSet" />
+                <ScalarProperty Name="IsOptional" ColumnName="IsOptional" />
+                <ScalarProperty Name="Modifiers" ColumnName="Modifiers" />
+                <ScalarProperty Name="Prerequisites" ColumnName="Prerequisites" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Default" ColumnName="Default" />
+                <ScalarProperty Name="SkillId" ColumnName="SkillId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -1838,26 +1878,6 @@
                 <ScalarProperty Name="PersonDiscription" ColumnName="PersonDiscription" />
                 <ScalarProperty Name="PersonName" ColumnName="PersonName" />
                 <ScalarProperty Name="EncyclopediaID" ColumnName="EncyclopediaID" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="encycloPlanets">
-            <EntityTypeMapping TypeName="Db1Model.encycloPlanets">
-              <MappingFragment StoreEntitySet="encycloPlanets">
-                <ScalarProperty Name="PlanetDiscription" ColumnName="PlanetDiscription" />
-                <ScalarProperty Name="PlanetName" ColumnName="PlanetName" />
-                <ScalarProperty Name="EncyclopediaId" ColumnName="EncyclopediaId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="encycloRace">
-            <EntityTypeMapping TypeName="Db1Model.encycloRace">
-              <MappingFragment StoreEntitySet="encycloRace">
-                <ScalarProperty Name="RaceDiscription" ColumnName="RaceDiscription" />
-                <ScalarProperty Name="RaceName" ColumnName="RaceName" />
-                <ScalarProperty Name="EncyclopediaId" ColumnName="EncyclopediaId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

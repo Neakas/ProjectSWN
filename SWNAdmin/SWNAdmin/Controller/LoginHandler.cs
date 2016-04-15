@@ -1,19 +1,17 @@
 ﻿using System;
+using System.Linq;
 using SWNAdmin.Classes;
 using SWNAdmin.Utility;
-using System.Linq;
 
 namespace SWNAdmin.Controller
 {
-    public class LoginHandler
+    public static class LoginHandler
     {
-        public static bool LoginCheck(Client cl)
+        public static bool LoginCheck( Client cl )
         {
             using (var regcontext = new Db1Entities())
             {
-                var query = from c in regcontext.Registration
-                    where c.Username == cl.UserName && c.Password == cl.EncPassword
-                    select c;
+                var query = from c in regcontext.Registration where c.Username == cl.UserName && c.Password == cl.EncPassword select c;
                 try
                 {
                     var firstOrDefault = query.FirstOrDefault();

@@ -7,7 +7,7 @@ namespace UniverseGeneration.Utility
     {
         public string TargetPath { get; set; }
         public int LogCounter { get; set; }
-        
+
         public void Initialize()
         {
             TargetPath = @"C:\Test\GenLog.txt";
@@ -19,14 +19,14 @@ namespace UniverseGeneration.Utility
 
             LogCounter = 0;
 
-            using (StreamWriter writer = new StreamWriter(TargetPath,true))
+            using (var writer = new StreamWriter(TargetPath, true))
             {
                 writer.WriteLine("-----------------SWN Generation Log File-----------------");
                 writer.WriteLine("-----------------------Initialized-----------------------");
             }
-            
         }
-        public void Initialize(string targetpath)
+
+        public void Initialize( string targetpath )
         {
             TargetPath = targetpath + "GenLog.txt";
 
@@ -37,38 +37,39 @@ namespace UniverseGeneration.Utility
 
             LogCounter = 0;
 
-            using (StreamWriter writer = new StreamWriter(TargetPath, true))
+            using (var writer = new StreamWriter(TargetPath, true))
             {
                 writer.WriteLine("-----------------SWN Generation Log File-----------------");
                 writer.WriteLine("-----------------------Initialized-----------------------");
             }
         }
 
-        public void LogString(string ToLogString)
+        public void LogString( string toLogString )
         {
             if (TargetPath == null)
             {
                 Initialize();
-                Exception e = new Exception("Please Initialize() the Logger First next Time. Basic Path Set!");
+                new Exception("Please Initialize() the Logger First next Time. Basic Path Set!");
                 return;
             }
             LogCounter++;
-            using (StreamWriter writer = new StreamWriter(TargetPath, true))
+            using (var writer = new StreamWriter(TargetPath, true))
             {
-                writer.WriteLine(LogCounter + ":[" + ToLogString + "]");
+                writer.WriteLine(LogCounter + ":[" + toLogString + "]");
             }
         }
-        public void LogPriorityString(string ToLogString)
+
+        public void LogPriorityString( string toLogString )
         {
             if (TargetPath == null)
             {
                 Initialize();
-                Exception e = new Exception("Please Initialize() the Logger First next Time. Basic Path Set!");
+                var e = new Exception("Please Initialize() the Logger First next Time. Basic Path Set!");
                 return;
             }
-            using (StreamWriter writer = new StreamWriter(TargetPath, true))
+            using (var writer = new StreamWriter(TargetPath, true))
             {
-                writer.WriteLine("---------------![" + ToLogString + "]!---------------");
+                writer.WriteLine("---------------![" + toLogString + "]!---------------");
             }
         }
     }

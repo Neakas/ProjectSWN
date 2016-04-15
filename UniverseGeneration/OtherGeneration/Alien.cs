@@ -6,527 +6,1494 @@ namespace UniverseGeneration.OtherGeneration
     public class Alien
     {
         #region EnumsAndDicts
-        public enum ChemicalBasis { None, Hydrogen, Ammonia, Hydrocarbon, Water, Chlorine, SulfuricAcid, LiquidSulfur, LiquidRock, Plasma, Exotic }
-        public enum LandWater { None, Land, Water }
-        public enum LandHabitats { None, Plains, Desert, IslandBeach, Woodlands, Swampland, Mountain, Arctic, Jungle }
-        public enum WaterHabitats { None, Banks, OpenOcean, FreshWaterLakes, RiverStream, TropicalLagoon, DeepOceanVents, SaltWaterSea, Reef }
-        public enum TrophicDiets { None, CombinedMethod, ParasiteSymbiont, FilterFeeder, PouncingCarnivore, ChasingCarnivore, HijackingCarnivore, TrappingCarnivore, Scavenger, GatheringHerbivore, GrazingHerbivore, Omnivore, Decomposer, AutothrophPhotosynthetic, AutothrophChemosynthetic, AutothrophOther }
-        public enum Locomotions { None, immobile, slithering, swimming, digging, walking, wingedflight, floating, sailing, bouyantflight, climbing, special }
-        public enum SizeClasses { None, Small, HumanScale, Large }
-        public enum Symmetries { None, Bilateral, Trilateral, Radial, Spherical, Asymmetric }
-        public enum Tails { None, FeatureLess, Striker, Long, Constricting, Barbed, Gripping, Branching, Combination }
-        public enum Skeletons { None, Hydrostatic, External, Internal, Combination }
-        public enum SkinClasses { None, Skin, Scales, Fur, Feathers, Exeskeleton }
-        public enum Skins { None, SoftSkin, NormalSkin, Hide, ThickHide, ArmorShell, Blubber, Scales, HeavyScales, Fur, ThickFur, ThickFurOverHide, Spines, Feathers, ThickFeather, FeathersOverHide, LightExoskeleton, ToughExoskeleton, HeavyExoskeleton }
-        public enum BreathingMethods { None, Gills, LungsOxygenStorage, GillsAndLungs, Lungs }
-        public enum Temperatures { None, ColdBloodedwithDis, ColdBlooded, PartialRegulations, WarmBlooded, WarmBloodedMetabolism }
-        public enum GrowthRates { None, Metamorphosis, Molting, ContinuousGrowth, UnusualGrowthPattern }
-        public enum Sexes { None, Asexual, Hermaphrodite, TwoSexes, Switching, ThreeOrMore, Alternating }
-        public enum Gestations { None, SpawningPollinating, EggLaying, LiveBearing, LiveBearingWithPouch, BroodParasite, ParasiticYoung, CannibalisticEatParent, CannibalisticEatEachOther }
-        public enum Strategies { None, StrongK, ModerateK, MedianStrategy, ModerateR, StrongR }
-        public enum PrimarySenses { None, Vision, Hearing, TouchTaste }
-        public enum Visions { None, Blindness, BlindnessSoft, BadSightColorblind, BadSight, Normal, TelescopicVision }
-        public enum Hearings { None, Deafness, HardOfhearing, Normal, NormalPlusRange, Acute, AcutePlusSubSonic, AcutePlusSubSonicAndSonar }
-        public enum Touches { None, Numb, Minus2PoorSense, Minus1PoorSense, Normal, Acute, AcutePlusSensitive }
-        public enum TasteSmells { None, NoTasteSmell, NoSmell, Normal, Acute, AcutePlusDisciminatory }
-        public enum SpecialSenses { None, ThreeSixtyVision, AbsoluteDirection, DisciminatoryHearing, PeripheralVision, NightVision, UltraVision, DetectHeat, DetectElectricFields, PerfectBalance, ScanningSense }
-        public enum Intelligences { None, Mindless, Preprogrammed, LowIntelligence, HighIntelligence, Presapient, Sapient }
-        public enum MatingBehaviours { None, NoPair, TempPair, PermanentPair, Harem, Hive }
-        public enum SocialOrganizations { None, Solitary, PairBonded, SmallGroup, MediumGroup, LargeHerd }
-        public enum Chauvinisms { None, RacialIntolerance, ExtremlyChauvinistic, VeryChauvinistic, Chauvinistic, Xenophobia, Normal, BroadMinded, VeryBroadMinded, Xenophilia, Undisciminating }
-        public enum Concentrations { None, VerySingleMinded, SingleMinded, Attentive, Normal, Distractible, ShortAttentionSpan, VeryShortAttentionSpan }
-        public enum Curiosities { None, VeryCurious, Curious, Nosy, Normal, Staid, Incurious, VeryIncurious }
-        public enum Egoisms { None, VerySelfish, Selfish, Proud, Normal, Humble, Selfless, VerySelfless }
-        public enum Empathies { None, VeryEmpathic, Empathy, Responsive, Normal, Oblivious, Callous, LowEmpathy }
-        public enum Gegariousnesses { None, Gregarious, Chummy, Congenial, Normal, Uncongenial, Loner, ExtremeLoner }
-        public enum Imaginations { None, ExtremlyImaginative, VeryImaginative, Imaginative, Normal, Dull, Hidebound, VeryHidebound }
-        public enum Suspicions { None, VeryFearfull, Fearfulness, Careful, Normal, Fearlessness, VeryFearless, ExtremlyFearless }
-        public enum Playfulnessess { None, ExtremeCompulsivePlayfulness, CompulsivePlayfulness, Playful, Normal, Serious, OdiousRacialHabit, NoSenseofHumor }
-        public enum Communications { None, Chemical, Sound, Visual, Gestures, Expressions, Language }
+
+        public enum ChemicalBasis
+        {
+            None,
+            Hydrogen,
+            Ammonia,
+            Hydrocarbon,
+            Water,
+            Chlorine,
+            SulfuricAcid,
+            LiquidSulfur,
+            LiquidRock,
+            Plasma,
+            Exotic
+        }
+
+        public enum LandWater
+        {
+            None,
+            Land,
+            Water
+        }
+
+        public enum LandHabitats
+        {
+            None,
+            Plains,
+            Desert,
+            IslandBeach,
+            Woodlands,
+            Swampland,
+            Mountain,
+            Arctic,
+            Jungle
+        }
+
+        public enum WaterHabitats
+        {
+            None,
+            Banks,
+            OpenOcean,
+            FreshWaterLakes,
+            RiverStream,
+            TropicalLagoon,
+            DeepOceanVents,
+            SaltWaterSea,
+            Reef
+        }
+
+        public enum TrophicDiets
+        {
+            None,
+            CombinedMethod,
+            ParasiteSymbiont,
+            FilterFeeder,
+            PouncingCarnivore,
+            ChasingCarnivore,
+            HijackingCarnivore,
+            TrappingCarnivore,
+            Scavenger,
+            GatheringHerbivore,
+            GrazingHerbivore,
+            Omnivore,
+            Decomposer,
+            AutothrophPhotosynthetic,
+            AutothrophChemosynthetic,
+            AutothrophOther
+        }
+
+        public enum Locomotions
+        {
+            None,
+            Immobile,
+            Slithering,
+            Swimming,
+            Digging,
+            Walking,
+            Wingedflight,
+            Floating,
+            Sailing,
+            Bouyantflight,
+            Climbing,
+            Special
+        }
+
+        public enum SizeClasses
+        {
+            None,
+            Small,
+            HumanScale,
+            Large
+        }
+
+        public enum Symmetries
+        {
+            None,
+            Bilateral,
+            Trilateral,
+            Radial,
+            Spherical,
+            Asymmetric
+        }
+
+        public enum Tails
+        {
+            None,
+            FeatureLess,
+            Striker,
+            Long,
+            Constricting,
+            Barbed,
+            Gripping,
+            Branching,
+            Combination
+        }
+
+        public enum Skeletons
+        {
+            None,
+            Hydrostatic,
+            External,
+            Internal,
+            Combination
+        }
+
+        public enum SkinClasses
+        {
+            None,
+            Skin,
+            Scales,
+            Fur,
+            Feathers,
+            Exeskeleton
+        }
+
+        public enum Skins
+        {
+            None,
+            SoftSkin,
+            NormalSkin,
+            Hide,
+            ThickHide,
+            ArmorShell,
+            Blubber,
+            Scales,
+            HeavyScales,
+            Fur,
+            ThickFur,
+            ThickFurOverHide,
+            Spines,
+            Feathers,
+            ThickFeather,
+            FeathersOverHide,
+            LightExoskeleton,
+            ToughExoskeleton,
+            HeavyExoskeleton
+        }
+
+        public enum BreathingMethods
+        {
+            None,
+            Gills,
+            LungsOxygenStorage,
+            GillsAndLungs,
+            Lungs
+        }
+
+        public enum Temperatures
+        {
+            None,
+            ColdBloodedwithDis,
+            ColdBlooded,
+            PartialRegulations,
+            WarmBlooded,
+            WarmBloodedMetabolism
+        }
+
+        public enum GrowthRates
+        {
+            None,
+            Metamorphosis,
+            Molting,
+            ContinuousGrowth,
+            UnusualGrowthPattern
+        }
+
+        public enum Sexes
+        {
+            None,
+            Asexual,
+            Hermaphrodite,
+            TwoSexes,
+            Switching,
+            ThreeOrMore,
+            Alternating
+        }
+
+        public enum Gestations
+        {
+            None,
+            SpawningPollinating,
+            EggLaying,
+            LiveBearing,
+            LiveBearingWithPouch,
+            BroodParasite,
+            ParasiticYoung,
+            CannibalisticEatParent,
+            CannibalisticEatEachOther
+        }
+
+        public enum Strategies
+        {
+            None,
+            StrongK,
+            ModerateK,
+            MedianStrategy,
+            ModerateR,
+            StrongR
+        }
+
+        public enum PrimarySenses
+        {
+            None,
+            Vision,
+            Hearing,
+            TouchTaste
+        }
+
+        public enum Visions
+        {
+            None,
+            Blindness,
+            BlindnessSoft,
+            BadSightColorblind,
+            BadSight,
+            Normal,
+            TelescopicVision
+        }
+
+        public enum Hearings
+        {
+            None,
+            Deafness,
+            HardOfhearing,
+            Normal,
+            NormalPlusRange,
+            Acute,
+            AcutePlusSubSonic,
+            AcutePlusSubSonicAndSonar
+        }
+
+        public enum Touches
+        {
+            None,
+            Numb,
+            Minus2PoorSense,
+            Minus1PoorSense,
+            Normal,
+            Acute,
+            AcutePlusSensitive
+        }
+
+        public enum TasteSmells
+        {
+            None,
+            NoTasteSmell,
+            NoSmell,
+            Normal,
+            Acute,
+            AcutePlusDisciminatory
+        }
+
+        public enum SpecialSenses
+        {
+            None,
+            ThreeSixtyVision,
+            AbsoluteDirection,
+            DisciminatoryHearing,
+            PeripheralVision,
+            NightVision,
+            UltraVision,
+            DetectHeat,
+            DetectElectricFields,
+            PerfectBalance,
+            ScanningSense
+        }
+
+        public enum Intelligences
+        {
+            None,
+            Mindless,
+            Preprogrammed,
+            LowIntelligence,
+            HighIntelligence,
+            Presapient,
+            Sapient
+        }
+
+        public enum MatingBehaviours
+        {
+            None,
+            NoPair,
+            TempPair,
+            PermanentPair,
+            Harem,
+            Hive
+        }
+
+        public enum SocialOrganizations
+        {
+            None,
+            Solitary,
+            PairBonded,
+            SmallGroup,
+            MediumGroup,
+            LargeHerd
+        }
+
+        public enum Chauvinisms
+        {
+            None,
+            RacialIntolerance,
+            ExtremlyChauvinistic,
+            VeryChauvinistic,
+            Chauvinistic,
+            Xenophobia,
+            Normal,
+            BroadMinded,
+            VeryBroadMinded,
+            Xenophilia,
+            Undisciminating
+        }
+
+        public enum Concentrations
+        {
+            None,
+            VerySingleMinded,
+            SingleMinded,
+            Attentive,
+            Normal,
+            Distractible,
+            ShortAttentionSpan,
+            VeryShortAttentionSpan
+        }
+
+        public enum Curiosities
+        {
+            None,
+            VeryCurious,
+            Curious,
+            Nosy,
+            Normal,
+            Staid,
+            Incurious,
+            VeryIncurious
+        }
+
+        public enum Egoisms
+        {
+            None,
+            VerySelfish,
+            Selfish,
+            Proud,
+            Normal,
+            Humble,
+            Selfless,
+            VerySelfless
+        }
+
+        public enum Empathies
+        {
+            None,
+            VeryEmpathic,
+            Empathy,
+            Responsive,
+            Normal,
+            Oblivious,
+            Callous,
+            LowEmpathy
+        }
+
+        public enum Gegariousnesses
+        {
+            None,
+            Gregarious,
+            Chummy,
+            Congenial,
+            Normal,
+            Uncongenial,
+            Loner,
+            ExtremeLoner
+        }
+
+        public enum Imaginations
+        {
+            None,
+            ExtremlyImaginative,
+            VeryImaginative,
+            Imaginative,
+            Normal,
+            Dull,
+            Hidebound,
+            VeryHidebound
+        }
+
+        public enum Suspicions
+        {
+            None,
+            VeryFearfull,
+            Fearfulness,
+            Careful,
+            Normal,
+            Fearlessness,
+            VeryFearless,
+            ExtremlyFearless
+        }
+
+        public enum Playfulnessess
+        {
+            None,
+            ExtremeCompulsivePlayfulness,
+            CompulsivePlayfulness,
+            Playful,
+            Normal,
+            Serious,
+            OdiousRacialHabit,
+            NoSenseofHumor
+        }
+
+        public enum Communications
+        {
+            None,
+            Chemical,
+            Sound,
+            Visual,
+            Gestures,
+            Expressions,
+            Language
+        }
 
         public Dictionary<ChemicalBasis, string> TypesofLifeDict = new Dictionary<ChemicalBasis, string>
         {
-            { ChemicalBasis.None , "None" },
-            { ChemicalBasis.Hydrogen , "Hydrogen-Based Life (Frozen worlds below -250° F or Gas Giants)" },
-            { ChemicalBasis.Ammonia , "Ammonia-Based Life (Frozen worlds between - 100° F and - 30° F)" },
-            { ChemicalBasis.Hydrocarbon , "Hydrocarbon-Based Life (Cold to Cool worlds)" },
-            { ChemicalBasis.Water , "Water-Based Life (Cold to Hot worlds)" },
-            { ChemicalBasis.Chlorine , "Chlorine - Based Life (Cold to Tropical worlds" },
-            { ChemicalBasis.SulfuricAcid , "Silicon/Sulfuric Acid Life (Warm to Infernal worlds between 50° F and 600° F)" },
-            { ChemicalBasis.LiquidSulfur , "Silicon/Liquid Sulfur Life (Infernal worlds between 250° F and 750° F)" },
-            { ChemicalBasis.LiquidRock , "Silicon/Liquid Rock Life (Infernal worlds above 2500° F, or mantle)" },
-            { ChemicalBasis.Plasma , "Plasma Life (Infernal worlds or stars above 4000° F)" },
-            { ChemicalBasis.Exotic , "Exotica (Nebula - dwelling life, Machine life, Magnetic life)" }
+            {
+                ChemicalBasis.None, "None"
+            },
+            {
+                ChemicalBasis.Hydrogen, "Hydrogen-Based Life (Frozen worlds below -250° F or Gas Giants)"
+            },
+            {
+                ChemicalBasis.Ammonia, "Ammonia-Based Life (Frozen worlds between - 100° F and - 30° F)"
+            },
+            {
+                ChemicalBasis.Hydrocarbon, "Hydrocarbon-Based Life (Cold to Cool worlds)"
+            },
+            {
+                ChemicalBasis.Water, "Water-Based Life (Cold to Hot worlds)"
+            },
+            {
+                ChemicalBasis.Chlorine, "Chlorine - Based Life (Cold to Tropical worlds"
+            },
+            {
+                ChemicalBasis.SulfuricAcid, "Silicon/Sulfuric Acid Life (Warm to Infernal worlds between 50° F and 600° F)"
+            },
+            {
+                ChemicalBasis.LiquidSulfur, "Silicon/Liquid Sulfur Life (Infernal worlds between 250° F and 750° F)"
+            },
+            {
+                ChemicalBasis.LiquidRock, "Silicon/Liquid Rock Life (Infernal worlds above 2500° F, or mantle)"
+            },
+            {
+                ChemicalBasis.Plasma, "Plasma Life (Infernal worlds or stars above 4000° F)"
+            },
+            {
+                ChemicalBasis.Exotic, "Exotica (Nebula - dwelling life, Machine life, Magnetic life)"
+            }
         };
 
-        public Dictionary<LandWater, string> LandWaterDict = new Dictionary<Alien.LandWater, string>
+        public Dictionary<LandWater, string> LandWaterDict = new Dictionary<LandWater, string>
         {
-            { LandWater.None , "None" },
-            { LandWater.Land , "Mostly Landmass" },
-            { LandWater.Water  ,"Mostly Watermass"}
+            {
+                LandWater.None, "None"
+            },
+            {
+                LandWater.Land, "Mostly Landmass"
+            },
+            {
+                LandWater.Water, "Mostly Watermass"
+            }
         };
 
         public Dictionary<LandHabitats, string> TypesofLandHabitatsDict = new Dictionary<LandHabitats, string>
         {
-            { LandHabitats.None , "None" },
-            { LandHabitats.Plains , "Plains" },
-            { LandHabitats.Desert , "Desert" },
-            { LandHabitats.IslandBeach , "Island/Beach" },
-            { LandHabitats.Woodlands , "Woodlands" },
-            { LandHabitats.Swampland , "Swampland" },
-            { LandHabitats.Mountain , "Mountain" },
-            { LandHabitats.Arctic , "Arctic" },
-            { LandHabitats.Jungle , "Jungle" }
+            {
+                LandHabitats.None, "None"
+            },
+            {
+                LandHabitats.Plains, "Plains"
+            },
+            {
+                LandHabitats.Desert, "Desert"
+            },
+            {
+                LandHabitats.IslandBeach, "Island/Beach"
+            },
+            {
+                LandHabitats.Woodlands, "Woodlands"
+            },
+            {
+                LandHabitats.Swampland, "Swampland"
+            },
+            {
+                LandHabitats.Mountain, "Mountain"
+            },
+            {
+                LandHabitats.Arctic, "Arctic"
+            },
+            {
+                LandHabitats.Jungle, "Jungle"
+            }
         };
 
         public Dictionary<WaterHabitats, string> TypesofWaterHabitatsDict = new Dictionary<WaterHabitats, string>
         {
-            { WaterHabitats.None , "None" },
-            { WaterHabitats.Banks , "Banks" },
-            { WaterHabitats.OpenOcean , "Open Ocean" },
-            { WaterHabitats.FreshWaterLakes , "FreshWaterLakes" },
-            { WaterHabitats.RiverStream , "River/Stream" },
-            { WaterHabitats.TropicalLagoon , "TropicalLagoon" },
-            { WaterHabitats.DeepOceanVents , "Deep-Ocean Vents" },
-            { WaterHabitats.SaltWaterSea , "Salt-Water Sea" },
-            { WaterHabitats.Reef , "Reef" }
+            {
+                WaterHabitats.None, "None"
+            },
+            {
+                WaterHabitats.Banks, "Banks"
+            },
+            {
+                WaterHabitats.OpenOcean, "Open Ocean"
+            },
+            {
+                WaterHabitats.FreshWaterLakes, "FreshWaterLakes"
+            },
+            {
+                WaterHabitats.RiverStream, "River/Stream"
+            },
+            {
+                WaterHabitats.TropicalLagoon, "TropicalLagoon"
+            },
+            {
+                WaterHabitats.DeepOceanVents, "Deep-Ocean Vents"
+            },
+            {
+                WaterHabitats.SaltWaterSea, "Salt-Water Sea"
+            },
+            {
+                WaterHabitats.Reef, "Reef"
+            }
         };
 
-        public Dictionary<TrophicDiets, string> TrophicDietDict = new Dictionary<TrophicDiets, string>()
+        public Dictionary<TrophicDiets, string> TrophicDietDict = new Dictionary<TrophicDiets, string>
         {
-            { TrophicDiets.None , "None" },
-            { TrophicDiets.CombinedMethod , "Combined Method" },
-            { TrophicDiets.ParasiteSymbiont , "Parasite/Symbiont" },
-            { TrophicDiets.FilterFeeder , "Filter-Feeder" },
-            { TrophicDiets.PouncingCarnivore , "Pouncing Carnivore" },
-            { TrophicDiets.ChasingCarnivore , "Chasing Carnivore" },
-            { TrophicDiets.HijackingCarnivore , "Hijacking Carnivore" },
-            { TrophicDiets.TrappingCarnivore , "Trapping Carnivore" },
-            { TrophicDiets.Scavenger , "Scavenger" },
-            { TrophicDiets.GatheringHerbivore , "Gathering Herbivore" },
-            { TrophicDiets.GrazingHerbivore , "Grazing Herbivore" },
-            { TrophicDiets.Omnivore , "Omnivore" },
-            { TrophicDiets.Decomposer , "Decomposer" },
-            { TrophicDiets.AutothrophPhotosynthetic , "Autothroph - Photosynthetic" },
-            { TrophicDiets.AutothrophChemosynthetic , "Autothroph - Chemosynthetic" },
-            { TrophicDiets.AutothrophOther , "Autothroph - Other" }
+            {
+                TrophicDiets.None, "None"
+            },
+            {
+                TrophicDiets.CombinedMethod, "Combined Method"
+            },
+            {
+                TrophicDiets.ParasiteSymbiont, "Parasite/Symbiont"
+            },
+            {
+                TrophicDiets.FilterFeeder, "Filter-Feeder"
+            },
+            {
+                TrophicDiets.PouncingCarnivore, "Pouncing Carnivore"
+            },
+            {
+                TrophicDiets.ChasingCarnivore, "Chasing Carnivore"
+            },
+            {
+                TrophicDiets.HijackingCarnivore, "Hijacking Carnivore"
+            },
+            {
+                TrophicDiets.TrappingCarnivore, "Trapping Carnivore"
+            },
+            {
+                TrophicDiets.Scavenger, "Scavenger"
+            },
+            {
+                TrophicDiets.GatheringHerbivore, "Gathering Herbivore"
+            },
+            {
+                TrophicDiets.GrazingHerbivore, "Grazing Herbivore"
+            },
+            {
+                TrophicDiets.Omnivore, "Omnivore"
+            },
+            {
+                TrophicDiets.Decomposer, "Decomposer"
+            },
+            {
+                TrophicDiets.AutothrophPhotosynthetic, "Autothroph - Photosynthetic"
+            },
+            {
+                TrophicDiets.AutothrophChemosynthetic, "Autothroph - Chemosynthetic"
+            },
+            {
+                TrophicDiets.AutothrophOther, "Autothroph - Other"
+            }
         };
 
-        public Dictionary<Locomotions, string> LocomotionDict = new Dictionary<Locomotions, string>()
+        public Dictionary<Locomotions, string> LocomotionDict = new Dictionary<Locomotions, string>
         {
-            { Locomotions.None , "None" },
-            { Locomotions.immobile , "Immobile" },
-            { Locomotions.bouyantflight , "Bouyant Flight" },
-            { Locomotions.climbing , "Climbing" },
-            { Locomotions.digging , "Digging" },
-            { Locomotions.floating , "Floating" },
-            { Locomotions.sailing , "Sailing" },
-            { Locomotions.slithering , "Slithering" },
-            { Locomotions.special , "Special" },
-            { Locomotions.swimming , "Swimming" },
-            { Locomotions.walking , "Walking" },
-            { Locomotions.wingedflight , "Winged Flight" }
+            {
+                Locomotions.None, "None"
+            },
+            {
+                Locomotions.Immobile, "Immobile"
+            },
+            {
+                Locomotions.Bouyantflight, "Bouyant Flight"
+            },
+            {
+                Locomotions.Climbing, "Climbing"
+            },
+            {
+                Locomotions.Digging, "Digging"
+            },
+            {
+                Locomotions.Floating, "Floating"
+            },
+            {
+                Locomotions.Sailing, "Sailing"
+            },
+            {
+                Locomotions.Slithering, "Slithering"
+            },
+            {
+                Locomotions.Special, "Special"
+            },
+            {
+                Locomotions.Swimming, "Swimming"
+            },
+            {
+                Locomotions.Walking, "Walking"
+            },
+            {
+                Locomotions.Wingedflight, "Winged Flight"
+            }
         };
 
-        public Dictionary<SizeClasses, string> SizeClassDict = new Dictionary<SizeClasses, string>()
+        public Dictionary<SizeClasses, string> SizeClassDict = new Dictionary<SizeClasses, string>
         {
-            { SizeClasses.None , "None" },
-            { SizeClasses.HumanScale , "Human-Scale" },
-            { SizeClasses.Large , "Large" },
-            { SizeClasses.Small , "Small" }
+            {
+                SizeClasses.None, "None"
+            },
+            {
+                SizeClasses.HumanScale, "Human-Scale"
+            },
+            {
+                SizeClasses.Large, "Large"
+            },
+            {
+                SizeClasses.Small, "Small"
+            }
         };
 
-        public Dictionary<Symmetries, string> SymmetryDict = new Dictionary<Symmetries, string>()
+        public Dictionary<Symmetries, string> SymmetryDict = new Dictionary<Symmetries, string>
         {
-            { Symmetries.None , "None" },
-            { Symmetries.Asymmetric , "Asymmetric" },
-            { Symmetries.Bilateral , "Bilateral" },
-            { Symmetries.Radial , "Radial" },
-            { Symmetries.Spherical , "Spherical" },
-            { Symmetries.Trilateral , "Trilateral" }
+            {
+                Symmetries.None, "None"
+            },
+            {
+                Symmetries.Asymmetric, "Asymmetric"
+            },
+            {
+                Symmetries.Bilateral, "Bilateral"
+            },
+            {
+                Symmetries.Radial, "Radial"
+            },
+            {
+                Symmetries.Spherical, "Spherical"
+            },
+            {
+                Symmetries.Trilateral, "Trilateral"
+            }
         };
 
-        public Dictionary<Tails, string> TailsDict = new Dictionary<Tails, string>()
+        public Dictionary<Tails, string> TailsDict = new Dictionary<Tails, string>
         {
-            { Tails.None , "None" },
-            { Tails.FeatureLess, "No features (tail is a 0-point advantage)"},
-            { Tails.Striker, "Striker tail (Striker doing crushing damage)"},
-            { Tails.Long, "Long tail (Long enhancement)"},
-            { Tails.Constricting, "Constricting tail (Constriction Attack)"},
-            { Tails.Barbed, "Barbed striker tail (Striker doing cutting or piercing damage)"},
-            { Tails.Gripping, "Gripping tail (counts as an Extra Arm with Bad Grip)"},
-            { Tails.Branching, "Branching tail (tail splits according to body symmetry)"},
-            { Tails.Combination, "Combination (roll 1d+5 twice and combine results)"}
+            {
+                Tails.None, "None"
+            },
+            {
+                Tails.FeatureLess, "No features (tail is a 0-point advantage)"
+            },
+            {
+                Tails.Striker, "Striker tail (Striker doing crushing damage)"
+            },
+            {
+                Tails.Long, "Long tail (Long enhancement)"
+            },
+            {
+                Tails.Constricting, "Constricting tail (Constriction Attack)"
+            },
+            {
+                Tails.Barbed, "Barbed striker tail (Striker doing cutting or piercing damage)"
+            },
+            {
+                Tails.Gripping, "Gripping tail (counts as an Extra Arm with Bad Grip)"
+            },
+            {
+                Tails.Branching, "Branching tail (tail splits according to body symmetry)"
+            },
+            {
+                Tails.Combination, "Combination (roll 1d+5 twice and combine results)"
+            }
         };
 
-        public Dictionary<Skeletons, string> SkeletonDict = new Dictionary<Skeletons, string>()
+        public Dictionary<Skeletons, string> SkeletonDict = new Dictionary<Skeletons, string>
         {
-            { Skeletons.None , "No Skeleton" },
-            { Skeletons.Hydrostatic , "Hydrostatic skeleton" },
-            { Skeletons.External , "External skeleton" },
-            { Skeletons.Internal , "Internal skeleton" },
-            { Skeletons.Combination , "Combination" },
+            {
+                Skeletons.None, "No Skeleton"
+            },
+            {
+                Skeletons.Hydrostatic, "Hydrostatic skeleton"
+            },
+            {
+                Skeletons.External, "External skeleton"
+            },
+            {
+                Skeletons.Internal, "Internal skeleton"
+            },
+            {
+                Skeletons.Combination, "Combination"
+            }
         };
 
-        public Dictionary<SkinClasses, string> SkinTypeDict = new Dictionary<SkinClasses, string>()
+        public Dictionary<SkinClasses, string> SkinTypeDict = new Dictionary<SkinClasses, string>
         {
-            { SkinClasses.None , "None" },
-            { SkinClasses.Skin , "Skin" },
-            { SkinClasses.Scales , "Scales" },
-            { SkinClasses.Fur , "Fur" },
-            { SkinClasses.Feathers , "Feathers" },
-            { SkinClasses.Exeskeleton , "Exoskeleton (external-skeleton organisms always have Exoskeleton)" }
+            {
+                SkinClasses.None, "None"
+            },
+            {
+                SkinClasses.Skin, "Skin"
+            },
+            {
+                SkinClasses.Scales, "Scales"
+            },
+            {
+                SkinClasses.Fur, "Fur"
+            },
+            {
+                SkinClasses.Feathers, "Feathers"
+            },
+            {
+                SkinClasses.Exeskeleton, "Exoskeleton (external-skeleton organisms always have Exoskeleton)"
+            }
         };
 
-        public Dictionary<Skins, string> SkinDict = new Dictionary<Skins, string>()
+        public Dictionary<Skins, string> SkinDict = new Dictionary<Skins, string>
         {
-            { Skins.None , "None" },
-            { Skins.ArmorShell , "Armor Shell" },
-            { Skins.Blubber , "Blubber" },
-            { Skins.Feathers , "Feathers" },
-            { Skins.FeathersOverHide , "Feathers over Hide" },
-            { Skins.Fur , "Fur" },
-            { Skins.HeavyExoskeleton , "Heavy Exoskeleton" },
-            { Skins.HeavyScales , "Heavy Scales" },
-            { Skins.Hide , "Hide" },
-            { Skins.LightExoskeleton , "Light Exoskeleton" },
-            { Skins.NormalSkin , "Normal Skin" },
-            { Skins.Scales , "Scales" },
-            { Skins.SoftSkin , "Soft Skin" },
-            { Skins.Spines , "Spines" },
-            { Skins.ThickFeather , "Thick Feathers" },
-            { Skins.ThickFur , "Thick Fur" },
-            { Skins.ThickFurOverHide , "Thick Fur over Hide" },
-            { Skins.ThickHide , "Thick Hide" },
-            { Skins.ToughExoskeleton , "Tough Exoskeleton" }
+            {
+                Skins.None, "None"
+            },
+            {
+                Skins.ArmorShell, "Armor Shell"
+            },
+            {
+                Skins.Blubber, "Blubber"
+            },
+            {
+                Skins.Feathers, "Feathers"
+            },
+            {
+                Skins.FeathersOverHide, "Feathers over Hide"
+            },
+            {
+                Skins.Fur, "Fur"
+            },
+            {
+                Skins.HeavyExoskeleton, "Heavy Exoskeleton"
+            },
+            {
+                Skins.HeavyScales, "Heavy Scales"
+            },
+            {
+                Skins.Hide, "Hide"
+            },
+            {
+                Skins.LightExoskeleton, "Light Exoskeleton"
+            },
+            {
+                Skins.NormalSkin, "Normal Skin"
+            },
+            {
+                Skins.Scales, "Scales"
+            },
+            {
+                Skins.SoftSkin, "Soft Skin"
+            },
+            {
+                Skins.Spines, "Spines"
+            },
+            {
+                Skins.ThickFeather, "Thick Feathers"
+            },
+            {
+                Skins.ThickFur, "Thick Fur"
+            },
+            {
+                Skins.ThickFurOverHide, "Thick Fur over Hide"
+            },
+            {
+                Skins.ThickHide, "Thick Hide"
+            },
+            {
+                Skins.ToughExoskeleton, "Tough Exoskeleton"
+            }
         };
 
-        public Dictionary<BreathingMethods, string> BreathingMethodDict = new Dictionary<BreathingMethods, string>()
+        public Dictionary<BreathingMethods, string> BreathingMethodDict = new Dictionary<BreathingMethods, string>
         {
-            { BreathingMethods.None , "None" },
-            { BreathingMethods.Gills , "Doesnt Breathe (Gills)"},
-            { BreathingMethods.LungsOxygenStorage , "Lungs (air-breathing) with Doesn’t Breathe (Oxygen Storage))"},
-            { BreathingMethods.GillsAndLungs , "Doesn’t Breathe (Gills) and Lungs (or convertible organ)"},
-            { BreathingMethods.Lungs , "Lungs"}
+            {
+                BreathingMethods.None, "None"
+            },
+            {
+                BreathingMethods.Gills, "Doesnt Breathe (Gills)"
+            },
+            {
+                BreathingMethods.LungsOxygenStorage, "Lungs (air-breathing) with Doesn’t Breathe (Oxygen Storage))"
+            },
+            {
+                BreathingMethods.GillsAndLungs, "Doesn’t Breathe (Gills) and Lungs (or convertible organ)"
+            },
+            {
+                BreathingMethods.Lungs, "Lungs"
+            }
         };
 
-        public Dictionary<Temperatures, string> TemperatureDict = new Dictionary<Temperatures, string>()
+        public Dictionary<Temperatures, string> TemperatureDict = new Dictionary<Temperatures, string>
         {
-            { Temperatures.None , "None" },
-            { Temperatures.ColdBloodedwithDis , "Cold-blooded (with Cold-Blooded disadvantage)"},
-            { Temperatures.ColdBlooded , "Cold-blooded (no disadvantage)Cold-blooded (no disadvantage)"},
-            { Temperatures.PartialRegulations , "Partial regulation (temperature varies within limits)"},
-            { Temperatures.WarmBlooded , "Warm-blooded"},
-            { Temperatures.WarmBloodedMetabolism , "Warm-blooded (with Metabolism Control 2)"}
+            {
+                Temperatures.None, "None"
+            },
+            {
+                Temperatures.ColdBloodedwithDis, "Cold-blooded (with Cold-Blooded disadvantage)"
+            },
+            {
+                Temperatures.ColdBlooded, "Cold-blooded (no disadvantage)Cold-blooded (no disadvantage)"
+            },
+            {
+                Temperatures.PartialRegulations, "Partial regulation (temperature varies within limits)"
+            },
+            {
+                Temperatures.WarmBlooded, "Warm-blooded"
+            },
+            {
+                Temperatures.WarmBloodedMetabolism, "Warm-blooded (with Metabolism Control 2)"
+            }
         };
 
-        public Dictionary<GrowthRates, string> GrowthDict = new Dictionary<GrowthRates, string>()
+        public Dictionary<GrowthRates, string> GrowthDict = new Dictionary<GrowthRates, string>
         {
-            { GrowthRates.None , "None" },
-            { GrowthRates.ContinuousGrowth , "Continuous Growth" },
-            { GrowthRates.Metamorphosis , "Metamorphosis" },
-            { GrowthRates.Molting , "Molting" },
-            { GrowthRates.UnusualGrowthPattern , "Unusual Growth Patterns" }
+            {
+                GrowthRates.None, "None"
+            },
+            {
+                GrowthRates.ContinuousGrowth, "Continuous Growth"
+            },
+            {
+                GrowthRates.Metamorphosis, "Metamorphosis"
+            },
+            {
+                GrowthRates.Molting, "Molting"
+            },
+            {
+                GrowthRates.UnusualGrowthPattern, "Unusual Growth Patterns"
+            }
         };
 
-        public Dictionary<Sexes, string> SexesDict = new Dictionary<Sexes, string>()
+        public Dictionary<Sexes, string> SexesDict = new Dictionary<Sexes, string>
         {
-            { Sexes.None , "None" },
-            { Sexes.Asexual , "Asexual reproduction or Parthenogenesis" },
-            { Sexes.Hermaphrodite, "Hermaphodite" },
-            { Sexes.TwoSexes, "Two Sexes" },
-            { Sexes.Switching, "Switching between male and female" },
-            { Sexes.ThreeOrMore, "Three or more Sexes (1d: 1-3: three sexes, 4-5: four sexes, 6: 2d sexes)" },
-            { Sexes.Alternating, "Roll twice and combine; types either alternate or are triggered by conditions" },
+            {
+                Sexes.None, "None"
+            },
+            {
+                Sexes.Asexual, "Asexual reproduction or Parthenogenesis"
+            },
+            {
+                Sexes.Hermaphrodite, "Hermaphodite"
+            },
+            {
+                Sexes.TwoSexes, "Two Sexes"
+            },
+            {
+                Sexes.Switching, "Switching between male and female"
+            },
+            {
+                Sexes.ThreeOrMore, "Three or more Sexes (1d: 1-3: three sexes, 4-5: four sexes, 6: 2d sexes)"
+            },
+            {
+                Sexes.Alternating, "Roll twice and combine; types either alternate or are triggered by conditions"
+            }
         };
 
-        public Dictionary<Gestations, string> GestationDict = new Dictionary<Gestations, string>()
+        public Dictionary<Gestations, string> GestationDict = new Dictionary<Gestations, string>
         {
-            { Gestations.None , "None" },
-            { Gestations.SpawningPollinating , "Spawning/Pollinating"},
-            { Gestations.EggLaying , "Egg-Laying"},
-            { Gestations.LiveBearing , "Live-Bearing"},
-            { Gestations.LiveBearingWithPouch , "Live-Bearing with Pouch"},
-            { Gestations.BroodParasite , "Brood Parasite (young raised by another species)"},
-            { Gestations.ParasiticYoung , "Parasitic Young (young implanted in a host)"},
-            { Gestations.CannibalisticEatParent , "Cannibalistic Young (young implanted in parent, fatal to parent)"},
-            { Gestations.CannibalisticEatEachOther , "Cannibalistic Young (young consume each other)"}
+            {
+                Gestations.None, "None"
+            },
+            {
+                Gestations.SpawningPollinating, "Spawning/Pollinating"
+            },
+            {
+                Gestations.EggLaying, "Egg-Laying"
+            },
+            {
+                Gestations.LiveBearing, "Live-Bearing"
+            },
+            {
+                Gestations.LiveBearingWithPouch, "Live-Bearing with Pouch"
+            },
+            {
+                Gestations.BroodParasite, "Brood Parasite (young raised by another species)"
+            },
+            {
+                Gestations.ParasiticYoung, "Parasitic Young (young implanted in a host)"
+            },
+            {
+                Gestations.CannibalisticEatParent, "Cannibalistic Young (young implanted in parent, fatal to parent)"
+            },
+            {
+                Gestations.CannibalisticEatEachOther, "Cannibalistic Young (young consume each other)"
+            }
         };
 
-        public Dictionary<Strategies, string> StrategyDict = new Dictionary<Strategies, string>()
+        public Dictionary<Strategies, string> StrategyDict = new Dictionary<Strategies, string>
         {
-            { Strategies.None , "None" },
-            { Strategies.StrongK , "Strong K-Strategy: one offspring, extensive care after birth" },
-            { Strategies.ModerateK , "Moderate K-Strategy: one to two offspring per litter, extensive care after birth" },
-            { Strategies.MedianStrategy , "Median Strategy: 1d offspring per litter, moderate care after birth" },
-            { Strategies.ModerateR , "Moderate r-Strategy: 1d+1 offspring per litter, some care after birth" },
-            { Strategies.StrongR , "Strong r-Strategy: 2d offspring per litter, no care, +1 level of Short Lifespan" },
+            {
+                Strategies.None, "None"
+            },
+            {
+                Strategies.StrongK, "Strong K-Strategy: one offspring, extensive care after birth"
+            },
+            {
+                Strategies.ModerateK, "Moderate K-Strategy: one to two offspring per litter, extensive care after birth"
+            },
+            {
+                Strategies.MedianStrategy, "Median Strategy: 1d offspring per litter, moderate care after birth"
+            },
+            {
+                Strategies.ModerateR, "Moderate r-Strategy: 1d+1 offspring per litter, some care after birth"
+            },
+            {
+                Strategies.StrongR, "Strong r-Strategy: 2d offspring per litter, no care, +1 level of Short Lifespan"
+            }
         };
 
-        public Dictionary<PrimarySenses, string> PrimarySenseDict = new Dictionary<PrimarySenses, string>()
+        public Dictionary<PrimarySenses, string> PrimarySenseDict = new Dictionary<PrimarySenses, string>
         {
-            { PrimarySenses.None , "None" },
-            { PrimarySenses.Vision , "Vision" },
-            { PrimarySenses.Hearing , "Hearing" },
-            { PrimarySenses.TouchTaste , "Touch and Taste" }
+            {
+                PrimarySenses.None, "None"
+            },
+            {
+                PrimarySenses.Vision, "Vision"
+            },
+            {
+                PrimarySenses.Hearing, "Hearing"
+            },
+            {
+                PrimarySenses.TouchTaste, "Touch and Taste"
+            }
         };
 
-        public Dictionary<Visions, string> VisionDict = new Dictionary<Visions, string>()
+        public Dictionary<Visions, string> VisionDict = new Dictionary<Visions, string>
         {
-            { Visions.None , "None" },
-            { Visions.Blindness , "Blindness" },
-            { Visions.BlindnessSoft , "Blindness (Can sense light and dark, -10%) [-45]" },
-            { Visions.BadSightColorblind , "Bad Sight and Colorblindness" },
-            { Visions.BadSight , "Bad Sight or Colorblindness*" },
-            { Visions.Normal , "Normal Vision*" },
-            { Visions.TelescopicVision , "Telescopic Vision 4*" }
+            {
+                Visions.None, "None"
+            },
+            {
+                Visions.Blindness, "Blindness"
+            },
+            {
+                Visions.BlindnessSoft, "Blindness (Can sense light and dark, -10%) [-45]"
+            },
+            {
+                Visions.BadSightColorblind, "Bad Sight and Colorblindness"
+            },
+            {
+                Visions.BadSight, "Bad Sight or Colorblindness*"
+            },
+            {
+                Visions.Normal, "Normal Vision*"
+            },
+            {
+                Visions.TelescopicVision, "Telescopic Vision 4*"
+            }
         };
 
-        public Dictionary<Hearings, string> HearingDict = new Dictionary<Hearings, string>()
+        public Dictionary<Hearings, string> HearingDict = new Dictionary<Hearings, string>
         {
-            { Hearings.None , "None" },
-            { Hearings.Deafness , "Deafness" },
-            { Hearings.HardOfhearing , "Hard of Hearing" },
-            { Hearings.Normal , "Normal Hearing*" },
-            { Hearings.NormalPlusRange , "Normal Hearing with extended range (Subsonic Hearing if Large, Ultrahearing otherwise)*" },
-            { Hearings.Acute , "Acute Hearing 4**" },
-            { Hearings.AcutePlusSubSonic , "Acute Hearing 4 and either Subsonic Hearing or Ultrahearing**" },
-            { Hearings.AcutePlusSubSonicAndSonar , "Acute Hearing 4 with Ultrasonic Hearing and Sonar**" }
+            {
+                Hearings.None, "None"
+            },
+            {
+                Hearings.Deafness, "Deafness"
+            },
+            {
+                Hearings.HardOfhearing, "Hard of Hearing"
+            },
+            {
+                Hearings.Normal, "Normal Hearing*"
+            },
+            {
+                Hearings.NormalPlusRange, "Normal Hearing with extended range (Subsonic Hearing if Large, Ultrahearing otherwise)*"
+            },
+            {
+                Hearings.Acute, "Acute Hearing 4**"
+            },
+            {
+                Hearings.AcutePlusSubSonic, "Acute Hearing 4 and either Subsonic Hearing or Ultrahearing**"
+            },
+            {
+                Hearings.AcutePlusSubSonicAndSonar, "Acute Hearing 4 with Ultrasonic Hearing and Sonar**"
+            }
         };
 
-        public Dictionary<Touches, string> TouchDict = new Dictionary<Touches, string>()
+        public Dictionary<Touches, string> TouchDict = new Dictionary<Touches, string>
         {
-            { Touches.None , "None" },
-            { Touches.Numb , "Numb" },
-            { Touches.Minus2PoorSense , "-2 DX from poor sense of touch" },
-            { Touches.Minus1PoorSense , "-1 DX from poor sense of touch" },
-            { Touches.Normal , "Human-level touch" },
-            { Touches.Acute , "Acute Touch 4*" },
-            { Touches.AcutePlusSensitive , "Acute Touch 4 and either Sensitive Touch or Vibration Sense*" }
+            {
+                Touches.None, "None"
+            },
+            {
+                Touches.Numb, "Numb"
+            },
+            {
+                Touches.Minus2PoorSense, "-2 DX from poor sense of touch"
+            },
+            {
+                Touches.Minus1PoorSense, "-1 DX from poor sense of touch"
+            },
+            {
+                Touches.Normal, "Human-level touch"
+            },
+            {
+                Touches.Acute, "Acute Touch 4*"
+            },
+            {
+                Touches.AcutePlusSensitive, "Acute Touch 4 and either Sensitive Touch or Vibration Sense*"
+            }
         };
 
-        public Dictionary<TasteSmells, string> TasteSmellDict = new Dictionary<TasteSmells, string>()
+        public Dictionary<TasteSmells, string> TasteSmellDict = new Dictionary<TasteSmells, string>
         {
-            { TasteSmells.None , "None" },
-            { TasteSmells.NoTasteSmell , "No Sense of Smell/Taste" },
-            { TasteSmells.NoSmell , "No Sense of Smell (can taste, -50%) [-2 points]" },
-            { TasteSmells.Normal , "Normal taste/smell" },
-            { TasteSmells.Acute , "Acute Taste/Smell 4 (aquatic organisms use Acute Taste only)*" },
-            { TasteSmells.AcutePlusDisciminatory , "Acute Taste/Smell 4 and Discriminatory Smell (aquatic organisms use Discriminatory Taste)*" }
+            {
+                TasteSmells.None, "None"
+            },
+            {
+                TasteSmells.NoTasteSmell, "No Sense of Smell/Taste"
+            },
+            {
+                TasteSmells.NoSmell, "No Sense of Smell (can taste, -50%) [-2 points]"
+            },
+            {
+                TasteSmells.Normal, "Normal taste/smell"
+            },
+            {
+                TasteSmells.Acute, "Acute Taste/Smell 4 (aquatic organisms use Acute Taste only)*"
+            },
+            {
+                TasteSmells.AcutePlusDisciminatory, "Acute Taste/Smell 4 and Discriminatory Smell (aquatic organisms use Discriminatory Taste)*"
+            }
         };
 
-        public Dictionary<SpecialSenses, string> SpecialSenseDict = new Dictionary<SpecialSenses, string>()
+        public Dictionary<SpecialSenses, string> SpecialSenseDict = new Dictionary<SpecialSenses, string>
         {
-            { SpecialSenses.None , "None" },
-            { SpecialSenses.ThreeSixtyVision , "360° Vision*" },
-            { SpecialSenses.AbsoluteDirection , "Absolute Direction" },
-            { SpecialSenses.DisciminatoryHearing , "Discriminatory Hearing" },
-            { SpecialSenses.PeripheralVision , "Peripheral Vision" },
-            { SpecialSenses.NightVision , "Night Vision" },
-            { SpecialSenses.UltraVision , "Ultravision" },
-            { SpecialSenses.DetectHeat , "Detect (Heat)" },
-            { SpecialSenses.DetectElectricFields , "Detect (Electric Fields)" },
-            { SpecialSenses.PerfectBalance , "Perfect Balance" },
-            { SpecialSenses.ScanningSense , "Scanning Sense (Radar)" }
+            {
+                SpecialSenses.None, "None"
+            },
+            {
+                SpecialSenses.ThreeSixtyVision, "360° Vision*"
+            },
+            {
+                SpecialSenses.AbsoluteDirection, "Absolute Direction"
+            },
+            {
+                SpecialSenses.DisciminatoryHearing, "Discriminatory Hearing"
+            },
+            {
+                SpecialSenses.PeripheralVision, "Peripheral Vision"
+            },
+            {
+                SpecialSenses.NightVision, "Night Vision"
+            },
+            {
+                SpecialSenses.UltraVision, "Ultravision"
+            },
+            {
+                SpecialSenses.DetectHeat, "Detect (Heat)"
+            },
+            {
+                SpecialSenses.DetectElectricFields, "Detect (Electric Fields)"
+            },
+            {
+                SpecialSenses.PerfectBalance, "Perfect Balance"
+            },
+            {
+                SpecialSenses.ScanningSense, "Scanning Sense (Radar)"
+            }
         };
 
-        public Dictionary<Intelligences, string> IntelligenceDict = new Dictionary<Intelligences, string>()
+        public Dictionary<Intelligences, string> IntelligenceDict = new Dictionary<Intelligences, string>
         {
-            { Intelligences.None , "None" },
-            { Intelligences.Mindless , "Mindless (IQ 0)" },
-            { Intelligences.Preprogrammed , "Preprogrammed (IQ 1 and Cannot Learn)" },
-            { Intelligences.LowIntelligence , "Low Intelligence (IQ 1-3 and Bestial)" },
-            { Intelligences.HighIntelligence , "High Intelligence (IQ 3-5 and Bestial)" },
-            { Intelligences.Presapient , "Presapient (IQ 5)" },
-            { Intelligences.Sapient , "Sapient" }
+            {
+                Intelligences.None, "None"
+            },
+            {
+                Intelligences.Mindless, "Mindless (IQ 0)"
+            },
+            {
+                Intelligences.Preprogrammed, "Preprogrammed (IQ 1 and Cannot Learn)"
+            },
+            {
+                Intelligences.LowIntelligence, "Low Intelligence (IQ 1-3 and Bestial)"
+            },
+            {
+                Intelligences.HighIntelligence, "High Intelligence (IQ 3-5 and Bestial)"
+            },
+            {
+                Intelligences.Presapient, "Presapient (IQ 5)"
+            },
+            {
+                Intelligences.Sapient, "Sapient"
+            }
         };
 
-        public Dictionary<MatingBehaviours, string> MatingBahaviourDict = new Dictionary<MatingBehaviours, string>()
+        public Dictionary<MatingBehaviours, string> MatingBahaviourDict = new Dictionary<MatingBehaviours, string>
         {
-            { MatingBehaviours.None , "None" },
-            { MatingBehaviours.NoPair , "Mating only, no pair bond" },
-            { MatingBehaviours.TempPair , "Temporary pair bond" },
-            { MatingBehaviours.PermanentPair , "Permanent pair bond" },
-            { MatingBehaviours.Harem , "Harem" },
-            { MatingBehaviours.Hive , "Hive" },
+            {
+                MatingBehaviours.None, "None"
+            },
+            {
+                MatingBehaviours.NoPair, "Mating only, no pair bond"
+            },
+            {
+                MatingBehaviours.TempPair, "Temporary pair bond"
+            },
+            {
+                MatingBehaviours.PermanentPair, "Permanent pair bond"
+            },
+            {
+                MatingBehaviours.Harem, "Harem"
+            },
+            {
+                MatingBehaviours.Hive, "Hive"
+            }
         };
 
-        public Dictionary<SocialOrganizations, string> SocialOrganizationDict = new Dictionary<SocialOrganizations, string>()
+        public Dictionary<SocialOrganizations, string> SocialOrganizationDict = new Dictionary<SocialOrganizations, string>
         {
-            { SocialOrganizations.None , "None" },
-            { SocialOrganizations.LargeHerd , "Large Herd" },
-            { SocialOrganizations.MediumGroup , "Medium Group" },
-            { SocialOrganizations.PairBonded , "Pair Bonded" },
-            { SocialOrganizations.SmallGroup , "Small Group" },
-            { SocialOrganizations.Solitary , "Solitary" }
+            {
+                SocialOrganizations.None, "None"
+            },
+            {
+                SocialOrganizations.LargeHerd, "Large Herd"
+            },
+            {
+                SocialOrganizations.MediumGroup, "Medium Group"
+            },
+            {
+                SocialOrganizations.PairBonded, "Pair Bonded"
+            },
+            {
+                SocialOrganizations.SmallGroup, "Small Group"
+            },
+            {
+                SocialOrganizations.Solitary, "Solitary"
+            }
         };
 
-        public Dictionary<Chauvinisms, string> ChauvinismDict = new Dictionary<Chauvinisms, string>()
+        public Dictionary<Chauvinisms, string> ChauvinismDict = new Dictionary<Chauvinisms, string>
         {
-            { Chauvinisms.None , "None" },
-            { Chauvinisms.ExtremlyChauvinistic, "Chauvinistic (quirk) (becomes Racial Intolerance if Empathy is less than +1 or Suspicion greater than -1; becomes Xenophobia if Suspicion is greater than +1)" },
-            { Chauvinisms.VeryChauvinistic, "Chauvinistic (quirk) (becomes Racial Intolerance if Empathy is less than +1 or Suspicion greater than -1)" },
-            { Chauvinisms.Chauvinistic, "Chauvinistic (quirk) (becomes Racial Intolerance if Empathy is less than 0 or Suspicion greater than 0)" },
-            { Chauvinisms.Normal, "Normal" },
-            { Chauvinisms.BroadMinded, "Broad-Minded (quirk)" },
-            { Chauvinisms.VeryBroadMinded, "Broad-Minded (quirk) (becomes Xenophilia at 15 if Suspicion is less than 0 and Empathy is greater than 0)" },
-            { Chauvinisms.Undisciminating, "Undiscriminating (quirk – considers all intelligence to be one “species”) (becomes Xenophilia at 12 if Suspicion is less than 0 or Empathy is greater than 0; Xenophilia at 9 if both are true)" },
+            {
+                Chauvinisms.None, "None"
+            },
+            {
+                Chauvinisms.ExtremlyChauvinistic, "Chauvinistic (quirk) (becomes Racial Intolerance if Empathy is less than +1 or Suspicion greater than -1; becomes Xenophobia if Suspicion is greater than +1)"
+            },
+            {
+                Chauvinisms.VeryChauvinistic, "Chauvinistic (quirk) (becomes Racial Intolerance if Empathy is less than +1 or Suspicion greater than -1)"
+            },
+            {
+                Chauvinisms.Chauvinistic, "Chauvinistic (quirk) (becomes Racial Intolerance if Empathy is less than 0 or Suspicion greater than 0)"
+            },
+            {
+                Chauvinisms.Normal, "Normal"
+            },
+            {
+                Chauvinisms.BroadMinded, "Broad-Minded (quirk)"
+            },
+            {
+                Chauvinisms.VeryBroadMinded, "Broad-Minded (quirk) (becomes Xenophilia at 15 if Suspicion is less than 0 and Empathy is greater than 0)"
+            },
+            {
+                Chauvinisms.Undisciminating, "Undiscriminating (quirk – considers all intelligence to be one “species”) (becomes Xenophilia at 12 if Suspicion is less than 0 or Empathy is greater than 0; Xenophilia at 9 if both are true)"
+            }
         };
 
-        public Dictionary<Concentrations, string> ConcentrationDict = new Dictionary<Concentrations, string>()
+        public Dictionary<Concentrations, string> ConcentrationDict = new Dictionary<Concentrations, string>
         {
-            { Concentrations.None , "None" },
-            { Concentrations.VerySingleMinded , "Single-Minded and either High Pain Threshold or one 5-point Talent" },
-            { Concentrations.SingleMinded , "Single-Minded" },
-            { Concentrations.Attentive , "Attentive (quirk)" },
-            { Concentrations.Normal , "Normal" },
-            { Concentrations.Distractible , "Distractible (quirk)" },
-            { Concentrations.ShortAttentionSpan , "Short Attention Span (12)" },
-            { Concentrations.VeryShortAttentionSpan , "Short Attention Span (9)" }
+            {
+                Concentrations.None, "None"
+            },
+            {
+                Concentrations.VerySingleMinded, "Single-Minded and either High Pain Threshold or one 5-point Talent"
+            },
+            {
+                Concentrations.SingleMinded, "Single-Minded"
+            },
+            {
+                Concentrations.Attentive, "Attentive (quirk)"
+            },
+            {
+                Concentrations.Normal, "Normal"
+            },
+            {
+                Concentrations.Distractible, "Distractible (quirk)"
+            },
+            {
+                Concentrations.ShortAttentionSpan, "Short Attention Span (12)"
+            },
+            {
+                Concentrations.VeryShortAttentionSpan, "Short Attention Span (9)"
+            }
         };
 
-        public Dictionary<Curiosities, string> CuriosityDict = new Dictionary<Curiosities, string>()
+        public Dictionary<Curiosities, string> CuriosityDict = new Dictionary<Curiosities, string>
         {
-            { Curiosities.None , "None" },
-            { Curiosities.VeryCurious , "Curious (9) (if Concentration or Suspicion is 0 or less, reduce selfcontrol number to 6)" },
-            { Curiosities.Curious , "Curious (12) (if Concentration is 0 or less, change self-control number to 9)" },
-            { Curiosities.Nosy , "Nosy (quirk) (becomes Curious at 12 if Concentration is 0 or less)" },
-            { Curiosities.Normal , "Normal" },
-            { Curiosities.Staid , "Staid (quirk)" },
-            { Curiosities.Incurious , "Incurious (12) (self-control number becomes 9 if Suspicion is less than 0)" },
-            { Curiosities.VeryIncurious , "Incurious (9)" },
+            {
+                Curiosities.None, "None"
+            },
+            {
+                Curiosities.VeryCurious, "Curious (9) (if Concentration or Suspicion is 0 or less, reduce selfcontrol number to 6)"
+            },
+            {
+                Curiosities.Curious, "Curious (12) (if Concentration is 0 or less, change self-control number to 9)"
+            },
+            {
+                Curiosities.Nosy, "Nosy (quirk) (becomes Curious at 12 if Concentration is 0 or less)"
+            },
+            {
+                Curiosities.Normal, "Normal"
+            },
+            {
+                Curiosities.Staid, "Staid (quirk)"
+            },
+            {
+                Curiosities.Incurious, "Incurious (12) (self-control number becomes 9 if Suspicion is less than 0)"
+            },
+            {
+                Curiosities.VeryIncurious, "Incurious (9)"
+            }
         };
 
-        public Dictionary<Egoisms, string> EgoismDict = new Dictionary<Egoisms, string>()
+        public Dictionary<Egoisms, string> EgoismDict = new Dictionary<Egoisms, string>
         {
-            { Egoisms.None , "None" },
-            { Egoisms.VerySelfish , "Selfish (9)" },
-            { Egoisms.Selfish , "Selfish (12) (control number becomes 9 if Suspicion is more than 0 or Empathy is less than 0)" },
-            { Egoisms.Proud , "Proud (quirk) (Selfish at 12 if Suspicion is more than 0; Selfish at 9 if Suspicion is +2 or more or if Empathy is -2 or less)" },
-            { Egoisms.Normal , "Normal" },
-            { Egoisms.Humble , "Humble (quirk)" },
-            { Egoisms.Selfless , "Selfless (12) (control number becomes 9 if Chauvinism is +2 or more)" },
-            { Egoisms.VerySelfless , "Selfless (6)" }
+            {
+                Egoisms.None, "None"
+            },
+            {
+                Egoisms.VerySelfish, "Selfish (9)"
+            },
+            {
+                Egoisms.Selfish, "Selfish (12) (control number becomes 9 if Suspicion is more than 0 or Empathy is less than 0)"
+            },
+            {
+                Egoisms.Proud, "Proud (quirk) (Selfish at 12 if Suspicion is more than 0; Selfish at 9 if Suspicion is +2 or more or if Empathy is -2 or less)"
+            },
+            {
+                Egoisms.Normal, "Normal"
+            },
+            {
+                Egoisms.Humble, "Humble (quirk)"
+            },
+            {
+                Egoisms.Selfless, "Selfless (12) (control number becomes 9 if Chauvinism is +2 or more)"
+            },
+            {
+                Egoisms.VerySelfless, "Selfless (6)"
+            }
         };
 
-        public Dictionary<Empathies, string> EmpathyDict = new Dictionary<Empathies, string>()
+        public Dictionary<Empathies, string> EmpathyDict = new Dictionary<Empathies, string>
         {
-            { Empathies.VeryEmpathic , "Empathy (if Gregariousness is more than 0 add Charitable at 12)" },
-            { Empathies.Empathy , "Empathy (Sensitive)" },
-            { Empathies.Responsive , "Responsive (quirk) (becomes Sensitive if Gregariousness is more than 0 and Suspicion is less than 0)" },
-            { Empathies.Normal , "Normal" },
-            { Empathies.Oblivious , "Oblivious" },
-            { Empathies.Callous , "Callous" },
-            { Empathies.LowEmpathy , "Low Empathy (carnivores add Bloodlust at 12)" }
+            {
+                Empathies.VeryEmpathic, "Empathy (if Gregariousness is more than 0 add Charitable at 12)"
+            },
+            {
+                Empathies.Empathy, "Empathy (Sensitive)"
+            },
+            {
+                Empathies.Responsive, "Responsive (quirk) (becomes Sensitive if Gregariousness is more than 0 and Suspicion is less than 0)"
+            },
+            {
+                Empathies.Normal, "Normal"
+            },
+            {
+                Empathies.Oblivious, "Oblivious"
+            },
+            {
+                Empathies.Callous, "Callous"
+            },
+            {
+                Empathies.LowEmpathy, "Low Empathy (carnivores add Bloodlust at 12)"
+            }
         };
 
-        public Dictionary<Gegariousnesses, string> GegariousnessnessDict = new Dictionary<Gegariousnesses, string>()
+        public Dictionary<Gegariousnesses, string> GegariousnessnessDict = new Dictionary<Gegariousnesses, string>
         {
-            { Gegariousnesses.None , "None" },
-            { Gegariousnesses.Gregarious , "Gregarious" },
-            { Gegariousnesses.Chummy , "Chummy" },
-            { Gegariousnesses.Congenial , "Congenial (quirk)" },
-            { Gegariousnesses.Normal , "Normal" },
-            { Gegariousnesses.Uncongenial , "Uncongenial (quirk)" },
-            { Gegariousnesses.Loner , "Loner (12)" },
-            { Gegariousnesses.ExtremeLoner , "Loner (9)" }
+            {
+                Gegariousnesses.None, "None"
+            },
+            {
+                Gegariousnesses.Gregarious, "Gregarious"
+            },
+            {
+                Gegariousnesses.Chummy, "Chummy"
+            },
+            {
+                Gegariousnesses.Congenial, "Congenial (quirk)"
+            },
+            {
+                Gegariousnesses.Normal, "Normal"
+            },
+            {
+                Gegariousnesses.Uncongenial, "Uncongenial (quirk)"
+            },
+            {
+                Gegariousnesses.Loner, "Loner (12)"
+            },
+            {
+                Gegariousnesses.ExtremeLoner, "Loner (9)"
+            }
         };
 
-        public Dictionary<Imaginations, string> ImaginationDict = new Dictionary<Imaginations, string>()
+        public Dictionary<Imaginations, string> ImaginationDict = new Dictionary<Imaginations, string>
         {
-            { Imaginations.None , "None" },
-            { Imaginations.ExtremlyImaginative , "Imaginative (quirk) (as with +2 below, but if Empathy is less than +1 add the Odious Racial Habit (Nonstop Idea Factory) [-5])" },
-            { Imaginations.VeryImaginative , "Imaginative (quirk) (as with +1 below, but adds the quirk Dreamer if Egoism is greater than 0 or if Concentration is less than +1)" },
-            { Imaginations.Imaginative , "Imaginative (quirk) (becomes Versatile if Concentration is 0 or more and Egoism is less than +2)" },
-            { Imaginations.Normal , "Normal" },
-            { Imaginations.Dull , "Dull (quirk)" },
-            { Imaginations.Hidebound , "Hidebound" },
-            { Imaginations.VeryHidebound , "Hidebound and -1 IQ" }
+            {
+                Imaginations.None, "None"
+            },
+            {
+                Imaginations.ExtremlyImaginative, "Imaginative (quirk) (as with +2 below, but if Empathy is less than +1 add the Odious Racial Habit (Nonstop Idea Factory) [-5])"
+            },
+            {
+                Imaginations.VeryImaginative, "Imaginative (quirk) (as with +1 below, but adds the quirk Dreamer if Egoism is greater than 0 or if Concentration is less than +1)"
+            },
+            {
+                Imaginations.Imaginative, "Imaginative (quirk) (becomes Versatile if Concentration is 0 or more and Egoism is less than +2)"
+            },
+            {
+                Imaginations.Normal, "Normal"
+            },
+            {
+                Imaginations.Dull, "Dull (quirk)"
+            },
+            {
+                Imaginations.Hidebound, "Hidebound"
+            },
+            {
+                Imaginations.VeryHidebound, "Hidebound and -1 IQ"
+            }
         };
 
-        public Dictionary<Suspicions, string> SuspicionDict = new Dictionary<Suspicions, string>()
+        public Dictionary<Suspicions, string> SuspicionDict = new Dictionary<Suspicions, string>
         {
-            { Suspicions.None , "None" },
-            { Suspicions.VeryFearfull , "Fearfulness 2, and Cowardice (if herbivore) or Paranoia (if carnivore)" },
-            { Suspicions.Fearfulness , "Fearfulness 1 (becomes Careful quirk if Curiosity is -3)" },
-            { Suspicions.Careful , "Careful (quirk) (ignore if Curiosity is -2 or less)" },
-            { Suspicions.Normal , "Normal" },
-            { Suspicions.Fearlessness , "Fearlessness 1" },
-            { Suspicions.VeryFearless , "Fearlessness 2 (add Overconfidence if Egoism is +2 or more)" },
-            { Suspicions.ExtremlyFearless , "Fearlessness 3 (add Overconfidence if Egoism is +1 or more; Fearlessness becomes Unfazeable if Chauvinism is -3 or less)" }
+            {
+                Suspicions.None, "None"
+            },
+            {
+                Suspicions.VeryFearfull, "Fearfulness 2, and Cowardice (if herbivore) or Paranoia (if carnivore)"
+            },
+            {
+                Suspicions.Fearfulness, "Fearfulness 1 (becomes Careful quirk if Curiosity is -3)"
+            },
+            {
+                Suspicions.Careful, "Careful (quirk) (ignore if Curiosity is -2 or less)"
+            },
+            {
+                Suspicions.Normal, "Normal"
+            },
+            {
+                Suspicions.Fearlessness, "Fearlessness 1"
+            },
+            {
+                Suspicions.VeryFearless, "Fearlessness 2 (add Overconfidence if Egoism is +2 or more)"
+            },
+            {
+                Suspicions.ExtremlyFearless, "Fearlessness 3 (add Overconfidence if Egoism is +1 or more; Fearlessness becomes Unfazeable if Chauvinism is -3 or less)"
+            }
         };
 
-        public Dictionary<Playfulnessess, string> PlayfulnessDict = new Dictionary<Playfulnessess, string>()
+        public Dictionary<Playfulnessess, string> PlayfulnessDict = new Dictionary<Playfulnessess, string>
         {
-            { Playfulnessess.None , "None" },
-            { Playfulnessess.ExtremeCompulsivePlayfulness , "Compulsive Playfulness (9) (becomes Trickster at 12 if species is Overconfident)" },
-            { Playfulnessess.CompulsivePlayfulness , "Compulsive Playfulness (12) [-5*]" },
-            { Playfulnessess.Playful , "Playful (quirk)" },
-            { Playfulnessess.Normal , "Normal (occasionally playful)" },
-            { Playfulnessess.Serious , "Serious (quirk)" },
-            { Playfulnessess.OdiousRacialHabit , "Odious Racial Habit (Wet Blanket) [-5]" },
-            { Playfulnessess.NoSenseofHumor , "No Sense of Humor" }
+            {
+                Playfulnessess.None, "None"
+            },
+            {
+                Playfulnessess.ExtremeCompulsivePlayfulness, "Compulsive Playfulness (9) (becomes Trickster at 12 if species is Overconfident)"
+            },
+            {
+                Playfulnessess.CompulsivePlayfulness, "Compulsive Playfulness (12) [-5*]"
+            },
+            {
+                Playfulnessess.Playful, "Playful (quirk)"
+            },
+            {
+                Playfulnessess.Normal, "Normal (occasionally playful)"
+            },
+            {
+                Playfulnessess.Serious, "Serious (quirk)"
+            },
+            {
+                Playfulnessess.OdiousRacialHabit, "Odious Racial Habit (Wet Blanket) [-5]"
+            },
+            {
+                Playfulnessess.NoSenseofHumor, "No Sense of Humor"
+            }
         };
 
         #endregion
 
         #region PropsAndConstructor
 
-        public ChemicalBasis chemicalBasis { get; set; }
-        public LandWater LandOrWater { get; set; }
-        public LandHabitats LandHabitat { get; set; }
-        public WaterHabitats WaterHabitat { get; set; }
-        public TrophicDiets TrophicDiet { get; set; }
-        public Locomotions PrimaryLocomotion { get; set; }
-        public Locomotions SecondaryLocomotion { get; set; }
-        public bool hasSecondaryLocomotion { get; set; } = false;
-        public double Gravity { get; set; }
-        public SizeClasses SizeClass { get; set; }
-        public double Size { get; set; }
-        public Symmetries Symmetry { get; set; }
-        public int Sides { get; set; }
-        public int LimbSegments { get; set; }
-        public Tails Tail { get; set; }
-        public int Manipulators { get; set; }
-        public Skeletons Skeleton { get; set; }
-        public SkinClasses SkinClass { get; set; }
-        public Skins Skin { get; set; }
-        public BreathingMethods Breathing { get; set; }
-        public Temperatures Temperture { get; set; }
-        public GrowthRates Growth { get; set; }
-        public Sexes Sex { get; set; }
-        public Gestations Gestation { get; set; }
-        public Strategies Strategy { get; set; }
-        public int OffspringCount { get; set; }
-        public PrimarySenses PrimarySense { get; set; }
-        public Visions Vision { get; set; }
-        public Hearings Hearing { get; set; }
-        public Touches Touch { get; set; }
-        public TasteSmells TasteSmell { get; set; }
-        public List<SpecialSenses> specialSense { get; set; }
-        public Intelligences Intelligence { get; set; }
-        public int IntelligenceValue { get; set; }
-        public MatingBehaviours MatingBahavior { get; set; }
-        public SocialOrganizations SocialOrganization { get; set; }
-        public int SocialGroupSize { get; set; }
-        public Concentrations Concentration { get; set; }
-        public Curiosities Curiosity { get; set; }
-        public Egoisms Egoism { get; set; }
-        public Empathies Empathy { get; set; }
-        public Gegariousnesses Gegariousness { get; set; }
-        public Imaginations Imagination { get; set; }
-        public Chauvinisms Chauvinism { get; set; }
-        public Suspicions Suspicion { get; set; }
-        public Playfulnessess Playfulness { get; set; }
+        public ChemicalBasis ChemicalBase { get; private set; }
+        public LandWater LandOrWater { get; private set; }
+        public LandHabitats LandHabitat { get; private set; }
+        public WaterHabitats WaterHabitat { get; private set; }
+        public TrophicDiets TrophicDiet { get; private set; }
+        public Locomotions PrimaryLocomotion { get; private set; }
+        public Locomotions SecondaryLocomotion { get; private set; }
+        public bool HasSecondaryLocomotion { get; private set; }
+        private double Gravity { get; set; }
+        public SizeClasses SizeClass { get; private set; }
+        public double Size { get; private set; }
+        public Symmetries Symmetry { get; private set; }
+        public int Sides { get; private set; }
+        public int LimbSegments { get; private set; }
+        public Tails Tail { get; private set; }
+        public int Manipulators { get; private set; }
+        public Skeletons Skeleton { get; private set; }
+        public SkinClasses SkinClass { get; private set; }
+        public Skins Skin { get; private set; }
+        public BreathingMethods Breathing { get; private set; }
+        public Temperatures Temperture { get; private set; }
+        public GrowthRates Growth { get; private set; }
+        public Sexes Sex { get; private set; }
+        public Gestations Gestation { get; private set; }
+        public Strategies Strategy { get; private set; }
+        public int OffspringCount { get; private set; }
+        public PrimarySenses PrimarySense { get; private set; }
+        public Visions Vision { get; private set; }
+        public Hearings Hearing { get; private set; }
+        public Touches Touch { get; private set; }
+        public TasteSmells TasteSmell { get; private set; }
+        private List<SpecialSenses> SpecialSense { get; set; }
+        public Intelligences Intelligence { get; private set; }
+        public int IntelligenceValue { get; private set; }
+        public MatingBehaviours MatingBahavior { get; private set; }
+        public SocialOrganizations SocialOrganization { get; private set; }
+        public int SocialGroupSize { get; private set; }
+        public Concentrations Concentration { get; private set; }
+        public Curiosities Curiosity { get; private set; }
+        public Egoisms Egoism { get; private set; }
+        public Empathies Empathy { get; private set; }
+        public Gegariousnesses Gegariousness { get; private set; }
+        public Imaginations Imagination { get; private set; }
+        public Chauvinisms Chauvinism { get; private set; }
+        public Suspicions Suspicion { get; private set; }
+        public Playfulnessess Playfulness { get; private set; }
 
         /// <summary>
-        /// Creates a New Alien Race
+        ///     Creates a New Alien Race
         /// </summary>
-        /// <param name="WaterModPercent">"Base Value is 0, set to -1 if you Have no Water on the Planet, else Input the Percentage of Water on the Planet"</param>
-        public Alien(int WaterModPercent = 0, bool isSapient = true, double gravity = 1.00)
+        /// <param name="waterModPercent">
+        ///     "Base Value is 0, set to -1 if you Have no Water on the Planet, else Input the Percentage
+        ///     of Water on the Planet"
+        /// </param>
+        /// <param name="isSapient"> If the Alien is Suppose to be Sapient or not</param>
+        /// <param name="gravity"> The Gravit of the Home Planet</param>
+        public Alien( int waterModPercent = 0, bool isSapient = true, double gravity = 1.00 )
         {
-            chemicalBasis = DetermineChemicalBasis();
-            LandOrWater = DetermineLandWater(WaterModPercent);
+            ChemicalBase = DetermineChemicalBasis();
+            LandOrWater = DetermineLandWater(waterModPercent);
             if (LandOrWater == LandWater.Land)
             {
                 WaterHabitat = WaterHabitats.None;
@@ -540,9 +1507,9 @@ namespace UniverseGeneration.OtherGeneration
 
             TrophicDiet = DetermineDiet(isSapient);
             PrimaryLocomotion = DeterminePrimaryLocomotion();
-            if (hasSecondaryLocomotion == true)
+            if (HasSecondaryLocomotion)
             {
-                SecondaryLocomotion =  DetermineSecondaryLocomotion();
+                SecondaryLocomotion = DetermineSecondaryLocomotion();
             }
             Gravity = gravity;
             SizeClass = DetermineSizeClass();
@@ -566,7 +1533,7 @@ namespace UniverseGeneration.OtherGeneration
             Hearing = DetermineHearing();
             Touch = DetermineTouch();
             TasteSmell = DetermineTasteSmell();
-            specialSense = DetermineSpecialSenses();
+            SpecialSense = DetermineSpecialSenses();
             Intelligence = DetermineIntelligence(isSapient);
             MatingBahavior = DetermineMatingBehaviour();
             SocialOrganization = DetermineSocialOrganization();
@@ -588,9 +1555,9 @@ namespace UniverseGeneration.OtherGeneration
 
         private ChemicalBasis DetermineChemicalBasis()
         {
-            ChemicalBasis cb = ChemicalBasis.None;
-            Dice dice = new Dice();
-            int roll = dice.gurpsRoll();
+            var cb = ChemicalBasis.None;
+            var dice = new Dice();
+            var roll = dice.GurpsRoll();
             switch (roll)
             {
                 case 3:
@@ -633,31 +1600,31 @@ namespace UniverseGeneration.OtherGeneration
             return cb;
         }
 
-        private LandWater DetermineLandWater(int WaterModPercent)
+        private LandWater DetermineLandWater( int waterModPercent )
         {
-            LandWater lw = LandWater.None;
-            Dice dice = new Dice();
-            int roll = dice.rng(6);
+            var lw = LandWater.None;
+            var dice = new Dice();
+            var roll = dice.Rng(6);
 
-            int Mod = 0;
-            if (WaterModPercent == 0)
+            var mod = 0;
+            if (waterModPercent == 0)
             {
-                Mod = 0;
+                mod = 0;
             }
-            if (WaterModPercent <= 50 && WaterModPercent > 0)
+            if (waterModPercent <= 50 && waterModPercent > 0)
             {
-                Mod = -1;
+                mod = -1;
             }
-            if (WaterModPercent >= 80 && WaterModPercent < 90)
+            if (waterModPercent >= 80 && waterModPercent < 90)
             {
-                Mod = 1;
+                mod = 1;
             }
-            if (WaterModPercent >= 90)
+            if (waterModPercent >= 90)
             {
-                Mod = 2;
+                mod = 2;
             }
 
-            roll += Mod;
+            roll += mod;
 
             switch (roll)
             {
@@ -677,9 +1644,9 @@ namespace UniverseGeneration.OtherGeneration
 
         private LandHabitats DetermineLandHabitat()
         {
-            Dice dice = new Dice();
-            int roll = dice.gurpsRoll();
-            LandHabitats hab = LandHabitats.None;
+            var dice = new Dice();
+            var roll = dice.GurpsRoll();
+            var hab = LandHabitats.None;
             switch (roll)
             {
                 case 3:
@@ -720,9 +1687,9 @@ namespace UniverseGeneration.OtherGeneration
 
         private WaterHabitats DetermineWaterHabitat()
         {
-            Dice dice = new Dice();
-            int roll = dice.gurpsRoll();
-            WaterHabitats hab = WaterHabitats.None;
+            var dice = new Dice();
+            var roll = dice.GurpsRoll();
+            var hab = WaterHabitats.None;
             switch (roll)
             {
                 case 3:
@@ -761,70 +1728,70 @@ namespace UniverseGeneration.OtherGeneration
             return hab;
         }
 
-        private TrophicDiets DetermineDiet(bool issapient)
+        private TrophicDiets DetermineDiet( bool issapient )
         {
-            TrophicDiets Diet = TrophicDiets.None;
-            Dice dice = new Dice();
-            int roll = dice.gurpsRoll();
+            var diet = TrophicDiets.None;
+            var dice = new Dice();
+            var roll = dice.GurpsRoll();
             if (issapient)
             {
                 switch (roll)
                 {
                     case 3:
-                        Diet = TrophicDiets.CombinedMethod;
+                        diet = TrophicDiets.CombinedMethod;
                         break;
                     case 4:
-                        Diet = TrophicDiets.ParasiteSymbiont;
+                        diet = TrophicDiets.ParasiteSymbiont;
                         break;
                     case 5:
-                        Diet = TrophicDiets.FilterFeeder;
+                        diet = TrophicDiets.FilterFeeder;
                         break;
                     case 6:
-                        Diet = TrophicDiets.PouncingCarnivore;
+                        diet = TrophicDiets.PouncingCarnivore;
                         break;
                     case 7:
-                        Diet = TrophicDiets.Scavenger;
+                        diet = TrophicDiets.Scavenger;
                         break;
                     case 8:
                     case 9:
-                        Diet = TrophicDiets.GatheringHerbivore;
+                        diet = TrophicDiets.GatheringHerbivore;
                         break;
                     case 10:
-                        Diet = TrophicDiets.Omnivore;
+                        diet = TrophicDiets.Omnivore;
                         break;
                     case 11:
                     case 12:
-                        Diet = TrophicDiets.ChasingCarnivore;
+                        diet = TrophicDiets.ChasingCarnivore;
                         break;
                     case 13:
-                        Diet = TrophicDiets.GrazingHerbivore;
+                        diet = TrophicDiets.GrazingHerbivore;
                         break;
                     case 14:
-                        Diet = TrophicDiets.HijackingCarnivore;
+                        diet = TrophicDiets.HijackingCarnivore;
                         break;
                     case 15:
                     case 16:
-                        Diet = TrophicDiets.TrappingCarnivore;
+                        diet = TrophicDiets.TrappingCarnivore;
                         break;
                     case 17:
-                        Diet = TrophicDiets.Decomposer;
+                        diet = TrophicDiets.Decomposer;
                         break;
                     case 18:
-                        Dice newdice = new Dice();
-                        int Autothrophroll = newdice.rng(6);
-                        switch (Autothrophroll)
+                        var newdice = new Dice();
+                        var autothrophroll = newdice.Rng(6);
+                        switch (autothrophroll)
                         {
                             case 1:
                             case 2:
                             case 3:
-                                Diet = TrophicDiets.AutothrophPhotosynthetic;
+                                diet = TrophicDiets.AutothrophPhotosynthetic;
                                 break;
                             case 4:
                             case 5:
-                                Diet = TrophicDiets.AutothrophChemosynthetic;
+                                diet = TrophicDiets.AutothrophChemosynthetic;
                                 break;
                             case 6:
-                                Diet = TrophicDiets.AutothrophOther;
+                                diet = TrophicDiets.AutothrophOther;
                                 break;
                         }
                         break;
@@ -835,73 +1802,73 @@ namespace UniverseGeneration.OtherGeneration
                 switch (roll)
                 {
                     case 3:
-                        Diet = TrophicDiets.CombinedMethod;
+                        diet = TrophicDiets.CombinedMethod;
                         break;
                     case 4:
-                        Dice newdice = new Dice();
-                        int Autothrophroll = newdice.rng(6);
-                        switch (Autothrophroll)
+                        var newdice = new Dice();
+                        var autothrophroll = newdice.Rng(6);
+                        switch (autothrophroll)
                         {
                             case 1:
                             case 2:
                             case 3:
-                                Diet = TrophicDiets.AutothrophPhotosynthetic;
+                                diet = TrophicDiets.AutothrophPhotosynthetic;
                                 break;
                             case 4:
                             case 5:
-                                Diet = TrophicDiets.AutothrophChemosynthetic;
+                                diet = TrophicDiets.AutothrophChemosynthetic;
                                 break;
                             case 6:
-                                Diet = TrophicDiets.AutothrophOther;
+                                diet = TrophicDiets.AutothrophOther;
                                 break;
                         }
                         break;
                     case 5:
-                        Diet = TrophicDiets.Decomposer;
+                        diet = TrophicDiets.Decomposer;
                         break;
                     case 6:
-                        Diet = TrophicDiets.Scavenger;
+                        diet = TrophicDiets.Scavenger;
                         break;
                     case 7:
-                        Diet = TrophicDiets.Omnivore;
+                        diet = TrophicDiets.Omnivore;
                         break;
                     case 8:
                     case 9:
-                        Diet = TrophicDiets.GatheringHerbivore;
+                        diet = TrophicDiets.GatheringHerbivore;
                         break;
                     case 10:
                     case 11:
-                        Diet = TrophicDiets.GrazingHerbivore;
+                        diet = TrophicDiets.GrazingHerbivore;
                         break;
                     case 12:
-                        Diet = TrophicDiets.PouncingCarnivore;
+                        diet = TrophicDiets.PouncingCarnivore;
                         break;
                     case 13:
-                        Diet = TrophicDiets.PouncingCarnivore;
+                        diet = TrophicDiets.PouncingCarnivore;
                         break;
                     case 14:
-                        Diet = TrophicDiets.TrappingCarnivore;
+                        diet = TrophicDiets.TrappingCarnivore;
                         break;
                     case 15:
-                        Diet = TrophicDiets.HijackingCarnivore;
+                        diet = TrophicDiets.HijackingCarnivore;
                         break;
                     case 16:
-                        Diet = TrophicDiets.FilterFeeder;
+                        diet = TrophicDiets.FilterFeeder;
                         break;
                     case 17:
                     case 18:
-                        Diet = TrophicDiets.ParasiteSymbiont;
+                        diet = TrophicDiets.ParasiteSymbiont;
                         break;
                 }
             }
-            return Diet;
+            return diet;
         }
 
         private Locomotions DeterminePrimaryLocomotion()
         {
-            Locomotions PrimaryLocomotion = Locomotions.None;
-            Dice dice = new Dice();
-            int roll = dice.rng(2, 6);
+            var primaryLocomotion = Locomotions.None;
+            var dice = new Dice();
+            var roll = dice.Rng(2, 6);
             if (TrophicDiet == TrophicDiets.PouncingCarnivore || TrophicDiet == TrophicDiets.ChasingCarnivore || TrophicDiet == TrophicDiets.Omnivore || TrophicDiet == TrophicDiets.GatheringHerbivore || TrophicDiet == TrophicDiets.Scavenger)
             {
                 roll += 1;
@@ -911,33 +1878,33 @@ namespace UniverseGeneration.OtherGeneration
                 switch (roll)
                 {
                     case 2:
-                        PrimaryLocomotion = Locomotions.immobile;
+                        primaryLocomotion = Locomotions.Immobile;
                         break;
                     case 3:
                     case 4:
-                        PrimaryLocomotion = Locomotions.slithering;
+                        primaryLocomotion = Locomotions.Slithering;
                         break;
                     case 5:
                     case 6:
-                        PrimaryLocomotion = Locomotions.swimming;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Swimming;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 7:
-                        PrimaryLocomotion = Locomotions.digging;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Digging;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 8:
                     case 9:
-                        PrimaryLocomotion = Locomotions.walking;
+                        primaryLocomotion = Locomotions.Walking;
                         break;
                     case 10:
                     case 11:
-                        PrimaryLocomotion = Locomotions.wingedflight;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Wingedflight;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 12:
                     case 13:
-                        PrimaryLocomotion = Locomotions.special;
+                        primaryLocomotion = Locomotions.Special;
                         break;
                 }
             }
@@ -947,28 +1914,28 @@ namespace UniverseGeneration.OtherGeneration
                 {
                     case 2:
                     case 3:
-                        PrimaryLocomotion = Locomotions.immobile;
+                        primaryLocomotion = Locomotions.Immobile;
                         break;
                     case 4:
-                        PrimaryLocomotion = Locomotions.floating;
+                        primaryLocomotion = Locomotions.Floating;
                         break;
                     case 5:
-                        PrimaryLocomotion = Locomotions.sailing;
+                        primaryLocomotion = Locomotions.Sailing;
                         break;
                     case 6:
                     case 7:
                     case 8:
-                        PrimaryLocomotion = Locomotions.swimming;
+                        primaryLocomotion = Locomotions.Swimming;
                         break;
                     case 9:
                     case 10:
                     case 11:
-                        PrimaryLocomotion = Locomotions.wingedflight;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Wingedflight;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 12:
                     case 13:
-                        PrimaryLocomotion = Locomotions.special;
+                        primaryLocomotion = Locomotions.Special;
                         break;
                 }
             }
@@ -980,25 +1947,25 @@ namespace UniverseGeneration.OtherGeneration
                     case 3:
                     case 4:
                     case 5:
-                        PrimaryLocomotion = Locomotions.immobile;
+                        primaryLocomotion = Locomotions.Immobile;
                         break;
                     case 6:
-                        PrimaryLocomotion = Locomotions.floating;
+                        primaryLocomotion = Locomotions.Floating;
                         break;
                     case 7:
-                        PrimaryLocomotion = Locomotions.digging;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Digging;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 8:
                     case 9:
-                        PrimaryLocomotion = Locomotions.walking;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Walking;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 10:
                     case 11:
                     case 12:
                     case 13:
-                        PrimaryLocomotion = Locomotions.swimming;
+                        primaryLocomotion = Locomotions.Swimming;
                         break;
                 }
             }
@@ -1007,30 +1974,30 @@ namespace UniverseGeneration.OtherGeneration
                 switch (roll)
                 {
                     case 2:
-                        PrimaryLocomotion = Locomotions.immobile;
+                        primaryLocomotion = Locomotions.Immobile;
                         break;
                     case 3:
                     case 4:
-                        PrimaryLocomotion = Locomotions.slithering;
+                        primaryLocomotion = Locomotions.Slithering;
                         break;
                     case 5:
-                        PrimaryLocomotion = Locomotions.digging;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Digging;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 6:
                     case 7:
                     case 8:
-                        PrimaryLocomotion = Locomotions.walking;
+                        primaryLocomotion = Locomotions.Walking;
                         break;
                     case 9:
                     case 10:
                     case 11:
-                        PrimaryLocomotion = Locomotions.wingedflight;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Wingedflight;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 12:
                     case 13:
-                        PrimaryLocomotion = Locomotions.special;
+                        primaryLocomotion = Locomotions.Special;
                         break;
                 }
             }
@@ -1039,36 +2006,36 @@ namespace UniverseGeneration.OtherGeneration
                 switch (roll)
                 {
                     case 2:
-                        PrimaryLocomotion = Locomotions.immobile;
+                        primaryLocomotion = Locomotions.Immobile;
                         break;
                     case 3:
                     case 4:
-                        PrimaryLocomotion = Locomotions.slithering;
+                        primaryLocomotion = Locomotions.Slithering;
                         break;
                     case 5:
-                        PrimaryLocomotion = Locomotions.digging;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Digging;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 6:
                     case 7:
-                        PrimaryLocomotion = Locomotions.walking;
+                        primaryLocomotion = Locomotions.Walking;
                         break;
                     case 8:
-                        PrimaryLocomotion = Locomotions.climbing;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Climbing;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 9:
-                        PrimaryLocomotion = Locomotions.swimming;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Swimming;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 10:
                     case 11:
-                        PrimaryLocomotion = Locomotions.wingedflight;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Wingedflight;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 12:
                     case 13:
-                        PrimaryLocomotion = Locomotions.special;
+                        primaryLocomotion = Locomotions.Special;
                         break;
                 }
             }
@@ -1079,33 +2046,33 @@ namespace UniverseGeneration.OtherGeneration
                     case 2:
                     case 3:
                     case 4:
-                        PrimaryLocomotion = Locomotions.immobile;
+                        primaryLocomotion = Locomotions.Immobile;
                         break;
                     case 5:
-                        PrimaryLocomotion = Locomotions.floating;
+                        primaryLocomotion = Locomotions.Floating;
                         break;
                     case 6:
-                        PrimaryLocomotion = Locomotions.slithering;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Slithering;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 7:
-                        PrimaryLocomotion = Locomotions.walking;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Walking;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 8:
-                        PrimaryLocomotion = Locomotions.digging;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Digging;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 9:
-                        PrimaryLocomotion = Locomotions.swimming;
+                        primaryLocomotion = Locomotions.Swimming;
                         break;
                     case 10:
                     case 11:
-                        PrimaryLocomotion = Locomotions.wingedflight;
+                        primaryLocomotion = Locomotions.Wingedflight;
                         break;
                     case 12:
                     case 13:
-                        PrimaryLocomotion = Locomotions.special;
+                        primaryLocomotion = Locomotions.Special;
                         break;
                 }
             }
@@ -1115,32 +2082,32 @@ namespace UniverseGeneration.OtherGeneration
                 {
                     case 2:
                     case 3:
-                        PrimaryLocomotion = Locomotions.immobile;
+                        primaryLocomotion = Locomotions.Immobile;
                         break;
                     case 4:
-                        PrimaryLocomotion = Locomotions.floating;
+                        primaryLocomotion = Locomotions.Floating;
                         break;
                     case 5:
-                        PrimaryLocomotion = Locomotions.walking;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Walking;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 6:
-                        PrimaryLocomotion = Locomotions.slithering;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Slithering;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 7:
                     case 8:
                     case 9:
-                        PrimaryLocomotion = Locomotions.swimming;
+                        primaryLocomotion = Locomotions.Swimming;
                         break;
                     case 10:
                     case 11:
-                        PrimaryLocomotion = Locomotions.wingedflight;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Wingedflight;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 12:
                     case 13:
-                        PrimaryLocomotion = Locomotions.special;
+                        primaryLocomotion = Locomotions.Special;
                         break;
                 }
             }
@@ -1149,34 +2116,34 @@ namespace UniverseGeneration.OtherGeneration
                 switch (roll)
                 {
                     case 2:
-                        PrimaryLocomotion = Locomotions.immobile;
+                        primaryLocomotion = Locomotions.Immobile;
                         break;
                     case 3:
                     case 4:
-                        PrimaryLocomotion = Locomotions.slithering;
+                        primaryLocomotion = Locomotions.Slithering;
                         break;
                     case 5:
-                        PrimaryLocomotion = Locomotions.digging;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Digging;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 6:
                     case 7:
-                        PrimaryLocomotion = Locomotions.walking;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Walking;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 8:
-                        PrimaryLocomotion = Locomotions.climbing;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Climbing;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 9:
                     case 10:
                     case 11:
-                        PrimaryLocomotion = Locomotions.wingedflight;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Wingedflight;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 12:
                     case 13:
-                        PrimaryLocomotion = Locomotions.special;
+                        primaryLocomotion = Locomotions.Special;
                         break;
                 }
             }
@@ -1185,30 +2152,30 @@ namespace UniverseGeneration.OtherGeneration
                 switch (roll)
                 {
                     case 2:
-                        PrimaryLocomotion = Locomotions.immobile;
+                        primaryLocomotion = Locomotions.Immobile;
                         break;
                     case 3:
                     case 4:
-                        PrimaryLocomotion = Locomotions.slithering;
+                        primaryLocomotion = Locomotions.Slithering;
                         break;
                     case 5:
-                        PrimaryLocomotion = Locomotions.digging;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Digging;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 6:
                     case 7:
                     case 8:
-                        PrimaryLocomotion = Locomotions.walking;
+                        primaryLocomotion = Locomotions.Walking;
                         break;
                     case 9:
                     case 10:
                     case 11:
-                        PrimaryLocomotion = Locomotions.wingedflight;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Wingedflight;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 12:
                     case 13:
-                        PrimaryLocomotion = Locomotions.special;
+                        primaryLocomotion = Locomotions.Special;
                         break;
                 }
             }
@@ -1218,35 +2185,35 @@ namespace UniverseGeneration.OtherGeneration
                 {
                     case 2:
                     case 3:
-                        PrimaryLocomotion = Locomotions.immobile;
+                        primaryLocomotion = Locomotions.Immobile;
                         break;
                     case 4:
-                        PrimaryLocomotion = Locomotions.floating;
+                        primaryLocomotion = Locomotions.Floating;
                         break;
                     case 5:
-                        PrimaryLocomotion = Locomotions.slithering;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Slithering;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 6:
-                        PrimaryLocomotion = Locomotions.digging;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Digging;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 7:
-                        PrimaryLocomotion = Locomotions.walking;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Walking;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 8:
                     case 9:
-                        PrimaryLocomotion = Locomotions.swimming;
+                        primaryLocomotion = Locomotions.Swimming;
                         break;
                     case 10:
                     case 11:
-                        PrimaryLocomotion = Locomotions.wingedflight;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Wingedflight;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 12:
                     case 13:
-                        PrimaryLocomotion = Locomotions.special;
+                        primaryLocomotion = Locomotions.Special;
                         break;
                 }
             }
@@ -1255,36 +2222,36 @@ namespace UniverseGeneration.OtherGeneration
                 switch (roll)
                 {
                     case 2:
-                        PrimaryLocomotion = Locomotions.immobile;
+                        primaryLocomotion = Locomotions.Immobile;
                         break;
                     case 3:
                     case 4:
                     case 5:
-                        PrimaryLocomotion = Locomotions.swimming;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Swimming;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 6:
-                        PrimaryLocomotion = Locomotions.slithering;
+                        primaryLocomotion = Locomotions.Slithering;
                         break;
                     case 7:
-                        PrimaryLocomotion = Locomotions.digging;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Digging;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 8:
-                        PrimaryLocomotion = Locomotions.walking;
+                        primaryLocomotion = Locomotions.Walking;
                         break;
                     case 9:
-                        PrimaryLocomotion = Locomotions.climbing;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Climbing;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 10:
                     case 11:
-                        PrimaryLocomotion = Locomotions.wingedflight;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Wingedflight;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 12:
                     case 13:
-                        PrimaryLocomotion = Locomotions.special;
+                        primaryLocomotion = Locomotions.Special;
                         break;
                 }
             }
@@ -1293,45 +2260,45 @@ namespace UniverseGeneration.OtherGeneration
                 switch (roll)
                 {
                     case 2:
-                        PrimaryLocomotion = Locomotions.immobile;
+                        primaryLocomotion = Locomotions.Immobile;
                         break;
                     case 3:
                     case 4:
-                        PrimaryLocomotion = Locomotions.slithering;
+                        primaryLocomotion = Locomotions.Slithering;
                         break;
                     case 5:
-                        PrimaryLocomotion = Locomotions.digging;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Digging;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 6:
                     case 7:
-                        PrimaryLocomotion = Locomotions.walking;
+                        primaryLocomotion = Locomotions.Walking;
                         break;
                     case 8:
                     case 9:
-                        PrimaryLocomotion = Locomotions.climbing;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Climbing;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 10:
                     case 11:
-                        PrimaryLocomotion = Locomotions.wingedflight;
-                        hasSecondaryLocomotion = true;
+                        primaryLocomotion = Locomotions.Wingedflight;
+                        HasSecondaryLocomotion = true;
                         break;
                     case 12:
                     case 13:
-                        PrimaryLocomotion = Locomotions.special;
+                        primaryLocomotion = Locomotions.Special;
                         break;
                 }
             }
-            return PrimaryLocomotion;
+            return primaryLocomotion;
         }
 
         private Locomotions DetermineSecondaryLocomotion()
         {
-            Locomotions SecondaryLocomotion = Locomotions.None;
-            Dice dice = new Dice();
-            int roll = dice.rng(2, 6);
-            if (PrimaryLocomotion == Locomotions.climbing)
+            var secondaryLocomotion = Locomotions.None;
+            var dice = new Dice();
+            var roll = dice.Rng(2, 6);
+            if (PrimaryLocomotion == Locomotions.Climbing)
             {
                 switch (roll)
                 {
@@ -1340,21 +2307,21 @@ namespace UniverseGeneration.OtherGeneration
                     case 4:
                     case 5:
                     case 6:
-                        SecondaryLocomotion = Locomotions.slithering;
+                        secondaryLocomotion = Locomotions.Slithering;
                         break;
                     case 7:
                     case 8:
                     case 9:
                     case 10:
                     case 11:
-                        SecondaryLocomotion = Locomotions.walking;
+                        secondaryLocomotion = Locomotions.Walking;
                         break;
                     case 12:
-                        SecondaryLocomotion = Locomotions.None;
+                        secondaryLocomotion = Locomotions.None;
                         break;
                 }
             }
-            if (PrimaryLocomotion == Locomotions.digging)
+            if (PrimaryLocomotion == Locomotions.Digging)
             {
                 if (LandOrWater == LandWater.Land)
                 {
@@ -1365,17 +2332,17 @@ namespace UniverseGeneration.OtherGeneration
                         case 4:
                         case 5:
                         case 6:
-                            SecondaryLocomotion = Locomotions.slithering;
+                            secondaryLocomotion = Locomotions.Slithering;
                             break;
                         case 7:
                         case 8:
                         case 9:
                         case 10:
                         case 11:
-                            SecondaryLocomotion = Locomotions.walking;
+                            secondaryLocomotion = Locomotions.Walking;
                             break;
                         case 12:
-                            SecondaryLocomotion = Locomotions.None;
+                            secondaryLocomotion = Locomotions.None;
                             break;
                     }
                 }
@@ -1387,25 +2354,25 @@ namespace UniverseGeneration.OtherGeneration
                         case 3:
                         case 4:
                         case 5:
-                            SecondaryLocomotion = Locomotions.slithering;
+                            secondaryLocomotion = Locomotions.Slithering;
                             break;
                         case 6:
                         case 7:
-                            SecondaryLocomotion = Locomotions.walking;
+                            secondaryLocomotion = Locomotions.Walking;
                             break;
                         case 8:
                         case 9:
                         case 10:
                         case 11:
-                            SecondaryLocomotion = Locomotions.swimming;
+                            secondaryLocomotion = Locomotions.Swimming;
                             break;
                         case 12:
-                            SecondaryLocomotion = Locomotions.None;
+                            secondaryLocomotion = Locomotions.None;
                             break;
                     }
                 }
             }
-            if (PrimaryLocomotion == Locomotions.slithering)
+            if (PrimaryLocomotion == Locomotions.Slithering)
             {
                 switch (roll)
                 {
@@ -1418,15 +2385,15 @@ namespace UniverseGeneration.OtherGeneration
                     case 8:
                     case 9:
                     case 10:
-                        SecondaryLocomotion = Locomotions.swimming;
+                        secondaryLocomotion = Locomotions.Swimming;
                         break;
                     case 11:
                     case 12:
-                        SecondaryLocomotion = Locomotions.None;
+                        secondaryLocomotion = Locomotions.None;
                         break;
                 }
             }
-            if (PrimaryLocomotion == Locomotions.walking)
+            if (PrimaryLocomotion == Locomotions.Walking)
             {
                 switch (roll)
                 {
@@ -1437,17 +2404,17 @@ namespace UniverseGeneration.OtherGeneration
                     case 6:
                     case 7:
                     case 8:
-                        SecondaryLocomotion = Locomotions.swimming;
+                        secondaryLocomotion = Locomotions.Swimming;
                         break;
                     case 9:
                     case 10:
                     case 11:
                     case 12:
-                        SecondaryLocomotion = Locomotions.None;
+                        secondaryLocomotion = Locomotions.None;
                         break;
                 }
             }
-            if (PrimaryLocomotion == Locomotions.wingedflight)
+            if (PrimaryLocomotion == Locomotions.Wingedflight)
             {
                 switch (roll)
                 {
@@ -1455,33 +2422,33 @@ namespace UniverseGeneration.OtherGeneration
                     case 3:
                     case 4:
                     case 5:
-                        SecondaryLocomotion = Locomotions.climbing;
+                        secondaryLocomotion = Locomotions.Climbing;
                         break;
                     case 6:
                     case 7:
-                        SecondaryLocomotion = Locomotions.swimming;
+                        secondaryLocomotion = Locomotions.Swimming;
                         break;
                     case 8:
                     case 9:
                     case 10:
-                        SecondaryLocomotion = Locomotions.walking;
+                        secondaryLocomotion = Locomotions.Walking;
                         break;
                     case 11:
-                        SecondaryLocomotion = Locomotions.slithering;
+                        secondaryLocomotion = Locomotions.Slithering;
                         break;
                     case 12:
-                        SecondaryLocomotion = Locomotions.None;
+                        secondaryLocomotion = Locomotions.None;
                         break;
                 }
             }
-            return SecondaryLocomotion;
+            return secondaryLocomotion;
         }
 
         private SizeClasses DetermineSizeClass()
         {
-            SizeClasses sizeclass = SizeClasses.None;
-            Dice dice = new Dice();
-            int roll = dice.rng(6);
+            var sizeclass = SizeClasses.None;
+            var dice = new Dice();
+            var roll = dice.Rng(6);
             if (Gravity <= 0.4)
             {
                 roll += 2;
@@ -1526,11 +2493,11 @@ namespace UniverseGeneration.OtherGeneration
             {
                 roll -= 4;
             }
-            if (PrimaryLocomotion == Locomotions.slithering || SecondaryLocomotion == Locomotions.slithering)
+            if (PrimaryLocomotion == Locomotions.Slithering || SecondaryLocomotion == Locomotions.Slithering)
             {
                 roll -= 1;
             }
-            if (PrimaryLocomotion == Locomotions.wingedflight || SecondaryLocomotion == Locomotions.wingedflight)
+            if (PrimaryLocomotion == Locomotions.Wingedflight || SecondaryLocomotion == Locomotions.Wingedflight)
             {
                 roll -= 3;
             }
@@ -1553,9 +2520,9 @@ namespace UniverseGeneration.OtherGeneration
 
         private double DetermineSize()
         {
-            double size = 0.00;
-            Dice dice = new Dice();
-            int roll = dice.rng(6);
+            var size = 0.00;
+            var dice = new Dice();
+            var roll = dice.Rng(6);
             if (SizeClass == SizeClasses.Small)
             {
                 switch (roll)
@@ -1697,16 +2664,16 @@ namespace UniverseGeneration.OtherGeneration
 
         private Symmetries DetermineSymmetry()
         {
-            Symmetries symmetry = Symmetries.None;
-            Dice dice = new Dice();
-            int roll = dice.rng(2, 6);
+            var symmetry = Symmetries.None;
+            var dice = new Dice();
+            var roll = dice.Rng(2, 6);
 
-            if (PrimaryLocomotion == Locomotions.immobile || SecondaryLocomotion == Locomotions.immobile)
+            if (PrimaryLocomotion == Locomotions.Immobile || SecondaryLocomotion == Locomotions.Immobile)
             {
                 roll += 1;
             }
 
-            if (PrimaryLocomotion == Locomotions.floating || SecondaryLocomotion == Locomotions.floating)
+            if (PrimaryLocomotion == Locomotions.Floating || SecondaryLocomotion == Locomotions.Floating)
             {
                 roll += 1;
             }
@@ -1742,9 +2709,9 @@ namespace UniverseGeneration.OtherGeneration
 
         private int DetermineSides()
         {
-            int sides = 0;
-            Dice dice = new Dice();
-            int roll = dice.rng(6);
+            var sides = 0;
+            var dice = new Dice();
+            var roll = dice.Rng(6);
             if (Symmetry == Symmetries.Bilateral)
             {
                 sides = 2;
@@ -1784,9 +2751,9 @@ namespace UniverseGeneration.OtherGeneration
 
         private int DetermineLimbSegments()
         {
-            int limbseg = 0;
-            Dice dice = new Dice();
-            int roll = dice.rng(6);
+            var limbseg = 0;
+            var dice = new Dice();
+            var roll = dice.Rng(6);
             if (Symmetry == Symmetries.Trilateral)
             {
                 roll -= 1;
@@ -1801,8 +2768,8 @@ namespace UniverseGeneration.OtherGeneration
             }
             if (Symmetry == Symmetries.Asymmetric)
             {
-                Dice d1 = new Dice();
-                return d1.rng(2, 6) - 2;
+                var d1 = new Dice();
+                return d1.Rng(2, 6) - 2;
             }
             ///////////
             if (roll <= 1)
@@ -1818,16 +2785,16 @@ namespace UniverseGeneration.OtherGeneration
                     limbseg = 2;
                     break;
                 case 4:
-                    Dice d2 = new Dice();
-                    limbseg = d2.rng(6);
+                    var d2 = new Dice();
+                    limbseg = d2.Rng(6);
                     break;
                 case 5:
-                    Dice d3 = new Dice();
-                    limbseg = d3.rng(2, 6);
+                    var d3 = new Dice();
+                    limbseg = d3.Rng(2, 6);
                     break;
                 case 6:
-                    Dice d4 = new Dice();
-                    limbseg = d4.rng(3, 6);
+                    var d4 = new Dice();
+                    limbseg = d4.Rng(3, 6);
                     break;
             }
 
@@ -1836,66 +2803,66 @@ namespace UniverseGeneration.OtherGeneration
 
         private Tails DetermineTail()
         {
-            Tails Tail = Tails.None;
-            Dice taildice = new Dice();
-            int roll = taildice.rng(6);
+            var tail = Tails.None;
+            var taildice = new Dice();
+            var roll = taildice.Rng(6);
             if (Symmetry == Symmetries.Spherical)
             {
                 return Tails.None;
             }
-            if (PrimaryLocomotion == Locomotions.swimming || SecondaryLocomotion == Locomotions.swimming)
+            if (PrimaryLocomotion == Locomotions.Swimming || SecondaryLocomotion == Locomotions.Swimming)
             {
                 roll += 1;
             }
             if (roll >= 5)
             {
-                Dice dice = new Dice();
-                roll = dice.rng(2, 6);
+                var dice = new Dice();
+                roll = dice.Rng(2, 6);
                 switch (roll)
                 {
                     case 2:
                     case 3:
                     case 4:
                     case 5:
-                        Tail = Tails.FeatureLess;
+                        tail = Tails.FeatureLess;
                         //TODO: Add 0-Point Advantage/Feature.(Has no Gameplay Effect)
                         break;
                     case 6:
-                        Tail = Tails.Striker;
+                        tail = Tails.Striker;
                         break;
                     case 7:
-                        Tail = Tails.Long;
+                        tail = Tails.Long;
                         //TODO: Long enhancement
                         break;
                     case 8:
-                        Tail = Tails.Constricting;
+                        tail = Tails.Constricting;
                         break;
                     case 9:
-                        Tail = Tails.Barbed;
+                        tail = Tails.Barbed;
                         break;
                     case 10:
-                        Tail = Tails.Gripping;
+                        tail = Tails.Gripping;
                         break;
                     case 11:
-                        Tail = Tails.Branching;
+                        tail = Tails.Branching;
                         break;
                     case 12:
-                        Tail = Tails.Combination;
+                        tail = Tails.Combination;
                         break;
                 }
             }
             else
             {
-                Tail = Tails.None;
+                tail = Tails.None;
             }
-            return Tail;
+            return tail;
         }
 
         private int DetermineManipulators()
         {
-            int manipulators = 0;
-            Dice dice = new Dice();
-            int roll = dice.rng(2, 6);
+            var manipulators = 0;
+            var dice = new Dice();
+            var roll = dice.Rng(2, 6);
             if (LimbSegments == 1)
             {
                 roll -= 1;
@@ -1908,11 +2875,11 @@ namespace UniverseGeneration.OtherGeneration
             {
                 roll += 2;
             }
-            if (PrimaryLocomotion == Locomotions.wingedflight || SecondaryLocomotion == Locomotions.wingedflight)
+            if (PrimaryLocomotion == Locomotions.Wingedflight || SecondaryLocomotion == Locomotions.Wingedflight)
             {
                 roll -= 1;
             }
-            if (PrimaryLocomotion == Locomotions.swimming && WaterHabitat == WaterHabitats.OpenOcean)
+            if (PrimaryLocomotion == Locomotions.Swimming && WaterHabitat == WaterHabitats.OpenOcean)
             {
                 roll -= 2;
             }
@@ -1943,8 +2910,8 @@ namespace UniverseGeneration.OtherGeneration
                 case 15:
                 case 16:
                 case 17:
-                    Dice d1 = new Dice();
-                    manipulators = d1.rng(6);
+                    var d1 = new Dice();
+                    manipulators = d1.Rng(6);
                     break;
             }
             return manipulators;
@@ -1952,9 +2919,9 @@ namespace UniverseGeneration.OtherGeneration
 
         private Skeletons DetermineSkeleton()
         {
-            Skeletons skeleton = Skeletons.None;
-            Dice dice = new Dice();
-            int roll = dice.rng(2, 6);
+            var skeleton = Skeletons.None;
+            var dice = new Dice();
+            var roll = dice.Rng(2, 6);
             if (SizeClass == SizeClasses.HumanScale)
             {
                 roll += 1;
@@ -1967,11 +2934,11 @@ namespace UniverseGeneration.OtherGeneration
             {
                 roll += 1;
             }
-            if (PrimaryLocomotion == Locomotions.slithering || SecondaryLocomotion == Locomotions.slithering)
+            if (PrimaryLocomotion == Locomotions.Slithering || SecondaryLocomotion == Locomotions.Slithering)
             {
                 roll -= 1;
             }
-            if (PrimaryLocomotion == Locomotions.immobile || SecondaryLocomotion == Locomotions.immobile)
+            if (PrimaryLocomotion == Locomotions.Immobile || SecondaryLocomotion == Locomotions.Immobile)
             {
                 roll -= 1;
             }
@@ -2022,9 +2989,9 @@ namespace UniverseGeneration.OtherGeneration
 
         private SkinClasses DetermineSkinClass()
         {
-            SkinClasses skinclass = SkinClasses.None;
-            Dice dice = new Dice();
-            int roll = dice.rng(6);
+            var skinclass = SkinClasses.None;
+            var dice = new Dice();
+            var roll = dice.Rng(6);
             if (Skeleton == Skeletons.External)
             {
                 return SkinClasses.Exeskeleton;
@@ -2053,11 +3020,11 @@ namespace UniverseGeneration.OtherGeneration
 
         private Skins DetermineSkin()
         {
-            Skins skin = Skins.None;
+            var skin = Skins.None;
             if (SkinClass == SkinClasses.Skin)
             {
-                Dice dice = new Dice();
-                int roll = dice.rng(2, 6);
+                var dice = new Dice();
+                var roll = dice.Rng(2, 6);
                 if (LandHabitat == LandHabitats.Arctic)
                 {
                     roll += 1;
@@ -2074,7 +3041,7 @@ namespace UniverseGeneration.OtherGeneration
                 {
                     roll += 1;
                 }
-                if (PrimaryLocomotion == Locomotions.wingedflight || SecondaryLocomotion == Locomotions.wingedflight)
+                if (PrimaryLocomotion == Locomotions.Wingedflight || SecondaryLocomotion == Locomotions.Wingedflight)
                 {
                     roll -= 5;
                 }
@@ -2111,8 +3078,8 @@ namespace UniverseGeneration.OtherGeneration
             }
             if (SkinClass == SkinClasses.Scales)
             {
-                Dice dice = new Dice();
-                int roll = dice.rng(2, 6);
+                var dice = new Dice();
+                var roll = dice.Rng(2, 6);
                 if (LandHabitat == LandHabitats.Desert)
                 {
                     roll += 1;
@@ -2121,11 +3088,11 @@ namespace UniverseGeneration.OtherGeneration
                 {
                     roll += 1;
                 }
-                if (PrimaryLocomotion == Locomotions.wingedflight || SecondaryLocomotion == Locomotions.wingedflight)
+                if (PrimaryLocomotion == Locomotions.Wingedflight || SecondaryLocomotion == Locomotions.Wingedflight)
                 {
                     roll -= 2;
                 }
-                if (PrimaryLocomotion == Locomotions.digging || SecondaryLocomotion == Locomotions.digging)
+                if (PrimaryLocomotion == Locomotions.Digging || SecondaryLocomotion == Locomotions.Digging)
                 {
                     roll -= 1;
                 }
@@ -2154,12 +3121,11 @@ namespace UniverseGeneration.OtherGeneration
                         skin = Skins.ArmorShell;
                         break;
                 }
-
             }
             if (SkinClass == SkinClasses.Fur)
             {
-                Dice dice = new Dice();
-                int roll = dice.rng(2, 6);
+                var dice = new Dice();
+                var roll = dice.Rng(2, 6);
                 if (LandHabitat == LandHabitats.Desert)
                 {
                     roll -= 1;
@@ -2168,7 +3134,7 @@ namespace UniverseGeneration.OtherGeneration
                 {
                     roll += 1;
                 }
-                if (PrimaryLocomotion == Locomotions.wingedflight || SecondaryLocomotion == Locomotions.wingedflight)
+                if (PrimaryLocomotion == Locomotions.Wingedflight || SecondaryLocomotion == Locomotions.Wingedflight)
                 {
                     roll -= 1;
                 }
@@ -2203,12 +3169,11 @@ namespace UniverseGeneration.OtherGeneration
                         skin = Skins.Spines;
                         break;
                 }
-
             }
             if (SkinClass == SkinClasses.Feathers)
             {
-                Dice dice = new Dice();
-                int roll = dice.rng(2, 6);
+                var dice = new Dice();
+                var roll = dice.Rng(2, 6);
                 if (LandHabitat == LandHabitats.Desert)
                 {
                     roll -= 1;
@@ -2217,7 +3182,7 @@ namespace UniverseGeneration.OtherGeneration
                 {
                     roll += 1;
                 }
-                if (PrimaryLocomotion == Locomotions.wingedflight || SecondaryLocomotion == Locomotions.wingedflight)
+                if (PrimaryLocomotion == Locomotions.Wingedflight || SecondaryLocomotion == Locomotions.Wingedflight)
                 {
                     roll += 1;
                 }
@@ -2255,18 +3220,18 @@ namespace UniverseGeneration.OtherGeneration
 
             if (SkinClass == SkinClasses.Exeskeleton)
             {
-                Dice dice = new Dice();
-                int roll = dice.rng(6);
+                var dice = new Dice();
+                var roll = dice.Rng(6);
 
                 if (LandOrWater == LandWater.Water)
                 {
                     roll += 1;
                 }
-                if (PrimaryLocomotion == Locomotions.immobile || SecondaryLocomotion == Locomotions.immobile)
+                if (PrimaryLocomotion == Locomotions.Immobile || SecondaryLocomotion == Locomotions.Immobile)
                 {
                     roll += 1;
                 }
-                if (PrimaryLocomotion == Locomotions.wingedflight || SecondaryLocomotion == Locomotions.wingedflight)
+                if (PrimaryLocomotion == Locomotions.Wingedflight || SecondaryLocomotion == Locomotions.Wingedflight)
                 {
                     roll -= 2;
                 }
@@ -2296,14 +3261,14 @@ namespace UniverseGeneration.OtherGeneration
 
         private BreathingMethods DetermineBreathing()
         {
-            BreathingMethods breathing = BreathingMethods.None;
-            Dice dice = new Dice();
-            int roll = dice.rng(2, 6);
+            var breathing = BreathingMethods.None;
+            var dice = new Dice();
+            var roll = dice.Rng(2, 6);
             if (LandOrWater == LandWater.Land)
             {
                 return BreathingMethods.Lungs;
             }
-            if (PrimaryLocomotion == Locomotions.wingedflight || SecondaryLocomotion == Locomotions.wingedflight)
+            if (PrimaryLocomotion == Locomotions.Wingedflight || SecondaryLocomotion == Locomotions.Wingedflight)
             {
                 return BreathingMethods.Lungs;
             }
@@ -2343,9 +3308,9 @@ namespace UniverseGeneration.OtherGeneration
 
         private Temperatures DetermineTemperature()
         {
-            Temperatures temperature = Temperatures.None;
-            Dice dice = new Dice();
-            int roll = dice.rng(2, 6);
+            var temperature = Temperatures.None;
+            var dice = new Dice();
+            var roll = dice.Rng(2, 6);
 
             if (Breathing == BreathingMethods.Lungs)
             {
@@ -2409,9 +3374,9 @@ namespace UniverseGeneration.OtherGeneration
 
         private GrowthRates DetermineGrowth()
         {
-            GrowthRates growth = GrowthRates.None;
-            Dice dice = new Dice();
-            int roll = dice.rng(2, 6);
+            var growth = GrowthRates.None;
+            var dice = new Dice();
+            var roll = dice.Rng(2, 6);
             if (Skeleton == Skeletons.External)
             {
                 roll -= 1;
@@ -2420,7 +3385,7 @@ namespace UniverseGeneration.OtherGeneration
             {
                 roll += 1;
             }
-            if (PrimaryLocomotion == Locomotions.immobile || SecondaryLocomotion == Locomotions.immobile)
+            if (PrimaryLocomotion == Locomotions.Immobile || SecondaryLocomotion == Locomotions.Immobile)
             {
                 roll += 1;
             }
@@ -2455,10 +3420,10 @@ namespace UniverseGeneration.OtherGeneration
 
         private Sexes DetermineSexes()
         {
-            Sexes sexes = Sexes.None;
-            Dice dice = new Dice();
-            int roll = dice.rng(2, 6);
-            if (PrimaryLocomotion == Locomotions.immobile || SecondaryLocomotion == Locomotions.immobile)
+            var sexes = Sexes.None;
+            var dice = new Dice();
+            var roll = dice.Rng(2, 6);
+            if (PrimaryLocomotion == Locomotions.Immobile || SecondaryLocomotion == Locomotions.Immobile)
             {
                 roll -= 1;
             }
@@ -2502,14 +3467,14 @@ namespace UniverseGeneration.OtherGeneration
 
         private Gestations DetermineGestation()
         {
-            Gestations gestation = Gestations.None;
-            Dice dice = new Dice();
-            int roll = dice.rng(2, 6);
+            var gestation = Gestations.None;
+            var dice = new Dice();
+            var roll = dice.Rng(2, 6);
             if (LandOrWater == LandWater.Land)
             {
                 roll -= 1;
             }
-            if (PrimaryLocomotion == Locomotions.immobile || SecondaryLocomotion == Locomotions.immobile)
+            if (PrimaryLocomotion == Locomotions.Immobile || SecondaryLocomotion == Locomotions.Immobile)
             {
                 roll -= 2;
             }
@@ -2540,12 +3505,12 @@ namespace UniverseGeneration.OtherGeneration
                     break;
             }
 
-            Dice specialDice = new Dice();
-            roll = specialDice.rng(2, 6);
+            var specialDice = new Dice();
+            roll = specialDice.Rng(2, 6);
             if (roll == 12)
             {
-                Dice d1 = new Dice();
-                roll = d1.rng(6);
+                var d1 = new Dice();
+                roll = d1.Rng(6);
                 switch (roll)
                 {
                     case 1:
@@ -2569,9 +3534,9 @@ namespace UniverseGeneration.OtherGeneration
 
         private Strategies DetermineStrategy()
         {
-            Strategies strategy = Strategies.None;
-            Dice dice = new Dice();
-            int roll = dice.rng(2, 6);
+            var strategy = Strategies.None;
+            var dice = new Dice();
+            var roll = dice.Rng(2, 6);
 
             if (SizeClass == SizeClasses.Large)
             {
@@ -2600,15 +3565,15 @@ namespace UniverseGeneration.OtherGeneration
                     OffspringCount = 1;
                     break;
                 case 7:
-                    Dice d2 = new Dice();
-                    int spawn = d2.rng(6);
+                    var d2 = new Dice();
+                    var spawn = d2.Rng(6);
                     strategy = Strategies.MedianStrategy;
                     OffspringCount = spawn;
                     break;
                 case 8:
                 case 9:
-                    Dice d3 = new Dice();
-                    int spawn3 = d3.rng(6) + 1;
+                    var d3 = new Dice();
+                    var spawn3 = d3.Rng(6) + 1;
                     strategy = Strategies.ModerateR;
                     OffspringCount = spawn3;
                     break;
@@ -2619,8 +3584,8 @@ namespace UniverseGeneration.OtherGeneration
                 case 14:
                 case 15:
                 case 16:
-                    Dice d4 = new Dice();
-                    int spawn4 = d4.rng(2, 6);
+                    var d4 = new Dice();
+                    var spawn4 = d4.Rng(2, 6);
                     strategy = Strategies.StrongR;
                     OffspringCount = spawn4;
                     break;
@@ -2628,8 +3593,8 @@ namespace UniverseGeneration.OtherGeneration
 
             if (Gestation == Gestations.SpawningPollinating)
             {
-                Dice d1 = new Dice();
-                int spawn = (d1.rng(2, 6) * 10) * roll;
+                var d1 = new Dice();
+                var spawn = d1.Rng(2, 6) * 10 * roll;
                 OffspringCount = spawn;
             }
             return strategy;
@@ -2637,9 +3602,9 @@ namespace UniverseGeneration.OtherGeneration
 
         private PrimarySenses DeterminePrimarySense()
         {
-            PrimarySenses primarysense = PrimarySenses.None;
-            Dice dice = new Dice();
-            int roll = dice.rng(3, 6);
+            var primarysense = PrimarySenses.None;
+            var dice = new Dice();
+            var roll = dice.Rng(3, 6);
 
             if (LandOrWater == LandWater.Water)
             {
@@ -2668,26 +3633,26 @@ namespace UniverseGeneration.OtherGeneration
 
         private Visions DetermineVision()
         {
-            Visions vision = Visions.None;
-            Dice dice = new Dice();
-            int roll = dice.gurpsRoll();
+            var vision = Visions.None;
+            var dice = new Dice();
+            var roll = dice.GurpsRoll();
             if (PrimarySense == PrimarySenses.Vision)
             {
                 roll += 4;
             }
-            if (PrimaryLocomotion == Locomotions.digging)
+            if (PrimaryLocomotion == Locomotions.Digging)
             {
                 roll -= 4;
             }
-            if (PrimaryLocomotion == Locomotions.climbing || SecondaryLocomotion == Locomotions.climbing)
+            if (PrimaryLocomotion == Locomotions.Climbing || SecondaryLocomotion == Locomotions.Climbing)
             {
                 roll += 2;
             }
-            if (PrimaryLocomotion == Locomotions.wingedflight || SecondaryLocomotion == Locomotions.wingedflight)
+            if (PrimaryLocomotion == Locomotions.Wingedflight || SecondaryLocomotion == Locomotions.Wingedflight)
             {
                 roll += 3;
             }
-            if (PrimaryLocomotion == Locomotions.immobile || SecondaryLocomotion == Locomotions.immobile)
+            if (PrimaryLocomotion == Locomotions.Immobile || SecondaryLocomotion == Locomotions.Immobile)
             {
                 roll -= 4;
             }
@@ -2699,7 +3664,8 @@ namespace UniverseGeneration.OtherGeneration
             {
                 roll -= 2;
             }
-            if (TrophicDiet == TrophicDiets.ChasingCarnivore || TrophicDiet == TrophicDiets.HijackingCarnivore || TrophicDiet == TrophicDiets.TrappingCarnivore || TrophicDiet == TrophicDiets.PouncingCarnivore || TrophicDiet == TrophicDiets.GatheringHerbivore)
+            if (TrophicDiet == TrophicDiets.ChasingCarnivore || TrophicDiet == TrophicDiets.HijackingCarnivore || TrophicDiet == TrophicDiets.TrappingCarnivore || TrophicDiet == TrophicDiets.PouncingCarnivore ||
+                TrophicDiet == TrophicDiets.GatheringHerbivore)
             {
                 roll += 2;
             }
@@ -2743,9 +3709,9 @@ namespace UniverseGeneration.OtherGeneration
 
         private Hearings DetermineHearing()
         {
-            Hearings hearing = Hearings.None;
-            Dice dice = new Dice();
-            int roll = dice.gurpsRoll();
+            var hearing = Hearings.None;
+            var dice = new Dice();
+            var roll = dice.GurpsRoll();
             if (PrimarySense == PrimarySenses.Hearing)
             {
                 roll += 4;
@@ -2762,7 +3728,7 @@ namespace UniverseGeneration.OtherGeneration
             {
                 roll += 1;
             }
-            if (PrimaryLocomotion == Locomotions.immobile || SecondaryLocomotion == Locomotions.immobile)
+            if (PrimaryLocomotion == Locomotions.Immobile || SecondaryLocomotion == Locomotions.Immobile)
             {
                 roll -= 4;
             }
@@ -2808,9 +3774,9 @@ namespace UniverseGeneration.OtherGeneration
 
         private Touches DetermineTouch()
         {
-            Touches touch = Touches.None;
-            Dice dice = new Dice();
-            int roll = dice.rng(2, 6);
+            var touch = Touches.None;
+            var dice = new Dice();
+            var roll = dice.Rng(2, 6);
             if (PrimarySense == PrimarySenses.TouchTaste)
             {
                 roll += 4;
@@ -2823,11 +3789,11 @@ namespace UniverseGeneration.OtherGeneration
             {
                 roll += 2;
             }
-            if (PrimaryLocomotion == Locomotions.digging || SecondaryLocomotion == Locomotions.digging)
+            if (PrimaryLocomotion == Locomotions.Digging || SecondaryLocomotion == Locomotions.Digging)
             {
                 roll += 2;
             }
-            if (PrimaryLocomotion == Locomotions.wingedflight || SecondaryLocomotion == Locomotions.wingedflight)
+            if (PrimaryLocomotion == Locomotions.Wingedflight || SecondaryLocomotion == Locomotions.Wingedflight)
             {
                 roll -= 2;
             }
@@ -2881,9 +3847,9 @@ namespace UniverseGeneration.OtherGeneration
 
         private TasteSmells DetermineTasteSmell()
         {
-            TasteSmells tastesmell = TasteSmells.None;
-            Dice dice = new Dice();
-            int roll = dice.rng(2, 6) + 2;
+            var tastesmell = TasteSmells.None;
+            var dice = new Dice();
+            var roll = dice.Rng(2, 6) + 2;
             if (PrimarySense == PrimarySenses.TouchTaste)
             {
                 roll += 4;
@@ -2892,11 +3858,12 @@ namespace UniverseGeneration.OtherGeneration
             {
                 roll += 2;
             }
-            if (TrophicDiet == TrophicDiets.FilterFeeder || TrophicDiet == TrophicDiets.TrappingCarnivore || TrophicDiet == TrophicDiets.AutothrophPhotosynthetic || TrophicDiet == TrophicDiets.AutothrophChemosynthetic || TrophicDiet == TrophicDiets.AutothrophOther)
+            if (TrophicDiet == TrophicDiets.FilterFeeder || TrophicDiet == TrophicDiets.TrappingCarnivore || TrophicDiet == TrophicDiets.AutothrophPhotosynthetic || TrophicDiet == TrophicDiets.AutothrophChemosynthetic ||
+                TrophicDiet == TrophicDiets.AutothrophOther)
             {
                 roll -= 2;
             }
-            if (PrimaryLocomotion == Locomotions.immobile || SecondaryLocomotion == Locomotions.immobile)
+            if (PrimaryLocomotion == Locomotions.Immobile || SecondaryLocomotion == Locomotions.Immobile)
             {
                 roll -= 4;
             }
@@ -2933,9 +3900,9 @@ namespace UniverseGeneration.OtherGeneration
 
         private List<SpecialSenses> DetermineSpecialSenses()
         {
-            List<SpecialSenses> specialsenses = new List<SpecialSenses>();
-            Dice dice = new Dice();
-            int roll = dice.rng(2, 6);
+            var specialsenses = new List<SpecialSenses>();
+            var dice = new Dice();
+            var roll = dice.Rng(2, 6);
             //TODO: Add All the Advantages
             //360 Vision
             if (LandHabitat == LandHabitats.Plains || LandHabitat == LandHabitats.Desert)
@@ -2952,16 +3919,16 @@ namespace UniverseGeneration.OtherGeneration
             }
 
             //Absolute Direction
-            roll = dice.rng(2, 6);
+            roll = dice.Rng(2, 6);
             if (WaterHabitat == WaterHabitats.OpenOcean)
             {
                 roll += 1;
             }
-            if (PrimaryLocomotion == Locomotions.wingedflight || SecondaryLocomotion == Locomotions.wingedflight)
+            if (PrimaryLocomotion == Locomotions.Wingedflight || SecondaryLocomotion == Locomotions.Wingedflight)
             {
                 roll += 1;
             }
-            if (PrimaryLocomotion == Locomotions.digging || SecondaryLocomotion == Locomotions.digging)
+            if (PrimaryLocomotion == Locomotions.Digging || SecondaryLocomotion == Locomotions.Digging)
             {
                 roll += 1;
             }
@@ -2971,7 +3938,7 @@ namespace UniverseGeneration.OtherGeneration
             }
 
             //Discriminatory Hearing
-            roll = dice.rng(2, 6);
+            roll = dice.Rng(2, 6);
             if (Hearing == Hearings.AcutePlusSubSonicAndSonar)
             {
                 roll += 2;
@@ -2982,7 +3949,7 @@ namespace UniverseGeneration.OtherGeneration
             }
 
             //Peripheral Vision
-            roll = dice.rng(2, 6);
+            roll = dice.Rng(2, 6);
             if (LandHabitat == LandHabitats.Plains || LandHabitat == LandHabitats.Desert)
             {
                 roll += 1;
@@ -2997,7 +3964,7 @@ namespace UniverseGeneration.OtherGeneration
             }
 
             //Night Vision
-            roll = dice.rng(2, 6);
+            roll = dice.Rng(2, 6);
             if (LandOrWater == LandWater.Water)
             {
                 roll += 2;
@@ -3012,14 +3979,14 @@ namespace UniverseGeneration.OtherGeneration
             }
 
             //Ultravision
-            roll = dice.rng(2, 6);
-            if (roll >= 11 && LandOrWater != LandWater.Water && chemicalBasis != ChemicalBasis.Ammonia)
+            roll = dice.Rng(2, 6);
+            if (roll >= 11 && LandOrWater != LandWater.Water && ChemicalBase != ChemicalBasis.Ammonia)
             {
                 specialsenses.Add(SpecialSenses.UltraVision);
             }
 
             //Detect (Heat)
-            roll = dice.rng(2, 6);
+            roll = dice.Rng(2, 6);
             if (TrophicDiet == TrophicDiets.PouncingCarnivore || TrophicDiet == TrophicDiets.ChasingCarnivore || TrophicDiet == TrophicDiets.TrappingCarnivore || TrophicDiet == TrophicDiets.HijackingCarnivore)
             {
                 roll += 1;
@@ -3034,7 +4001,7 @@ namespace UniverseGeneration.OtherGeneration
             }
 
             //Detect (Electric Fields)
-            roll = dice.rng(2, 6);
+            roll = dice.Rng(2, 6);
             if (TrophicDiet == TrophicDiets.PouncingCarnivore || TrophicDiet == TrophicDiets.ChasingCarnivore || TrophicDiet == TrophicDiets.TrappingCarnivore || TrophicDiet == TrophicDiets.HijackingCarnivore)
             {
                 roll += 1;
@@ -3045,8 +4012,8 @@ namespace UniverseGeneration.OtherGeneration
             }
 
             //Perfect Balance
-            roll = dice.rng(2, 6);
-            if (PrimaryLocomotion == Locomotions.climbing || SecondaryLocomotion == Locomotions.climbing)
+            roll = dice.Rng(2, 6);
+            if (PrimaryLocomotion == Locomotions.Climbing || SecondaryLocomotion == Locomotions.Climbing)
             {
                 roll += 2;
             }
@@ -3067,7 +4034,7 @@ namespace UniverseGeneration.OtherGeneration
                 specialsenses.Add(SpecialSenses.PerfectBalance);
             }
             //Scanning Sense (Radar)
-            roll = dice.rng(2, 6);
+            roll = dice.Rng(2, 6);
             if (roll >= 11 && SizeClass != SizeClasses.Small && LandOrWater != LandWater.Water)
             {
                 specialsenses.Add(SpecialSenses.ScanningSense);
@@ -3075,14 +4042,15 @@ namespace UniverseGeneration.OtherGeneration
             return specialsenses;
         }
 
-        private Intelligences DetermineIntelligence(bool issapient)
+        private Intelligences DetermineIntelligence( bool issapient )
         {
-            Intelligences intelligence = Intelligences.None;
+            var intelligence = Intelligences.None;
             if (!issapient)
             {
-                Dice dice = new Dice();
-                int roll = dice.rng(2, 6);
-                if (TrophicDiet == TrophicDiets.AutothrophPhotosynthetic || TrophicDiet == TrophicDiets.AutothrophChemosynthetic || TrophicDiet == TrophicDiets.AutothrophOther || TrophicDiet == TrophicDiets.FilterFeeder || TrophicDiet == TrophicDiets.GrazingHerbivore)
+                var dice = new Dice();
+                var roll = dice.Rng(2, 6);
+                if (TrophicDiet == TrophicDiets.AutothrophPhotosynthetic || TrophicDiet == TrophicDiets.AutothrophChemosynthetic || TrophicDiet == TrophicDiets.AutothrophOther || TrophicDiet == TrophicDiets.FilterFeeder ||
+                    TrophicDiet == TrophicDiets.GrazingHerbivore)
                 {
                     roll -= 1;
                 }
@@ -3137,13 +4105,13 @@ namespace UniverseGeneration.OtherGeneration
                         IntelligenceValue = 5;
                         break;
                 }
-
             }
             else
             {
-                Dice dice = new Dice();
-                int roll = dice.rng(6) + 5;
-                if (TrophicDiet == TrophicDiets.AutothrophPhotosynthetic || TrophicDiet == TrophicDiets.AutothrophChemosynthetic || TrophicDiet == TrophicDiets.AutothrophOther || TrophicDiet == TrophicDiets.FilterFeeder || TrophicDiet == TrophicDiets.GrazingHerbivore)
+                var dice = new Dice();
+                var roll = dice.Rng(6) + 5;
+                if (TrophicDiet == TrophicDiets.AutothrophPhotosynthetic || TrophicDiet == TrophicDiets.AutothrophChemosynthetic || TrophicDiet == TrophicDiets.AutothrophOther || TrophicDiet == TrophicDiets.FilterFeeder ||
+                    TrophicDiet == TrophicDiets.GrazingHerbivore)
                 {
                     roll -= 1;
                 }
@@ -3175,9 +4143,9 @@ namespace UniverseGeneration.OtherGeneration
 
         private MatingBehaviours DetermineMatingBehaviour()
         {
-            MatingBehaviours matingbehaviour = MatingBehaviours.None;
-            Dice dice = new Dice();
-            int roll = dice.rng(2, 6);
+            var matingbehaviour = MatingBehaviours.None;
+            var dice = new Dice();
+            var roll = dice.Rng(2, 6);
             if (Sex == Sexes.Hermaphrodite)
             {
                 roll -= 2;
@@ -3230,9 +4198,9 @@ namespace UniverseGeneration.OtherGeneration
 
         private SocialOrganizations DetermineSocialOrganization()
         {
-            SocialOrganizations socialorgs = SocialOrganizations.None;
-            Dice dice = new Dice();
-            int roll = dice.rng(2, 6);
+            var socialorgs = SocialOrganizations.None;
+            var dice = new Dice();
+            var roll = dice.Rng(2, 6);
             if (TrophicDiet == TrophicDiets.ChasingCarnivore || TrophicDiet == TrophicDiets.HijackingCarnivore || TrophicDiet == TrophicDiets.PouncingCarnivore || TrophicDiet == TrophicDiets.TrappingCarnivore)
             {
                 roll -= 1;
@@ -3268,17 +4236,17 @@ namespace UniverseGeneration.OtherGeneration
                 case 9:
                 case 10:
                     socialorgs = SocialOrganizations.SmallGroup;
-                    SocialGroupSize = dice.rng(2,6);
+                    SocialGroupSize = dice.Rng(2, 6);
                     break;
                 case 11:
                     socialorgs = SocialOrganizations.MediumGroup;
-                    SocialGroupSize = dice.rng(4, 6);
+                    SocialGroupSize = dice.Rng(4, 6);
                     break;
                 case 12:
                 case 13:
                 case 14:
                     socialorgs = SocialOrganizations.LargeHerd;
-                    SocialGroupSize = dice.rng(10) * 10;
+                    SocialGroupSize = dice.Rng(10) * 10;
                     break;
             }
             return socialorgs;
@@ -3286,11 +4254,11 @@ namespace UniverseGeneration.OtherGeneration
 
         private Concentrations DetermineConcentration()
         {
-            Concentrations concentration = Concentrations.None;
-            Dice dice = new Dice();
-            int roll1 = dice.rng(6);
-            int roll2 = dice.rng(6);
-            int roll = roll1 - roll2;
+            var concentration = Concentrations.None;
+            var dice = new Dice();
+            var roll1 = dice.Rng(6);
+            var roll2 = dice.Rng(6);
+            var roll = roll1 - roll2;
             if (TrophicDiet == TrophicDiets.PouncingCarnivore || TrophicDiet == TrophicDiets.ChasingCarnivore)
             {
                 roll += 1;
@@ -3341,11 +4309,11 @@ namespace UniverseGeneration.OtherGeneration
 
         private Curiosities DetermineCuriosity()
         {
-            Curiosities curiosity = Curiosities.None;
-            Dice dice = new Dice();
-            int roll1 = dice.rng(6);
-            int roll2 = dice.rng(6);
-            int roll = roll1 - roll2;
+            var curiosity = Curiosities.None;
+            var dice = new Dice();
+            var roll1 = dice.Rng(6);
+            var roll2 = dice.Rng(6);
+            var roll = roll1 - roll2;
             if (TrophicDiet == TrophicDiets.Omnivore)
             {
                 roll += 1;
@@ -3388,21 +4356,17 @@ namespace UniverseGeneration.OtherGeneration
                     {
                         //TODO: Add Curios Disadvatage
                     }
-                    else
-                    {
-                        //TODO: Add Nosy Quirk
-                    }
                     break;
                 case 0:
                     curiosity = Curiosities.Normal;
                     break;
                 case -1:
                     curiosity = Curiosities.Staid;
-                        //TODO: Add Staid Quirk
+                    //TODO: Add Staid Quirk
                     break;
                 case -2:
                     curiosity = Curiosities.Incurious;
-                        //TODO: Add Incurious
+                    //TODO: Add Incurious
                     break;
             }
             return curiosity;
@@ -3410,11 +4374,11 @@ namespace UniverseGeneration.OtherGeneration
 
         private Egoisms DetermineEgoism()
         {
-            Egoisms egoism = Egoisms.None;
-            Dice dice = new Dice();
-            int roll1 = dice.rng(6);
-            int roll2 = dice.rng(6);
-            int roll = roll1 - roll2;
+            var egoism = Egoisms.None;
+            var dice = new Dice();
+            var roll1 = dice.Rng(6);
+            var roll2 = dice.Rng(6);
+            var roll = roll1 - roll2;
             if (SocialOrganization == SocialOrganizations.Solitary)
             {
                 roll += 1;
@@ -3472,16 +4436,17 @@ namespace UniverseGeneration.OtherGeneration
 
         private Empathies DetermineEmpathy()
         {
-            Empathies empathy = Empathies.None;
-            Dice dice = new Dice();
-            int roll1 = dice.rng(6);
-            int roll2 = dice.rng(6);
-            int roll = roll1 - roll2;
+            var empathy = Empathies.None;
+            var dice = new Dice();
+            var roll1 = dice.Rng(6);
+            var roll2 = dice.Rng(6);
+            var roll = roll1 - roll2;
             if (TrophicDiet == TrophicDiets.ChasingCarnivore)
             {
                 roll += 1;
             }
-            if (TrophicDiet == TrophicDiets.AutothrophPhotosynthetic || TrophicDiet == TrophicDiets.AutothrophChemosynthetic || TrophicDiet == TrophicDiets.AutothrophOther || TrophicDiet == TrophicDiets.FilterFeeder || TrophicDiet == TrophicDiets.GrazingHerbivore || TrophicDiet == TrophicDiets.Scavenger)
+            if (TrophicDiet == TrophicDiets.AutothrophPhotosynthetic || TrophicDiet == TrophicDiets.AutothrophChemosynthetic || TrophicDiet == TrophicDiets.AutothrophOther || TrophicDiet == TrophicDiets.FilterFeeder ||
+                TrophicDiet == TrophicDiets.GrazingHerbivore || TrophicDiet == TrophicDiets.Scavenger)
             {
                 roll -= 1;
             }
@@ -3536,12 +4501,13 @@ namespace UniverseGeneration.OtherGeneration
 
         private Gegariousnesses DetermineGegariousness()
         {
-            Gegariousnesses gregariousness = Gegariousnesses.None;
-            Dice dice = new Dice();
-            int roll1 = dice.rng(6);
-            int roll2 = dice.rng(6);
-            int roll = roll1 - roll2;
-            if (TrophicDiet == TrophicDiets.PouncingCarnivore || TrophicDiet == TrophicDiets.Scavenger || TrophicDiet == TrophicDiets.FilterFeeder || TrophicDiet == TrophicDiets.AutothrophPhotosynthetic || TrophicDiet == TrophicDiets.AutothrophChemosynthetic || TrophicDiet == TrophicDiets.AutothrophOther || TrophicDiet == TrophicDiets.GatheringHerbivore || TrophicDiet == TrophicDiets.GrazingHerbivore)
+            var gregariousness = Gegariousnesses.None;
+            var dice = new Dice();
+            var roll1 = dice.Rng(6);
+            var roll2 = dice.Rng(6);
+            var roll = roll1 - roll2;
+            if (TrophicDiet == TrophicDiets.PouncingCarnivore || TrophicDiet == TrophicDiets.Scavenger || TrophicDiet == TrophicDiets.FilterFeeder || TrophicDiet == TrophicDiets.AutothrophPhotosynthetic ||
+                TrophicDiet == TrophicDiets.AutothrophChemosynthetic || TrophicDiet == TrophicDiets.AutothrophOther || TrophicDiet == TrophicDiets.GatheringHerbivore || TrophicDiet == TrophicDiets.GrazingHerbivore)
             {
                 roll -= 1;
             }
@@ -3598,16 +4564,17 @@ namespace UniverseGeneration.OtherGeneration
 
         private Imaginations DetermineImagination()
         {
-            Imaginations imagination = Imaginations.None;
-            Dice dice = new Dice();
-            int roll1 = dice.rng(6);
-            int roll2 = dice.rng(6);
-            int roll = roll1 - roll2;
+            var imagination = Imaginations.None;
+            var dice = new Dice();
+            var roll1 = dice.Rng(6);
+            var roll2 = dice.Rng(6);
+            var roll = roll1 - roll2;
             if (TrophicDiet == TrophicDiets.PouncingCarnivore || TrophicDiet == TrophicDiets.Omnivore || TrophicDiet == TrophicDiets.GatheringHerbivore)
             {
                 roll -= 1;
             }
-            if (TrophicDiet == TrophicDiets.FilterFeeder || TrophicDiet == TrophicDiets.AutothrophPhotosynthetic || TrophicDiet == TrophicDiets.AutothrophChemosynthetic || TrophicDiet == TrophicDiets.AutothrophOther || TrophicDiet == TrophicDiets.GrazingHerbivore)
+            if (TrophicDiet == TrophicDiets.FilterFeeder || TrophicDiet == TrophicDiets.AutothrophPhotosynthetic || TrophicDiet == TrophicDiets.AutothrophChemosynthetic || TrophicDiet == TrophicDiets.AutothrophOther ||
+                TrophicDiet == TrophicDiets.GrazingHerbivore)
             {
                 roll -= 1;
             }
@@ -3650,11 +4617,11 @@ namespace UniverseGeneration.OtherGeneration
 
         private Suspicions DetermineSuspicion()
         {
-            Suspicions suspicion = Suspicions.None;
-            Dice dice = new Dice();
-            int roll1 = dice.rng(6);
-            int roll2 = dice.rng(6);
-            int roll = roll1 - roll2;
+            var suspicion = Suspicions.None;
+            var dice = new Dice();
+            var roll1 = dice.Rng(6);
+            var roll2 = dice.Rng(6);
+            var roll = roll1 - roll2;
             if (TrophicDiet == TrophicDiets.PouncingCarnivore || TrophicDiet == TrophicDiets.ChasingCarnivore || TrophicDiet == TrophicDiets.HijackingCarnivore || TrophicDiet == TrophicDiets.TrappingCarnivore)
             {
                 roll -= 1;
@@ -3710,16 +4677,17 @@ namespace UniverseGeneration.OtherGeneration
 
         private Chauvinisms DetermineChauvinism()
         {
-            Chauvinisms chauvinism = Chauvinisms.None;
-            Dice dice = new Dice();
-            int roll1 = dice.rng(6);
-            int roll2 = dice.rng(6);
-            int roll = roll1 - roll2;
+            var chauvinism = Chauvinisms.None;
+            var dice = new Dice();
+            var roll1 = dice.Rng(6);
+            var roll2 = dice.Rng(6);
+            var roll = roll1 - roll2;
             if (TrophicDiet == TrophicDiets.PouncingCarnivore || TrophicDiet == TrophicDiets.Omnivore || TrophicDiet == TrophicDiets.GatheringHerbivore)
             {
                 roll -= 1;
             }
-            if (TrophicDiet == TrophicDiets.FilterFeeder || TrophicDiet == TrophicDiets.AutothrophPhotosynthetic || TrophicDiet == TrophicDiets.AutothrophChemosynthetic || TrophicDiet == TrophicDiets.AutothrophOther || TrophicDiet == TrophicDiets.GrazingHerbivore)
+            if (TrophicDiet == TrophicDiets.FilterFeeder || TrophicDiet == TrophicDiets.AutothrophPhotosynthetic || TrophicDiet == TrophicDiets.AutothrophChemosynthetic || TrophicDiet == TrophicDiets.AutothrophOther ||
+                TrophicDiet == TrophicDiets.GrazingHerbivore)
             {
                 roll -= 1;
             }
@@ -3734,7 +4702,8 @@ namespace UniverseGeneration.OtherGeneration
             if (roll >= 3)
             {
                 chauvinism = Chauvinisms.ExtremlyChauvinistic;
-                if (Empathy != Empathies.Responsive || Empathy != Empathies.Empathy || Empathy != Empathies.VeryEmpathic || Suspicion == Suspicions.Normal || Suspicion == Suspicions.Careful || Suspicion == Suspicions.Fearfulness || Suspicion == Suspicions.VeryFearfull)
+                if (Empathy != Empathies.Responsive || Empathy != Empathies.Empathy || Empathy != Empathies.VeryEmpathic || Suspicion == Suspicions.Normal || Suspicion == Suspicions.Careful || Suspicion == Suspicions.Fearfulness ||
+                    Suspicion == Suspicions.VeryFearfull)
                 {
                     //Todo: Add Intolerance (Racial)
                 }
@@ -3751,14 +4720,16 @@ namespace UniverseGeneration.OtherGeneration
             {
                 case 2:
                     chauvinism = Chauvinisms.VeryChauvinistic;
-                    if (Empathy != Empathies.Responsive || Empathy != Empathies.Empathy || Empathy != Empathies.VeryEmpathic || Suspicion == Suspicions.Normal || Suspicion == Suspicions.Careful || Suspicion == Suspicions.Fearfulness || Suspicion == Suspicions.VeryFearfull)
+                    if (Empathy != Empathies.Responsive || Empathy != Empathies.Empathy || Empathy != Empathies.VeryEmpathic || Suspicion == Suspicions.Normal || Suspicion == Suspicions.Careful || Suspicion == Suspicions.Fearfulness ||
+                        Suspicion == Suspicions.VeryFearfull)
                     {
                         //Todo: Add Intolerance (Racial)
                     }
                     break;
                 case 1:
                     chauvinism = Chauvinisms.Chauvinistic;
-                    if (Empathy != Empathies.Normal || Empathy != Empathies.Responsive || Empathy != Empathies.Empathy || Empathy != Empathies.VeryEmpathic || Suspicion == Suspicions.Careful || Suspicion == Suspicions.Fearfulness || Suspicion == Suspicions.VeryFearfull)
+                    if (Empathy != Empathies.Normal || Empathy != Empathies.Responsive || Empathy != Empathies.Empathy || Empathy != Empathies.VeryEmpathic || Suspicion == Suspicions.Careful || Suspicion == Suspicions.Fearfulness ||
+                        Suspicion == Suspicions.VeryFearfull)
                     {
                         //Todo: Add Intolerance (Racial)
                     }
@@ -3785,11 +4756,11 @@ namespace UniverseGeneration.OtherGeneration
 
         private Playfulnessess DeterminePlayfulness()
         {
-            Playfulnessess playfulness = Playfulnessess.None;
-            Dice dice = new Dice();
-            int roll1 = dice.rng(6);
-            int roll2 = dice.rng(6);
-            int roll = roll1 - roll2;
+            var playfulness = Playfulnessess.None;
+            var dice = new Dice();
+            var roll1 = dice.Rng(6);
+            var roll2 = dice.Rng(6);
+            var roll = roll1 - roll2;
             if (Strategy == Strategies.ModerateK)
             {
                 roll += 1;
@@ -3846,6 +4817,4 @@ namespace UniverseGeneration.OtherGeneration
 
         #endregion
     }
-
 }
-

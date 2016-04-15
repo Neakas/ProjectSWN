@@ -3,18 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SWN"
         themes:ThemeManager.Theme="ExpressionDark"
         xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
         mc:Ignorable="d"
         Title="LoadCharacter" Height="263.129" Width="282.402">
     <Window.Background>
-        <SolidColorBrush Color="{DynamicResource SWNBackgroundDark}" />
+        <SolidColorBrush Color="{DynamicResource SwnBackgroundDark}" />
     </Window.Background>
     <Grid>
-        <ListBox x:Name="lbCharacters" HorizontalAlignment="Left" Height="180" Margin="10,10,0,0"
+        <ListBox x:Name="LbCharacters" HorizontalAlignment="Left" Height="180" Margin="10,10,0,0"
                  VerticalAlignment="Top" Width="252" />
-        <Button x:Name="btLoad" Content="Load" HorizontalAlignment="Left" Margin="187,204,0,0" VerticalAlignment="Top"
+        <Button x:Name="BtLoad" Content="Load" HorizontalAlignment="Left" Margin="187,204,0,0" VerticalAlignment="Top"
                 Width="75" Click="btLoad_Click" />
 
     </Grid>

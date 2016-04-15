@@ -1,36 +1,32 @@
-﻿namespace UniverseGeneration.Range_Objects 
+﻿namespace UniverseGeneration.Range_Objects
 {
-    class FormationSegment : Range
+    internal class FormationSegment : Range
     {
-        public int ownershipFlag { get; set; }
-        public int parentID { get; set; }
-
-        public FormationSegment(int ownership, double lower, double upper)
-            : base(lower, upper)
+        public FormationSegment( int ownership, double lower, double upper ) : base(lower, upper)
         {
-            this.ownershipFlag = ownership;
-            this.parentID = ownership;
+            OwnershipFlag = ownership;
+            ParentId = ownership;
         }
 
-        public FormationSegment(int parentID, int ownership, double lower, double upper)
-            : base(lower, upper)
+        public FormationSegment( int parentId, int ownership, double lower, double upper ) : base(lower, upper)
         {
-            this.ownershipFlag = ownership;
-            this.parentID = parentID;
+            OwnershipFlag = ownership;
+            ParentId = parentId;
         }
 
-        public FormationSegment(int ownership, Range incoming)
-            : base(incoming)
+        public FormationSegment( int ownership, Range incoming ) : base(incoming)
         {
-            this.ownershipFlag = ownership;
-            this.parentID = ownership;
+            OwnershipFlag = ownership;
+            ParentId = ownership;
         }
 
-        public FormationSegment(FormationSegment s) : base (s.lowerBound, s.upperBound)
+        public FormationSegment( FormationSegment s ) : base(s.LowerBound, s.UpperBound)
         {
-            this.parentID = s.parentID;
-            this.ownershipFlag = s.ownershipFlag;
+            ParentId = s.ParentId;
+            OwnershipFlag = s.OwnershipFlag;
         }
-        private FormationSegment() { }
+
+        public int OwnershipFlag { get; set; }
+        public int ParentId { get; set; }
     }
 }

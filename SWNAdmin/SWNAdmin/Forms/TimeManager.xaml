@@ -3,9 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:SWNAdmin.Forms"
     xmlns:themes="http://schemas.rudigrobler.net/wpfthemes"
-    xmlns:UserControls="clr-namespace:SWNAdmin.UserControls" x:Class="SWNAdmin.Forms.TimeManager"
+    x:Class="SWNAdmin.Forms.TimeManager"
     themes:ThemeManager.Theme="ExpressionDark"
     mc:Ignorable="d"
     Title="TimeManager" Height="422.812" Width="380.625">
@@ -14,7 +13,7 @@
     </Window.Background>
 
     <Grid>
-        <Button x:Name="btTurn" Content="Turn" HorizontalAlignment="Left" Margin="10,104,0,0" VerticalAlignment="Top"
+        <Button x:Name="BtTurn" Content="Turn" HorizontalAlignment="Left" Margin="10,104,0,0" VerticalAlignment="Top"
                 Width="75" />
         <Button x:Name="_1MButton" Content="1 Minute" HorizontalAlignment="Left" Margin="10,129,0,0"
                 VerticalAlignment="Top" Width="75" Click="_1MButton_Click" />
@@ -30,25 +29,25 @@
                 VerticalAlignment="Top" Width="75" Click="SixHButton_Click" />
         <Button x:Name="TwelveHbutton" Content="12 Hours" HorizontalAlignment="Left" Margin="10,279,0,0"
                 VerticalAlignment="Top" Width="75" Click="TwelveHButton_Click" />
-        <Button x:Name="oneDButton" Content="1 Day" HorizontalAlignment="Left" Margin="10,304,0,0"
+        <Button x:Name="OneDButton" Content="1 Day" HorizontalAlignment="Left" Margin="10,304,0,0"
                 VerticalAlignment="Top" Width="75" Click="OneDButton_Click" />
-        <Button x:Name="sevenDButton" Content="7 Days" HorizontalAlignment="Left" Margin="10,329,0,0"
+        <Button x:Name="SevenDButton" Content="7 Days" HorizontalAlignment="Left" Margin="10,329,0,0"
                 VerticalAlignment="Top" Width="75" Click="sevenDButton_click" />
-        <Button x:Name="thirthyDButton" Content="30 Days" HorizontalAlignment="Left" Margin="10,354,0,0"
+        <Button x:Name="ThirthyDButton" Content="30 Days" HorizontalAlignment="Left" Margin="10,354,0,0"
                 VerticalAlignment="Top" Width="75" Click="thirthyDButton_Click" />
-        <TextBox x:Name="tbClock" HorizontalAlignment="Left" Height="23" Margin="90,53,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbClock" HorizontalAlignment="Left" Height="23" Margin="90,53,0,0" TextWrapping="Wrap"
                  Text="00:00:00" VerticalAlignment="Top" Width="54" IsEnabled="False" KeyDown="tbClock_KeyDown"
                  Foreground="Black" />
         <Calendar x:Name="MainCalendar" HorizontalAlignment="Left" Margin="90,81,0,0" VerticalAlignment="Top"
                   DisplayDate="3000-01-01" Focusable="False" IsHitTestVisible="True" />
-        <Button x:Name="btOpenMap" Content="Open Mapping" HorizontalAlignment="Left" Margin="90,249,0,0"
+        <Button x:Name="BtOpenMap" Content="Open Mapping" HorizontalAlignment="Left" Margin="90,249,0,0"
                 VerticalAlignment="Top" Width="96" Height="23" />
-        <TextBox x:Name="tbDate" HorizontalAlignment="Left" Height="23" Margin="149,53,0,0" TextWrapping="Wrap"
+        <TextBox x:Name="TbDate" HorizontalAlignment="Left" Height="23" Margin="149,53,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="120" IsEnabled="False" KeyDown="tbDate_KeyDown" Foreground="Black" />
-        <CheckBox x:Name="checkBox" Content="Modify" HorizontalAlignment="Left" Margin="274,53,0,0"
+        <CheckBox x:Name="CheckBox" Content="Modify" HorizontalAlignment="Left" Margin="274,53,0,0"
                   VerticalAlignment="Top" Checked="checkBox_Checked" Unchecked="checkBox_Unchecked"
                   RenderTransformOrigin="0.912,2.267" />
-        <Button x:Name="btUndo" Content="Undo" HorizontalAlignment="Left" Margin="274,81,0,0" VerticalAlignment="Top"
+        <Button x:Name="BtUndo" Content="Undo" HorizontalAlignment="Left" Margin="274,81,0,0" VerticalAlignment="Top"
                 Width="42" Click="btUndo_Click" IsEnabled="False" RenderTransformOrigin="0.452,0.55" />
     </Grid>
 </Window>
